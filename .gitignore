@@ -28,6 +28,7 @@ proguard/
 *.iws
 .idea/
 
+.settings
 project.properties
 R.java
 gen/com/eshare_android_preview/R.java
