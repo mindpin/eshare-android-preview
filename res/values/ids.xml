@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<item type="id" name="drag_handle" />
+    <item type="id" name="click_remove" />
+    <item type="id" name="main_tab_group">false</item>
+    <item type="id" name="main_tab_weixin">false</item>
+    <item type="id" name="main_tab_unread_tv">false</item>
+    <item type="id" name="main_tab_address">false</item>
+    <item type="id" name="main_tab_fmessage_unread_tv">false</item>
+    <item type="id" name="main_tab_find_friend">false</item>
+    <item type="id" name="main_tab_findfriend_prospect_tv">false</item>
+    <item type="id" name="main_tab_new_tv">false</item>
+    <item type="id" name="main_tab_sayhi_new_tv">false</item>
+    <item type="id" name="main_tab_more">false</item>
+    <item type="id" name="main_tab_setting_new_tv">false</item>
+</resources>

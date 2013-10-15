@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <RelativeLayout style="@style/head_bar" android:id="@+id/head">
+       <ImageButton style="@style/head_bar_button_go_back" android:contentDescription="@string/image_description"/>
+       <Button
+          android:onClick="on_click_hard_right"
+          android:id="@+id/data_list_save_bn"
+          android:text="@string/edit"
+          style="@style/head_bar_button_right"
+          android:background="@drawable/bg_button_head_green_bar"
+       />
+        
+       <TextView
+           android:text="@string/category_qa"
+           android:id="@+id/head_bar_title_tv"
+           style="@style/head_bar_text_center"
+        />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">eshare-android-preview</string>
+    <string name="app_version">0.01</string>
+    
+    <!-- 登录页面 -->
+    <string name="login_email">邮箱</string>
+    <string name="login_password">密码</string>
+    <string name="login_login">登录</string>
+    <string name="login_register">注册</string>
+    <string name="login_email_valid_blank">请输入邮箱</string>
+    <string name="login_password_valid_blank">请输入密码</string>
+    <string name="login_auth_fail">用户邮箱或密码错误</string>
+    <string name="login_now_login">正在登录…</string>
+    
+    
+    <string name="category_home">首页</string>
+    <string name="category_qa">问答</string>
+    <!-- <string name="category_mission">团饭</string> -->
+    <string name="category_message">消息</string>
+     <string name="app_new">new</string>
+     <string name="edit">编辑</string>
+     <string name="placeholder">占位</string>
+     
+     <string name="image_description">image_description</string>
+     
+     <!-- view.getTag(key,value) 中的 key -->
+    <!-- 笔记列表项的 tag key -->
+    <item type="id" name="tag_note_uuid"></item>
+    
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+
+</resources>
