@@ -17,8 +17,12 @@ public class HttpApi {
 		}
 		return categorys;
 	}
-	public static List<Node> get_nodes(){
-		return KnowledgeNet.parse_xml(xml_path);
+	public static List<Node> get_nodes(String category){
+		List<Node> list = null;
+		if (category.equals("javascript")) {
+			list = KnowledgeNet.parse_xml(xml_path);
+		}
+		return list;
 	}
 	public static List<Node> get_nodes_by_node_ids(List<String> node_ids){
 		return KnowledgeNet.array_node_list(KnowledgeNet.parse_xml(xml_path), node_ids);

@@ -35,7 +35,7 @@ public class KnowledgeNetActivity extends EshareBaseActivity{
 	}
 	private void load_list_view() {
 		list_view = (ListView)findViewById(R.id.list_view);
-		List<Node> node_list = HttpApi.get_nodes();
+		List<Node> node_list = HttpApi.get_nodes("javascript");
 		KnowledgeNetAdapter adapter = new KnowledgeNetAdapter(this);
 		adapter.add_items(node_list);
 		list_view.setAdapter(adapter);
