@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.data.GridViewData;
 import com.eshare_android_preview.widget.adapter.GridViewAdapter;
@@ -48,12 +49,19 @@ public class HomeActivity extends EshareBaseActivity {
 		grid_view.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-				Toast.makeText(HomeActivity.this, (String)lists.get(item_id).get("text"), Toast.LENGTH_SHORT).show();
+				open_activity(KnowledgeNetCategoryActivity.class);
 			}
 		});
 	}
 	
 	public void on_click_hard_right(View view){
 		
+	}
+	@Override 
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			return false;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

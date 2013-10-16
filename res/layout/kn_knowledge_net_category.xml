@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <RelativeLayout style="@style/head_bar" android:id="@+id/head">
+       <ImageButton 
+           android:id="@+id/go_back"
+           style="@style/head_bar_button_go_back" 
+           android:contentDescription="@string/image_description"
+       />
+        <EditText
+            android:id="@+id/search_edit_tv"
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/go_back"
+            android:layout_toLeftOf="@+id/search_but"
+            android:background="@drawable/shape"
+            android:drawableRight="@drawable/txt_search_default"
+            android:ems="10"
+            android:gravity="center_vertical" >
+            <requestFocus />
+        </EditText>
+		<Button
+		    android:id="@+id/search_but"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_search_background"
+            android:text="@string/search_text"
+            android:layout_alignParentRight="true" 
+        />
+    </RelativeLayout>
+	<ListView
+	    android:layout_below="@+id/head"
+	    android:id="@+id/list_view"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	 />
+</RelativeLayout>
