@@ -72,7 +72,9 @@
 		        android:layout_width="0.0dp"
 		        android:layout_weight="1.0"
 		        android:layout_height="wrap_content"
-		        android:text="@string/submit" 
+		        android:clickable="false"
+		        android:onClick="click_on_submit_but"
+		        android:text="@string/submit"
 		    />
 	    </LinearLayout>
 	    

@@ -260,4 +260,26 @@ public class BaseUtils {
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
+    //"abcdef" -  "c"  -> 2
+    public static int char_at_array_index(String[] array,String s){
+    	for (int i = 0; i < array.length; i++) {
+			if (array[i].equals(s)) {
+				return i;
+			}
+		}
+		return -1;
+    }
+    
+    //{'a','b','c','d','e','f'} - 'bdf' -> 1,3,5
+    public static List<Integer> str_at_array_array(String[] array,String s){
+		List<Integer> answer_list = new ArrayList<Integer>();
+		for (int j = 0; j < s.length(); j++) {
+			for (int i = 0; i < array.length; i++) {
+				if (array[i].equals(s.charAt(j)+"")) {
+					answer_list.add(i);
+				}
+			}
+		}
+		return answer_list;
+	}
 }
