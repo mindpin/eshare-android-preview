@@ -1,4 +1,4 @@
-package com.eshare_android_preview.model;
+package com.eshare_android_preview.model.parse;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +17,8 @@ import org.xml.sax.SAXException;
 import android.content.res.AssetManager;
 
 import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.model.Node;
+import com.eshare_android_preview.model.Relation;
 
 public class KnowledgeNet {
 	public static List<Node> parse_xml(String xml_path){

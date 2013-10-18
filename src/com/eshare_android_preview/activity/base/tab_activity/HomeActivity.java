@@ -1,5 +1,6 @@
 package com.eshare_android_preview.activity.base.tab_activity;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryActivity;
+import com.eshare_android_preview.activity.base.questions.KnowledgeNetQuestionActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.data.GridViewData;
 import com.eshare_android_preview.widget.adapter.GridViewAdapter;
@@ -49,9 +51,29 @@ public class HomeActivity extends EshareBaseActivity {
 		grid_view.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-				open_activity(KnowledgeNetCategoryActivity.class);
+				
+				TextView info_tv = (TextView)list_item.findViewById(R.id.info_tv);
+				@SuppressWarnings("unchecked")
+				Map<String, Object> item = (HashMap<String, Object>) info_tv.getTag(R.id.tag_note_uuid);
+				open_click_item_activity(item);
 			}
 		});
+	}
+	private void open_click_item_activity(Map<String, Object> item){
+//		switch (item.get("text")) {
+//		case value:
+//			
+//			break;
+//
+//		default:
+//			break;
+//		}
+		if (item.get("text").equals("题目")) {
+			open_activity(KnowledgeNetQuestionActivity.class);
+		}
+		if (item.get("text").equals("学习")) {
+			open_activity(KnowledgeNetCategoryActivity.class);
+		}
 	}
 	
 	public void on_click_hard_right(View view){

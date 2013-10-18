@@ -30,6 +30,9 @@
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetActivity"></activity>
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetItemActivity"></activity>
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetCategoryActivity"></activity>
+        
+        <activity android:name=".activity.base.questions.KnowledgeNetQuestionActivity"></activity>
+        <activity android:name=".activity.base.questions.QuestionShowActivity" android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

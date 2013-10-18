@@ -1,4 +1,4 @@
-package com.eshare_android_preview.activity.base.knowledge_net;
+package com.eshare_android_preview.activity.base.questions;
 
 import java.util.List;
 
@@ -12,32 +12,31 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Node;
-import com.eshare_android_preview.widget.adapter.KnowledgeNetAdapter;
+import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.widget.adapter.QuestionsAdapter;
 
-public class KnowledgeNetActivity extends EshareBaseActivity{
+public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 	ListView list_view;
 	TextView item_title_tv;
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.kn_knowledge_net);
+		setContentView(R.layout.q_knowledge_net_question);
 		
-		Intent intent = getIntent();
-		String item = (String) intent.getExtras().getSerializable("item");
-		item_title_tv = (TextView)findViewById(R.id.item_title_tv);
-		item_title_tv.setText(item);
+//		Intent intent = getIntent();
+//		String item = (String) intent.getExtras().getSerializable("item");
+//		item_title_tv = (TextView)findViewById(R.id.item_title_tv);
+//		item_title_tv.setText(item);
 		
 		load_list_view();
 	}
 	
 	private void load_list_view() {
 		list_view = (ListView)findViewById(R.id.list_view);
-		List<Node> node_list = HttpApi.get_nodes("javascript");
-		KnowledgeNetAdapter adapter = new KnowledgeNetAdapter(this);
+		List<Question> node_list = HttpApi.get_questions();
+		QuestionsAdapter adapter = new QuestionsAdapter(this);
 		adapter.add_items(node_list);
 		list_view.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
@@ -46,13 +45,12 @@ public class KnowledgeNetActivity extends EshareBaseActivity{
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
 				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
-				Node node = (Node) info_tv.getTag(R.id.tag_note_uuid);
-				BaseUtils.toast(node.list_parents.toString());
+				Question item = (Question) info_tv.getTag(R.id.tag_note_uuid);
 				
 				Bundle bundle = new Bundle();
-		        bundle.putSerializable("node", node);
+		        bundle.putSerializable("item", item);
 
-		        Intent intent = new Intent(KnowledgeNetActivity.this,KnowledgeNetItemActivity.class);
+		        Intent intent = new Intent(KnowledgeNetQuestionActivity.this,QuestionShowActivity.class);
 		        intent.putExtras(bundle);
 		        startActivity(intent);
 			}
