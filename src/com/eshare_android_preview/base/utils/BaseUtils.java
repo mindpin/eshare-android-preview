@@ -239,6 +239,13 @@ public class BaseUtils {
         }
         return true;
     }
+    public static String sub_string_by(String str,int len){
+    	String resulet = is_str_blank(str) ? "" : str;
+    	if (str.length() > len) {
+    		resulet = resulet.substring(0, len) + "...";
+		}
+    	return resulet;
+    }
 
     // 快速显示一个toast
     public static void toast(int string_resource_id) {

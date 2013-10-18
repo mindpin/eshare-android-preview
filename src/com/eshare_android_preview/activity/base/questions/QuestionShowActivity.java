@@ -64,7 +64,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	}
 	
 	private void load_question_msg() {
-		item_title_tv.setText(question.title);
+		item_title_tv.setText(BaseUtils.sub_string_by(question.title, 10));
 		question_kind.setText(question.kind);
 		question_title.setText(question.title);
 		
