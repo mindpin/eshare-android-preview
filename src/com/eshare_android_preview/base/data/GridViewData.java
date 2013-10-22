@@ -11,7 +11,7 @@ public class GridViewData {
 	public static List<Map<String, Object>> get_tab_home_grid_view_data(){
 		List<Map<String, Object>> lists = new ArrayList<Map<String,Object>>();
 		
-		String[] names = new String[]{"计划","笔记","收藏","学习","题目"};
+		String[] names = new String[]{"计划","笔记","收藏","学习","题目","分组"};
 		
 		int[]    imgs = new int[]{
 					R.drawable.tab_qa_btn_image_bg_normal,
