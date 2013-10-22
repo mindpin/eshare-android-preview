@@ -74,6 +74,9 @@ public class HomeActivity extends EshareBaseActivity {
 		if (item.get("text").equals("学习")) {
 			open_activity(KnowledgeNetCategoryActivity.class);
 		}
+		if (item.get("text").equals("收藏")) {
+			open_activity(FavourateActivity.class);
+		}
 	}
 	
 	public void on_click_hard_right(View view){

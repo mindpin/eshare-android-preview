@@ -22,6 +22,7 @@
     
     <!-- knowledge_net -->
     <string name="knowedge_title">知识网络节点</string>
+    <string name="favourate_knowledge_list">收藏列表</string>
     
     <!-- questions -->
     <string name="questions_title">题目</string>
