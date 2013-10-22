@@ -3,9 +3,12 @@ package com.eshare_android_preview.activity.base.questions;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +34,10 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	String answer="";
 	String[] a_z = "A,B,C,D,E,F,G,H,I,J,K".split(",");
 	Question question;
+	int question_id;
+	private static final String FAVOURATE_IDS = "favourate_ids";  
+	
+	@SuppressLint({ "WorldReadableFiles", "CommitPrefEdits", "WorldWriteableFiles" })
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,6 +45,23 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
+		question_id = (int)intent.getExtras().getInt("question_id");
+		
+		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
+		String favourate_ids = sp.getString("favourate_ids", "");
+		if (favourate_ids == "") {
+			favourate_ids = question_id + "";
+		} else {
+			favourate_ids = favourate_ids + "," + question_id;
+		}
+		
+		
+        SharedPreferences.Editor editor = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_WRITEABLE).edit();  
+		editor.putString("favourate_ids", favourate_ids);
+		
+		Log.d("whatwhatwhatwhat ===== ", favourate_ids);
+
+
 		
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
@@ -154,5 +178,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
         Intent intent = new Intent(QuestionShowActivity.this,AddNoteActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+	}
+	
+	public void click_favourates(View view) {
+		
 	}
 }
