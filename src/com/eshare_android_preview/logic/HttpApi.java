@@ -58,4 +58,8 @@ public class HttpApi {
 	public static List<Plan> get_plan_all() {
 		return PlanDBHelper.all();
 	}
+
+	public static void update_plan(Plan plan) {
+		PlanDBHelper.update(plan);
+	}
 }

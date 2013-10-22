@@ -14,7 +14,6 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Plan;
-import com.eshare_android_preview.model.parse.CourseXMLParse;
 import com.eshare_android_preview.widget.adapter.PlanAdapter;
 
 public class PlansActivity extends EshareBaseActivity{
@@ -23,7 +22,6 @@ public class PlansActivity extends EshareBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.p_plans);
-		CourseXMLParse.parse_xml(HttpApi.course_xml_path);
 		load_list();
 	}
 

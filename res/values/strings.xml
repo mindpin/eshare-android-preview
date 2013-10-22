@@ -34,6 +34,8 @@
     <!-- plans -->
     <string name="plans_title">计划</string>
     <string name="plans_my_plans">我的计划</string>
+    <string name="plans_add_plans_title">添加计划</string>
+    <string name="plans_add_plans">添加</string>
     
     <string name="now_loading">正在载入…</string>
     <string name="app_method_not_define_exception">功能方法未定义</string>

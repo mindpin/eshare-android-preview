@@ -22,6 +22,15 @@ public class PlanDBHelper  extends BaseModelDBHelper{
 		db.close();
 	}
 	
+	public static void update(Plan plan) {
+		SQLiteDatabase db = get_write_db();
+		ContentValues values = new ContentValues();
+		values.put(Constants.TABLE_PLAN__CONTENT, plan.content);
+		values.put(Constants.TABLE_PLAN__CHECKED, plan.checked);
+		db.update(Constants.TABLE_PLAN, values, Constants.KEY_ID + " = ? ", new String[]{plan.id+""});
+		db.close();
+	}
+	
 	public static List<Plan> all(){
 		SQLiteDatabase db = get_read_db();
 		Cursor cursor = db.query(
