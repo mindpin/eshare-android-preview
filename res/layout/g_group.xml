@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/item_title_tv"
             style="@style/head_bar_text_center"
-            android:text="@string/group_list_title" />
+            android:text="@string/group_title" />
     </RelativeLayout>
 
     <ListView

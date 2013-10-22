@@ -10,32 +10,36 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by kaid on 10/22/13.
  */
-public class User {
+public class User implements Serializable {
     static ArrayList<User> users;
-    static final String AVATAR_PATH = "images/avatars/";
-    public Drawable avatar;
+    static final String AVATAR_DIR = "images/avatars/";
+    public String avatar_path;
     public String username;
     public String bio;
 
     public User(String username, String avatar) {
         this.username = username;
-        setAvatar(AVATAR_PATH + avatar);
+        this.avatar_path = AVATAR_DIR + avatar;
         this.bio = "大家好，我是" + username + "。";
     }
 
-    private void setAvatar(String path) {
+    public Drawable getAvatarDrawable() {
+        Drawable avatar;
         try {
-            InputStream stream = EshareApplication.context.getAssets().open(path);
+            InputStream stream = EshareApplication.context.getAssets().open(avatar_path);
             avatar = Drawable.createFromStream(stream, null);
             stream.close();
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
+        return avatar;
     }
 
     private static void fetch() {

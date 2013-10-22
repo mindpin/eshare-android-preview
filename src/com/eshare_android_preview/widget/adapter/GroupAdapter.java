@@ -33,8 +33,9 @@ public class GroupAdapter extends EshareBaseAdapter<User> {
     @Override
     public void fill_with_data(BaseViewHolder holder, User user, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
+        view_holder.user_name.setTag(R.id.tag_user_uuid, user);
         view_holder.user_name.setText(user.username);
-	    view_holder.user_avatar.setImageDrawable(user.avatar);
+	    view_holder.user_avatar.setImageDrawable(user.getAvatarDrawable());
     }
 
     private class ViewHolder implements BaseViewHolder {
