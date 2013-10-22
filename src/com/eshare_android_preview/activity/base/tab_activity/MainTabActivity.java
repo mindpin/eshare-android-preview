@@ -16,48 +16,40 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 
 public class MainTabActivity extends TabActivity  implements OnClickListener {
-	private TabHost mTabHost;
+	
+	private TabHost tab_Host;
+	int current_tab_id;
+	
 	FrameLayout tab_home_btn, tab_qa_btn, tab_message_btn;
 	ImageView tab_home_btn_image,tab_qa_btn_image,tab_message_btn_image;
 	TextView tab_home_btn_text, tab_qa_btn_text, tab_message_btn_text;
-	Intent mHomeItent, mRiceIntent, mMessionIntent, mWeatherIntent;
-	int current_tab_id;
+	
 	private Animation left_in, left_out;
 	private Animation right_in, right_out;
-	
-//	public static String TAG_HOME = "home";
-//	public static String TAG_QA = "qa";
-//	public static String TAG_MESSAGE = "message";
-//	static final int tab_btn_unselect_color = Color.parseColor("#787878");
-//	static final int tab_btn_select_color = Color.parseColor("#ffffff");
-//	public static final String TAB_HOME="tabHome";
-//    public static final String TAB_MSG = "tabMSG";
-//    public static final String TAB_HAIR_LOW="tabHairLow";
-//    public static final String TAB_USERINFO = "tabUserInFo";
 	
 	public void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);  
         setContentView(R.layout.tab_main);  
         
-        prepareAnim();
-        prepareIntent();
-		setupIntent();
-		prepareView();
-		
-		test_msg_show_view();
+        prepare_view();
+        init_tab_switch_anim();
+        init_tab_host();
 		
 		tab_home_btn_image.setSelected(true);
 		tab_home_btn_text.setSelected(true);
 		current_tab_id = R.id.tab_home_btn;
+		
+		test_msg_show_view();
     }
+	
 	private void test_msg_show_view(){
 		TextView tab_qa_btn_unread_text = (TextView)findViewById(R.id.tab_qa_btn_unread_text);
 		tab_qa_btn_unread_text.setText("3");
 		tab_qa_btn_unread_text.setVisibility(View.VISIBLE);
 	}
 	
-	private void prepareView() {
+	private void prepare_view() {
 		// 底部三个切换页签的按钮
 		tab_home_btn = (FrameLayout)findViewById(R.id.tab_home_btn);
 		tab_qa_btn = (FrameLayout)findViewById(R.id.tab_qa_btn);
@@ -76,7 +68,7 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 		findViewById(R.id.tab_message_btn).setOnClickListener(this);
 	}
 	
-	private void prepareAnim() {
+	private void init_tab_switch_anim() {
 		left_in = AnimationUtils.loadAnimation(this, R.anim.left_in);
 		left_out = AnimationUtils.loadAnimation(this, R.anim.left_out);
 
@@ -84,35 +76,30 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 		right_out = AnimationUtils.loadAnimation(this, R.anim.right_out);
 	}
 	
-	private void prepareIntent() {
-		mHomeItent = new Intent(this, HomeActivity.class);
-		mRiceIntent = new Intent(this, QAActivity.class);
-		mWeatherIntent = new Intent(this, MessageActivity.class);
-	}
-	
-	private void setupIntent() {
-		mTabHost = getTabHost();
-		mTabHost.addTab(buildTabSpec(
+	private void init_tab_host() {
+		tab_Host = getTabHost();
+		tab_Host.addTab(build_tab_spec(
 				getResources().getString(R.string.category_home),
 				R.string.category_home,
 				R.drawable.tab_home_btn_image_bg_normal, 
-				mHomeItent));
+				new Intent(this, HomeActivity.class)));
 		
-		mTabHost.addTab(buildTabSpec(
+		tab_Host.addTab(build_tab_spec(
 				getResources().getString(R.string.category_qa),
 				R.string.category_qa, 
 				R.drawable.tab_qa_btn_image_bg_normal, 
-				mRiceIntent));
+				new Intent(this, QAActivity.class)));
 		
-		mTabHost.addTab(buildTabSpec(
+		tab_Host.addTab(build_tab_spec(
 				getResources().getString(R.string.category_message),
 				R.string.category_message, 
 				R.drawable.tab_message_btn_image_bg_normal, 
-				mWeatherIntent));
+				new Intent(this, MessageActivity.class)));
 	}
-	private TabHost.TabSpec buildTabSpec(String tag, int resLabel, int resIcon,
+	
+	private TabHost.TabSpec build_tab_spec(String tag, int resLabel, int resIcon,
 			final Intent content) {
-		return mTabHost
+		return tab_Host
 				.newTabSpec(tag)
 				.setIndicator(getString(resLabel),
 						getResources().getDrawable(resIcon))
@@ -144,40 +131,39 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 		tab_message_btn_image.setSelected(false);
 		
 		int checked_id = v.getId();
-		final boolean o;
-		if (current_tab_id < checked_id)
-			o = true;
-		else
-			o = false;
-		if (o)
-			mTabHost.getCurrentView().startAnimation(left_out);
-		else
-			mTabHost.getCurrentView().startAnimation(right_out);
+		boolean swtich_to_right = current_tab_id < checked_id ? true : false;
+		
+		if (swtich_to_right){
+			tab_Host.getCurrentView().startAnimation(left_out);
+		}else{
+			tab_Host.getCurrentView().startAnimation(right_out);
+		}
+		
 		switch (checked_id) {
 		case R.id.tab_home_btn:
-			mTabHost.setCurrentTabByTag(getResources().getString(R.string.category_home));
+			tab_Host.setCurrentTabByTag(getResources().getString(R.string.category_home));
 			tab_home_btn_image.setSelected(true);
 			tab_home_btn_text.setSelected(true);
 			break;
 		case R.id.tab_qa_btn:
-			mTabHost.setCurrentTabByTag(getResources().getString(R.string.category_qa));
+			tab_Host.setCurrentTabByTag(getResources().getString(R.string.category_qa));
 			tab_qa_btn_text.setSelected(true);
 			tab_qa_btn_image.setSelected(true);
 			break;
 		case R.id.tab_message_btn:
-			mTabHost.setCurrentTabByTag(getResources().getString(R.string.category_message));
+			tab_Host.setCurrentTabByTag(getResources().getString(R.string.category_message));
 			tab_message_btn_text.setSelected(true);
 			tab_message_btn_image.setSelected(true);
-			
 			break;
 		default:
 			break;
 		}
 
-		if (o)
-			mTabHost.getCurrentView().startAnimation(left_in);
-		else
-			mTabHost.getCurrentView().startAnimation(right_in);
+		if (swtich_to_right){
+			tab_Host.getCurrentView().startAnimation(right_in);
+		}else{
+			tab_Host.getCurrentView().startAnimation(left_in);
+		}
 		current_tab_id = checked_id;
 	} 
 }
