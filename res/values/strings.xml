@@ -31,6 +31,9 @@
     <string name="add_note_title">创建笔记</string>
     <string name="add_img">增加图片</string>
     
+    <!-- group -->
+    <string name="group_list_title">分组</string>
+
     <!-- plans -->
     <string name="plans_title">计划</string>
     <string name="plans_my_plans">我的计划</string>
