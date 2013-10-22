@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.model.Question;
@@ -140,5 +141,18 @@ public class QuestionShowActivity extends EshareBaseActivity{
 				layout.getChildAt(list.get(i)).findViewById(R.id.choice_item_but).setBackgroundResource(R.color.choice_selected);
 			}
 		}
+	}
+	
+	public void onClick(View view){
+		
+	}
+	public void click_notes(View view){
+//		open_activity(AddNoteActivity.class);
+		Bundle bundle = new Bundle();
+        bundle.putSerializable("item", question);
+
+        Intent intent = new Intent(QuestionShowActivity.this,AddNoteActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
 	}
 }

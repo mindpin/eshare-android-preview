@@ -1,5 +1,6 @@
 package com.eshare_android_preview.model;
 
+// 关系
 public class Relation {
 	public String parent_id;
 	public String child_id;

@@ -20,6 +20,7 @@ import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.model.Node;
 import com.eshare_android_preview.model.Relation;
 
+// xml dom解析
 public class KnowledgeNet {
 	public static List<Node> parse_xml(String xml_path){
 		AssetManager asset = EshareApplication.context.getAssets();

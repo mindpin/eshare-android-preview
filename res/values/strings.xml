@@ -26,6 +26,21 @@
     <!-- questions -->
     <string name="questions_title">题目</string>
     
+    <!-- notes -->
+    <string name="add_note_home">笔记</string>
+    <string name="add_note_title">创建笔记</string>
+    <string name="add_img">增加图片</string>
+    
+    <!-- plans -->
+    <string name="plans_title">计划</string>
+    <string name="plans_my_plans">我的计划</string>
+    
+    <string name="now_loading">正在载入…</string>
+    <string name="app_method_not_define_exception">功能方法未定义</string>
+    <string name="app_intent_connection_exception">网络连接错误</string>
+    <string name="app_authenticate_exception">用户身份验证错误</string>
+    <string name="app_unknown_exception">服务端数据读取错误</string>
+    
     <string name="submit">提交</string>
      <string name="app_new">new</string>
      <string name="edit">编辑</string>

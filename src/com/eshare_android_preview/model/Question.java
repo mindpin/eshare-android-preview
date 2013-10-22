@@ -3,6 +3,7 @@ package com.eshare_android_preview.model;
 import java.io.Serializable;
 import java.util.List;
 
+// 问题
 public class Question implements Serializable{
 	public static class Type{
 		public static final String   SINGLE_CHOICE = "single_choice";

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+// 课程节点
 public class Node implements Serializable{
 	/**
 	 * 

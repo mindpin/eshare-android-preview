@@ -15,6 +15,8 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.logic.HttpApi;
+import com.eshare_android_preview.model.parse.CourseXMLParse;
 
 public class MainTabActivity extends TabActivity  implements OnClickListener {
 	public static String TAB_TAG_HOME = "home";
@@ -46,7 +48,7 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
         super.onCreate(savedInstanceState);  
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);  
         setContentView(R.layout.tab_main);  
-               
+        
         prepareAnim();
         prepareIntent();
 		setupIntent();

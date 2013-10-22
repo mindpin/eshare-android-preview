@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryActivity;
+import com.eshare_android_preview.activity.base.notes.NotesActivity;
+import com.eshare_android_preview.activity.base.plans.PlansActivity;
 import com.eshare_android_preview.activity.base.questions.KnowledgeNetQuestionActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.data.GridViewData;
@@ -60,14 +62,12 @@ public class HomeActivity extends EshareBaseActivity {
 		});
 	}
 	private void open_click_item_activity(Map<String, Object> item){
-//		switch (item.get("text")) {
-//		case value:
-//			
-//			break;
-//
-//		default:
-//			break;
-//		}
+		if (item.get("text").equals("计划")) {
+			open_activity(PlansActivity.class);
+		}
+		if (item.get("text").equals("笔记")) {
+			open_activity(NotesActivity.class);
+		}
 		if (item.get("text").equals("题目")) {
 			open_activity(KnowledgeNetQuestionActivity.class);
 		}

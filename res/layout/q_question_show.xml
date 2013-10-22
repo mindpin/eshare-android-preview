@@ -10,9 +10,47 @@
            style="@style/head_bar_text_center"
         />
     </RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_below="@+id/head"
+        android:id="@+id/notes_page"
+        android:padding="3dp"
+        android:background="@color/choice_after"
+        android:baselineAligned="false"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:onClick="click_notes"
+            android:layout_width="0.0dp"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:text="添加笔记"
+            android:layout_margin="0dp"
+            
+       />
+        <Button
+            android:onClick="click_notes"
+            android:layout_width="0.0dp"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:text="----"
+            android:layout_margin="0dp"
+       />
+        <Button
+            android:onClick="click_notes"
+            android:layout_width="0.0dp"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:text="----"
+            android:layout_margin="0dp"
+       />
+        
+    </LinearLayout>
+    
 	<ScrollView
-	    android:layout_below="@+id/head"
+	    android:layout_below="@+id/notes_page"
 	    android:id="@+id/scroll_view" 
+	    android:layout_marginBottom="35dp"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content">
 	    <LinearLayout 
@@ -44,7 +82,6 @@
 	    </LinearLayout>
 	</ScrollView>
 	<LinearLayout
-	    android:layout_marginTop="30dp"
 	    android:layout_alignParentBottom="true" 
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"
