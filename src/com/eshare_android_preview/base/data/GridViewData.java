@@ -13,7 +13,7 @@ public class GridViewData {
 		
 		String[] names = new String[]{"计划","笔记","收藏","学习","题目"};
 		
-		int[]    imgs = new int[]{
+		int[]  imgs = new int[]{
 					R.drawable.tab_address_normal,
 					R.drawable.tab_find_frd_normal,
 					R.drawable.tab_settings_pressed,

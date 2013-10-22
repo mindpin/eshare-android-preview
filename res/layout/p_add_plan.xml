@@ -5,15 +5,30 @@
     <RelativeLayout style="@style/head_bar" android:id="@+id/head">
        <ImageButton style="@style/head_bar_button_go_back" android:contentDescription="@string/image_description"/>
        <TextView
-           android:text="@string/plans_my_plans"
+           android:text="@string/plans_add_plans_title"
            android:id="@+id/item_title_tv"
            style="@style/head_bar_text_center"
         />
     </RelativeLayout>
-	<ListView 
+	<ListView
+	    android:layout_above="@+id/bottom_ll"
 	    android:layout_below="@+id/head"
 	    android:id="@+id/list_view"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	 />
+	<LinearLayout
+	    android:id="@+id/bottom_ll"
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true">
+	    <Button
+	        android:onClick="click_add_plans"
+	        android:layout_width="0.0dp"
+	        android:layout_weight="1.0"
+	        android:layout_height="wrap_content"
+	        android:text="@string/plans_add_plans" 
+	    />
+	</LinearLayout>
 </RelativeLayout>
