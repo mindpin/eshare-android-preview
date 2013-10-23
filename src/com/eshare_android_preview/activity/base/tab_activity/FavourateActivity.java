@@ -46,6 +46,9 @@ public class FavourateActivity extends EshareBaseActivity{
 		
 		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
 		String favourate_ids = sp.getString("favourate_ids", "");
+		if (favourate_ids == "") {
+			return;
+		}
 		
 		Log.d("value = ", favourate_ids);
 		
