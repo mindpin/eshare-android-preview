@@ -28,7 +28,6 @@ import com.eshare_android_preview.base.utils.ValidateUtil;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Notes;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.database.NotesDBHelper;
 
 public class AddNoteActivity extends EshareBaseActivity{
 	public class RequestCode{
@@ -186,7 +185,7 @@ public class AddNoteActivity extends EshareBaseActivity{
 			return;
 		}
 		String content = BaseUtils.is_str_blank(content_str)? "":content_str;
-		Notes notes = new Notes(question.knowledge_node_id,content,bytes);
+		Notes notes = new Notes(question.id,content,bytes);
 		if (HttpApi.create_notes(notes)) {
 			this.finish();
 		}

@@ -22,6 +22,7 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Question;
 
 public class QuestionShowActivity extends EshareBaseActivity{
@@ -36,7 +37,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	String answer="";
 	String[] a_z = "A,B,C,D,E,F,G,H,I,J,K".split(",");
 	Question question;
-	int question_id;
 	private static final String FAVOURATE_IDS = "favourate_ids";  
 	
 	@SuppressLint("WorldReadableFiles")
@@ -47,7 +47,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
-		question_id = (int)intent.getExtras().getInt("question_id");
+		
+		Log.d("mmmmm = ,", question.id + "");
+
 		
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
@@ -60,7 +62,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		
 		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
 		String favourate_ids = sp.getString("favourate_ids", "");
-		int current_question = favourate_ids.indexOf(question_id + "");
+		int current_question = favourate_ids.indexOf(question.id + "");
 		
 		Log.d("current = ", favourate_ids);
 		Log.d("current question = ", current_question + "");
@@ -188,7 +190,8 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void add_favourates(View view) {
 		Intent intent = getIntent();
-		question_id = (int)intent.getExtras().getInt("question_id");
+		question = (Question)intent.getExtras().getSerializable("item");
+		int question_id = question.id;
 		
 		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
 		String favourate_ids = sp.getString("favourate_ids", "");
@@ -211,7 +214,8 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void cancel_favourates(View view) {
 		Intent intent = getIntent();
-		question_id = (int)intent.getExtras().getInt("question_id");
+		question = (Question)intent.getExtras().getSerializable("item");
+		int question_id = question.id;
 		
 		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
 		String favourate_ids = sp.getString("favourate_ids", "");

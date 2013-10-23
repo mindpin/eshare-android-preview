@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
+import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.model.Notes;
 
 public class NotesAdapter extends EshareBaseAdapter<Notes>{
@@ -33,6 +34,9 @@ public class NotesAdapter extends EshareBaseAdapter<Notes>{
 		 ViewHolder view_holder = (ViewHolder) holder;
 		 view_holder.info_tv.setTag(R.id.tag_note_uuid, item);
 		 view_holder.item_tv.setText(item.content);
+		 if (BaseUtils.is_str_blank(item.content) && item.img != null) {
+			 view_holder.item_tv.setText("图片");
+		}
 //	     view_holder.item_iv.setBackgroundResource((Integer)item.get("img"));
 	}
 	private class ViewHolder implements BaseViewHolder {

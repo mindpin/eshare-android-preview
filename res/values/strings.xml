@@ -29,8 +29,10 @@
     
     <!-- notes -->
     <string name="add_note_home">笔记</string>
+    <string name="show_note_title">显示笔记</string>
     <string name="add_note_title">创建笔记</string>
     <string name="add_img">增加图片</string>
+    <string name="show_question">显示问题</string>
     
     <!-- groups -->
     <string name="group_title">分组</string>

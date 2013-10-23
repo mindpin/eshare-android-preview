@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -20,13 +21,13 @@ import com.eshare_android_preview.widget.adapter.AddPlanAdapter;
 import com.eshare_android_preview.widget.model.ViewHolder;
 
 public class AddPlanActivity extends EshareBaseActivity{
+	
 	ListView list_view;
 	List<Plan> list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.p_add_plan);
-		
 		load_data();
 	}
 	private void load_data() {
