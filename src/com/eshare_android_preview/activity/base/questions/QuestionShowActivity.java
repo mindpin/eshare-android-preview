@@ -22,7 +22,6 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Question;
 
 public class QuestionShowActivity extends EshareBaseActivity{
@@ -49,8 +48,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		question = (Question)intent.getExtras().getSerializable("item");
 		
 		Log.d("mmmmm = ,", question.id + "");
-		BaseUtils.toast(question.id+"---");
-
 		
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
