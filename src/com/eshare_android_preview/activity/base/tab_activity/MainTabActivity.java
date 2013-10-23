@@ -29,7 +29,6 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 	
 	public void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);  
         setContentView(R.layout.tab_main);  
         
         prepare_view();

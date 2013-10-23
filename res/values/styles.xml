@@ -3,6 +3,7 @@
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme">
+    	<item name="android:windowNoTitle">true</item>
     </style>
 	
     <!-- 公用 -->
