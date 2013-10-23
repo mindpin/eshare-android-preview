@@ -48,10 +48,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
 		
-		Log.d("mmmmm = ,", question.id + "");
-		BaseUtils.toast(question.id+"---");
-
-		
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
 			list.add("正确");
