@@ -11,7 +11,9 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
+import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Notes;
+import com.eshare_android_preview.model.Question;
 
 public class NotesShowActivity extends EshareBaseActivity{
 	TextView note_content;
@@ -42,7 +44,8 @@ public class NotesShowActivity extends EshareBaseActivity{
 	public void click_show_question_but(View view){
 		Intent intent = new Intent();
 		intent.setClass(NotesShowActivity.this, QuestionShowActivity.class);
-		intent.putExtra("question_id", notes.question_id);
+		Question item = HttpApi.question_find_by(notes.question_id);
+		intent.putExtra("item", item);
 		startActivity(intent);
 	}
 }
