@@ -14,12 +14,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -375,6 +377,41 @@ public class ImageTools {
 				bm.getWidth(), bm.getHeight(), matrix, true);
 		return resizedBitmap;
 	}
+	//获得带倒影的图片
+	public static Bitmap createReflectionImageWithOrigin(Bitmap bitmap) {  
+	    final int reflectionGap = 4;  
+	    int w = bitmap.getWidth();  
+	    int h = bitmap.getHeight();  
+	  
+	    Matrix matrix = new Matrix();  
+	    matrix.preScale(1, -1);  
+	  
+	    Bitmap reflectionImage = Bitmap.createBitmap(bitmap, 0, h / 2, w,  
+	            h / 2, matrix, false);  
+	  
+	    Bitmap bitmapWithReflection = Bitmap.createBitmap(w, (h + h / 2),  
+	            Config.ARGB_8888);  
+	  
+	    Canvas canvas = new Canvas(bitmapWithReflection);  
+	    canvas.drawBitmap(bitmap, 0, 0, null);  
+	    Paint deafalutPaint = new Paint();  
+	    canvas.drawRect(0, h, w, h + reflectionGap, deafalutPaint);  
+	  
+	    canvas.drawBitmap(reflectionImage, 0, h + reflectionGap, null);  
+	  
+	    Paint paint = new Paint();  
+	    LinearGradient shader = new LinearGradient(0, bitmap.getHeight(), 0,  
+	            bitmapWithReflection.getHeight() + reflectionGap, 0x70ffffff,  
+	            0x00ffffff, TileMode.CLAMP);  
+	    paint.setShader(shader);  
+	    // Set the Transfer mode to be porter duff and destination in  
+	    paint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));  
+	    // Draw a rectangle using the paint with our linear gradient  
+	    canvas.drawRect(0, h, w, bitmapWithReflection.getHeight()  
+	            + reflectionGap, paint);  
+	  
+	    return bitmapWithReflection;  
+	} 
 	
 	public static File mkdir_file(String path,String name) {
         File dir = new File(path, name);
