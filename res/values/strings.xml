@@ -60,6 +60,7 @@
     <!-- 笔记列表项的 tag key -->
     <item type="id" name="tag_note_uuid"></item>
     <item type="id" name="tag_choice_uuid"></item>
+    <item type="id" name="tag_home_grid_view_data"></item>
     
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
