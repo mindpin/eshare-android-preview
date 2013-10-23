@@ -1,6 +1,5 @@
 package com.eshare_android_preview.activity.base;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;

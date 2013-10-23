@@ -4,7 +4,6 @@
     android:background="@android:color/background_light"
  >
     <RelativeLayout style="@style/head_bar" android:id="@+id/head">
-        <ImageButton style="@style/head_bar_button_go_back" android:contentDescription="@string/image_description"/>
         <Button
            android:onClick="on_click_hard_right"
            android:id="@+id/data_list_save_bn"
