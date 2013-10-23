@@ -51,7 +51,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		}else{
 			question_id = question.id;
 		}
-		
 		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
 		String favourate_ids = sp.getString("favourate_ids", "");
 		if (favourate_ids == "") {

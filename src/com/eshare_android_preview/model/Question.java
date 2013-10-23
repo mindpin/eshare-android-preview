@@ -28,6 +28,7 @@ public class Question implements Serializable{
 	// 判读题
 	public Question(int id,String knowledge_node_id, String kind, String title,String answer) {
 		super();
+		this.id = id;
 		this.knowledge_node_id = knowledge_node_id;
 		this.kind = kind;
 		this.title = title;
@@ -37,6 +38,7 @@ public class Question implements Serializable{
 	// 选择题
 	public Question(int id,String knowledge_node_id, String kind, String title,List<String> choices_list, String answer) {
 		super();
+		this.id = id;
 		this.knowledge_node_id = knowledge_node_id;
 		this.kind = kind;
 		this.title = title;
@@ -48,6 +50,7 @@ public class Question implements Serializable{
 	public Question(int id,String knowledge_node_id, String kind, String title,
 			String code_type, String desc, String init_code, String rule) {
 		super();
+		this.id = id;
 		this.knowledge_node_id = knowledge_node_id;
 		this.kind = kind;
 		this.title = title;
