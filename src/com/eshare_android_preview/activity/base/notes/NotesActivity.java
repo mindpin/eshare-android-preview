@@ -11,10 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetActivity;
-import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Notes;
 import com.eshare_android_preview.widget.adapter.NotesAdapter;
