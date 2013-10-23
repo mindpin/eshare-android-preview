@@ -50,6 +50,9 @@
 
     	<activity android:name=".activity.base.notes.NotesActivity"></activity>
     	<activity android:name=".activity.base.notes.AddNoteActivity"></activity>
+
+        <activity android:name=".activity.base.groups.GroupActivity"></activity>
+        <activity android:name=".activity.base.groups.UserInfoActivity"></activity>
     </application>
 
 </manifest>

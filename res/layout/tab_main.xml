@@ -19,7 +19,7 @@
             >
                 
                 <FrameLayout
-                    android:id="@+id/channel1" 
+                    android:id="@+id/tab_home_btn" 
                     android:background="@null" 
                     android:layout_width="0.0dip" 
                     android:layout_height="fill_parent" 
@@ -34,19 +34,19 @@
                     	<ImageView
                     	    android:layout_marginTop="8dip"
                     	    android:layout_gravity="top|center_horizontal"
-		                    android:id="@+id/imageView1"
+		                    android:id="@+id/tab_home_btn_image"
 		                    android:layout_width="fill_parent"
 		                    android:layout_height="wrap_content"
-		                    android:src="@drawable/tab_weixin_pressed" />
+		                    android:src="@drawable/tab_home_btn_image_bg" />
 		
 		                <TextView
 		                    android:gravity="bottom|center_horizontal"
-		                    android:id="@+id/textView1"
+		                    android:id="@+id/tab_home_btn_text"
 		                    android:layout_width="wrap_content"
 		                    android:layout_height="wrap_content"
 		                    android:layout_weight="1"
 		                    android:textSize="12.0dip"
-		                    android:textColor="@color/mm_tab_btn"
+		                    android:textColor="@color/tab_btn_text_color"
 		                    android:text="@string/category_home" />
                     </LinearLayout>
                     
@@ -61,7 +61,7 @@
                             android:textSize="10.0dip" 
                             android:textColor="@color/white" 
                             android:gravity="center" 
-                            android:id="@id/main_tab_unread_tv" 
+                            android:id="@+id/tab_home_btn_unread_text" 
                             android:background="@drawable/tab_unread_bg" 
                             android:visibility="invisible" 
                             android:layout_width="wrap_content" 
@@ -74,7 +74,7 @@
                 </FrameLayout>
                 
                 <FrameLayout
-                    android:id="@+id/channel2"
+                    android:id="@+id/tab_qa_btn"
                     android:background="@null" 
                     android:layout_width="0.0dip" 
                     android:layout_height="fill_parent" 
@@ -89,19 +89,19 @@
                         <ImageView
                     	    android:layout_marginTop="8dip"
                     	    android:layout_gravity="top|center_horizontal"
-		                    android:id="@+id/imageView2"
+		                    android:id="@+id/tab_qa_btn_image"
 		                    android:layout_width="fill_parent"
 		                    android:layout_height="wrap_content"
-		                    android:src="@drawable/tab_address_normal" />
+		                    android:src="@drawable/tab_qa_btn_image_bg" />
 		
 		                <TextView
 		                    android:gravity="bottom|center_horizontal"
-		                    android:id="@+id/textView2"
+		                    android:id="@+id/tab_qa_btn_text"
 		                    android:layout_width="wrap_content"
 		                    android:layout_height="wrap_content"
 		                    android:layout_weight="1"
 		                    android:textSize="12.0dip"
-		                    android:textColor="@color/mm_tab_btn"
+		                    android:textColor="@color/tab_btn_text_color"
 		                    android:text="@string/category_qa" />
                     </LinearLayout>
                     
@@ -116,7 +116,7 @@
                             android:textSize="10.0dip" 
                             android:textColor="@color/white" 
                             android:gravity="center" 
-                            android:id="@id/main_tab_fmessage_unread_tv" 
+                            android:id="@+id/tab_qa_btn_unread_text" 
                             android:background="@drawable/tab_unread_bg" 
                             android:visibility="invisible" 
                             android:layout_width="wrap_content" 
@@ -130,7 +130,7 @@
 
                 
                 <FrameLayout
-                    android:id="@+id/channel4"
+                    android:id="@+id/tab_message_btn"
                     android:background="@null"
                     android:layout_width="0.0dip" 
                     android:layout_height="fill_parent" 
@@ -145,19 +145,19 @@
                         <ImageView
                     	    android:layout_marginTop="8dip"
                     	    android:layout_gravity="top|center_horizontal"
-		                    android:id="@+id/imageView4"
+		                    android:id="@+id/tab_message_btn_image"
 		                    android:layout_width="fill_parent"
 		                    android:layout_height="wrap_content"
-		                    android:src="@drawable/tab_settings_normal" />
+		                    android:src="@drawable/tab_message_btn_image_bg" />
 		
 		                <TextView
 		                    android:gravity="bottom|center_horizontal"
-		                    android:id="@+id/textView4"
+		                    android:id="@+id/tab_message_btn_text"
 		                    android:layout_width="wrap_content"
 		                    android:layout_height="wrap_content"
 		                    android:layout_weight="1"
 		                    android:textSize="12.0dip"
-		                    android:textColor="@color/mm_tab_btn"
+		                    android:textColor="@color/tab_btn_text_color"
 		                    android:text="@string/category_message" />
                     </LinearLayout>
                     <LinearLayout 
@@ -169,7 +169,7 @@
                             android:textSize="10.0dip" 
                             android:textColor="@color/white" 
                             android:gravity="center" 
-                            android:id="@id/main_tab_setting_new_tv" 
+                            android:id="@+id/tab_message_btn_unread_text" 
                             android:background="@drawable/tab_unread_bg" 
                             android:paddingLeft="6.0dip" 
                             android:paddingRight="6.0dip" 

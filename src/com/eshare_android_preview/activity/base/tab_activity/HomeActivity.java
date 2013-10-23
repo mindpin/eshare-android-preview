@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.groups.GroupActivity;
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryActivity;
 import com.eshare_android_preview.activity.base.notes.NotesActivity;
 import com.eshare_android_preview.activity.base.plans.PlansActivity;
@@ -74,9 +75,15 @@ public class HomeActivity extends EshareBaseActivity {
 		if (item.get("text").equals("学习")) {
 			open_activity(KnowledgeNetCategoryActivity.class);
 		}
+
 		if (item.get("text").equals("收藏")) {
 			open_activity(FavourateActivity.class);
 		}
+
+        if (item.get("text").equals("分组")) {
+            open_activity(GroupActivity.class);
+        }
+
 	}
 	
 	public void on_click_hard_right(View view){
