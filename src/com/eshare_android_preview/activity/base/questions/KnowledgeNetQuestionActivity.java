@@ -35,7 +35,7 @@ public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 	
 	private void load_list_view() {
 		list_view = (ListView)findViewById(R.id.list_view);
-		List<Question> node_list = HttpApi.get_questions();
+		final List<Question> node_list = HttpApi.get_questions();
 		QuestionsAdapter adapter = new QuestionsAdapter(this);
 		adapter.add_items(node_list);
 		list_view.setAdapter(adapter);
@@ -47,9 +47,11 @@ public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
 				Question item = (Question) info_tv.getTag(R.id.tag_note_uuid);
 				
+				int question_id = (int)node_list.indexOf(item);
+				
 				Bundle bundle = new Bundle();
 		        bundle.putSerializable("item", item);
-
+		        bundle.putInt("question_id", question_id);
 		        Intent intent = new Intent(KnowledgeNetQuestionActivity.this,QuestionShowActivity.class);
 		        intent.putExtras(bundle);
 		        startActivity(intent);

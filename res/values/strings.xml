@@ -22,6 +22,7 @@
     
     <!-- knowledge_net -->
     <string name="knowedge_title">知识网络节点</string>
+    <string name="favourate_knowledge_list">收藏列表</string>
     
     <!-- questions -->
     <string name="questions_title">题目</string>
@@ -31,6 +32,10 @@
     <string name="add_note_title">创建笔记</string>
     <string name="add_img">增加图片</string>
     
+    <!-- groups -->
+    <string name="group_title">分组</string>
+    <string name="group_user_info_title">用户信息</string>
+
     <!-- plans -->
     <string name="plans_title">计划</string>
     <string name="plans_my_plans">我的计划</string>
@@ -56,5 +61,5 @@
     
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-
+    <item type="id" name="tag_user_uuid"></item>
 </resources>

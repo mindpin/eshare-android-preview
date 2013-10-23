@@ -36,6 +36,7 @@
         <activity android:name=".activity.base.tab_activity.HomeActivity"></activity>
         <activity android:name=".activity.base.tab_activity.MessageActivity"></activity>
         <activity android:name=".activity.base.tab_activity.QAActivity"></activity>
+        <activity android:name=".activity.base.tab_activity.FavourateActivity"></activity>
         
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetActivity"></activity>
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetItemActivity"></activity>
@@ -49,6 +50,9 @@
 
     	<activity android:name=".activity.base.notes.NotesActivity"></activity>
     	<activity android:name=".activity.base.notes.AddNoteActivity"></activity>
+
+        <activity android:name=".activity.base.groups.GroupActivity"></activity>
+        <activity android:name=".activity.base.groups.UserInfoActivity"></activity>
     </application>
 
 </manifest>
