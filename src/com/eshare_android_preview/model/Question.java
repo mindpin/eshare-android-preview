@@ -13,7 +13,7 @@ public class Question implements Serializable{
 	}
 	
 	private static final long serialVersionUID = 1L;
-	
+	public int id;
 	public String knowledge_node_id;
 	public String kind;
 	public String title;
@@ -26,7 +26,7 @@ public class Question implements Serializable{
 	public String rule;
 	
 	// 判读题
-	public Question(String knowledge_node_id, String kind, String title,String answer) {
+	public Question(int id,String knowledge_node_id, String kind, String title,String answer) {
 		super();
 		this.knowledge_node_id = knowledge_node_id;
 		this.kind = kind;
@@ -35,7 +35,7 @@ public class Question implements Serializable{
 	}
 	
 	// 选择题
-	public Question(String knowledge_node_id, String kind, String title,List<String> choices_list, String answer) {
+	public Question(int id,String knowledge_node_id, String kind, String title,List<String> choices_list, String answer) {
 		super();
 		this.knowledge_node_id = knowledge_node_id;
 		this.kind = kind;
@@ -45,7 +45,7 @@ public class Question implements Serializable{
 	}
 	
 	// 编程题
-	public Question(String knowledge_node_id, String kind, String title,
+	public Question(int id,String knowledge_node_id, String kind, String title,
 			String code_type, String desc, String init_code, String rule) {
 		super();
 		this.knowledge_node_id = knowledge_node_id;

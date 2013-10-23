@@ -22,6 +22,7 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Question;
 
 public class QuestionShowActivity extends EshareBaseActivity{
@@ -45,7 +46,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
-		question_id = (int)intent.getExtras().getInt("question_id");
+		question_id = (int)intent.getExtras().getInt("question_id",-1);
 		
 		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
 		String favourate_ids = sp.getString("favourate_ids", "");
@@ -62,6 +63,11 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		Log.d("whatwhatwhatwhat ===== ", favourate_ids);
 
 
+		
+		
+		if (question_id != -1) {
+			question = HttpApi.question_find_by(question_id);
+		}
 		
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();

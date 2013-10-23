@@ -2,6 +2,7 @@ package com.eshare_android_preview.activity.base.notes;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetActivity;
+import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.logic.HttpApi;
@@ -36,8 +39,13 @@ public class NotesActivity extends EshareBaseActivity{
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
 				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
-				Notes node = (Notes) info_tv.getTag(R.id.tag_note_uuid);
-				BaseUtils.toast(node.question_id);
+				Notes item = (Notes) info_tv.getTag(R.id.tag_note_uuid);
+				Bundle bundle = new Bundle();
+		        bundle.putSerializable("item", item);
+
+		        Intent intent = new Intent(NotesActivity.this,NotesShowActivity.class);
+		        intent.putExtras(bundle);
+		        startActivity(intent);
 			}
 		});
 	}

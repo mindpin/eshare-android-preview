@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/head"
+        style="@style/head_bar" >
+
+        <ImageButton
+            style="@style/head_bar_button_go_back"
+            android:contentDescription="@string/image_description" />
+
+        <TextView
+            android:id="@+id/item_title_tv"
+            style="@style/head_bar_text_center"
+            android:text="@string/show_note_title" />
+    </RelativeLayout>
+	<ScrollView 
+	    android:layout_above="@+id/button_ll"
+	    android:layout_below="@+id/head"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	    <LinearLayout
+	        android:orientation="vertical"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content">
+	        <TextView
+		        android:id="@+id/note_content"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:background="#00000000"
+		        android:gravity="top"
+		        android:padding="8dip"
+		        android:textColor="#000000"
+		        android:text="@string/placeholder"
+		        android:textSize="16sp" />
+		
+			<ImageView
+			    android:id="@+id/note_img"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:visibility="invisible"
+			/>
+	    </LinearLayout>
+	</ScrollView>
+
+    <LinearLayout
+        android:id="@+id/button_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/v5_0_1_publisher_buttons_area_bg"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/submit_but"
+            android:layout_width="0.0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:onClick="click_show_question_but"
+            android:text="@string/show_question" />
+    </LinearLayout>
+
+</RelativeLayout>

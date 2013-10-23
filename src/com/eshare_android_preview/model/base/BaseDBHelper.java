@@ -10,7 +10,7 @@ public class BaseDBHelper extends SQLiteOpenHelper {
     private static final String create_table_notes = "create table " +
             Constants.TABLE_NOTES + " (" +
             Constants.KEY_ID + " integer primary key autoincrement, " +
-            Constants.TABLE_NOTES__NODE_ID + " text not null, " +
+            Constants.TABLE_NOTES__QUESTION_ID + " integer not null, " +
             Constants.TABLE_NOTES__CONTENT + " text, " +
             Constants.TABLE_NOTES__IMG + " blob );";
     

@@ -45,7 +45,7 @@ public class YAMLParse {
 				}
 
 				if (!kind.equals(Question.Type.CODE)) {
-					Question question = new Question(knowledge_node_id.toString(), kind.toString(), title.toString(), choices_list, answer.toString());
+					Question question = new Question(i,knowledge_node_id.toString(), kind.toString(), title.toString(), choices_list, answer.toString());
 					list.add(question);
 				}
 				

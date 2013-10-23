@@ -45,12 +45,13 @@
         
         <activity android:name=".activity.base.questions.KnowledgeNetQuestionActivity"></activity>
         <activity android:name=".activity.base.questions.QuestionShowActivity" android:windowSoftInputMode="stateHidden"></activity>
-    
+        
     	<activity android:name=".activity.base.plans.PlansActivity"></activity>
     	<activity android:name=".activity.base.plans.AddPlanActivity"></activity>
 
     	<activity android:name=".activity.base.notes.NotesActivity"></activity>
     	<activity android:name=".activity.base.notes.AddNoteActivity"></activity>
+    	<activity android:name=".activity.base.notes.NotesShowActivity"></activity>
 
         <activity android:name=".activity.base.groups.GroupActivity"></activity>
         <activity android:name=".activity.base.groups.UserInfoActivity"></activity>
