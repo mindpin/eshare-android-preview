@@ -109,7 +109,7 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && current_tab_id != R.id.tab_home_btn) {
 			tab_home_btn.performClick();
 			return true;
 		}
