@@ -62,4 +62,14 @@ public class HttpApi {
 	public static void update_plan(Plan plan) {
 		PlanDBHelper.update(plan);
 	}
+
+	public static Question question_find_by(int question_id) {
+		List<Question> list = get_questions();
+		for (Question question : list) {
+			if (question_id == question.id) {
+				return question;
+			}
+		}
+		return null;
+	}
 }
