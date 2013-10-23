@@ -35,7 +35,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	String answer="";
 	String[] a_z = "A,B,C,D,E,F,G,H,I,J,K".split(",");
 	Question question;
-	int question_id;
 	private static final String FAVOURATE_IDS = "favourate_ids";  
 	
 	@SuppressLint({ "WorldReadableFiles", "CommitPrefEdits", "WorldWriteableFiles" })
@@ -46,7 +45,12 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
-		question_id = (int)intent.getExtras().getInt("question_id",-1);
+		int question_id = (int)intent.getExtras().getInt("question_id",-1);
+		if (question_id != -1) {
+			question = HttpApi.question_find_by(question_id);
+		}else{
+			question_id = question.id;
+		}
 		
 		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
 		String favourate_ids = sp.getString("favourate_ids", "");
@@ -62,12 +66,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		
 		Log.d("whatwhatwhatwhat ===== ", favourate_ids);
 
-
-		
-		
-		if (question_id != -1) {
-			question = HttpApi.question_find_by(question_id);
-		}
 		
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
