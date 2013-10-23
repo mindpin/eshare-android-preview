@@ -27,6 +27,8 @@ import com.eshare_android_preview.model.Question;
 public class QuestionShowActivity extends EshareBaseActivity{
 	TextView item_title_tv,question_kind,question_title;
 	LinearLayout choices_ll, choices_list_ll;
+	Button add_favourate_btn;
+	Button cancel_favourate_btn;
 	
 	EditText answer_et;
 	Button submit_but;
@@ -37,7 +39,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	int question_id;
 	private static final String FAVOURATE_IDS = "favourate_ids";  
 	
-	@SuppressLint({ "WorldReadableFiles", "CommitPrefEdits", "WorldWriteableFiles" })
+	@SuppressLint("WorldReadableFiles")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,22 +49,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		question = (Question)intent.getExtras().getSerializable("item");
 		question_id = (int)intent.getExtras().getInt("question_id");
 		
-		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
-		String favourate_ids = sp.getString("favourate_ids", "");
-		if (favourate_ids == "") {
-			favourate_ids = question_id + "";
-		} else {
-			favourate_ids = favourate_ids + "," + question_id;
-		}
-		
-		
-        SharedPreferences.Editor editor = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_WRITEABLE).edit();  
-		editor.putString("favourate_ids", favourate_ids);
-		
-		Log.d("whatwhatwhatwhat ===== ", favourate_ids);
-
-
-		
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
 			list.add("正确");
@@ -70,10 +56,26 @@ public class QuestionShowActivity extends EshareBaseActivity{
 			question.choices_list = list;
 			a_z = "T,F".split(",");
 		}
+				
 		
+		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
+		String favourate_ids = sp.getString("favourate_ids", "");
+		int current_question = favourate_ids.indexOf(question_id + "");
+		
+		Log.d("current = ", favourate_ids);
+		Log.d("current question = ", current_question + "");
+
 		
 		init_ui();
 		load_question_msg();
+		
+		if (current_question < 0) {
+			add_favourate_btn.setVisibility(View.VISIBLE);
+			cancel_favourate_btn.setVisibility(View.GONE);
+		} else {
+			add_favourate_btn.setVisibility(View.GONE);
+			cancel_favourate_btn.setVisibility(View.VISIBLE);
+		}
 	}
 	
 	private void init_ui() {
@@ -86,6 +88,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		
 		answer_et = (EditText)findViewById(R.id.answer_et);
 		submit_but = (Button)findViewById(R.id.submit_but);
+		
+		add_favourate_btn = (Button) findViewById(R.id.add_favourates_btn);
+		cancel_favourate_btn = (Button) findViewById(R.id.cancel_favourates_btn);
 	}
 	
 	private void load_question_msg() {
@@ -180,7 +185,55 @@ public class QuestionShowActivity extends EshareBaseActivity{
         startActivity(intent);
 	}
 	
-	public void click_favourates(View view) {
+	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
+	public void add_favourates(View view) {
+		Intent intent = getIntent();
+		question_id = (int)intent.getExtras().getInt("question_id");
 		
+		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
+		String favourate_ids = sp.getString("favourate_ids", "");
+		if (favourate_ids == "") {
+			favourate_ids = question_id + "";
+		} else {
+			favourate_ids = favourate_ids + "," + question_id;
+		}
+
+        SharedPreferences.Editor editor = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_WRITEABLE).edit();  
+		editor.putString("favourate_ids", favourate_ids);
+		editor.commit();
+		
+		Log.d("latest after add =", favourate_ids);
+		
+		add_favourate_btn.setVisibility(View.GONE);
+		cancel_favourate_btn.setVisibility(View.VISIBLE);
+	}
+	
+	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
+	public void cancel_favourates(View view) {
+		Intent intent = getIntent();
+		question_id = (int)intent.getExtras().getInt("question_id");
+		
+		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
+		String favourate_ids = sp.getString("favourate_ids", "");
+		
+		String[] strArray = favourate_ids.split(",");
+		int[] favourate_ids_arr = new int[strArray.length];
+		for(int i = 0; i < strArray.length; i++) {
+			favourate_ids_arr[i] = Integer.parseInt(strArray[i]);
+		}
+		
+		favourate_ids = favourate_ids.replace("," + question_id, "");
+		favourate_ids = favourate_ids.replace(question_id + ",", "");
+		favourate_ids = favourate_ids.replace(question_id + "", "");
+		
+		SharedPreferences.Editor editor = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_WRITEABLE).edit();  
+		editor.putString("favourate_ids", favourate_ids);
+		editor.commit();
+		
+		Log.d("latest after cancel =", favourate_ids);
+		
+		
+		add_favourate_btn.setVisibility(View.VISIBLE);
+		cancel_favourate_btn.setVisibility(View.GONE);
 	}
 }
