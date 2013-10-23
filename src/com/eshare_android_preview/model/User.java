@@ -29,6 +29,10 @@ public class User implements Serializable {
         this.bio = "大家好，我是" + username + "。";
     }
 
+    public static User fromJSONObject(JSONObject obj) throws JSONException {
+        return new User(obj.getString("name"), obj.getString("avatar"));
+    }
+
     public Drawable getAvatarDrawable() {
         Drawable avatar;
         try {
@@ -54,9 +58,7 @@ public class User implements Serializable {
             data = new JSONArray(new String(buffer, "UTF-8"));
             for (int i = 0; i < data.length(); i++) {
                 JSONObject obj = data.getJSONObject(i);
-
-                User user = new User(obj.getString("name"), obj.getString("avatar"));
-                users.add(user);
+                users.add(User.fromJSONObject(obj));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,7 +68,7 @@ public class User implements Serializable {
     }
 
     public static ArrayList<User> all() {
-        if (!(users == null)) return users;
+        if (users != null) return users;
         fetch();
         return users;
     }
