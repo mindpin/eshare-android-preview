@@ -49,6 +49,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		question = (Question)intent.getExtras().getSerializable("item");
 		
 		Log.d("mmmmm = ,", question.id + "");
+		BaseUtils.toast(question.id+"---");
 
 		
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
