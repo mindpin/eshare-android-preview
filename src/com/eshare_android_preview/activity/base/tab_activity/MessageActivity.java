@@ -12,10 +12,12 @@ public class MessageActivity extends EshareBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab_message);
+
+        this.hide_head_go_back_button();
+        this.set_head_text(R.string.category_message);
+
 	}
-	public void on_click_hard_right(View view){
-		
-	}
+
 	@Override 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
