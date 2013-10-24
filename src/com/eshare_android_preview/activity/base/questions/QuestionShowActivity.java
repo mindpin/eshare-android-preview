@@ -41,8 +41,8 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	@SuppressLint("WorldReadableFiles")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.q_question_show);
+        hide_head_setting_button();
 		
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
@@ -76,6 +76,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 			add_favourate_btn.setVisibility(View.GONE);
 			cancel_favourate_btn.setVisibility(View.VISIBLE);
 		}
+        super.onCreate(savedInstanceState);
 	}
 	
 	private void init_ui() {
@@ -94,7 +95,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	}
 	
 	private void load_question_msg() {
-		item_title_tv.setText(BaseUtils.sub_string_by(question.title, 10));
+        set_head_text(BaseUtils.sub_string_by(question.title, 10));
 		question_kind.setText(question.kind);
 		question_title.setText(question.title);
 		

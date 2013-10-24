@@ -19,11 +19,13 @@ public class UserInfoActivity extends EshareBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.g_user_info);
+        hide_head_setting_button();
+        set_head_text(R.string.group_user_info_title);
         user = (User)getIntent().getExtras().getSerializable("user");
         init_ui();
         load_user();
+        super.onCreate(savedInstanceState);
     }
 
     private void init_ui() {

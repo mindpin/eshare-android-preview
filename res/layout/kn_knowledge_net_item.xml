@@ -2,18 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <RelativeLayout style="@style/head_bar" android:id="@+id/head">
-       <ImageButton style="@style/head_bar_button_go_back" android:contentDescription="@string/image_description"/>
-       <TextView
-           android:id="@+id/item_title"
-           android:text="@string/placeholder"
-           style="@style/head_bar_text_center"
-        />
-    </RelativeLayout>
+    <include layout="@layout/cell_head_bar"/>
     <RelativeLayout
         android:paddingLeft="20dp"
         android:paddingTop="20dp"
-        android:layout_below="@+id/head"
+        android:layout_below="@+id/head_bar"
         android:id="@+id/shwo_itme_msg" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
