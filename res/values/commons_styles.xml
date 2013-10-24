@@ -11,7 +11,7 @@
     </style>
     
     <style name="head_bar_text_center" parent="head_bar_text">
-        <item name="android:gravity">center_vertical</item>
+        <item name="android:gravity">center</item>
         <item name="android:text">@string/placeholder</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_centerVertical">true</item>

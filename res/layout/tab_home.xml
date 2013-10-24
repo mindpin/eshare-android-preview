@@ -3,50 +3,13 @@
     style="@style/body"
     android:background="@android:color/background_light" >
 
-    <RelativeLayout
-        android:id="@+id/head"
-        style="@style/head_bar" >
-
-        <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:padding="10dp" >
-
-            <Button
-                android:id="@+id/go_back"
-                style="@style/head_bar_button_go_back" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/head_bar_title_tv"
-            style="@style/head_bar_text_center"
-            android:text="@string/tab_home" />
-
-        <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:padding="10dp" >
-
-            <Button
-                android:id="@+id/setting"
-                style="@style/head_bar_button_setting" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:background="#e0e0e0" />
-    </RelativeLayout>
+    <include layout="@layout/cell_head_bar" />
 
     <RelativeLayout
         android:id="@+id/user_msg"
         android:layout_width="fill_parent"
         android:layout_height="160dp"
-        android:layout_below="@+id/head" >
+        android:layout_below="@+id/head_bar" >
 
         <RelativeLayout
             android:layout_width="fill_parent"
