@@ -1,4 +1,4 @@
-package com.eshare_android_preview.activity.base.tab_activity;
+package com.eshare_android_preview.activity.base.fav;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +34,13 @@ public class FavourateActivity extends EshareBaseActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab_favourate);
 		
 		load_list_view();
+		
+		hide_head_setting_button();
+        set_head_text(R.string.favourate_knowledge_list);
+        super.onCreate(savedInstanceState);
 	}
 	
 	private void load_list_view() {

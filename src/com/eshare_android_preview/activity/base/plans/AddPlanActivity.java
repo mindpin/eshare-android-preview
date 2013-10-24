@@ -26,9 +26,13 @@ public class AddPlanActivity extends EshareBaseActivity{
 	List<Plan> list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.p_add_plan);
 		load_data();
+		
+		hide_head_setting_button();
+        set_head_text(getResources().getString(R.string.plans_add_plans_title));
+		super.onCreate(savedInstanceState);
 	}
 	private void load_data() {
 		if (PlanDBHelper.all().size()!=0) {

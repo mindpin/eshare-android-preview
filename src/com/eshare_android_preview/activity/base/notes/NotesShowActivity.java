@@ -28,6 +28,10 @@ public class NotesShowActivity extends EshareBaseActivity{
 		notes = (Notes)intent.getExtras().getSerializable("item");
 		
 		load_ui();
+		
+		hide_head_setting_button();
+        set_head_text(R.string.show_note_title);
+        super.onCreate(savedInstanceState);
 	}
 	private void load_ui() {
 		note_content = (TextView)findViewById(R.id.note_content);

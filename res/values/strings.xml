@@ -41,6 +41,7 @@
     <string name="questions_title">题目</string>
     
     <!-- notes -->
+    <string name="note">笔记</string>
     <string name="add_note_home">笔记</string>
     <string name="show_note_title">显示笔记</string>
     <string name="add_note_title">创建笔记</string>

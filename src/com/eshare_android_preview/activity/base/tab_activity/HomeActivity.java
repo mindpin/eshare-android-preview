@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.fav.FavourateActivity;
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryActivity;
 import com.eshare_android_preview.activity.base.notes.NotesActivity;
 import com.eshare_android_preview.activity.base.plans.PlansActivity;

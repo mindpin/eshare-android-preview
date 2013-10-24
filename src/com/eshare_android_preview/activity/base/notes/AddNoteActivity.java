@@ -78,6 +78,10 @@ public class AddNoteActivity extends EshareBaseActivity{
 		question = (Question)intent.getExtras().getSerializable("item");
 		
 		load_ui();
+		
+		hide_head_setting_button();
+        set_head_text(R.string.add_note_title);
+        super.onCreate(savedInstanceState);
 	}
 	private void load_ui() {
 		add_note_content = (EditText)findViewById(R.id.add_note_content);

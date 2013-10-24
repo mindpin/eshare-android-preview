@@ -37,7 +37,8 @@
         <activity android:name=".activity.base.tab_activity.HomeActivity"></activity>
         <activity android:name=".activity.base.tab_activity.MessageActivity"></activity>
         <activity android:name=".activity.base.tab_activity.QAActivity"></activity>
-        <activity android:name=".activity.base.tab_activity.FavourateActivity"></activity>
+        
+        <activity android:name=".activity.base.fav.FavourateActivity"></activity>
         
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetActivity"></activity>
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetItemActivity"></activity>

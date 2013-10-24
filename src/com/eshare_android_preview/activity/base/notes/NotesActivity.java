@@ -20,10 +20,14 @@ public class NotesActivity extends EshareBaseActivity{
 	ListView list_view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.n_notes);
 		
 		load_list();
+		
+		hide_head_setting_button();
+        set_head_text(R.string.note);
+        super.onCreate(savedInstanceState);
 	}
 	private void load_list() {
 		list_view = (ListView)findViewById(R.id.list_view);
