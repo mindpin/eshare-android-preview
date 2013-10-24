@@ -29,17 +29,19 @@ public class KnowledgeNetCategoryActivity extends EshareBaseActivity{
 	ListView list_view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.kn_knowledge_net_category);
+        hide_head_setting_button();
+        set_head_text(R.string.knowedge_title);
 		load_search_et();
 		load_list_view();
+        super.onCreate(savedInstanceState);
 	}
 	private void load_search_et() {
 		d_default = getResources().getDrawable(R.drawable.txt_search_default);
 	    d_clear = getResources().getDrawable(R.drawable.txt_search_clear);
-		search_edit_tv = (EditText) findViewById(R.id.search_edit_tv);
-		search_edit_tv.addTextChangedListener(tbxSearch_TextChanged);
-		search_edit_tv.setOnTouchListener(txtSearch_OnTouch);
+//		search_edit_tv = (EditText) findViewById(R.id.search_edit_tv);
+//		search_edit_tv.addTextChangedListener(tbxSearch_TextChanged);
+//		search_edit_tv.setOnTouchListener(txtSearch_OnTouch);
 	}
 	/**
      * 动态搜索

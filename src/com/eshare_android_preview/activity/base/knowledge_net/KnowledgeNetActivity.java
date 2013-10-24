@@ -23,15 +23,15 @@ public class KnowledgeNetActivity extends EshareBaseActivity{
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.kn_knowledge_net);
-		
+        hide_head_setting_button();
+
 		Intent intent = getIntent();
 		String item = (String) intent.getExtras().getSerializable("item");
-		item_title_tv = (TextView)findViewById(R.id.item_title_tv);
-		item_title_tv.setText(item);
+        set_head_text(item);
 		
 		load_list_view();
+        super.onCreate(savedInstanceState);
 	}
 	
 	private void load_list_view() {

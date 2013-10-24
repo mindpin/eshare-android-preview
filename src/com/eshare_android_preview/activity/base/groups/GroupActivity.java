@@ -19,9 +19,11 @@ public class GroupActivity extends EshareBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.g_group);
         load_list();
+        hide_head_setting_button();
+        set_head_text(R.string.group_title);
+        super.onCreate(savedInstanceState);
     }
 
     private void load_list() {

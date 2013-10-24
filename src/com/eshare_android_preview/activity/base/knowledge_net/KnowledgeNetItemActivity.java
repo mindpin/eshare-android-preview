@@ -18,28 +18,29 @@ import com.eshare_android_preview.model.Node;
 import com.eshare_android_preview.widget.adapter.KnowledgeNetItemAdapter;
 
 public class KnowledgeNetItemActivity extends EshareBaseActivity{
-	TextView item_title, node_name, node_desc;
+    TextView node_name;
+    TextView node_desc;
 	ListView child_list_view,parends_list_view;
 	
 	Node node;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.kn_knowledge_net_item);
+        hide_head_setting_button();
 		
 		Intent intent = getIntent();
 		node = (Node)intent.getExtras().getSerializable("node");
+        set_head_text(node.name);
 		
 		load_node_msg();
 		load_list_view();
+        super.onCreate(savedInstanceState);
 	}
 	
 	private void load_node_msg() {
-		item_title = (TextView)findViewById(R.id.item_title);
 		node_name = (TextView)findViewById(R.id.node_name);
 		node_desc = (TextView)findViewById(R.id.node_desc);
-		
-		item_title.setText(node.name);
+
 		node_name.setText(node.name);
 		node_desc.setText(node.desc);
 		
