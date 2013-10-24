@@ -12,13 +12,18 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.LoginActivity;
 
 public class EshareBaseActivity extends Activity{
+
+    /**
+     * 此方法务必要在子类的 onCreate 中 layout 加载后再调用
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		ActivitiesStackSingleton.tidy_and_push_activity(this);
 
 //        如果存在顶栏，加载顶栏并进行一些必要设置
         _load_head_bar();
+
+		super.onCreate(savedInstanceState);
 	}
 	@Override
 	protected void onDestroy() {

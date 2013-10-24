@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.groups.GroupActivity;
@@ -32,23 +33,25 @@ public class HomeActivity extends EshareBaseActivity {
 	GridView grid_view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab_home);
 
 		init_view();
 		load_user_data();
 		set_buttons_font();
+
+		super.onCreate(savedInstanceState);
 	}
 
 	private void set_buttons_font() {
 		Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
 		int[] icon_ids = new int[]{
-				R.id.icon_plan, R.id.icon_note, R.id.icon_fav,
-				R.id.icon_knowledge, R.id.icon_test, R.id.icon_group
+				R.id.home_button_plan, R.id.home_button_note, R.id.home_button_fav,
+				R.id.home_button_knowledge, R.id.home_button_test, R.id.home_button_group
 		};
 		
 		for(int i = 0; i < icon_ids.length; i++) {
-			TextView tv = (TextView) findViewById(icon_ids[i]);
+            RelativeLayout button_view = (RelativeLayout) findViewById(icon_ids[i]);
+			TextView tv = (TextView) button_view.getChildAt(0);
 			tv.setTypeface(font);
 		}
 	}
