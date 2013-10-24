@@ -9,8 +9,7 @@
             android:id="@+id/user_msg"
             android:layout_width="fill_parent"
             android:layout_height="160dp"
-            android:layout_below="@+id/head_bar"
-            android:background="#ffffdc">
+            android:layout_below="@+id/head_bar">
 
         <RelativeLayout
                 android:layout_width="fill_parent"
@@ -71,12 +70,10 @@
 
             <TextView
                     style="@style/home_button_icon"
-                    android:textColor="#4F9CD4"
                     android:text="@string/icon_list"/>
 
             <TextView
                     style="@style/home_button_text"
-                    android:textColor="#fff"
                     android:text="学习计划"/>
 
             <RelativeLayout style="@style/bottom_1dp_border"/>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.LoginActivity;
@@ -43,33 +44,65 @@ public class EshareBaseActivity extends Activity{
 		this.finish();
 	}
 
+    // 绑定在顶栏 setting 按钮上的事件处理
+    final public void setting(View view) {
+        on_setting();
+    }
+
+    // 钩子，自行重载
+    public void on_go_back() {};
+
+    // 钩子，自行重载
+    public void on_setting() {};
+
 	// 打开一个新的activity，此方法用来简化调用
 	final public void open_activity(Class<?> cls) {
 		startActivity(new Intent(getApplicationContext(), cls));
 	}
-	
-	// 钩子，自行重载
-	public void on_go_back() {
-	};
 
     private void _load_head_bar() {
-//        RelativeLayout head_bar_rl = (RelativeLayout) findViewById(R.id.head_bar);
-//
-//        System.out.print(head_bar_rl);
-//
-//        if (null != head_bar_rl) {
-            try {
-				Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
+        RelativeLayout head_bar_rl = (RelativeLayout) findViewById(R.id.head_bar);
 
-				Button go_back_button = (Button) findViewById(R.id.button_go_back);
-				go_back_button.setTypeface(font);
+        if (null != head_bar_rl) {
+            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
 
-				Button setting_button = (Button) findViewById(R.id.button_setting);
-				setting_button.setTypeface(font);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-//        }
+            Button go_back_button = (Button) findViewById(R.id.button_go_back);
+            go_back_button.setTypeface(font);
+
+            Button setting_button = (Button) findViewById(R.id.button_setting);
+            setting_button.setTypeface(font);
+        }
+    }
+
+    // 隐藏顶部的回退按钮
+    public void hide_head_go_back_button() {
+        try {
+            Button button = (Button) findViewById(R.id.button_go_back);
+            button.setVisibility(View.GONE);
+        } catch (Exception e) {}
+    }
+
+    // 隐藏顶部的设置按钮
+    public void hide_head_setting_button() {
+        try {
+            Button button = (Button) findViewById(R.id.button_setting);
+            button.setVisibility(View.GONE);
+        } catch (Exception e) {}
+    }
+
+    // 设置顶部文字
+    public void set_head_text(CharSequence text) {
+        try {
+            TextView tv = (TextView) findViewById(R.id.head_bar_title_tv);
+            tv.setText(text);
+        } catch (Exception e) {}
+    }
+
+    // 设置顶部文字
+    public void set_head_text(int res_id) {
+        try {
+            TextView tv = (TextView) findViewById(R.id.head_bar_title_tv);
+            tv.setText(res_id);
+        } catch (Exception e) {}
     }
 }
