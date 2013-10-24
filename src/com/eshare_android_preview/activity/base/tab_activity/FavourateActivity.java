@@ -10,12 +10,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.activity.base.questions.KnowledgeNetQuestionActivity;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
