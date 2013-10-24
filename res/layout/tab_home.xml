@@ -67,8 +67,7 @@
 
         <RelativeLayout
                 android:id="@+id/home_button_plan"
-                style="@style/home_button_layout"
-                android:background="#375D81">
+                style="@style/home_button_layout">
 
             <TextView
                     style="@style/home_button_icon"

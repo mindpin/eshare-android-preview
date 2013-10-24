@@ -1,36 +1,34 @@
 package com.eshare_android_preview.activity.base.tab_activity;
 
-import java.util.ArrayList;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.GridView;
+import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.activity.base.groups.GroupActivity;
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryActivity;
 import com.eshare_android_preview.activity.base.notes.NotesActivity;
 import com.eshare_android_preview.activity.base.plans.PlansActivity;
 import com.eshare_android_preview.activity.base.questions.KnowledgeNetQuestionActivity;
+import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
-import com.eshare_android_preview.widget.adapter.GridViewAdapter;
 
 
 public class HomeActivity extends EshareBaseActivity {
 	ImageView user_avatar;
 	TextView user_name;
-	GridView grid_view;
+	RelativeLayout home_button_plan,home_button_note,home_button_fav,home_button_knowledge,home_button_test,home_button_group;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.tab_home);
@@ -38,6 +36,7 @@ public class HomeActivity extends EshareBaseActivity {
 		init_view();
 		load_user_data();
 		set_buttons_font();
+		set_layout_click();
 
 		super.onCreate(savedInstanceState);
 	}
@@ -59,6 +58,14 @@ public class HomeActivity extends EshareBaseActivity {
 	private void init_view() {
 		user_avatar = (ImageView)findViewById(R.id.user_avatar);
 		user_name  = (TextView)findViewById(R.id.user_name);
+
+		home_button_plan = (RelativeLayout)findViewById(R.id.home_button_plan);
+		home_button_note = (RelativeLayout)findViewById(R.id.home_button_note);
+		home_button_fav = (RelativeLayout)findViewById(R.id.home_button_fav);
+		home_button_knowledge = (RelativeLayout)findViewById(R.id.home_button_knowledge);
+		home_button_test = (RelativeLayout)findViewById(R.id.home_button_test);
+		home_button_group = (RelativeLayout)findViewById(R.id.home_button_group);
+		
 	}
 
     private void load_user_data() {
@@ -69,47 +76,41 @@ public class HomeActivity extends EshareBaseActivity {
         user_name.setText("熊猫滚滚");
     }
 
-	private void load_grid_view_data(){
-		ArrayList<GridViewData> lists = new ArrayList<GridViewData>();
-        lists.add(
-            new GridViewData("计划", R.drawable.tab_qa_btn_image_bg_normal, PlansActivity.class)
-        );
-        lists.add(
-            new GridViewData("笔记", R.drawable.tab_find_frd_normal, NotesActivity.class)
-        );
-        lists.add(
-            new GridViewData("收藏", R.drawable.tab_message_btn_image_bg_selected, FavourateActivity.class)
-        );
-        lists.add(
-            new GridViewData("学习", R.drawable.tab_find_frd_normal, KnowledgeNetCategoryActivity.class)
-        );
-        lists.add(
-            new GridViewData("题目", R.drawable.tab_message_btn_image_bg_selected, KnowledgeNetQuestionActivity.class)
-        );
-        lists.add(
-            new GridViewData("分组", R.drawable.tab_home_btn_image_bg_normal, GroupActivity.class)
-        );
-
-		GridViewAdapter adapter = new GridViewAdapter(this);
-		adapter.add_items(lists);
-		grid_view.setAdapter(adapter);
-		
-		grid_view.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-				
-				TextView info_tv = (TextView)list_item.findViewById(R.id.info_tv);
-				@SuppressWarnings("unchecked")
-                GridViewData item = (GridViewData) info_tv.getTag(R.id.tag_home_grid_view_data);
-                open_activity(item.activity);
+	private void set_layout_click(){
+		home_button_plan.setOnTouchListener(new RelativeLayoutClice(home_button_plan,PlansActivity.class));
+		home_button_note.setOnTouchListener(new RelativeLayoutClice(home_button_note,NotesActivity.class));
+		home_button_fav.setOnTouchListener(new RelativeLayoutClice(home_button_fav,FavourateActivity.class));
+		home_button_knowledge.setOnTouchListener(new RelativeLayoutClice(home_button_knowledge,KnowledgeNetCategoryActivity.class));
+		home_button_test.setOnTouchListener(new RelativeLayoutClice(home_button_test,KnowledgeNetQuestionActivity.class));
+		home_button_group.setOnTouchListener(new RelativeLayoutClice(home_button_group,PlansActivity.class));
+	}
+	class RelativeLayoutClice implements OnTouchListener{
+		RelativeLayout layout;
+		Class activity;
+		public RelativeLayoutClice(RelativeLayout layout,Class activity){
+			this.layout = layout;
+			this.activity = activity;
+		}
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			switch (event.getAction()) {
+			
+			case MotionEvent.ACTION_DOWN:
+			case MotionEvent.ACTION_MOVE:
+				layout.setBackgroundColor(getResources().getColor(R.color.tab_home_clik_item));
+				break;
+			case MotionEvent.ACTION_UP:
+				open_activity(activity);
+				layout.setBackgroundColor(getResources().getColor(R.color.white));
+			default:
+				break;
 			}
-		});
-	}
-
-	public void on_click_hard_right(View view){
+			return true;
+		}
 		
 	}
 
+	
 	@Override 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -117,16 +118,4 @@ public class HomeActivity extends EshareBaseActivity {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-
-    public class GridViewData {
-        public Class activity;
-        public int img;
-        public String text;
-
-        public GridViewData(String text, int img, Class activity){
-            this.text = text;
-            this.img = img;
-            this.activity= activity;
-        }
-    }
 }

@@ -5,4 +5,7 @@
     
     <color name="choice_selected">#AA7700</color>
     <color name="choice_after">#AAAAAA</color>
+    
+    
+    <color name="tab_home_clik_item">#375D81</color>
 </resources>

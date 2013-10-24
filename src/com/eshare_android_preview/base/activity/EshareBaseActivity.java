@@ -58,13 +58,18 @@ public class EshareBaseActivity extends Activity{
 //        System.out.print(head_bar_rl);
 //
 //        if (null != head_bar_rl) {
-            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
+            try {
+				Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
 
-            Button go_back_button = (Button) findViewById(R.id.button_go_back);
-            go_back_button.setTypeface(font);
+				Button go_back_button = (Button) findViewById(R.id.button_go_back);
+				go_back_button.setTypeface(font);
 
-            Button setting_button = (Button) findViewById(R.id.button_setting);
-            setting_button.setTypeface(font);
+				Button setting_button = (Button) findViewById(R.id.button_setting);
+				setting_button.setTypeface(font);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 //        }
     }
 }
