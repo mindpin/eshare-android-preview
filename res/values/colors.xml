@@ -7,5 +7,12 @@
     <color name="choice_after">#AAAAAA</color>
     
     
-    <color name="tab_home_clik_item">#375D81</color>
+    <color name="tab_home_item_bg_normal">#ffffffff</color>
+    <color name="tab_home_item_bg_selected">#375D81</color>
+    
+    <color name="tab_home_item_icon_normal">#4F9CD4</color>
+    <color name="tab_home_item_icon_selected">#E5E9F1</color>
+    
+    <color name="tab_home_item_text_normal">#000</color>
+    <color name="tab_home_item_text_selected">#fff</color>
 </resources>

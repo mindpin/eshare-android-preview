@@ -71,7 +71,7 @@
 
             <TextView
                     style="@style/home_button_icon"
-                    android:textColor="#E5E9F1"
+                    android:textColor="#4F9CD4"
                     android:text="@string/icon_list"/>
 
             <TextView

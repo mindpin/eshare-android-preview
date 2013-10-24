@@ -18,7 +18,6 @@ import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCatego
 import com.eshare_android_preview.activity.base.notes.NotesActivity;
 import com.eshare_android_preview.activity.base.plans.PlansActivity;
 import com.eshare_android_preview.activity.base.questions.KnowledgeNetQuestionActivity;
-import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
 
@@ -27,8 +26,7 @@ public class HomeActivity extends EshareBaseActivity {
 	ImageView user_avatar;
 	TextView user_name;
 	RelativeLayout home_button_plan,home_button_note,home_button_fav,home_button_knowledge,home_button_test,home_button_group;
-	
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.tab_home);
@@ -93,15 +91,21 @@ public class HomeActivity extends EshareBaseActivity {
 		}
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-			switch (event.getAction()) {
+			TextView icon_view = (TextView) layout.getChildAt(0);
+			TextView text_view = (TextView) layout.getChildAt(1);
 			
+			switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 			case MotionEvent.ACTION_MOVE:
-				layout.setBackgroundColor(getResources().getColor(R.color.tab_home_clik_item));
+				layout.setBackgroundColor(getResources().getColor(R.color.tab_home_item_bg_selected));
+				icon_view.setTextColor(getResources().getColor(R.color.tab_home_item_icon_selected));
+				text_view.setTextColor(getResources().getColor(R.color.tab_home_item_text_selected));
 				break;
 			case MotionEvent.ACTION_UP:
 				open_activity(activity);
-				layout.setBackgroundColor(getResources().getColor(R.color.white));
+				layout.setBackgroundColor(getResources().getColor(R.color.tab_home_item_bg_normal));
+				icon_view.setTextColor(getResources().getColor(R.color.tab_home_item_icon_normal));
+				text_view.setTextColor(getResources().getColor(R.color.tab_home_item_text_normal));
 			default:
 				break;
 			}
