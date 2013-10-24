@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp">
+
+    <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:padding="10dp">
+
+        <Button
+                android:id="@+id/button_go_back"
+                style="@style/head_bar_button_go_back"/>
+    </RelativeLayout>
+
+    <TextView
+            android:id="@+id/head_bar_title_tv"
+            style="@style/head_bar_text_center"
+            android:text="@string/tab_home"/>
+
+    <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp">
+
+        <Button
+                android:id="@+id/button_setting"
+                style="@style/head_bar_button_setting"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#e0e0e0"/>
+
+</RelativeLayout>

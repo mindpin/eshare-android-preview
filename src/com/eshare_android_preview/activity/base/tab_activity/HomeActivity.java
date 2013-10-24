@@ -37,20 +37,11 @@ public class HomeActivity extends EshareBaseActivity {
 
 		init_view();
 		load_user_data();
-		set_head_font();
 		set_buttons_font();
 	}
-	
-	private void set_head_font() {
-		Typeface font = Typeface.createFromAsset(getAssets(), "fontawesome-webfont.ttf");
-		Button go_back_button = (Button) findViewById(R.id.go_back);
-		go_back_button.setTypeface(font);
-		Button setting_button = (Button) findViewById(R.id.setting);
-		setting_button.setTypeface(font);
-	}
-	
+
 	private void set_buttons_font() {
-		Typeface font = Typeface.createFromAsset(getAssets(), "fontawesome-webfont.ttf");
+		Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
 		int[] icon_ids = new int[]{
 				R.id.icon_plan, R.id.icon_note, R.id.icon_fav,
 				R.id.icon_knowledge, R.id.icon_test, R.id.icon_group
