@@ -4,6 +4,17 @@
     <string name="app_name">eshare-android-preview</string>
     <string name="app_version">0.01</string>
     
+    <!-- 图标字符 -->
+    <string name="icon_chevron_left">&#xf053;</string>
+    <string name="icon_cog">&#xf013;</string>
+    
+    <string name="icon_list">&#xf03a;</string>
+    <string name="icon_pencil">&#xf040;</string>
+    <string name="icon_star">&#xf005;</string>
+    <string name="icon_leaf">&#xf06c;</string>
+    <string name="icon_lightbulb">&#xf0eb;</string>
+    <string name="icon_group">&#xf0c0;</string>
+    
     <!-- 登录页面 -->
     <string name="login_email">邮箱</string>
     <string name="login_password">密码</string>
@@ -14,6 +25,8 @@
     <string name="login_auth_fail">用户邮箱或密码错误</string>
     <string name="login_now_login">正在登录…</string>
     
+    
+    <string name="tab_home">学习中心</string>
     
     <string name="category_home">首页</string>
     <string name="category_qa">问答</string>

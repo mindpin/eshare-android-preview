@@ -22,12 +22,13 @@ public class GridViewAdapter extends EshareBaseAdapter<GridViewData>{
 
 	@Override
 	public BaseViewHolder build_view_holder(View view) {
-		ViewHolder view_holder      = new ViewHolder();
-        view_holder.info_tv = (TextView) view.findViewById(R.id.info_tv);
-        
-        view_holder.group_item_tv = (TextView)view.findViewById(R.id.group_item_tv);
-        view_holder.group_item_iv = (ImageView)view.findViewById(R.id.group_item_iv);
-		return view_holder;
+//		ViewHolder view_holder      = new ViewHolder();
+//        view_holder.info_tv = (TextView) view.findViewById(R.id.info_tv);
+//
+//        view_holder.group_item_tv = (TextView)view.findViewById(R.id.group_item_tv);
+//        view_holder.group_item_iv = (ImageView)view.findViewById(R.id.group_item_iv);
+//		return view_holder;
+        return null;
 	}
 
 	@Override
