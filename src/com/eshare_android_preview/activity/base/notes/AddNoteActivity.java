@@ -71,16 +71,15 @@ public class AddNoteActivity extends EshareBaseActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.n_add_notes);
+        hide_head_setting_button();
+        set_head_text(R.string.add_note_title);
 		
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
 		
 		load_ui();
-		
-		hide_head_setting_button();
-        set_head_text(R.string.add_note_title);
+
         super.onCreate(savedInstanceState);
 	}
 	private void load_ui() {
