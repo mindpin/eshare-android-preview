@@ -90,6 +90,14 @@ public class EshareBaseActivity extends Activity{
         } catch (Exception e) {}
     }
 
+    // 隐藏顶栏底边
+    public void hide_head_bottom_line() {
+        try {
+            RelativeLayout rl = (RelativeLayout) findViewById(R.id.head_bottom_line);
+            rl.setVisibility(View.GONE);
+        } catch (Exception e) {}
+    }
+
     // 设置顶部文字
     public void set_head_text(CharSequence text) {
         try {

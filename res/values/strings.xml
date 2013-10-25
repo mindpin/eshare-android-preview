@@ -14,6 +14,7 @@
     <string name="icon_leaf">&#xf06c;</string>
     <string name="icon_lightbulb">&#xf0eb;</string>
     <string name="icon_group">&#xf0c0;</string>
+    <string name="icon_plus_sign">&#xf055;</string>
     
     <!-- 登录页面 -->
     <string name="login_email">邮箱</string>
@@ -54,7 +55,7 @@
 
     <!-- plans -->
     <string name="plans_title">计划</string>
-    <string name="plans_my_plans">我的计划</string>
+    <string name="plans_my_plans">我的学习计划</string>
     <string name="plans_add_plans_title">添加计划</string>
     <string name="plans_add_plans">添加</string>
     
@@ -63,7 +64,9 @@
     <string name="app_intent_connection_exception">网络连接错误</string>
     <string name="app_authenticate_exception">用户身份验证错误</string>
     <string name="app_unknown_exception">服务端数据读取错误</string>
-    
+
+    <string name="add_courses_desc">点击 + 号\n添加课程\n到学习计划</string>
+
     <string name="submit">提交</string>
      <string name="app_new">new</string>
      <string name="edit">编辑</string>

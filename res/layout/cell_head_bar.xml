@@ -37,6 +37,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+            android:id="@+id/head_bottom_line"
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"

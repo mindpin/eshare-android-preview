@@ -39,7 +39,7 @@ public class HomeActivity extends EshareBaseActivity {
 		set_layout_click();
 
         hide_head_go_back_button();
-        set_head_text("哈哈哈");
+        set_head_text("学习中心");
 
 		super.onCreate(savedInstanceState);
 	}
