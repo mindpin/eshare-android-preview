@@ -33,17 +33,18 @@ public class PlanShowActivity extends EshareBaseActivity{
 		click_plan_add_but = (Button)findViewById(R.id.click_plan_add_but);
 		
 		plan_content_tv.setText(plan.content);
-		
-		int text_checked_str_id = plan.checked.equals("true")? R.string.plans_cancel_plans:R.string.plans_add_plans;
-		click_plan_add_but.setText(text_checked_str_id);
+		set_but_txt();
 		click_plan_add_but.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				plan.checked = plan.checked.equals("true") ? "false":"true";
 				HttpApi.update_plan(plan);
-				int text_checked_str_id = plan.checked.equals("false")? R.string.plans_add_plans:R.string.plans_cancel_plans;
-				click_plan_add_but.setText(text_checked_str_id);
+				set_but_txt();
 			}
 		});
+	}
+	private void set_but_txt(){
+		int text_checked_str_id = plan.checked.equals("false")? R.string.plans_add_plans:R.string.plans_cancel_plans;
+		click_plan_add_but.setText(text_checked_str_id);
 	}
 }
