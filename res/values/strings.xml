@@ -75,6 +75,7 @@
     <item type="id" name="tag_note_uuid"></item>
     <item type="id" name="tag_choice_uuid"></item>
     <item type="id" name="tag_home_grid_view_data"></item>
+    <item type="id" name="tag_current_question"></item>
     
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>

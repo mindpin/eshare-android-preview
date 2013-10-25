@@ -74,7 +74,10 @@ public class FavourateActivity extends EshareBaseActivity{
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
 				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
-				Question item = (Question) info_tv.getTag(R.id.tag_note_uuid);
+				Question item = (Question) info_tv.getTag(R.id.tag_current_question);
+                // Question item = (Question) info_tv.getTag(R.id.tag_note_uuid);
+
+                Log.d("value ===", item.title);
 				
 				Bundle bundle = new Bundle();
 		        bundle.putSerializable("item", item);

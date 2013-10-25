@@ -32,6 +32,7 @@ public class QuestionsAdapter extends EshareBaseAdapter<Question>{
 	public void fill_with_data(BaseViewHolder holder,Question item, int position) {
 		 ViewHolder view_holder = (ViewHolder) holder;
 		 view_holder.info_tv.setTag(R.id.tag_note_uuid, item);
+         view_holder.info_tv.setTag(R.id.tag_current_question, item);
 		 view_holder.item_tv.setText(item.title);
 //	     view_holder.item_iv.setBackgroundResource((Integer)item.get("img"));
 	}
