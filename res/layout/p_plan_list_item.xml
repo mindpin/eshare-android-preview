@@ -1,45 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
-              android:layout_height="100dp"
+              android:layout_height="wrap_content"
               android:orientation="horizontal"
-              android:padding="5dip"
+              android:paddingTop="5dp"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
               android:background="#e7e7e7"
         >
 
     <RelativeLayout
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:background="#fff"
+            android:minHeight="60dp"
             >
 
         <TextView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/btn_yellow_circle_flat"
                 android:text="JS"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 ></TextView>
 
         <TextView
-                android:id="@+id/info_tv"
-                android:layout_width="wrap_content"
+                android:id="@+id/icon_tv"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_topbar_circle_flat"
+                android:text="@string/icon_chevron_right"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:paddingTop="1dp"
+                android:paddingLeft="1dp"
+                ></TextView>
+
+        <TextView
+                android:id="@+id/item_tv"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="60dp"
+                android:textSize="16dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:text="@string/placeholder"
                 />
 
         <TextView
-                android:layout_marginLeft="50dp"
-                android:padding="5dp"
-                android:id="@+id/item_tv"
-                android:textSize="18sp"
-                android:layout_width="wrap_content"
+                android:layout_below="@+id/item_tv"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="60dp"
+                android:textSize="12dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="141413"
+                android:text="30课时，已学习60%"
+                android:textColor="#888"
                 />
 
     </RelativeLayout>

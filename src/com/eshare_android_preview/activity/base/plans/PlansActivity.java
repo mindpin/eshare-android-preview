@@ -41,6 +41,7 @@ public class PlansActivity extends EshareBaseActivity{
 
 	private void load_list() {
 		list_view = (ListView)findViewById(R.id.list_view);
+        list_view.setDivider(null);
 		List<Plan> list = HttpApi.get_plan_checked("true");
 		PlanAdapter adapter = new PlanAdapter(this);
 		adapter.add_items(list);
@@ -49,8 +50,8 @@ public class PlansActivity extends EshareBaseActivity{
 		list_view.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
-				Plan item = (Plan) info_tv.getTag(R.id.tag_note_uuid);
+				TextView tv = (TextView) list_item.findViewById(R.id.item_tv);
+				Plan item = (Plan) tv.getTag(R.id.tag_plan);
 				BaseUtils.toast(item.content);
 			}
 		});

@@ -57,6 +57,7 @@ public class AddPlanActivity extends EshareBaseActivity{
 		list_view = (ListView)findViewById(R.id.list_view);
 		list = HttpApi.get_plan_all();
 		AddPlanAdapter adapter = new AddPlanAdapter(list);
+        list_view.setDivider(null);
 		list_view.setAdapter(adapter);
 		
 		list_view.setOnItemClickListener(new OnItemClickListener() {

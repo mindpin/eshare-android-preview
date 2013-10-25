@@ -7,9 +7,10 @@
 
     <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_below="@+id/head_bar"
             android:orientation="vertical"
+            android:background="#e7e7e7"
             >
 
         <RelativeLayout
