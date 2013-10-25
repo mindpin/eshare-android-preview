@@ -49,6 +49,7 @@
         
     	<activity android:name=".activity.base.plans.PlansActivity"></activity>
     	<activity android:name=".activity.base.plans.AddPlanActivity"></activity>
+    	<activity android:name=".activity.base.plans.PlanShowActivity"></activity>
 
     	<activity android:name=".activity.base.notes.NotesActivity"></activity>
     	<activity android:name=".activity.base.notes.AddNoteActivity"></activity>
