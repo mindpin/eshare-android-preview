@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <include layout="@layout/cell_head_bar"/>
+	<TextView
+	    android:layout_below="@+id/head_bar"
+	    android:id="@+id/plan_content_tv"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	/>
+	<Button
+	    android:layout_alignParentBottom="true"
+	    android:id="@+id/click_plan_add_but"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/plans_add_plans" 
+	/>
+</RelativeLayout>

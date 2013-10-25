@@ -2,6 +2,7 @@ package com.eshare_android_preview.activity.base.plans;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +29,7 @@ public class PlansActivity extends EshareBaseActivity{
 		
 		hide_head_setting_button();
         hide_head_bottom_line();
-		set_head_text(getResources().getString(R.string.plans_my_plans));
+		set_head_text(R.string.plans_my_plans);
         _set_btn_fonts();
 		super.onCreate(savedInstanceState);
 	}
@@ -51,8 +52,13 @@ public class PlansActivity extends EshareBaseActivity{
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
 				TextView tv = (TextView) list_item.findViewById(R.id.item_tv);
-				Plan item = (Plan) tv.getTag(R.id.tag_plan);
-				BaseUtils.toast(item.content);
+				Plan plan = (Plan) tv.getTag(R.id.tag_plan);
+				
+				Intent intent = new Intent(PlansActivity.this,PlanShowActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("plan", plan);
+				intent.putExtras(bundle);
+				startActivity(intent);
 			}
 		});
 	}

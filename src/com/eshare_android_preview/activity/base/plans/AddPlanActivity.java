@@ -1,14 +1,14 @@
 package com.eshare_android_preview.activity.base.plans;
 
-import java.util.HashMap;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
@@ -18,7 +18,6 @@ import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.database.PlanDBHelper;
 import com.eshare_android_preview.model.parse.CourseXMLParse;
 import com.eshare_android_preview.widget.adapter.AddPlanAdapter;
-import com.eshare_android_preview.widget.model.ViewHolder;
 
 public class AddPlanActivity extends EshareBaseActivity{
 	
@@ -56,33 +55,23 @@ public class AddPlanActivity extends EshareBaseActivity{
 	private void load_list() {
 		list_view = (ListView)findViewById(R.id.list_view);
 		list = HttpApi.get_plan_all();
-		AddPlanAdapter adapter = new AddPlanAdapter(list);
+		AddPlanAdapter adapter = new AddPlanAdapter(this);
+		adapter.add_items(list);
         list_view.setDivider(null);
 		list_view.setAdapter(adapter);
 		
 		list_view.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-				ViewHolder viewHolder=(ViewHolder)list_item.getTag(); 
-				viewHolder.cb.toggle();
-				AddPlanAdapter.getIsSelected().put(item_id, viewHolder.cb.isChecked());//将CheckBox的选中状况记录下来
+				TextView tv = (TextView) list_item.findViewById(R.id.item_tv);
+				Plan plan = (Plan) tv.getTag(R.id.tag_plan_uuid);
+				
+				Intent intent = new Intent(AddPlanActivity.this,PlanShowActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("plan", plan);
+				intent.putExtras(bundle);
+				startActivity(intent);
 			}
 		});
 	}
-	
-	public void click_add_plans(View view){
-		HashMap<Integer,Boolean> hashMap = AddPlanAdapter.getIsSelected();
-		for (int i = 0; i < list.size(); i++) {
-			if (hashMap.get(i)) {
-				Plan plan = list.get(i);
-				plan.checked = true+"";
-				HttpApi.update_plan(plan);
-			}
-//			System.out.println(hashMap.get(i));
-		}
-		
-		open_activity(PlansActivity.class);
-		this.finish();
-	}
-	
 }

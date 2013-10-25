@@ -13,20 +13,4 @@
             android:layout_height="fill_parent"
             android:background="#e7e7e7"
             />
-
-    <LinearLayout
-            android:id="@+id/bottom_ll"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
-
-        <Button
-                android:onClick="click_add_plans"
-                android:layout_width="0.0dp"
-                android:layout_weight="1.0"
-                android:layout_height="wrap_content"
-                android:text="@string/plans_add_plans"
-                />
-    </LinearLayout>
 </RelativeLayout>
