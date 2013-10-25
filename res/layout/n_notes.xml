@@ -4,7 +4,17 @@
     android:layout_height="match_parent" >
 
     <include layout="@layout/cell_head_bar"/>
-	
+
+	<TextView
+        android:id="@+id/note_list_empty_tip_tv"
+        android:layout_below="@+id/head_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/note_list_empty_tip"
+        android:gravity="center"
+        android:visibility="gone">
+
+	</TextView>
 	<ListView 
 	    android:layout_below="@+id/head_bar"
 	    android:id="@+id/list_view"
