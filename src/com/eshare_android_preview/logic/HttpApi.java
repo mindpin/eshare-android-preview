@@ -19,7 +19,7 @@ public class HttpApi {
 	
 	public static List<String> get_knowledge_net_category(){
 		List<String> categorys = new ArrayList<String>();
-		String[] cates = {"java",".net","Ruby","C","C++","Php","javascript"};
+		String[] cates = {"java",".net","Ruby","C","C++","PHP","javascript"};
 		for (int i = 0; i < cates.length; i++) {
 			categorys.add(cates[i]);
 		}

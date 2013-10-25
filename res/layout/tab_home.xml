@@ -49,126 +49,115 @@
             -->
         </RelativeLayout>
 
-        <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:background="#e0e0e0"/>
     </RelativeLayout>
 
+
     <LinearLayout
-            android:id="@+id/btn_group_1"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_below="@+id/user_msg"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:background="#e7e7e7"
+            >
 
-        <RelativeLayout
-                android:id="@+id/home_button_plan"
-                style="@style/home_button_layout">
+        <LinearLayout
+                android:id="@+id/btn_group_1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
-            <TextView
-                    style="@style/home_button_icon"
-                    android:text="@string/icon_list"/>
+            <RelativeLayout
+                    android:id="@+id/home_button_plan"
+                    style="@style/home_button_layout">
 
-            <TextView
-                    style="@style/home_button_text"
-                    android:text="学习计划"/>
+                <TextView
+                        style="@style/home_button_icon"
+                        android:text="@string/icon_list"/>
 
-            <RelativeLayout style="@style/bottom_1dp_border"/>
+                <TextView
+                        style="@style/home_button_text"
+                        android:text="学习计划"/>
+            </RelativeLayout>
 
-            <RelativeLayout style="@style/right_1dp_border"/>
-        </RelativeLayout>
+            <RelativeLayout
+                    android:id="@+id/home_button_note"
+                    style="@style/home_button_layout"
+                    android:layout_width="99dp">
 
-        <RelativeLayout
-                android:id="@+id/home_button_note"
-                style="@style/home_button_layout">
+                <TextView
+                        style="@style/home_button_icon"
+                        android:text="@string/icon_pencil"/>
 
-            <TextView
-                    style="@style/home_button_icon"
-                    android:text="@string/icon_pencil"/>
+                <TextView
+                        style="@style/home_button_text"
+                        android:text="笔记"/>
+            </RelativeLayout>
 
-            <TextView
-                    style="@style/home_button_text"
-                    android:text="笔记"/>
+            <RelativeLayout
+                    android:id="@+id/home_button_fav"
+                    style="@style/home_button_layout">
 
-            <RelativeLayout style="@style/bottom_1dp_border"/>
+                <TextView
+                        style="@style/home_button_icon"
+                        android:text="@string/icon_star"/>
 
-            <RelativeLayout style="@style/right_1dp_border"/>
-        </RelativeLayout>
+                <TextView
+                        style="@style/home_button_text"
+                        android:text="收藏夹"/>
+            </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
-                android:id="@+id/home_button_fav"
-                style="@style/home_button_layout">
+        <LinearLayout
+                android:id="@+id/btn_group_2"
+                android:layout_below="@+id/btn_group_1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <TextView
-                    style="@style/home_button_icon"
-                    android:text="@string/icon_star"/>
+            <RelativeLayout
+                    android:id="@+id/home_button_knowledge"
+                    style="@style/home_button_layout">
 
-            <TextView
-                    style="@style/home_button_text"
-                    android:text="收藏夹"/>
+                <TextView
+                        style="@style/home_button_icon"
+                        android:text="@string/icon_leaf"/>
 
-            <RelativeLayout style="@style/bottom_1dp_border"/>
-        </RelativeLayout>
-    </LinearLayout>
+                <TextView
+                        style="@style/home_button_text"
+                        android:text="知识点"/>
 
-    <LinearLayout
-            android:id="@+id/btn_group_2"
-            android:layout_below="@+id/btn_group_1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            </RelativeLayout>
 
-        <RelativeLayout
-                android:id="@+id/home_button_knowledge"
-                style="@style/home_button_layout">
+            <RelativeLayout
+                    android:id="@+id/home_button_test"
+                    style="@style/home_button_layout">
 
-            <TextView
-                    style="@style/home_button_icon"
-                    android:text="@string/icon_leaf"/>
+                <TextView
+                        style="@style/home_button_icon"
+                        android:text="@string/icon_lightbulb"/>
 
-            <TextView
-                    style="@style/home_button_text"
-                    android:text="知识点"/>
+                <TextView
+                        style="@style/home_button_text"
+                        android:text="练习题"/>
 
-            <RelativeLayout style="@style/bottom_1dp_border"/>
+            </RelativeLayout>
 
-            <RelativeLayout style="@style/right_1dp_border"/>
-        </RelativeLayout>
+            <RelativeLayout
+                    android:id="@+id/home_button_group"
+                    style="@style/home_button_layout"
+                    android:layout_width="99dp">
 
-        <RelativeLayout
-                android:id="@+id/home_button_test"
-                style="@style/home_button_layout">
+                <TextView
+                        style="@style/home_button_icon"
+                        android:text="@string/icon_group"/>
 
-            <TextView
-                    style="@style/home_button_icon"
-                    android:text="@string/icon_lightbulb"/>
+                <TextView
+                        style="@style/home_button_text"
+                        android:text="群组"/>
 
-            <TextView
-                    style="@style/home_button_text"
-                    android:text="练习题"/>
-
-            <RelativeLayout style="@style/bottom_1dp_border"/>
-
-            <RelativeLayout style="@style/right_1dp_border"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-                android:id="@+id/home_button_group"
-                style="@style/home_button_layout">
-
-            <TextView
-                    style="@style/home_button_icon"
-                    android:text="@string/icon_group"/>
-
-            <TextView
-                    style="@style/home_button_text"
-                    android:text="群组"/>
-
-            <RelativeLayout style="@style/bottom_1dp_border"/>
-        </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
