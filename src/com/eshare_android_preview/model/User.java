@@ -3,6 +3,7 @@ package com.eshare_android_preview.model;
 import android.graphics.drawable.Drawable;
 
 import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.logic.HttpApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kaid on 10/22/13.
@@ -71,5 +73,18 @@ public class User implements Serializable {
         if (users != null) return users;
         fetch();
         return users;
+    }
+
+    public static ArrayList<User> get_users_by_group(String group_name){
+        List<String> node_list = HttpApi.get_knowledge_net_category();
+        int index = node_list.indexOf(group_name);
+
+        if(index == -1){
+            return new ArrayList<User>();
+        }
+
+        return new ArrayList<User>(
+                User.all().subList(index * 10, index * 10 + 21)
+        );
     }
 }
