@@ -163,7 +163,7 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 
         public void set_tab_unselected() {
             btn.setSelected(false);
-            btn.setBackgroundColor(Color.parseColor("#333"));
+            btn.setBackgroundColor(Color.parseColor("#333333"));
         }
 	}
 }
