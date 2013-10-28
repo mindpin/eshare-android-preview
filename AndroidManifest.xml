@@ -57,6 +57,7 @@
 
         <activity android:name=".activity.base.groups.GroupActivity"></activity>
         <activity android:name=".activity.base.groups.UserInfoActivity"></activity>
+        <activity android:name=".activity.base.groups.GroupListActivity" />
     </application>
 
 </manifest>

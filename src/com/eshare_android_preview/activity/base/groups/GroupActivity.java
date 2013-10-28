@@ -21,6 +21,7 @@ public class GroupActivity extends EshareBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String item = getIntent().getStringExtra("item");
         setContentView(R.layout.g_group);
         load_list();
         hide_head_setting_button();
