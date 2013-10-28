@@ -3,7 +3,7 @@ package com.eshare_android_preview.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.eshare_android_preview.model.Favourates;
+import com.eshare_android_preview.model.Favourate;
 import com.eshare_android_preview.model.Node;
 import com.eshare_android_preview.model.Notes;
 import com.eshare_android_preview.model.Plan;
@@ -76,17 +76,17 @@ public class HttpApi {
 	}
 
 
-    public static List<Favourates> get_favourates(){
+    public static List<Favourate> get_favourates(){
         return FavouratesDBHelper.all();
     }
 
-    public static boolean create_favourate(Favourates favourates){
-        FavouratesDBHelper.create(favourates);
+    public static boolean create_favourate(Favourate favourate){
+        FavouratesDBHelper.create(favourate);
         return true;
     }
 
-    public static boolean cancel_favourate(Favourates favourates){
-        FavouratesDBHelper.cancel(favourates);
+    public static boolean cancel_favourate(Favourate favourate){
+        FavouratesDBHelper.cancel(favourate);
         return true;
     }
 }
