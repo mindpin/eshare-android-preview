@@ -3,7 +3,15 @@
     </style>
 
     <style name="AppTheme" parent="AppBaseTheme">
-    	<item name="android:windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/AppAnimation</item>
+    </style>
+
+    <style name="AppAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/right_out</item>
     </style>
 	
     <!-- 公用 -->
