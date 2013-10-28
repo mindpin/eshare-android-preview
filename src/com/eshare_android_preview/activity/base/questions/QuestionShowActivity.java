@@ -22,6 +22,7 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Question;
 
 public class QuestionShowActivity extends EshareBaseActivity{
@@ -43,9 +44,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.q_question_show);
         hide_head_setting_button();
-		
-		Intent intent = getIntent();
-		question = (Question)intent.getExtras().getSerializable("item");
+		Integer item_id = Integer.parseInt(getIntent().getStringExtra("item_id"));
+        System.out.println(item_id);
+		question = HttpApi.question_find_by(item_id);
 		
 		Log.d("mmmmm = ,", question.id + "");
 

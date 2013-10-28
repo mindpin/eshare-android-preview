@@ -86,11 +86,8 @@ public class FavourateActivity extends EshareBaseActivity{
                 // Question item = (Question) info_tv.getTag(R.id.tag_note_uuid);
 
                 Log.d("value ===", item.title);
-
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("item", item);
                 Intent intent = new Intent(FavourateActivity.this,QuestionShowActivity.class);
-                intent.putExtras(bundle);
+                intent.putExtra("item_id", item.id);
                 startActivity(intent);
             }
         });

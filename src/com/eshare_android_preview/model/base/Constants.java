@@ -8,7 +8,8 @@ public class Constants {
     
     // notes
     public static final String TABLE_NOTES = "notes";
-    public static final String TABLE_NOTES__QUESTION_ID = "question_id";
+    public static final String TABLE_NOTES__TYPE = "type";
+    public static final String TABLE_NOTES__TYPE_ID = "type_id";
     public static final String TABLE_NOTES__CONTENT = "content";
     public static final String TABLE_NOTES__IMG = "img";
 
