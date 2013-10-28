@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.logic.HttpApi;
@@ -28,8 +29,8 @@ public class KnowledgeNetItemActivity extends EshareBaseActivity{
 		setContentView(R.layout.kn_knowledge_net_item);
         hide_head_setting_button();
 		
-		Intent intent = getIntent();
-		node = (Node)intent.getExtras().getSerializable("node");
+		String item_id = getIntent().getStringExtra("item_id");
+		node = HttpApi.find_by_id(item_id);
         set_head_text(node.name);
 		
 		load_node_msg();
@@ -96,5 +97,14 @@ public class KnowledgeNetItemActivity extends EshareBaseActivity{
 		this.node = node;
 		load_node_msg();
 		load_list_view();
+	}
+	
+	public void click_notes(View view){
+		Bundle bundle = new Bundle();
+        bundle.putSerializable("item", node);
+
+        Intent intent = new Intent(KnowledgeNetItemActivity.this,AddNoteActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
 	}
 }

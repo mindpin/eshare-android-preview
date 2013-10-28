@@ -53,6 +53,8 @@
     <string name="add_note_title">创建笔记</string>
     <string name="add_img">增加图片</string>
     <string name="show_question">显示问题</string>
+    <string name="show_node">显示知识节点</string>
+    <string name="show_plan">显示计划</string>
 
     <!-- fav_list_empty_tip -->
     <string name="fav_list_empty_tip">收藏夹为空</string>

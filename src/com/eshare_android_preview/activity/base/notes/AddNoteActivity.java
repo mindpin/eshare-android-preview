@@ -37,7 +37,7 @@ public class AddNoteActivity extends EshareBaseActivity{
 	EditText add_note_content;
 	ImageView add_note_img;
 	
-	Question question;
+	Object item;
 	
 	Uri uri; //头像
     File image_file;
@@ -76,7 +76,7 @@ public class AddNoteActivity extends EshareBaseActivity{
         set_head_text(R.string.add_note_title);
 		
 		Intent intent = getIntent();
-		question = (Question)intent.getExtras().getSerializable("item");
+		item = intent.getExtras().getSerializable("item");
 		
 		load_ui();
 
@@ -188,7 +188,9 @@ public class AddNoteActivity extends EshareBaseActivity{
 			return;
 		}
 		String content = BaseUtils.is_str_blank(content_str)? "":content_str;
-		Notes notes = new Notes(question.id,content,bytes);
+//		Notes notes = new Notes(question.id,content,bytes);
+		System.out.println(item.getClass().getName());
+		Notes notes = new Notes(item.getClass().getName(), content, bytes,item);
 		if (HttpApi.create_notes(notes)) {
 			this.finish();
 		}

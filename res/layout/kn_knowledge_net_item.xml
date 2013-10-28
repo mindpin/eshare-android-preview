@@ -3,10 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     <include layout="@layout/cell_head_bar"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_below="@+id/head_bar"
+        android:id="@+id/notes_page"
+        android:padding="3dp"
+        android:background="@color/choice_after"
+        android:baselineAligned="false"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:onClick="click_notes"
+            android:layout_width="0.0dp"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:text="添加笔记"
+            android:layout_margin="0dp"
+            
+       />
+        <Button
+            android:id="@+id/add_favourates_btn"
+            android:layout_width="0.0dp"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:text="添加收藏"
+            android:layout_margin="0dp"
+       />
+ 
+        <Button
+            android:onClick="click_notes"
+            android:layout_width="0.0dp"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:text="----"
+            android:layout_margin="0dp"
+       />
+        
+    </LinearLayout>
     <RelativeLayout
         android:paddingLeft="20dp"
         android:paddingTop="20dp"
-        android:layout_below="@+id/head_bar"
+        android:layout_below="@+id/notes_page"
         android:id="@+id/shwo_itme_msg" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">

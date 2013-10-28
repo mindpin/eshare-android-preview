@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Plan;
@@ -20,8 +21,9 @@ public class PlanShowActivity extends EshareBaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.p_plan_show);
-		Intent intent = getIntent();
-		plan = (Plan)intent.getExtras().getSerializable("plan");
+		
+		String item_id = getIntent().getStringExtra("item_id");
+		plan = HttpApi.find_by_id(Integer.parseInt(item_id));
 		
 		load_ui();
 		hide_head_setting_button();
@@ -46,5 +48,14 @@ public class PlanShowActivity extends EshareBaseActivity{
 	private void set_but_txt(){
 		int text_checked_str_id = plan.checked.equals("false")? R.string.plans_add_plans:R.string.plans_cancel_plans;
 		click_plan_add_but.setText(text_checked_str_id);
+	}
+	
+	public void click_notes(View view){
+		Bundle bundle = new Bundle();
+        bundle.putSerializable("item", plan);
+
+        Intent intent = new Intent(PlanShowActivity.this,AddNoteActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
 	}
 }

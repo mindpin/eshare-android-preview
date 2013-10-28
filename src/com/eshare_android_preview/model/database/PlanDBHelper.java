@@ -47,7 +47,21 @@ public class PlanDBHelper  extends BaseModelDBHelper{
         db.close();
         return plans;
 	}
-	
+	public static Plan find_by_id(int plan_id) {
+		Plan plan = null;
+		SQLiteDatabase db = get_read_db();
+		Cursor cursor = db.query(Constants.TABLE_PLAN, get_columns(), 
+				Constants.KEY_ID+ " = ? ", 
+				new String[]{ plan_id + "" },
+				null, null, null);
+		boolean has_value = cursor.moveToFirst();
+		if(has_value){
+			plan = build_by_cursor(cursor);
+		}
+		cursor.close();
+		db.close();
+		return plan;
+	}
 	public static List<Plan> find_by_checked(String string) {
 		SQLiteDatabase db = get_read_db();
 		Cursor cursor = db.query(Constants.TABLE_PLAN, 
@@ -77,4 +91,6 @@ public class PlanDBHelper  extends BaseModelDBHelper{
 	        Constants.TABLE_PLAN__CHECKED
 	    };
 	 }
+
+
 }

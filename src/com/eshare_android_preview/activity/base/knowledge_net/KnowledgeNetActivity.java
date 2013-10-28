@@ -48,12 +48,9 @@ public class KnowledgeNetActivity extends EshareBaseActivity{
 				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
 				Node node = (Node) info_tv.getTag(R.id.tag_note_uuid);
 				BaseUtils.toast(node.list_parents.toString());
-				
-				Bundle bundle = new Bundle();
-		        bundle.putSerializable("node", node);
 
 		        Intent intent = new Intent(KnowledgeNetActivity.this,KnowledgeNetItemActivity.class);
-		        intent.putExtras(bundle);
+		        intent.putExtra("item_id", node.id);
 		        startActivity(intent);
 			}
 		});

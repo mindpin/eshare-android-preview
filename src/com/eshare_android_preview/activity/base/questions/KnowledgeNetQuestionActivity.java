@@ -48,10 +48,8 @@ public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
 				Question item = (Question) info_tv.getTag(R.id.tag_note_uuid);
 				
-				Bundle bundle = new Bundle();
-		        bundle.putSerializable("item", item);
 		        Intent intent = new Intent(KnowledgeNetQuestionActivity.this,QuestionShowActivity.class);
-		        intent.putExtras(bundle);
+		        intent.putExtra("item_id",item.id+"");
 		        startActivity(intent);
 			}
 		});
