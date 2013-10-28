@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,7 +23,7 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 	private ArrayList<Tab> tabs = new ArrayList<Tab>();
 	Tab current_tab;
 	
-	FrameLayout tab_home_btn, tab_qa_btn, tab_message_btn;
+	FrameLayout tab_home_btn, tab_message_btn, tab_about_btn;
 	
 	private Animation left_in, left_out;
 	private Animation right_in, right_out;
@@ -34,10 +36,24 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
         
         init_tab_host();
 		test_msg_show_view();
+
+        _set_btn_icon_font();
+    }
+
+    private void _set_btn_icon_font() {
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
+        int[] icon_ids = new int[]{
+                R.id.tab_home_btn_image, R.id.tab_message_btn_image, R.id.tab_about_btn_image
+        };
+
+        for(int i = 0; i < icon_ids.length; i++) {
+            TextView tv = (TextView) findViewById(icon_ids[i]);
+            tv.setTypeface(font);
+        }
     }
 	
 	private void test_msg_show_view(){
-		TextView tab_qa_btn_unread_text = (TextView)findViewById(R.id.tab_qa_btn_unread_text);
+		TextView tab_qa_btn_unread_text = (TextView)findViewById(R.id.tab_message_btn_unread_text);
 		tab_qa_btn_unread_text.setText("3");
 		tab_qa_btn_unread_text.setVisibility(View.VISIBLE);
 	}
@@ -45,8 +61,8 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 	private void prepare_view() {
 		// 底部三个切换页签的按钮
 		tab_home_btn = (FrameLayout)findViewById(R.id.tab_home_btn);
-		tab_qa_btn = (FrameLayout)findViewById(R.id.tab_qa_btn);
 		tab_message_btn = (FrameLayout)findViewById(R.id.tab_message_btn);
+		tab_about_btn = (FrameLayout)findViewById(R.id.tab_about_btn);
 	}
 	
 	private void init_tab_switch_anim() {
@@ -65,17 +81,18 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 				new Intent(this, HomeActivity.class)));
 		
 		tab_host.addTab(build_tab_spec(
-				R.string.category_qa,
-				tab_qa_btn,
-				new Intent(this, QAActivity.class)));
-		
-		tab_host.addTab(build_tab_spec(
 				R.string.category_message,
 				tab_message_btn,
 				new Intent(this, MessageActivity.class)));
-	
+
+        tab_host.addTab(build_tab_spec(
+                R.string.category_about,
+                tab_about_btn,
+                new Intent(this, AboutActivity.class)));
+
 		Tab first_tab = tabs.get(0);
-		first_tab.btn.setSelected(true);
+
+		first_tab.set_tab_selected();
 		current_tab = first_tab;
 
 	}
@@ -107,7 +124,7 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 		if (current_tab.index == click_tab.index) {
 			return;
 		}
-		current_tab.btn.setSelected(false);
+		current_tab.set_tab_unselected();
 		
 		boolean swtich_to_right = current_tab.index < click_tab.index ? true : false;
 		Animation out_anim;
@@ -122,11 +139,12 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 		
 		tab_host.getCurrentView().startAnimation(out_anim);
 		tab_host.setCurrentTabByTag(click_tab.tag_name);
-		click_tab.btn.setSelected(true);
+
+		click_tab.set_tab_selected();
 		tab_host.getCurrentView().startAnimation(in_anim);
 		current_tab = click_tab;
 	}
-	
+
 	class Tab{
 		public String tag_name;
 		public FrameLayout btn;
@@ -137,5 +155,15 @@ public class MainTabActivity extends TabActivity  implements OnClickListener {
 			this.btn = btn;
 			this.index = index;
 		}
+
+        public void set_tab_selected() {
+            btn.setSelected(true);
+            btn.setBackgroundColor(Color.parseColor("#e7e7e7"));
+        }
+
+        public void set_tab_unselected() {
+            btn.setSelected(false);
+            btn.setBackgroundColor(Color.parseColor("#333"));
+        }
 	}
 }

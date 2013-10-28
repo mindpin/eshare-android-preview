@@ -36,7 +36,7 @@
         <activity android:name=".activity.base.LoginActivity"></activity>
         <activity android:name=".activity.base.tab_activity.HomeActivity"></activity>
         <activity android:name=".activity.base.tab_activity.MessageActivity"></activity>
-        <activity android:name=".activity.base.tab_activity.QAActivity"></activity>
+        <activity android:name=".activity.base.tab_activity.AboutActivity"></activity>
         
         <activity android:name=".activity.base.fav.FavourateActivity"></activity>
         
