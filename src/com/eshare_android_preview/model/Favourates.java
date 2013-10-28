@@ -1,5 +1,6 @@
 package com.eshare_android_preview.model;
 
+
 import java.io.Serializable;
 
 public class Favourates implements Serializable {
@@ -19,4 +20,6 @@ public class Favourates implements Serializable {
         this.favourate_id = favourate_id;
         this.kind = kind;
     }
+
+
 }
