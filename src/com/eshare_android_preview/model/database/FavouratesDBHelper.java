@@ -33,6 +33,13 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
         db.close();
     }
 
+    public static void cancel(Favourates favourates) {
+        SQLiteDatabase db = get_write_db();
+        db.delete(TABLE_FAVOURATES, KEY_ID + " = ?",
+                new String[] { String.valueOf(favourates.id) });
+        db.close();
+    }
+
     public static List<Favourates> all(){
         SQLiteDatabase db = get_read_db();
         Cursor cursor = db.query(
