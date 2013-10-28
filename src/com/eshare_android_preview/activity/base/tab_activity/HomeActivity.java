@@ -38,6 +38,7 @@ public class HomeActivity extends EshareBaseActivity {
 		set_buttons_font();
 		set_layout_click();
 
+        hide_head_bottom_line();
         hide_head_go_back_button();
         set_head_text("学习中心");
 

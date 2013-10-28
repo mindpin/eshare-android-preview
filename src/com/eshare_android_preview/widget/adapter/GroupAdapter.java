@@ -1,5 +1,6 @@
 package com.eshare_android_preview.widget.adapter;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
+import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.model.User;
 
 /**
@@ -35,7 +37,10 @@ public class GroupAdapter extends EshareBaseAdapter<User> {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.user_name.setTag(R.id.tag_user_uuid, user);
         view_holder.user_name.setText(user.username);
-	    view_holder.user_avatar.setImageDrawable(user.getAvatarDrawable());
+
+        // 设置头像
+        BitmapDrawable drawable = ImageTools.toRoundCorner((BitmapDrawable)user.getAvatarDrawable(), 100);
+	    view_holder.user_avatar.setImageDrawable(drawable);
     }
 
     private class ViewHolder implements BaseViewHolder {

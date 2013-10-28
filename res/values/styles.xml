@@ -4,6 +4,7 @@
 
     <style name="AppTheme" parent="AppBaseTheme">
     	<item name="android:windowNoTitle">true</item>
+        <item name="android:textColor">#333</item>
     </style>
 	
     <!-- 公用 -->

@@ -13,6 +13,6 @@
     <color name="tab_home_item_icon_normal">#4F9CD4</color>
     <color name="tab_home_item_icon_selected">#E5E9F1</color>
     
-    <color name="tab_home_item_text_normal">#000</color>
+    <color name="tab_home_item_text_normal">#333</color>
     <color name="tab_home_item_text_selected">#fff</color>
 </resources>
