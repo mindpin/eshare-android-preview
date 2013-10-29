@@ -1,11 +1,13 @@
 package com.eshare_android_preview.model;
 
+import com.eshare_android_preview.model.interfaces.ILearningResource;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 // 课程节点
-public class Node implements Serializable{
+public class Node implements Serializable, ILearningResource {
 	/**
 	 * 
 	 */
@@ -64,4 +66,14 @@ public class Node implements Serializable{
 		this.list_parents = list_parents;
 		this.list_children = list_children;
 	}
+
+    @Override
+    public boolean has_note() {
+        return false;
+    }
+
+    @Override
+    public boolean is_faved() {
+        return false;
+    }
 }

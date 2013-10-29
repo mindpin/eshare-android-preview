@@ -1,11 +1,23 @@
 package com.eshare_android_preview.model;
 
+import com.eshare_android_preview.model.interfaces.ILearningResource;
+
 import java.io.Serializable;
 import java.util.List;
 
 // 问题
-public class Question implements Serializable{
-	public static class Type{
+public class Question implements Serializable, ILearningResource {
+    @Override
+    public boolean has_note() {
+        return false;
+    }
+
+    @Override
+    public boolean is_faved() {
+        return false;
+    }
+
+    public static class Type{
 		public static final String   SINGLE_CHOICE = "single_choice";
 		public static final String   MULTIPLE_CHOICE = "multiple_choices";
 		public static final String   TRUE_FALSE = "true_false";
