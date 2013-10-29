@@ -49,7 +49,7 @@ public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 				Question item = (Question) info_tv.getTag(R.id.tag_note_uuid);
 				
 		        Intent intent = new Intent(KnowledgeNetQuestionActivity.this,QuestionShowActivity.class);
-		        intent.putExtra("item", item);
+                intent.putExtra("item_id",item.id+"");
 		        startActivity(intent);
 			}
 		});

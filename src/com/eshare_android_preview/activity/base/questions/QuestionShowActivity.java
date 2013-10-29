@@ -45,8 +45,8 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		setContentView(R.layout.q_question_show);
         hide_head_setting_button();
 
-		Intent intent = getIntent();
-		question = (Question)intent.getExtras().getSerializable("item");
+        Integer item_id = Integer.parseInt(getIntent().getStringExtra("item_id"));
+        question = HttpApi.question_find_by(item_id);
 
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
