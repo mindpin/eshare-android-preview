@@ -21,18 +21,19 @@ public class GroupActivity extends EshareBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String group_name = getIntent().getStringExtra("group_name");
         setContentView(R.layout.g_group);
-        load_list();
+        load_list(group_name);
         hide_head_setting_button();
         set_head_text(R.string.group_title);
         hide_head_bottom_line();
         super.onCreate(savedInstanceState);
     }
 
-    private void load_list() {
+    private void load_list(String group_name) {
         grid_view = (GridView)findViewById(R.id.grid_view);
         GroupAdapter adapter = new GroupAdapter(this);
-        adapter.add_items(User.all());
+        adapter.add_items(User.get_users_by_group(group_name));
         grid_view.setAdapter(adapter);
         grid_view.setSelector(new ColorDrawable(Color.TRANSPARENT));
 

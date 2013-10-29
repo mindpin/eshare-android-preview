@@ -6,9 +6,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,7 +44,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.q_question_show);
         hide_head_setting_button();
-		
+
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
 
@@ -64,7 +62,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 
         Boolean is_favourated = intent.getExtras().getBoolean("is_favourated");
 
-		if (is_favourated) {
+		if (is_favourated || is_favourated == null) {
             add_favourate_btn.setVisibility(View.GONE);
             cancel_favourate_btn.setVisibility(View.VISIBLE);
 		} else {

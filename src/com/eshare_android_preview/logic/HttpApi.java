@@ -36,6 +36,16 @@ public class HttpApi {
 		return list;
 	}
 	
+	public static Node find_by_id(String node_id){
+		List<Node> list = get_nodes("javascript");
+		for(Node node:list){
+			if (node.id .equals(node_id)) {
+				return node;
+			}
+		}
+		return null;
+	}
+	
 	public static List<Node> get_nodes_by_node_ids(List<String> node_ids){
 		return KnowledgeNet.array_node_list(KnowledgeNet.parse_xml(xml_path), node_ids);
 	}
@@ -56,7 +66,9 @@ public class HttpApi {
 	public static List<Plan> get_plan_checked(String string) {
 		return PlanDBHelper.find_by_checked(string);
 	}
-
+	public static Plan find_by_id(int plan_id ){
+		return PlanDBHelper.find_by_id(plan_id);
+	}
 	public static List<Plan> get_plan_all() {
 		return PlanDBHelper.all();
 	}

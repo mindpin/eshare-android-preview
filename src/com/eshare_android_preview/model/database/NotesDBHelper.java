@@ -16,7 +16,8 @@ public class NotesDBHelper extends BaseModelDBHelper{
 	public static void create(Notes notes) {
 		SQLiteDatabase db = get_write_db();
 		ContentValues values = new ContentValues();
-		values.put(Constants.TABLE_NOTES__QUESTION_ID, notes.question_id);
+		values.put(Constants.TABLE_NOTES__TYPE, notes.type);
+		values.put(Constants.TABLE_NOTES__TYPE_ID, notes.type_id);
 		values.put(Constants.TABLE_NOTES__CONTENT, notes.content);
 		values.put(Constants.TABLE_NOTES__IMG, notes.img);
 		
@@ -44,16 +45,18 @@ public class NotesDBHelper extends BaseModelDBHelper{
 	
 	private static Notes build_by_cursor(Cursor cursor) {
 	    int id = cursor.getInt(0);
-	    int question_id = cursor.getInt(1);
-	    String content = cursor.getString(2);
+	    String type = cursor.getString(1);
+	    String type_id = cursor.getString(2);
+	    String content = cursor.getString(3);
 	    byte[] img = cursor.getBlob(3);
-	    return new Notes(id,question_id, content, img);
+	    return new Notes(id, type, type_id, content, img);
 	}
 	
 	private static String[] get_columns() {
 	    return new String[]{
 	        Constants.KEY_ID,
-	        Constants.TABLE_NOTES__QUESTION_ID,
+	        Constants.TABLE_NOTES__TYPE,
+	        Constants.TABLE_NOTES__TYPE_ID,
 	        Constants.TABLE_NOTES__CONTENT,
 	        Constants.TABLE_NOTES__IMG
 	    };

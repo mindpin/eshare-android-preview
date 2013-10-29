@@ -5,9 +5,7 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -18,7 +16,6 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Favourate;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.widget.adapter.QuestionsAdapter;
 
@@ -76,7 +73,6 @@ public class FavourateActivity extends EshareBaseActivity{
                 bundle.putSerializable("item", item);
                 bundle.putBoolean("is_favourated", true);
                 Intent intent = new Intent(FavourateActivity.this,QuestionShowActivity.class);
-                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

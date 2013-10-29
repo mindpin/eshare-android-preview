@@ -48,10 +48,10 @@ public class NotesActivity extends EshareBaseActivity{
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
 				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
 				Notes item = (Notes) info_tv.getTag(R.id.tag_note_uuid);
-				Bundle bundle = new Bundle();
-		        bundle.putSerializable("item", item);
-
+				
 		        Intent intent = new Intent(NotesActivity.this,NotesShowActivity.class);
+		        Bundle bundle = new Bundle();
+		        bundle.putSerializable("item", item);
 		        intent.putExtras(bundle);
 		        startActivity(intent);
 			}
