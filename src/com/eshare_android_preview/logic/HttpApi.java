@@ -21,7 +21,7 @@ public class HttpApi {
 	public static List<KnowledgeCategory> get_knowledge_net_category(){
 		List<KnowledgeCategory> categorys = new ArrayList<KnowledgeCategory>();
         KnowledgeCategory[] cates = {
-                new KnowledgeCategory("javascript", R.drawable.lan_js),
+                new KnowledgeCategory("Javascript", R.drawable.lan_js),
                 new KnowledgeCategory("Rails",      R.drawable.lan_rails),
                 new KnowledgeCategory("HTML5",      R.drawable.lan_html5),
                 new KnowledgeCategory("MongoDB",    R.drawable.lan_mongodb),

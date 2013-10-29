@@ -44,7 +44,7 @@ public class GroupListActivity extends EshareBaseActivity {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
                 TextView item_tv = (TextView) list_item.findViewById(R.id.item_tv);
-                String group_name = (String)item_tv.getTag();
+                String group_name = ((HttpApi.KnowledgeCategory)item_tv.getTag()).name;
                 Intent intent = new Intent(GroupListActivity.this,GroupActivity.class);
                 intent.putExtra("group_name", group_name);
                 startActivity(intent);
