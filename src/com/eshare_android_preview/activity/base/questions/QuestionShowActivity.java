@@ -181,9 +181,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void add_favourate(View view) {
-		Intent intent = getIntent();
-		question = (Question)intent.getExtras().getSerializable("item");
-
         Favourate favourate = new Favourate(question.id + "", FavouratesDBHelper.Kinds.QUESTION);
         HttpApi.create_favourate(favourate);
 		
@@ -193,9 +190,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void cancel_favourate(View view) {
-		Intent intent = getIntent();
-		question = (Question)intent.getExtras().getSerializable("item");
-
         Favourate favourate = HttpApi.find_favourate(question.id + "", FavouratesDBHelper.Kinds.QUESTION);
         HttpApi.cancel_favourate(favourate);
 		

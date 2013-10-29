@@ -34,7 +34,7 @@ public class GroupListActivity extends EshareBaseActivity {
 
     private void load_list(){
         ListView group_list_view = (ListView)findViewById(R.id.list_view);
-        List<String> node_list = HttpApi.get_knowledge_net_category();
+        List<HttpApi.KnowledgeCategory> node_list = HttpApi.get_knowledge_net_category();
         GroupListAdapter adapter = new GroupListAdapter(this);
         adapter.add_items(node_list);
         group_list_view.setAdapter(adapter);
@@ -44,7 +44,7 @@ public class GroupListActivity extends EshareBaseActivity {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
                 TextView item_tv = (TextView) list_item.findViewById(R.id.item_tv);
-                String group_name = (String)item_tv.getTag();
+                String group_name = ((HttpApi.KnowledgeCategory)item_tv.getTag()).name;
                 Intent intent = new Intent(GroupListActivity.this,GroupActivity.class);
                 intent.putExtra("group_name", group_name);
                 startActivity(intent);

@@ -76,8 +76,15 @@ public class User implements Serializable {
     }
 
     public static ArrayList<User> get_users_by_group(String group_name){
-        List<String> node_list = HttpApi.get_knowledge_net_category();
-        int index = node_list.indexOf(group_name);
+        List<HttpApi.KnowledgeCategory> node_list = HttpApi.get_knowledge_net_category();
+        int index = -1;
+        for(int i = 0; i < node_list.size(); i++) {
+            HttpApi.KnowledgeCategory c = node_list.get(i);
+            if (c.name.equals(group_name)) {
+                index = i;
+                break;
+            }
+        }
 
         if(index == -1){
             return new ArrayList<User>();

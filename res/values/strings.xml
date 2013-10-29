@@ -20,6 +20,7 @@
     <string name="icon_home">&#xf015;</string>
     <string name="icon_envelope">&#xf0e0;</string>
     <string name="icon_info_circle">&#xf05a;</string>
+    <string name="icon_pagelines">&#xf18c;</string>
     
     <!-- 登录页面 -->
     <string name="login_email">邮箱</string>
@@ -39,7 +40,7 @@
     <string name="category_about">关于</string>
     
     <!-- knowledge_net -->
-    <string name="knowedge_title">知识网络节点</string>
+    <string name="knowedge_title">知识点浏览</string>
     <string name="favourate_knowledge_list">收藏列表</string>
     
     <!-- questions -->
@@ -61,7 +62,7 @@
 
     <!-- groups -->
     <string name="group_title">学习群组</string>
-    <string name="group_list_title">群组列表</string>
+    <string name="group_list_title">知识领域群组</string>
     <string name="group_user_info_title">用户信息</string>
 
     <!-- plans -->
@@ -79,6 +80,7 @@
     <string name="app_unknown_exception">服务端数据读取错误</string>
 
     <string name="add_courses_desc">点击 + 号\n添加课程\n到学习计划</string>
+    <string name="javascript_desc">属于网络时代的\n世界上最流行的脚本语言</string>
 
     <string name="submit">提交</string>
      <string name="app_new">new</string>
@@ -96,6 +98,7 @@
     <item type="id" name="tag_current_note"></item>
     <item type="id" name="tag_favourate"></item>
     <item type="id" name="tag_plan_uuid"></item>
+
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <item type="id" name="tag_user_uuid"></item>

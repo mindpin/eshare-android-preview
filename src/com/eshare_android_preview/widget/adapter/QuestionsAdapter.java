@@ -21,8 +21,7 @@ public class QuestionsAdapter extends EshareBaseAdapter<Question>{
 	@Override
 	public BaseViewHolder build_view_holder(View view) {
 		ViewHolder view_holder      = new ViewHolder();
-        view_holder.info_tv = (TextView) view.findViewById(R.id.info_tv);
-        
+
         view_holder.item_tv = (TextView)view.findViewById(R.id.item_tv);
 //        view_holder.item_iv = (ImageView)view.findViewById(R.id.item_iv);
 		return view_holder;
@@ -31,13 +30,11 @@ public class QuestionsAdapter extends EshareBaseAdapter<Question>{
 	@Override
 	public void fill_with_data(BaseViewHolder holder,Question item, int position) {
 		 ViewHolder view_holder = (ViewHolder) holder;
-		 view_holder.info_tv.setTag(R.id.tag_note_uuid, item);
-         view_holder.info_tv.setTag(R.id.tag_current_question, item);
+         view_holder.item_tv.setTag(R.id.tag_current_question, item);
 		 view_holder.item_tv.setText(item.title);
 //	     view_holder.item_iv.setBackgroundResource((Integer)item.get("img"));
 	}
 	private class ViewHolder implements BaseViewHolder {
-    	TextView info_tv;
     	// 个人列表子项显示
     	TextView  item_tv;
 //        ImageView item_iv;
