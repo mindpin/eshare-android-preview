@@ -83,8 +83,8 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		answer_et = (EditText)findViewById(R.id.answer_et);
 		submit_but = (Button)findViewById(R.id.submit_but);
 		
-		add_favourate_btn = (Button) findViewById(R.id.add_favourates_btn);
-		cancel_favourate_btn = (Button) findViewById(R.id.cancel_favourates_btn);
+		add_favourate_btn = (Button) findViewById(R.id.add_favourate_btn);
+		cancel_favourate_btn = (Button) findViewById(R.id.cancel_favourate_btn);
 	}
 	
 	private void load_question_msg() {
@@ -180,7 +180,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	}
 	
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
-	public void add_favourates(View view) {
+	public void add_favourate(View view) {
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
 
@@ -192,7 +192,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	}
 	
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
-	public void cancel_favourates(View view) {
+	public void cancel_favourate(View view) {
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
 
