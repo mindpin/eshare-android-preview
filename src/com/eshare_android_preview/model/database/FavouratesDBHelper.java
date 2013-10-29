@@ -51,8 +51,8 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
         db.close();
     }
 
-    public static Favourate find(int favourate_id, String kind) {
-        SQLiteDatabase db = get_write_db();
+    public static Favourate find(String favourate_id, String kind) {
+        SQLiteDatabase db = get_read_db();
 
         String[] tableColumns = get_columns();
 
@@ -83,7 +83,7 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
 
         if(cursor.getCount() >= 1) {
             int id = cursor.getInt(0);
-            Integer _favourate_id = cursor.getInt(1);
+            String _favourate_id = cursor.getString(1);
             String _kind = cursor.getString(2);
 
             return new Favourate(id, _favourate_id, _kind);

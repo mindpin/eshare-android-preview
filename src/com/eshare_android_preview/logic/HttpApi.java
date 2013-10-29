@@ -87,20 +87,22 @@ public class HttpApi {
 		return null;
 	}
 
-
-    public static List<Question> get_favourates(){
-        List<Favourate> favourates =  FavouratesDBHelper.all();
-
-        List<Question> questions =  new ArrayList<Question>();
-
-        for (int i = 0; i < favourates.size(); i++) {
-            Favourate favourate = favourates.get(i);
-            Question question = HttpApi.question_find_by(favourate.favourate_id);
-            questions.add(question);
-
+    public static Plan plan_find_by(int plan_id) {
+        List<Plan> list = get_plan_all();
+        for (Plan plan : list) {
+            if (plan_id == plan.id) {
+                return plan;
+            }
         }
-        return questions;
+        return null;
     }
+
+    public static List<Favourate> get_favourates(){
+        return FavouratesDBHelper.all();
+    }
+
+
+
 
 
     public static boolean create_favourate(Favourate favourate){
@@ -116,7 +118,7 @@ public class HttpApi {
         return true;
     }
 
-    public static Favourate find_favourate(int favourate_id, String kind) {
+    public static Favourate find_favourate(String favourate_id, String kind) {
         return FavouratesDBHelper.find(favourate_id, kind);
     }
 }
