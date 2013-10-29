@@ -144,7 +144,7 @@ public class HttpApi {
         return true;
     }
 
-    public static Favourate find_favourate(int favourate_id, String kind) {
+    public static Favourate find_favourate(String favourate_id, String kind) {
         return FavouratesDBHelper.find(favourate_id, kind);
     }
 }

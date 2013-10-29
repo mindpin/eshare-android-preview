@@ -51,8 +51,8 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
         db.close();
     }
 
-    public static Favourate find(int favourate_id, String kind) {
-        SQLiteDatabase db = get_write_db();
+    public static Favourate find(String favourate_id, String kind) {
+        SQLiteDatabase db = get_read_db();
 
         String[] tableColumns = get_columns();
 

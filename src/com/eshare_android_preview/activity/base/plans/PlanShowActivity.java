@@ -37,7 +37,7 @@ public class PlanShowActivity extends EshareBaseActivity{
 		set_head_text(R.string.plans_show);
 
 
-        Favourate favourate = HttpApi.find_favourate(plan.id, FavouratesDBHelper.Kinds.PLAN);
+        Favourate favourate = HttpApi.find_favourate(plan.id + "", FavouratesDBHelper.Kinds.PLAN);
 
         if (favourate == null) {
             add_favourate_btn.setVisibility(View.VISIBLE);
@@ -100,7 +100,7 @@ public class PlanShowActivity extends EshareBaseActivity{
         String item_id = getIntent().getStringExtra("item_id");
         plan = HttpApi.find_by_id(Integer.parseInt(item_id));
 
-        Favourate favourate = HttpApi.find_favourate(plan.id, FavouratesDBHelper.Kinds.PLAN);
+        Favourate favourate = HttpApi.find_favourate(plan.id + "", FavouratesDBHelper.Kinds.PLAN);
         HttpApi.cancel_favourate(favourate);
 
         add_favourate_btn.setVisibility(View.VISIBLE);
