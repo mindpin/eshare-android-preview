@@ -93,6 +93,8 @@
     <item type="id" name="tag_home_grid_view_data"></item>
     <item type="id" name="tag_plan"></item>
     <item type="id" name="tag_current_question"></item>
+    <item type="id" name="tag_current_note"></item>
+    <item type="id" name="tag_favourate"></item>
     <item type="id" name="tag_plan_uuid"></item>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>

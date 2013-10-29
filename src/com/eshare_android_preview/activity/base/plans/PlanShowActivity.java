@@ -35,6 +35,19 @@ public class PlanShowActivity extends EshareBaseActivity{
 		load_ui();
 		hide_head_setting_button();
 		set_head_text(R.string.plans_show);
+
+
+        Favourate favourate = HttpApi.find_favourate(plan.id, FavouratesDBHelper.Kinds.PLAN);
+
+        if (favourate == null) {
+            add_favourate_btn.setVisibility(View.VISIBLE);
+            cancel_favourate_btn.setVisibility(View.GONE);
+        } else {
+            add_favourate_btn.setVisibility(View.GONE);
+            cancel_favourate_btn.setVisibility(View.VISIBLE);
+        }
+
+
 		super.onCreate(savedInstanceState);
 	}
 	private void load_ui() {
@@ -72,8 +85,8 @@ public class PlanShowActivity extends EshareBaseActivity{
 
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void add_favourate(View view) {
-        Intent intent = getIntent();
-        plan = (Plan)intent.getExtras().getSerializable("item");
+        String item_id = getIntent().getStringExtra("item_id");
+        plan = HttpApi.find_by_id(Integer.parseInt(item_id));
 
         Favourate favourate = new Favourate(plan.id, FavouratesDBHelper.Kinds.PLAN);
         HttpApi.create_favourate(favourate);
@@ -84,8 +97,8 @@ public class PlanShowActivity extends EshareBaseActivity{
 
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void cancel_favourate(View view) {
-        Intent intent = getIntent();
-        plan = (Plan)intent.getExtras().getSerializable("item");
+        String item_id = getIntent().getStringExtra("item_id");
+        plan = HttpApi.find_by_id(Integer.parseInt(item_id));
 
         Favourate favourate = HttpApi.find_favourate(plan.id, FavouratesDBHelper.Kinds.PLAN);
         HttpApi.cancel_favourate(favourate);

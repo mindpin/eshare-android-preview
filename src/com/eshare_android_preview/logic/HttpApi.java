@@ -87,9 +87,23 @@ public class HttpApi {
 		return null;
 	}
 
+    public static Plan plan_find_by(int plan_id) {
+        List<Plan> list = get_plan_all();
+        for (Plan plan : list) {
+            if (plan_id == plan.id) {
+                return plan;
+            }
+        }
+        return null;
+    }
 
-    public static List<Question> get_favourates(){
-        List<Favourate> favourates =  FavouratesDBHelper.all();
+    public static List<Favourate> get_favourates(){
+        return FavouratesDBHelper.all();
+    }
+
+
+    public static List<Question> get_favourate_questions(){
+        List<Favourate> favourates =  get_favourates();
 
         List<Question> questions =  new ArrayList<Question>();
 
@@ -100,6 +114,20 @@ public class HttpApi {
 
         }
         return questions;
+    }
+
+    public static List<Plan> get_favourate_plans(){
+        List<Favourate> favourates =  FavouratesDBHelper.all();
+
+        List<Plan> plans =  new ArrayList<Plan>();
+
+        for (int i = 0; i < favourates.size(); i++) {
+            Favourate favourate = favourates.get(i);
+            Plan plan = HttpApi.plan_find_by(favourate.favourate_id);
+            plans.add(plan);
+
+        }
+        return plans;
     }
 
 
