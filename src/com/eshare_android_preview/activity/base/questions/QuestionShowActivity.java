@@ -62,7 +62,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 
         Boolean is_favourated = intent.getExtras().getBoolean("is_favourated");
 
-		if (is_favourated || is_favourated == null) {
+		if (is_favourated) {
             add_favourate_btn.setVisibility(View.GONE);
             cancel_favourate_btn.setVisibility(View.VISIBLE);
 		} else {
