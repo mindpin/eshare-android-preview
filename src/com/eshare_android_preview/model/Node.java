@@ -10,18 +10,27 @@ public class Node implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public String id;
+	public int id;
+	public String node_id;
 	public String name;
 	public String desc;
 	public List<String> list_parents = new ArrayList<String>();
 	public List<String> list_children = new ArrayList<String>();
-	
-	public String getId() {
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getNode_id() {
+		return node_id;
+	}
+
+	public void setNode_id(String node_id) {
+		this.node_id = node_id;
 	}
 
 	public String getName() {
@@ -56,12 +65,34 @@ public class Node implements Serializable{
 		this.list_children = list_children;
 	}
 
-	public Node(String id, String name, String desc, List<String> list_parents,List<String> list_children) {
+	public Node(String node_id, String name, String desc,
+			List<String> list_parents, List<String> list_children) {
 		super();
-		this.id = id;
+		this.node_id = node_id;
 		this.name = name;
 		this.desc = desc;
 		this.list_parents = list_parents;
 		this.list_children = list_children;
 	}
+
+	public Node(int id, String node_id, String name, String desc,
+			List<String> list_parents, List<String> list_children) {
+		super();
+		this.id = id;
+		this.node_id = node_id;
+		this.name = name;
+		this.desc = desc;
+		this.list_parents = list_parents;
+		this.list_children = list_children;
+	}
+
+//	public Node(String id, String name, String desc, List<String> list_parents,List<String> list_children) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.desc = desc;
+//		this.list_parents = list_parents;
+//		this.list_children = list_children;
+//	}
+	
 }

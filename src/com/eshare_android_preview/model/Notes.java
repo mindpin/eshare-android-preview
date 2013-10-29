@@ -42,7 +42,7 @@ public class Notes implements Serializable{
 				this.type_id = ((Question) obj).id + "";
 			}
 			if (this.type.indexOf(Type.NODE) != -1) {
-				this.type_id = ((Node) obj).id;
+				this.type_id = ((Node) obj).id + "";
 			}
 			if (this.type.indexOf(Type.PLAN) != -1) {
 				this.type_id = ((Plan) obj).id + "";

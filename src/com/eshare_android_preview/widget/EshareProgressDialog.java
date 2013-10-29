@@ -9,16 +9,16 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.utils.BaseUtils;
 
-public class BlogProgressDialog extends Dialog{
-	private String message;
-	public BlogProgressDialog(Context context) {
+public class EshareProgressDialog extends Dialog{
+	public String message;
+	public EshareProgressDialog(Context context) {
 		super(context);
 	}
-	public BlogProgressDialog(Context context, String message){
+	public EshareProgressDialog(Context context, String message){
 		super(context, R.style.base_progress_dialog);
 		this.message = message;
 	}
-	public BlogProgressDialog(Context context, int resId){
+	public EshareProgressDialog(Context context, int resId){
 		super(context, R.style.base_progress_dialog);
 		this.message = context.getString(resId);
 	}
@@ -32,13 +32,13 @@ public class BlogProgressDialog extends Dialog{
             message_textview.setText(this.message);
         }
 	}
-	public static BlogProgressDialog show(Context context,String message) {
-		BlogProgressDialog dialog = new BlogProgressDialog(context, message);
+	public static EshareProgressDialog show(Context context,String message) {
+		EshareProgressDialog dialog = new EshareProgressDialog(context, message);
 		dialog.show();
 		return dialog;
 	}
-	public static BlogProgressDialog show(Context context) {
-		BlogProgressDialog dialog = new BlogProgressDialog(context);
+	public static EshareProgressDialog show(Context context) {
+		EshareProgressDialog dialog = new EshareProgressDialog(context);
 		dialog.show();
 		return dialog;
 	}
