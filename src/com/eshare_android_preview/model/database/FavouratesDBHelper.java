@@ -3,6 +3,7 @@ package com.eshare_android_preview.model.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.eshare_android_preview.model.Favourate;
 import com.eshare_android_preview.model.Question;
@@ -44,7 +45,7 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
     }
 
     public static void cancel(Favourate favourate) {
-        SQLiteDatabase db = get_write_db();
+        SQLiteDatabase db = get_read_db();
         db.delete(TABLE_FAVOURATES, KEY_ID + " = ?",
                 new String[] { String.valueOf(favourate.id) });
         db.close();
@@ -60,14 +61,18 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
                 kind
         };
 
-        Cursor c = db.query(Constants.TABLE_FAVOURATES, get_columns(),
+        Cursor cursor = db.query(Constants.TABLE_FAVOURATES, get_columns(),
                 Constants.TABLE_FAVOURATES__ID + "=? and " +
                 Constants.TABLE_FAVOURATES__KIND + "= ?",
                 whereArgs, null, null, null, null);
 
+        cursor.moveToFirst();
+        Favourate favourate = build_by_cursor(cursor);
 
-        return build_by_cursor(c);
+        cursor.close();
+        db.close();
 
+        return favourate;
     }
 
 
@@ -75,11 +80,17 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
         if (cursor == null) {
             return null;
         }
-        cursor.moveToFirst();
-        int id = cursor.getInt(0);
-        Integer favourate_id = cursor.getInt(1);
-        String kind = cursor.getString(2);
-        return new Favourate(id, favourate_id, kind);
+
+        if(cursor.getCount() >= 1) {
+            int id = cursor.getInt(0);
+            Integer _favourate_id = cursor.getInt(1);
+            String _kind = cursor.getString(2);
+
+            return new Favourate(id, _favourate_id, _kind);
+        }
+
+        return null;
+
     }
 
     private static String[] get_columns() {
@@ -102,6 +113,7 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
         while (cursor.moveToNext()) {
             favourates.add(build_by_cursor(cursor));
         }
+
         cursor.close();
         db.close();
         return favourates;

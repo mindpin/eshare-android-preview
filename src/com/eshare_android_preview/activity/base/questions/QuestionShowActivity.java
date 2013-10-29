@@ -60,14 +60,14 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		init_ui();
 		load_question_msg();
 
-        Boolean is_favourated = intent.getExtras().getBoolean("is_favourated");
+        Favourate favourate = HttpApi.find_favourate(question.id, FavouratesDBHelper.Kinds.QUESTION);
 
-		if (is_favourated) {
-            add_favourate_btn.setVisibility(View.GONE);
-            cancel_favourate_btn.setVisibility(View.VISIBLE);
-		} else {
+		if (favourate == null) {
             add_favourate_btn.setVisibility(View.VISIBLE);
             cancel_favourate_btn.setVisibility(View.GONE);
+		} else {
+            add_favourate_btn.setVisibility(View.GONE);
+            cancel_favourate_btn.setVisibility(View.VISIBLE);
 		}
 
         super.onCreate(savedInstanceState);
@@ -183,7 +183,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	public void add_favourates(View view) {
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
-		int question_id = question.id;
 
         Favourate favourate = new Favourate(question.id, FavouratesDBHelper.Kinds.QUESTION);
         HttpApi.create_favourate(favourate);
