@@ -1,5 +1,6 @@
 package com.eshare_android_preview.model;
 
+import com.eshare_android_preview.model.database.NotesDBHelper;
 import com.eshare_android_preview.model.interfaces.ILearningResource;
 
 import java.io.Serializable;
@@ -9,7 +10,7 @@ import java.util.List;
 public class Question implements Serializable, ILearningResource {
     @Override
     public boolean has_note() {
-        return false;
+        return NotesDBHelper.has_note_from(id + "", Notes.Type.QUESTION);
     }
 
     @Override
@@ -72,6 +73,6 @@ public class Question implements Serializable, ILearningResource {
 		this.rule = rule;
 	}
 	
-	
+
 	
 }

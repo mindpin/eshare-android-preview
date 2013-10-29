@@ -1,8 +1,5 @@
 package com.eshare_android_preview.model.database;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import com.eshare_android_preview.model.Notes;
 import com.eshare_android_preview.model.base.BaseModelDBHelper;
 import com.eshare_android_preview.model.base.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotesDBHelper extends BaseModelDBHelper{
 
@@ -42,7 +42,25 @@ public class NotesDBHelper extends BaseModelDBHelper{
         db.close();
         return blogs;
 	}
-	
+
+    public static Boolean has_note_from(String notable_id, String notable_type) {
+        SQLiteDatabase db = NotesDBHelper.get_read_db();
+        String[] columns = new String[] {
+            Constants.TABLE_NOTES__TYPE_ID,
+            Constants.TABLE_NOTES__TYPE
+        };
+        String[] whereArgs = new String[] {
+            notable_id,
+            notable_type
+        };
+        String whereClause = Constants.TABLE_NOTES__TYPE_ID + " = ? AND " + Constants.TABLE_NOTES__TYPE + " = ?";
+        Cursor cursor = db.query(Constants.TABLE_NOTES, columns, whereClause, whereArgs, null, null, null);
+        boolean result = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return result;
+    }
+
 	private static Notes build_by_cursor(Cursor cursor) {
 	    int id = cursor.getInt(0);
 	    String type = cursor.getString(1);
