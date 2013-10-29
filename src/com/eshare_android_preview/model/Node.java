@@ -1,5 +1,6 @@
 package com.eshare_android_preview.model;
 
+import com.eshare_android_preview.model.database.FavouratesDBHelper;
 import com.eshare_android_preview.model.database.NotesDBHelper;
 import com.eshare_android_preview.model.interfaces.ILearningResource;
 
@@ -75,6 +76,6 @@ public class Node implements Serializable, ILearningResource {
 
     @Override
     public boolean is_faved() {
-        return false;
+        return FavouratesDBHelper.find(id, FavouratesDBHelper.Kinds.NODE) != null;
     }
 }
