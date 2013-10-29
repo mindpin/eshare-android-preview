@@ -150,7 +150,7 @@
         <item name="android:textSize">16dp</item>
     </style>
     
-    <!-- blog自定义的 progress_dialog 用于 正在登录 等场合 -->
+    <!-- 自定义的 progress_dialog 用于 正在登录 等场合 -->
     <style name="base_progress_dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -161,6 +161,25 @@
         <item name="android:backgroundDimEnabled">false</item>
         <!-- 半透明的背景遮罩 -->
         <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 无背景 -->
+
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowIsTranslucent">true</item>
+
+        <item name="android:background">@drawable/base_process_dialog_background</item>
+    </style>
+    
+    <!-- 自定义的 progress_dialog 用于 正在登录 等场合 -->
+    <style name="loading_dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 标题栏 -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <!-- 自身浮动 -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- 半透明的背景遮罩 -->
+        <item name="android:windowBackground">@android:color/black</item>
         <!-- 无背景 -->
 
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
