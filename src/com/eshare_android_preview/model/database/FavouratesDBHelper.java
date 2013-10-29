@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.eshare_android_preview.model.Favourate;
+import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.base.BaseModelDBHelper;
 import com.eshare_android_preview.model.base.Constants;
 
@@ -71,6 +72,22 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
 
     }
 
+
+    private static Favourate build_by_cursor(Cursor cursor) {
+        int id = cursor.getInt(0);
+        Integer favourate_id = cursor.getInt(1);
+        String kind = cursor.getString(2);
+        return new Favourate(id, favourate_id, kind);
+    }
+
+    private static String[] get_columns() {
+        return new String[]{
+                Constants.KEY_ID,
+                Constants.TABLE_FAVOURATES__ID,
+                Constants.TABLE_FAVOURATES__KIND
+        };
+    }
+
     public static List<Favourate> all(){
         SQLiteDatabase db = get_read_db();
         Cursor cursor = db.query(
@@ -88,18 +105,5 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
         return favourates;
     }
 
-    private static Favourate build_by_cursor(Cursor cursor) {
-        int id = cursor.getInt(0);
-        Integer favourate_id = cursor.getInt(1);
-        String kind = cursor.getString(2);
-        return new Favourate(id, favourate_id, kind);
-    }
 
-    private static String[] get_columns() {
-        return new String[]{
-                Constants.KEY_ID,
-                Constants.TABLE_FAVOURATES__ID,
-                Constants.TABLE_FAVOURATES__KIND
-        };
-    }
 }

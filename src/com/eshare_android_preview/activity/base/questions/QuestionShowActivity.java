@@ -49,8 +49,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
-		
-		Log.d("mmmmm = ,", question.id + "");
 
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
@@ -59,26 +57,21 @@ public class QuestionShowActivity extends EshareBaseActivity{
 			question.choices_list = list;
 			a_z = "T,F".split(",");
 		}
-				
-		
-		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
-		String favourate_ids = sp.getString("favourate_ids", "");
-		int current_question = favourate_ids.indexOf(question.id + "");
-		
-		Log.d("current = ", favourate_ids);
-		Log.d("current question = ", current_question + "");
 
 		
 		init_ui();
 		load_question_msg();
-		
-		if (current_question < 0) {
-			add_favourate_btn.setVisibility(View.VISIBLE);
-			cancel_favourate_btn.setVisibility(View.GONE);
+
+        Boolean is_favourated = intent.getExtras().getBoolean("is_favourated");
+
+		if (is_favourated) {
+            add_favourate_btn.setVisibility(View.GONE);
+            cancel_favourate_btn.setVisibility(View.VISIBLE);
 		} else {
-			add_favourate_btn.setVisibility(View.GONE);
-			cancel_favourate_btn.setVisibility(View.VISIBLE);
+            add_favourate_btn.setVisibility(View.VISIBLE);
+            cancel_favourate_btn.setVisibility(View.GONE);
 		}
+
         super.onCreate(savedInstanceState);
 	}
 	
@@ -206,7 +199,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
 
-        Favourate favourate = FavouratesDBHelper.find(question.id, FavouratesDBHelper.Kinds.Favourate);
+        Favourate favourate = HttpApi.find_favourate(question.id, FavouratesDBHelper.Kinds.Favourate);
         HttpApi.cancel_favourate(favourate);
 		
 		add_favourate_btn.setVisibility(View.VISIBLE);
