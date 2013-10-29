@@ -1,11 +1,14 @@
 package com.eshare_android_preview.model;
 
+import com.eshare_android_preview.model.database.NotesDBHelper;
+import com.eshare_android_preview.model.interfaces.ILearningResource;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 // 课程节点
-public class Node implements Serializable{
+public class Node implements Serializable, ILearningResource {
 	/**
 	 * 
 	 */
@@ -86,13 +89,13 @@ public class Node implements Serializable{
 		this.list_children = list_children;
 	}
 
-//	public Node(String id, String name, String desc, List<String> list_parents,List<String> list_children) {
-//		super();
-//		this.id = id;
-//		this.name = name;
-//		this.desc = desc;
-//		this.list_parents = list_parents;
-//		this.list_children = list_children;
-//	}
-	
+    @Override
+    public boolean has_note() {
+        return NotesDBHelper.has_note_from(node_id, Notes.Type.NODE);
+    }
+
+    @Override
+    public boolean is_faved() {
+        return false;
+    }
 }

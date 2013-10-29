@@ -17,8 +17,9 @@ public class Constants {
     public static final String TABLE_PLAN = "plan";
     public static final String TABLE_PLAN__CONTENT = "content";
     public static final String TABLE_PLAN__CHECKED = "checked";
-    
-    // Node
-    
-    
+
+    // favourates
+    public static final String TABLE_FAVOURATES = "favourates";
+    public static final String TABLE_FAVOURATES__ID = "favourate_id";
+    public static final String TABLE_FAVOURATES__KIND = "kind";
 }

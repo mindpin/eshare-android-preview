@@ -20,6 +20,14 @@ public class BaseDBHelper extends SQLiteOpenHelper {
             Constants.KEY_ID + " integer primary key, " +
             Constants.TABLE_PLAN__CONTENT + " text, " +
             Constants.TABLE_PLAN__CHECKED + " text default false);";
+
+
+    private static final String create_favourates = "create table " +
+            Constants.TABLE_FAVOURATES + " (" +
+            Constants.KEY_ID + " integer primary key, " +
+            Constants.TABLE_FAVOURATES__ID + " integer not null, " +
+            Constants.TABLE_FAVOURATES__KIND + " text);";
+
  
     public BaseDBHelper(Context context, String name, CursorFactory factory,int version) {
         super(context, name, factory, version);
@@ -28,13 +36,15 @@ public class BaseDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {	
         db.execSQL(create_table_notes);
-        db.execSQL(create_plan);    
+        db.execSQL(create_plan);
+        db.execSQL(create_favourates);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + Constants.TABLE_NOTES);
-        db.execSQL("drop table if exists " + Constants.TABLE_PLAN);       
+        db.execSQL("drop table if exists " + Constants.TABLE_PLAN);
+        db.execSQL("drop table if exists " + Constants.TABLE_FAVOURATES);
         onCreate(db);
     }
 }

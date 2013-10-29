@@ -5,9 +5,7 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -44,12 +42,11 @@ public class FavourateActivity extends EshareBaseActivity{
 	}
 	
 	private void load_list_view() {
-		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);
-		String favourate_ids = sp.getString("favourate_ids", "");
-		if (favourate_ids.equals("")) {
+        final List<Question> favourate_list = HttpApi.get_favourates();
+		if (favourate_list.size() == 0) {
             process_when_fav_list_is_empty();
 		}else{
-            build_fav_list_adapter(favourate_ids);
+            build_fav_list_adapter(favourate_list);
         }
 	}
 
@@ -58,20 +55,8 @@ public class FavourateActivity extends EshareBaseActivity{
         fav_list_empty_tip_tv.setVisibility(View.VISIBLE);
     }
 
-    private void build_fav_list_adapter(String favourate_ids) {
+    private void build_fav_list_adapter(List<Question> favourate_list) {
         list_view = (ListView)findViewById(R.id.list_view);
-        Log.d("value = ", favourate_ids);
-
-        String[] strArray = favourate_ids.split(",");
-        for(int i = 0; i < strArray.length; i++) {
-            System.out.println("----------   " + strArray[i]);
-            int question_id = Integer.parseInt(strArray[i]);
-            Log.d("question_id = ", question_id + "");
-            Question question = HttpApi.question_find_by(question_id);
-            Log.d("title = ", question.title);
-            favourate_list.add(question);
-        }
-
 
         QuestionsAdapter adapter = new QuestionsAdapter(this);
         adapter.add_items(favourate_list);
@@ -83,11 +68,10 @@ public class FavourateActivity extends EshareBaseActivity{
             public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
                 TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
                 Question item = (Question) info_tv.getTag(R.id.tag_current_question);
-                // Question item = (Question) info_tv.getTag(R.id.tag_note_uuid);
 
-                Log.d("value ===", item.title);
                 Intent intent = new Intent(FavourateActivity.this,QuestionShowActivity.class);
-                intent.putExtra("item_id", item.id);
+                intent.putExtra("item", item);
+                intent.putExtra("is_favourated", true);
                 startActivity(intent);
             }
         });

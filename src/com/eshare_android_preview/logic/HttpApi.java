@@ -3,10 +3,12 @@ package com.eshare_android_preview.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.eshare_android_preview.model.Favourate;
 import com.eshare_android_preview.model.Node;
 import com.eshare_android_preview.model.Notes;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.database.FavouratesDBHelper;
 import com.eshare_android_preview.model.database.NotesDBHelper;
 import com.eshare_android_preview.model.database.PlanDBHelper;
 import com.eshare_android_preview.model.parse.KnowledgeNet;
@@ -84,4 +86,37 @@ public class HttpApi {
 		}
 		return null;
 	}
+
+
+    public static List<Question> get_favourates(){
+        List<Favourate> favourates =  FavouratesDBHelper.all();
+
+        List<Question> questions =  new ArrayList<Question>();
+
+        for (int i = 0; i < favourates.size(); i++) {
+            Favourate favourate = favourates.get(i);
+            Question question = HttpApi.question_find_by(favourate.favourate_id);
+            questions.add(question);
+
+        }
+        return questions;
+    }
+
+
+    public static boolean create_favourate(Favourate favourate){
+        FavouratesDBHelper.create(favourate);
+        return true;
+    }
+
+    public static boolean cancel_favourate(Favourate favourate){
+        if (favourate == null) {
+            return false;
+        }
+        FavouratesDBHelper.cancel(favourate);
+        return true;
+    }
+
+    public static Favourate find_favourate(int favourate_id, String kind) {
+        return FavouratesDBHelper.find(favourate_id, kind);
+    }
 }

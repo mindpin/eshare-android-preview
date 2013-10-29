@@ -6,9 +6,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +21,9 @@ import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.logic.HttpApi;
+import com.eshare_android_preview.model.Favourate;
 import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.database.FavouratesDBHelper;
 
 public class QuestionShowActivity extends EshareBaseActivity{
 	TextView item_title_tv,question_kind,question_title;
@@ -44,11 +44,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.q_question_show);
         hide_head_setting_button();
-		Integer item_id = Integer.parseInt(getIntent().getStringExtra("item_id"));
-        System.out.println(item_id);
-		question = HttpApi.question_find_by(item_id);
-		
-		Log.d("mmmmm = ,", question.id + "");
+
+		Intent intent = getIntent();
+		question = (Question)intent.getExtras().getSerializable("item");
 
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
@@ -57,26 +55,21 @@ public class QuestionShowActivity extends EshareBaseActivity{
 			question.choices_list = list;
 			a_z = "T,F".split(",");
 		}
-				
-		
-		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
-		String favourate_ids = sp.getString("favourate_ids", "");
-		int current_question = favourate_ids.indexOf(question.id + "");
-		
-		Log.d("current = ", favourate_ids);
-		Log.d("current question = ", current_question + "");
 
 		
 		init_ui();
 		load_question_msg();
-		
-		if (current_question < 0) {
-			add_favourate_btn.setVisibility(View.VISIBLE);
-			cancel_favourate_btn.setVisibility(View.GONE);
+
+        Favourate favourate = HttpApi.find_favourate(question.id, FavouratesDBHelper.Kinds.QUESTION);
+
+		if (favourate == null) {
+            add_favourate_btn.setVisibility(View.VISIBLE);
+            cancel_favourate_btn.setVisibility(View.GONE);
 		} else {
-			add_favourate_btn.setVisibility(View.GONE);
-			cancel_favourate_btn.setVisibility(View.VISIBLE);
+            add_favourate_btn.setVisibility(View.GONE);
+            cancel_favourate_btn.setVisibility(View.VISIBLE);
 		}
+
         super.onCreate(savedInstanceState);
 	}
 	
@@ -190,21 +183,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	public void add_favourates(View view) {
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
-		int question_id = question.id;
-		
-		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
-		String favourate_ids = sp.getString("favourate_ids", "");
-		if (favourate_ids == "") {
-			favourate_ids = question_id + "";
-		} else {
-			favourate_ids = favourate_ids + "," + question_id;
-		}
 
-        SharedPreferences.Editor editor = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_WRITEABLE).edit();  
-		editor.putString("favourate_ids", favourate_ids);
-		editor.commit();
-		
-		Log.d("latest after add =", favourate_ids);
+        Favourate favourate = new Favourate(question.id, FavouratesDBHelper.Kinds.QUESTION);
+        HttpApi.create_favourate(favourate);
 		
 		add_favourate_btn.setVisibility(View.GONE);
 		cancel_favourate_btn.setVisibility(View.VISIBLE);
@@ -214,27 +195,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	public void cancel_favourates(View view) {
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
-		int question_id = question.id;
-		
-		SharedPreferences sp = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_READABLE);  
-		String favourate_ids = sp.getString("favourate_ids", "");
-		
-		String[] strArray = favourate_ids.split(",");
-		int[] favourate_ids_arr = new int[strArray.length];
-		for(int i = 0; i < strArray.length; i++) {
-			favourate_ids_arr[i] = Integer.parseInt(strArray[i]);
-		}
-		
-		favourate_ids = favourate_ids.replace("," + question_id, "");
-		favourate_ids = favourate_ids.replace(question_id + ",", "");
-		favourate_ids = favourate_ids.replace(question_id + "", "");
-		
-		SharedPreferences.Editor editor = getSharedPreferences(FAVOURATE_IDS, MODE_WORLD_WRITEABLE).edit();  
-		editor.putString("favourate_ids", favourate_ids);
-		editor.commit();
-		
-		Log.d("latest after cancel =", favourate_ids);
-		
+
+        Favourate favourate = HttpApi.find_favourate(question.id, FavouratesDBHelper.Kinds.QUESTION);
+        HttpApi.cancel_favourate(favourate);
 		
 		add_favourate_btn.setVisibility(View.VISIBLE);
 		cancel_favourate_btn.setVisibility(View.GONE);

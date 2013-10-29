@@ -61,6 +61,7 @@
 
     <!-- groups -->
     <string name="group_title">学习群组</string>
+    <string name="group_list_title">群组列表</string>
     <string name="group_user_info_title">用户信息</string>
 
     <!-- plans -->
