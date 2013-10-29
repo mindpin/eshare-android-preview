@@ -53,20 +53,18 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
     public static Favourate find(int favourate_id, String kind) {
         SQLiteDatabase db = get_write_db();
 
-        String[] tableColumns = new String[] {
-                "id",
-                "favourate_id",
-                "kind"
-        };
-        String whereClause = "favourate_id = ? AND kind = ?";
+        String[] tableColumns = get_columns();
+
         String[] whereArgs = new String[] {
                 favourate_id + "",
                 kind
         };
 
-        Cursor c = db.query(Constants.TABLE_FAVOURATES,
-                tableColumns, whereClause, whereArgs,
-                null, null, null);
+        Cursor c = db.query(Constants.TABLE_FAVOURATES, get_columns(),
+                Constants.TABLE_FAVOURATES__ID + "=? and " +
+                Constants.TABLE_FAVOURATES__KIND + "= ?",
+                whereArgs, null, null, null, null);
+
 
         return build_by_cursor(c);
 
@@ -74,6 +72,10 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
 
 
     private static Favourate build_by_cursor(Cursor cursor) {
+        if (cursor == null) {
+            return null;
+        }
+        cursor.moveToFirst();
         int id = cursor.getInt(0);
         Integer favourate_id = cursor.getInt(1);
         String kind = cursor.getString(2);

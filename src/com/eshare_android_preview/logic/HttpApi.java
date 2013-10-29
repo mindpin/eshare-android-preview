@@ -109,6 +109,9 @@ public class HttpApi {
     }
 
     public static boolean cancel_favourate(Favourate favourate){
+        if (favourate == null) {
+            return false;
+        }
         FavouratesDBHelper.cancel(favourate);
         return true;
     }
