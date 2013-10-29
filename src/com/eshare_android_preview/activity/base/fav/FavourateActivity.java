@@ -69,10 +69,9 @@ public class FavourateActivity extends EshareBaseActivity{
                 TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
                 Question item = (Question) info_tv.getTag(R.id.tag_current_question);
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("item", item);
-                bundle.putBoolean("is_favourated", true);
                 Intent intent = new Intent(FavourateActivity.this,QuestionShowActivity.class);
+                intent.putExtra("item", item);
+                intent.putExtra("is_favourated", true);
                 startActivity(intent);
             }
         });
