@@ -102,33 +102,7 @@ public class HttpApi {
     }
 
 
-    public static List<Question> get_favourate_questions(){
-        List<Favourate> favourates =  get_favourates();
 
-        List<Question> questions =  new ArrayList<Question>();
-
-        for (int i = 0; i < favourates.size(); i++) {
-            Favourate favourate = favourates.get(i);
-            Question question = HttpApi.question_find_by(favourate.favourate_id);
-            questions.add(question);
-
-        }
-        return questions;
-    }
-
-    public static List<Plan> get_favourate_plans(){
-        List<Favourate> favourates =  FavouratesDBHelper.all();
-
-        List<Plan> plans =  new ArrayList<Plan>();
-
-        for (int i = 0; i < favourates.size(); i++) {
-            Favourate favourate = favourates.get(i);
-            Plan plan = HttpApi.plan_find_by(favourate.favourate_id);
-            plans.add(plan);
-
-        }
-        return plans;
-    }
 
 
     public static boolean create_favourate(Favourate favourate){

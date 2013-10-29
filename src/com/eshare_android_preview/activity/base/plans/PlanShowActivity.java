@@ -88,7 +88,7 @@ public class PlanShowActivity extends EshareBaseActivity{
         String item_id = getIntent().getStringExtra("item_id");
         plan = HttpApi.find_by_id(Integer.parseInt(item_id));
 
-        Favourate favourate = new Favourate(plan.id, FavouratesDBHelper.Kinds.PLAN);
+        Favourate favourate = new Favourate(plan.id + "", FavouratesDBHelper.Kinds.PLAN);
         HttpApi.create_favourate(favourate);
 
         add_favourate_btn.setVisibility(View.GONE);

@@ -184,7 +184,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		Intent intent = getIntent();
 		question = (Question)intent.getExtras().getSerializable("item");
 
-        Favourate favourate = new Favourate(question.id, FavouratesDBHelper.Kinds.QUESTION);
+        Favourate favourate = new Favourate(question.id + "", FavouratesDBHelper.Kinds.QUESTION);
         HttpApi.create_favourate(favourate);
 		
 		add_favourate_btn.setVisibility(View.GONE);

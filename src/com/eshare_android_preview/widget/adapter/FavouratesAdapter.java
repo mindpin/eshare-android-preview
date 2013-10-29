@@ -8,6 +8,7 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Favourate;
+import com.eshare_android_preview.model.Node;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.database.FavouratesDBHelper;
@@ -40,12 +41,16 @@ public class FavouratesAdapter extends EshareBaseAdapter<Favourate> {
         view_holder.info_tv.setTag(R.id.tag_favourate, item);
 
         if (item.kind.equals(FavouratesDBHelper.Kinds.QUESTION)) {
-            Question question = HttpApi.question_find_by(item.favourate_id);
+            Question question = HttpApi.question_find_by(Integer.parseInt(item.favourate_id));
             view_holder.item_tv.setText(question.title);
 
         } else if (item.kind.equals(FavouratesDBHelper.Kinds.PLAN)) {
-            Plan plan = HttpApi.plan_find_by(item.favourate_id);
+            Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourate_id));
             view_holder.item_tv.setText(plan.content);
+
+        } else if (item.kind.equals(FavouratesDBHelper.Kinds.NODE)) {
+            Node node = HttpApi.find_by_id(item.favourate_id);
+            view_holder.item_tv.setText(node.name);
         }
 
     }

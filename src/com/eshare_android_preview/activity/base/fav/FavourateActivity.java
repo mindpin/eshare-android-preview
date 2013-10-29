@@ -13,11 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetItemActivity;
 import com.eshare_android_preview.activity.base.plans.PlanShowActivity;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Favourate;
+import com.eshare_android_preview.model.Node;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.database.FavouratesDBHelper;
@@ -75,15 +77,22 @@ public class FavourateActivity extends EshareBaseActivity{
 
                 if (item.kind.equals(FavouratesDBHelper.Kinds.QUESTION)) {
                     Intent intent = new Intent(FavourateActivity.this, QuestionShowActivity.class);
-                    Question question = HttpApi.question_find_by(item.favourate_id);
+                    Question question = HttpApi.question_find_by(Integer.parseInt(item.favourate_id));
                     intent.putExtra("item", question);
                     startActivity(intent);
 
                 } else if (item.kind.equals(FavouratesDBHelper.Kinds.PLAN)) {
                     Intent intent = new Intent(FavourateActivity.this, PlanShowActivity.class);
-                    Plan plan = HttpApi.plan_find_by(item.favourate_id);
+                    Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourate_id));
                     intent.putExtra("item", plan);
                     intent.putExtra("item_id", plan.id+"");
+                    startActivity(intent);
+
+                } else if (item.kind.equals(FavouratesDBHelper.Kinds.NODE)) {
+                    Intent intent = new Intent(FavourateActivity.this, KnowledgeNetItemActivity.class);
+                    Node node = HttpApi.find_by_id(item.favourate_id);
+                    intent.putExtra("item", node);
+                    intent.putExtra("item_id", node.id+"");
                     startActivity(intent);
                 }
 

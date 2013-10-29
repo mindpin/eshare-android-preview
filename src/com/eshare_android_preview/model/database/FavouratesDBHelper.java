@@ -83,7 +83,7 @@ public class FavouratesDBHelper  extends BaseModelDBHelper {
 
         if(cursor.getCount() >= 1) {
             int id = cursor.getInt(0);
-            Integer _favourate_id = cursor.getInt(1);
+            String _favourate_id = cursor.getString(1);
             String _kind = cursor.getString(2);
 
             return new Favourate(id, _favourate_id, _kind);
