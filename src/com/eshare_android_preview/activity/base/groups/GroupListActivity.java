@@ -34,7 +34,7 @@ public class GroupListActivity extends EshareBaseActivity {
 
     private void load_list(){
         ListView group_list_view = (ListView)findViewById(R.id.list_view);
-        List<String> node_list = HttpApi.get_knowledge_net_category();
+        List<HttpApi.KnowledgeCategory> node_list = HttpApi.get_knowledge_net_category();
         GroupListAdapter adapter = new GroupListAdapter(this);
         adapter.add_items(node_list);
         group_list_view.setAdapter(adapter);

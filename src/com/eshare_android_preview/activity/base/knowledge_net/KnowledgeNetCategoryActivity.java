@@ -3,6 +3,8 @@ package com.eshare_android_preview.activity.base.knowledge_net;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,6 +17,7 @@ import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,7 +29,7 @@ import com.eshare_android_preview.widget.adapter.KnoweledgeNetCategoryAdapter;
 public class KnowledgeNetCategoryActivity extends EshareBaseActivity{
 	EditText search_edit_tv;
 	Drawable d_default,d_clear;
-	ListView list_view;
+	GridView grid_view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.kn_knowledge_net_category);
@@ -34,6 +37,7 @@ public class KnowledgeNetCategoryActivity extends EshareBaseActivity{
         set_head_text(R.string.knowedge_title);
 		load_search_et();
 		load_list_view();
+        hide_head_bottom_line();
         super.onCreate(savedInstanceState);
 	}
 	private void load_search_et() {
@@ -97,27 +101,27 @@ public class KnowledgeNetCategoryActivity extends EshareBaseActivity{
 	
 	
 	private void load_list_view() {
-		list_view = (ListView)findViewById(R.id.list_view);
-		List<String> node_list = HttpApi.get_knowledge_net_category();
+		grid_view = (GridView)findViewById(R.id.grid_view);
+		List<HttpApi.KnowledgeCategory> node_list = HttpApi.get_knowledge_net_category();
 		KnoweledgeNetCategoryAdapter adapter = new KnoweledgeNetCategoryAdapter(this);
 		adapter.add_items(node_list);
-		list_view.setAdapter(adapter);
+		grid_view.setAdapter(adapter);
+        grid_view.setSelector(new ColorDrawable(Color.TRANSPARENT));
 		adapter.notifyDataSetChanged();
 		
-		list_view.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
-				String item = (String) info_tv.getTag(R.id.tag_note_uuid);
-//				open_activity(KnowledgeNetActivity.class);
-				Bundle bundle = new Bundle();
-		        bundle.putSerializable("item", item);
+		grid_view.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
+                TextView item_tv = (TextView) list_item.findViewById(R.id.item_tv);
+                String item_name = ((HttpApi.KnowledgeCategory) item_tv.getTag()).name;
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item", item_name);
 
-		        Intent intent = new Intent(KnowledgeNetCategoryActivity.this,KnowledgeNetActivity.class);
-		        intent.putExtras(bundle);
-		        startActivity(intent);
-				
-			}
-		});
+                Intent intent = new Intent(KnowledgeNetCategoryActivity.this, KnowledgeNetActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
 	}
 }

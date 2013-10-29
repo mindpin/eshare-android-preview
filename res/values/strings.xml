@@ -94,6 +94,7 @@
     <item type="id" name="tag_plan"></item>
     <item type="id" name="tag_current_question"></item>
     <item type="id" name="tag_plan_uuid"></item>
+    
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <item type="id" name="tag_user_uuid"></item>

@@ -19,8 +19,7 @@ import com.eshare_android_preview.widget.adapter.KnowledgeNetAdapter;
 
 public class KnowledgeNetActivity extends EshareBaseActivity{
 	ListView list_view;
-	TextView item_title_tv;
-	 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.kn_knowledge_net);
