@@ -60,7 +60,7 @@ public class KnowledgeNetActivity extends EshareBaseActivity{
                 Node node = (Node) item_tv.getTag();
 
                 Intent intent = new Intent(KnowledgeNetActivity.this, KnowledgeNetItemActivity.class);
-                intent.putExtra("item_id", node.id);
+                intent.putExtra("item_id", node.node_id);
                 startActivity(intent);
             }
         });

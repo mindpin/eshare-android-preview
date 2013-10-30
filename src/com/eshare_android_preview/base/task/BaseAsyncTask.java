@@ -6,7 +6,7 @@ import android.util.Log;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.widget.BlogProgressDialog;
+import com.eshare_android_preview.widget.EshareProgressDialog;
 
 public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
 	public static final int SUCCESS = 200;
@@ -25,7 +25,7 @@ public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
     	protected void onPreExecute() {
     		// 如果构造器传入了 progress_dialog_message 则显示一个提示框
             if (null != progress_dialog_message && null != progress_dialog_activity) {
-                progress_dialog = BlogProgressDialog.show(progress_dialog_activity, progress_dialog_message);
+                progress_dialog = EshareProgressDialog.show(progress_dialog_activity, progress_dialog_message);
             }
             on_start();
     	}
@@ -107,7 +107,7 @@ public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
     
 	private EshareBaseActivity progress_dialog_activity =  null;
 	private String progress_dialog_message =  null;
-	private BlogProgressDialog progress_dialog =  null;
+	private EshareProgressDialog progress_dialog =  null;
 	
 	private InnerTask inner_task = null;
 	private TResult inner_task_result =  null;

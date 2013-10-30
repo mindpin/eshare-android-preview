@@ -47,7 +47,6 @@ public class NotesShowActivity extends EshareBaseActivity{
 			note_img.setBackgroundDrawable(ImageTools.bitmapToDrawableByBD(bitmap));
 			note_img.setVisibility(View.VISIBLE);
 		}
-		
 	}
 	public void click_show_old_but(View view){
 		Intent intent = set_ui_and_intent();

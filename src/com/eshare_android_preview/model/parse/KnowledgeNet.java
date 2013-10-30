@@ -83,11 +83,11 @@ public class KnowledgeNet {
 			for (int i = 0; i < nodes_list.size(); i++) {
 				Node node = nodes_list.get(i);
 				for (int j = 0; j < relations_list.size(); j++) {
-					if (node.id.equals(relations_list.get(j).parent_id) ) {
+					if (node.node_id.equals(relations_list.get(j).parent_id) ) {
 						System.out.println("parent_id:" + relations_list.get(j).parent_id + " , child_id: " + relations_list.get(j).child_id);
 						node.list_children.add(relations_list.get(j).child_id);
 					}
-					if (node.id.equals(relations_list.get(j).child_id) ) {
+					if (node.node_id.equals(relations_list.get(j).child_id) ) {
 						node.list_parents.add(relations_list.get(j).parent_id);
 					}
 				}
@@ -110,7 +110,7 @@ public class KnowledgeNet {
 		List<Node> nodes = new ArrayList<Node>();
 		for (int i = 0; i < node_list.size(); i++) {
 			for (int j = 0; j < node_ids.size(); j++) {
-				if (node_list.get(i).id.equals(node_ids.get(j))) {
+				if (node_list.get(i).node_id.equals(node_ids.get(j))) {
 					nodes.add(node_list.get(i));
 				}
 			}

@@ -20,7 +20,6 @@ import com.eshare_android_preview.model.parse.CourseXMLParse;
 import com.eshare_android_preview.widget.adapter.AddPlanAdapter;
 
 public class AddPlanActivity extends EshareBaseActivity{
-	
 	ListView list_view;
 	List<Plan> list;
 	@Override
@@ -38,8 +37,7 @@ public class AddPlanActivity extends EshareBaseActivity{
 			load_list();
 			return;
 		}
-		
-		new BaseAsyncTask<Void, Void, List<Plan>>(this,"获取数据") {
+		new BaseAsyncTask<Void, Void, List<Plan>>() {
 			@Override
 			public List<Plan> do_in_background(Void... params) throws Exception {
 				CourseXMLParse.parse_xml(HttpApi.course_xml_path);
@@ -49,8 +47,12 @@ public class AddPlanActivity extends EshareBaseActivity{
 			public void on_success(List<Plan> result) {
 				load_list();
 			}
+			
 		}.execute();
 	}
+	
+
+	
 	
 	private void load_list() {
 		list_view = (ListView)findViewById(R.id.list_view);
