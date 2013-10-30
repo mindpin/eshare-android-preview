@@ -55,7 +55,11 @@ public class PlansActivity extends EshareBaseActivity{
 				Plan plan = (Plan) tv.getTag(R.id.tag_plan);
 				
 				Intent intent = new Intent(PlansActivity.this,PlanShowActivity.class);
-				intent.putExtra("item_id", plan.id+"");
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);
+                intent.putExtras(bundle);
+
 				startActivity(intent);
 			}
 		});

@@ -4,6 +4,7 @@ package com.eshare_android_preview.activity.base.plans;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,12 +26,19 @@ public class PlanShowActivity extends EshareBaseActivity{
     Button cancel_favourate_btn;
 
 	Plan plan;
+
+    public static class ExtraKeys {
+        public static final String PLAN = "plan";
+    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.p_plan_show);
-		
-		String item_id = getIntent().getStringExtra("item_id");
-		plan = HttpApi.find_by_id(Integer.parseInt(item_id));
+
+        Bundle bundle = getIntent().getExtras();
+        plan = (Plan)bundle.getSerializable(PlanShowActivity.ExtraKeys.PLAN);
+
+        Log.d("ppppp = ", plan.content);
 		
 		load_ui();
 		hide_head_setting_button();
@@ -85,9 +93,6 @@ public class PlanShowActivity extends EshareBaseActivity{
 
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void add_favourate(View view) {
-        String item_id = getIntent().getStringExtra("item_id");
-        plan = HttpApi.find_by_id(Integer.parseInt(item_id));
-
         Favourate favourate = new Favourate(plan.id + "", FavouratesDBHelper.Kinds.PLAN);
         HttpApi.create_favourate(favourate);
 
@@ -97,9 +102,6 @@ public class PlanShowActivity extends EshareBaseActivity{
 
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void cancel_favourate(View view) {
-        String item_id = getIntent().getStringExtra("item_id");
-        plan = HttpApi.find_by_id(Integer.parseInt(item_id));
-
         Favourate favourate = HttpApi.find_favourate(plan.id + "", FavouratesDBHelper.Kinds.PLAN);
         HttpApi.cancel_favourate(favourate);
 

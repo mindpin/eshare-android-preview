@@ -1,5 +1,6 @@
 package com.eshare_android_preview.activity.base.questions;
 
+import java.io.Serializable;
 import java.util.List;
 
 import android.content.Intent;
@@ -16,7 +17,7 @@ import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.widget.adapter.QuestionsAdapter;
 
-public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
+public class KnowledgeNetQuestionActivity extends EshareBaseActivity implements Serializable  {
 	ListView list_view;
 	TextView item_title_tv;
 	 
@@ -49,7 +50,11 @@ public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 				Question item = (Question) info_tv.getTag(R.id.tag_current_question);
 				
 		        Intent intent = new Intent(KnowledgeNetQuestionActivity.this,QuestionShowActivity.class);
-                intent.putExtra("item_id",item.id+"");
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, item);
+                intent.putExtras(bundle);
+
 		        startActivity(intent);
 			}
 		});

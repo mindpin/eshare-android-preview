@@ -1,5 +1,6 @@
 package com.eshare_android_preview.activity.base.fav;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ import com.eshare_android_preview.widget.adapter.QuestionsAdapter;
 
 
 @SuppressLint("WorldReadableFiles")
-public class FavourateActivity extends EshareBaseActivity{
+public class FavourateActivity extends EshareBaseActivity implements Serializable {
 	ListView list_view;
 	TextView item_title_tv;
 
@@ -78,19 +79,31 @@ public class FavourateActivity extends EshareBaseActivity{
                 if (item.kind.equals(FavouratesDBHelper.Kinds.QUESTION)) {
                     Intent intent = new Intent(FavourateActivity.this, QuestionShowActivity.class);
                     Question question = HttpApi.question_find_by(Integer.parseInt(item.favourate_id));
-                    intent.putExtra("item_id", question.id+"");
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question);
+                    intent.putExtras(bundle);
+
                     startActivity(intent);
 
                 } else if (item.kind.equals(FavouratesDBHelper.Kinds.PLAN)) {
                     Intent intent = new Intent(FavourateActivity.this, PlanShowActivity.class);
                     Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourate_id));
-                    intent.putExtra("item_id", plan.id+"");
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);
+                    intent.putExtras(bundle);
+
                     startActivity(intent);
 
                 } else if (item.kind.equals(FavouratesDBHelper.Kinds.NODE)) {
                     Intent intent = new Intent(FavourateActivity.this, KnowledgeNetItemActivity.class);
                     Node node = HttpApi.find_by_id(item.favourate_id);
-                    intent.putExtra("item_id", node.id+"");
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE, node);
+                    intent.putExtras(bundle);
+
                     startActivity(intent);
                 }
 
