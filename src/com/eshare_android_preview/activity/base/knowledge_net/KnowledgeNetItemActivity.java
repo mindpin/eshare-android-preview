@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -20,32 +21,36 @@ import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Favourate;
 import com.eshare_android_preview.model.Node;
+import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.database.FavouratesDBHelper;
 import com.eshare_android_preview.widget.adapter.KnowledgeNetAdapter;
 
 import java.util.List;
 
 public class KnowledgeNetItemActivity extends EshareBaseActivity {
+    public static class ExtraKeys {
+        public static final String NODE = "node";
+    }
     GridView children_grid_view, parents_grid_view;
     Button add_favourate_btn;
     Button cancel_favourate_btn;
+	Node node;
 
-    Node node;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.kn_knowledge_net_item);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.kn_knowledge_net_item);
         hide_head_setting_button();
 
-        String item_id = getIntent().getStringExtra("item_id");
-        node = HttpApi.find_by_id(item_id);
+        Bundle bundle = getIntent().getExtras();
+        node = (Node)bundle.getSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE);
+        Log.d("node to", node.node_id);
         ((TextView) findViewById(R.id.kn_name)).setText(node.name);
         set_head_text("知识点");
 
         load_list_view();
 
 
-        Favourate favourate = HttpApi.find_favourate(item_id + "", FavouratesDBHelper.Kinds.NODE);
+        Favourate favourate = HttpApi.find_favourate(node.node_id, FavouratesDBHelper.Kinds.NODE);
 
         if (favourate == null) {
             add_favourate_btn.setVisibility(View.VISIBLE);
@@ -105,7 +110,11 @@ public class KnowledgeNetItemActivity extends EshareBaseActivity {
 		public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
             Node node = (Node) list_item.getTag(R.id.adapter_item_tag);
 			Intent intent = new Intent(KnowledgeNetItemActivity.this,KnowledgeNetItemActivity.class);
-			intent.putExtra("item_id", node.node_id);
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE, node);
+            intent.putExtras(bundle);
+
 			startActivity(intent);
 			finish();
 		}
@@ -122,10 +131,7 @@ public class KnowledgeNetItemActivity extends EshareBaseActivity {
 
     @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
     public void add_favourate(View view) {
-        String item_id = getIntent().getStringExtra("item_id");
-        node = HttpApi.find_by_id(item_id);
-
-        Favourate favourate = new Favourate(node.id, FavouratesDBHelper.Kinds.NODE);
+        Favourate favourate = new Favourate(node.node_id, FavouratesDBHelper.Kinds.NODE);
         HttpApi.create_favourate(favourate);
 
         add_favourate_btn.setVisibility(View.GONE);
@@ -134,10 +140,7 @@ public class KnowledgeNetItemActivity extends EshareBaseActivity {
 
     @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
     public void cancel_favourate(View view) {
-        String item_id = getIntent().getStringExtra("item_id");
-        node = HttpApi.find_by_id(item_id);
-
-        Favourate favourate = HttpApi.find_favourate(node.id + "", FavouratesDBHelper.Kinds.NODE);
+        Favourate favourate = HttpApi.find_favourate(node.node_id + "", FavouratesDBHelper.Kinds.NODE);
         HttpApi.cancel_favourate(favourate);
 
         add_favourate_btn.setVisibility(View.VISIBLE);

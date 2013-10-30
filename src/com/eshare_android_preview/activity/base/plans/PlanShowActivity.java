@@ -4,6 +4,7 @@ package com.eshare_android_preview.activity.base.plans;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,13 +26,18 @@ public class PlanShowActivity extends EshareBaseActivity{
     Button cancel_favourate_btn;
 
 	Plan plan;
+
+    public static class ExtraKeys {
+        public static final String PLAN = "plan";
+    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.p_plan_show);
-		
-		String item_id = getIntent().getStringExtra("item_id");
-		plan = HttpApi.find_by_id(Integer.parseInt(item_id));
-		
+
+        Bundle bundle = getIntent().getExtras();
+        plan = (Plan)bundle.getSerializable(PlanShowActivity.ExtraKeys.PLAN);
+
 		load_ui();
 		hide_head_setting_button();
 		set_head_text(R.string.plans_show);
@@ -53,7 +59,10 @@ public class PlanShowActivity extends EshareBaseActivity{
 	private void load_ui() {
 		plan_content_tv = (TextView)findViewById(R.id.plan_content_tv);
 		click_plan_add_but = (Button)findViewById(R.id.click_plan_add_but);
-		
+		System.out.println("111");
+        System.out.println(plan_content_tv);
+        System.out.println(plan);
+
 		plan_content_tv.setText(plan.content);
 		set_but_txt();
 		click_plan_add_but.setOnClickListener(new OnClickListener() {
@@ -85,9 +94,6 @@ public class PlanShowActivity extends EshareBaseActivity{
 
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void add_favourate(View view) {
-        String item_id = getIntent().getStringExtra("item_id");
-        plan = HttpApi.find_by_id(Integer.parseInt(item_id));
-
         Favourate favourate = new Favourate(plan.id + "", FavouratesDBHelper.Kinds.PLAN);
         HttpApi.create_favourate(favourate);
 
@@ -97,9 +103,6 @@ public class PlanShowActivity extends EshareBaseActivity{
 
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void cancel_favourate(View view) {
-        String item_id = getIntent().getStringExtra("item_id");
-        plan = HttpApi.find_by_id(Integer.parseInt(item_id));
-
         Favourate favourate = HttpApi.find_favourate(plan.id + "", FavouratesDBHelper.Kinds.PLAN);
         HttpApi.cancel_favourate(favourate);
 

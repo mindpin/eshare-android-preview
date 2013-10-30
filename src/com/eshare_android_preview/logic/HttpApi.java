@@ -1,5 +1,7 @@
 package com.eshare_android_preview.logic;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,8 +61,10 @@ public class HttpApi {
 	}
 	
 	public static Node find_by_id(String node_id){
+        Log.d("find_by_id", node_id);
 		List<Node> list = get_nodes("javascript");
 		for(Node node:list){
+            Log.d("for", node.node_id);
 			if (node.node_id .equals(node_id)) {
 				return node;
 			}

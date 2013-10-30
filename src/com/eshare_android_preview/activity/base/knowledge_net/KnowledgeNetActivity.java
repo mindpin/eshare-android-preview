@@ -31,7 +31,7 @@ public class KnowledgeNetActivity extends EshareBaseActivity {
 //		String item_name = (String) intent.getExtras().getSerializable("item");
         set_head_text("知识领域");
         hide_head_bottom_line();
-        load_list_view();
+
         _set_icon_font();
         super.onCreate(savedInstanceState);
     }
@@ -58,9 +58,19 @@ public class KnowledgeNetActivity extends EshareBaseActivity {
                 Node node = (Node) list_item.getTag(R.id.adapter_item_tag);
 
                 Intent intent = new Intent(KnowledgeNetActivity.this, KnowledgeNetItemActivity.class);
-                intent.putExtra("item_id", node.node_id);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE, node);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        load_list_view();
+        super.onResume();
     }
 }

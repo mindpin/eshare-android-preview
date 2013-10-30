@@ -13,7 +13,7 @@ public class Node implements Serializable, ILearningResource {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 216785L;
 	public String id;
 	public String node_id;
 	public String name;
@@ -104,7 +104,7 @@ public class Node implements Serializable, ILearningResource {
     @Override
     public boolean is_faved() {
         if(this.is_faved == null){
-            this.is_faved = FavouratesDBHelper.find(id, FavouratesDBHelper.Kinds.NODE) != null;
+            this.is_faved = FavouratesDBHelper.find(node_id, FavouratesDBHelper.Kinds.NODE) != null;
         }
         return this.is_faved;
     }

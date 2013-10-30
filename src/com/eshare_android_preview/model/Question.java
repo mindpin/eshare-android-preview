@@ -32,7 +32,7 @@ public class Question implements Serializable, ILearningResource {
 		public static final String   CODE = "code";
 	}
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 111111L;
 	public int id;
 	public String knowledge_node_id;
 	public String kind;

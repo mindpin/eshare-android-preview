@@ -3,6 +3,7 @@ package com.eshare_android_preview.activity.base.notes;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,7 +16,12 @@ import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
+import com.eshare_android_preview.logic.HttpApi;
+import com.eshare_android_preview.model.Node;
 import com.eshare_android_preview.model.Notes;
+import com.eshare_android_preview.model.Plan;
+import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.database.PlanDBHelper;
 
 public class NotesShowActivity extends EshareBaseActivity{
 	TextView note_content;
@@ -58,14 +64,39 @@ public class NotesShowActivity extends EshareBaseActivity{
 		int show_str_id = R.string.show_question;;
 		if (notes.type.indexOf(Notes.Type.QUESTION) != -1) {
 			intent.setClass(NotesShowActivity.this, QuestionShowActivity.class);
+
+            Bundle bundle = new Bundle();
+            Question question = HttpApi.question_find_by(Integer.parseInt(notes.type_id));
+            bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question);
+            intent.putExtras(bundle);
+
 			show_str_id = R.string.show_question;
+
 		}
 		if (notes.type.indexOf(Notes.Type.NODE)  != -1) {
+            Log.d("node", "1");
 			intent.setClass(NotesShowActivity.this, KnowledgeNetItemActivity.class);
+
+            Bundle bundle = new Bundle();
+            Log.d("node", "2");
+            Node node = HttpApi.find_by_id(notes.type_id);
+            Log.d("node", "3");
+            Log.d("node", node.node_id);
+            bundle.putSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE, node);
+            intent.putExtras(bundle);
+
 			show_str_id = R.string.show_node;
+
+
 		}
 		if (notes.type.indexOf(Notes.Type.PLAN)  != -1) {
 			intent.setClass(NotesShowActivity.this, PlanShowActivity.class);
+
+            Bundle bundle = new Bundle();
+            Plan plan = HttpApi.plan_find_by(Integer.parseInt(notes.type_id));
+            bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);
+            intent.putExtras(bundle);
+
 			show_str_id = R.string.show_plan;
 		}
 		submit_but.setText(show_str_id);

@@ -12,7 +12,7 @@ public class Notes implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 19757L;
 	public int id;
     public String type;
 	public String type_id;
@@ -42,7 +42,7 @@ public class Notes implements Serializable{
 				this.type_id = ((Question) obj).id + "";
 			}
 			if (this.type.indexOf(Type.NODE) != -1) {
-				this.type_id = ((Node) obj).id + "";
+				this.type_id = ((Node) obj).node_id + "";
 			}
 			if (this.type.indexOf(Type.PLAN) != -1) {
 				this.type_id = ((Plan) obj).id + "";

@@ -60,17 +60,21 @@ public class AddPlanActivity extends EshareBaseActivity {
         AddPlanAdapter adapter = new AddPlanAdapter(this);
         adapter.add_items(list);
         list_view.setDivider(null);
-        list_view.setAdapter(adapter);
-
-        list_view.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
+		list_view.setAdapter(adapter);
+		
+		list_view.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
                 Plan plan = (Plan) list_item.getTag(R.id.adapter_item_tag);
 
-                Intent intent = new Intent(AddPlanActivity.this, PlanShowActivity.class);
-                intent.putExtra("item_id", plan.id + "");
-                startActivity(intent);
-            }
-        });
-    }
+				Intent intent = new Intent(AddPlanActivity.this,PlanShowActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);
+                intent.putExtras(bundle);
+
+				startActivity(intent);
+			}
+		});
+	}
 }

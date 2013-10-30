@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,7 +38,10 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	String answer="";
 	String[] a_z = "A,B,C,D,E,F,G,H,I,J,K".split(",");
 	Question question;
-	private static final String FAVOURATE_IDS = "favourate_ids";  
+
+    public static class ExtraKeys {
+        public static final String QUESTION = "question";
+    }
 	
 	@SuppressLint("WorldReadableFiles")
 	@Override
@@ -45,8 +49,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		setContentView(R.layout.q_question_show);
         hide_head_setting_button();
 
-        Integer item_id = Integer.parseInt(getIntent().getStringExtra("item_id"));
-        question = HttpApi.question_find_by(item_id);
+        Bundle bundle = getIntent().getExtras();
+        question = (Question)bundle.getSerializable(QuestionShowActivity.ExtraKeys.QUESTION);
+
 
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();

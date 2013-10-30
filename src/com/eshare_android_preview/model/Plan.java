@@ -12,7 +12,7 @@ public class Plan implements Serializable, ILearningResource {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 12865444L;
 	public int id;
 	public String content;
 	public String checked;

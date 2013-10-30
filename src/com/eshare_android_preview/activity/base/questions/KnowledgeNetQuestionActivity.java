@@ -1,33 +1,25 @@
 package com.eshare_android_preview.activity.base.questions;
 
+import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.widget.adapter.QuestionsAdapter;
 
-import java.util.List;
-
 public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 	ListView list_view;
-	TextView item_title_tv;
-	 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.q_knowledge_net_question);
 		
-//		Intent intent = getIntent();
-//		String item = (String) intent.getExtras().getSerializable("item");
-//		item_title_tv = (TextView)findViewById(R.id.item_title_tv);
-//		item_title_tv.setText(item);
 		set_head_text(R.string.questions_title);
         hide_head_setting_button();
 		load_list_view();
@@ -48,7 +40,9 @@ public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
                 Question item = (Question) list_item.getTag(R.id.adapter_item_tag);
 
                 Intent intent = new Intent(KnowledgeNetQuestionActivity.this, QuestionShowActivity.class);
-                intent.putExtra("item_id",item.id+"");
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, item);
+                intent.putExtras(bundle);
 		        startActivity(intent);
 			}
 		});
