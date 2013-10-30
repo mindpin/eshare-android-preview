@@ -1,13 +1,14 @@
 package com.eshare_android_preview.base.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class EshareBaseAdapter<M> extends BaseAdapter {
     public EshareBaseActivity activity;
@@ -57,6 +58,9 @@ public abstract class EshareBaseAdapter<M> extends BaseAdapter {
 
         BaseViewHolder view_holder = (BaseViewHolder) convertView.getTag();
         fill_with_data(view_holder, item, position);
+
+        // 把item作为tag附加到对应的item_view上
+        convertView.setTag(R.id.adapter_item_tag, item);
 
         return convertView;
     }
