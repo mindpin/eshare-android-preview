@@ -83,14 +83,7 @@ public class KnowledgeNetItemActivity extends EshareBaseActivity{
 		child_adapter.notifyDataSetChanged();
         children_grid_view.setSelector(new ColorDrawable(Color.TRANSPARENT));
 		
-		children_grid_view.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
-                TextView item_tv = (TextView) list_item.findViewById(R.id.item_tv);
-                Node node = (Node) item_tv.getTag();
-                refresh(node);
-            }
-        });
+		children_grid_view.setOnItemClickListener(item_click_listener);
 		
 		// -----------------------------
 		
@@ -102,23 +95,24 @@ public class KnowledgeNetItemActivity extends EshareBaseActivity{
 		parends_adapter.notifyDataSetChanged();
         parents_grid_view.setSelector(new ColorDrawable(Color.TRANSPARENT));
 		
-		parents_grid_view.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
-                TextView item_tv = (TextView) list_item.findViewById(R.id.item_tv);
-                Node node = (Node) item_tv.getTag();
-                refresh(node);
-            }
-        });
+		parents_grid_view.setOnItemClickListener(item_click_listener);
 
         add_favourate_btn = (Button) findViewById(R.id.add_favourate_btn);
         cancel_favourate_btn = (Button) findViewById(R.id.cancel_favourate_btn);
 	}
 	
-	public void refresh(Node node){
-		this.node = node;
-		load_list_view();
-	}
+	// TODO
+	OnItemClickListener item_click_listener = new OnItemClickListener() {
+		@Override
+		public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
+			TextView item_tv = (TextView) list_item.findViewById(R.id.item_tv);
+            Node node = (Node) item_tv.getTag();
+			Intent intent = new Intent(KnowledgeNetItemActivity.this,KnowledgeNetItemActivity.class);
+			intent.putExtra("item_id", node.node_id);
+			startActivity(intent);
+			finish();
+		}
+	};
 	
 	public void click_notes(View view){
 		Bundle bundle = new Bundle();
