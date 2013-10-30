@@ -43,7 +43,6 @@ public class KnowledgeNetItemActivity extends EshareBaseActivity {
 
         Bundle bundle = getIntent().getExtras();
         node = (Node)bundle.getSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE);
-        Log.d("node to", node.node_id);
         ((TextView) findViewById(R.id.kn_name)).setText(node.name);
         set_head_text("知识点");
 

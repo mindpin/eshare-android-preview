@@ -35,7 +35,6 @@ public class NotesShowActivity extends EshareBaseActivity{
 		
 		Intent intent = getIntent();
 		notes = (Notes)intent.getExtras().getSerializable("item");
-		BaseUtils.toast(notes.type_id + " :  " + notes.content);
 		load_ui();
 		
 		hide_head_setting_button();
@@ -74,14 +73,10 @@ public class NotesShowActivity extends EshareBaseActivity{
 
 		}
 		if (notes.type.indexOf(Notes.Type.NODE)  != -1) {
-            Log.d("node", "1");
 			intent.setClass(NotesShowActivity.this, KnowledgeNetItemActivity.class);
 
             Bundle bundle = new Bundle();
-            Log.d("node", "2");
             Node node = HttpApi.find_by_id(notes.type_id);
-            Log.d("node", "3");
-            Log.d("node", node.node_id);
             bundle.putSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE, node);
             intent.putExtras(bundle);
 
