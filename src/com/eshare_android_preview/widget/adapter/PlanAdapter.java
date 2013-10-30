@@ -37,7 +37,6 @@ public class PlanAdapter extends EshareBaseAdapter<Plan> {
     public void fill_with_data(BaseViewHolder holder, Plan item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.item_tv.setText(item.content);
-        view_holder.item_tv.setTag(R.id.tag_plan, item);
     }
 
     private class ViewHolder implements BaseViewHolder {

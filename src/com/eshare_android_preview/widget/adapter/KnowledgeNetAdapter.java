@@ -23,12 +23,12 @@ public class KnowledgeNetAdapter extends EshareBaseAdapter<Node> {
 
     @Override
     public BaseViewHolder build_view_holder(View view) {
-        ViewHolder view_holder  = new ViewHolder();
+        ViewHolder view_holder = new ViewHolder();
 
-        view_holder.item_tv     = (TextView) view.findViewById(R.id.item_tv);
-        view_holder.item_icon   = (TextView) view.findViewById(R.id.item_icon);
-        view_holder.note_icon   = (TextView) view.findViewById(R.id.note_icon);
-        view_holder.fav_icon    = (TextView) view.findViewById(R.id.fav_icon);
+        view_holder.item_tv = (TextView) view.findViewById(R.id.item_tv);
+        view_holder.item_icon = (TextView) view.findViewById(R.id.item_icon);
+        view_holder.note_icon = (TextView) view.findViewById(R.id.note_icon);
+        view_holder.fav_icon = (TextView) view.findViewById(R.id.fav_icon);
 
         view_holder.fontawesome_font = Typeface.createFromAsset(
                 view.getContext().getAssets(), "fonts/fontawesome-webfont.ttf");
@@ -49,7 +49,6 @@ public class KnowledgeNetAdapter extends EshareBaseAdapter<Node> {
     @Override
     public void fill_with_data(BaseViewHolder holder, Node item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
-        view_holder.item_tv.setTag(item);
         view_holder.item_tv.setText(item.name);
 
         if (item.has_note()) {

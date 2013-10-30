@@ -29,7 +29,6 @@ public class KnowledgeNetItemAdapter extends EshareBaseAdapter<Node> {
     public void fill_with_data(BaseViewHolder holder, Node item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.item_tv.setText(item.name);
-        view_holder.item_tv.setTag(item);
     }
 
     private class ViewHolder implements BaseViewHolder {

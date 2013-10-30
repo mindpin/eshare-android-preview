@@ -2,6 +2,7 @@ package com.eshare_android_preview.widget.adapter;
 
 import android.view.View;
 import android.widget.TextView;
+
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
@@ -23,19 +24,18 @@ public class GroupListAdapter extends EshareBaseAdapter<HttpApi.KnowledgeCategor
 
     @Override
     public BaseViewHolder build_view_holder(View view) {
-        ViewHolder view_holder      = new ViewHolder();
-        view_holder.item_tv = (TextView)view.findViewById(R.id.item_tv);
+        ViewHolder view_holder = new ViewHolder();
+        view_holder.item_tv = (TextView) view.findViewById(R.id.item_tv);
         return view_holder;
     }
 
     @Override
     public void fill_with_data(BaseViewHolder holder, HttpApi.KnowledgeCategory item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
-        view_holder.item_tv.setTag(item);
         view_holder.item_tv.setText(item.name);
     }
 
     private class ViewHolder implements BaseViewHolder {
-        TextView  item_tv;
+        TextView item_tv;
     }
 }

@@ -1,7 +1,5 @@
 package com.eshare_android_preview.activity.base.plans;
 
-import java.util.List;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,29 +8,30 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.widget.adapter.PlanAdapter;
 
-public class PlansActivity extends EshareBaseActivity{
-	ListView list_view;
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		
-		setContentView(R.layout.p_plans);
-		load_list();
-		
-		hide_head_setting_button();
+import java.util.List;
+
+public class PlansActivity extends EshareBaseActivity {
+    ListView list_view;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        setContentView(R.layout.p_plans);
+        load_list();
+
+        hide_head_setting_button();
         hide_head_bottom_line();
-		set_head_text(R.string.plans_my_plans);
+        set_head_text(R.string.plans_my_plans);
         _set_btn_fonts();
-		super.onCreate(savedInstanceState);
-	}
+        super.onCreate(savedInstanceState);
+    }
 
     private void _set_btn_fonts() {
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
@@ -40,28 +39,27 @@ public class PlansActivity extends EshareBaseActivity{
         button.setTypeface(font);
     }
 
-	private void load_list() {
-		list_view = (ListView)findViewById(R.id.list_view);
+    private void load_list() {
+        list_view = (ListView) findViewById(R.id.list_view);
         list_view.setDivider(null);
-		List<Plan> list = HttpApi.get_plan_checked("true");
-		PlanAdapter adapter = new PlanAdapter(this);
-		adapter.add_items(list);
-		list_view.setAdapter(adapter);
-		
-		list_view.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-				TextView tv = (TextView) list_item.findViewById(R.id.item_tv);
-				Plan plan = (Plan) tv.getTag(R.id.tag_plan);
-				
-				Intent intent = new Intent(PlansActivity.this,PlanShowActivity.class);
-				intent.putExtra("item_id", plan.id+"");
-				startActivity(intent);
-			}
-		});
-	}
-	
-	public void click_add_plans(View view){
-		open_activity(AddPlanActivity.class);
-	}
+        List<Plan> list = HttpApi.get_plan_checked("true");
+        PlanAdapter adapter = new PlanAdapter(this);
+        adapter.add_items(list);
+        list_view.setAdapter(adapter);
+
+        list_view.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
+                Plan plan = (Plan) list_item.getTag(R.id.adapter_item_tag);
+
+                Intent intent = new Intent(PlansActivity.this, PlanShowActivity.class);
+                intent.putExtra("item_id", plan.id + "");
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void click_add_plans(View view) {
+        open_activity(AddPlanActivity.class);
+    }
 }
