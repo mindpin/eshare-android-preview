@@ -23,10 +23,8 @@ public class PlansActivity extends EshareBaseActivity{
 	ListView list_view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
 		setContentView(R.layout.p_plans);
-		load_list();
-		
+
 		hide_head_setting_button();
         hide_head_bottom_line();
 		set_head_text(R.string.plans_my_plans);
@@ -64,4 +62,10 @@ public class PlansActivity extends EshareBaseActivity{
 	public void click_add_plans(View view){
 		open_activity(AddPlanActivity.class);
 	}
+
+    @Override
+    protected void onResume() {
+        load_list();
+        super.onResume();
+    }
 }

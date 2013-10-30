@@ -22,7 +22,6 @@ public class NotesActivity extends EshareBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.n_notes);
 		
-		load_list();
 		hide_head_setting_button();
         set_head_text(R.string.note);
 
@@ -62,5 +61,14 @@ public class NotesActivity extends EshareBaseActivity{
     private void process_when_note_list_is_empty() {
         View note_list_empty_tip_tv = findViewById(R.id.note_list_empty_tip_tv);
         note_list_empty_tip_tv.setVisibility(View.VISIBLE);
+
+        list_view = (ListView)findViewById(R.id.list_view);
+        list_view.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onResume() {
+        load_list();
+        super.onResume();
     }
 }

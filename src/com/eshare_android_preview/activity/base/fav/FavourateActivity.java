@@ -39,8 +39,6 @@ public class FavourateActivity extends EshareBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.tab_favourate);
 		
-		load_list_view();
-		
 		hide_head_setting_button();
         set_head_text(R.string.favourate_knowledge_list);
         super.onCreate(savedInstanceState);
@@ -58,6 +56,9 @@ public class FavourateActivity extends EshareBaseActivity{
     private void process_when_fav_list_is_empty() {
         View fav_list_empty_tip_tv = findViewById(R.id.fav_list_empty_tip_tv);
         fav_list_empty_tip_tv.setVisibility(View.VISIBLE);
+
+        list_view = (ListView)findViewById(R.id.list_view);
+        list_view.setVisibility(View.GONE);
     }
 
     private void build_fav_list_adapter(List<Favourate> favourate_list) {
@@ -99,7 +100,9 @@ public class FavourateActivity extends EshareBaseActivity{
         });
     }
 
-
-
-
+    @Override
+    protected void onResume() {
+        load_list_view();
+        super.onResume();
+    }
 }
