@@ -45,11 +45,11 @@ public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 		list_view.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-				TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
-				Question item = (Question) info_tv.getTag(R.id.tag_note_uuid);
+				TextView info_tv = (TextView) list_item.findViewById(R.id.item_tv);
+				Question item = (Question) info_tv.getTag(R.id.tag_current_question);
 				
 		        Intent intent = new Intent(KnowledgeNetQuestionActivity.this,QuestionShowActivity.class);
-		        intent.putExtra("item", item);
+                intent.putExtra("item_id",item.id+"");
 		        startActivity(intent);
 			}
 		});

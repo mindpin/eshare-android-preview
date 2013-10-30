@@ -28,7 +28,6 @@ public class FavouratesAdapter extends EshareBaseAdapter<Favourate> {
     public BaseViewHolder build_view_holder(View view) {
         ViewHolder view_holder = new ViewHolder();
 
-        view_holder.info_tv = (TextView) view.findViewById(R.id.info_tv);
         view_holder.item_tv = (TextView)view.findViewById(R.id.item_tv);
 
         return view_holder;
@@ -38,7 +37,7 @@ public class FavouratesAdapter extends EshareBaseAdapter<Favourate> {
     public void fill_with_data(BaseViewHolder holder, Favourate item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
 
-        view_holder.info_tv.setTag(R.id.tag_favourate, item);
+        view_holder.item_tv.setTag(R.id.tag_favourate, item);
 
         if (item.kind.equals(FavouratesDBHelper.Kinds.QUESTION)) {
             Question question = HttpApi.question_find_by(Integer.parseInt(item.favourate_id));
@@ -55,7 +54,6 @@ public class FavouratesAdapter extends EshareBaseAdapter<Favourate> {
 
     }
     private class ViewHolder implements BaseViewHolder {
-        TextView info_tv;
         TextView  item_tv;
     }
 }

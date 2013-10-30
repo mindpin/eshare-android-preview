@@ -230,7 +230,7 @@
       <desc/>
     </node>
     <node id="n57">
-      <name>可写性，可枚举性，可配置性定义</name>
+      <name>可枚举性</name>
       <desc/>
     </node>
     <node id="n58">
@@ -242,7 +242,7 @@
       <desc/>
     </node>
     <node id="n60">
-      <name>对象通用方法-从Object继承</name>
+      <name>Object通用方法</name>
       <desc/>
     </node>
     <node id="n61">
@@ -318,7 +318,7 @@
       <desc/>
     </node>
     <node id="n79">
-      <name>函数的属性，方法，构造函数</name>
+      <name>函数的属性，方法</name>
       <desc/>
     </node>
     <node id="n80">

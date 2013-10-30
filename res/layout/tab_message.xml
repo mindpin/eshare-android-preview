@@ -9,5 +9,13 @@
         android:layout_below="@+id/head_bar"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:background="#e7e7e7"></LinearLayout>
+        android:gravity="center"
+        android:background="#e7e7e7">
+    <com.eshare_android_preview.base.view.RoundView
+        arc_color="#ff11aa"
+        arc_angle="110"
+        android:background="#aaaaaa"
+        android:layout_height="200dp"
+        android:layout_width="200dp" />
+    </LinearLayout>
 </RelativeLayout>

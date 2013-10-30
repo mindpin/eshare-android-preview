@@ -71,27 +71,25 @@ public class FavourateActivity extends EshareBaseActivity{
         list_view.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-                TextView info_tv = (TextView) list_item.findViewById(R.id.info_tv);
+                TextView item_tv = (TextView) list_item.findViewById(R.id.item_tv);
 
-                Favourate item = (Favourate) info_tv.getTag(R.id.tag_favourate);
+                Favourate item = (Favourate) item_tv.getTag(R.id.tag_favourate);
 
                 if (item.kind.equals(FavouratesDBHelper.Kinds.QUESTION)) {
                     Intent intent = new Intent(FavourateActivity.this, QuestionShowActivity.class);
                     Question question = HttpApi.question_find_by(Integer.parseInt(item.favourate_id));
-                    intent.putExtra("item", question);
+                    intent.putExtra("item_id", question.id+"");
                     startActivity(intent);
 
                 } else if (item.kind.equals(FavouratesDBHelper.Kinds.PLAN)) {
                     Intent intent = new Intent(FavourateActivity.this, PlanShowActivity.class);
                     Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourate_id));
-                    intent.putExtra("item", plan);
                     intent.putExtra("item_id", plan.id+"");
                     startActivity(intent);
 
                 } else if (item.kind.equals(FavouratesDBHelper.Kinds.NODE)) {
                     Intent intent = new Intent(FavourateActivity.this, KnowledgeNetItemActivity.class);
                     Node node = HttpApi.find_by_id(item.favourate_id);
-                    intent.putExtra("item", node);
                     intent.putExtra("item_id", node.id+"");
                     startActivity(intent);
                 }

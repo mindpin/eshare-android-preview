@@ -1,5 +1,6 @@
 package com.eshare_android_preview.model;
 
+import com.eshare_android_preview.model.database.FavouratesDBHelper;
 import com.eshare_android_preview.model.database.NotesDBHelper;
 import com.eshare_android_preview.model.interfaces.ILearningResource;
 
@@ -15,6 +16,9 @@ public class Plan implements Serializable, ILearningResource {
 	public int id;
 	public String content;
 	public String checked;
+    public Boolean has_note;
+    public Boolean is_faved;
+
 	public Plan(String content, String checked) {
 		super();
 		this.content = content;
@@ -29,11 +33,17 @@ public class Plan implements Serializable, ILearningResource {
 
     @Override
     public boolean has_note() {
-        return NotesDBHelper.has_note_from(id + "", Notes.Type.PLAN);
+        if(this.has_note == null){
+            this.has_note = NotesDBHelper.has_note_from(id + "", Notes.Type.PLAN);
+        }
+        return this.has_note;
     }
 
     @Override
     public boolean is_faved() {
-        return false;
+        if(this.is_faved == null){
+            this.is_faved = FavouratesDBHelper.find(id+"", FavouratesDBHelper.Kinds.PLAN) != null;
+        }
+        return this.is_faved;
     }
 }

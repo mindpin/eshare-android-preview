@@ -5,11 +5,12 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
+import com.eshare_android_preview.logic.HttpApi;
 
 /**
  * Created by fushang318 on 13-10-28.
  */
-public class GroupListAdapter extends EshareBaseAdapter<String> {
+public class GroupListAdapter extends EshareBaseAdapter<HttpApi.KnowledgeCategory> {
 
     public GroupListAdapter(EshareBaseActivity activity) {
         super(activity);
@@ -28,10 +29,10 @@ public class GroupListAdapter extends EshareBaseAdapter<String> {
     }
 
     @Override
-    public void fill_with_data(BaseViewHolder holder, String item, int position) {
+    public void fill_with_data(BaseViewHolder holder, HttpApi.KnowledgeCategory item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.item_tv.setTag(item);
-        view_holder.item_tv.setText(item);
+        view_holder.item_tv.setText(item.name);
     }
 
     private class ViewHolder implements BaseViewHolder {

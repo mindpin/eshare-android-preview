@@ -1,11 +1,12 @@
 package com.eshare_android_preview.model;
 
-import com.eshare_android_preview.model.database.NotesDBHelper;
-import com.eshare_android_preview.model.interfaces.ILearningResource;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.eshare_android_preview.model.database.FavouratesDBHelper;
+import com.eshare_android_preview.model.database.NotesDBHelper;
+import com.eshare_android_preview.model.interfaces.ILearningResource;
 
 // 课程节点
 public class Node implements Serializable, ILearningResource {
@@ -13,18 +14,21 @@ public class Node implements Serializable, ILearningResource {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public int id;
+	public String id;
 	public String node_id;
 	public String name;
 	public String desc;
 	public List<String> list_parents = new ArrayList<String>();
 	public List<String> list_children = new ArrayList<String>();
 
-	public int getId() {
+    public Boolean has_note;
+    public Boolean is_faved;
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -78,7 +82,7 @@ public class Node implements Serializable, ILearningResource {
 		this.list_children = list_children;
 	}
 
-	public Node(int id, String node_id, String name, String desc,
+	public Node(String id, String node_id, String name, String desc,
 			List<String> list_parents, List<String> list_children) {
 		super();
 		this.id = id;
@@ -91,11 +95,17 @@ public class Node implements Serializable, ILearningResource {
 
     @Override
     public boolean has_note() {
-        return NotesDBHelper.has_note_from(node_id, Notes.Type.NODE);
+        if(this.has_note == null){
+            this.has_note = NotesDBHelper.has_note_from(id, Notes.Type.NODE);
+        }
+        return this.has_note;
     }
 
     @Override
     public boolean is_faved() {
-        return false;
+        if(this.is_faved == null){
+            this.is_faved = FavouratesDBHelper.find(id, FavouratesDBHelper.Kinds.NODE) != null;
+        }
+        return this.is_faved;
     }
 }
