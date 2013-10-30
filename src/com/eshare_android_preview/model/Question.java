@@ -11,12 +11,18 @@ import java.util.List;
 public class Question implements Serializable, ILearningResource {
     @Override
     public boolean has_note() {
-        return NotesDBHelper.has_note_from(id + "", Notes.Type.QUESTION);
+        if(this.has_note == null){
+            this.has_note = NotesDBHelper.has_note_from(id + "", Notes.Type.QUESTION);
+        }
+        return this.has_note;
     }
 
     @Override
     public boolean is_faved() {
-        return FavouratesDBHelper.find(id + "", FavouratesDBHelper.Kinds.QUESTION) != null;
+        if(this.is_faved == null){
+            this.is_faved = FavouratesDBHelper.find(id + "", FavouratesDBHelper.Kinds.QUESTION) != null;
+        }
+        return this.is_faved;
     }
 
     public static class Type{
@@ -38,7 +44,9 @@ public class Question implements Serializable, ILearningResource {
 	public String desc;
 	public String init_code;
 	public String rule;
-	
+    public Boolean has_note;
+    public Boolean is_faved;
+
 	// 判读题
 	public Question(int id,String knowledge_node_id, String kind, String title,String answer) {
 		super();
