@@ -113,4 +113,12 @@ public class EshareBaseActivity extends Activity{
             tv.setText(res_id);
         } catch (Exception e) {}
     }
+
+    private Typeface fontawesome_font;
+    public void set_fontawesome(TextView tv) {
+        if (null == fontawesome_font) {
+            fontawesome_font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
+        }
+        tv.setTypeface(fontawesome_font);
+    }
 }
