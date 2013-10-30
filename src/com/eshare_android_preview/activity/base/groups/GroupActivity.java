@@ -41,7 +41,7 @@ public class GroupActivity extends EshareBaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(GroupActivity.this, UserInfoActivity.class);
-                User user = (User) view.findViewById(R.id.user_name).getTag(R.id.tag_user_uuid);
+                User user = (User) view.getTag(R.id.adapter_item_tag);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("user", user);
                 intent.putExtras(bundle);

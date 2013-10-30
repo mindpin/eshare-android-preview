@@ -34,8 +34,6 @@ public class KnoweledgeNetCategoryAdapter extends EshareBaseAdapter<HttpApi.Know
     @Override
     public void fill_with_data(BaseViewHolder holder, HttpApi.KnowledgeCategory item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
-
-        view_holder.item_tv.setTag(item);
         view_holder.item_tv.setText(item.name);
 
         BitmapDrawable drawable = ImageTools.toRoundCorner(

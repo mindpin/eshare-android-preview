@@ -89,9 +89,15 @@ public class User implements Serializable {
         if(index == -1){
             return new ArrayList<User>();
         }
+        if(index == 7){
+            return new ArrayList<User>(
+                    User.all().subList(index * 10, index * 10 + 9)
+            );
+        }else{
+            return new ArrayList<User>(
+                    User.all().subList(index * 10, index * 10 + 21)
+            );
+        }
 
-        return new ArrayList<User>(
-                User.all().subList(index * 10, index * 10 + 21)
-        );
     }
 }

@@ -56,9 +56,6 @@ public class FavourateActivity extends EshareBaseActivity{
     private void process_when_fav_list_is_empty() {
         View fav_list_empty_tip_tv = findViewById(R.id.fav_list_empty_tip_tv);
         fav_list_empty_tip_tv.setVisibility(View.VISIBLE);
-
-        list_view = (ListView)findViewById(R.id.list_view);
-        list_view.setVisibility(View.GONE);
     }
 
     private void build_fav_list_adapter(List<Favourate> favourate_list) {

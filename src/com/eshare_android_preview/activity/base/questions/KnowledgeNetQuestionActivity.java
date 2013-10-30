@@ -1,7 +1,5 @@
 package com.eshare_android_preview.activity.base.questions;
 
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +13,8 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.widget.adapter.QuestionsAdapter;
+
+import java.util.List;
 
 public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 	ListView list_view;
@@ -45,10 +45,9 @@ public class KnowledgeNetQuestionActivity extends EshareBaseActivity{
 		list_view.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-				TextView info_tv = (TextView) list_item.findViewById(R.id.item_tv);
-				Question item = (Question) info_tv.getTag(R.id.tag_current_question);
-				
-		        Intent intent = new Intent(KnowledgeNetQuestionActivity.this,QuestionShowActivity.class);
+                Question item = (Question) list_item.getTag(R.id.adapter_item_tag);
+
+                Intent intent = new Intent(KnowledgeNetQuestionActivity.this, QuestionShowActivity.class);
                 intent.putExtra("item_id",item.id+"");
 		        startActivity(intent);
 			}
