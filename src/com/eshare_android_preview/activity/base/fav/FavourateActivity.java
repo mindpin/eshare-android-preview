@@ -25,16 +25,13 @@ import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.database.FavouratesDBHelper;
 import com.eshare_android_preview.widget.adapter.FavouratesAdapter;
-import com.eshare_android_preview.widget.adapter.PlanAdapter;
-import com.eshare_android_preview.widget.adapter.QuestionsAdapter;
 
 
 
 
 @SuppressLint("WorldReadableFiles")
-public class FavourateActivity extends EshareBaseActivity implements Serializable {
+public class FavourateActivity extends EshareBaseActivity {
 	ListView list_view;
-	TextView item_title_tv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

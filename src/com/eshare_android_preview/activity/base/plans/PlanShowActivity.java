@@ -38,8 +38,6 @@ public class PlanShowActivity extends EshareBaseActivity{
         Bundle bundle = getIntent().getExtras();
         plan = (Plan)bundle.getSerializable(PlanShowActivity.ExtraKeys.PLAN);
 
-        Log.d("ppppp = ", plan.content);
-		
 		load_ui();
 		hide_head_setting_button();
 		set_head_text(R.string.plans_show);

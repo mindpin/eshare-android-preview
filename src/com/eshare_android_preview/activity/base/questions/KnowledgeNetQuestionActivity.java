@@ -17,7 +17,7 @@ import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.widget.adapter.QuestionsAdapter;
 
-public class KnowledgeNetQuestionActivity extends EshareBaseActivity implements Serializable  {
+public class KnowledgeNetQuestionActivity extends EshareBaseActivity {
 	ListView list_view;
 	TextView item_title_tv;
 	 
