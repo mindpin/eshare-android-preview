@@ -19,6 +19,8 @@ public class Node implements Serializable, ILearningResource {
 	public String desc;
 	public List<String> list_parents = new ArrayList<String>();
 	public List<String> list_children = new ArrayList<String>();
+    public Boolean has_note;
+    public Boolean is_faved;
 	
 	public String getId() {
 		return id;
@@ -71,11 +73,17 @@ public class Node implements Serializable, ILearningResource {
 
     @Override
     public boolean has_note() {
-        return NotesDBHelper.has_note_from(id, Notes.Type.NODE);
+        if(this.has_note == null){
+            this.has_note = NotesDBHelper.has_note_from(id, Notes.Type.NODE);
+        }
+        return this.has_note;
     }
 
     @Override
     public boolean is_faved() {
-        return FavouratesDBHelper.find(id, FavouratesDBHelper.Kinds.NODE) != null;
+        if(this.is_faved == null){
+            this.is_faved = FavouratesDBHelper.find(id, FavouratesDBHelper.Kinds.NODE) != null;
+        }
+        return this.is_faved;
     }
 }
