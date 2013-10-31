@@ -33,12 +33,12 @@ public class FavouriteListActivity extends EshareBaseActivity {
 		setContentView(R.layout.f_favourite_list);
 		
 		hide_head_setting_button();
-        set_head_text(R.string.favourate_knowledge_list);
+        set_head_text(R.string.favourite_knowledge_list);
         super.onCreate(savedInstanceState);
 	}
 	
 	private void load_list_view() {
-        final List<Favourite> favourite_list = HttpApi.get_favourates();
+        final List<Favourite> favourite_list = HttpApi.get_favourites();
 		if (favourite_list.size() == 0) {
             process_when_fav_list_is_empty();
 		} else {

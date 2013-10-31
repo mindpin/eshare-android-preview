@@ -119,7 +119,7 @@ public class HttpApi {
         return null;
     }
 
-    public static List<Favourite> get_favourates(){
+    public static List<Favourite> get_favourites(){
         return FavouriteDBHelper.all();
     }
 
@@ -127,12 +127,12 @@ public class HttpApi {
 
 
 
-    public static boolean create_favourate(Favourite favourite){
+    public static boolean create_favourite(Favourite favourite){
         FavouriteDBHelper.create(favourite);
         return true;
     }
 
-    public static boolean cancel_favourate(Favourite favourite){
+    public static boolean cancel_favourite(Favourite favourite){
         if (favourite == null) {
             return false;
         }
@@ -140,7 +140,7 @@ public class HttpApi {
         return true;
     }
 
-    public static Favourite find_favourate(String favourate_id, String kind) {
-        return FavouriteDBHelper.find(favourate_id, kind);
+    public static Favourite find_favourite(String favourite_id, String kind) {
+        return FavouriteDBHelper.find(favourite_id, kind);
     }
 }

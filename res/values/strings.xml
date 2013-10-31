@@ -45,7 +45,7 @@
 
     <!-- knowledge_net -->
     <string name="knowedge_title">知识点浏览</string>
-    <string name="favourate_knowledge_list">收藏列表</string>
+    <string name="favourite_knowledge_list">收藏列表</string>
 
     <!-- questions -->
     <string name="questions_title">题目</string>
@@ -94,17 +94,8 @@
     <string name="image_description">image_description</string>
     <!-- view.getTag(key,value) 中的 key -->
     <!-- 笔记列表项的 tag key -->
-    <item type="id" name="tag_note_uuid"></item>
     <item type="id" name="tag_choice_uuid"></item>
-    <item type="id" name="tag_home_grid_view_data"></item>
-    <item type="id" name="tag_plan"></item>
-    <item type="id" name="tag_current_question"></item>
-    <item type="id" name="tag_current_note"></item>
-    <item type="id" name="tag_favourate"></item>
-    <item type="id" name="tag_plan_uuid"></item>
 
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <item type="id" name="tag_user_uuid"></item>
     <item type="id" name="adapter_item_tag" />
 </resources>

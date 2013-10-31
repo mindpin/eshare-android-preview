@@ -23,8 +23,8 @@
             
        />
         <Button
-                android:id="@+id/add_favourate_btn"
-                android:onClick="add_favourate"
+                android:id="@+id/add_favourite_btn"
+                android:onClick="add_favourite"
                 android:layout_width="0.0dp"
                 android:layout_weight="1.0"
                 android:layout_height="wrap_content"
@@ -33,8 +33,8 @@
                 />
 
         <Button
-                android:id="@+id/cancel_favourate_btn"
-                android:onClick="cancel_favourate"
+                android:id="@+id/cancel_favourite_btn"
+                android:onClick="cancel_favourite"
                 android:layout_width="0.0dp"
                 android:layout_weight="1.0"
                 android:layout_height="wrap_content"

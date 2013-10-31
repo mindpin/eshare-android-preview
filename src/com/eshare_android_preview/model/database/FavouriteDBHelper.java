@@ -19,7 +19,6 @@ public class FavouriteDBHelper extends BaseModelDBHelper {
         public static final String QUESTION = "com.eshare_android_preview.model.Question";
         public static final String NODE = "com.eshare_android_preview.model.KnowledgeNetNode";
         public static final String PLAN = "com.eshare_android_preview.model.Plan";
-        public static final String Favourate = "com.eshare_android_preview.model.Favourite";
     }
 
 
@@ -49,13 +48,13 @@ public class FavouriteDBHelper extends BaseModelDBHelper {
         db.close();
     }
 
-    public static Favourite find(String favourate_id, String kind) {
+    public static Favourite find(String favourite_id, String kind) {
         SQLiteDatabase db = get_read_db();
 
         String[] tableColumns = get_columns();
 
         String[] whereArgs = new String[] {
-                favourate_id + "",
+                favourite_id + "",
                 kind
         };
 
@@ -81,10 +80,10 @@ public class FavouriteDBHelper extends BaseModelDBHelper {
 
         if(cursor.getCount() >= 1) {
             int id = cursor.getInt(0);
-            String _favourate_id = cursor.getString(1);
+            String _favourite_id = cursor.getString(1);
             String _kind = cursor.getString(2);
 
-            return new Favourite(id, _favourate_id, _kind);
+            return new Favourite(id, _favourite_id, _kind);
         }
 
         return null;

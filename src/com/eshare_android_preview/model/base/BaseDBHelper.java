@@ -22,7 +22,7 @@ public class BaseDBHelper extends SQLiteOpenHelper {
             Constants.TABLE_PLANS__CHECKED + " text default false);";
 
 
-    private static final String create_favourates = "create table " +
+    private static final String create_favourites = "create table " +
             Constants.TABLE_FAVOURITES + " (" +
             Constants.KEY_ID + " integer primary key, " +
             Constants.TABLE_FAVOURITES__ID + " integer not null, " +
@@ -37,7 +37,7 @@ public class BaseDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {	
         db.execSQL(create_table_notes);
         db.execSQL(create_plan);
-        db.execSQL(create_favourates);
+        db.execSQL(create_favourites);
     }
 
     @Override

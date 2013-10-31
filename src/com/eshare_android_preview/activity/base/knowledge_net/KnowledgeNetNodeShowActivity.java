@@ -30,8 +30,8 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
         public static final String NODE = "node";
     }
     GridView children_grid_view, parents_grid_view;
-    Button add_favourate_btn;
-    Button cancel_favourate_btn;
+    Button add_favourite_btn;
+    Button cancel_favourite_btn;
 	KnowledgeNetNode node;
 
 	@Override
@@ -47,14 +47,14 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
         load_list_view();
 
 
-        Favourite favourite = HttpApi.find_favourate(node.node_id, FavouriteDBHelper.Kinds.NODE);
+        Favourite favourite = HttpApi.find_favourite(node.node_id, FavouriteDBHelper.Kinds.NODE);
 
         if (favourite == null) {
-            add_favourate_btn.setVisibility(View.VISIBLE);
-            cancel_favourate_btn.setVisibility(View.GONE);
+            add_favourite_btn.setVisibility(View.VISIBLE);
+            cancel_favourite_btn.setVisibility(View.GONE);
         } else {
-            add_favourate_btn.setVisibility(View.GONE);
-            cancel_favourate_btn.setVisibility(View.VISIBLE);
+            add_favourite_btn.setVisibility(View.GONE);
+            cancel_favourite_btn.setVisibility(View.VISIBLE);
         }
 
         _set_icons();
@@ -97,8 +97,8 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 
 		parents_grid_view.setOnItemClickListener(item_click_listener);
 
-        add_favourate_btn = (Button) findViewById(R.id.add_favourate_btn);
-        cancel_favourate_btn = (Button) findViewById(R.id.cancel_favourate_btn);
+        add_favourite_btn = (Button) findViewById(R.id.add_favourite_btn);
+        cancel_favourite_btn = (Button) findViewById(R.id.cancel_favourite_btn);
 	}
 	
 	// TODO
@@ -127,20 +127,20 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
     }
 
     @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
-    public void add_favourate(View view) {
+    public void add_favourite(View view) {
         Favourite favourite = new Favourite(node.node_id, FavouriteDBHelper.Kinds.NODE);
-        HttpApi.create_favourate(favourite);
+        HttpApi.create_favourite(favourite);
 
-        add_favourate_btn.setVisibility(View.GONE);
-        cancel_favourate_btn.setVisibility(View.VISIBLE);
+        add_favourite_btn.setVisibility(View.GONE);
+        cancel_favourite_btn.setVisibility(View.VISIBLE);
     }
 
     @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
-    public void cancel_favourate(View view) {
-        Favourite favourite = HttpApi.find_favourate(node.node_id + "", FavouriteDBHelper.Kinds.NODE);
-        HttpApi.cancel_favourate(favourite);
+    public void cancel_favourite(View view) {
+        Favourite favourite = HttpApi.find_favourite(node.node_id + "", FavouriteDBHelper.Kinds.NODE);
+        HttpApi.cancel_favourite(favourite);
 
-        add_favourate_btn.setVisibility(View.VISIBLE);
-        cancel_favourate_btn.setVisibility(View.GONE);
+        add_favourite_btn.setVisibility(View.VISIBLE);
+        cancel_favourite_btn.setVisibility(View.GONE);
     }
 }
