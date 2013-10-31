@@ -96,7 +96,7 @@ public class Node implements Serializable, ILearningResource {
     @Override
     public boolean has_note() {
         if(this.has_note == null){
-            this.has_note = NotesDBHelper.has_note_from(node_id, Notes.Type.NODE);
+            this.has_note = NotesDBHelper.has_note_from(node_id, Note.Type.NODE);
         }
         return this.has_note;
     }

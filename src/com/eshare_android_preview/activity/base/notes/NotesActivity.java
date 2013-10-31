@@ -10,7 +10,7 @@ import android.widget.ListView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Notes;
+import com.eshare_android_preview.model.Note;
 import com.eshare_android_preview.widget.adapter.NotesAdapter;
 
 import java.util.List;
@@ -28,28 +28,28 @@ public class NotesActivity extends EshareBaseActivity{
     }
 
     private void load_list() {
-        List<Notes> notes_list = HttpApi.get_notes_list();
-        if (notes_list.size() == 0) {
+        List<Note> note_list = HttpApi.get_notes_list();
+        if (note_list.size() == 0) {
             process_when_note_list_is_empty();
         } else {
-            build_note_list_adapter(notes_list);
+            build_note_list_adapter(note_list);
         }
     }
 
-    private void build_note_list_adapter(List<Notes> notes_list) {
+    private void build_note_list_adapter(List<Note> note_list) {
         NotesAdapter adapter = new NotesAdapter(this);
-        adapter.add_items(notes_list);
+        adapter.add_items(note_list);
 
         list_view = (ListView) findViewById(R.id.list_view);
         list_view.setAdapter(adapter);
         list_view.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
-                Notes item = (Notes) list_item.getTag(R.id.adapter_item_tag);
+                Note note = (Note) list_item.getTag(R.id.adapter_item_tag);
 
-                Intent intent = new Intent(NotesActivity.this, NotesShowActivity.class);
+                Intent intent = new Intent(NotesActivity.this, NoteShowActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("item", item);
+                bundle.putSerializable(NoteShowActivity.ExtraKeys.NOTE, note);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

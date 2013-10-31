@@ -44,7 +44,7 @@
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetItemActivity"></activity>
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetCategoryActivity"></activity>
         
-        <activity android:name=".activity.base.questions.KnowledgeNetQuestionActivity"></activity>
+        <activity android:name=".activity.base.questions.QuestionsActivity"></activity>
         <activity android:name=".activity.base.questions.QuestionShowActivity" android:windowSoftInputMode="stateHidden"></activity>
         
     	<activity android:name=".activity.base.plans.PlansActivity"></activity>
@@ -53,7 +53,7 @@
 
     	<activity android:name=".activity.base.notes.NotesActivity"></activity>
     	<activity android:name=".activity.base.notes.AddNoteActivity"></activity>
-    	<activity android:name=".activity.base.notes.NotesShowActivity"></activity>
+    	<activity android:name=".activity.base.notes.NoteShowActivity"></activity>
 
         <activity android:name=".activity.base.groups.GroupActivity"></activity>
         <activity android:name=".activity.base.groups.UserInfoActivity"></activity>

@@ -12,7 +12,7 @@ public class Question implements Serializable, ILearningResource {
     @Override
     public boolean has_note() {
         if(this.has_note == null){
-            this.has_note = NotesDBHelper.has_note_from(id + "", Notes.Type.QUESTION);
+            this.has_note = NotesDBHelper.has_note_from(id + "", Note.Type.QUESTION);
         }
         return this.has_note;
     }

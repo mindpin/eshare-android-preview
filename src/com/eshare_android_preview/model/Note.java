@@ -3,7 +3,7 @@ package com.eshare_android_preview.model;
 import java.io.Serializable;
 
 // 笔记
-public class Notes implements Serializable{
+public class Note implements Serializable{
     public static class Type{
         public static final String QUESTION = "com.eshare_android_preview.model.Question";
         public static final String NODE = "com.eshare_android_preview.model.Node";
@@ -20,7 +20,7 @@ public class Notes implements Serializable{
 	public byte[] img;
 	
 	public Object obj;
-	public Notes(String type, String type_id, String content, byte[] img) {
+	public Note(String type, String type_id, String content, byte[] img) {
 		super();
 		this.type = type;
 		this.type_id = type_id;
@@ -30,7 +30,7 @@ public class Notes implements Serializable{
 	
 	
 	
-	public Notes(String type, String content, byte[] img, Object obj) {
+	public Note(String type, String content, byte[] img, Object obj) {
 		super();
 		this.type = type;
 		this.content = content;
@@ -52,7 +52,7 @@ public class Notes implements Serializable{
 
 
 
-	public Notes(int id, String type, String type_id, String content, byte[] img) {
+	public Note(int id, String type, String type_id, String content, byte[] img) {
 		super();
 		this.id = id;
 		this.type = type;

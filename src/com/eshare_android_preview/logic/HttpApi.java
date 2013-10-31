@@ -1,14 +1,12 @@
 package com.eshare_android_preview.logic;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import com.eshare_android_preview.model.Favourate;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.model.Node;
-import com.eshare_android_preview.model.Notes;
+import com.eshare_android_preview.model.Note;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.database.FavouratesDBHelper;
@@ -78,12 +76,12 @@ public class HttpApi {
 		return YAMLParse.parse_yaml(yaml_path);
 	}
 	
-	public static List<Notes> get_notes_list(){
+	public static List<Note> get_notes_list(){
 		return NotesDBHelper.all();
 	}
 	
-	public static boolean create_notes(Notes notes){
-		NotesDBHelper.create(notes);
+	public static boolean create_notes(Note note){
+		NotesDBHelper.create(note);
 		return true;
 	}
 

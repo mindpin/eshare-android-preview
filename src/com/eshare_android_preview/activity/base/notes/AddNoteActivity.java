@@ -26,8 +26,7 @@ import com.eshare_android_preview.base.utils.CameraLogic;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.utils.ValidateUtil;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Notes;
-import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.Note;
 
 public class AddNoteActivity extends EshareBaseActivity{
 	public class RequestCode{
@@ -71,7 +70,7 @@ public class AddNoteActivity extends EshareBaseActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.n_add_notes);
+		setContentView(R.layout.n_add_note);
         hide_head_setting_button();
         set_head_text(R.string.add_note_title);
 		
@@ -188,10 +187,10 @@ public class AddNoteActivity extends EshareBaseActivity{
 			return;
 		}
 		String content = BaseUtils.is_str_blank(content_str)? "":content_str;
-//		Notes notes = new Notes(question.id,content,bytes);
+//		Note note = new Note(question.id,content,bytes);
 		System.out.println(item.getClass().getName());
-		Notes notes = new Notes(item.getClass().getName(), content, bytes,item);
-		if (HttpApi.create_notes(notes)) {
+		Note note = new Note(item.getClass().getName(), content, bytes,item);
+		if (HttpApi.create_notes(note)) {
 			this.finish();
 		}
 	}

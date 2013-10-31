@@ -34,7 +34,7 @@ public class Plan implements Serializable, ILearningResource {
     @Override
     public boolean has_note() {
         if(this.has_note == null){
-            this.has_note = NotesDBHelper.has_note_from(id + "", Notes.Type.PLAN);
+            this.has_note = NotesDBHelper.has_note_from(id + "", Note.Type.PLAN);
         }
         return this.has_note;
     }

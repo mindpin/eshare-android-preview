@@ -7,9 +7,9 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.model.Notes;
+import com.eshare_android_preview.model.Note;
 
-public class NotesAdapter extends EshareBaseAdapter<Notes> {
+public class NotesAdapter extends EshareBaseAdapter<Note> {
     public NotesAdapter(EshareBaseActivity activity) {
         super(activity);
     }
@@ -30,7 +30,7 @@ public class NotesAdapter extends EshareBaseAdapter<Notes> {
     }
 
     @Override
-    public void fill_with_data(BaseViewHolder holder, Notes item, int position) {
+    public void fill_with_data(BaseViewHolder holder, Note item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.item_tv.setText(item.content);
         if (BaseUtils.is_str_blank(item.content) && item.img != null) {

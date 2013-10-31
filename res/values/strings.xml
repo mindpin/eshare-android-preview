@@ -50,7 +50,7 @@
     <!-- questions -->
     <string name="questions_title">题目</string>
 
-    <!-- notes -->
+    <!-- note -->
     <string name="note_list_empty_tip">还没有笔记</string>
     <string name="note">笔记</string>
     <string name="add_note_home">笔记</string>
