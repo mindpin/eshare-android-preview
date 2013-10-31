@@ -2,7 +2,6 @@ package com.eshare_android_preview.activity.base.tab_activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;

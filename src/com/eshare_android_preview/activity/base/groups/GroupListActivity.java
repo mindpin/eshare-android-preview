@@ -1,5 +1,7 @@
 package com.eshare_android_preview.activity.base.groups;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +11,8 @@ import android.widget.ListView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.widget.adapter.GroupsAdapter;
-
-import java.util.List;
 
 /**
  * Created by fushang318 on 13-10-28.
@@ -30,7 +31,7 @@ public class GroupListActivity extends EshareBaseActivity {
 
     private void load_list() {
         ListView group_list_view = (ListView) findViewById(R.id.list_view);
-        List<HttpApi.KnowledgeCategory> node_list = HttpApi.get_knowledge_net_category();
+        List<KnowledgeNetNode.KnowledgeCategory> node_list = HttpApi.HANode.get_knowledge_net_category();
         GroupsAdapter adapter = new GroupsAdapter(this);
         adapter.add_items(node_list);
         group_list_view.setAdapter(adapter);
@@ -39,7 +40,7 @@ public class GroupListActivity extends EshareBaseActivity {
         group_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
-                String group_name = ((HttpApi.KnowledgeCategory) list_item.getTag(R.id.adapter_item_tag)).name;
+                String group_name = ((KnowledgeNetNode.KnowledgeCategory) list_item.getTag(R.id.adapter_item_tag)).name;
                 Intent intent = new Intent(GroupListActivity.this, GroupShowUserListActivity.class);
                 intent.putExtra("group_name", group_name);
                 startActivity(intent);

@@ -38,7 +38,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 	}
 	
 	private void load_list_view() {
-        final List<Favourite> favourite_list = HttpApi.get_favourates();
+        final List<Favourite> favourite_list = HttpApi.HAFavourite.all();
 		if (favourite_list.size() == 0) {
             process_when_fav_list_is_empty();
 		} else {
@@ -70,7 +70,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 
                 if (item.kind.equals(FavouriteDBHelper.Kinds.QUESTION)) {
                     Intent intent = new Intent(FavouriteListActivity.this, QuestionShowActivity.class);
-                    Question question = HttpApi.question_find_by(Integer.parseInt(item.favourite_id));
+                    Question question = HttpApi.HAQuestion.find_by_id(Integer.parseInt(item.favourite_id));
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question);
@@ -80,7 +80,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 
                 } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
                     Intent intent = new Intent(FavouriteListActivity.this, PlanShowActivity.class);
-                    Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourite_id));
+                    Plan plan = HttpApi.HAPlan.find_by_id(Integer.parseInt(item.favourite_id));
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);
@@ -90,7 +90,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 
                 } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {
                     Intent intent = new Intent(FavouriteListActivity.this, KnowledgeNetNodeShowActivity.class);
-                    KnowledgeNetNode node = HttpApi.find_by_id(item.favourite_id);
+                    KnowledgeNetNode node = HttpApi.HANode.find_by_id(item.favourite_id);
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(KnowledgeNetNodeShowActivity.ExtraKeys.NODE, node);

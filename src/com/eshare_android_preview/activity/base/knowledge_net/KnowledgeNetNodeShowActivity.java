@@ -47,7 +47,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
         load_list_view();
 
 
-        Favourite favourite = HttpApi.find_favourate(node.node_id, FavouriteDBHelper.Kinds.NODE);
+        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(node.node_id, FavouriteDBHelper.Kinds.NODE);
 
         if (favourite == null) {
             add_favourate_btn.setVisibility(View.VISIBLE);
@@ -76,7 +76,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 
     private void load_list_view() {
         children_grid_view = (GridView) findViewById(R.id.children_grid_view);
-        List<KnowledgeNetNode> children_node_list = HttpApi.get_nodes_by_node_ids(node.list_children);
+        List<KnowledgeNetNode> children_node_list = HttpApi.HANode.find_by_node_ids(node.list_children);
         KnowledgeNetNodesAdapter child_adapter = new KnowledgeNetNodesAdapter(this);
         child_adapter.add_items(children_node_list);
         children_grid_view.setAdapter(child_adapter);
@@ -88,7 +88,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 		// -----------------------------
 		
 		parents_grid_view = (GridView)findViewById(R.id.parents_grid_view);
-		List<KnowledgeNetNode> parents_node_list = HttpApi.get_nodes_by_node_ids(node.list_parents);
+		List<KnowledgeNetNode> parents_node_list = HttpApi.HANode.find_by_node_ids(node.list_parents);
         KnowledgeNetNodesAdapter parends_adapter = new KnowledgeNetNodesAdapter(this);
         parends_adapter.add_items(parents_node_list);
         parents_grid_view.setAdapter(parends_adapter);
@@ -129,7 +129,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
     @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
     public void add_favourate(View view) {
         Favourite favourite = new Favourite(node.node_id, FavouriteDBHelper.Kinds.NODE);
-        HttpApi.create_favourate(favourite);
+        HttpApi.HAFavourite.create(favourite);
 
         add_favourate_btn.setVisibility(View.GONE);
         cancel_favourate_btn.setVisibility(View.VISIBLE);
@@ -137,8 +137,8 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 
     @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
     public void cancel_favourate(View view) {
-        Favourite favourite = HttpApi.find_favourate(node.node_id + "", FavouriteDBHelper.Kinds.NODE);
-        HttpApi.cancel_favourate(favourite);
+        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(node.node_id + "", FavouriteDBHelper.Kinds.NODE);
+        HttpApi.HAFavourite.cancel(favourite);
 
         add_favourate_btn.setVisibility(View.VISIBLE);
         cancel_favourate_btn.setVisibility(View.GONE);

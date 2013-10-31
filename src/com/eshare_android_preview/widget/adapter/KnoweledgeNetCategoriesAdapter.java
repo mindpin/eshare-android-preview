@@ -9,9 +9,9 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
 import com.eshare_android_preview.base.utils.ImageTools;
-import com.eshare_android_preview.logic.HttpApi;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 
-public class KnoweledgeNetCategoriesAdapter extends EshareBaseAdapter<HttpApi.KnowledgeCategory> {
+public class KnoweledgeNetCategoriesAdapter extends EshareBaseAdapter<KnowledgeNetNode.KnowledgeCategory> {
 
     public KnoweledgeNetCategoriesAdapter(EshareBaseActivity activity) {
         super(activity);
@@ -32,7 +32,7 @@ public class KnoweledgeNetCategoriesAdapter extends EshareBaseAdapter<HttpApi.Kn
     }
 
     @Override
-    public void fill_with_data(BaseViewHolder holder, HttpApi.KnowledgeCategory item, int position) {
+    public void fill_with_data(BaseViewHolder holder, KnowledgeNetNode.KnowledgeCategory item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.item_tv.setText(item.name);
 

@@ -64,7 +64,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		init_ui();
 		load_question_msg();
 
-        Favourite favourite = HttpApi.find_favourate(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
+        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
 
 		if (favourite == null) {
             add_favourate_btn.setVisibility(View.VISIBLE);
@@ -186,7 +186,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void add_favourate(View view) {
         Favourite favourite = new Favourite(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
-        HttpApi.create_favourate(favourite);
+        HttpApi.HAFavourite.create(favourite);
 		
 		add_favourate_btn.setVisibility(View.GONE);
 		cancel_favourate_btn.setVisibility(View.VISIBLE);
@@ -194,8 +194,8 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void cancel_favourate(View view) {
-        Favourite favourite = HttpApi.find_favourate(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
-        HttpApi.cancel_favourate(favourite);
+        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
+        HttpApi.HAFavourite.cancel(favourite);
 		
 		add_favourate_btn.setVisibility(View.VISIBLE);
 		cancel_favourate_btn.setVisibility(View.GONE);

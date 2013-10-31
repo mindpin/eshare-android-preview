@@ -190,7 +190,7 @@ public class AddNoteActivity extends EshareBaseActivity{
 //		Note note = new Note(question.id,content,bytes);
 		System.out.println(item.getClass().getName());
 		Note note = new Note(item.getClass().getName(), content, bytes,item);
-		if (HttpApi.create_notes(note)) {
+		if (HttpApi.HANote.create(note)) {
 			this.finish();
 		}
 	}
