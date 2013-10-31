@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+
 import com.eshare_android_preview.activity.base.fav.FavouriteListActivity;
 import com.eshare_android_preview.activity.base.groups.GroupListActivity;
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryListActivity;
@@ -73,11 +74,11 @@ public class HomeActivity extends EshareBaseActivity {
 	}
 
     private void load_user_data() {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.pandaabao);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.avatar_orange);
         Bitmap rounded_bitmap = ImageTools.toRoundCorner(bitmap, 500);
         user_avatar.setBackgroundDrawable(new BitmapDrawable(rounded_bitmap));
 
-        user_name.setText("熊猫滚滚");
+        user_name.setText("程序桔子");
     }
 
 	private void set_layout_click(){
