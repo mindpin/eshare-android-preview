@@ -21,6 +21,7 @@ import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 
 import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.database.PlanDBHelper;
 
@@ -29,10 +30,34 @@ public class CourseXMLParse {
 	public static List<Plan> parse_xml(String xml_path){
 		AssetManager asset = EshareApplication.context.getAssets();
 		try {
-			InputStream inputStream = asset.open(xml_path);
+			InputStream inputStream = asset.open(HttpApi.course_xml_path);
 			List<Plan> list = doc_parse_inputstream(inputStream);
 			return list;
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private static Element get_root(){
+		AssetManager asset = EshareApplication.context.getAssets();
+		DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+		try {
+			InputStream inputStream = asset.open(HttpApi.course_xml_path);
+			
+			DocumentBuilder builder= factory.newDocumentBuilder();
+			
+			Document document= builder.parse(inputStream);
+			Element root=document.getDocumentElement();
+			return root;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -59,6 +84,24 @@ public class CourseXMLParse {
 		}
 		return list;
 	}
+	
+	
+	
+	public static int doc_parse_plan_count(){
+		Element root= get_root();
+		NodeList notes=root.getElementsByTagName("course");
+		return notes.getLength();
+	}
+	
+	public static int doc_parse_plan_id(int id){
+		Element root= get_root();
+		NodeList notes=root.getElementsByTagName("course");
+		Element item=(Element)notes.item(id);
+		String title = item.getAttribute("title");
+		PlanDBHelper.create(new Plan(title, "false"));
+		return ++id;
+	}
+	
 	
 	public static  List<Plan> doc_parse_inputstream(InputStream inputStream){
 		DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
