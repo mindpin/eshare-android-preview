@@ -12,6 +12,9 @@ import com.eshare_android_preview.model.User;
  * Created by kaid on 10/22/13.
  */
 public class UserShowActivity extends EshareBaseActivity {
+    public static class ExtraKeys{
+        public static final String USER = "user";
+    }
     User user;
     ImageView user_avatar;
     TextView user_name;
@@ -22,7 +25,7 @@ public class UserShowActivity extends EshareBaseActivity {
         setContentView(R.layout.g_user_show);
         hide_head_setting_button();
         set_head_text(R.string.group_user_info_title);
-        user = (User)getIntent().getExtras().getSerializable("user");
+        user = (User)getIntent().getExtras().getSerializable(ExtraKeys.USER);
         init_ui();
         load_user();
         super.onCreate(savedInstanceState);

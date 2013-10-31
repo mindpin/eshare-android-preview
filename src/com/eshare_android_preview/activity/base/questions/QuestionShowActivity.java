@@ -176,7 +176,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	public void click_notes(View view){
 //		open_activity(AddNoteActivity.class);
 		Bundle bundle = new Bundle();
-        bundle.putSerializable("item", question);
+        bundle.putSerializable(AddNoteActivity.ExtraKeys.LEARNING_RESOURCE, question);
 
         Intent intent = new Intent(QuestionShowActivity.this,AddNoteActivity.class);
         intent.putExtras(bundle);

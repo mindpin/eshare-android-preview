@@ -96,6 +96,6 @@ public class NoteShowActivity extends EshareBaseActivity{
 			show_str_id = R.string.show_plan;
 		}
 		submit_but.setText(show_str_id);
-		return intent.putExtra("item_id", note.type_id);
+		return intent;
 	}
 }

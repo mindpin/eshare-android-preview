@@ -41,7 +41,7 @@ public class GroupListActivity extends EshareBaseActivity {
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
                 String group_name = ((HttpApi.KnowledgeCategory) list_item.getTag(R.id.adapter_item_tag)).name;
                 Intent intent = new Intent(GroupListActivity.this, GroupShowUserListActivity.class);
-                intent.putExtra("group_name", group_name);
+                intent.putExtra(GroupShowUserListActivity.ExtraKeys.GROUP, group_name);
                 startActivity(intent);
             }
         });

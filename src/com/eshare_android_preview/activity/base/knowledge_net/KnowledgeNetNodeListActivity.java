@@ -27,8 +27,6 @@ public class KnowledgeNetNodeListActivity extends EshareBaseActivity {
         setContentView(R.layout.kn_knowledge_net_node_list);
         hide_head_setting_button();
 
-//		Intent intent = getIntent();
-//		String item_name = (String) intent.getExtras().getSerializable("item");
         set_head_text("知识领域");
         hide_head_bottom_line();
 

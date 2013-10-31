@@ -119,7 +119,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 	
 	public void click_notes(View view){
 		Bundle bundle = new Bundle();
-        bundle.putSerializable("item", node);
+        bundle.putSerializable(AddNoteActivity.ExtraKeys.LEARNING_RESOURCE, node);
 
         Intent intent = new Intent(KnowledgeNetNodeShowActivity.this, AddNoteActivity.class);
         intent.putExtras(bundle);

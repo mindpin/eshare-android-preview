@@ -27,8 +27,12 @@ import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.utils.ValidateUtil;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Note;
+import com.eshare_android_preview.model.interfaces.ILearningResource;
 
 public class AddNoteActivity extends EshareBaseActivity{
+    public static class ExtraKeys{
+        public static final String LEARNING_RESOURCE = "learning_resource";
+    }
 	public class RequestCode{
 		public static final int FROM_ALBUM  = 0;
 		public static final int FROM_CAMERA = 1;
@@ -36,7 +40,7 @@ public class AddNoteActivity extends EshareBaseActivity{
 	EditText add_note_content;
 	ImageView add_note_img;
 	
-	Object item;
+	ILearningResource learning_resource;
 	
 	Uri uri; //头像
     File image_file;
@@ -75,7 +79,7 @@ public class AddNoteActivity extends EshareBaseActivity{
         set_head_text(R.string.add_note_title);
 		
 		Intent intent = getIntent();
-		item = intent.getExtras().getSerializable("item");
+        learning_resource = (ILearningResource)intent.getExtras().getSerializable(ExtraKeys.LEARNING_RESOURCE);
 		
 		load_ui();
 
@@ -187,9 +191,7 @@ public class AddNoteActivity extends EshareBaseActivity{
 			return;
 		}
 		String content = BaseUtils.is_str_blank(content_str)? "":content_str;
-//		Note note = new Note(question.id,content,bytes);
-		System.out.println(item.getClass().getName());
-		Note note = new Note(item.getClass().getName(), content, bytes,item);
+		Note note = new Note(learning_resource.getClass().getName(), content, bytes, learning_resource);
 		if (HttpApi.create_notes(note)) {
 			this.finish();
 		}

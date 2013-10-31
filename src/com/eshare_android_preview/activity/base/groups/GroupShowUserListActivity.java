@@ -17,11 +17,14 @@ import com.eshare_android_preview.widget.adapter.GroupUsersAdapter;
  * Created by kaid on 10/22/13.
  */
 public class GroupShowUserListActivity extends EshareBaseActivity {
+    public static class ExtraKeys{
+        public static final String GROUP = "group";
+    }
     GridView grid_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String group_name = getIntent().getStringExtra("group_name");
+        String group_name = getIntent().getStringExtra(ExtraKeys.GROUP);
         setContentView(R.layout.g_group_show_user_list);
         load_list(group_name);
         hide_head_setting_button();
@@ -43,7 +46,7 @@ public class GroupShowUserListActivity extends EshareBaseActivity {
                 Intent intent = new Intent(GroupShowUserListActivity.this, UserShowActivity.class);
                 User user = (User) view.getTag(R.id.adapter_item_tag);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("user", user);
+                bundle.putSerializable(UserShowActivity.ExtraKeys.USER, user);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

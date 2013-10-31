@@ -57,9 +57,6 @@ public class PlanShowActivity extends EshareBaseActivity{
 	private void load_ui() {
 		plan_content_tv = (TextView)findViewById(R.id.plan_content_tv);
 		click_plan_add_but = (Button)findViewById(R.id.click_plan_add_but);
-		System.out.println("111");
-        System.out.println(plan_content_tv);
-        System.out.println(plan);
 
 		plan_content_tv.setText(plan.content);
 		set_but_txt();
@@ -82,7 +79,7 @@ public class PlanShowActivity extends EshareBaseActivity{
 	
 	public void click_notes(View view){
 		Bundle bundle = new Bundle();
-        bundle.putSerializable("item", plan);
+        bundle.putSerializable(AddNoteActivity.ExtraKeys.LEARNING_RESOURCE, plan);
 
         Intent intent = new Intent(PlanShowActivity.this,AddNoteActivity.class);
         intent.putExtras(bundle);

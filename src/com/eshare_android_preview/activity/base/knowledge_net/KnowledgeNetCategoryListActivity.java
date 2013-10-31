@@ -43,9 +43,6 @@ public class KnowledgeNetCategoryListActivity extends EshareBaseActivity {
     private void load_search_et() {
         d_default = getResources().getDrawable(R.drawable.txt_search_default);
         d_clear = getResources().getDrawable(R.drawable.txt_search_clear);
-//		search_edit_tv = (EditText) findViewById(R.id.search_edit_tv);
-//		search_edit_tv.addTextChangedListener(tbxSearch_TextChanged);
-//		search_edit_tv.setOnTouchListener(txtSearch_OnTouch);
     }
 
     /**
@@ -115,14 +112,8 @@ public class KnowledgeNetCategoryListActivity extends EshareBaseActivity {
         grid_view.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
-                String item_name = ((HttpApi.KnowledgeCategory) list_item.getTag(R.id.adapter_item_tag)).name;
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("item", item_name);
-
                 Intent intent = new Intent(KnowledgeNetCategoryListActivity.this, KnowledgeNetNodeListActivity.class);
-                intent.putExtras(bundle);
                 startActivity(intent);
-
             }
         });
     }
