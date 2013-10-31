@@ -14,7 +14,6 @@ public class KnowledgeNetNode implements Serializable, ILearningResource {
 	 * 
 	 */
 	private static final long serialVersionUID = 216785L;
-	public String id;
 	public String node_id;
 	public String name;
 	public String desc;
@@ -24,68 +23,9 @@ public class KnowledgeNetNode implements Serializable, ILearningResource {
     public Boolean has_note;
     public Boolean is_faved;
 	
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getNode_id() {
-		return node_id;
-	}
-
-	public void setNode_id(String node_id) {
-		this.node_id = node_id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
-	public List<String> getList_parents() {
-		return list_parents;
-	}
-
-	public void setList_parents(List<String> list_parents) {
-		this.list_parents = list_parents;
-	}
-
-	public List<String> getList_children() {
-		return list_children;
-	}
-
-	public void setList_children(List<String> list_children) {
-		this.list_children = list_children;
-	}
-
 	public KnowledgeNetNode(String node_id, String name, String desc,
                             List<String> list_parents, List<String> list_children) {
 		super();
-		this.node_id = node_id;
-		this.name = name;
-		this.desc = desc;
-		this.list_parents = list_parents;
-		this.list_children = list_children;
-	}
-
-	public KnowledgeNetNode(String id, String node_id, String name, String desc,
-                            List<String> list_parents, List<String> list_children) {
-		super();
-		this.id = id;
 		this.node_id = node_id;
 		this.name = name;
 		this.desc = desc;
