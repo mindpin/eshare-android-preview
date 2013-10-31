@@ -42,7 +42,7 @@ public class KnowledgeNetNodeListActivity extends EshareBaseActivity {
 
     private void load_list_view() {
         grid_view = (GridView) findViewById(R.id.grid_view);
-        List<KnowledgeNetNode> node_list = HttpApi.get_nodes("javascript");
+        List<KnowledgeNetNode> node_list = HttpApi.HANode.find_by_category("javascript");
         KnowledgeNetNodesAdapter adapter = new KnowledgeNetNodesAdapter(this);
         adapter.add_items(node_list);
         grid_view.setAdapter(adapter);

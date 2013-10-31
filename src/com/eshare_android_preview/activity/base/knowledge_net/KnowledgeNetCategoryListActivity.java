@@ -1,17 +1,13 @@
 package com.eshare_android_preview.activity.base.knowledge_net;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -20,9 +16,8 @@ import android.widget.GridView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.widget.adapter.KnoweledgeNetCategoriesAdapter;
-
-import java.util.List;
 
 public class KnowledgeNetCategoryListActivity extends EshareBaseActivity {
     EditText search_edit_tv;
@@ -39,70 +34,15 @@ public class KnowledgeNetCategoryListActivity extends EshareBaseActivity {
         hide_head_bottom_line();
         super.onCreate(savedInstanceState);
     }
-
+    
     private void load_search_et() {
         d_default = getResources().getDrawable(R.drawable.txt_search_default);
         d_clear = getResources().getDrawable(R.drawable.txt_search_clear);
     }
 
-    /**
-     * 动态搜索
-     */
-    private TextWatcher tbxSearch_TextChanged = new TextWatcher() {
-        //缓存上一次文本框内是否为空
-        private boolean isnull = true;
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            if (TextUtils.isEmpty(s)) {
-                if (!isnull) {
-                    search_edit_tv.setCompoundDrawablesWithIntrinsicBounds(null, null, d_default, null);
-                    isnull = true;
-                }
-            } else {
-                if (isnull) {
-                    search_edit_tv.setCompoundDrawablesWithIntrinsicBounds(null, null, d_clear, null);
-                    isnull = false;
-                }
-            }
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        /**
-         * 随着文本框内容改变动态改变列表内容
-         */
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
-    };
-    private OnTouchListener txtSearch_OnTouch = new OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_UP:
-                    int curX = (int) event.getX();
-                    if (curX > v.getWidth() - 38
-                            && !TextUtils.isEmpty(search_edit_tv.getText())) {
-                        search_edit_tv.setText("");
-                        int cacheInputType = search_edit_tv.getInputType();// backup  the input type
-                        search_edit_tv.setInputType(InputType.TYPE_NULL);// disable soft input
-                        search_edit_tv.onTouchEvent(event);// call native handler
-                        search_edit_tv.setInputType(cacheInputType);// restore input  type
-                        return true;// consume touch even
-                    }
-                    break;
-            }
-            return false;
-        }
-    };
-
-
     private void load_list_view() {
         grid_view = (GridView) findViewById(R.id.grid_view);
-        List<HttpApi.KnowledgeCategory> node_list = HttpApi.get_knowledge_net_category();
+        List<KnowledgeNetNode.KnowledgeCategory> node_list = HttpApi.HANode.get_knowledge_net_category();
         KnoweledgeNetCategoriesAdapter adapter = new KnoweledgeNetCategoriesAdapter(this);
         adapter.add_items(node_list);
         grid_view.setAdapter(adapter);

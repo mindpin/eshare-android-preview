@@ -6,12 +6,12 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
-import com.eshare_android_preview.logic.HttpApi;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 
 /**
  * Created by fushang318 on 13-10-28.
  */
-public class GroupsAdapter extends EshareBaseAdapter<HttpApi.KnowledgeCategory> {
+public class GroupsAdapter extends EshareBaseAdapter<KnowledgeNetNode.KnowledgeCategory> {
 
     public GroupsAdapter(EshareBaseActivity activity) {
         super(activity);
@@ -30,7 +30,7 @@ public class GroupsAdapter extends EshareBaseAdapter<HttpApi.KnowledgeCategory> 
     }
 
     @Override
-    public void fill_with_data(BaseViewHolder holder, HttpApi.KnowledgeCategory item, int position) {
+    public void fill_with_data(BaseViewHolder holder, KnowledgeNetNode.KnowledgeCategory item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.item_tv.setText(item.name);
     }

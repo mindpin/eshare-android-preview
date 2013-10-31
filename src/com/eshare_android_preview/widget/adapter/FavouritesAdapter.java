@@ -38,15 +38,15 @@ public class FavouritesAdapter extends EshareBaseAdapter<Favourite> {
         ViewHolder view_holder = (ViewHolder) holder;
 
         if (item.kind.equals(FavouriteDBHelper.Kinds.QUESTION)) {
-            Question question = HttpApi.question_find_by(Integer.parseInt(item.favourite_id));
+            Question question = HttpApi.HAQuestion.find_by_id(Integer.parseInt(item.favourite_id));
             view_holder.item_tv.setText(question.title);
 
         } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
-            Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourite_id));
+            Plan plan = HttpApi.HAPlan.find_by_id(Integer.parseInt(item.favourite_id));
             view_holder.item_tv.setText(plan.content);
 
         } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {
-            KnowledgeNetNode node = HttpApi.find_by_id(item.favourite_id);
+            KnowledgeNetNode node = HttpApi.HANode.find_by_id(item.favourite_id);
             view_holder.item_tv.setText(node.name);
         }
 

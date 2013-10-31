@@ -28,7 +28,7 @@ public class NoteListActivity extends EshareBaseActivity{
     }
 
     private void load_list() {
-        List<Note> note_list = HttpApi.get_notes_list();
+        List<Note> note_list = HttpApi.HANote.all();
         if (note_list.size() == 0) {
             process_when_note_list_is_empty();
         } else {

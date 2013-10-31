@@ -5,11 +5,6 @@
     android:orientation="horizontal"
     android:padding="5dip"
 >  
-    <TextView
-        android:id="@+id/info_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-    />
      <ImageView  
        android:id="@+id/item_iv"
        android:layout_width="30dip"

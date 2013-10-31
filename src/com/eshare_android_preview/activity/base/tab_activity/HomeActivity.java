@@ -90,8 +90,8 @@ public class HomeActivity extends EshareBaseActivity {
 	}
 	class RelativeLayoutClice implements OnTouchListener{
 		RelativeLayout layout;
-		Class activity;
-		public RelativeLayoutClice(RelativeLayout layout,Class activity){
+		Class<?> activity;
+		public RelativeLayoutClice(RelativeLayout layout,Class<?> activity){
 			this.layout = layout;
 			this.activity = activity;
 		}

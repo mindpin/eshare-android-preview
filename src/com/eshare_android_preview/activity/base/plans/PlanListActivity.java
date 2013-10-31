@@ -39,7 +39,7 @@ public class PlanListActivity extends EshareBaseActivity{
     private void load_list() {
         list_view = (ListView) findViewById(R.id.list_view);
         list_view.setDivider(null);
-		List<Plan> list = HttpApi.get_plan_checked("true");
+		List<Plan> list = HttpApi.HAPlan.get_checked("true");
 		PlansAdapter adapter = new PlansAdapter(this);
 		adapter.add_items(list);
 		list_view.setAdapter(adapter);

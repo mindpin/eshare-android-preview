@@ -41,7 +41,7 @@ public class PlanShowActivity extends EshareBaseActivity{
 		set_head_text(R.string.plans_show);
 
 
-        Favourite favourite = HttpApi.find_favourite(plan.id + "", FavouriteDBHelper.Kinds.PLAN);
+        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(plan.id + "", FavouriteDBHelper.Kinds.PLAN);
 
         if (favourite == null) {
             add_favourite_btn.setVisibility(View.VISIBLE);
@@ -64,7 +64,7 @@ public class PlanShowActivity extends EshareBaseActivity{
 			@Override
 			public void onClick(View arg0) {
 				plan.checked = plan.checked.equals("true") ? "false":"true";
-				HttpApi.update_plan(plan);
+				HttpApi.HAPlan.update(plan);
 				set_but_txt();
 			}
 		});
@@ -90,7 +90,7 @@ public class PlanShowActivity extends EshareBaseActivity{
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void add_favourite(View view) {
         Favourite favourite = new Favourite(plan.id + "", FavouriteDBHelper.Kinds.PLAN);
-        HttpApi.create_favourite(favourite);
+        HttpApi.HAFavourite.create(favourite);
 
         add_favourite_btn.setVisibility(View.GONE);
         cancel_favourite_btn.setVisibility(View.VISIBLE);
@@ -98,8 +98,8 @@ public class PlanShowActivity extends EshareBaseActivity{
 
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void cancel_favourite(View view) {
-        Favourite favourite = HttpApi.find_favourite(plan.id + "", FavouriteDBHelper.Kinds.PLAN);
-        HttpApi.cancel_favourite(favourite);
+        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(plan.id + "", FavouriteDBHelper.Kinds.PLAN);
+        HttpApi.HAFavourite.cancel(favourite);
 
         add_favourite_btn.setVisibility(View.VISIBLE);
         cancel_favourite_btn.setVisibility(View.GONE);

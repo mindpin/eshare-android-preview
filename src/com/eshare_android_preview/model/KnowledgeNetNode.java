@@ -10,6 +10,15 @@ import com.eshare_android_preview.model.interfaces.ILearningResource;
 
 // 课程节点
 public class KnowledgeNetNode implements Serializable, ILearningResource {
+	public static class KnowledgeCategory {
+        public String name;
+        public int res_id;
+
+        public KnowledgeCategory(String name, int res_id) {
+            this.name = name;
+            this.res_id = res_id;
+        }
+    }
 	/**
 	 * 
 	 */

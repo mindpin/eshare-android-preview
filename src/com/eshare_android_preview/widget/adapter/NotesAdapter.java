@@ -22,10 +22,8 @@ public class NotesAdapter extends EshareBaseAdapter<Note> {
     @Override
     public BaseViewHolder build_view_holder(View view) {
         ViewHolder view_holder = new ViewHolder();
-        view_holder.info_tv = (TextView) view.findViewById(R.id.info_tv);
 
         view_holder.item_tv = (TextView) view.findViewById(R.id.item_tv);
-//        view_holder.item_iv = (ImageView)view.findViewById(R.id.item_iv);
         return view_holder;
     }
 
@@ -36,13 +34,9 @@ public class NotesAdapter extends EshareBaseAdapter<Note> {
         if (BaseUtils.is_str_blank(item.content) && item.img != null) {
             view_holder.item_tv.setText("图片");
         }
-//	     view_holder.item_iv.setBackgroundResource((Integer)item.get("img"));
     }
 
     private class ViewHolder implements BaseViewHolder {
-        TextView info_tv;
-        // 个人列表子项显示
         TextView item_tv;
-//        ImageView item_iv;
     }
 }

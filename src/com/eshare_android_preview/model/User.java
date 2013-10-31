@@ -1,19 +1,19 @@
 package com.eshare_android_preview.model;
 
-import android.graphics.drawable.Drawable;
-
-import com.eshare_android_preview.application.EshareApplication;
-import com.eshare_android_preview.logic.HttpApi;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.graphics.drawable.Drawable;
+
+import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.logic.HttpApi;
 
 /**
  * Created by kaid on 10/22/13.
@@ -76,10 +76,10 @@ public class User implements Serializable {
     }
 
     public static ArrayList<User> get_users_by_group(String group_name){
-        List<HttpApi.KnowledgeCategory> node_list = HttpApi.get_knowledge_net_category();
+        List<KnowledgeNetNode.KnowledgeCategory> node_list = HttpApi.HANode.get_knowledge_net_category();
         int index = -1;
         for(int i = 0; i < node_list.size(); i++) {
-            HttpApi.KnowledgeCategory c = node_list.get(i);
+        	KnowledgeNetNode.KnowledgeCategory c = node_list.get(i);
             if (c.name.equals(group_name)) {
                 index = i;
                 break;

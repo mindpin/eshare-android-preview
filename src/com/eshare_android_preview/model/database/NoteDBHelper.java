@@ -66,7 +66,7 @@ public class NoteDBHelper extends BaseModelDBHelper{
 	    String type = cursor.getString(1);
 	    String type_id = cursor.getString(2);
 	    String content = cursor.getString(3);
-	    byte[] img = cursor.getBlob(3);
+	    byte[] img = cursor.getBlob(4);
 	    return new Note(id, type, type_id, content, img);
 	}
 	

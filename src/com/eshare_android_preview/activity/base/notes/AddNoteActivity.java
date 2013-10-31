@@ -186,13 +186,12 @@ public class AddNoteActivity extends EshareBaseActivity{
 	public void click_on_submit_but(View view){
 		String content_str = add_note_content.getText().toString();
 		if (BaseUtils.is_str_blank(content_str) && bytes == null) {
-//			BaseUtils.toast("笔记内容不可以为空");
 			ValidateUtil.isEmpty(add_note_content, "内容");
 			return;
 		}
 		String content = BaseUtils.is_str_blank(content_str)? "":content_str;
 		Note note = new Note(learning_resource.getClass().getName(), content, bytes, learning_resource);
-		if (HttpApi.create_notes(note)) {
+		if (HttpApi.HANote.create(note)) {
 			this.finish();
 		}
 	}

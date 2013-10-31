@@ -28,7 +28,7 @@ public class QuestionListActivity extends EshareBaseActivity{
 	
 	private void load_list_view() {
 		list_view = (ListView)findViewById(R.id.list_view);
-		final List<Question> node_list = HttpApi.get_questions();
+		final List<Question> node_list = HttpApi.HAQuestion.all();
 		QuestionsAdapter adapter = new QuestionsAdapter(this);
 		adapter.add_items(node_list);
 		list_view.setAdapter(adapter);
