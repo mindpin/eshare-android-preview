@@ -28,6 +28,7 @@ import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.database.PlanDBHelper;
 import com.eshare_android_preview.model.parse.CourseXMLParse;
 import com.eshare_android_preview.widget.adapter.AddPlanAdapter;
+import com.eshare_android_preview.widget.dialog.arc.ArcProgressDialog;
 
 public class AddPlanActivity extends EshareBaseActivity{
 	ListView list_view;
@@ -37,7 +38,10 @@ public class AddPlanActivity extends EshareBaseActivity{
         setContentView(R.layout.p_add_plan);
 
 		load_data();
-		
+
+//      如果要调试进度条用connect()这行代码，把 load_data() 注释掉
+//      connect();
+
 		hide_head_setting_button();
         set_head_text(getResources().getString(R.string.plans_add_plans_title));
 
@@ -85,21 +89,9 @@ public class AddPlanActivity extends EshareBaseActivity{
 
     class ParsePlanTask extends AsyncTask<Integer, Integer, String>{
         int count = CourseXMLParse.doc_parse_plan_count();
-        Dialog loadingDialog;
-        LinearLayout layout;
-        TextView loading_tv;
+        ArcProgressDialog dialog;
         public ParsePlanTask(Context context){
-            View v = EshareApplication.inflate(R.layout.loading_dialog, null);
-            layout = (LinearLayout) v.findViewById(R.id.dialog_view);
-            ImageView loading_img = (ImageView) v.findViewById(R.id.loading_img);
-            loading_tv = (TextView) v.findViewById(R.id.loading_tv);
-            Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(context, R.anim.loading_animation);
-            loading_img.startAnimation(hyperspaceJumpAnimation);
-            loading_tv.setText("0/" + count);// 设置加载信息
-            loadingDialog = new Dialog(context, R.style.loading_dialog);// 创建自定义样式dialog
-            loadingDialog.setCancelable(false);// 不可以用“返回键”取消
-            loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,LinearLayout.LayoutParams.FILL_PARENT));// 设置布局
-            loadingDialog.show();
+            dialog = ArcProgressDialog.show(context, count);
         }
         protected void onPreExecute() {
             super.onPreExecute();
@@ -108,17 +100,16 @@ public class AddPlanActivity extends EshareBaseActivity{
             int id = 0;
             while (id < count) {
                 id = CourseXMLParse.doc_parse_plan_id(id);
-                System.out.println("id : --- " + id);
                 publishProgress(id);
             }
             return "执行完毕";
         }
         protected void onProgressUpdate(Integer... progress) {
-            loading_tv.setText(progress[0] +" / " + count);
+            dialog.set_progress(progress[0]);
             super.onProgressUpdate(progress);
         }
         protected void onPostExecute(String result) {
-            loadingDialog.dismiss();
+            dialog.dismiss();
             load_list();
             super.onPostExecute(result);
         }
