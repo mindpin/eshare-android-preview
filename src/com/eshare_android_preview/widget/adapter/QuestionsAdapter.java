@@ -15,7 +15,7 @@ public class QuestionsAdapter extends EshareBaseAdapter<Question> {
 
     @Override
     public View inflate_view() {
-        return inflate(R.layout.knowledge_net_category_list_item, null);
+        return inflate(R.layout.q_question_list_item, null);
     }
 
     @Override

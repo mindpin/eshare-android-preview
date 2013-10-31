@@ -24,14 +24,14 @@ import com.eshare_android_preview.widget.adapter.KnoweledgeNetCategoriesAdapter;
 
 import java.util.List;
 
-public class KnowledgeNetCategoriesActivity extends EshareBaseActivity {
+public class KnowledgeNetCategoryListActivity extends EshareBaseActivity {
     EditText search_edit_tv;
     Drawable d_default, d_clear;
     GridView grid_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.kn_knowledge_net_categories);
+        setContentView(R.layout.kn_knowledge_net_category_list);
         hide_head_setting_button();
         set_head_text(R.string.knowedge_title);
         load_search_et();
@@ -119,7 +119,7 @@ public class KnowledgeNetCategoriesActivity extends EshareBaseActivity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("item", item_name);
 
-                Intent intent = new Intent(KnowledgeNetCategoriesActivity.this, KnowledgeNetNodesActivity.class);
+                Intent intent = new Intent(KnowledgeNetCategoryListActivity.this, KnowledgeNetNodeListActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
 

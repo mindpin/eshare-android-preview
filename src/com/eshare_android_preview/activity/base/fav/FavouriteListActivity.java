@@ -25,12 +25,12 @@ import com.eshare_android_preview.widget.adapter.FavouritesAdapter;
 
 
 @SuppressLint("WorldReadableFiles")
-public class FavouritesActivity extends EshareBaseActivity {
+public class FavouriteListActivity extends EshareBaseActivity {
 	ListView list_view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.f_favourites);
+		setContentView(R.layout.f_favourite_list);
 		
 		hide_head_setting_button();
         set_head_text(R.string.favourate_knowledge_list);
@@ -69,7 +69,7 @@ public class FavouritesActivity extends EshareBaseActivity {
                 Favourite item = (Favourite) list_item.getTag(R.id.adapter_item_tag);
 
                 if (item.kind.equals(FavouriteDBHelper.Kinds.QUESTION)) {
-                    Intent intent = new Intent(FavouritesActivity.this, QuestionShowActivity.class);
+                    Intent intent = new Intent(FavouriteListActivity.this, QuestionShowActivity.class);
                     Question question = HttpApi.question_find_by(Integer.parseInt(item.favourite_id));
 
                     Bundle bundle = new Bundle();
@@ -79,7 +79,7 @@ public class FavouritesActivity extends EshareBaseActivity {
                     startActivity(intent);
 
                 } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
-                    Intent intent = new Intent(FavouritesActivity.this, PlanShowActivity.class);
+                    Intent intent = new Intent(FavouriteListActivity.this, PlanShowActivity.class);
                     Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourite_id));
 
                     Bundle bundle = new Bundle();
@@ -89,7 +89,7 @@ public class FavouritesActivity extends EshareBaseActivity {
                     startActivity(intent);
 
                 } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {
-                    Intent intent = new Intent(FavouritesActivity.this, KnowledgeNetNodeShowActivity.class);
+                    Intent intent = new Intent(FavouriteListActivity.this, KnowledgeNetNodeShowActivity.class);
                     KnowledgeNetNode node = HttpApi.find_by_id(item.favourite_id);
 
                     Bundle bundle = new Bundle();

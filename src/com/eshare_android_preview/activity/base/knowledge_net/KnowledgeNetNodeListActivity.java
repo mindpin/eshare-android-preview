@@ -19,12 +19,12 @@ import com.eshare_android_preview.widget.adapter.KnowledgeNetNodesAdapter;
 
 import java.util.List;
 
-public class KnowledgeNetNodesActivity extends EshareBaseActivity {
+public class KnowledgeNetNodeListActivity extends EshareBaseActivity {
     GridView grid_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.kn_knowledge_net_nodes);
+        setContentView(R.layout.kn_knowledge_net_node_list);
         hide_head_setting_button();
 
 //		Intent intent = getIntent();
@@ -57,7 +57,7 @@ public class KnowledgeNetNodesActivity extends EshareBaseActivity {
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
                 KnowledgeNetNode node = (KnowledgeNetNode) list_item.getTag(R.id.adapter_item_tag);
 
-                Intent intent = new Intent(KnowledgeNetNodesActivity.this, KnowledgeNetNodeShowActivity.class);
+                Intent intent = new Intent(KnowledgeNetNodeListActivity.this, KnowledgeNetNodeShowActivity.class);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(KnowledgeNetNodeShowActivity.ExtraKeys.NODE, node);

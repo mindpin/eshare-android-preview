@@ -38,26 +38,26 @@
         <activity android:name=".activity.base.tab_activity.MessageActivity"></activity>
         <activity android:name=".activity.base.tab_activity.AboutActivity"></activity>
         
-        <activity android:name=".activity.base.fav.FavouritesActivity"></activity>
+        <activity android:name=".activity.base.fav.FavouriteListActivity"></activity>
         
-        <activity android:name=".activity.base.knowledge_net.KnowledgeNetNodesActivity"></activity>
+        <activity android:name=".activity.base.knowledge_net.KnowledgeNetNodeListActivity"></activity>
         <activity android:name=".activity.base.knowledge_net.KnowledgeNetNodeShowActivity"></activity>
-        <activity android:name=".activity.base.knowledge_net.KnowledgeNetCategoriesActivity"></activity>
+        <activity android:name=".activity.base.knowledge_net.KnowledgeNetCategoryListActivity"></activity>
         
-        <activity android:name=".activity.base.questions.QuestionsActivity"></activity>
+        <activity android:name=".activity.base.questions.QuestionListActivity"></activity>
         <activity android:name=".activity.base.questions.QuestionShowActivity" android:windowSoftInputMode="stateHidden"></activity>
         
-    	<activity android:name=".activity.base.plans.PlansActivity"></activity>
+    	<activity android:name=".activity.base.plans.PlanListActivity"></activity>
     	<activity android:name=".activity.base.plans.AddPlanActivity"></activity>
     	<activity android:name=".activity.base.plans.PlanShowActivity"></activity>
 
-    	<activity android:name=".activity.base.notes.NotesActivity"></activity>
+    	<activity android:name=".activity.base.notes.NoteListActivity"></activity>
     	<activity android:name=".activity.base.notes.AddNoteActivity"></activity>
     	<activity android:name=".activity.base.notes.NoteShowActivity"></activity>
 
-        <activity android:name=".activity.base.groups.GroupShowUsersActivity"></activity>
+        <activity android:name=".activity.base.groups.GroupShowUserListActivity"></activity>
         <activity android:name=".activity.base.groups.UserShowActivity"></activity>
-        <activity android:name=".activity.base.groups.GroupsActivity" />
+        <activity android:name=".activity.base.groups.GroupListActivity" />
     </application>
 
 </manifest>

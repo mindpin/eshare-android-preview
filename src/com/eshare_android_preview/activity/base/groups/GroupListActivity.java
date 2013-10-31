@@ -16,10 +16,10 @@ import java.util.List;
 /**
  * Created by fushang318 on 13-10-28.
  */
-public class GroupsActivity extends EshareBaseActivity {
+public class GroupListActivity extends EshareBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
 
-        setContentView(R.layout.g_groups);
+        setContentView(R.layout.g_group_list);
         load_list();
         hide_head_setting_button();
         set_head_text(R.string.group_list_title);
@@ -40,7 +40,7 @@ public class GroupsActivity extends EshareBaseActivity {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
                 String group_name = ((HttpApi.KnowledgeCategory) list_item.getTag(R.id.adapter_item_tag)).name;
-                Intent intent = new Intent(GroupsActivity.this, GroupShowUsersActivity.class);
+                Intent intent = new Intent(GroupListActivity.this, GroupShowUserListActivity.class);
                 intent.putExtra("group_name", group_name);
                 startActivity(intent);
             }

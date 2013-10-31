@@ -15,11 +15,11 @@ import com.eshare_android_preview.widget.adapter.NotesAdapter;
 
 import java.util.List;
 
-public class NotesActivity extends EshareBaseActivity{
+public class NoteListActivity extends EshareBaseActivity{
 	ListView list_view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.n_notes);
+		setContentView(R.layout.n_note_list);
 		
 		hide_head_setting_button();
         set_head_text(R.string.note);
@@ -47,7 +47,7 @@ public class NotesActivity extends EshareBaseActivity{
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
                 Note note = (Note) list_item.getTag(R.id.adapter_item_tag);
 
-                Intent intent = new Intent(NotesActivity.this, NoteShowActivity.class);
+                Intent intent = new Intent(NoteListActivity.this, NoteShowActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(NoteShowActivity.ExtraKeys.NOTE, note);
                 intent.putExtras(bundle);

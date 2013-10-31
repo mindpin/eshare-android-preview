@@ -17,11 +17,11 @@ import com.eshare_android_preview.widget.adapter.PlansAdapter;
 
 import java.util.List;
 
-public class PlansActivity extends EshareBaseActivity{
+public class PlanListActivity extends EshareBaseActivity{
 	ListView list_view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.p_plans);
+		setContentView(R.layout.p_plan_list);
 
 		hide_head_setting_button();
         hide_head_bottom_line();
@@ -49,7 +49,7 @@ public class PlansActivity extends EshareBaseActivity{
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
 				Plan plan = (Plan) list_item.getTag(R.id.adapter_item_tag);
 				
-				Intent intent = new Intent(PlansActivity.this,PlanShowActivity.class);
+				Intent intent = new Intent(PlanListActivity.this,PlanShowActivity.class);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);

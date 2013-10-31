@@ -18,7 +18,7 @@ public class KnowledgeNetNodesAdapter extends EshareBaseAdapter<KnowledgeNetNode
 
     @Override
     public View inflate_view() {
-        return inflate(R.layout.knowledge_net_node_list_item, null);
+        return inflate(R.layout.kn_knowledge_net_node_list_item, null);
     }
 
     @Override

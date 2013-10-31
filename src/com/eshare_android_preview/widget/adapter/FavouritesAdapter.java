@@ -21,7 +21,7 @@ public class FavouritesAdapter extends EshareBaseAdapter<Favourite> {
 
     @Override
     public View inflate_view() {
-        return inflate(R.layout.knowledge_net_category_list_item, null);
+        return inflate(R.layout.f_favourite_list_item, null);
     }
 
     @Override

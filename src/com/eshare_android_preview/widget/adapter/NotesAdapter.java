@@ -16,7 +16,7 @@ public class NotesAdapter extends EshareBaseAdapter<Note> {
 
     @Override
     public View inflate_view() {
-        return inflate(R.layout.n_notes_list_item, null);
+        return inflate(R.layout.n_note_list_item, null);
     }
 
     @Override

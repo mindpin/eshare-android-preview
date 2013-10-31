@@ -13,12 +13,12 @@ import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.widget.adapter.QuestionsAdapter;
 
-public class QuestionsActivity extends EshareBaseActivity{
+public class QuestionListActivity extends EshareBaseActivity{
 	ListView list_view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.q_questions);
+		setContentView(R.layout.q_question_list);
 		
 		set_head_text(R.string.questions_title);
         hide_head_setting_button();
@@ -39,7 +39,7 @@ public class QuestionsActivity extends EshareBaseActivity{
 			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
                 Question item = (Question) list_item.getTag(R.id.adapter_item_tag);
 
-                Intent intent = new Intent(QuestionsActivity.this, QuestionShowActivity.class);
+                Intent intent = new Intent(QuestionListActivity.this, QuestionShowActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, item);
                 intent.putExtras(bundle);
