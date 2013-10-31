@@ -9,8 +9,8 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
 import com.eshare_android_preview.model.Plan;
 
-public class PlanAdapter extends EshareBaseAdapter<Plan> {
-    public PlanAdapter(EshareBaseActivity activity) {
+public class PlansAdapter extends EshareBaseAdapter<Plan> {
+    public PlansAdapter(EshareBaseActivity activity) {
         super(activity);
     }
 

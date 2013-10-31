@@ -38,11 +38,11 @@
         <activity android:name=".activity.base.tab_activity.MessageActivity"></activity>
         <activity android:name=".activity.base.tab_activity.AboutActivity"></activity>
         
-        <activity android:name=".activity.base.fav.FavourateActivity"></activity>
+        <activity android:name=".activity.base.fav.FavouritesActivity"></activity>
         
-        <activity android:name=".activity.base.knowledge_net.KnowledgeNetActivity"></activity>
-        <activity android:name=".activity.base.knowledge_net.KnowledgeNetItemActivity"></activity>
-        <activity android:name=".activity.base.knowledge_net.KnowledgeNetCategoryActivity"></activity>
+        <activity android:name=".activity.base.knowledge_net.KnowledgeNetNodesActivity"></activity>
+        <activity android:name=".activity.base.knowledge_net.KnowledgeNetNodeShowActivity"></activity>
+        <activity android:name=".activity.base.knowledge_net.KnowledgeNetCategoriesActivity"></activity>
         
         <activity android:name=".activity.base.questions.QuestionsActivity"></activity>
         <activity android:name=".activity.base.questions.QuestionShowActivity" android:windowSoftInputMode="stateHidden"></activity>
@@ -55,9 +55,9 @@
     	<activity android:name=".activity.base.notes.AddNoteActivity"></activity>
     	<activity android:name=".activity.base.notes.NoteShowActivity"></activity>
 
-        <activity android:name=".activity.base.groups.GroupActivity"></activity>
-        <activity android:name=".activity.base.groups.UserInfoActivity"></activity>
-        <activity android:name=".activity.base.groups.GroupListActivity" />
+        <activity android:name=".activity.base.groups.GroupShowUsersActivity"></activity>
+        <activity android:name=".activity.base.groups.UserShowActivity"></activity>
+        <activity android:name=".activity.base.groups.GroupsActivity" />
     </application>
 
 </manifest>

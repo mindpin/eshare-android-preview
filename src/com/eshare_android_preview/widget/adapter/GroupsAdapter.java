@@ -11,15 +11,15 @@ import com.eshare_android_preview.logic.HttpApi;
 /**
  * Created by fushang318 on 13-10-28.
  */
-public class GroupListAdapter extends EshareBaseAdapter<HttpApi.KnowledgeCategory> {
+public class GroupsAdapter extends EshareBaseAdapter<HttpApi.KnowledgeCategory> {
 
-    public GroupListAdapter(EshareBaseActivity activity) {
+    public GroupsAdapter(EshareBaseActivity activity) {
         super(activity);
     }
 
     @Override
     public View inflate_view() {
-        return inflate(R.layout.group_list_item, null);
+        return inflate(R.layout.g_group_list_item, null);
     }
 
     @Override

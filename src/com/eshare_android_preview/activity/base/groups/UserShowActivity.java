@@ -11,7 +11,7 @@ import com.eshare_android_preview.model.User;
 /**
  * Created by kaid on 10/22/13.
  */
-public class UserInfoActivity extends EshareBaseActivity {
+public class UserShowActivity extends EshareBaseActivity {
     User user;
     ImageView user_avatar;
     TextView user_name;
@@ -19,7 +19,7 @@ public class UserInfoActivity extends EshareBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.g_user_info);
+        setContentView(R.layout.g_user_show);
         hide_head_setting_button();
         set_head_text(R.string.group_user_info_title);
         user = (User)getIntent().getExtras().getSerializable("user");

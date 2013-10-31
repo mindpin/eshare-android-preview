@@ -11,18 +11,18 @@ import android.widget.GridView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.model.User;
-import com.eshare_android_preview.widget.adapter.GroupAdapter;
+import com.eshare_android_preview.widget.adapter.GroupUsersAdapter;
 
 /**
  * Created by kaid on 10/22/13.
  */
-public class GroupActivity extends EshareBaseActivity {
+public class GroupShowUsersActivity extends EshareBaseActivity {
     GridView grid_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String group_name = getIntent().getStringExtra("group_name");
-        setContentView(R.layout.g_group);
+        setContentView(R.layout.g_group_show_users);
         load_list(group_name);
         hide_head_setting_button();
         set_head_text(R.string.group_title);
@@ -32,7 +32,7 @@ public class GroupActivity extends EshareBaseActivity {
 
     private void load_list(String group_name) {
         grid_view = (GridView)findViewById(R.id.grid_view);
-        GroupAdapter adapter = new GroupAdapter(this);
+        GroupUsersAdapter adapter = new GroupUsersAdapter(this);
         adapter.add_items(User.get_users_by_group(group_name));
         grid_view.setAdapter(adapter);
         grid_view.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -40,7 +40,7 @@ public class GroupActivity extends EshareBaseActivity {
         grid_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(GroupActivity.this, UserInfoActivity.class);
+                Intent intent = new Intent(GroupShowUsersActivity.this, UserShowActivity.class);
                 User user = (User) view.getTag(R.id.adapter_item_tag);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("user", user);

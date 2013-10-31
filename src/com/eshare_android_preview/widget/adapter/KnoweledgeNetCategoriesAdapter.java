@@ -11,9 +11,9 @@ import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.logic.HttpApi;
 
-public class KnoweledgeNetCategoryAdapter extends EshareBaseAdapter<HttpApi.KnowledgeCategory> {
+public class KnoweledgeNetCategoriesAdapter extends EshareBaseAdapter<HttpApi.KnowledgeCategory> {
 
-    public KnoweledgeNetCategoryAdapter(EshareBaseActivity activity) {
+    public KnoweledgeNetCategoriesAdapter(EshareBaseActivity activity) {
         super(activity);
     }
 

@@ -9,17 +9,17 @@ import android.widget.ListView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.widget.adapter.GroupListAdapter;
+import com.eshare_android_preview.widget.adapter.GroupsAdapter;
 
 import java.util.List;
 
 /**
  * Created by fushang318 on 13-10-28.
  */
-public class GroupListActivity extends EshareBaseActivity {
+public class GroupsActivity extends EshareBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
 
-        setContentView(R.layout.g_group_list);
+        setContentView(R.layout.g_groups);
         load_list();
         hide_head_setting_button();
         set_head_text(R.string.group_list_title);
@@ -31,7 +31,7 @@ public class GroupListActivity extends EshareBaseActivity {
     private void load_list() {
         ListView group_list_view = (ListView) findViewById(R.id.list_view);
         List<HttpApi.KnowledgeCategory> node_list = HttpApi.get_knowledge_net_category();
-        GroupListAdapter adapter = new GroupListAdapter(this);
+        GroupsAdapter adapter = new GroupsAdapter(this);
         adapter.add_items(node_list);
         group_list_view.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -40,7 +40,7 @@ public class GroupListActivity extends EshareBaseActivity {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
                 String group_name = ((HttpApi.KnowledgeCategory) list_item.getTag(R.id.adapter_item_tag)).name;
-                Intent intent = new Intent(GroupListActivity.this, GroupActivity.class);
+                Intent intent = new Intent(GroupsActivity.this, GroupShowUsersActivity.class);
                 intent.putExtra("group_name", group_name);
                 startActivity(intent);
             }

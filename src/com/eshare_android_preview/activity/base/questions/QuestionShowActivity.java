@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,9 +21,9 @@ import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Favourate;
+import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.database.FavouratesDBHelper;
+import com.eshare_android_preview.model.database.FavouriteDBHelper;
 
 public class QuestionShowActivity extends EshareBaseActivity{
 	TextView item_title_tv,question_kind,question_title;
@@ -65,9 +64,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		init_ui();
 		load_question_msg();
 
-        Favourate favourate = HttpApi.find_favourate(question.id + "", FavouratesDBHelper.Kinds.QUESTION);
+        Favourite favourite = HttpApi.find_favourate(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
 
-		if (favourate == null) {
+		if (favourite == null) {
             add_favourate_btn.setVisibility(View.VISIBLE);
             cancel_favourate_btn.setVisibility(View.GONE);
 		} else {
@@ -186,8 +185,8 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void add_favourate(View view) {
-        Favourate favourate = new Favourate(question.id + "", FavouratesDBHelper.Kinds.QUESTION);
-        HttpApi.create_favourate(favourate);
+        Favourite favourite = new Favourite(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
+        HttpApi.create_favourate(favourite);
 		
 		add_favourate_btn.setVisibility(View.GONE);
 		cancel_favourate_btn.setVisibility(View.VISIBLE);
@@ -195,8 +194,8 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void cancel_favourate(View view) {
-        Favourate favourate = HttpApi.find_favourate(question.id + "", FavouratesDBHelper.Kinds.QUESTION);
-        HttpApi.cancel_favourate(favourate);
+        Favourite favourite = HttpApi.find_favourate(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
+        HttpApi.cancel_favourate(favourite);
 		
 		add_favourate_btn.setVisibility(View.VISIBLE);
 		cancel_favourate_btn.setVisibility(View.GONE);

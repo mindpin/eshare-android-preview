@@ -14,12 +14,12 @@ public class Constants {
     public static final String TABLE_NOTES__IMG = "img";
 
     // plan
-    public static final String TABLE_PLAN = "plan";
-    public static final String TABLE_PLAN__CONTENT = "content";
-    public static final String TABLE_PLAN__CHECKED = "checked";
+    public static final String TABLE_PLANS = "plans";
+    public static final String TABLE_PLANS__CONTENT = "content";
+    public static final String TABLE_PLANS__CHECKED = "checked";
 
     // favourates
-    public static final String TABLE_FAVOURATES = "favourates";
-    public static final String TABLE_FAVOURATES__ID = "favourate_id";
-    public static final String TABLE_FAVOURATES__KIND = "kind";
+    public static final String TABLE_FAVOURITES = "favourites";
+    public static final String TABLE_FAVOURITES__ID = "favourite_id";
+    public static final String TABLE_FAVOURITES__KIND = "kind";
 }

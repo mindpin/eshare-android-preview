@@ -13,7 +13,8 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Plan;
-import com.eshare_android_preview.widget.adapter.PlanAdapter;
+import com.eshare_android_preview.widget.adapter.PlansAdapter;
+
 import java.util.List;
 
 public class PlansActivity extends EshareBaseActivity{
@@ -39,7 +40,7 @@ public class PlansActivity extends EshareBaseActivity{
         list_view = (ListView) findViewById(R.id.list_view);
         list_view.setDivider(null);
 		List<Plan> list = HttpApi.get_plan_checked("true");
-		PlanAdapter adapter = new PlanAdapter(this);
+		PlansAdapter adapter = new PlansAdapter(this);
 		adapter.add_items(list);
 		list_view.setAdapter(adapter);
 		

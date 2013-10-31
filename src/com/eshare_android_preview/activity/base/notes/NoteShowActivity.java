@@ -9,13 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetItemActivity;
+import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetNodeShowActivity;
 import com.eshare_android_preview.activity.base.plans.PlanShowActivity;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Node;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Note;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
@@ -74,11 +74,11 @@ public class NoteShowActivity extends EshareBaseActivity{
 
 		}
 		if (note.type.indexOf(Note.Type.NODE)  != -1) {
-			intent.setClass(NoteShowActivity.this, KnowledgeNetItemActivity.class);
+			intent.setClass(NoteShowActivity.this, KnowledgeNetNodeShowActivity.class);
 
             Bundle bundle = new Bundle();
-            Node node = HttpApi.find_by_id(note.type_id);
-            bundle.putSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE, node);
+            KnowledgeNetNode node = HttpApi.find_by_id(note.type_id);
+            bundle.putSerializable(KnowledgeNetNodeShowActivity.ExtraKeys.NODE, node);
             intent.putExtras(bundle);
 
 			show_str_id = R.string.show_node;

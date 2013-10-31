@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class Note implements Serializable{
     public static class Type{
         public static final String QUESTION = "com.eshare_android_preview.model.Question";
-        public static final String NODE = "com.eshare_android_preview.model.Node";
+        public static final String NODE = "com.eshare_android_preview.model.KnowledgeNetNode";
         public static final String PLAN = "com.eshare_android_preview.model.Plan";
     }
 	/**
@@ -42,7 +42,7 @@ public class Note implements Serializable{
 				this.type_id = ((Question) obj).id + "";
 			}
 			if (this.type.indexOf(Type.NODE) != -1) {
-				this.type_id = ((Node) obj).node_id + "";
+				this.type_id = ((KnowledgeNetNode) obj).node_id + "";
 			}
 			if (this.type.indexOf(Type.PLAN) != -1) {
 				this.type_id = ((Plan) obj).id + "";

@@ -1,7 +1,7 @@
 package com.eshare_android_preview.model;
 
-import com.eshare_android_preview.model.database.FavouratesDBHelper;
-import com.eshare_android_preview.model.database.NotesDBHelper;
+import com.eshare_android_preview.model.database.FavouriteDBHelper;
+import com.eshare_android_preview.model.database.NoteDBHelper;
 import com.eshare_android_preview.model.interfaces.ILearningResource;
 
 import java.io.Serializable;
@@ -12,7 +12,7 @@ public class Question implements Serializable, ILearningResource {
     @Override
     public boolean has_note() {
         if(this.has_note == null){
-            this.has_note = NotesDBHelper.has_note_from(id + "", Note.Type.QUESTION);
+            this.has_note = NoteDBHelper.has_note_from(id + "", Note.Type.QUESTION);
         }
         return this.has_note;
     }
@@ -20,7 +20,7 @@ public class Question implements Serializable, ILearningResource {
     @Override
     public boolean is_faved() {
         if(this.is_faved == null){
-            this.is_faved = FavouratesDBHelper.find(id + "", FavouratesDBHelper.Kinds.QUESTION) != null;
+            this.is_faved = FavouriteDBHelper.find(id + "", FavouriteDBHelper.Kinds.QUESTION) != null;
         }
         return this.is_faved;
     }

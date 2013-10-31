@@ -20,18 +20,18 @@ import android.widget.GridView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.widget.adapter.KnoweledgeNetCategoryAdapter;
+import com.eshare_android_preview.widget.adapter.KnoweledgeNetCategoriesAdapter;
 
 import java.util.List;
 
-public class KnowledgeNetCategoryActivity extends EshareBaseActivity {
+public class KnowledgeNetCategoriesActivity extends EshareBaseActivity {
     EditText search_edit_tv;
     Drawable d_default, d_clear;
     GridView grid_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.kn_knowledge_net_category);
+        setContentView(R.layout.kn_knowledge_net_categories);
         hide_head_setting_button();
         set_head_text(R.string.knowedge_title);
         load_search_et();
@@ -106,7 +106,7 @@ public class KnowledgeNetCategoryActivity extends EshareBaseActivity {
     private void load_list_view() {
         grid_view = (GridView) findViewById(R.id.grid_view);
         List<HttpApi.KnowledgeCategory> node_list = HttpApi.get_knowledge_net_category();
-        KnoweledgeNetCategoryAdapter adapter = new KnoweledgeNetCategoryAdapter(this);
+        KnoweledgeNetCategoriesAdapter adapter = new KnoweledgeNetCategoriesAdapter(this);
         adapter.add_items(node_list);
         grid_view.setAdapter(adapter);
         grid_view.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -119,7 +119,7 @@ public class KnowledgeNetCategoryActivity extends EshareBaseActivity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("item", item_name);
 
-                Intent intent = new Intent(KnowledgeNetCategoryActivity.this, KnowledgeNetActivity.class);
+                Intent intent = new Intent(KnowledgeNetCategoriesActivity.this, KnowledgeNetNodesActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
 

@@ -7,15 +7,15 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Favourate;
-import com.eshare_android_preview.model.Node;
+import com.eshare_android_preview.model.Favourite;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.database.FavouratesDBHelper;
+import com.eshare_android_preview.model.database.FavouriteDBHelper;
 
-public class FavouratesAdapter extends EshareBaseAdapter<Favourate> {
+public class FavouritesAdapter extends EshareBaseAdapter<Favourite> {
 
-    public FavouratesAdapter(EshareBaseActivity activity) {
+    public FavouritesAdapter(EshareBaseActivity activity) {
         super(activity);
     }
 
@@ -34,19 +34,19 @@ public class FavouratesAdapter extends EshareBaseAdapter<Favourate> {
     }
 
     @Override
-    public void fill_with_data(BaseViewHolder holder, Favourate item, int position) {
+    public void fill_with_data(BaseViewHolder holder, Favourite item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
 
-        if (item.kind.equals(FavouratesDBHelper.Kinds.QUESTION)) {
-            Question question = HttpApi.question_find_by(Integer.parseInt(item.favourate_id));
+        if (item.kind.equals(FavouriteDBHelper.Kinds.QUESTION)) {
+            Question question = HttpApi.question_find_by(Integer.parseInt(item.favourite_id));
             view_holder.item_tv.setText(question.title);
 
-        } else if (item.kind.equals(FavouratesDBHelper.Kinds.PLAN)) {
-            Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourate_id));
+        } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
+            Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourite_id));
             view_holder.item_tv.setText(plan.content);
 
-        } else if (item.kind.equals(FavouratesDBHelper.Kinds.NODE)) {
-            Node node = HttpApi.find_by_id(item.favourate_id);
+        } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {
+            KnowledgeNetNode node = HttpApi.find_by_id(item.favourite_id);
             view_holder.item_tv.setText(node.name);
         }
 

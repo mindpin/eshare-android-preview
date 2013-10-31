@@ -8,17 +8,17 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
-import com.eshare_android_preview.model.Node;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 
-public class KnowledgeNetAdapter extends EshareBaseAdapter<Node> {
+public class KnowledgeNetNodesAdapter extends EshareBaseAdapter<KnowledgeNetNode> {
 
-    public KnowledgeNetAdapter(EshareBaseActivity activity) {
+    public KnowledgeNetNodesAdapter(EshareBaseActivity activity) {
         super(activity);
     }
 
     @Override
     public View inflate_view() {
-        return inflate(R.layout.knowledge_net_list_item, null);
+        return inflate(R.layout.knowledge_net_node_list_item, null);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class KnowledgeNetAdapter extends EshareBaseAdapter<Node> {
     }
 
     @Override
-    public void fill_with_data(BaseViewHolder holder, Node item, int position) {
+    public void fill_with_data(BaseViewHolder holder, KnowledgeNetNode item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.item_tv.setText(item.name);
 

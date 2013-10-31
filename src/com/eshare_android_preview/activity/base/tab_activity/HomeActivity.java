@@ -14,9 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.activity.base.fav.FavourateActivity;
-import com.eshare_android_preview.activity.base.groups.GroupListActivity;
-import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoryActivity;
+import com.eshare_android_preview.activity.base.fav.FavouritesActivity;
+import com.eshare_android_preview.activity.base.groups.GroupsActivity;
+import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetCategoriesActivity;
 import com.eshare_android_preview.activity.base.notes.NotesActivity;
 import com.eshare_android_preview.activity.base.plans.PlansActivity;
 import com.eshare_android_preview.activity.base.questions.QuestionsActivity;
@@ -83,10 +83,10 @@ public class HomeActivity extends EshareBaseActivity {
 	private void set_layout_click(){
 		home_button_plan.setOnTouchListener(new RelativeLayoutClice(home_button_plan,PlansActivity.class));
 		home_button_note.setOnTouchListener(new RelativeLayoutClice(home_button_note,NotesActivity.class));
-		home_button_fav.setOnTouchListener(new RelativeLayoutClice(home_button_fav,FavourateActivity.class));
-		home_button_knowledge.setOnTouchListener(new RelativeLayoutClice(home_button_knowledge,KnowledgeNetCategoryActivity.class));
+		home_button_fav.setOnTouchListener(new RelativeLayoutClice(home_button_fav,FavouritesActivity.class));
+		home_button_knowledge.setOnTouchListener(new RelativeLayoutClice(home_button_knowledge,KnowledgeNetCategoriesActivity.class));
 		home_button_test.setOnTouchListener(new RelativeLayoutClice(home_button_test,QuestionsActivity.class));
-		home_button_group.setOnTouchListener(new RelativeLayoutClice(home_button_group,GroupListActivity.class));
+		home_button_group.setOnTouchListener(new RelativeLayoutClice(home_button_group,GroupsActivity.class));
 	}
 	class RelativeLayoutClice implements OnTouchListener{
 		RelativeLayout layout;

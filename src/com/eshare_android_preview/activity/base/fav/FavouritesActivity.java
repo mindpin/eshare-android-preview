@@ -1,7 +1,5 @@
 package com.eshare_android_preview.activity.base.fav;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -11,31 +9,28 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetItemActivity;
+import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetNodeShowActivity;
 import com.eshare_android_preview.activity.base.plans.PlanShowActivity;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Favourate;
-import com.eshare_android_preview.model.Node;
+import com.eshare_android_preview.model.Favourite;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.database.FavouratesDBHelper;
-import com.eshare_android_preview.widget.adapter.FavouratesAdapter;
-
-
+import com.eshare_android_preview.model.database.FavouriteDBHelper;
+import com.eshare_android_preview.widget.adapter.FavouritesAdapter;
 
 
 @SuppressLint("WorldReadableFiles")
-public class FavourateActivity extends EshareBaseActivity {
+public class FavouritesActivity extends EshareBaseActivity {
 	ListView list_view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.tab_favourate);
+		setContentView(R.layout.f_favourites);
 		
 		hide_head_setting_button();
         set_head_text(R.string.favourate_knowledge_list);
@@ -43,11 +38,11 @@ public class FavourateActivity extends EshareBaseActivity {
 	}
 	
 	private void load_list_view() {
-        final List<Favourate> favourate_list = HttpApi.get_favourates();
-		if (favourate_list.size() == 0) {
+        final List<Favourite> favourite_list = HttpApi.get_favourates();
+		if (favourite_list.size() == 0) {
             process_when_fav_list_is_empty();
 		} else {
-            build_fav_list_adapter(favourate_list);
+            build_fav_list_adapter(favourite_list);
         }
 	}
 
@@ -60,22 +55,22 @@ public class FavourateActivity extends EshareBaseActivity {
 
     }
 
-    private void build_fav_list_adapter(List<Favourate> favourate_list) {
+    private void build_fav_list_adapter(List<Favourite> favourite_list) {
         list_view = (ListView)findViewById(R.id.list_view);
 
-        FavouratesAdapter adapter = new FavouratesAdapter(this);
-        adapter.add_items(favourate_list);
+        FavouritesAdapter adapter = new FavouritesAdapter(this);
+        adapter.add_items(favourite_list);
         list_view.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
         list_view.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
-                Favourate item = (Favourate) list_item.getTag(R.id.adapter_item_tag);
+                Favourite item = (Favourite) list_item.getTag(R.id.adapter_item_tag);
 
-                if (item.kind.equals(FavouratesDBHelper.Kinds.QUESTION)) {
-                    Intent intent = new Intent(FavourateActivity.this, QuestionShowActivity.class);
-                    Question question = HttpApi.question_find_by(Integer.parseInt(item.favourate_id));
+                if (item.kind.equals(FavouriteDBHelper.Kinds.QUESTION)) {
+                    Intent intent = new Intent(FavouritesActivity.this, QuestionShowActivity.class);
+                    Question question = HttpApi.question_find_by(Integer.parseInt(item.favourite_id));
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question);
@@ -83,9 +78,9 @@ public class FavourateActivity extends EshareBaseActivity {
 
                     startActivity(intent);
 
-                } else if (item.kind.equals(FavouratesDBHelper.Kinds.PLAN)) {
-                    Intent intent = new Intent(FavourateActivity.this, PlanShowActivity.class);
-                    Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourate_id));
+                } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
+                    Intent intent = new Intent(FavouritesActivity.this, PlanShowActivity.class);
+                    Plan plan = HttpApi.plan_find_by(Integer.parseInt(item.favourite_id));
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);
@@ -93,12 +88,12 @@ public class FavourateActivity extends EshareBaseActivity {
 
                     startActivity(intent);
 
-                } else if (item.kind.equals(FavouratesDBHelper.Kinds.NODE)) {
-                    Intent intent = new Intent(FavourateActivity.this, KnowledgeNetItemActivity.class);
-                    Node node = HttpApi.find_by_id(item.favourate_id);
+                } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {
+                    Intent intent = new Intent(FavouritesActivity.this, KnowledgeNetNodeShowActivity.class);
+                    KnowledgeNetNode node = HttpApi.find_by_id(item.favourite_id);
 
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE, node);
+                    bundle.putSerializable(KnowledgeNetNodeShowActivity.ExtraKeys.NODE, node);
                     intent.putExtras(bundle);
 
                     startActivity(intent);

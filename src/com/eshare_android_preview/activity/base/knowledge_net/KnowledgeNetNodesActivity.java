@@ -14,17 +14,17 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Node;
-import com.eshare_android_preview.widget.adapter.KnowledgeNetAdapter;
+import com.eshare_android_preview.model.KnowledgeNetNode;
+import com.eshare_android_preview.widget.adapter.KnowledgeNetNodesAdapter;
 
 import java.util.List;
 
-public class KnowledgeNetActivity extends EshareBaseActivity {
+public class KnowledgeNetNodesActivity extends EshareBaseActivity {
     GridView grid_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.kn_knowledge_net);
+        setContentView(R.layout.kn_knowledge_net_nodes);
         hide_head_setting_button();
 
 //		Intent intent = getIntent();
@@ -44,8 +44,8 @@ public class KnowledgeNetActivity extends EshareBaseActivity {
 
     private void load_list_view() {
         grid_view = (GridView) findViewById(R.id.grid_view);
-        List<Node> node_list = HttpApi.get_nodes("javascript");
-        KnowledgeNetAdapter adapter = new KnowledgeNetAdapter(this);
+        List<KnowledgeNetNode> node_list = HttpApi.get_nodes("javascript");
+        KnowledgeNetNodesAdapter adapter = new KnowledgeNetNodesAdapter(this);
         adapter.add_items(node_list);
         grid_view.setAdapter(adapter);
         grid_view.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -55,12 +55,12 @@ public class KnowledgeNetActivity extends EshareBaseActivity {
         grid_view.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
-                Node node = (Node) list_item.getTag(R.id.adapter_item_tag);
+                KnowledgeNetNode node = (KnowledgeNetNode) list_item.getTag(R.id.adapter_item_tag);
 
-                Intent intent = new Intent(KnowledgeNetActivity.this, KnowledgeNetItemActivity.class);
+                Intent intent = new Intent(KnowledgeNetNodesActivity.this, KnowledgeNetNodeShowActivity.class);
 
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(KnowledgeNetItemActivity.ExtraKeys.NODE, node);
+                bundle.putSerializable(KnowledgeNetNodeShowActivity.ExtraKeys.NODE, node);
                 intent.putExtras(bundle);
 
                 startActivity(intent);

@@ -3,23 +3,23 @@ package com.eshare_android_preview.model;
 
 import java.io.Serializable;
 
-public class Favourate implements Serializable {
+public class Favourite implements Serializable {
     private static final long serialVersionUID = 3112128L;
     public int id;
-    public String favourate_id;
+    public String favourite_id;
     public String kind;
 
 
 
-    public Favourate(String favourate_id, String kind) {
+    public Favourite(String favourite_id, String kind) {
         super();
-        this.favourate_id = favourate_id;
+        this.favourite_id = favourite_id;
         this.kind = kind;
     }
-    public Favourate(int id, String favourate_id, String kind) {
+    public Favourite(int id, String favourite_id, String kind) {
         super();
         this.id = id;
-        this.favourate_id = favourate_id;
+        this.favourite_id = favourite_id;
         this.kind = kind;
     }
 

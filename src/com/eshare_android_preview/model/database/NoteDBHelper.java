@@ -11,7 +11,7 @@ import com.eshare_android_preview.model.base.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesDBHelper extends BaseModelDBHelper{
+public class NoteDBHelper extends BaseModelDBHelper{
 
 	public static void create(Note note) {
 		SQLiteDatabase db = get_write_db();
@@ -44,7 +44,7 @@ public class NotesDBHelper extends BaseModelDBHelper{
 	}
 
     public static Boolean has_note_from(String notable_id, String notable_type) {
-        SQLiteDatabase db = NotesDBHelper.get_read_db();
+        SQLiteDatabase db = NoteDBHelper.get_read_db();
         String[] columns = new String[] {
             Constants.TABLE_NOTES__TYPE_ID,
             Constants.TABLE_NOTES__TYPE

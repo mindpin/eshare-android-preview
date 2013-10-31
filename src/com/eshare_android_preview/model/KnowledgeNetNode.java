@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.eshare_android_preview.model.database.FavouratesDBHelper;
-import com.eshare_android_preview.model.database.NotesDBHelper;
+import com.eshare_android_preview.model.database.FavouriteDBHelper;
+import com.eshare_android_preview.model.database.NoteDBHelper;
 import com.eshare_android_preview.model.interfaces.ILearningResource;
 
 // 课程节点
-public class Node implements Serializable, ILearningResource {
+public class KnowledgeNetNode implements Serializable, ILearningResource {
 	/**
 	 * 
 	 */
@@ -72,8 +72,8 @@ public class Node implements Serializable, ILearningResource {
 		this.list_children = list_children;
 	}
 
-	public Node(String node_id, String name, String desc,
-			List<String> list_parents, List<String> list_children) {
+	public KnowledgeNetNode(String node_id, String name, String desc,
+                            List<String> list_parents, List<String> list_children) {
 		super();
 		this.node_id = node_id;
 		this.name = name;
@@ -82,8 +82,8 @@ public class Node implements Serializable, ILearningResource {
 		this.list_children = list_children;
 	}
 
-	public Node(String id, String node_id, String name, String desc,
-			List<String> list_parents, List<String> list_children) {
+	public KnowledgeNetNode(String id, String node_id, String name, String desc,
+                            List<String> list_parents, List<String> list_children) {
 		super();
 		this.id = id;
 		this.node_id = node_id;
@@ -96,7 +96,7 @@ public class Node implements Serializable, ILearningResource {
     @Override
     public boolean has_note() {
         if(this.has_note == null){
-            this.has_note = NotesDBHelper.has_note_from(node_id, Note.Type.NODE);
+            this.has_note = NoteDBHelper.has_note_from(node_id, Note.Type.NODE);
         }
         return this.has_note;
     }
@@ -104,7 +104,7 @@ public class Node implements Serializable, ILearningResource {
     @Override
     public boolean is_faved() {
         if(this.is_faved == null){
-            this.is_faved = FavouratesDBHelper.find(node_id, FavouratesDBHelper.Kinds.NODE) != null;
+            this.is_faved = FavouriteDBHelper.find(node_id, FavouriteDBHelper.Kinds.NODE) != null;
         }
         return this.is_faved;
     }

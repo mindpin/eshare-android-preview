@@ -16,17 +16,17 @@ public class BaseDBHelper extends SQLiteOpenHelper {
             Constants.TABLE_NOTES__IMG + " blob );";
     
     private static final String create_plan = "create table " +
-            Constants.TABLE_PLAN + " (" +
+            Constants.TABLE_PLANS + " (" +
             Constants.KEY_ID + " integer primary key, " +
-            Constants.TABLE_PLAN__CONTENT + " text, " +
-            Constants.TABLE_PLAN__CHECKED + " text default false);";
+            Constants.TABLE_PLANS__CONTENT + " text, " +
+            Constants.TABLE_PLANS__CHECKED + " text default false);";
 
 
     private static final String create_favourates = "create table " +
-            Constants.TABLE_FAVOURATES + " (" +
+            Constants.TABLE_FAVOURITES + " (" +
             Constants.KEY_ID + " integer primary key, " +
-            Constants.TABLE_FAVOURATES__ID + " integer not null, " +
-            Constants.TABLE_FAVOURATES__KIND + " text);";
+            Constants.TABLE_FAVOURITES__ID + " integer not null, " +
+            Constants.TABLE_FAVOURITES__KIND + " text);";
 
  
     public BaseDBHelper(Context context, String name, CursorFactory factory,int version) {
@@ -43,8 +43,8 @@ public class BaseDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + Constants.TABLE_NOTES);
-        db.execSQL("drop table if exists " + Constants.TABLE_PLAN);
-        db.execSQL("drop table if exists " + Constants.TABLE_FAVOURATES);
+        db.execSQL("drop table if exists " + Constants.TABLE_PLANS);
+        db.execSQL("drop table if exists " + Constants.TABLE_FAVOURITES);
         onCreate(db);
     }
 }

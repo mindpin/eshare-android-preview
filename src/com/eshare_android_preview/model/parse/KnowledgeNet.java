@@ -17,16 +17,16 @@ import org.xml.sax.SAXException;
 import android.content.res.AssetManager;
 
 import com.eshare_android_preview.application.EshareApplication;
-import com.eshare_android_preview.model.Node;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Relation;
 
 // xml dom解析
 public class KnowledgeNet {
-	public static List<Node> parse_xml(String xml_path){
+	public static List<KnowledgeNetNode> parse_xml(String xml_path){
 		AssetManager asset = EshareApplication.context.getAssets();
 		try {
 			InputStream inputStream = asset.open(xml_path);
-			List<Node> list = doc_parse_inputstream(inputStream);
+			List<KnowledgeNetNode> list = doc_parse_inputstream(inputStream);
 			return list;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -34,14 +34,14 @@ public class KnowledgeNet {
 		return null;
 	}
 	
-	public static  List<Node> doc_parse_inputstream(InputStream inputStream){
+	public static  List<KnowledgeNetNode> doc_parse_inputstream(InputStream inputStream){
 		DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder builder=factory.newDocumentBuilder();
 			Document document=builder.parse(inputStream);
 			Element root=document.getDocumentElement();
 			
-			List<Node> nodes_list = new ArrayList<Node>();
+			List<KnowledgeNetNode> nodes_list = new ArrayList<KnowledgeNetNode>();
 			NodeList notes=root.getElementsByTagName("node");
 			
 			for (int i = 0; i < notes.getLength(); i++) {
@@ -59,7 +59,7 @@ public class KnowledgeNet {
 				}
 				List<String> childe_list = new ArrayList<String>();
 				List<String> parent_list = new ArrayList<String>();
-				Node node = new Node(id, name, desc, childe_list, parent_list);
+				KnowledgeNetNode node = new KnowledgeNetNode(id, name, desc, childe_list, parent_list);
 				nodes_list.add(node);
 			}
 			
@@ -79,9 +79,9 @@ public class KnowledgeNet {
 				
 			}
 			
-			List<Node> after_nodes_list = new ArrayList<Node>();
+			List<KnowledgeNetNode> after_nodes_list = new ArrayList<KnowledgeNetNode>();
 			for (int i = 0; i < nodes_list.size(); i++) {
-				Node node = nodes_list.get(i);
+				KnowledgeNetNode node = nodes_list.get(i);
 				for (int j = 0; j < relations_list.size(); j++) {
 					if (node.node_id.equals(relations_list.get(j).parent_id) ) {
 						System.out.println("parent_id:" + relations_list.get(j).parent_id + " , child_id: " + relations_list.get(j).child_id);
@@ -106,8 +106,8 @@ public class KnowledgeNet {
 	}
 	
 	
-	public static List<Node> array_node_list(List<Node> node_list,List<String> node_ids){
-		List<Node> nodes = new ArrayList<Node>();
+	public static List<KnowledgeNetNode> array_node_list(List<KnowledgeNetNode> node_list,List<String> node_ids){
+		List<KnowledgeNetNode> nodes = new ArrayList<KnowledgeNetNode>();
 		for (int i = 0; i < node_list.size(); i++) {
 			for (int j = 0; j < node_ids.size(); j++) {
 				if (node_list.get(i).node_id.equals(node_ids.get(j))) {

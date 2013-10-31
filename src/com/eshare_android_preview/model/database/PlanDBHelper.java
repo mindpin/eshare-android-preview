@@ -15,26 +15,26 @@ public class PlanDBHelper  extends BaseModelDBHelper{
 	public static void create(Plan plan) {
 		SQLiteDatabase db = get_write_db();
 		ContentValues values = new ContentValues();
-		values.put(Constants.TABLE_PLAN__CONTENT, plan.content);
-		values.put(Constants.TABLE_PLAN__CHECKED, plan.checked);
+		values.put(Constants.TABLE_PLANS__CONTENT, plan.content);
+		values.put(Constants.TABLE_PLANS__CHECKED, plan.checked);
 		
-		db.insert(Constants.TABLE_PLAN, null, values);
+		db.insert(Constants.TABLE_PLANS, null, values);
 		db.close();
 	}
 	
 	public static void update(Plan plan) {
 		SQLiteDatabase db = get_write_db();
 		ContentValues values = new ContentValues();
-		values.put(Constants.TABLE_PLAN__CONTENT, plan.content);
-		values.put(Constants.TABLE_PLAN__CHECKED, plan.checked);
-		db.update(Constants.TABLE_PLAN, values, Constants.KEY_ID + " = ? ", new String[]{plan.id+""});
+		values.put(Constants.TABLE_PLANS__CONTENT, plan.content);
+		values.put(Constants.TABLE_PLANS__CHECKED, plan.checked);
+		db.update(Constants.TABLE_PLANS, values, Constants.KEY_ID + " = ? ", new String[]{plan.id+""});
 		db.close();
 	}
 	
 	public static List<Plan> all(){
 		SQLiteDatabase db = get_read_db();
 		Cursor cursor = db.query(
-                Constants.TABLE_PLAN,
+                Constants.TABLE_PLANS,
                 get_columns()
                 , null, null, null, null,
                 Constants.KEY_ID + " ASC"
@@ -50,7 +50,7 @@ public class PlanDBHelper  extends BaseModelDBHelper{
 	public static Plan find_by_id(int plan_id) {
 		Plan plan = null;
 		SQLiteDatabase db = get_read_db();
-		Cursor cursor = db.query(Constants.TABLE_PLAN, get_columns(), 
+		Cursor cursor = db.query(Constants.TABLE_PLANS, get_columns(),
 				Constants.KEY_ID+ " = ? ", 
 				new String[]{ plan_id + "" },
 				null, null, null);
@@ -64,9 +64,9 @@ public class PlanDBHelper  extends BaseModelDBHelper{
 	}
 	public static List<Plan> find_by_checked(String string) {
 		SQLiteDatabase db = get_read_db();
-		Cursor cursor = db.query(Constants.TABLE_PLAN, 
+		Cursor cursor = db.query(Constants.TABLE_PLANS,
 				get_columns(),
-		        Constants.TABLE_PLAN__CHECKED + " = ?", 
+		        Constants.TABLE_PLANS__CHECKED + " = ?",
 		        new String[]{string},null, null, null);
 		List<Plan> plan_list = new ArrayList<Plan>();
 		while (cursor.moveToNext()) {
@@ -87,8 +87,8 @@ public class PlanDBHelper  extends BaseModelDBHelper{
 	private static String[] get_columns() {
 	    return new String[]{
 	        Constants.KEY_ID,
-	        Constants.TABLE_PLAN__CONTENT,
-	        Constants.TABLE_PLAN__CHECKED
+	        Constants.TABLE_PLANS__CONTENT,
+	        Constants.TABLE_PLANS__CHECKED
 	    };
 	 }
 

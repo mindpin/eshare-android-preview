@@ -14,14 +14,14 @@ import com.eshare_android_preview.model.User;
 /**
  * Created by kaid on 10/22/13.
  */
-public class GroupAdapter extends EshareBaseAdapter<User> {
-    public GroupAdapter(EshareBaseActivity activity) {
+public class GroupUsersAdapter extends EshareBaseAdapter<User> {
+    public GroupUsersAdapter(EshareBaseActivity activity) {
         super(activity);
     }
 
     @Override
     public View inflate_view() {
-        return inflate(R.layout.g_group_user, null);
+        return inflate(R.layout.g_group_user_list_item, null);
     }
 
     @Override

@@ -3,14 +3,14 @@ package com.eshare_android_preview.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.eshare_android_preview.model.Favourate;
+import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.model.Node;
+import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Note;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.database.FavouratesDBHelper;
-import com.eshare_android_preview.model.database.NotesDBHelper;
+import com.eshare_android_preview.model.database.FavouriteDBHelper;
+import com.eshare_android_preview.model.database.NoteDBHelper;
 import com.eshare_android_preview.model.database.PlanDBHelper;
 import com.eshare_android_preview.model.parse.KnowledgeNet;
 import com.eshare_android_preview.model.parse.YAMLParse;
@@ -50,17 +50,17 @@ public class HttpApi {
     }
 
 	
-	public static List<Node> get_nodes(String category){
-		List<Node> list = null;
+	public static List<KnowledgeNetNode> get_nodes(String category){
+		List<KnowledgeNetNode> list = null;
 		if (category.equals("javascript")) {
 			list = KnowledgeNet.parse_xml(xml_path);
 		}
 		return list;
 	}
 	
-	public static Node find_by_id(String node_id){
-		List<Node> list = get_nodes("javascript");
-		for(Node node:list){
+	public static KnowledgeNetNode find_by_id(String node_id){
+		List<KnowledgeNetNode> list = get_nodes("javascript");
+		for(KnowledgeNetNode node:list){
 			if (node.node_id .equals(node_id)) {
 				return node;
 			}
@@ -68,7 +68,7 @@ public class HttpApi {
 		return null;
 	}
 	
-	public static List<Node> get_nodes_by_node_ids(List<String> node_ids){
+	public static List<KnowledgeNetNode> get_nodes_by_node_ids(List<String> node_ids){
 		return KnowledgeNet.array_node_list(KnowledgeNet.parse_xml(xml_path), node_ids);
 	}
 	
@@ -77,11 +77,11 @@ public class HttpApi {
 	}
 	
 	public static List<Note> get_notes_list(){
-		return NotesDBHelper.all();
+		return NoteDBHelper.all();
 	}
 	
 	public static boolean create_notes(Note note){
-		NotesDBHelper.create(note);
+		NoteDBHelper.create(note);
 		return true;
 	}
 
@@ -119,28 +119,28 @@ public class HttpApi {
         return null;
     }
 
-    public static List<Favourate> get_favourates(){
-        return FavouratesDBHelper.all();
+    public static List<Favourite> get_favourates(){
+        return FavouriteDBHelper.all();
     }
 
 
 
 
 
-    public static boolean create_favourate(Favourate favourate){
-        FavouratesDBHelper.create(favourate);
+    public static boolean create_favourate(Favourite favourite){
+        FavouriteDBHelper.create(favourite);
         return true;
     }
 
-    public static boolean cancel_favourate(Favourate favourate){
-        if (favourate == null) {
+    public static boolean cancel_favourate(Favourite favourite){
+        if (favourite == null) {
             return false;
         }
-        FavouratesDBHelper.cancel(favourate);
+        FavouriteDBHelper.cancel(favourite);
         return true;
     }
 
-    public static Favourate find_favourate(String favourate_id, String kind) {
-        return FavouratesDBHelper.find(favourate_id, kind);
+    public static Favourite find_favourate(String favourate_id, String kind) {
+        return FavouriteDBHelper.find(favourate_id, kind);
     }
 }
