@@ -22,7 +22,7 @@ public class ArcProgressDialog extends Dialog {
     private TextView message_view;
 
     public ArcProgressDialog(Context context, int total_num) {
-        super(context);
+        super(context, R.style.base_progress_dialog);
         this.total_num = total_num;
         this.message = "";
         setCancelable(false);// 不可以用“返回键”取消
