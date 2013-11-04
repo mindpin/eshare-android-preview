@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Note;
 import com.eshare_android_preview.widget.adapter.NotesAdapter;
 
@@ -28,7 +27,7 @@ public class NoteListActivity extends EshareBaseActivity{
     }
 
     private void load_list() {
-        List<Note> note_list = HttpApi.HANote.all();
+        List<Note> note_list = Note.all();
         if (note_list.size() == 0) {
             process_when_note_list_is_empty();
         } else {

@@ -9,19 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
-import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.KnowledgeNetNode;
-import com.eshare_android_preview.model.database.FavouriteDBHelper;
 import com.eshare_android_preview.widget.adapter.KnowledgeNetNodesAdapter;
 
 import java.util.List;
@@ -46,10 +41,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 
         load_list_view();
 
-
-        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(node.node_id, FavouriteDBHelper.Kinds.NODE);
-
-        if (favourite == null) {
+        if (!node.is_faved()) {
             add_favourite_btn.setVisibility(View.VISIBLE);
             cancel_favourite_btn.setVisibility(View.GONE);
         } else {
@@ -130,8 +122,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 
     @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
     public void add_favourite(View view) {
-        Favourite favourite = new Favourite(node.node_id, FavouriteDBHelper.Kinds.NODE);
-        HttpApi.HAFavourite.create(favourite);
+        node.add_to_fav();
 
         add_favourite_btn.setVisibility(View.GONE);
         cancel_favourite_btn.setVisibility(View.VISIBLE);
@@ -139,8 +130,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 
     @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
     public void cancel_favourite(View view) {
-        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(node.node_id + "", FavouriteDBHelper.Kinds.NODE);
-        HttpApi.HAFavourite.cancel(favourite);
+        node.remove_from_fav();
 
         add_favourite_btn.setVisibility(View.VISIBLE);
         cancel_favourite_btn.setVisibility(View.GONE);

@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import android.graphics.drawable.Drawable;
 
 import com.eshare_android_preview.application.EshareApplication;
-import com.eshare_android_preview.logic.HttpApi;
 
 /**
  * Created by kaid on 10/22/13.
@@ -76,10 +75,10 @@ public class User implements Serializable {
     }
 
     public static ArrayList<User> get_users_by_group(String group_name){
-        List<KnowledgeNetNode.KnowledgeCategory> node_list = HttpApi.HANode.get_knowledge_net_category();
+        List<KnowledgeNetCategory> node_list = KnowledgeNetCategory.all();
         int index = -1;
         for(int i = 0; i < node_list.size(); i++) {
-        	KnowledgeNetNode.KnowledgeCategory c = node_list.get(i);
+        	KnowledgeNetCategory c = node_list.get(i);
             if (c.name.equals(group_name)) {
                 index = i;
                 break;

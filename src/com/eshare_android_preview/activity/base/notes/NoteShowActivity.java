@@ -14,7 +14,6 @@ import com.eshare_android_preview.activity.base.plans.PlanShowActivity;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
-import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Note;
 import com.eshare_android_preview.model.Course;
@@ -62,7 +61,8 @@ public class NoteShowActivity extends EshareBaseActivity{
 	private Intent set_ui_and_intent(){
 		Intent intent = new Intent();
 		int show_str_id = R.string.show_question;;
-		if (note.type.indexOf(Note.Type.QUESTION) != -1) {
+		if (note.is_belong_question()) {
+
 			intent.setClass(NoteShowActivity.this, QuestionShowActivity.class);
 
             Bundle bundle = new Bundle();
@@ -73,7 +73,8 @@ public class NoteShowActivity extends EshareBaseActivity{
 			show_str_id = R.string.show_question;
 
 		}
-		if (note.type.indexOf(Note.Type.NODE)  != -1) {
+		if (note.is_belong_knowledge_net_node()) {
+
 			intent.setClass(NoteShowActivity.this, KnowledgeNetNodeShowActivity.class);
 
             Bundle bundle = new Bundle();
@@ -85,7 +86,8 @@ public class NoteShowActivity extends EshareBaseActivity{
 
 
 		}
-		if (note.type.indexOf(Note.Type.PLAN)  != -1) {
+		if (note.is_belong_course()) {
+
 			intent.setClass(NoteShowActivity.this, PlanShowActivity.class);
 
             Bundle bundle = new Bundle();

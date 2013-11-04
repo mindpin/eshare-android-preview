@@ -25,7 +25,6 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.CameraLogic;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.utils.ValidateUtil;
-import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Note;
 import com.eshare_android_preview.model.interfaces.ILearningResource;
 
@@ -190,8 +189,8 @@ public class AddNoteActivity extends EshareBaseActivity{
 			return;
 		}
 		String content = BaseUtils.is_str_blank(content_str)? "":content_str;
-		Note note = new Note(learning_resource.getClass().getName(), content, bytes, learning_resource);
-		if (HttpApi.HANote.create(note)) {
+        Note note = learning_resource.build_note(content, bytes);
+		if (note.save()) {
 			this.finish();
 		}
 	}

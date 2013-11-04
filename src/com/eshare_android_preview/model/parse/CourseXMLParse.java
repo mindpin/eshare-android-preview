@@ -21,7 +21,6 @@ import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 
 import com.eshare_android_preview.application.EshareApplication;
-import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.database.CourseDBHelper;
 
@@ -30,7 +29,7 @@ public class CourseXMLParse {
 	public static List<Course> parse_xml(String xml_path){
 		AssetManager asset = EshareApplication.context.getAssets();
 		try {
-			InputStream inputStream = asset.open(HttpApi.course_xml_path);
+			InputStream inputStream = asset.open(Course.COURSE_XML_PATH);
 			List<Course> list = doc_parse_inputstream(inputStream);
 			return list;
 		} catch (IOException e) {
@@ -43,7 +42,7 @@ public class CourseXMLParse {
 		AssetManager asset = EshareApplication.context.getAssets();
 		DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
 		try {
-			InputStream inputStream = asset.open(HttpApi.course_xml_path);
+			InputStream inputStream = asset.open(Course.COURSE_XML_PATH);
 			
 			DocumentBuilder builder= factory.newDocumentBuilder();
 			

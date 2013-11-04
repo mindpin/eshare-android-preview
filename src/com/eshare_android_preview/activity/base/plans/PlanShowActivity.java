@@ -12,10 +12,7 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.Course;
-import com.eshare_android_preview.model.database.FavouriteDBHelper;
 
 public class PlanShowActivity extends EshareBaseActivity{
 	TextView plan_content_tv;
@@ -41,9 +38,7 @@ public class PlanShowActivity extends EshareBaseActivity{
 		set_head_text(R.string.plans_show);
 
 
-        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(plan.id + "", FavouriteDBHelper.Kinds.PLAN);
-
-        if (favourite == null) {
+        if (!plan.is_faved()) {
             add_favourite_btn.setVisibility(View.VISIBLE);
             cancel_favourite_btn.setVisibility(View.GONE);
         } else {
@@ -92,8 +87,7 @@ public class PlanShowActivity extends EshareBaseActivity{
 
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void add_favourite(View view) {
-        Favourite favourite = new Favourite(plan.id + "", FavouriteDBHelper.Kinds.PLAN);
-        HttpApi.HAFavourite.create(favourite);
+        plan.add_to_fav();
 
         add_favourite_btn.setVisibility(View.GONE);
         cancel_favourite_btn.setVisibility(View.VISIBLE);
@@ -101,8 +95,7 @@ public class PlanShowActivity extends EshareBaseActivity{
 
     @SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
     public void cancel_favourite(View view) {
-        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(plan.id + "", FavouriteDBHelper.Kinds.PLAN);
-        HttpApi.HAFavourite.cancel(favourite);
+        plan.remove_from_fav();
 
         add_favourite_btn.setVisibility(View.VISIBLE);
         cancel_favourite_btn.setVisibility(View.GONE);

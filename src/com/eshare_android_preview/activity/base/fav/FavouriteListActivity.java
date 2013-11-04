@@ -15,12 +15,10 @@ import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeNetNodeSh
 import com.eshare_android_preview.activity.base.plans.PlanShowActivity;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.database.FavouriteDBHelper;
 import com.eshare_android_preview.widget.adapter.FavouritesAdapter;
 
 
@@ -38,7 +36,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 	}
 	
 	private void load_list_view() {
-        final List<Favourite> favourite_list = HttpApi.HAFavourite.all();
+        final List<Favourite> favourite_list = Favourite.all();
 		if (favourite_list.size() == 0) {
             process_when_fav_list_is_empty();
 		} else {
@@ -68,7 +66,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
             public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
                 Favourite item = (Favourite) list_item.getTag(R.id.adapter_item_tag);
 
-                if (item.kind.equals(FavouriteDBHelper.Kinds.QUESTION)) {
+                if (item.is_belong_question()) {
                     Intent intent = new Intent(FavouriteListActivity.this, QuestionShowActivity.class);
                     Question question = Question.find(Integer.parseInt(item.favourite_id));
                     Bundle bundle = new Bundle();
@@ -77,7 +75,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 
                     startActivity(intent);
 
-                } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
+                } else if (item.is_belong_course()) {
                     Intent intent = new Intent(FavouriteListActivity.this, PlanShowActivity.class);
                     Course plan = Course.find(Integer.parseInt(item.favourite_id));
 
@@ -87,7 +85,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 
                     startActivity(intent);
 
-                } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {
+                } else if (item.is_belong_knowledge_net_node()) {
                     Intent intent = new Intent(FavouriteListActivity.this, KnowledgeNetNodeShowActivity.class);
                     KnowledgeNetNode node = KnowledgeNetNode.find(item.favourite_id);
                     Bundle bundle = new Bundle();

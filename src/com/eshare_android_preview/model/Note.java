@@ -1,17 +1,21 @@
 package com.eshare_android_preview.model;
 
+import com.eshare_android_preview.model.database.NoteDBHelper;
+
 import java.io.Serializable;
+import java.util.List;
 
 // 笔记
 public class Note implements Serializable{
-    public static class Type{
-        public static final String QUESTION = "com.eshare_android_preview.model.Question";
-        public static final String NODE = "com.eshare_android_preview.model.KnowledgeNetNode";
-        public static final String PLAN = "com.eshare_android_preview.model.Plan";
+    public static List<Note> all(){
+        return NoteDBHelper.all();
     }
-	/**
-	 * 
-	 */
+
+    public boolean save(){
+        NoteDBHelper.create(this);
+        return true;
+    }
+
 	private static final long serialVersionUID = 19757L;
 	public int id;
     public String type;
@@ -27,9 +31,7 @@ public class Note implements Serializable{
 		this.content = content;
 		this.img = img;
 	}
-	
-	
-	
+
 	public Note(String type, String content, byte[] img, Object obj) {
 		super();
 		this.type = type;
@@ -38,19 +40,18 @@ public class Note implements Serializable{
 		this.obj = obj;
 		System.out.println("type  " + type);
 		if (obj!=null) {
-			if (this.type.indexOf(Type.QUESTION) != -1) {
+
+			if (this.is_belong_question()) {
 				this.type_id = ((Question) obj).id + "";
 			}
-			if (this.type.indexOf(Type.NODE) != -1) {
+			if (this.is_belong_knowledge_net_node()) {
 				this.type_id = ((KnowledgeNetNode) obj).node_id + "";
 			}
-			if (this.type.indexOf(Type.PLAN) != -1) {
+			if (this.is_belong_course()) {
 				this.type_id = ((Course) obj).id + "";
 			}
 		}
 	}
-
-
 
 	public Note(int id, String type, String type_id, String content, byte[] img) {
 		super();
@@ -60,6 +61,24 @@ public class Note implements Serializable{
 		this.content = content;
 		this.img = img;
 	}
-	
-	
+
+    public boolean is_belong_question(){
+        return is_belong(Question.class);
+    }
+
+    public boolean is_belong_course(){
+        return is_belong(Course.class);
+    }
+    public boolean is_belong_knowledge_net_node(){
+        return is_belong(KnowledgeNetNode.class);
+    }
+
+    private boolean is_belong(Class clazz){
+        try {
+            return Class.forName(this.type) == clazz;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

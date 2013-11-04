@@ -10,12 +10,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.KnowledgeNetNode;
-import com.eshare_android_preview.model.parse.KnowledgeNet;
 import com.eshare_android_preview.widget.adapter.KnowledgeNetNodesAdapter;
 
 import java.util.List;
