@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
@@ -30,8 +31,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
         public static final String NODE = "node";
     }
     GridView children_grid_view, parents_grid_view;
-    Button add_favourite_btn;
-    Button cancel_favourite_btn;
+    TextView add_favourite_btn, cancel_favourite_btn;
 	KnowledgeNetNode node;
 
 	@Override
@@ -63,8 +63,6 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
     }
 
     private void _set_icons() {
-//        findViewById(R.id.progress).bringToFront();
-
         set_fontawesome((TextView) findViewById(R.id.kn_icon));
         set_fontawesome((TextView) findViewById(R.id.kn_prev_icon));
         set_fontawesome((TextView) findViewById(R.id.kn_next_icon));
@@ -72,6 +70,10 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
         BitmapDrawable drawable = ImageTools.toRoundCorner(
                 (BitmapDrawable) getResources().getDrawable(R.drawable.lan_js), 100);
         findViewById(R.id.javascript_icon).setBackgroundDrawable(drawable);
+
+        set_fontawesome((TextView) findViewById(R.id.add_note_icon));
+        set_fontawesome((TextView) findViewById(R.id.add_fav_icon));
+        set_fontawesome((TextView) findViewById(R.id.cancel_fav_icon));
     }
 
     private void load_list_view() {
@@ -97,8 +99,8 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 
 		parents_grid_view.setOnItemClickListener(item_click_listener);
 
-        add_favourite_btn = (Button) findViewById(R.id.add_favourite_btn);
-        cancel_favourite_btn = (Button) findViewById(R.id.cancel_favourite_btn);
+        add_favourite_btn = (TextView) findViewById(R.id.add_fav_icon);
+        cancel_favourite_btn = (TextView) findViewById(R.id.cancel_fav_icon);
 	}
 	
 	// TODO

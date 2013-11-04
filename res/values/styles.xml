@@ -40,6 +40,16 @@
         <item name="android:layout_marginLeft">9dp</item>
     </style>
 
+    <style name="home_header_white_text">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
     <!-- 首页按钮组 -->
 
     <style name="home_button_layout">

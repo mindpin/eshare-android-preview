@@ -43,7 +43,8 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/placeholder"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
 
         <RelativeLayout
@@ -56,40 +57,71 @@
         <LinearLayout
             android:id="@+id/notes_page"
             android:layout_below="@+id/h_line_1dp"
-            android:orientation="horizontal"
-            android:padding="3dp"
             android:background="#ffffff"
-            android:baselineAligned="false"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:paddingTop="5dp"
+            android:orientation="horizontal"
+            >
 
-            <Button
-                android:onClick="click_notes"
-                android:layout_width="0.0dp"
-                android:layout_weight="1.0"
+            <RelativeLayout
                 android:layout_height="wrap_content"
-                android:text="添加笔记"
-                android:layout_margin="0dp"
-                />
+                android:layout_width="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
 
-            <Button
-                android:id="@+id/add_favourite_btn"
-                android:onClick="add_favourite"
-                android:layout_width="0.0dp"
-                android:layout_weight="1.0"
-                android:layout_height="wrap_content"
-                android:text="添加收藏"
-                android:layout_margin="0dp" />
+                <TextView
+                    android:id="@+id/add_note_icon"
+                    android:onClick="click_notes"
+                    android:background="@drawable/btn_c4f9cd4_circle_flat"
+                    android:text="@string/icon_pencil"
+                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:textSize="30dp"
+                    android:textColor="#fff"
+                    android:clickable="true"
+                    />
 
-            <Button
-                android:id="@+id/cancel_favourite_btn"
-                android:onClick="cancel_favourite"
-                android:layout_width="0.0dp"
-                android:layout_weight="1.0"
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_height="wrap_content"
-                android:text="取消收藏"
-                android:layout_margin="0dp"
-                android:visibility="gone" />
+                android:layout_width="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:id="@+id/add_fav_icon"
+                    android:onClick="add_favourite"
+                    android:background="@drawable/btn_c4f9cd4_circle_flat"
+                    android:text="@string/icon_star"
+                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:textSize="30dp"
+                    android:textColor="#fff"
+                    android:clickable="true"
+                    />
+
+                <TextView
+                    android:id="@+id/cancel_fav_icon"
+                    android:onClick="cancel_favourite"
+                    android:background="@drawable/btn_c4f9cd4_circle_flat"
+                    android:text="@string/icon_star"
+                    android:layout_height="50dp"
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:textSize="30dp"
+                    android:textColor="#FEE9A2"
+                    android:visibility="gone"
+                    android:clickable="true"
+                    />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -179,7 +211,7 @@
                 android:layout_width="0.0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                tools:listitem="@layout/knowledge_net_list_item"
+                tools:listitem="@layout/kn_knowledge_net_node_list_item"
                 android:verticalSpacing="5dp"
                 android:padding="5dp"
                 android:layout_marginRight="-3dp"
@@ -191,7 +223,7 @@
                 android:layout_width="0.0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                tools:listitem="@layout/knowledge_net_list_item"
+                tools:listitem="@layout/kn_knowledge_net_node_list_item"
                 android:verticalSpacing="5dp"
                 android:padding="5dp"
                 android:layout_marginLeft="-3dp"
@@ -204,7 +236,7 @@
             android:layout_below="@+id/shwo_itme_msg"
             android:layout_height="100dp"
             android:layout_width="100dp"
-            android:layout_marginTop="-80dp"
+            android:layout_marginTop="-85dp"
             android:background="@drawable/btn_white_circle_flat"
             android:layout_centerHorizontal="true"
             android:padding="5dp">
@@ -227,10 +259,9 @@
                         android:text="75%"
                         android:textSize="24dp"
                         android:textStyle="bold"
-                        android:textColor="#1e3c4b"
-                        />
+                        android:textColor="#1e3c4b" />
 
-                    </RelativeLayout>
+                </RelativeLayout>
 
             </RelativeLayout>
         </RelativeLayout>

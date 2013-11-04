@@ -26,6 +26,9 @@
     <string name="icon_pagelines">&#xf18c;</string>
     <string name="icon_pencil_square">&#xf14b;</string>
 
+    <string name="icon_comments">&#xf086;</string>
+    <string name="icon_check">&#xf00c;</string>
+
     <!-- 登录页面 -->
     <string name="login_email">邮箱</string>
     <string name="login_password">密码</string>
