@@ -51,7 +51,7 @@ public class Course implements Serializable, ILearningResource {
 
     // 检查课程是否在用户的计划中
     public boolean is_in_user_plan(Object user) {
-        return "true".equals(checked);
+        return checked;
     }
     
     public void add_to_user(Object user){
