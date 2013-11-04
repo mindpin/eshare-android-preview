@@ -45,7 +45,7 @@ public class Note implements Serializable{
 				this.type_id = ((KnowledgeNetNode) obj).node_id + "";
 			}
 			if (this.type.indexOf(Type.PLAN) != -1) {
-				this.type_id = ((Plan) obj).id + "";
+				this.type_id = ((Course) obj).id + "";
 			}
 		}
 	}

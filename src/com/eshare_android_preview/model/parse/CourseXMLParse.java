@@ -22,16 +22,16 @@ import android.content.res.XmlResourceParser;
 
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Plan;
-import com.eshare_android_preview.model.database.PlanDBHelper;
+import com.eshare_android_preview.model.Course;
+import com.eshare_android_preview.model.database.CourseDBHelper;
 
 // xml pull 解析
 public class CourseXMLParse {
-	public static List<Plan> parse_xml(String xml_path){
+	public static List<Course> parse_xml(String xml_path){
 		AssetManager asset = EshareApplication.context.getAssets();
 		try {
 			InputStream inputStream = asset.open(HttpApi.course_xml_path);
-			List<Plan> list = doc_parse_inputstream(inputStream);
+			List<Course> list = doc_parse_inputstream(inputStream);
 			return list;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -75,7 +75,7 @@ public class CourseXMLParse {
 					String tagName = parser.getName();
 					if (tagName.equals("course")) {
 						list.add(parser.getAttributeValue(null, "title"));
-						PlanDBHelper.create(new Plan(parser.getAttributeValue(null, "title"), null));
+						CourseDBHelper.create(new Course(parser.getAttributeValue(null, "title"), false));
 					}
 				}
 			}
@@ -98,26 +98,26 @@ public class CourseXMLParse {
 		NodeList notes=root.getElementsByTagName("course");
 		Element item=(Element)notes.item(id);
 		String title = item.getAttribute("title");
-		PlanDBHelper.create(new Plan(title, "false"));
+		CourseDBHelper.create(new Course(title, false));
 		return ++id;
 	}
 	
 	
-	public static  List<Plan> doc_parse_inputstream(InputStream inputStream){
+	public static  List<Course> doc_parse_inputstream(InputStream inputStream){
 		DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder builder=factory.newDocumentBuilder();
 			Document document=builder.parse(inputStream);
 			Element root=document.getDocumentElement();
 			
-			List<Plan> list= new ArrayList<Plan>();
+			List<Course> list= new ArrayList<Course>();
 			NodeList notes=root.getElementsByTagName("course");
 			
 			for (int i = 0; i < notes.getLength(); i++) {
 				Element item=(Element)notes.item(i);
 				String title = item.getAttribute("title");
-				PlanDBHelper.create(new Plan(title, "false"));
-				list.add(new Plan(title, null));
+				CourseDBHelper.create(new Course(title, false));
+				list.add(new Course(title, false));
 			}
 			return list;
 			

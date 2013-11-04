@@ -17,7 +17,7 @@ import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Note;
-import com.eshare_android_preview.model.Plan;
+import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.Question;
 
 public class NoteShowActivity extends EshareBaseActivity{
@@ -89,7 +89,7 @@ public class NoteShowActivity extends EshareBaseActivity{
 			intent.setClass(NoteShowActivity.this, PlanShowActivity.class);
 
             Bundle bundle = new Bundle();
-            Plan plan = HttpApi.HAPlan.find_by_id(Integer.parseInt(note.type_id));
+            Course plan = Course.find(Integer.parseInt(note.type_id));
             bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);
             intent.putExtras(bundle);
 

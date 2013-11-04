@@ -16,9 +16,9 @@ import com.eshare_android_preview.activity.base.plans.PlanShowActivity;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
+import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.KnowledgeNetNode;
-import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.database.FavouriteDBHelper;
 import com.eshare_android_preview.widget.adapter.FavouritesAdapter;
@@ -79,7 +79,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 
                 } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
                     Intent intent = new Intent(FavouriteListActivity.this, PlanShowActivity.class);
-                    Plan plan = HttpApi.HAPlan.find_by_id(Integer.parseInt(item.favourite_id));
+                    Course plan = Course.find(Integer.parseInt(item.favourite_id));
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);

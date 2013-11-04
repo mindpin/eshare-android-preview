@@ -15,11 +15,11 @@ public class BaseDBHelper extends SQLiteOpenHelper {
             Constants.TABLE_NOTES__CONTENT + " text, " +
             Constants.TABLE_NOTES__IMG + " blob );";
     
-    private static final String create_plan = "create table " +
-            Constants.TABLE_PLANS + " (" +
+    private static final String create_course = "create table " +
+            Constants.TABLE_COURSE + " (" +
             Constants.KEY_ID + " integer primary key, " +
-            Constants.TABLE_PLANS__CONTENT + " text, " +
-            Constants.TABLE_PLANS__CHECKED + " text default false);";
+            Constants.TABLE_COURSE__CONTENT + " text, " +
+            Constants.TABLE_COURSE__CHECKED + " text default false);";
 
 
     private static final String create_favourites = "create table " +
@@ -36,14 +36,14 @@ public class BaseDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {	
         db.execSQL(create_table_notes);
-        db.execSQL(create_plan);
+        db.execSQL(create_course);
         db.execSQL(create_favourites);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + Constants.TABLE_NOTES);
-        db.execSQL("drop table if exists " + Constants.TABLE_PLANS);
+        db.execSQL("drop table if exists " + Constants.TABLE_COURSE);
         db.execSQL("drop table if exists " + Constants.TABLE_FAVOURITES);
         onCreate(db);
     }

@@ -7,39 +7,39 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.eshare_android_preview.model.Plan;
+import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.base.BaseModelDBHelper;
 import com.eshare_android_preview.model.base.Constants;
 
-public class PlanDBHelper  extends BaseModelDBHelper{
-	public static void create(Plan plan) {
+public class CourseDBHelper  extends BaseModelDBHelper{
+	public static void create(Course plan) {
 		SQLiteDatabase db = get_write_db();
 		ContentValues values = new ContentValues();
-		values.put(Constants.TABLE_PLANS__CONTENT, plan.content);
-		values.put(Constants.TABLE_PLANS__CHECKED, plan.checked);
+		values.put(Constants.TABLE_COURSE__CONTENT, plan.content);
+		values.put(Constants.TABLE_COURSE__CHECKED, plan.checked+"");
 		
-		db.insert(Constants.TABLE_PLANS, null, values);
+		db.insert(Constants.TABLE_COURSE, null, values);
 		db.close();
 	}
 	
-	public static void update(Plan plan) {
+	public static void update(Course plan) {
 		SQLiteDatabase db = get_write_db();
 		ContentValues values = new ContentValues();
-		values.put(Constants.TABLE_PLANS__CONTENT, plan.content);
-		values.put(Constants.TABLE_PLANS__CHECKED, plan.checked);
-		db.update(Constants.TABLE_PLANS, values, Constants.KEY_ID + " = ? ", new String[]{plan.id+""});
+		values.put(Constants.TABLE_COURSE__CONTENT, plan.content);
+		values.put(Constants.TABLE_COURSE__CHECKED, plan.checked+"");
+		db.update(Constants.TABLE_COURSE, values, Constants.KEY_ID + " = ? ", new String[]{plan.id+""});
 		db.close();
 	}
 	
-	public static List<Plan> all(){
+	public static List<Course> all(){
 		SQLiteDatabase db = get_read_db();
 		Cursor cursor = db.query(
-                Constants.TABLE_PLANS,
+                Constants.TABLE_COURSE,
                 get_columns()
                 , null, null, null, null,
                 Constants.KEY_ID + " ASC"
         );
-		List<Plan> plans = new ArrayList<Plan>();
+		List<Course> plans = new ArrayList<Course>();
         while (cursor.moveToNext()) {
         	plans.add(build_by_cursor(cursor));
         }
@@ -47,10 +47,10 @@ public class PlanDBHelper  extends BaseModelDBHelper{
         db.close();
         return plans;
 	}
-	public static Plan find_by_id(int plan_id) {
-		Plan plan = null;
+	public static Course find_by_id(int plan_id) {
+		Course plan = null;
 		SQLiteDatabase db = get_read_db();
-		Cursor cursor = db.query(Constants.TABLE_PLANS, get_columns(),
+		Cursor cursor = db.query(Constants.TABLE_COURSE, get_columns(),
 				Constants.KEY_ID+ " = ? ", 
 				new String[]{ plan_id + "" },
 				null, null, null);
@@ -62,13 +62,13 @@ public class PlanDBHelper  extends BaseModelDBHelper{
 		db.close();
 		return plan;
 	}
-	public static List<Plan> find_by_checked(String string) {
+	public static List<Course> find_by_checked(boolean checked) {
 		SQLiteDatabase db = get_read_db();
-		Cursor cursor = db.query(Constants.TABLE_PLANS,
+		Cursor cursor = db.query(Constants.TABLE_COURSE,
 				get_columns(),
-		        Constants.TABLE_PLANS__CHECKED + " = ?",
-		        new String[]{string},null, null, null);
-		List<Plan> plan_list = new ArrayList<Plan>();
+		        Constants.TABLE_COURSE__CHECKED + " = ?",
+		        new String[]{checked+""},null, null, null);
+		List<Course> plan_list = new ArrayList<Course>();
 		while (cursor.moveToNext()) {
 			plan_list.add(build_by_cursor(cursor));
 		}
@@ -77,18 +77,19 @@ public class PlanDBHelper  extends BaseModelDBHelper{
 		return plan_list;
 	}
 	
-	private static Plan build_by_cursor(Cursor cursor) {
+	private static Course build_by_cursor(Cursor cursor) {
 	    int id = cursor.getInt(0);
 	    String content = cursor.getString(1);
 	    String checked = cursor.getString(2);
-	    return new Plan(id, content, checked);
+	    boolean boolen_checked = checked.equals("true") ? true:false;
+	    return new Course(id, content, boolen_checked);
 	}
 	
 	private static String[] get_columns() {
 	    return new String[]{
 	        Constants.KEY_ID,
-	        Constants.TABLE_PLANS__CONTENT,
-	        Constants.TABLE_PLANS__CHECKED
+	        Constants.TABLE_COURSE__CONTENT,
+	        Constants.TABLE_COURSE__CHECKED
 	    };
 	 }
 
