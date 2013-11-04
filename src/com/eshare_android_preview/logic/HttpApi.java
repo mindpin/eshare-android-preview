@@ -17,8 +17,6 @@ import com.eshare_android_preview.model.parse.KnowledgeNet;
 import com.eshare_android_preview.model.parse.YAMLParse;
 
 public class HttpApi {
-	public static final String xml_path = "javascript_core.xml";
-	public static final String yaml_path = "javascript_core_knowledge_questions.yaml";
 	public static final String course_xml_path = "course_names.xml";
 
 	public static class HANode{
@@ -40,28 +38,6 @@ public class HttpApi {
 			}
 			return categorys;
 		}
-
-		public static List<KnowledgeNetNode> find_by_category(String category){
-			List<KnowledgeNetNode> list = null;
-			if (category.equals("javascript")) {
-				list = KnowledgeNet.parse_xml(xml_path);
-			}
-			return list;
-		}
-		
-		public static KnowledgeNetNode find_by_id(String node_id){
-			List<KnowledgeNetNode> list = find_by_category("javascript");
-			for(KnowledgeNetNode node:list){
-				if (node.node_id .equals(node_id)) {
-					return node;
-				}
-			}
-			return null;
-		}
-		
-		public static List<KnowledgeNetNode> find_by_node_ids(List<String> node_ids){
-			return KnowledgeNet.array_node_list(KnowledgeNet.parse_xml(xml_path), node_ids);
-		}
 	}
 	
 
@@ -76,21 +52,6 @@ public class HttpApi {
 		}
 	}
 	
-	public static class HAQuestion{
-		public static List<Question> all() {
-			return YAMLParse.parse_yaml(yaml_path);
-		}
-		public static Question find_by_id(int question_id) {
-			List<Question> list = all();
-			for (Question question : list) {
-				if (question_id == question.id) {
-					return question;
-				}
-			}
-			return null;
-		}
-	}
-    
     public static class HAPlan{
     	public static List<Plan> get_checked(String string) {
     		return PlanDBHelper.find_by_checked(string);

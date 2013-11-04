@@ -78,7 +78,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 
     private void load_list_view() {
         children_grid_view = (GridView) findViewById(R.id.children_grid_view);
-        List<KnowledgeNetNode> children_node_list = HttpApi.HANode.find_by_node_ids(node.list_children);
+        List<KnowledgeNetNode> children_node_list = KnowledgeNetNode.find(node.list_children);
         KnowledgeNetNodesAdapter child_adapter = new KnowledgeNetNodesAdapter(this);
         child_adapter.add_items(children_node_list);
         children_grid_view.setAdapter(child_adapter);
@@ -90,7 +90,7 @@ public class KnowledgeNetNodeShowActivity extends EshareBaseActivity {
 		// -----------------------------
 		
 		parents_grid_view = (GridView)findViewById(R.id.parents_grid_view);
-		List<KnowledgeNetNode> parents_node_list = HttpApi.HANode.find_by_node_ids(node.list_parents);
+		List<KnowledgeNetNode> parents_node_list = KnowledgeNetNode.find(node.list_parents);
         KnowledgeNetNodesAdapter parends_adapter = new KnowledgeNetNodesAdapter(this);
         parends_adapter.add_items(parents_node_list);
         parents_grid_view.setAdapter(parends_adapter);

@@ -106,15 +106,4 @@ public class KnowledgeNet {
 	}
 	
 	
-	public static List<KnowledgeNetNode> array_node_list(List<KnowledgeNetNode> node_list,List<String> node_ids){
-		List<KnowledgeNetNode> nodes = new ArrayList<KnowledgeNetNode>();
-		for (int i = 0; i < node_list.size(); i++) {
-			for (int j = 0; j < node_ids.size(); j++) {
-				if (node_list.get(i).node_id.equals(node_ids.get(j))) {
-					nodes.add(node_list.get(i));
-				}
-			}
-		}
-		return nodes;
-	}
 }

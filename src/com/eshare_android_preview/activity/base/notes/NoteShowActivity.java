@@ -66,7 +66,7 @@ public class NoteShowActivity extends EshareBaseActivity{
 			intent.setClass(NoteShowActivity.this, QuestionShowActivity.class);
 
             Bundle bundle = new Bundle();
-            Question question = HttpApi.HAQuestion.find_by_id(Integer.parseInt(note.type_id));
+            Question question = Question.find(Integer.parseInt(note.type_id));
             bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question);
             intent.putExtras(bundle);
 
@@ -77,7 +77,7 @@ public class NoteShowActivity extends EshareBaseActivity{
 			intent.setClass(NoteShowActivity.this, KnowledgeNetNodeShowActivity.class);
 
             Bundle bundle = new Bundle();
-            KnowledgeNetNode node = HttpApi.HANode.find_by_id(note.type_id);
+            KnowledgeNetNode node = KnowledgeNetNode.find(note.type_id);
             bundle.putSerializable(KnowledgeNetNodeShowActivity.ExtraKeys.NODE, node);
             intent.putExtras(bundle);
 

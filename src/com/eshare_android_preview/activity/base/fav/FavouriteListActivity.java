@@ -70,8 +70,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 
                 if (item.kind.equals(FavouriteDBHelper.Kinds.QUESTION)) {
                     Intent intent = new Intent(FavouriteListActivity.this, QuestionShowActivity.class);
-                    Question question = HttpApi.HAQuestion.find_by_id(Integer.parseInt(item.favourite_id));
-
+                    Question question = Question.find(Integer.parseInt(item.favourite_id));
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question);
                     intent.putExtras(bundle);
@@ -90,8 +89,7 @@ public class FavouriteListActivity extends EshareBaseActivity {
 
                 } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {
                     Intent intent = new Intent(FavouriteListActivity.this, KnowledgeNetNodeShowActivity.class);
-                    KnowledgeNetNode node = HttpApi.HANode.find_by_id(item.favourite_id);
-
+                    KnowledgeNetNode node = KnowledgeNetNode.find(item.favourite_id);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(KnowledgeNetNodeShowActivity.ExtraKeys.NODE, node);
                     intent.putExtras(bundle);

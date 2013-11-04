@@ -3,12 +3,15 @@ package com.eshare_android_preview.model;
 import com.eshare_android_preview.model.database.FavouriteDBHelper;
 import com.eshare_android_preview.model.database.NoteDBHelper;
 import com.eshare_android_preview.model.interfaces.ILearningResource;
+import com.eshare_android_preview.model.parse.YAMLParse;
 
 import java.io.Serializable;
 import java.util.List;
 
 // 问题
 public class Question implements Serializable, ILearningResource {
+    public static final String YAML_PATH = "javascript_core_knowledge_questions.yaml";
+
     @Override
     public boolean has_note() {
         if(this.has_note == null){
@@ -83,5 +86,17 @@ public class Question implements Serializable, ILearningResource {
 	}
 	
 
-	
+    public static List<Question> all(){
+        return YAMLParse.parse_yaml(YAML_PATH);
+    }
+
+    public static Question find(int question_id) {
+        List<Question> list = all();
+        for (Question question : list) {
+            if (question_id == question.id) {
+                return question;
+            }
+        }
+        return null;
+    }
 }

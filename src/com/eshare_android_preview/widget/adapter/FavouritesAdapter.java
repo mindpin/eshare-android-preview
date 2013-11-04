@@ -38,7 +38,7 @@ public class FavouritesAdapter extends EshareBaseAdapter<Favourite> {
         ViewHolder view_holder = (ViewHolder) holder;
 
         if (item.kind.equals(FavouriteDBHelper.Kinds.QUESTION)) {
-            Question question = HttpApi.HAQuestion.find_by_id(Integer.parseInt(item.favourite_id));
+            Question question = Question.find(Integer.parseInt(item.favourite_id));
             view_holder.item_tv.setText(question.title);
 
         } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
@@ -46,7 +46,7 @@ public class FavouritesAdapter extends EshareBaseAdapter<Favourite> {
             view_holder.item_tv.setText(plan.content);
 
         } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {
-            KnowledgeNetNode node = HttpApi.HANode.find_by_id(item.favourite_id);
+            KnowledgeNetNode node = KnowledgeNetNode.find(item.favourite_id);
             view_holder.item_tv.setText(node.name);
         }
 

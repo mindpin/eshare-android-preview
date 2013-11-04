@@ -5,12 +5,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
-
 import android.content.res.AssetManager;
-
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.model.Question;
 
