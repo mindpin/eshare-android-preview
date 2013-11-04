@@ -6,7 +6,7 @@ import android.util.Log;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.widget.EshareProgressDialog;
+import com.eshare_android_preview.widget.dialog.EshareProgressDialog;
 
 public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
 	public static final int SUCCESS = 200;

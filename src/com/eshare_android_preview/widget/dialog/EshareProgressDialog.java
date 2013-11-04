@@ -1,4 +1,4 @@
-package com.eshare_android_preview.widget;
+package com.eshare_android_preview.widget.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
