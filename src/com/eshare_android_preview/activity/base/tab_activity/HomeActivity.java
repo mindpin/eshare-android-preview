@@ -58,6 +58,10 @@ public class HomeActivity extends EshareBaseActivity {
 			TextView tv = (TextView) button_view.getChildAt(0);
 			tv.setTypeface(font);
 		}
+
+        set_fontawesome((TextView) findViewById(R.id.header_plan_icon));
+        set_fontawesome((TextView) findViewById(R.id.header_note_icon));
+        set_fontawesome((TextView) findViewById(R.id.header_fav_icon));
 	}
 	
 	private void init_view() {
@@ -74,11 +78,11 @@ public class HomeActivity extends EshareBaseActivity {
 	}
 
     private void load_user_data() {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.avatar_orange);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.avatar_ben7th);
         Bitmap rounded_bitmap = ImageTools.toRoundCorner(bitmap, 500);
         user_avatar.setBackgroundDrawable(new BitmapDrawable(rounded_bitmap));
 
-        user_name.setText("程序桔子");
+        user_name.setText("Ben7th");
     }
 
 	private void set_layout_click(){

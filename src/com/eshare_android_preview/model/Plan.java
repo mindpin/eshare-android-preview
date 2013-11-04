@@ -46,4 +46,9 @@ public class Plan implements Serializable, ILearningResource {
         }
         return this.is_faved;
     }
+
+    // 检查课程是否在用户的计划中
+    public boolean is_in_user_plan(Object user) {
+        return "true".equals(checked);
+    }
 }

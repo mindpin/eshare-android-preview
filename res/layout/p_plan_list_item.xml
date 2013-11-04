@@ -16,17 +16,14 @@
             android:minHeight="60dp"
             >
 
-        <TextView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/btn_yellow_circle_flat"
-                android:text="JS"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                ></TextView>
+        <ImageView
+            android:id="@+id/lan_icon"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:background="@drawable/lan_js"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            />
 
         <TextView
                 android:id="@+id/icon_tv"
@@ -63,7 +60,7 @@
                 android:textSize="12dp"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="30课时，已学习60%"
+                android:text="15课时，已学习47%"
                 android:textColor="#888"
                 />
 

@@ -1,34 +1,24 @@
 package com.eshare_android_preview.activity.base.plans;
 
-import java.util.List;
-
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.database.PlanDBHelper;
 import com.eshare_android_preview.model.parse.CourseXMLParse;
-import com.eshare_android_preview.widget.adapter.AddPlanAdapter;
+import com.eshare_android_preview.widget.adapter.PlansAdapter;
 import com.eshare_android_preview.widget.dialog.arc.ArcProgressDialog;
+
+import java.util.List;
 
 public class AddPlanActivity extends EshareBaseActivity{
 	ListView list_view;
@@ -65,17 +55,17 @@ public class AddPlanActivity extends EshareBaseActivity{
 	private void load_list() {
 		list_view = (ListView)findViewById(R.id.list_view);
         list = HttpApi.HAPlan.all();
-		AddPlanAdapter adapter = new AddPlanAdapter(this);
-		adapter.add_items(list);
+        PlansAdapter adapter = new PlansAdapter(this);
+        adapter.add_items(list);
         list_view.setDivider(null);
-		list_view.setAdapter(adapter);
-		
-		list_view.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> list_view, View list_item,int item_id, long position) {
+        list_view.setAdapter(adapter);
+
+        list_view.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
                 Plan plan = (Plan) list_item.getTag(R.id.adapter_item_tag);
 
-				Intent intent = new Intent(AddPlanActivity.this,PlanShowActivity.class);
+                Intent intent = new Intent(AddPlanActivity.this, PlanShowActivity.class);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(PlanShowActivity.ExtraKeys.PLAN, plan);
@@ -114,5 +104,4 @@ public class AddPlanActivity extends EshareBaseActivity{
             super.onPostExecute(result);
         }
     }
-
 }
