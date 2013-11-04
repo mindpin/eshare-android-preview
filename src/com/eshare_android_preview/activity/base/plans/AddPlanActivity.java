@@ -1,5 +1,7 @@
 package com.eshare_android_preview.activity.base.plans;
 
+import java.util.List;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,18 +13,15 @@ import android.widget.ListView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Plan;
-import com.eshare_android_preview.model.database.PlanDBHelper;
+import com.eshare_android_preview.model.Course;
+import com.eshare_android_preview.model.database.CourseDBHelper;
 import com.eshare_android_preview.model.parse.CourseXMLParse;
 import com.eshare_android_preview.widget.adapter.PlansAdapter;
 import com.eshare_android_preview.widget.dialog.arc.ArcProgressDialog;
 
-import java.util.List;
-
 public class AddPlanActivity extends EshareBaseActivity{
 	ListView list_view;
-	List<Plan> list;
+	List<Course> list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.p_add_plan);
@@ -40,7 +39,7 @@ public class AddPlanActivity extends EshareBaseActivity{
 
 	private void load_data() {
 		int count = CourseXMLParse.doc_parse_plan_count();
-		if (PlanDBHelper.all().size() >= count || count == 0) {
+		if (CourseDBHelper.all().size() >= count || count == 0) {
 			load_list();
 		}else{
 		    connect();
@@ -54,7 +53,7 @@ public class AddPlanActivity extends EshareBaseActivity{
 
 	private void load_list() {
 		list_view = (ListView)findViewById(R.id.list_view);
-        list = HttpApi.HAPlan.all();
+        list = Course.all();
         PlansAdapter adapter = new PlansAdapter(this);
         adapter.add_items(list);
         list_view.setDivider(null);
@@ -63,7 +62,7 @@ public class AddPlanActivity extends EshareBaseActivity{
         list_view.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list_view, View list_item, int item_id, long position) {
-                Plan plan = (Plan) list_item.getTag(R.id.adapter_item_tag);
+                Course plan = (Course) list_item.getTag(R.id.adapter_item_tag);
 
                 Intent intent = new Intent(AddPlanActivity.this, PlanShowActivity.class);
 

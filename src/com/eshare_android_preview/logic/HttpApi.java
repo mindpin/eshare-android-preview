@@ -8,11 +8,9 @@ import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.KnowledgeNetNode.KnowledgeCategory;
 import com.eshare_android_preview.model.Note;
-import com.eshare_android_preview.model.Plan;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.database.FavouriteDBHelper;
 import com.eshare_android_preview.model.database.NoteDBHelper;
-import com.eshare_android_preview.model.database.PlanDBHelper;
 import com.eshare_android_preview.model.parse.KnowledgeNet;
 import com.eshare_android_preview.model.parse.YAMLParse;
 
@@ -90,24 +88,7 @@ public class HttpApi {
 			return null;
 		}
 	}
-    
-    public static class HAPlan{
-    	public static List<Plan> get_checked(String string) {
-    		return PlanDBHelper.find_by_checked(string);
-    	}
-    	public static Plan find_by_id(int plan_id ){
-    		return PlanDBHelper.find_by_id(plan_id);
-    	}
-    	public static List<Plan> all() {
-    		return PlanDBHelper.all();
-    	}
 
-    	public static void update(Plan plan) {
-    		PlanDBHelper.update(plan);
-    	}
-    }
-    
-    
     public static class HAFavourite{
     	public static List<Favourite> all(){
             return FavouriteDBHelper.all();

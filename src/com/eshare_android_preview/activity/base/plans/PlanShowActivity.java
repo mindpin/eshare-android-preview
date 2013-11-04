@@ -14,7 +14,7 @@ import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Favourite;
-import com.eshare_android_preview.model.Plan;
+import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.database.FavouriteDBHelper;
 
 public class PlanShowActivity extends EshareBaseActivity{
@@ -23,7 +23,7 @@ public class PlanShowActivity extends EshareBaseActivity{
     Button add_favourite_btn;
     Button cancel_favourite_btn;
 
-	Plan plan;
+	Course plan;
 
     public static class ExtraKeys {
         public static final String PLAN = "plan";
@@ -34,7 +34,7 @@ public class PlanShowActivity extends EshareBaseActivity{
 		setContentView(R.layout.p_plan_show);
 
         Bundle bundle = getIntent().getExtras();
-        plan = (Plan)bundle.getSerializable(PlanShowActivity.ExtraKeys.PLAN);
+        plan = (Course)bundle.getSerializable(PlanShowActivity.ExtraKeys.PLAN);
 
 		load_ui();
 		hide_head_setting_button();
@@ -63,8 +63,11 @@ public class PlanShowActivity extends EshareBaseActivity{
 		click_plan_add_but.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				plan.checked = plan.checked.equals("true") ? "false":"true";
-				HttpApi.HAPlan.update(plan);
+				if (plan.checked) {
+					plan.remove_from_user(null);
+				}else{
+					plan.add_to_user(null);
+				}
 				set_but_txt();
 			}
 		});
@@ -73,7 +76,7 @@ public class PlanShowActivity extends EshareBaseActivity{
         cancel_favourite_btn = (Button) findViewById(R.id.cancel_favourite_btn);
 	}
 	private void set_but_txt(){
-		int text_checked_str_id = plan.checked.equals("false")? R.string.plans_add_plans:R.string.plans_cancel_plans;
+		int text_checked_str_id = plan.checked ? R.string.plans_cancel_plans:R.string.plans_add_plans;
 		click_plan_add_but.setText(text_checked_str_id);
 	}
 	

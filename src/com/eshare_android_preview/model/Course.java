@@ -1,30 +1,32 @@
 package com.eshare_android_preview.model;
 
+import com.eshare_android_preview.model.database.CourseDBHelper;
 import com.eshare_android_preview.model.database.FavouriteDBHelper;
 import com.eshare_android_preview.model.database.NoteDBHelper;
 import com.eshare_android_preview.model.interfaces.ILearningResource;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 // 计划
-public class Plan implements Serializable, ILearningResource {
+public class Course implements Serializable, ILearningResource {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 12865444L;
 	public int id;
 	public String content;
-	public String checked;
+	public boolean checked;
     public Boolean has_note;
     public Boolean is_faved;
 
-	public Plan(String content, String checked) {
+	public Course(String content, boolean checked) {
 		super();
 		this.content = content;
 		this.checked = checked;
 	}
-	public Plan(int id, String content, String checked) {
+	public Course(int id, String content, boolean checked) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -50,5 +52,24 @@ public class Plan implements Serializable, ILearningResource {
     // 检查课程是否在用户的计划中
     public boolean is_in_user_plan(Object user) {
         return "true".equals(checked);
+    }
+    
+    public void add_to_user(Object user){
+    	this.checked = true;
+    	CourseDBHelper.update(this);
+    }
+    public void remove_from_user(Object user){
+    	this.checked = false;
+    	CourseDBHelper.update(this);
+    }
+    public static List<Course>  courses_of_user(Object user){
+    	return CourseDBHelper.find_by_checked(true);
+    }
+    
+    public static List<Course> all(){
+    	return CourseDBHelper.all();
+    }
+    public static Course find(int id){
+    	return CourseDBHelper.find_by_id(id);
     }
 }

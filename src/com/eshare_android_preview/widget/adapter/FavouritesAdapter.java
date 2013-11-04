@@ -9,7 +9,7 @@ import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
 import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.KnowledgeNetNode;
-import com.eshare_android_preview.model.Plan;
+import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.database.FavouriteDBHelper;
 
@@ -42,7 +42,7 @@ public class FavouritesAdapter extends EshareBaseAdapter<Favourite> {
             view_holder.item_tv.setText(question.title);
 
         } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
-            Plan plan = HttpApi.HAPlan.find_by_id(Integer.parseInt(item.favourite_id));
+            Course plan = Course.find(Integer.parseInt(item.favourite_id));
             view_holder.item_tv.setText(plan.content);
 
         } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {

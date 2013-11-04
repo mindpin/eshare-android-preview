@@ -14,9 +14,9 @@ public class Constants {
     public static final String TABLE_NOTES__IMG = "img";
 
     // plans
-    public static final String TABLE_PLANS = "plans";
-    public static final String TABLE_PLANS__CONTENT = "content";
-    public static final String TABLE_PLANS__CHECKED = "checked";
+    public static final String TABLE_COURSE = "courese";
+    public static final String TABLE_COURSE__CONTENT = "content";
+    public static final String TABLE_COURSE__CHECKED = "checked";
 
     // favourites
     public static final String TABLE_FAVOURITES = "favourites";

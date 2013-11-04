@@ -1,6 +1,5 @@
 package com.eshare_android_preview.widget.adapter;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
@@ -11,9 +10,9 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
 import com.eshare_android_preview.base.utils.ImageTools;
-import com.eshare_android_preview.model.Plan;
+import com.eshare_android_preview.model.Course;
 
-public class PlansAdapter extends EshareBaseAdapter<Plan> {
+public class PlansAdapter extends EshareBaseAdapter<Course> {
     public PlansAdapter(EshareBaseActivity activity) {
         super(activity);
     }
@@ -43,7 +42,7 @@ public class PlansAdapter extends EshareBaseAdapter<Plan> {
     }
 
     @Override
-    public void fill_with_data(BaseViewHolder holder, Plan item, int position) {
+    public void fill_with_data(BaseViewHolder holder, Course item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.item_tv.setText(item.content);
 
