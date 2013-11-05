@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,12 +14,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.QuestionChoice;
 import com.eshare_android_preview.model.TestResult;
 
 public class QuestionShowActivity extends EshareBaseActivity{
@@ -33,15 +32,13 @@ public class QuestionShowActivity extends EshareBaseActivity{
     TextView test_result_tv;
 
 	TextView question_kind_tv, question_title_tv;
-	LinearLayout choices_ll, choices_list_ll;
+	LinearLayout choices_detail_ll, choices_symbol_ll;
 	Button add_favourite_btn;
 	Button cancel_favourite_btn;
 	
 	EditText answer_et;
 	Button submit_answer_btn;
-
-	String answer="";
-	String[] a_z = "A,B,C,D,E,F,G,H,I,J,K".split(",");
+	List<QuestionChoice> select_choices = new ArrayList<QuestionChoice>();
 	Question question;
 
 	@SuppressLint("WorldReadableFiles")
@@ -53,14 +50,6 @@ public class QuestionShowActivity extends EshareBaseActivity{
         Bundle bundle = getIntent().getExtras();
         question = (Question)bundle.getSerializable(ExtraKeys.QUESTION);
         test_result = (TestResult)bundle.getSerializable(ExtraKeys.TEST_RESULT);
-
-		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
-			List<String> list = new ArrayList<String>();
-			list.add("正确");
-			list.add("错误");
-			question.choices_list = list;
-			a_z = "T,F".split(",");
-		}
 
 		init_ui();
 
@@ -92,12 +81,11 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		question_kind_tv = (TextView)findViewById(R.id.question_kind);
 		question_title_tv = (TextView)findViewById(R.id.question_title);
 		
-		choices_ll = (LinearLayout)findViewById(R.id.choices_ll);
-		choices_list_ll = (LinearLayout)findViewById(R.id.choices_list_ll);
+		choices_detail_ll = (LinearLayout)findViewById(R.id.choices_detail_ll);
+		choices_symbol_ll = (LinearLayout)findViewById(R.id.choices_symbol_ll);
 		
 		answer_et = (EditText)findViewById(R.id.answer_et);
         submit_answer_btn = (Button)findViewById(R.id.submit_answer_btn);
-
 	}
 	
 	private void load_question_msg() {
@@ -105,19 +93,26 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		question_kind_tv.setText(question.kind);
 		question_title_tv.setText(question.title);
 		
-		load_choice(choices_ll,R.layout.q_question_choice_item);
-		load_choice(choices_list_ll,R.layout.q_question_choice_list_item);
+		load_choice(choices_detail_ll,R.layout.q_question_choice_detail_item);
+		load_choice(choices_symbol_ll,R.layout.q_question_choice_symbol_item);
 	}
 
 	private void load_choice(LinearLayout view,int item_view_layout){
-		for (int i = 0; i < question.choices_list.size(); i++) {
+		for (QuestionChoice choice : question.choices_list) {
 			LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 			RelativeLayout choice_item_view = (RelativeLayout) inflater.inflate(item_view_layout, null); 
 			Button choice_item_btn = (Button) choice_item_view.findViewById(R.id.choice_item_btn);
-			String but_text = item_view_layout == R.layout.q_question_choice_item ? a_z[i] + " " +  question.choices_list.get(i): a_z[i];
-			choice_item_btn.setText(but_text);
+
+            String btn_text;
+            if(item_view_layout == R.layout.q_question_choice_detail_item){
+                btn_text = choice.content;
+            }else{
+                btn_text = choice.sym;
+            }
+
+            choice_item_btn.setText(btn_text);
 			view.addView(choice_item_view);
-			choice_item_btn.setOnClickListener(new ClickItemListener(i, choice_item_btn));
+			choice_item_btn.setOnClickListener(new ClickItemListener(choice, choice_item_btn));
 		}
 	}
 	
@@ -151,52 +146,56 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	}
 	
 	class ClickItemListener implements OnClickListener{
-		int item_id;
-		View view;
-		public ClickItemListener(int id,View view){
-			this.item_id = id;
+        QuestionChoice choice;
+        View view;
+		public ClickItemListener(QuestionChoice choice,View view){
+			this.choice = choice;
 			this.view = view;
 		}
 		@Override
 		public void onClick(View v) {
-			if (question.kind.equals(Question.Type.SINGLE_CHOICE)) {
-				answer = a_z[item_id];
+
+			if (question.is_single_choice() || question.is_true_false()) {
+                select_choices.clear();
+                select_choices.add(choice);
 			}
-			if (question.kind.equals(Question.Type.MULTIPLE_CHOICE)) {
-				Object obj = view.getTag(R.id.tag_choice_uuid);
-				boolean is_checked = obj != null ? (Boolean)obj:false;
-				answer = is_checked ? answer.replace(a_z[item_id], ""):answer.replace(a_z[item_id], "")+a_z[item_id];
+			if (question.is_multiple_choice()) {
+                if(select_choices.indexOf(choice) != -1){
+                    select_choices.remove(choice);
+                }else{
+                    select_choices.add(choice);
+                }
 			}
-			if (question.kind.equals(Question.Type.TRUE_FALSE)) {
-				answer = a_z[item_id];
-			}
-			set_choice_item_and_list_item_background(choices_ll);
-			set_choice_item_and_list_item_background(choices_list_ll);
+
+			set_choice_item_background(choices_detail_ll);
+			set_choice_item_background(choices_symbol_ll);
+
+            String answer = "";
+            for(QuestionChoice sc : select_choices){
+                answer += sc.sym;
+            }
 			answer_et.setText(answer);
-			submit_answer_btn.setClickable(!BaseUtils.is_str_blank(answer));
+			submit_answer_btn.setClickable(select_choices.size() != 0);
 		}
 		
 	}
 	
-	private void set_choice_item_and_list_item_background(LinearLayout layout){
-		if (question.kind.equals(Question.Type.SINGLE_CHOICE) || question.kind.equals(Question.Type.TRUE_FALSE)) {
+	private void set_choice_item_background(LinearLayout layout){
+		if (question.is_single_choice() || question.is_true_false()) {
 			for (int j = 0; j < layout.getChildCount(); j++) {
-				layout.getChildAt(j).findViewById(R.id.choice_item_btn).setBackgroundResource(R.color.choice_after);
+				layout.getChildAt(j).findViewById(R.id.choice_item_btn).setBackgroundResource(R.color.choice_before);
 			}
-			layout.getChildAt(BaseUtils.char_at_array_index(a_z, answer)).findViewById(R.id.choice_item_btn).setBackgroundResource(R.color.choice_selected);
+			layout.getChildAt(select_choices.get(0).index).findViewById(R.id.choice_item_btn).setBackgroundResource(R.color.choice_selected);
 		}
 		
-		if (question.kind.equals(Question.Type.MULTIPLE_CHOICE)) {
+		if (question.is_multiple_choice()) {
 			for (int j = 0; j < layout.getChildCount(); j++) {
-				layout.getChildAt(j).findViewById(R.id.choice_item_btn).setTag(R.id.tag_choice_uuid, false);
-				layout.getChildAt(j).findViewById(R.id.choice_item_btn).setBackgroundResource(R.color.choice_after);
+				layout.getChildAt(j).findViewById(R.id.choice_item_btn).setBackgroundResource(R.color.choice_before);
 			}
-			
-			List<Integer> list = BaseUtils.str_at_array_array(a_z, answer);
-			for (int i = 0; i < list.size(); i++) {
-				layout.getChildAt(list.get(i)).findViewById(R.id.choice_item_btn).setTag(R.id.tag_choice_uuid, true);
-				layout.getChildAt(list.get(i)).findViewById(R.id.choice_item_btn).setBackgroundResource(R.color.choice_selected);
-			}
+
+            for(QuestionChoice qc : select_choices){
+			    layout.getChildAt(qc.index).findViewById(R.id.choice_item_btn).setBackgroundResource(R.color.choice_selected);
+            }
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package com.eshare_android_preview.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.eshare_android_preview.model.parse.YAMLParse;
@@ -8,44 +9,24 @@ import com.eshare_android_preview.model.parse.YAMLParse;
 // 问题
 public class Question extends LearningResource implements Serializable {
     public static final String YAML_PATH = "javascript_core_knowledge_questions.yaml";
-
-    @Override
-    public String get_note_foreign_key_id() {
-        return this.id + "";
-    }
-
     public static class Type{
 		public static final String   SINGLE_CHOICE = "single_choice";
 		public static final String   MULTIPLE_CHOICE = "multiple_choices";
 		public static final String   TRUE_FALSE = "true_false";
 		public static final String   CODE = "code";
 	}
-	
+
 	private static final long serialVersionUID = 111111L;
 	public int id;
 	public String knowledge_node_id;
 	public String kind;
 	public String title;
-	public List<String> choices_list;
+	public List<QuestionChoice> choices_list;
 	public String answer;
-	
-	public String code_type;
-	public String desc;
-	public String init_code;
-	public String rule;
 
-	// 判读题
-	public Question(int id,String knowledge_node_id, String kind, String title,String answer) {
-		super();
-		this.id = id;
-		this.knowledge_node_id = knowledge_node_id;
-		this.kind = kind;
-		this.title = title;
-		this.answer = answer;
-	}
-	
+
 	// 选择题
-	public Question(int id,String knowledge_node_id, String kind, String title,List<String> choices_list, String answer) {
+	public Question(int id,String knowledge_node_id, String kind, String title,List<QuestionChoice> choices_list, String answer) {
 		super();
 		this.id = id;
 		this.knowledge_node_id = knowledge_node_id;
@@ -55,20 +36,21 @@ public class Question extends LearningResource implements Serializable {
 		this.answer = answer;
 	}
 	
-	// 编程题
-	public Question(int id,String knowledge_node_id, String kind, String title,
-			String code_type, String desc, String init_code, String rule) {
-		super();
-		this.id = id;
-		this.knowledge_node_id = knowledge_node_id;
-		this.kind = kind;
-		this.title = title;
-		this.code_type = code_type;
-		this.desc = desc;
-		this.init_code = init_code;
-		this.rule = rule;
-	}
-	
+    public boolean is_single_choice(){
+        return this.kind.equals(Type.SINGLE_CHOICE);
+    }
+
+    public boolean is_multiple_choice(){
+        return this.kind.equals(Type.MULTIPLE_CHOICE);
+    }
+
+    public boolean is_true_false(){
+        return this.kind.equals(Type.TRUE_FALSE);
+    }
+
+    public boolean is_code(){
+        return this.kind.equals(Type.CODE);
+    }
 
     public static List<Question> all(){
         return YAMLParse.parse_yaml(YAML_PATH);
@@ -88,6 +70,19 @@ public class Question extends LearningResource implements Serializable {
     public Question next(){
     	return find_by_jump_index(this.id,1);
     }
+
+    public List<QuestionChoice> select_choice_by_str(String answer){
+        List<QuestionChoice> result = new ArrayList<QuestionChoice>();
+        String[] symbols = answer.split("");
+        for(QuestionChoice choice : this.choices_list){
+            for(String symbol : symbols){
+                if(symbol.equals(choice.sym)){
+                    result.add(choice);
+                }
+            }
+        }
+        return result;
+    }
     
     
     private static Question find_by_jump_index(int question_id,int index){
@@ -101,5 +96,10 @@ public class Question extends LearningResource implements Serializable {
 			}
 		}
     	return null;
+    }
+
+    @Override
+    public String get_note_foreign_key_id() {
+        return this.id + "";
     }
 }

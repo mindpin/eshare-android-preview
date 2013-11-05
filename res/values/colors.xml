@@ -4,7 +4,7 @@
     <color name="black">#ff000000</color>
     
     <color name="choice_selected">#AA7700</color>
-    <color name="choice_after">#AAAAAA</color>
+    <color name="choice_before">#AAAAAA</color>
     
     
     <color name="tab_home_item_bg_normal">#ffffffff</color>

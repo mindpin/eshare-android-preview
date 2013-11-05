@@ -9,7 +9,7 @@
         android:layout_below="@+id/head_bar"
         android:id="@+id/notes_page"
         android:padding="3dp"
-        android:background="@color/choice_after"
+        android:background="@color/choice_before"
         android:baselineAligned="false"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
