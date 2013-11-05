@@ -19,6 +19,7 @@ import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.widget.adapter.FavouritesAdapter;
 
 
@@ -70,6 +71,8 @@ public class FavouriteListActivity extends EshareBaseActivity {
                     Intent intent = new Intent(FavouriteListActivity.this, QuestionShowActivity.class);
                     Question question = Question.find(Integer.parseInt(item.favourite_id));
                     Bundle bundle = new Bundle();
+                    TestResult test_result = new TestResult();
+                    bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_RESULT, test_result);
                     bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question);
                     intent.putExtras(bundle);
 
