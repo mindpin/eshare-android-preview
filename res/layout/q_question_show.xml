@@ -111,16 +111,42 @@
 		        android:layout_weight="1.0" 
 		    />
 	        <Button
-		        android:id="@+id/submit_but"
+		        android:id="@+id/submit_answer_btn"
 		        android:layout_width="0.0dp"
 		        android:layout_weight="1.0"
 		        android:layout_height="wrap_content"
 		        android:clickable="false"
-		        android:onClick="click_on_submit_but"
+		        android:onClick="click_on_submit_answer_btn"
 		        android:text="@string/submit"
 		    />
 	    </LinearLayout>
-	    
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:id="@+id/test_result_tv"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:id="@+id/answer_correct_tv"
+            android:text="回答正确"
+            android:visibility="gone"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:id="@+id/answer_error_tv"
+            android:text="回答错误"
+            android:visibility="gone"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:id="@+id/next_question_tv"
+            android:text="下一题"
+            android:visibility="gone"
+         />
+
 	</LinearLayout>
 	
 </RelativeLayout>

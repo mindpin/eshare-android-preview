@@ -101,6 +101,7 @@
                 />
 
             <TextView
+                android:id="@+id/start_answer_tv"
                 android:layout_height="40dp"
                 android:layout_width="fill_parent"
                 android:gravity="center"
