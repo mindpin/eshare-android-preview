@@ -71,8 +71,6 @@ public class FavouriteListActivity extends EshareBaseActivity {
                     Intent intent = new Intent(FavouriteListActivity.this, QuestionShowActivity.class);
                     Question question = Question.find(Integer.parseInt(item.favourite_id));
                     Bundle bundle = new Bundle();
-                    TestResult test_result = new TestResult();
-                    bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_RESULT, test_result);
                     bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question);
                     intent.putExtras(bundle);
 

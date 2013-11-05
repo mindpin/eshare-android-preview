@@ -50,6 +50,9 @@ public class QuestionShowActivity extends EshareBaseActivity{
         Bundle bundle = getIntent().getExtras();
         question = (Question)bundle.getSerializable(ExtraKeys.QUESTION);
         test_result = (TestResult)bundle.getSerializable(ExtraKeys.TEST_RESULT);
+        if(test_result == null){
+            test_result = new TestResult();
+        }
 
 		init_ui();
 
