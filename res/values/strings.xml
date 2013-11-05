@@ -29,6 +29,8 @@
     <string name="icon_comments">&#xf086;</string>
     <string name="icon_check">&#xf00c;</string>
 
+    <string name="icon_question_circle">&#xf059;</string>
+
     <!-- 登录页面 -->
     <string name="login_email">邮箱</string>
     <string name="login_password">密码</string>
@@ -51,7 +53,8 @@
     <string name="favourite_knowledge_list">收藏列表</string>
 
     <!-- questions -->
-    <string name="questions_title">题目</string>
+    <string name="questions_title">练习题</string>
+    <string name="questions_desc">请点击“开始练习”\n逐个回答问题</string>
 
     <!-- note -->
     <string name="note_list_empty_tip">还没有笔记</string>

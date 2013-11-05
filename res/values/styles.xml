@@ -50,6 +50,22 @@
         <item name="android:shadowRadius">1</item>
     </style>
 
+    <style name="shadow_white_text">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="shadow_white_text_light">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:shadowColor">#66000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
     <!-- 首页按钮组 -->
 
     <style name="home_button_layout">
