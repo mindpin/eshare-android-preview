@@ -3,29 +3,41 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@null"
     android:layout_gravity="center"
+    android:background="#e7e7e7"
     >
     <RelativeLayout
-        android:layout_width="100dip"
-        android:layout_height="100dip"
-        android:padding="8dip"
-        android:background="#00000000"
+        android:layout_width="150dip"
+        android:layout_height="150dip"
+        android:padding="4dp"
+        android:background="@drawable/btn_white_circle_flat"
         >
         <com.eshare_android_preview.widget.dialog.arc.ArcView
             android:id="@+id/arc_progress_av"
-            arc_color="#ff11aa"
-            android:background="#aaaaaa"
+            arc_color="#50CE00"
+            arc_width="16"
+            android:background="#00ffffff"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent" />
         <TextView android:id="@+id/arc_progress_dialog_message"
             android:text="@string/now_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_alignParentBottom="true"
+            android:textSize="12dp"
             android:layout_centerHorizontal="true"
-            android:textColor="#fff"
+            android:layout_marginTop="30dp"
+            android:textColor="#000"
+            android:background="#00000000"
+            />
+        <TextView
+            android:id="@+id/arc_progress_count"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="106/106"
+            android:textSize="26dp"
+            android:textStyle="bold"
+            android:textColor="#000"
             android:background="#00000000"
             />
     </RelativeLayout>

@@ -26,10 +26,9 @@ public class AddPlanActivity extends EshareBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.p_add_plan);
 
-		load_data();
-
 //      如果要调试进度条用connect()这行代码，把 load_data() 注释掉
-//      connect();
+//		load_data();
+      connect();
 
 		hide_head_setting_button();
         set_head_text(getResources().getString(R.string.plans_add_plans_title));

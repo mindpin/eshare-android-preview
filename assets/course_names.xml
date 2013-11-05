@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <courses>
   <course title="JavaScript 的基本类型"/>
+  <course title="JavaScript字符串处理"/>
   <course title="JavaScript 的函数"/>
   <course title="JavaScript 中 eval 函数的使用"/>
   <course title="JavaScript 中的作用域"/>
