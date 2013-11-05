@@ -2,14 +2,63 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:orientation="vertical" >
-	<Button
-	    android:padding="6dp"
-	    android:id="@+id/choice_item_btn"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/placeholder"
-	    android:background="@drawable/select_choice_item_bg" 
-	/>
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="5dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/choice_item_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp">
+
+        <RelativeLayout
+            android:id="@+id/choice_item_bg"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:background="#FCFBF9"
+            android:layout_marginLeft="20dp">
+
+            <RelativeLayout
+                android:id="@+id/choice_item_bg0"
+                android:layout_height="fill_parent"
+                android:layout_width="30dp"
+                android:background="#aaaaaa"
+                ></RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/btn_e7e7e7_circle_flat"
+            android:layout_centerVertical="true"
+            >
+
+            <TextView
+                android:id="@+id/choice_item_sym"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:background="@drawable/btn_c444_circle_flat"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:text="A"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/choice_item_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/placeholder"
+            android:textSize="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="60dp"
+            android:textColor="#444"
+            />
+
+    </RelativeLayout>
 </RelativeLayout>

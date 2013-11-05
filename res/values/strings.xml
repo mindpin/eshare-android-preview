@@ -28,6 +28,8 @@
 
     <string name="icon_comments">&#xf086;</string>
     <string name="icon_check">&#xf00c;</string>
+    <string name="icon_check_circle">&#xf058;</string>
+    <string name="icon_times_circle">&#xf057;</string>
 
     <string name="icon_question_circle">&#xf059;</string>
 

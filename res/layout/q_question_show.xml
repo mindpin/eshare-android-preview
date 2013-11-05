@@ -71,7 +71,9 @@
 
             <RelativeLayout
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent">
+                android:layout_width="fill_parent"
+                android:layout_marginBottom="5dp"
+                >
 
                 <LinearLayout
                     android:layout_height="wrap_content"
@@ -82,10 +84,10 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginBottom="5dp"
-                    android:paddingTop="35dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp">
+                    android:paddingTop="45dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp">
 
                     <TextView
                         android:id="@+id/question_title"
@@ -140,19 +142,62 @@
                     android:background="@drawable/btn_e7e7e7_circle_flat"
                     >
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_height="30dp"
                         android:layout_width="wrap_content"
                         android:minWidth="100dp"
                         android:background="@drawable/btn_white_circle_flat"
                         >
 
-                    </RelativeLayout>
+                        <TextView
+                            android:id="@+id/correct_icon"
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:gravity="center"
+                            android:text="@string/icon_check_circle"
+                            android:textSize="22dp"
+                            android:textColor="#50ce00"
+                            android:layout_marginLeft="5dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/correct_count"
+                            android:layout_height="30dp"
+                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textSize="18dp"
+                            android:textColor="#50ce00"
+                            />
+
+                        <TextView
+                            android:id="@+id/error_icon"
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:gravity="center"
+                            android:text="@string/icon_times_circle"
+                            android:textSize="22dp"
+                            android:textColor="#ff0000"
+                            android:layout_marginLeft="10dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/error_count"
+                            android:layout_height="30dp"
+                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textSize="18dp"
+                            android:textColor="#ff0000"
+                            android:layout_marginRight="10dp"
+                            />
+                    </LinearLayout>
 
                 </RelativeLayout>
 
             </RelativeLayout>
 
+            <!--选项-->
             <LinearLayout
                 android:id="@+id/choices_detail_ll"
                 android:orientation="vertical"
@@ -163,78 +208,68 @@
         </LinearLayout>
     </ScrollView>
 
+    <!--提交按钮-->
     <LinearLayout
+        android:id="@+id/btns"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <LinearLayout
-            android:id="@+id/choices_symbol_ll"
-            android:layout_width="0.0dp"
-            android:layout_weight="3.0"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="2.0"
-            android:layout_height="wrap_content"
-            android:layout_width="0.0dp">
-
-            <EditText
-                android:id="@+id/answer_et"
-                android:layout_width="0.0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/submit_answer_btn"
-                android:layout_width="0.0dp"
-                android:layout_weight="1.0"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:onClick="click_on_submit_answer_btn"
-                android:text="@string/submit" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/test_result_tv" />
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/answer_correct_tip_tv"
-            android:text="回答正确"
-            android:visibility="gone" />
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/answer_error_tip_tv"
-            android:text="回答错误"
-            android:visibility="gone" />
+        android:background="#e7e7e7"
+        android:padding="5dp"
+        >
 
         <Button
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/next_question_btn"
-            android:text="下一题"
-            android:visibility="gone" />
+            android:id="@+id/submit_answer_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:clickable="false"
+            android:onClick="click_on_submit_answer_btn"
+            android:background="@drawable/btn_c6699bd3b_circle_flat"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:text="确定"
+            />
 
+        <Button
+            android:id="@+id/next_question_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:clickable="false"
+            android:onClick="click_on_submit_answer_btn"
+            android:background="@drawable/btn_c99bd3b_circle_flat"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:text="下一题"
+            android:visibility="gone"
+            />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/answer_correct_tip_tv"
+        android:layout_height="50dp"
+        android:layout_width="120dp"
+        android:background="#ffffff"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/btns"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#50ce00"
+        android:text="回答正确"
+        />
+
+    <TextView
+        android:id="@+id/answer_error_tip_tv"
+        android:layout_height="50dp"
+        android:layout_width="120dp"
+        android:background="#ffffff"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/btns"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#f00"
+        android:text="回答错误"
+        />
 </RelativeLayout>

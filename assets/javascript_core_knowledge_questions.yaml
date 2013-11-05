@@ -6,7 +6,7 @@
 
   - knowledge_node_id: n1
     kind: single_choice
-    title: 选择正确的单行注释
+    title: 以下哪一个是正确的单行注释写法？
     choices:
       - "// 注释"
       - "/ 注释"
@@ -15,7 +15,7 @@
 
   - knowledge_node_id: n2
     kind: single_choice
-    title: 选择正确的多行注释
+    title: 以下哪一个是正确的多行注释写法？
     choices:
       - |
         / 注释
