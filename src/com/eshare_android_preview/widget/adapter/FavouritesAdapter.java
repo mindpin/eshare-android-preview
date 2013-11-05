@@ -6,7 +6,6 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
-import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Course;
@@ -37,16 +36,16 @@ public class FavouritesAdapter extends EshareBaseAdapter<Favourite> {
     public void fill_with_data(BaseViewHolder holder, Favourite item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
 
-        if (item.kind.equals(FavouriteDBHelper.Kinds.QUESTION)) {
-            Question question = HttpApi.HAQuestion.find_by_id(Integer.parseInt(item.favourite_id));
+        if (item.is_belong_question()) {
+            Question question = Question.find(Integer.parseInt(item.favourite_id));
             view_holder.item_tv.setText(question.title);
 
-        } else if (item.kind.equals(FavouriteDBHelper.Kinds.PLAN)) {
+        } else if (item.is_belong_course()) {
             Course plan = Course.find(Integer.parseInt(item.favourite_id));
             view_holder.item_tv.setText(plan.content);
 
-        } else if (item.kind.equals(FavouriteDBHelper.Kinds.NODE)) {
-            KnowledgeNetNode node = HttpApi.HANode.find_by_id(item.favourite_id);
+        } else if (item.is_belong_knowledge_net_node()) {
+            KnowledgeNetNode node = KnowledgeNetNode.find(item.favourite_id);
             view_holder.item_tv.setText(node.name);
         }
 

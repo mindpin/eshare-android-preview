@@ -38,7 +38,7 @@ public class AddPlanActivity extends EshareBaseActivity{
 
 	private void load_data() {
 		int count = CourseXMLParse.doc_parse_plan_count();
-		if (CourseDBHelper.all().size() >= count || count == 0) {
+		if (Course.all().size() >= count || count == 0) {
 			load_list();
 		}else{
 		    connect();

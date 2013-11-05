@@ -15,8 +15,7 @@ import android.widget.GridView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.KnowledgeNetNode;
+import com.eshare_android_preview.model.KnowledgeNetCategory;
 import com.eshare_android_preview.widget.adapter.KnoweledgeNetCategoriesAdapter;
 
 public class KnowledgeNetCategoryListActivity extends EshareBaseActivity {
@@ -42,7 +41,7 @@ public class KnowledgeNetCategoryListActivity extends EshareBaseActivity {
 
     private void load_list_view() {
         grid_view = (GridView) findViewById(R.id.grid_view);
-        List<KnowledgeNetNode.KnowledgeCategory> node_list = HttpApi.HANode.get_knowledge_net_category();
+        List<KnowledgeNetCategory> node_list = KnowledgeNetCategory.all();
         KnoweledgeNetCategoriesAdapter adapter = new KnoweledgeNetCategoriesAdapter(this);
         adapter.add_items(node_list);
         grid_view.setAdapter(adapter);

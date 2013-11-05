@@ -20,10 +20,7 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.logic.HttpApi;
-import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.database.FavouriteDBHelper;
 
 public class QuestionShowActivity extends EshareBaseActivity{
 	TextView item_title_tv,question_kind,question_title;
@@ -64,9 +61,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		init_ui();
 		load_question_msg();
 
-        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
-
-		if (favourite == null) {
+		if (!question.is_faved()) {
             add_favourite_btn.setVisibility(View.VISIBLE);
             cancel_favourite_btn.setVisibility(View.GONE);
 		} else {
@@ -185,8 +180,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void add_favourite(View view) {
-        Favourite favourite = new Favourite(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
-        HttpApi.HAFavourite.create(favourite);
+        question.add_to_fav();
 
 		add_favourite_btn.setVisibility(View.GONE);
 		cancel_favourite_btn.setVisibility(View.VISIBLE);
@@ -194,8 +188,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	
 	@SuppressLint({ "WorldReadableFiles", "WorldWriteableFiles" })
 	public void cancel_favourite(View view) {
-        Favourite favourite = HttpApi.HAFavourite.find_by_id_and_kind(question.id + "", FavouriteDBHelper.Kinds.QUESTION);
-        HttpApi.HAFavourite.cancel(favourite);
+        question.remove_from_fav();
 
 		add_favourite_btn.setVisibility(View.VISIBLE);
 		cancel_favourite_btn.setVisibility(View.GONE);

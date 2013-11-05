@@ -4,7 +4,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.Favourite;
+import com.eshare_android_preview.model.Note;
+import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.base.BaseModelDBHelper;
 import com.eshare_android_preview.model.base.Constants;
 
@@ -15,13 +18,6 @@ import static com.eshare_android_preview.model.base.Constants.*;
 
 public class FavouriteDBHelper extends BaseModelDBHelper {
 
-    public static class Kinds {
-        public static final String QUESTION = "com.eshare_android_preview.model.Question";
-        public static final String NODE = "com.eshare_android_preview.model.KnowledgeNetNode";
-        public static final String PLAN = "com.eshare_android_preview.model.Plan";
-    }
-
-
     public static void create(Favourite favourite) {
         SQLiteDatabase db = get_write_db();
         ContentValues values = new ContentValues();
@@ -29,15 +25,6 @@ public class FavouriteDBHelper extends BaseModelDBHelper {
         values.put(TABLE_FAVOURITES__KIND, favourite.kind);
 
         db.insert(TABLE_FAVOURITES, null, values);
-        db.close();
-    }
-
-    public static void update(Favourite favourite) {
-        SQLiteDatabase db = get_write_db();
-        ContentValues values = new ContentValues();
-        values.put(Constants.TABLE_FAVOURITES__ID, favourite.favourite_id);
-        values.put(Constants.TABLE_FAVOURITES__KIND, favourite.kind);
-        db.update(Constants.TABLE_FAVOURITES, values, Constants.KEY_ID + " = ? ", new String[]{favourite.id+""});
         db.close();
     }
 

@@ -10,10 +10,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.logic.HttpApi;
 import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.widget.adapter.KnowledgeNetNodesAdapter;
 
@@ -42,7 +40,7 @@ public class KnowledgeNetNodeListActivity extends EshareBaseActivity {
 
     private void load_list_view() {
         grid_view = (GridView) findViewById(R.id.grid_view);
-        List<KnowledgeNetNode> node_list = HttpApi.HANode.find_by_category("javascript");
+        List<KnowledgeNetNode> node_list = KnowledgeNetNode.all();
         KnowledgeNetNodesAdapter adapter = new KnowledgeNetNodesAdapter(this);
         adapter.add_items(node_list);
         grid_view.setAdapter(adapter);
