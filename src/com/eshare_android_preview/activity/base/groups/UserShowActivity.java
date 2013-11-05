@@ -1,11 +1,15 @@
 package com.eshare_android_preview.activity.base.groups;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.model.User;
 
 /**
@@ -18,7 +22,6 @@ public class UserShowActivity extends EshareBaseActivity {
     User user;
     ImageView user_avatar;
     TextView user_name;
-    TextView user_bio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +31,24 @@ public class UserShowActivity extends EshareBaseActivity {
         user = (User)getIntent().getExtras().getSerializable(ExtraKeys.USER);
         init_ui();
         load_user();
+        hide_head_bottom_line();
         super.onCreate(savedInstanceState);
     }
 
     private void init_ui() {
         user_avatar = (ImageView)findViewById(R.id.user_avatar);
         user_name   = (TextView)findViewById(R.id.user_name);
-        user_bio    = (TextView)findViewById(R.id.user_bio);
+
+        set_fontawesome((TextView) findViewById(R.id.header_plan_icon));
+        set_fontawesome((TextView) findViewById(R.id.header_note_icon));
+        set_fontawesome((TextView) findViewById(R.id.header_fav_icon));
     }
 
     private void load_user() {
-        user_avatar.setImageDrawable(user.getAvatarDrawable());
         user_name.setText(user.username);
-        user_bio.setText(user.bio);
+
+        BitmapDrawable bd = (BitmapDrawable) user.getAvatarDrawable();
+        BitmapDrawable rounded_bitmap = ImageTools.toRoundCorner(bd, 500);
+        user_avatar.setBackgroundDrawable(rounded_bitmap);
     }
 }

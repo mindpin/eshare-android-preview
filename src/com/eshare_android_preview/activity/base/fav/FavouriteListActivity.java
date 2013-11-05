@@ -41,17 +41,14 @@ public class FavouriteListActivity extends EshareBaseActivity {
 		if (favourite_list.size() == 0) {
             process_when_fav_list_is_empty();
 		} else {
+            findViewById(R.id.fav_list_empty_tip_tv).setVisibility(View.GONE);
             build_fav_list_adapter(favourite_list);
         }
 	}
 
     private void process_when_fav_list_is_empty() {
-        View fav_list_empty_tip_tv = findViewById(R.id.fav_list_empty_tip_tv);
-        fav_list_empty_tip_tv.setVisibility(View.VISIBLE);
-
-        list_view = (ListView)findViewById(R.id.list_view);
-        list_view.setVisibility(View.GONE);
-
+        findViewById(R.id.fav_list_empty_tip_tv).setVisibility(View.VISIBLE);
+        findViewById(R.id.list_view).setVisibility(View.GONE);
     }
 
     private void build_fav_list_adapter(List<Favourite> favourite_list) {

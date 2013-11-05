@@ -106,7 +106,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
     }
 
     private void load_question_msg() {
-        set_head_text("练习题");
+        set_head_text("答题");
         question_kind_tv.setText(question.get_kind_str());
         question_title_tv.setText(question.title);
 

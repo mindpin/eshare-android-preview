@@ -42,7 +42,7 @@
             android:id="@+id/user_level"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Level 1"
+            android:text="等级 1"
             android:layout_gravity="center"
             android:textSize="13dp"
             android:textStyle="bold"

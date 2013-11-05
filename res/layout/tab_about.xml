@@ -9,6 +9,82 @@
         android:layout_below="@+id/head_bar"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:background="#e7e7e7"></LinearLayout>
+        android:background="#e7e7e7">
+
+        <RelativeLayout
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:background="#455467"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/icon_t1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="60dp"
+                android:text="@string/icon_comment"
+                android:textColor="#4E88EC"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                />
+
+            <TextView
+                android:id="@+id/icon_t2"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="50dp"
+                android:text="@string/icon_comment"
+                android:textColor="#F7CB52"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="70dp"
+                />
+
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                >
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="@style/shadow_white_text_light"
+                    android:text="四叶草知识助手"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="@style/shadow_white_text_light"
+                    android:text="界面演示版 demo-1"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="240dp"
+                    style="@style/shadow_white_text_light"
+                    android:layout_marginBottom="20dp"
+                    android:text="程序原型:门旭; 程序开发/素材采集：门旭,李飞,黄锴,肖少富; 集成:李飞; 视觉/交互设计:宋亮; "
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="@style/shadow_white_text_light"
+                    android:text="2013.11"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

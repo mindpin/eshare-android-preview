@@ -3,35 +3,37 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dp"
-    android:background="#fff"
-    >
+    android:paddingTop="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:background="#e7e7e7">
 
-    <LinearLayout
-        android:layout_height="110dp"
+    <RelativeLayout
+        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:orientation="vertical"
-        >
+        android:background="#fff"
+        android:minHeight="60dp">
+
+        <ImageView
+            android:id="@+id/lan_icon"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:background="@drawable/lan_js"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp" />
 
         <TextView
             android:id="@+id/item_tv"
-            android:textSize="15dp"
-            android:layout_width="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginLeft="60dp"
+            android:textSize="16dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="@string/placeholder"
-            android:layout_gravity="center|top"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
-            android:textStyle="bold"
-            />
+            android:layout_centerVertical="true"
+            android:text="@string/placeholder" />
 
-        <ImageView
-            android:id="@+id/item_iv"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:layout_gravity="center|top"
-            android:layout_marginBottom="5dp"
-            />
+    </RelativeLayout>
 
-    </LinearLayout>
+
 </LinearLayout>  

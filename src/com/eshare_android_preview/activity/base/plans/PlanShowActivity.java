@@ -35,7 +35,7 @@ public class PlanShowActivity extends EshareBaseActivity{
 
 		load_ui();
 		hide_head_setting_button();
-		set_head_text(R.string.plans_show);
+		set_head_text("课程");
 
 
         if (!plan.is_faved()) {

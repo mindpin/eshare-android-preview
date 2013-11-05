@@ -278,11 +278,11 @@
 
                 <TextView
                     style="@style/home_button_icon"
-                    android:text="@string/icon_comments" />
+                    android:text="@string/icon_smile_o" />
 
                 <TextView
                     style="@style/home_button_text"
-                    android:text="讨论组" />
+                    android:text="用户组" />
 
             </RelativeLayout>
         </LinearLayout>

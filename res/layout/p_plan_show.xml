@@ -9,7 +9,7 @@
         android:layout_below="@+id/head_bar"
         android:id="@+id/notes_page"
         android:padding="3dp"
-        android:background="@color/choice_before"
+        android:background="#e7e7e7"
         android:baselineAligned="false"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
@@ -42,14 +42,6 @@
                 android:layout_margin="0dp"
                 android:visibility="gone"
                 />
- 
-        <Button
-            android:onClick="click_notes"
-            android:layout_width="0.0dp"
-            android:layout_weight="1.0"
-            android:layout_height="wrap_content"
-            android:text="----"
-            android:layout_margin="0dp"
        />
         
     </LinearLayout>
@@ -58,7 +50,9 @@
 	    android:layout_below="@+id/notes_page"
 	    android:id="@+id/plan_content_tv"
 	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content" 
+	    android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:textSize="15dp"
 	/>
 	
 	<Button

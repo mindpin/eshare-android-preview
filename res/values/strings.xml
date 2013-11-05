@@ -27,11 +27,13 @@
     <string name="icon_pencil_square">&#xf14b;</string>
 
     <string name="icon_comments">&#xf086;</string>
+    <string name="icon_comment">&#xf075;</string>
     <string name="icon_check">&#xf00c;</string>
     <string name="icon_check_circle">&#xf058;</string>
     <string name="icon_times_circle">&#xf057;</string>
 
     <string name="icon_question_circle">&#xf059;</string>
+    <string name="icon_smile_o">&#xf118;</string>
 
     <!-- 登录页面 -->
     <string name="login_email">邮箱</string>
@@ -51,8 +53,8 @@
     <string name="category_about">关于</string>
 
     <!-- knowledge_net -->
-    <string name="knowedge_title">知识点浏览</string>
-    <string name="favourite_knowledge_list">收藏列表</string>
+    <string name="knowedge_title">知识领域选择</string>
+    <string name="favourite_knowledge_list">收藏夹</string>
 
     <!-- questions -->
     <string name="questions_title">练习题</string>
@@ -70,19 +72,19 @@
     <string name="show_plan">显示计划</string>
 
     <!-- fav_list_empty_tip -->
-    <string name="fav_list_empty_tip">收藏夹为空</string>
+    <string name="fav_list_empty_tip">还没有收藏任何内容</string>
 
     <!-- groups -->
-    <string name="group_title">学习群组</string>
-    <string name="group_list_title">知识领域群组</string>
+    <string name="group_title">用户组</string>
+    <string name="group_list_title">用户组</string>
     <string name="group_user_info_title">用户信息</string>
 
     <!-- plans -->
     <string name="plans_title">计划</string>
     <string name="plans_my_plans">我的学习计划</string>
     <string name="plans_add_plans_title">添加课程</string>
-    <string name="plans_add_plans">添加计划</string>
-    <string name="plans_cancel_plans">取消计划</string>
+    <string name="plans_add_plans">添加到计划</string>
+    <string name="plans_cancel_plans">从计划中取消</string>
     <string name="plans_show">显示计划</string>
 
     <string name="now_loading">正在载入…</string>
