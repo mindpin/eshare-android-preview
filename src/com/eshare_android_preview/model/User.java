@@ -18,7 +18,11 @@ import com.eshare_android_preview.application.EshareApplication;
  * Created by kaid on 10/22/13.
  */
 public class User implements Serializable {
-    static ArrayList<User> users;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	static ArrayList<User> users;
     static final String AVATAR_DIR = "images/avatars/";
     public String avatar_path;
     public String username;

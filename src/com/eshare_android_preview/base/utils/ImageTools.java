@@ -312,6 +312,7 @@ public class ImageTools {
 	 * @return byte[]
 	 * @throws Exception
 	 */
+	@SuppressWarnings("resource")
 	public static byte[] getByte(File file) throws Exception {
 		byte[] bytes = null;
 		if (file != null) {

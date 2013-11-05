@@ -1,20 +1,20 @@
 package com.eshare_android_preview.model.database;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import com.eshare_android_preview.model.Course;
-import com.eshare_android_preview.model.Favourite;
-import com.eshare_android_preview.model.Note;
-import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.base.BaseModelDBHelper;
-import com.eshare_android_preview.model.base.Constants;
+import static com.eshare_android_preview.model.base.Constants.KEY_ID;
+import static com.eshare_android_preview.model.base.Constants.TABLE_FAVOURITES;
+import static com.eshare_android_preview.model.base.Constants.TABLE_FAVOURITES__ID;
+import static com.eshare_android_preview.model.base.Constants.TABLE_FAVOURITES__KIND;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.eshare_android_preview.model.base.Constants.*;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.eshare_android_preview.model.Favourite;
+import com.eshare_android_preview.model.base.BaseModelDBHelper;
+import com.eshare_android_preview.model.base.Constants;
 
 public class FavouriteDBHelper extends BaseModelDBHelper {
 
@@ -37,8 +37,6 @@ public class FavouriteDBHelper extends BaseModelDBHelper {
 
     public static Favourite find(String favourite_id, String kind) {
         SQLiteDatabase db = get_read_db();
-
-        String[] tableColumns = get_columns();
 
         String[] whereArgs = new String[] {
                 favourite_id + "",

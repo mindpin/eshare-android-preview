@@ -19,6 +19,7 @@ public class YAMLParse {
 			InputStream inputStream = asset.open(yaml_path);
 			Yaml yaml = new Yaml();
 			ArrayList<?> object = (ArrayList<?>) yaml.load(inputStream);
+			@SuppressWarnings("unchecked")
 			ArrayList<HashMap<String, JSONObject>> hms = (ArrayList<HashMap<String, JSONObject>>) object.get(1);
 			for (int i = 0; i < hms.size(); i++) {
 				HashMap<String, JSONObject> hashMap = hms.get(i);

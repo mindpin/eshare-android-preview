@@ -14,7 +14,6 @@ import android.widget.ListView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.model.Course;
-import com.eshare_android_preview.model.database.CourseDBHelper;
 import com.eshare_android_preview.model.parse.CourseXMLParse;
 import com.eshare_android_preview.widget.adapter.PlansAdapter;
 import com.eshare_android_preview.widget.dialog.arc.ArcProgressDialog;
