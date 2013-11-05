@@ -9,6 +9,7 @@ import com.eshare_android_preview.model.parse.YAMLParse;
 // 问题
 public class Question extends LearningResource implements Serializable {
     public static final String YAML_PATH = "javascript_core_knowledge_questions.yaml";
+    public static List<Question> QUESTIONS = YAMLParse.parse_yaml(YAML_PATH);
     public static class Type{
 		public static final String   SINGLE_CHOICE = "single_choice";
 		public static final String   MULTIPLE_CHOICE = "multiple_choices";
@@ -53,13 +54,10 @@ public class Question extends LearningResource implements Serializable {
     }
 
     public static List<Question> all(){
-        return YAMLParse.parse_yaml(YAML_PATH);
+        return QUESTIONS;
     }
     
     public static Question first(){
-    	if (all().size() == 0) {
-			return null;
-		}
     	return all().get(0);
     }
 
@@ -68,7 +66,7 @@ public class Question extends LearningResource implements Serializable {
     }
     
     public Question next(){
-    	return find_by_jump_index(this.id,1);
+        return all().get(this.id+1);
     }
 
     public List<QuestionChoice> select_choice_by_str(String answer){
