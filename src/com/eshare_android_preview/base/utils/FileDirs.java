@@ -89,7 +89,8 @@ public class FileDirs {
      * 读取文本文件转化为List.
      *  
      */  
-    public static List<String> readTxtFileList(File filename){  
+    @SuppressWarnings("resource")
+	public static List<String> readTxtFileList(File filename){  
     	List<String> readList = new ArrayList<String>();
     	String readStr =  "";  
         try {  
@@ -113,7 +114,8 @@ public class FileDirs {
      * 读取文本文件.
      *  
      */  
-    public static String readTxtFile(File filename){  
+    @SuppressWarnings("resource")
+	public static String readTxtFile(File filename){  
     	List<String> readList = new ArrayList<String>();
     	String readStr =  "";  
         try {  

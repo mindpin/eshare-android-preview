@@ -1,12 +1,9 @@
 package com.eshare_android_preview.model;
 
-import com.eshare_android_preview.model.database.FavouriteDBHelper;
-import com.eshare_android_preview.model.database.NoteDBHelper;
-import com.eshare_android_preview.model.interfaces.ILearningResource;
-import com.eshare_android_preview.model.parse.YAMLParse;
-
 import java.io.Serializable;
 import java.util.List;
+
+import com.eshare_android_preview.model.parse.YAMLParse;
 
 // 问题
 public class Question extends LearningResource implements Serializable {
@@ -76,14 +73,33 @@ public class Question extends LearningResource implements Serializable {
     public static List<Question> all(){
         return YAMLParse.parse_yaml(YAML_PATH);
     }
+    
+    public static Question first(){
+    	if (all().size() == 0) {
+			return null;
+		}
+    	return all().get(0);
+    }
 
     public static Question find(int question_id) {
-        List<Question> list = all();
-        for (Question question : list) {
-            if (question_id == question.id) {
-                return question;
-            }
-        }
-        return null;
+    	return find_by_jump_index(question_id,0);
+    }
+    
+    public Question next(){
+    	return find_by_jump_index(this.id,1);
+    }
+    
+    
+    private static Question find_by_jump_index(int question_id,int index){
+    	 List<Question> list = all();
+    	 for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).id == question_id) {
+				int current = i +index;
+				if (current >= 0 && current <= list.size()) {
+					return list.get(i+index);
+				}
+			}
+		}
+    	return null;
     }
 }

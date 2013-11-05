@@ -73,7 +73,7 @@ public class Note implements Serializable{
         return is_belong(KnowledgeNetNode.class);
     }
 
-    private boolean is_belong(Class clazz){
+    private boolean is_belong(Class<?> clazz){
         try {
             return Class.forName(this.type) == clazz;
         } catch (ClassNotFoundException e) {

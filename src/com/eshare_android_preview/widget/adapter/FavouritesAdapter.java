@@ -6,11 +6,10 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
+import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.KnowledgeNetNode;
-import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.database.FavouriteDBHelper;
 
 public class FavouritesAdapter extends EshareBaseAdapter<Favourite> {
 
