@@ -1,11 +1,8 @@
 - javascript_core_knowledge_questions
 - - knowledge_node_id: n0
-    kind: single_choice
+    kind: true_false
     title: 字符 é 的 unicode 转义写法为 \u00E9，那这两个字符串 "café" === "caf\u00e9" 的比较结果是
-    choices: 
-      - "True"
-      - "False"
-    answer: A
+    answer: T
 
   - knowledge_node_id: n1
     kind: single_choice

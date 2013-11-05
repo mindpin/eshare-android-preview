@@ -54,7 +54,7 @@
 
     <!-- questions -->
     <string name="questions_title">练习题</string>
-    <string name="questions_desc">请点击“开始练习”\n逐个回答问题</string>
+    <string name="questions_desc">请点击“开始答题”\n逐个回答问题</string>
 
     <!-- note -->
     <string name="note_list_empty_tip">还没有笔记</string>

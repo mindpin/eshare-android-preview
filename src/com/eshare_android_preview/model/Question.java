@@ -102,4 +102,11 @@ public class Question extends LearningResource implements Serializable {
     public String get_note_foreign_key_id() {
         return this.id + "";
     }
+
+    public String get_kind_str() {
+        if (is_single_choice()) return "单选题";
+        if (is_multiple_choice()) return "多选题";
+        if (is_true_false()) return "判断题";
+        return "单选题";
+    }
 }

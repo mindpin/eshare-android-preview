@@ -5,12 +5,14 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
 import com.eshare_android_preview.model.TestResult;
@@ -60,8 +63,17 @@ public class QuestionShowActivity extends EshareBaseActivity{
         init_faved_button();
 		load_question_msg();
 
+        _set_icon_fonts();
+
         super.onCreate(savedInstanceState);
 	}
+
+    private void _set_icon_fonts() {
+        BitmapDrawable drawable = ImageTools.toRoundCorner(
+                (BitmapDrawable) getResources().getDrawable(R.drawable.lan_js), 100);
+        ImageView lan_icon_iv = (ImageView) findViewById(R.id.lan_icon);
+        lan_icon_iv.setBackgroundDrawable(drawable);
+    }
 
     private void refresh_test_result() {
         test_result_tv = (TextView)findViewById(R.id.test_result_tv);
@@ -92,8 +104,8 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	}
 	
 	private void load_question_msg() {
-        set_head_text(BaseUtils.sub_string_by(question.title, 10));
-		question_kind_tv.setText(question.kind);
+        set_head_text("练习题");
+		question_kind_tv.setText(question.get_kind_str());
 		question_title_tv.setText(question.title);
 		
 		load_choice(choices_detail_ll,R.layout.q_question_choice_detail_item);
