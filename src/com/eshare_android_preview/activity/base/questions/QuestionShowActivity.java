@@ -21,6 +21,7 @@ import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.TestResult;
 
 public class QuestionShowActivity extends EshareBaseActivity{
     public static class ExtraKeys {
@@ -28,7 +29,10 @@ public class QuestionShowActivity extends EshareBaseActivity{
         public static final String TEST_RESULT = "test_result";
     }
 
-	TextView item_title_tv, question_kind_tv, question_title_tv;
+    TestResult test_result;
+    TextView test_result_tv;
+
+	TextView question_kind_tv, question_title_tv;
 	LinearLayout choices_ll, choices_list_ll;
 	Button add_favourite_btn;
 	Button cancel_favourite_btn;
@@ -48,10 +52,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 
         Bundle bundle = getIntent().getExtras();
         question = (Question)bundle.getSerializable(ExtraKeys.QUESTION);
-        // TODO get test_result
-        bundle.getSerializable(ExtraKeys.TEST_RESULT);
-        init_test_result();
-
+        test_result = (TestResult)bundle.getSerializable(ExtraKeys.TEST_RESULT);
 
 		if (question.kind.equals(Question.Type.TRUE_FALSE)) {
 			List<String> list = new ArrayList<String>();
@@ -61,15 +62,18 @@ public class QuestionShowActivity extends EshareBaseActivity{
 			a_z = "T,F".split(",");
 		}
 
-		
 		init_ui();
+
+        refresh_test_result();
         init_faved_button();
 		load_question_msg();
 
         super.onCreate(savedInstanceState);
 	}
 
-    private void init_test_result() {
+    private void refresh_test_result() {
+        test_result_tv = (TextView)findViewById(R.id.test_result_tv);
+        test_result_tv.setText("正确:" + test_result.correct_count + " 错误:" + test_result.error_count);
     }
 
     private void init_faved_button() {
@@ -93,6 +97,7 @@ public class QuestionShowActivity extends EshareBaseActivity{
 		
 		answer_et = (EditText)findViewById(R.id.answer_et);
         submit_answer_btn = (Button)findViewById(R.id.submit_answer_btn);
+
 	}
 	
 	private void load_question_msg() {
@@ -117,11 +122,32 @@ public class QuestionShowActivity extends EshareBaseActivity{
 	}
 	
 	public void click_on_submit_answer_btn(View view){
-		new AlertDialog.Builder(this)
-					  	.setTitle("提示")
-					  	.setMessage("答题正确")
-					  	.setPositiveButton("确定", null)
-					  	.show();
+        View tip_tv;
+        boolean is_answer_correct = true;
+        if(is_answer_correct){
+            tip_tv = findViewById(R.id.answer_correct_tip_tv);
+            test_result.increase_correct_count();
+        }else{
+            tip_tv = findViewById(R.id.answer_error_tip_tv);
+            test_result.increase_error_count();
+        }
+        refresh_test_result();
+        tip_tv.setVisibility(View.VISIBLE);
+        submit_answer_btn.setVisibility(View.GONE);
+        Button next_question_btn = (Button)findViewById(R.id.next_question_btn);
+        next_question_btn.setVisibility(View.VISIBLE);
+        next_question_btn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionShowActivity.this, QuestionShowActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_RESULT, test_result);
+                bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question.next());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+            }
+        });
 	}
 	
 	class ClickItemListener implements OnClickListener{

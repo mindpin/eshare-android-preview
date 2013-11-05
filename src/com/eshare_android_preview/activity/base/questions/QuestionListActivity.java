@@ -11,6 +11,7 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.TestResult;
 
 public class QuestionListActivity extends EshareBaseActivity{
 
@@ -43,10 +44,9 @@ public class QuestionListActivity extends EshareBaseActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(QuestionListActivity.this, QuestionShowActivity.class);
                 Bundle bundle = new Bundle();
-                // TODO  new Result()
-                bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_RESULT, null);
-                // TODO Question.first()
-                bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, Question.all().get(0));
+                TestResult test_result = new TestResult();
+                bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_RESULT, test_result);
+                bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, Question.first());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

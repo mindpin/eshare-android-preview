@@ -6,7 +6,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_below="@+id/head_bar"
-        android:id="@+id/notes_page"
+        android:id="@+id/question_action_bar"
         android:padding="3dp"
         android:background="@color/choice_after"
         android:baselineAligned="false"
@@ -54,8 +54,8 @@
     </LinearLayout>
     
 	<ScrollView
-	    android:layout_below="@+id/notes_page"
-	    android:id="@+id/scroll_view" 
+	    android:layout_below="@+id/question_action_bar"
+	    android:id="@+id/question_content_sv"
 	    android:layout_marginBottom="35dp"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content">
@@ -88,7 +88,7 @@
 	    </LinearLayout>
 	</ScrollView>
 	<LinearLayout
-	    android:layout_alignParentBottom="true" 
+        android:layout_below="@+id/question_content_sv"
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content">
@@ -120,33 +120,41 @@
 		        android:text="@string/submit"
 		    />
 	    </LinearLayout>
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:id="@+id/test_result_tv"
-            />
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:id="@+id/answer_correct_tv"
-            android:text="回答正确"
-            android:visibility="gone"
-            />
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:id="@+id/answer_error_tv"
-            android:text="回答错误"
-            android:visibility="gone"
-            />
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:id="@+id/next_question_tv"
-            android:text="下一题"
-            android:visibility="gone"
-         />
-
 	</LinearLayout>
-	
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/test_result_tv"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/answer_correct_tip_tv"
+        android:text="回答正确"
+        android:visibility="gone"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/answer_error_tip_tv"
+        android:text="回答错误"
+        android:visibility="gone"
+        />
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/next_question_btn"
+        android:text="下一题"
+        android:visibility="gone"
+        />
+
+    </LinearLayout>
+
 </RelativeLayout>
