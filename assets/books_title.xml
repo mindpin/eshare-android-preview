@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <courses>
   <course title="JavaScript语言基础"/>
-  <course title="JavaScript字符串处理"/>
+  <course title="JavaScript语言精粹"/>
   <course title="悟透JavaScript"/>
   <course title="JavaScript高级程序设计"/>
   <course title="基于MVC的JavaScript Web富应用开发"/>

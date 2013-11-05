@@ -20,11 +20,12 @@ public class ArcProgressDialog extends Dialog {
     public int current_num = 0;
     private ArcView arc_view;
     private TextView message_view;
+    private TextView count_view;
 
     public ArcProgressDialog(Context context, int total_num) {
         super(context, R.style.base_progress_dialog);
         this.total_num = total_num;
-        this.message = "";
+        this.message = "载入课程…";
         setCancelable(false);// 不可以用“返回键”取消
     }
 
@@ -40,7 +41,9 @@ public class ArcProgressDialog extends Dialog {
             message_view.setVisibility(View.GONE);
         }
         arc_view = (ArcView)findViewById(R.id.arc_progress_av);
-        arc_view.set_arc_angle(0);
+        count_view = (TextView) findViewById(R.id.arc_progress_count);
+
+        set_progress(0);
     }
 
 
@@ -48,6 +51,7 @@ public class ArcProgressDialog extends Dialog {
         this.current_num = current_num;
         int angle = current_num*360 / total_num;
         arc_view.set_arc_angle(angle);
+        count_view.setText(current_num + "/" + total_num);
     }
 
     public static ArcProgressDialog show(Context context, int total_num) {
