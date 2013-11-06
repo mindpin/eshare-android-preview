@@ -92,13 +92,12 @@ public class CourseXMLParse {
 		return notes.getLength();
 	}
 	
-	public static int doc_parse_plan_id(int id){
+	public static void doc_parse_plan_id(int id){
 		Element root= get_root();
 		NodeList notes=root.getElementsByTagName("course");
 		Element item=(Element)notes.item(id);
 		String title = item.getAttribute("title");
 		CourseDBHelper.create(new Course(title, false));
-		return ++id;
 	}
 	
 	

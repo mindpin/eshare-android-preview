@@ -25,9 +25,7 @@ public class AddPlanActivity extends EshareBaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.p_add_plan);
 
-//      如果要调试进度条用connect()这行代码，把 load_data() 注释掉
-//		load_data();
-      connect();
+        load_data();
 
 		hide_head_setting_button();
         set_head_text(getResources().getString(R.string.plans_add_plans_title));
@@ -36,17 +34,8 @@ public class AddPlanActivity extends EshareBaseActivity{
 	}
 
 	private void load_data() {
-		int count = CourseXMLParse.doc_parse_plan_count();
-		if (Course.all().size() >= count || count == 0) {
-			load_list();
-		}else{
-		    connect();
-        }
-	}
-
-	private void connect() {  
-		ParsePlanTask task = new ParsePlanTask(this);  
-        task.execute();  
+        ParsePlanTask task = new ParsePlanTask(this);
+        task.execute();
     }
 
 	private void load_list() {
@@ -76,6 +65,7 @@ public class AddPlanActivity extends EshareBaseActivity{
 
     class ParsePlanTask extends AsyncTask<Integer, Integer, String>{
         int count = CourseXMLParse.doc_parse_plan_count();
+        int database_courses_count = Course.all().size();
         ArcProgressDialog dialog;
         public ParsePlanTask(Context context){
             dialog = ArcProgressDialog.show(context, count);
@@ -86,7 +76,16 @@ public class AddPlanActivity extends EshareBaseActivity{
         protected String doInBackground(Integer... params) {
             int id = 0;
             while (id < count) {
-                id = CourseXMLParse.doc_parse_plan_id(id);
+                if( id+1 > database_courses_count ){
+                    CourseXMLParse.doc_parse_plan_id(id);
+                }else{
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                id++;
                 publishProgress(id);
             }
             return "执行完毕";
