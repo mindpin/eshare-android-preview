@@ -7,9 +7,10 @@
 
     <LinearLayout
         android:layout_below="@+id/head_bar"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:background="#e7e7e7">
+        android:background="#e7e7e7"
+        android:id="@+id/tab_message_area" >
 
         <TextView
             android:layout_height="120dp"
@@ -21,5 +22,18 @@
             android:gravity="center"
             />
 
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/tab_message_area">
+
+        <Button
+            android:id="@+id/markdown_button"
+            android:layout_height="80dp"
+            android:layout_width="fill_parent"
+            android:text="Markdown" />
     </LinearLayout>
 </RelativeLayout>
