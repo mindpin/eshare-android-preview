@@ -392,5 +392,4 @@ public class ValidateUtil {
 		}
 		return true;
 	}
-
 }

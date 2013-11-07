@@ -68,6 +68,10 @@ public class Question extends LearningResource implements Serializable {
     public Question next(){
         return all().get(this.id+1);
     }
+    
+    public boolean answer(String answer){
+    	return this.answer.equals(answer);
+    }
 
     public List<QuestionChoice> select_choice_by_str(String answer){
         List<QuestionChoice> result = new ArrayList<QuestionChoice>();
