@@ -53,7 +53,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         question = (Question) bundle.getSerializable(ExtraKeys.QUESTION);
         test_result = (TestResult) bundle.getSerializable(ExtraKeys.TEST_RESULT);
         if (test_result == null) {
-            test_result = new TestResult();
+            test_result = new TestResult(3,Question.all().size());
         }
 
         init_ui();
@@ -78,8 +78,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
     }
 
     private void refresh_test_result() {
-        ((TextView) findViewById(R.id.correct_count)).setText(test_result.correct_count + "");
-        ((TextView) findViewById(R.id.error_count)).setText(test_result.error_count + "");
+        ((TextView) findViewById(R.id.correct_count)).setText(test_result.current_correct_count + "");
+        ((TextView) findViewById(R.id.error_count)).setText(test_result.remaining_error_count + "");
     }
 
     private void init_faved_button() {
