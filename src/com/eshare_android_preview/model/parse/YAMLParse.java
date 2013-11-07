@@ -35,7 +35,10 @@ public class YAMLParse {
                 List<QuestionChoice> choices_list = new ArrayList<QuestionChoice>();
                 Object answer = "";
 
-                if (kind.equals(Question.Type.SINGLE_CHOICE) || kind.equals(Question.Type.MULTIPLE_CHOICE)) {
+                if (kind.equals(Question.Type.SINGLE_CHOICE) ||
+                    kind.equals(Question.Type.MULTIPLE_CHOICE) ||
+                    kind.equals(Question.Type.FILL)
+                    ) {
                     Object choices = hashMap.get("choices");
                     ArrayList<?> choices_list_hm = (ArrayList<?>) choices;
                     for (int j = 0; j < choices_list_hm.size(); j++) {
