@@ -1,16 +1,20 @@
 package com.eshare_android_preview.activity.base.switch_test;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Button;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ObjectAnimator;
 
 /**
  * Created by fushang318 on 13-11-8.
  */
-public class SecondActivity extends Activity {
+public class SecondActivity extends EshareBaseActivity {
+    private boolean anim_is_run = false;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.st_second);
@@ -19,12 +23,46 @@ public class SecondActivity extends Activity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        Button btn = (Button) findViewById(R.id.st_second_btn);
-        if(hasFocus){
-            ObjectAnimator.ofFloat(btn, "y", 400).setDuration(1000).start();
-        }else{
-            ObjectAnimator.ofFloat(btn, "y", 590).setDuration(1000).start();
+        if(hasFocus && !anim_is_run){
+            run_page_init_anim();
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            FirstActivity.instance.run_back_anim();
+            run_back_anim();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void run_page_init_anim(){
+        Button btn = (Button) findViewById(R.id.st_second_btn);
+        ObjectAnimator.ofFloat(btn, "y", 400).setDuration(500).start();
+        anim_is_run = true;
+    }
+
+    public void run_back_anim(){
+        Button btn = (Button) findViewById(R.id.st_second_btn);
+        ObjectAnimator oa = ObjectAnimator.ofFloat(btn, "y", 800);
+        oa.setDuration(500);
+        oa.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {}
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                SecondActivity.this.finish();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {}
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {}
+        });
+        oa.start();
+    }
 }
