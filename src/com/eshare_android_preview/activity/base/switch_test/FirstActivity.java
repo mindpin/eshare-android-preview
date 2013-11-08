@@ -23,8 +23,8 @@ public class FirstActivity extends EshareBaseActivity {
             public void onClick(View v) {
             	
             	
-            	
-            	
+            	Bundle b = new Bundle();
+
             	ObjectAnimator.ofFloat(v, "y", 300).setDuration(3000).start();
                 open_activity(SecondActivity.class);
             }
