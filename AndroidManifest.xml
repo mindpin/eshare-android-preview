@@ -59,6 +59,10 @@
         <activity android:name=".activity.base.groups.UserShowActivity"></activity>
         <activity android:name=".activity.base.groups.GroupListActivity" />
         <activity android:name=".activity.base.markdown.MarkdownActivity" />
+        <activity android:name=".activity.base.switch_test.FirstActivity" />
+        <activity
+            android:theme="@style/AppTranslucentTheme"
+            android:name=".activity.base.switch_test.SecondActivity" />
     </application>
 
 </manifest>

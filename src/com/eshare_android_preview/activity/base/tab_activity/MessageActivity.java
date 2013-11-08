@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.markdown.MarkdownActivity;
+import com.eshare_android_preview.activity.base.switch_test.FirstActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 
 public class MessageActivity extends EshareBaseActivity{
@@ -17,8 +18,19 @@ public class MessageActivity extends EshareBaseActivity{
         this.hide_head_go_back_button();
         this.set_head_text(R.string.category_message);
         this.render_markdown_button();
+        this.render_to_first_button();
 		super.onCreate(savedInstanceState);
 	}
+
+    private void render_to_first_button() {
+        Button button = (Button) findViewById(R.id.to_first_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                open_activity(FirstActivity.class);
+            }
+        });
+    }
 
     private void render_markdown_button() {
         Button button = (Button) findViewById(R.id.markdown_button);

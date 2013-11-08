@@ -26,6 +26,7 @@
 
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:layout_below="@+id/tab_message_area">
@@ -35,5 +36,10 @@
             android:layout_height="80dp"
             android:layout_width="fill_parent"
             android:text="Markdown" />
+        <Button
+            android:id="@+id/to_first_btn"
+            android:layout_height="80dp"
+            android:layout_width="fill_parent"
+            android:text="to_first_btn" />
     </LinearLayout>
 </RelativeLayout>
