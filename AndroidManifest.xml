@@ -58,7 +58,7 @@
         <activity android:name=".activity.base.groups.GroupShowUserListActivity"></activity>
         <activity android:name=".activity.base.groups.UserShowActivity"></activity>
         <activity android:name=".activity.base.groups.GroupListActivity" />
-        <activity android:name=".activity.base.markdown.MarkdownActivity" />
+        <activity android:name=".activity.base.webview_demo.WebViewDemoActivity" />
     </application>
 
 </manifest>

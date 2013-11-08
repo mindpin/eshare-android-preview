@@ -34,6 +34,6 @@
             android:id="@+id/markdown_button"
             android:layout_height="80dp"
             android:layout_width="fill_parent"
-            android:text="Markdown" />
+            android:text="WebView Demo" />
     </LinearLayout>
 </RelativeLayout>

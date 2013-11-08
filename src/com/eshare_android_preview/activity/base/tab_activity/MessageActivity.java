@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.activity.base.markdown.MarkdownActivity;
+import com.eshare_android_preview.activity.base.webview_demo.WebViewDemoActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 
 public class MessageActivity extends EshareBaseActivity{
@@ -25,7 +25,7 @@ public class MessageActivity extends EshareBaseActivity{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                open_activity(MarkdownActivity.class);
+                open_activity(WebViewDemoActivity.class);
             }
         });
     }
