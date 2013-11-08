@@ -28,9 +28,9 @@ public class FirstActivity extends EshareBaseActivity {
             	ObjectAnimator anim_y = ObjectAnimator.ofFloat(v, "y", 200);
             	anim_y.setDuration(3000);
             	TextView textView = (TextView) findViewById(R.id.first_tv_bg);
-            	ObjectAnimator anim_r = ObjectAnimator.ofFloat(textView, "scaleY", 1,50);
-            	anim_r.setDuration(3000);
-            	animSet.playTogether(anim_y,anim_r);
+            	ObjectAnimator anim_scale = ObjectAnimator.ofFloat(textView, "scaleY", 1,50);
+            	anim_scale.setDuration(3000);
+            	animSet.playTogether(anim_y,anim_scale);
             	animSet.start();
             	state = true;
                 open_activity(SecondActivity.class);
@@ -48,10 +48,10 @@ public class FirstActivity extends EshareBaseActivity {
         	anim_y.setDuration(3000);
         	
         	TextView textView = (TextView) findViewById(R.id.first_tv_bg);
-        	ObjectAnimator anim_r = ObjectAnimator.ofFloat(textView, "scaleY", 50,1);
-        	anim_r.setDuration(3000);
+        	ObjectAnimator anim_scale = ObjectAnimator.ofFloat(textView, "scaleY", 50,1);
+        	anim_scale.setDuration(3000);
         	
-        	animSet.playTogether(anim_r,anim_y);
+        	animSet.playTogether(anim_scale,anim_y);
         	animSet.start();
 		}
     }
