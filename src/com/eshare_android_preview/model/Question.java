@@ -15,6 +15,7 @@ public class Question extends LearningResource implements Serializable {
 		public static final String   MULTIPLE_CHOICE = "multiple_choices";
 		public static final String   TRUE_FALSE = "true_false";
 		public static final String   CODE = "code";
+        public static final String   FILL = "fill";
 	}
 
 	private static final long serialVersionUID = 111111L;
@@ -53,6 +54,10 @@ public class Question extends LearningResource implements Serializable {
         return this.kind.equals(Type.CODE);
     }
 
+    public boolean is_fill(){
+        return this.kind.equals(Type.FILL);
+    }
+
     public static List<Question> all(){
         return QUESTIONS;
     }
@@ -67,6 +72,10 @@ public class Question extends LearningResource implements Serializable {
     
     public Question next(){
         return all().get(this.id+1);
+    }
+    
+    public boolean answer(String answer){
+    	return this.answer.equals(answer);
     }
 
     public List<QuestionChoice> select_choice_by_str(String answer){
@@ -105,6 +114,7 @@ public class Question extends LearningResource implements Serializable {
         if (is_single_choice()) return "单选题";
         if (is_multiple_choice()) return "多选题";
         if (is_true_false()) return "判断题";
+        if (is_fill()) return "填空题";
         return "单选题";
     }
 }

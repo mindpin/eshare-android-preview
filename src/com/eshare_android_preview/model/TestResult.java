@@ -20,8 +20,12 @@ public class TestResult implements Serializable{
 		this.remaining_error_count--;
 	}
 	
+	public int current_error_count(){
+		return this.allowed_error_count - this.remaining_error_count;
+	}
+	
 	public boolean is_end(){
-		return this.remaining_error_count >= this.allowed_error_count;
+		return this.remaining_error_count == 0;
 	}
 	
 	public boolean is_pass(){

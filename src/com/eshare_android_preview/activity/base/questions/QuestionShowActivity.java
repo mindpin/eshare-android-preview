@@ -1,6 +1,8 @@
 package com.eshare_android_preview.activity.base.questions;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,7 +19,9 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
+import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
@@ -78,8 +82,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
     }
 
     private void refresh_test_result() {
-        ((TextView) findViewById(R.id.correct_count)).setText(test_result.current_correct_count + "");
-        ((TextView) findViewById(R.id.error_count)).setText(test_result.remaining_error_count + "");
+        ((TextView) findViewById(R.id.correct_count)).setText(test_result.current_correct_count + "/" + test_result.needed_correct_count);
+        ((TextView) findViewById(R.id.error_count)).setText(test_result.current_error_count() + "/" + test_result.allowed_error_count);
     }
 
     private void init_faved_button() {
@@ -133,7 +137,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     public void click_on_submit_answer_btn(View view) {
         View tip_tv;
-        boolean is_answer_correct = true;
+        boolean is_answer_correct = question.answer(QuestionChoice.syms(select_choices));
         if (is_answer_correct) {
             tip_tv = findViewById(R.id.answer_correct_tip_tv);
             test_result.increase_correct_count();
@@ -143,22 +147,44 @@ public class QuestionShowActivity extends EshareBaseActivity {
         }
         refresh_test_result();
         tip_tv.setVisibility(View.VISIBLE);
-        submit_answer_btn.setVisibility(View.GONE);
-        Button next_question_btn = (Button) findViewById(R.id.next_question_btn);
-        next_question_btn.setVisibility(View.VISIBLE);
-        next_question_btn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QuestionShowActivity.this, QuestionShowActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_RESULT, test_result);
-                bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question.next());
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-            }
-        });
+        
+        if (test_result.is_end()) {
+		   to_do_answer_error();
+		}else{
+		   to_do_next_question();
+		}
     }
+    private void to_do_answer_error() {
+    	new AlertDialog.Builder(QuestionShowActivity.this)
+    	.setTitle("提示")
+    	.setMessage("答题错误已经超过 " + test_result.allowed_error_count + " 次,需要重新答题")
+    	.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				finish();
+			}
+		}).show();
+	}
+
+	private void to_do_next_question(){
+    	 submit_answer_btn.setVisibility(View.GONE);
+         Button next_question_btn = (Button) findViewById(R.id.next_question_btn);
+         next_question_btn.setVisibility(View.VISIBLE);
+         next_question_btn.setOnClickListener(new OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent = new Intent(QuestionShowActivity.this, QuestionShowActivity.class);
+                 Bundle bundle = new Bundle();
+                 bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_RESULT, test_result);
+                 bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, question.next());
+                 intent.putExtras(bundle);
+                 startActivity(intent);
+                 finish();
+             }
+         });
+    }
+    
+    
 
     class ClickItemListener implements OnClickListener {
         QuestionChoice choice;
