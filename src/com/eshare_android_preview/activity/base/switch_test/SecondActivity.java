@@ -2,7 +2,9 @@ package com.eshare_android_preview.activity.base.switch_test;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
@@ -18,6 +20,14 @@ public class SecondActivity extends EshareBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.st_second);
+
+        Button btn = (Button) findViewById(R.id.st_second_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SecondActivity.this,"click",2000).show();
+            }
+        });
     }
 
     @Override

@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
     <Button
         android:id="@+id/st_second_btn"
-        android:layout_y="590dp"
+        android:layout_y="500dp"
         android:text="第二个页面的按钮"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent" />
