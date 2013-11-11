@@ -1,22 +1,29 @@
 package com.eshare_android_preview.activity.base.switch_test;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
+import com.nineoldandroids.animation.ValueAnimator.AnimatorUpdateListener;
 
 /**
  * Created by fushang318 on 13-11-8.
  */
 public class SecondActivity extends EshareBaseActivity {
     private boolean anim_is_run = false;
-
+    LinearLayout second_ll ;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.st_second);
@@ -25,7 +32,7 @@ public class SecondActivity extends EshareBaseActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SecondActivity.this,"click",2000).show();
+                Toast.makeText(SecondActivity.this,"click",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -49,14 +56,29 @@ public class SecondActivity extends EshareBaseActivity {
     }
 
     public void run_page_init_anim(){
-        Button btn = (Button) findViewById(R.id.st_second_btn);
-        ObjectAnimator.ofFloat(btn, "y", 400).setDuration(500).start();
+    	second_ll = (LinearLayout) findViewById(R.id.second_ll);
+    	ValueAnimator va = ObjectAnimator.ofFloat(second_ll, "y", 300);
+    	va.setDuration(500);
+    	va.addUpdateListener(new AnimatorUpdateListener() {
+			@Override
+			public void onAnimationUpdate(ValueAnimator animation) {
+				Log.i("update", ((Float) animation.getAnimatedValue()).toString());
+				int change_value = (int) (((Float) animation.getAnimatedValue())  + 0);
+				set_prame(second_ll,40,change_value,0,0);
+			}
+		});
+    	va.start();
         anim_is_run = true;
+    }
+    private void set_prame(ViewGroup group, int left, int top, int right, int bottom){
+		FrameLayout.LayoutParams lp = (LayoutParams) group.getLayoutParams();
+		lp.setMargins(left, top, right, bottom);
+		group.setLayoutParams(lp);
     }
 
     public void run_back_anim(){
-        Button btn = (Button) findViewById(R.id.st_second_btn);
-        ObjectAnimator oa = ObjectAnimator.ofFloat(btn, "y", 800);
+    	second_ll = (LinearLayout) findViewById(R.id.second_ll);
+        ObjectAnimator oa = ObjectAnimator.ofFloat(second_ll, "y", 800);
         oa.setDuration(500);
         oa.addListener(new Animator.AnimatorListener() {
             @Override
