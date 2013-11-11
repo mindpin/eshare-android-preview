@@ -63,7 +63,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         select_answer = question.build_select_answer();
         test_result = (TestResult) bundle.getSerializable(ExtraKeys.TEST_RESULT);
         if (test_result == null) {
-            test_result = new TestResult(3,Question.all().size());
+            test_result = new TestResult(3,4);
         }
 
         init_ui();
@@ -155,6 +155,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
         
         if (test_result.is_end()) {
 		   to_do_answer_error();
+        }else if(test_result.is_pass()){
+            to_do_answer_pass();
 		}else{
 		   to_do_next_question();
 		}
@@ -170,6 +172,18 @@ public class QuestionShowActivity extends EshareBaseActivity {
 			}
 		}).show();
 	}
+
+    private void to_do_answer_pass(){
+        new AlertDialog.Builder(QuestionShowActivity.this)
+                .setTitle("提示")
+                .setMessage("答题正确已经超过 " + test_result.needed_correct_count + " 次, 测试通过")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                }).show();
+    }
 
 	private void to_do_next_question(){
     	 submit_answer_btn.setVisibility(View.GONE);
