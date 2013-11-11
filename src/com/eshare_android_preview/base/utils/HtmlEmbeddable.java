@@ -2,6 +2,8 @@ package com.eshare_android_preview.base.utils;
 
 import android.util.Log;
 
+import java.io.IOException;
+
 /**
  * Created by kaid on 11/8/13.
  */
@@ -24,7 +26,7 @@ public class HtmlEmbeddable {
         return "<script src=\"file:///android_asset/js/" + jsFile + "\"></script>";
     }
 
-    public String output() {
+    public String output() throws IOException {
         return
         "<!DOCTYPE html>" +
         "<html>" +
@@ -35,7 +37,7 @@ public class HtmlEmbeddable {
           "</style>" +
         "</head>" +
         "<body>" +
-          htmlSnippet +
+          HtmlCodeParser.fromString(htmlSnippet).output() +
           js("prism.js") +
         "</body>" +
         "</html>";
