@@ -38,6 +38,21 @@
       - "é$str"
     answer: AC
 
+  - knowledge_node_id: n69
+    kind: fill
+    title: |
+      [fill](a > 3) {
+        [fill]("hello")
+      }
+    choices:
+      - alert
+      - if
+      - when
+      - confirm
+      - else
+      - of
+    answer: if,alert
+
   - knowledge_node_id: n4
     kind: multiple_choices
     title: 下列哪些是保留字
@@ -497,22 +512,3 @@
     - "arr = [1];arr.push(2);arr.join(',') === '1,2'"
     - "arr = [1];arr.unshift(2);arr.join(',') === '1,2'"
   answer: ABCD
-
-
-
-
-
-- knowledge_node_id: n69
-  kind: fill
-  title: |
-    [fill](a > 3) {
-      [fill]("hello")
-    }
-  choices:
-    - alert
-    - if
-    - when
-    - confirm
-    - else
-    - of
-  answer: if,alert

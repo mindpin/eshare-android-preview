@@ -117,4 +117,20 @@ public class Question extends LearningResource implements Serializable {
         if (is_fill()) return "填空题";
         return "单选题";
     }
+
+    public QuestionSelectAnswer build_select_answer(){
+        if(is_single_choice()){
+            return new SingleChoiceQuestionSelectAnswer(this);
+        }
+        if(is_multiple_choice()){
+            return new MultipleChoiceQuestionSelectAnswer(this);
+        }
+        if(is_true_false()){
+            return new TrueFalseQuestionSelectAnswer(this);
+        }
+        if(is_fill()){
+            return new FillQuestionSelectAnswer(this);
+        }
+        return null;
+    }
 }

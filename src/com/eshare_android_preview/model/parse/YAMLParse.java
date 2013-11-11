@@ -12,6 +12,7 @@ import org.yaml.snakeyaml.Yaml;
 import android.content.res.AssetManager;
 
 import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.model.FillQuestionChoice;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
 
@@ -36,13 +37,22 @@ public class YAMLParse {
                 Object answer = "";
 
                 if (kind.equals(Question.Type.SINGLE_CHOICE) ||
-                    kind.equals(Question.Type.MULTIPLE_CHOICE) ||
-                    kind.equals(Question.Type.FILL)
-                    ) {
+                    kind.equals(Question.Type.MULTIPLE_CHOICE)
+                   ) {
                     Object choices = hashMap.get("choices");
                     ArrayList<?> choices_list_hm = (ArrayList<?>) choices;
                     for (int j = 0; j < choices_list_hm.size(); j++) {
                         QuestionChoice qc = new QuestionChoice(j, choices_sym[j], choices_list_hm.get(j).toString());
+                        choices_list.add(qc);
+                    }
+                    answer = hashMap.get("answer");
+                }
+
+                if(kind.equals(Question.Type.FILL)){
+                    Object choices = hashMap.get("choices");
+                    ArrayList<?> choices_list_hm = (ArrayList<?>) choices;
+                    for (int j = 0; j < choices_list_hm.size(); j++) {
+                        QuestionChoice qc = new FillQuestionChoice(j, choices_list_hm.get(j).toString());
                         choices_list.add(qc);
                     }
                     answer = hashMap.get("answer");

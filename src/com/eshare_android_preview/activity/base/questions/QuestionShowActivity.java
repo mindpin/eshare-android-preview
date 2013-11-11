@@ -23,9 +23,14 @@ import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
+import com.eshare_android_preview.model.FillQuestionSelectAnswer;
+import com.eshare_android_preview.model.MultipleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
+import com.eshare_android_preview.model.QuestionSelectAnswer;
+import com.eshare_android_preview.model.SingleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.TestResult;
+import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +49,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
     Button cancel_favourite_btn;
 
     Button submit_answer_btn;
-    List<QuestionChoice> select_choices = new ArrayList<QuestionChoice>();
     Question question;
+    QuestionSelectAnswer select_answer;
 
     @SuppressLint("WorldReadableFiles")
     @Override
@@ -55,6 +60,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
         Bundle bundle = getIntent().getExtras();
         question = (Question) bundle.getSerializable(ExtraKeys.QUESTION);
+        select_answer = question.build_select_answer();
         test_result = (TestResult) bundle.getSerializable(ExtraKeys.TEST_RESULT);
         if (test_result == null) {
             test_result = new TestResult(3,Question.all().size());
@@ -137,8 +143,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     public void click_on_submit_answer_btn(View view) {
         View tip_tv;
-        boolean is_answer_correct = question.answer(QuestionChoice.syms(select_choices));
-        if (is_answer_correct) {
+        if (select_answer.is_correct()) {
             tip_tv = findViewById(R.id.answer_correct_tip_tv);
             test_result.increase_correct_count();
         } else {
@@ -199,20 +204,27 @@ public class QuestionShowActivity extends EshareBaseActivity {
         public void onClick(View v) {
 
             if (question.is_single_choice() || question.is_true_false()) {
-                select_choices.clear();
-                select_choices.add(choice);
+                select_answer.set_choice(choice);
             }
             if (question.is_multiple_choice()) {
-                if (select_choices.indexOf(choice) != -1) {
-                    select_choices.remove(choice);
-                } else {
-                    select_choices.add(choice);
-                }
+                select_answer.add_or_remove_choice(choice);
             }
+
+//            填空题提供的模型方法如下，和界面集成时会用到
+//            if (question.is_fill()){
+//                给第一个空填空
+//                select_answer.set_choice(1, choice);
+//
+//                给第二个空填空
+//                select_answer.set_choice(2, choice);
+//
+//                清空三个空
+//                select_answer.set_choice(3, null);
+//            }
 
             set_choice_item_background(choices_detail_ll);
 
-            if (select_choices.size() == 0) {
+            if (select_answer.is_empty()) {
                 submit_answer_btn.setClickable(false);
                 submit_answer_btn.setBackgroundResource(R.drawable.btn_c6699bd3b_circle_flat);
                 submit_answer_btn.setShadowLayer(0, 0, 0, Color.parseColor("#00000000"));
@@ -226,19 +238,32 @@ public class QuestionShowActivity extends EshareBaseActivity {
     }
 
     private void set_choice_item_background(LinearLayout layout) {
-
-        if (question.is_single_choice() || question.is_true_false()) {
+        if (question.is_single_choice()) {
             _set_choices_color_before(layout);
-            _set_choice_color_after(layout.getChildAt(select_choices.get(0).index));
+            int index = ((SingleChoiceQuestionSelectAnswer) select_answer).select_choice.index;
+            _set_choice_color_after(layout.getChildAt(index));
+        }
+
+        if (question.is_true_false()) {
+            _set_choices_color_before(layout);
+            int index = ((TrueFalseQuestionSelectAnswer) select_answer).select_choice.index;
+            _set_choice_color_after(layout.getChildAt(index));
         }
 
         if (question.is_multiple_choice()) {
             _set_choices_color_before(layout);
-
-            for (QuestionChoice qc : select_choices) {
+            for (QuestionChoice qc : ((MultipleChoiceQuestionSelectAnswer) select_answer).select_choices) {
                 _set_choice_color_after(layout.getChildAt(qc.index));
             }
         }
+
+//      填空题提供的模型方法如下，和界面集成时会用到
+//      if (question.is_fill()){
+//        _set_choices_color_before(layout);
+//        for (QuestionChoice qc : ((FillQuestionSelectAnswer) select_answer).select_choices.values()) {
+//            _set_choice_color_after(layout.getChildAt(qc.index));
+//        }
+//       }
     }
 
     private void _set_choices_color_before(LinearLayout layout) {
