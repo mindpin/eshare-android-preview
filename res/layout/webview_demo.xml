@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:background="#e7e7e7">
-        <WebView
+        <com.eshare_android_preview.base.view.EshareMarkdownView
             android:layout_below="@+id/markdown_input"
             android:id="@+id/markdown_preview"
             android:layout_height="fill_parent"
