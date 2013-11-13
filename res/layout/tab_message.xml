@@ -36,10 +36,11 @@
             android:layout_height="80dp"
             android:layout_width="fill_parent"
             android:text="WebView Demo" />
+        <Button
+            android:id="@+id/dash_path_button"
+            android:layout_height="80dp"
+            android:layout_width="fill_parent"
+            android:text="Dash Path Demo" />
 
-        <com.eshare_android_preview.base.view.DashPathView
-            android:layout_gravity="center"
-            android:layout_height="200dp"
-            android:layout_width="200dp" />
     </LinearLayout>
 </RelativeLayout>
