@@ -71,13 +71,14 @@ public class GistFileParse extends BaseNodeParser{
 					String child_id = parent_childElement.getAttribute("child");
 					String parent_id = parent_childElement.getAttribute("parent");
 					
-					KnowledgeNodeRelation nodeRelation = new KnowledgeNodeRelation(node_map.get(parent_id),node_map.get(child_id));
-					node_map.get(child_id).relations.put(child_id, nodeRelation);
-					node_map.get(parent_id).relations.put(parent_id, nodeRelation);
-					
-					node_map.get(child_id).parents.put(parent_id, node_map.get(parent_id));
-					node_map.get(parent_id).children.put(child_id, node_map.get(child_id));
-					
+					if (node_map.get(parent_id) !=null && node_map.get(child_id) !=null) {
+						KnowledgeNodeRelation nodeRelation = new KnowledgeNodeRelation(node_map.get(parent_id),node_map.get(child_id));
+						node_map.get(child_id).relations.put(child_id, nodeRelation);
+						node_map.get(parent_id).relations.put(parent_id, nodeRelation);
+						
+						node_map.get(child_id).parents.put(parent_id, node_map.get(parent_id));
+						node_map.get(parent_id).children.put(child_id, node_map.get(child_id));
+					}
 				}
 			}
 			
@@ -121,14 +122,14 @@ public class GistFileParse extends BaseNodeParser{
 					parent = check_point_map.get(parent_id);
 				}
 				
-				KnowledgeSetRelation setRelation = new KnowledgeSetRelation(parent,child);
-				
-				node_set_map.get(child_id).relations.add(setRelation);
-				node_set_map.get(parent_id).relations.add(setRelation);
-				
-				node_set_map.get(child_id).parents.add(parent);
-				node_set_map.get(parent_id).children.add(child);
-				
+				if (child != null && parent !=null) {
+					KnowledgeSetRelation setRelation = new KnowledgeSetRelation(parent,child);
+					child.relations.add(setRelation);
+					parent.relations.add(setRelation);
+					
+					child.parents.add(parent);
+					parent.children.add(child);
+				}
 			}
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();

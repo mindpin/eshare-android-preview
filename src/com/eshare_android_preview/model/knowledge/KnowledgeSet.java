@@ -17,10 +17,6 @@ public class KnowledgeSet extends BaseKnowledgeSet{
 		this.icon = icon;
 		
 		this.nodes = new ArrayList<KnowledgeNode>();
-		
-		this.relations = new ArrayList<KnowledgeSetRelation>();
-		this.parents = new ArrayList<BaseKnowledgeSet>();
-		this.children = new ArrayList<BaseKnowledgeSet>();
 	}
 	
 	public KnowledgeNode first_node(){
