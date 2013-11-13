@@ -41,8 +41,8 @@
   - knowledge_node_id: n69
     kind: fill
     content: |
-      [fill](a > 3) {
-        [fill]("hello")
+      [#](a > 3) {
+        [#]("hello")
       }
     choices:
       - alert
