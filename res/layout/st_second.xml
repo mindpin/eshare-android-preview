@@ -5,16 +5,17 @@
     android:layout_height="fill_parent"
 >   
     <LinearLayout
+        android:layout_marginTop="570dp"
         android:layout_gravity="left"
         android:id="@+id/second_ll"
         android:background="#0f0"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <Button
         android:id="@+id/st_second_btn"
         android:text="第二个页面的按钮"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content" />
+        android:layout_width="fill_parent" />
         
     </LinearLayout>
  </FrameLayout>

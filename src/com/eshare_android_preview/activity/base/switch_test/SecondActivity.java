@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.base.utils.BaseUtils;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.animation.ValueAnimator;
@@ -57,14 +58,15 @@ public class SecondActivity extends EshareBaseActivity {
 
     public void run_page_init_anim(){
     	second_ll = (LinearLayout) findViewById(R.id.second_ll);
-    	ValueAnimator va = ObjectAnimator.ofFloat(second_ll, "y", 300);
+    	ValueAnimator va = ValueAnimator.ofFloat(570, 300);
     	va.setDuration(500);
     	va.addUpdateListener(new AnimatorUpdateListener() {
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation) {
 				Log.i("update", ((Float) animation.getAnimatedValue()).toString());
 				int change_value = (int) (((Float) animation.getAnimatedValue())  + 0);
-				set_prame(second_ll,40,change_value,0,0);
+                int change_value_px = BaseUtils.dp_to_px(change_value);
+				set_prame(second_ll,0,change_value_px,0,0);
 			}
 		});
     	va.start();
