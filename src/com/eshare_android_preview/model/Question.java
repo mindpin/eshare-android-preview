@@ -21,18 +21,18 @@ public class Question extends LearningResource implements Serializable {
 	public int id;
 	public String knowledge_node_id;
 	public String kind;
-	public String title;
+	public String content;
 	public List<QuestionChoice> choices_list;
 	public String answer;
 
 
 	// 选择题
-	public Question(int id,String knowledge_node_id, String kind, String title,List<QuestionChoice> choices_list, String answer) {
+	public Question(int id,String knowledge_node_id, String kind, String content, List<QuestionChoice> choices_list, String answer) {
 		super();
 		this.id = id;
 		this.knowledge_node_id = knowledge_node_id;
 		this.kind = kind;
-		this.title = title;
+		this.content = content;
 		this.choices_list = choices_list;
 		this.answer = answer;
 	}
