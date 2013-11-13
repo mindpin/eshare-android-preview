@@ -2,6 +2,7 @@ package com.eshare_android_preview.model.parse.node;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,6 +14,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
@@ -21,23 +23,18 @@ import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeSetRelation;
 
 public class GistFileParse extends BaseNodeParser{
-	
-	public List<KnowledgeSet> node_set_list;
-	public List<KnowledgeNode> node_list;
-	public List<KnowledgeNodeRelation> node_relation_list;
-	public List<KnowledgeCheckpoint> check_point_list;
-	public List<KnowledgeSetRelation> set_relation_list;
-	
+
+	public HashMap<String, KnowledgeSet> node_set_map;
+	public HashMap<String, KnowledgeNode> node_map;
+	public HashMap<String, KnowledgeCheckpoint> check_point_map;
+
 	public 	GistFileParse(String nodeUrl){
 		super(nodeUrl);
-		this.node_list = new ArrayList<KnowledgeNode>();
-		this.node_set_list = new ArrayList<KnowledgeSet>();
-		this.node_relation_list = new ArrayList<KnowledgeNodeRelation>();
-		this.check_point_list = new ArrayList<KnowledgeCheckpoint>();
-		this.set_relation_list = new ArrayList<KnowledgeSetRelation>();
+		this.node_set_map = new HashMap<String, KnowledgeSet>();
+		this.node_map = new HashMap<String, KnowledgeNode>();
+		this.check_point_map = new HashMap<String, KnowledgeCheckpoint>();
 	}
 	
-	@Override
 	public List<KnowledgeNet> parse() {
 		DocumentBuilderFactory factory= DocumentBuilderFactory.newInstance();
 		try {
@@ -49,39 +46,38 @@ public class GistFileParse extends BaseNodeParser{
 			for(int i=0;i<sets.getLength();i++){
 				Element setElement=(Element)(sets.item(i));
 				
-				KnowledgeSet node_set = new KnowledgeSet(); 
-				node_set.setId(setElement.getAttribute("id"));
-				node_set.setName(setElement.getAttribute("name"));
-				node_set.setIcon(setElement.getAttribute("icon"));
-				this.node_set_list.add(node_set);
-				
-				
+				KnowledgeSet node_set = new KnowledgeSet(setElement.getAttribute("id"),setElement.getAttribute("name"),setElement.getAttribute("icon")); 
 				NodeList nodes = setElement.getElementsByTagName("node");
 				for (int j = 0; j < nodes.getLength(); j++) {
 					Element nodeElement=(Element)(nodes.item(j));
-					KnowledgeNode node = new KnowledgeNode();
-					node.setNode_set_id(node_set.id);
-					node.setId(nodeElement.getAttribute("id"));
-					node.setName(nodeElement.getAttribute("name"));
-					node.setRequired(nodeElement.getAttribute("required"));
-					
 					NodeList descNodeList = nodeElement.getElementsByTagName("desc");
+					String desc = "";
 					if (descNodeList.getLength() > 0) {
 						Element descElement= (Element) descNodeList.item(0);
-						node.setDesc(descElement.getNodeValue());
+						desc = descElement.getNodeValue();
 					}
-					this.node_list.add(node);
+					KnowledgeNode node = new KnowledgeNode(node_set.id,nodeElement.getAttribute("id"),nodeElement.getAttribute("name"),nodeElement.getAttribute("required"),desc);
+					this.node_map.put(node.id, node);
+					node_set.nodes.add(node);
+					
 				}
-				
+				this.node_set_map.put(node_set.id, node_set);
 				
 				
 				NodeList parent_child = setElement.getElementsByTagName("parent-child");
 				for (int j = 0; j < parent_child.getLength(); j++) {
 					Element parent_childElement=(Element)(parent_child.item(j));
-					KnowledgeNodeRelation nodeRelation = new KnowledgeNodeRelation();
-					nodeRelation.setChild_id(parent_childElement.getAttribute("child"));
-					nodeRelation.setParent_id(parent_childElement.getAttribute("parent"));
-					this.node_relation_list.add(nodeRelation);
+					
+					String child_id = parent_childElement.getAttribute("child");
+					String parent_id = parent_childElement.getAttribute("parent");
+					
+					KnowledgeNodeRelation nodeRelation = new KnowledgeNodeRelation(node_map.get(parent_id),node_map.get(child_id));
+					node_map.get(child_id).relations.put(child_id, nodeRelation);
+					node_map.get(parent_id).relations.put(parent_id, nodeRelation);
+					
+					node_map.get(child_id).parents.put(parent_id, node_map.get(parent_id));
+					node_map.get(parent_id).children.put(child_id, node_map.get(child_id));
+					
 				}
 			}
 			
@@ -89,28 +85,50 @@ public class GistFileParse extends BaseNodeParser{
 			NodeList checkpoints = checkpointsElement.getElementsByTagName("checkpoint");
 			for(int i=0;i<checkpoints.getLength();i++){
 				Element checkpointElement=(Element)(checkpoints.item(i));
-				KnowledgeCheckpoint checkpoint = new KnowledgeCheckpoint();
-				List<String> targets = new ArrayList<String>(); 
 				
-				checkpoint.setId(checkpointElement.getAttribute("id"));
+				List<KnowledgeSet> learned_sets = new ArrayList<KnowledgeSet>();
 				NodeList learneds = checkpointElement.getElementsByTagName("learned");
 				for (int j = 0; j < learneds.getLength(); j++) {
 					Element learnedElement=(Element)(learneds.item(j));
-					targets.add(learnedElement.getAttribute("target"));
+					String node_set_id = learnedElement.getAttribute("target");
+					learned_sets.add(node_set_map.get(node_set_id));
 				}
+				KnowledgeCheckpoint checkpoint = new KnowledgeCheckpoint(checkpointElement.getAttribute("id"),learned_sets);
 				
-				checkpoint.setTargets(targets);
-				this.check_point_list.add(checkpoint);
+				this.check_point_map.put(checkpoint.id, checkpoint);
 				
 			}
 			Element relationsElement = (Element) root.getElementsByTagName("relations").item(0);
 			NodeList parent_childs=relationsElement.getElementsByTagName("parent-child");
 			for(int i=0;i<parent_childs.getLength();i++){
 				Element parent_childElement=(Element)(parent_childs.item(i));
-				KnowledgeSetRelation setRelation = new KnowledgeSetRelation();
-				setRelation.setChild_id(parent_childElement.getAttribute("child"));
-				setRelation.setParent_id(parent_childElement.getAttribute("parent"));
-				this.set_relation_list.add(setRelation);
+				
+				String child_id = parent_childElement.getAttribute("child");
+				String parent_id = parent_childElement.getAttribute("parent");
+				
+				BaseKnowledgeSet child;
+				
+				if (child_id.indexOf("set-") == 1) {
+					child = node_set_map.get(child_id);
+				}else{
+					child = check_point_map.get(child_id);
+				}
+				
+				BaseKnowledgeSet parent;
+				if (parent_id.indexOf("set-") == 1) {
+					parent = node_set_map.get(parent_id);
+				}else{
+					parent = check_point_map.get(parent_id);
+				}
+				
+				KnowledgeSetRelation setRelation = new KnowledgeSetRelation(parent,child);
+				
+				node_set_map.get(child_id).relations.add(setRelation);
+				node_set_map.get(parent_id).relations.add(setRelation);
+				
+				node_set_map.get(child_id).parents.add(parent);
+				node_set_map.get(parent_id).children.add(child);
+				
 			}
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();

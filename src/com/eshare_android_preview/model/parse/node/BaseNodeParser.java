@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 import com.eshare_android_preview.application.EshareApplication;
 
-public abstract class BaseNodeParser implements NodeParser{
+public abstract class BaseNodeParser{
 	String nodeUrl;
 	
 	protected BaseNodeParser(String nodeUrl) {

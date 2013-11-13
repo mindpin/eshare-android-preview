@@ -9,6 +9,7 @@ public abstract class BaseParse {
 	protected BaseParse() {
 		if (fileParse == null) {
 			fileParse = new GistFileParse(XML_PATH);
+			fileParse.parse();
 		}
 	}
 }
