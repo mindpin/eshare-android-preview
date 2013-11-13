@@ -1,12 +1,12 @@
 - javascript_core_knowledge_questions
 - - knowledge_node_id: n0
     kind: true_false
-    title: 字符 é 的 unicode 转义写法为 \u00E9，那这两个字符串 "café" === "caf\u00e9" 的比较结果是
+    content: 字符 é 的 unicode 转义写法为 \u00E9，那这两个字符串 "café" === "caf\u00e9" 的比较结果是
     answer: T
 
   - knowledge_node_id: n1
     kind: single_choice
-    title: 以下哪一个是正确的单行注释写法？
+    content: 以下哪一个是正确的单行注释写法？
     choices:
       - "// 注释"
       - "/ 注释"
@@ -15,7 +15,7 @@
 
   - knowledge_node_id: n2
     kind: single_choice
-    title: 以下哪一个是正确的多行注释写法？
+    content: 以下哪一个是正确的多行注释写法？
     choices:
       - |
         / 注释
@@ -31,7 +31,7 @@
 
   - knowledge_node_id: n3
     kind: multiple_choices
-    title: 选择正确变量
+    content: 选择正确变量
     choices:
       - "$sí"
       - "4$abc"
@@ -40,7 +40,7 @@
 
   - knowledge_node_id: n69
     kind: fill
-    title: |
+    content: |
       [fill](a > 3) {
         [fill]("hello")
       }
@@ -55,7 +55,7 @@
 
   - knowledge_node_id: n4
     kind: multiple_choices
-    title: 下列哪些是保留字
+    content: 下列哪些是保留字
     choices:
       - "if"
       - "else"
@@ -65,12 +65,12 @@
 
   - knowledge_node_id: n5
     kind: true_false
-    title: 在 javascript 代码中，每行结尾必须有分号
+    content: 在 javascript 代码中，每行结尾必须有分号
     answer: F
 
   - knowledge_node_id: n6
     kind: single_choice
-    title: 哪个才是对象直接量
+    content: 哪个才是对象直接量
     choices:
       - "12"
       - "\"hi\""
@@ -80,7 +80,7 @@
 
   - knowledge_node_id: n13
     kind: multiple_choices
-    title: 下面哪些是正确的整数
+    content: 下面哪些是正确的整数
     choices:
       - "1"
       - "0x1"
@@ -90,17 +90,17 @@
 
   - knowledge_node_id: n14
     kind: true_false
-    title: 在javascript中所有数值均用浮点数表示
+    content: 在javascript中所有数值均用浮点数表示
     answer: T
 
   - knowledge_node_id: n15
     kind: true_false
-    title: 在javascript中字符串既可以使用单引号，也可以使用双引号
+    content: 在javascript中字符串既可以使用单引号，也可以使用双引号
     answer: T
 
   - knowledge_node_id: n16
     kind: single_choice
-    title: 选择正确的转义字符
+    content: 选择正确的转义字符
     choices:
       - "\\n"
       - "/n"
@@ -108,7 +108,7 @@
 
   - knowledge_node_id: n17
     kind: multiple_choices
-    title: 下面哪些布尔值是 true
+    content: 下面哪些布尔值是 true
     choices:
       - "!1"
       - "!0"
@@ -118,17 +118,17 @@
 
   - knowledge_node_id: n18
     kind: true_false
-    title: typeof null 的结果是 object
+    content: typeof null 的结果是 object
     answer: T
 
   - knowledge_node_id: n19
     kind: true_false
-    title: typeof undefined 的结果是 object
+    content: typeof undefined 的结果是 object
     answer: F
 
   - knowledge_node_id: n22
     kind: single_choice
-    title: 在浏览器javascript中，表示整个窗口的对象是
+    content: 在浏览器javascript中，表示整个窗口的对象是
     choices:
       - Math
       - RegExp
@@ -138,7 +138,7 @@
 
   - knowledge_node_id: n23
     kind: multiple_choices
-    title: 有一个变量 var o = {a:1}，下面哪些可以正确访问a属性
+    content: 有一个变量 var o = {a:1}，下面哪些可以正确访问a属性
     choices:
       - o.a
       - o.a()
@@ -148,7 +148,7 @@
 
   - knowledge_node_id: n24
     kind: multiple_choices
-    title: 下面哪些是全局属性
+    content: 下面哪些是全局属性
     choices:
       - Math
       - undinded
@@ -159,7 +159,7 @@
 
   - knowledge_node_id: n25
     kind: multiple_choices
-    title: 下面哪些是全局函数
+    content: 下面哪些是全局函数
     choices:
       - open()
       - new()
@@ -170,7 +170,7 @@
 
   - knowledge_node_id: n26
     kind: multiple_choices
-    title: 下面哪些是全局构造函数
+    content: 下面哪些是全局构造函数
     choices:
       - Date()
       - System()
@@ -183,17 +183,17 @@
 
   - knowledge_node_id: n28
     kind: true_false
-    title: javascript中变量声明前必须加 var
+    content: javascript中变量声明前必须加 var
     answer: F
 
   - knowledge_node_id: n29
     kind: true_false
-    title: 在函数体内，局部变量的优先级高于同名的全局变量
+    content: 在函数体内，局部变量的优先级高于同名的全局变量
     answer: T
 
   - knowledge_node_id: n30
     kind: single_choice
-    title: 关于表达式和语句的区别, 下列表述正确的是
+    content: 关于表达式和语句的区别, 下列表述正确的是
     choices:
       - 语句需要用花括号括起来, 而表达式不需要;
       - 表达式求值结果是一个值而语句对求值结果是否有值没有要求;
@@ -203,12 +203,12 @@
 
   - knowledge_node_id: n33
     kind: true_false
-    title: 1 + "2" === 3
+    content: 1 + "2" === 3
     answer: F
 
   - knowledge_node_id: n34
     kind: single_choice
-    title: 关于 == 和 === 运算符， 下列表叔正确的是
+    content: 关于 == 和 === 运算符， 下列表叔正确的是
     choices:
       - 0 == false
       - 1 === "1"
@@ -218,17 +218,17 @@
 
   - knowledge_node_id: n35
     kind: true_false
-    title: 1 || 0 的求值结果是1
+    content: 1 || 0 的求值结果是1
     answer: T
 
   - knowledge_node_id: n36
     kind: true_false
-    title: var a = 2; a += 1后a值为2
+    content: var a = 2; a += 1后a值为2
     answer: F
 
   - knowledge_node_id: n37
     kind: single_choice
-    title: 下面哪种写法是正确的
+    content: 下面哪种写法是正确的
     choices:
       - x > 0 ? x : 0
       - x > 0 : x ? 0
@@ -236,7 +236,7 @@
 
   - knowledge_node_id: n39
     kind: multiple_choices
-    title: 下面哪种写法是正确的
+    content: 下面哪种写法是正确的
     choices:
       - typeof null == "null"
       - typeof null == "object"
@@ -246,7 +246,7 @@
 
   - knowledge_node_id: n40
     kind: multiple_choices
-    title: 下面哪些是正确的
+    content: 下面哪些是正确的
     choices: 
       - 如果定义了一个变量 var o = {a:1}, delete o 可以删除 o 这个变量
       - 如果定义了一个变量 var o = {a:1}, delete o.a 可以删除 a 这个属性
@@ -255,7 +255,7 @@
 
   - knowledge_node_id: n41
     kind: single_choice
-    title: 下面哪个是正确的
+    content: 下面哪个是正确的
     choices:
       - void(1+1) === 2
       - void(1+1) === undefined
@@ -264,7 +264,7 @@
 
   - knowledge_node_id: n44
     kind: single_choice
-    title: 想要跳出一个循环体或者switch语句时，需要用到
+    content: 想要跳出一个循环体或者switch语句时，需要用到
     choices:
       - break
       - continue
@@ -274,7 +274,7 @@
 
 - knowledge_node_id: n47
   kind: multiple_choices
-  title: 下面哪些写法是正确的
+  content: 下面哪些写法是正确的
   choices:
     - "var book = {'main title': 'javascript'}"
     - "var book = {maintitle : 'javascript'}"
@@ -284,7 +284,7 @@
 
 - knowledge_node_id: n49
   kind: multiple_choices
-  title: "对象 o = {x: 1} 下面哪些返回结果为 true"
+  content: "对象 o = {x: 1} 下面哪些返回结果为 true"
   choices:
     - delete o.x;
     - delete o.toString;
@@ -294,7 +294,7 @@
 
 - knowledge_node_id: n50
   kind: multiple_choices
-  title: "对象 o = {x: 1} 下面哪些返回结果为 true"
+  content: "对象 o = {x: 1} 下面哪些返回结果为 true"
   choices:
     - "o.hasOwnProperty('x')"
     - "o.hasOwnProperty('toString')"
@@ -306,7 +306,7 @@
 
 - knowledge_node_id: n52
   kind: multiple_choices
-  title: 对象 o = {a:1},哪些用法可以得到属性a的值
+  content: 对象 o = {a:1},哪些用法可以得到属性a的值
   choices:
     - o[a]
     - o["a"]
@@ -315,7 +315,7 @@
 
 - knowledge_node_id: n53
   kind: multiple_choices
-  title: 对象 o = {a:1},哪些用法可以修改属性a的值
+  content: 对象 o = {a:1},哪些用法可以修改属性a的值
   choices:
     - o[a] = 2
     - o["a"] = 2
@@ -324,7 +324,7 @@
 
 - knowledge_node_id: n55
   kind: single_choice
-  title: 对象 o = {get a(){return 1}},下面哪个是正确的
+  content: 对象 o = {get a(){return 1}},下面哪个是正确的
   choices:
     - o.a() === 1
     - o.a === 1
@@ -332,7 +332,7 @@
 
 - knowledge_node_id: n56
   kind: single_choice
-  title: 对象 o = {set a(i){this.b = i}},运行下面那句代码可以使 o.b = 1
+  content: 对象 o = {set a(i){this.b = i}},运行下面那句代码可以使 o.b = 1
   choices:
     - o.a(1)
     - o.a = 1
@@ -342,7 +342,7 @@
 
 - knowledge_node_id: n58
   kind: single_choice
-  title: 哪个方法是序列化一个对象
+  content: 哪个方法是序列化一个对象
   choices: 
     - JSON.stringify(o)
     - JSON.parse(o)
@@ -350,7 +350,7 @@
 
 - knowledge_node_id: n60
   kind: multiple_choices
-  title: 哪些是从 Object.prototype 继承而来的方法
+  content: 哪些是从 Object.prototype 继承而来的方法
   choices: 
     - toString
     - valueOf
@@ -360,7 +360,7 @@
 
 - knowledge_node_id: n62
   kind: multiple_choices
-  title: 下面哪些是正确的
+  content: 下面哪些是正确的
   choices:
     - "var arr = [1.1,true,'a',]"
     - "var arr = {1.1,true,'a',}"
@@ -370,7 +370,7 @@
 
 - knowledge_node_id: n63
   kind: single_choice
-  title: 数组 arr = [1,2],如何获取 arr 的数组长度
+  content: 数组 arr = [1,2],如何获取 arr 的数组长度
   choices:
     - arr.length
     - arr.length()
@@ -378,7 +378,7 @@
 
 - knowledge_node_id: n64
   kind: single_choice
-  title: |
+  content: |
     var a = ['world'];
     a[1] = 3.14;
     i = 2;
@@ -395,7 +395,7 @@
 
 - knowledge_node_id: n65
   kind: multiple_choices
-  title: a=[1，3，5] 对a数组的操作正确的是
+  content: a=[1，3，5] 对a数组的操作正确的是
   choices:
     - a[0] = 'zero'
     - a.keys.length
@@ -408,7 +408,7 @@
 
 - knowledge_node_id: n67
   kind: single_choice
-  title: 数组 arr = ["a",["b","c","d"]],如何可以取到 "d"
+  content: 数组 arr = ["a",["b","c","d"]],如何可以取到 "d"
   choices:
     - arr[1][2]
     - arr[2][3]
@@ -418,7 +418,7 @@
 
 - knowledge_node_id: n68
   kind: multiple_choices
-  title: 下面正确的是
+  content: 下面正确的是
   choices:
     - "[1,2,3].join(',') === '1,2,3'"
     - "[1,2,3].reverse().join(',') === '3,2,1'"
