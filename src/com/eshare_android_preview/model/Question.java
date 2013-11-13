@@ -14,7 +14,6 @@ public class Question extends LearningResource implements Serializable {
 		public static final String   SINGLE_CHOICE = "single_choice";
 		public static final String   MULTIPLE_CHOICE = "multiple_choices";
 		public static final String   TRUE_FALSE = "true_false";
-		public static final String   CODE = "code";
         public static final String   FILL = "fill";
 	}
 
@@ -50,9 +49,6 @@ public class Question extends LearningResource implements Serializable {
         return this.kind.equals(Type.TRUE_FALSE);
     }
 
-    public boolean is_code(){
-        return this.kind.equals(Type.CODE);
-    }
 
     public boolean is_fill(){
         return this.kind.equals(Type.FILL);

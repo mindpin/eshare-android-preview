@@ -64,10 +64,6 @@ public class YAMLParse {
                     choices_list.add(new QuestionChoice(1, "F", "错误"));
                 }
 
-                if (!kind.equals(Question.Type.CODE)) {
-                    Question question = new Question(i, knowledge_node_id.toString(), kind.toString(), title.toString(), choices_list, answer.toString());
-                    list.add(question);
-                }
 
             }
         } catch (IOException e) {

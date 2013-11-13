@@ -261,45 +261,6 @@
       - void(1+1) === undefined
     answer: B
 
-  - knowledge_node_id: n42
-    kind: code
-    code_type: javascript
-    title: if 语句的使用
-    desc: |
-      定义一个数字变量 count，并给 count 赋值
-      用 if else 分支语句分别输出
-      console.log("count > 10")
-      console.log("count < 10")
-    init_code: |
-      var count = 3 * 4
-      // input code
-      console.log("count > 10")
-      // input code
-      console.log("count < 10")
-    rule: |
-      if(MT.error){
-        return '代码有错误'
-      }
-      if(MT.code.match(/if/) === null){
-        return '没有用到 if'
-      }
-      return true
-
-  - knowledge_node_id: n43
-    kind: code
-    code_type: javascript
-    title: 使用 for 语句
-    desc: |
-      用 for 语句打印 1 到 20（打印用 console.log(x) 方法）
-    init_code: ""
-    rule: |
-      if(MT.error){
-        return '代码有错误'
-      }
-      if(MT.code.match(/for/) === null){
-        return '没有用到 for'
-      }
-      return MT.array_equals(MT.prints, ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"])
 
   - knowledge_node_id: n44
     kind: single_choice
@@ -341,22 +302,7 @@
     - "o.toString !== undefined"
   answer: ACD
 
-- knowledge_node_id: n51
-  kind: code
-  code_type: javascript
-  title: 枚举属性
-  desc: |
-    打印对象 o 的所有属性名(打印用 console.log(x) 方法)
-  init_code: |
-    var o = {x: 1, y: 2, z: 3}
-  rule: |
-      if(MT.error){
-        return '代码有错误'
-      }
-      if(MT.code.match(/for/) === null || MT.code.match(/in/) === null){
-        return '没有用到 for in'
-      }
-      return MT.printed("x") && MT.printed("y") && MT.printed("z")
+
 
 - knowledge_node_id: n52
   kind: multiple_choices
@@ -392,23 +338,7 @@
     - o.a = 1
   answer: B
 
-- knowledge_node_id: n57
-  kind: code
-  code_type: javascript
-  title: 对象属性的可写性，可枚举性，可配置性
-  desc: |
-    使用 defineProperty 方法, 创建对象 var o = {x: 1}
-    并把 x 属性设置成可写，不可枚举，可配置
-  init_code: ""
-  rule: |
-    if(MT.error){
-      return '代码有错误'
-    }
-    if(MT.code.match(/defineProperty/)){
-      return '没有用到 defineProperty'
-    }
-    var attrs = Object.getOwnPropertyDescriptor(o, 'x')
-    return attrs.writable && !attrs.enumerable && attrs.configurable
+
 
 - knowledge_node_id: n58
   kind: single_choice
@@ -474,23 +404,7 @@
     - delete a[1]
   answer: ACE
 
-- knowledge_node_id: n66
-  kind: code
-  code_type: javascript
-  title: 遍历数组
-  desc: |
-    用 for 语句打印 arr 的所有元素(打印用 console.log(x) 方法)
-  init_code: |
-    var arr = [1,3,5,6,7]
-    // input code
-  rule: |
-    if(MT.error){
-      return '代码有错误'
-    }
-    if(MT.code.match(/for/) === null){
-      return '没有用到 for'
-    }
-    return MT.array_equals(MT.prints, ["1","3","5","6","7"])
+
 
 - knowledge_node_id: n67
   kind: single_choice
