@@ -30,7 +30,7 @@ public class YAMLParse {
                 HashMap<String, JSONObject> hashMap = hms.get(i);
                 Object knowledge_node_id = hashMap.get("knowledge_node_id");
                 Object kind = hashMap.get("kind");
-                Object title = hashMap.get("title");
+                Object content = hashMap.get("content");
 
                 String[] choices_sym = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P".split(",");
                 List<QuestionChoice> choices_list = new ArrayList<QuestionChoice>();
@@ -64,10 +64,8 @@ public class YAMLParse {
                     choices_list.add(new QuestionChoice(1, "F", "错误"));
                 }
 
-                if (!kind.equals(Question.Type.CODE)) {
-                    Question question = new Question(i, knowledge_node_id.toString(), kind.toString(), title.toString(), choices_list, answer.toString());
-                    list.add(question);
-                }
+                Question question = new Question(i, knowledge_node_id.toString(), kind.toString(), content.toString(), choices_list, answer.toString());
+                list.add(question);
 
             }
         } catch (IOException e) {

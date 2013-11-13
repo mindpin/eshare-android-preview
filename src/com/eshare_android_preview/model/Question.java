@@ -1,5 +1,7 @@
 package com.eshare_android_preview.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,6 @@ public class Question extends LearningResource implements Serializable {
 		public static final String   SINGLE_CHOICE = "single_choice";
 		public static final String   MULTIPLE_CHOICE = "multiple_choices";
 		public static final String   TRUE_FALSE = "true_false";
-		public static final String   CODE = "code";
         public static final String   FILL = "fill";
 	}
 
@@ -22,18 +23,18 @@ public class Question extends LearningResource implements Serializable {
 	public int id;
 	public String knowledge_node_id;
 	public String kind;
-	public String title;
+	public String content;
 	public List<QuestionChoice> choices_list;
 	public String answer;
 
 
 	// 选择题
-	public Question(int id,String knowledge_node_id, String kind, String title,List<QuestionChoice> choices_list, String answer) {
+	public Question(int id,String knowledge_node_id, String kind, String content, List<QuestionChoice> choices_list, String answer) {
 		super();
 		this.id = id;
 		this.knowledge_node_id = knowledge_node_id;
 		this.kind = kind;
-		this.title = title;
+		this.content = content;
 		this.choices_list = choices_list;
 		this.answer = answer;
 	}
@@ -50,9 +51,6 @@ public class Question extends LearningResource implements Serializable {
         return this.kind.equals(Type.TRUE_FALSE);
     }
 
-    public boolean is_code(){
-        return this.kind.equals(Type.CODE);
-    }
 
     public boolean is_fill(){
         return this.kind.equals(Type.FILL);
@@ -63,6 +61,7 @@ public class Question extends LearningResource implements Serializable {
     }
     
     public static Question first(){
+        Log.d("ddddd =", all().size() + "");
     	return all().get(0);
     }
 
