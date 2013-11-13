@@ -26,7 +26,7 @@
         /* 注释
         *  注释连写多行
         */
-        
+
     answer: B
 
   - knowledge_node_id: n3
@@ -247,7 +247,7 @@
   - knowledge_node_id: n40
     kind: multiple_choices
     content: 下面哪些是正确的
-    choices: 
+    choices:
       - 如果定义了一个变量 var o = {a:1}, delete o 可以删除 o 这个变量
       - 如果定义了一个变量 var o = {a:1}, delete o.a 可以删除 a 这个属性
       - 如果定义了一个变量 var o = ["a","b"], delete o[0] 可以删除 "a" 这个元素
@@ -268,7 +268,7 @@
     choices:
       - break
       - continue
-      - return 
+      - return
       - throw
     answer: A
 
@@ -343,7 +343,7 @@
 - knowledge_node_id: n58
   kind: single_choice
   content: 哪个方法是序列化一个对象
-  choices: 
+  choices:
     - JSON.stringify(o)
     - JSON.parse(o)
   answer: A
@@ -351,7 +351,7 @@
 - knowledge_node_id: n60
   kind: multiple_choices
   content: 哪些是从 Object.prototype 继承而来的方法
-  choices: 
+  choices:
     - toString
     - valueOf
     - hasOwnProperty

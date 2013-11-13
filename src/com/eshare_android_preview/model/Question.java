@@ -1,5 +1,7 @@
 package com.eshare_android_preview.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,7 @@ public class Question extends LearningResource implements Serializable {
     }
     
     public static Question first(){
+        Log.d("ddddd =", all().size() + "");
     	return all().get(0);
     }
 

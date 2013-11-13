@@ -118,7 +118,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
     private void load_question_msg() {
         set_head_text("答题");
         question_kind_tv.setText(question.get_kind_str());
-        question_title_tv.setText(question.title);
+        question_title_tv.setText(question.content);
 
         load_choice(choices_detail_ll, R.layout.q_question_choice_detail_item);
     }
