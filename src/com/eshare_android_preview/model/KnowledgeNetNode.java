@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.eshare_android_preview.model.parse.KnowledgeNet;
+import com.eshare_android_preview.model.parse.node.GistFileParse;
 
 // 课程节点
 public class KnowledgeNetNode extends LearningResource implements Serializable {
@@ -35,6 +36,16 @@ public class KnowledgeNetNode extends LearningResource implements Serializable {
     }
 
     public static List<KnowledgeNetNode> all(){
+    	GistFileParse fileParse = new GistFileParse("gistfile.xml");
+    	fileParse.parse();
+    	System.out.println("-----node_list-----------------  "  + fileParse.node_list.size());
+    	System.out.println("-----node_set_list-------------  "  + fileParse.node_set_list.size());
+    	System.out.println("-----node_relation_list--------  "  + fileParse.node_relation_list.size());
+    	System.out.println("-----check_point_list----------  "  + fileParse.check_point_list.size());
+    	System.out.println("-----set_relation_list---------  "  + fileParse.set_relation_list.size());
+    	
+    	
+    	
         return KnowledgeNet.parse_xml(XML_PATH);
     }
 

@@ -84,7 +84,7 @@ public class KnowledgeNet {
 				KnowledgeNetNode node = nodes_list.get(i);
 				for (int j = 0; j < relations_list.size(); j++) {
 					if (node.node_id.equals(relations_list.get(j).parent_id) ) {
-						System.out.println("parent_id:" + relations_list.get(j).parent_id + " , child_id: " + relations_list.get(j).child_id);
+//						System.out.println("parent_id:" + relations_list.get(j).parent_id + " , child_id: " + relations_list.get(j).child_id);
 						node.list_children.add(relations_list.get(j).child_id);
 					}
 					if (node.node_id.equals(relations_list.get(j).child_id) ) {
