@@ -37,7 +37,7 @@ public class FavouritesAdapter extends EshareBaseAdapter<Favourite> {
 
         if (item.is_belong_question()) {
             Question question = Question.find(Integer.parseInt(item.favourite_id));
-            view_holder.item_tv.setText(question.title);
+            view_holder.item_tv.setText(question.content);
 
         } else if (item.is_belong_course()) {
             Course plan = Course.find(Integer.parseInt(item.favourite_id));
