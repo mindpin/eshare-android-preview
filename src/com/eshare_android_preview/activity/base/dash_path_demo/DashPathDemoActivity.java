@@ -1,16 +1,12 @@
 package com.eshare_android_preview.activity.base.dash_path_demo;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.base.view.dash_path_view.DashPath;
+import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
-
 import java.util.ArrayList;
 
 /**
@@ -27,10 +23,12 @@ public class DashPathDemoActivity extends EshareBaseActivity {
         RelativeLayout root_view = (RelativeLayout)findViewById(R.id.dash_path_view_parent);
 
         DashPathView view = new DashPathView(this);
-        ArrayList<DashPath> dash_path_list = new ArrayList<DashPath>();
-        dash_path_list.add(new DashPath(10, 400, 700, 100));
-        dash_path_list.add(new DashPath(10, 400, 700, 400));
-        view.set_dash_path_list(dash_path_list);
+        ArrayList<DashPathEndpoint> dash_path_endpoint_list = new ArrayList<DashPathEndpoint>();
+        dash_path_endpoint_list.add(new DashPathEndpoint(10, 400, 700, 100));
+        dash_path_endpoint_list.add(new DashPathEndpoint(10, 400, 700, 400));
+        view.set_dash_path_endpoint_list(dash_path_endpoint_list);
+        view.set_color(Color.BLUE);
+        view.set_dash_icon_radius(20);
         root_view.addView(view);
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();

@@ -5,14 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ComposePathEffect;
 import android.graphics.CornerPathEffect;
-import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathDashPathEffect;
 import android.graphics.PathEffect;
 import android.util.AttributeSet;
 import android.view.View;
-
 import java.util.ArrayList;
 
 /**
@@ -29,12 +27,10 @@ public class DashPathView extends View {
     // 虚线的最小构成图片（这里是一个实心小圆）
     Path dash_icon;
     // 实心小圆的半径，默认是 10px
-    int dash_icon_radius = 10;
-    // 实心小圆两个圆心之间的距离，默认是 30px
-    int hash_icon_advance = 30;
+    float dash_icon_radius = 10;
 
-    // 需要绘制的虚线的路径 DashPath 对象数组
-    private ArrayList<DashPath> dash_path_list;
+    // 需要绘制的虚线的路径 DashPathEndpoint 对象数组
+    private ArrayList<DashPathEndpoint> dash_path_endpoint_list;
     // 需要绘制的虚线的路径 path 对象数组
     private ArrayList<Path> line_path_list = new ArrayList<Path>();
 
@@ -82,30 +78,44 @@ public class DashPathView extends View {
         invalidate();
     }
 
-    private PathEffect build_effect(float phase){
-        // 线条的转弯处，用曲线平滑处理
-        CornerPathEffect cpe = new CornerPathEffect(10);
-        // 用自定义的小图标做虚线
-        // PathDashPathEffect.Style.TRANSLATE,表示小图标的角度不受线的走向影响
-        PathDashPathEffect pdpe = new PathDashPathEffect(dash_icon, hash_icon_advance, phase,
-                PathDashPathEffect.Style.TRANSLATE);
-        // 混合使用上面定义的两种效果
-        return new ComposePathEffect(cpe, pdpe);
-    }
-
-    // 设置要绘制的多条虚线的起始点数据
-    public void set_dash_path_list(ArrayList<DashPath> dash_path_list) {
-        this.dash_path_list = dash_path_list;
-        build_line_path_list();
-    }
-
     private void build_line_path_list() {
         line_path_list = new ArrayList<Path>();
-        for(DashPath dash_path : this.dash_path_list){
+        for(DashPathEndpoint dash_path : this.dash_path_endpoint_list){
             Path line_path = new Path();
             line_path.moveTo(dash_path.start_x, dash_path.start_y);
             line_path.lineTo(dash_path.end_x, dash_path.end_y);
             line_path_list.add(line_path);
         }
     }
+
+    private PathEffect build_effect(float phase){
+        // 线条的转弯处，用曲线平滑处理
+        CornerPathEffect cpe = new CornerPathEffect(10);
+        // 用自定义的小图标做虚线
+        // PathDashPathEffect.Style.TRANSLATE,表示小图标的角度不受线的走向影响
+        PathDashPathEffect pdpe = new PathDashPathEffect(dash_icon, get_hash_icon_advance(), phase,
+                PathDashPathEffect.Style.TRANSLATE);
+        // 混合使用上面定义的两种效果
+        return new ComposePathEffect(cpe, pdpe);
+    }
+
+    // 实心小圆两个圆心之间的距离
+    private float get_hash_icon_advance(){
+        return this.dash_icon_radius*3;
+    }
+
+    // 设置要绘制的多条虚线的起始点数据
+    public void set_dash_path_endpoint_list(ArrayList<DashPathEndpoint> dash_path_endpoint_list) {
+        this.dash_path_endpoint_list = dash_path_endpoint_list;
+        build_line_path_list();
+    }
+
+    public void set_color(int color){
+        this.color = color;
+    }
+
+    public void set_dash_icon_radius(float radius){
+        this.dash_icon_radius = radius;
+    }
+
 }
