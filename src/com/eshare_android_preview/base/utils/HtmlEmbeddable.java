@@ -1,7 +1,5 @@
 package com.eshare_android_preview.base.utils;
 
-import android.util.Log;
-
 import java.io.IOException;
 
 /**

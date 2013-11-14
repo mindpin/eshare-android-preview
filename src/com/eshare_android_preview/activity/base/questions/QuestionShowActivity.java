@@ -1,8 +1,5 @@
 package com.eshare_android_preview.activity.base.questions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -23,7 +20,6 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
-import com.eshare_android_preview.model.FillQuestionSelectAnswer;
 import com.eshare_android_preview.model.MultipleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
