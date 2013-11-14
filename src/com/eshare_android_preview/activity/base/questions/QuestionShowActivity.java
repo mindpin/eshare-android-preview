@@ -1,12 +1,14 @@
 package com.eshare_android_preview.activity.base.questions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,16 +21,11 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
-import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
 import com.eshare_android_preview.model.TestResult;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class QuestionShowActivity extends EshareBaseActivity {
     public static class ExtraKeys {

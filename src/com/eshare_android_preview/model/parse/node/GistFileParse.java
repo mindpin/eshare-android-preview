@@ -27,15 +27,44 @@ public class GistFileParse extends BaseNodeParser{
 	public HashMap<String, KnowledgeSet> node_set_map;
 	public HashMap<String, KnowledgeNode> node_map;
 	public HashMap<String, KnowledgeCheckpoint> check_point_map;
+	
+	public List<KnowledgeSet> node_set_list;
+	public List<KnowledgeNode> node_list;
+	public List<KnowledgeCheckpoint> check_point_list;
 
 	public 	GistFileParse(String nodeUrl){
 		super(nodeUrl);
 		this.node_set_map = new HashMap<String, KnowledgeSet>();
 		this.node_map = new HashMap<String, KnowledgeNode>();
 		this.check_point_map = new HashMap<String, KnowledgeCheckpoint>();
+		
+		this.node_set_list = new ArrayList<KnowledgeSet>();
+		this.node_list = new ArrayList<KnowledgeNode>();
+		this.check_point_list = new ArrayList<KnowledgeCheckpoint>();
 	}
 	
-	public List<KnowledgeNet> parse() {
+	public void parse(){
+		parse_to_hash();
+		return_to_list();
+	}
+	public void return_to_list(){
+		this.node_set_list = (List<KnowledgeSet>) this.node_set_map.values();
+		this.node_list = (List<KnowledgeNode>) this.node_map.values();
+		this.check_point_list = (List<KnowledgeCheckpoint>) this.check_point_map.values();
+		
+		KnowledgeNet.first_set = first_set();
+	}
+	
+	public KnowledgeSet first_set(){
+		for (KnowledgeSet set : this.node_set_list) {
+			if (set.parents.size() == 0) {
+				return set;
+			}
+		}
+		return null;
+	}
+	
+	public void parse_to_hash() {
 		DocumentBuilderFactory factory= DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder  builder= factory.newDocumentBuilder();
@@ -138,7 +167,5 @@ public class GistFileParse extends BaseNodeParser{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return null;
 	}
 }

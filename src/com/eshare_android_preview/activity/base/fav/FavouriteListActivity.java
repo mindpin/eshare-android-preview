@@ -19,7 +19,6 @@ import com.eshare_android_preview.model.Course;
 import com.eshare_android_preview.model.Favourite;
 import com.eshare_android_preview.model.KnowledgeNetNode;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.widget.adapter.FavouritesAdapter;
 
 
