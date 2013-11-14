@@ -6,21 +6,23 @@ import java.util.List;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
 
 
-@SuppressWarnings("rawtypes")
-public class BaseKnowledgeSet implements IParentAndChild{
-	public List<KnowledgeSetRelation> relations = new ArrayList<KnowledgeSetRelation>();
-	public List<BaseKnowledgeSet> parents = new ArrayList<BaseKnowledgeSet>();
-	public List<BaseKnowledgeSet> children = new ArrayList<BaseKnowledgeSet>();
+public class BaseKnowledgeSet implements IParentAndChild<KnowledgeSetRelation,BaseKnowledgeSet>{
+	protected List<KnowledgeSetRelation> relations = new ArrayList<KnowledgeSetRelation>();
+    protected List<BaseKnowledgeSet> parents = new ArrayList<BaseKnowledgeSet>();
+    protected List<BaseKnowledgeSet> children = new ArrayList<BaseKnowledgeSet>();
+
 	@Override
-	public List relations() {
+	public List<KnowledgeSetRelation> relations() {
 		return relations;
 	}
+
 	@Override
-	public List parents() {
+	public List<BaseKnowledgeSet> parents() {
 		return parents;
 	}
+
 	@Override
-	public List children() {
+	public List<BaseKnowledgeSet> children() {
 		return children;
 	}
 }

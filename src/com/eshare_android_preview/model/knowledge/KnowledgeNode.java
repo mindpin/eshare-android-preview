@@ -6,17 +6,16 @@ import java.util.List;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
 
 
-@SuppressWarnings("rawtypes")
-public class KnowledgeNode implements IParentAndChild{
+public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>{
 	public String node_set_id;
 	public String id;
 	public String name;
 	public boolean required;
 	public String desc;
 	
-	public List<KnowledgeNodeRelation> relations;
-	public List<KnowledgeNode> parents;
-	public List<KnowledgeNode> children;
+	private List<KnowledgeNodeRelation> relations;
+	private List<KnowledgeNode> parents;
+	private List<KnowledgeNode> children;
 
 	public KnowledgeNode(String node_set_id, String id, String name,
 			String required, String desc) {
@@ -33,17 +32,17 @@ public class KnowledgeNode implements IParentAndChild{
 	}
 
 	@Override
-	public List relations() {
+	public List<KnowledgeNodeRelation> relations() {
 		return relations;
 	}
 
 	@Override
-	public List parents() {
+	public List<KnowledgeNode> parents() {
 		return parents;
 	}
 
 	@Override
-	public List children() {
+	public List<KnowledgeNode> children() {
 		return children;
 	}
 }

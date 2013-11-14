@@ -31,6 +31,7 @@ public class GistFileParse extends BaseNodeParser{
 	public List<KnowledgeSet> node_set_list;
 	public List<KnowledgeNode> node_list;
 	public List<KnowledgeCheckpoint> check_point_list;
+    public KnowledgeSet first_set;
 
 	public 	GistFileParse(String nodeUrl){
 		super(nodeUrl);
@@ -52,12 +53,12 @@ public class GistFileParse extends BaseNodeParser{
 		this.node_list = (List<KnowledgeNode>) this.node_map.values();
 		this.check_point_list = (List<KnowledgeCheckpoint>) this.check_point_map.values();
 		
-		KnowledgeNet.first_set = first_set();
+		this.first_set = first_set();
 	}
 	
 	private KnowledgeSet first_set(){
 		for (KnowledgeSet set : this.node_set_list) {
-			if (set.parents.size() == 0) {
+			if (set.parents().size() == 0) {
 				return set;
 			}
 		}
@@ -74,7 +75,7 @@ public class GistFileParse extends BaseNodeParser{
 			Element root=document.getDocumentElement();
 			parse_set(root);
 			parse_checkpoint(root);
-			parse_relation(root);
+			parse_set_relation(root);
 			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -111,11 +112,11 @@ public class GistFileParse extends BaseNodeParser{
 			
 			if (node_map.get(parent_id) !=null && node_map.get(child_id) !=null) {
 				KnowledgeNodeRelation nodeRelation = new KnowledgeNodeRelation(node_map.get(parent_id),node_map.get(child_id));
-				node_map.get(child_id).relations.add(nodeRelation);
-				node_map.get(parent_id).relations.add(nodeRelation);
+				node_map.get(child_id).relations().add(nodeRelation);
+				node_map.get(parent_id).relations().add(nodeRelation);
 				
-				node_map.get(child_id).parents.add(node_map.get(parent_id));
-				node_map.get(parent_id).children.add(node_map.get(child_id));
+				node_map.get(child_id).parents().add(node_map.get(parent_id));
+				node_map.get(parent_id).children().add(node_map.get(child_id));
 			}
 		}
 	}
@@ -134,7 +135,7 @@ public class GistFileParse extends BaseNodeParser{
 	}
 	private KnowledgeNode find_set_first_node_by(KnowledgeSet set){
 		for (KnowledgeNode node:set.nodes) {
-			if (node.parents.size() == 0) {
+			if (node.parents().size() == 0) {
 				return node;
 			}
 		}
@@ -161,7 +162,7 @@ public class GistFileParse extends BaseNodeParser{
 		}
 	}
 	
-	private void parse_relation(Element root){
+	private void parse_set_relation(Element root){
 		Element relationsElement = (Element) root.getElementsByTagName("relations").item(0);
 		NodeList parent_childs=relationsElement.getElementsByTagName("parent-child");
 		for(int i=0;i<parent_childs.getLength();i++){
@@ -175,11 +176,11 @@ public class GistFileParse extends BaseNodeParser{
 			
 			if (child != null && parent !=null) {
 				KnowledgeSetRelation setRelation = new KnowledgeSetRelation(parent,child);
-				child.relations.add(setRelation);
-				parent.relations.add(setRelation);
+				child.relations().add(setRelation);
+				parent.relations().add(setRelation);
 				
-				child.parents.add(parent);
-				parent.children.add(child);
+				child.parents().add(parent);
+				parent.children().add(child);
 			}
 		}
 	}
