@@ -16,7 +16,6 @@ import org.xml.sax.SAXException;
 
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
-import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeNodeRelation;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
@@ -38,10 +37,6 @@ public class GistFileParse extends BaseNodeParser{
 		this.node_set_map = new HashMap<String, KnowledgeSet>();
 		this.node_map = new HashMap<String, KnowledgeNode>();
 		this.check_point_map = new HashMap<String, KnowledgeCheckpoint>();
-		
-		this.node_set_list = new ArrayList<KnowledgeSet>();
-		this.node_list = new ArrayList<KnowledgeNode>();
-		this.check_point_list = new ArrayList<KnowledgeCheckpoint>();
 	}
 	
 	public void parse(){
@@ -49,10 +44,9 @@ public class GistFileParse extends BaseNodeParser{
 		return_to_list();
 	}
 	private void return_to_list(){
-		this.node_set_list = (List<KnowledgeSet>) this.node_set_map.values();
-		this.node_list = (List<KnowledgeNode>) this.node_map.values();
-		this.check_point_list = (List<KnowledgeCheckpoint>) this.check_point_map.values();
-		
+		this.node_set_list = new ArrayList<KnowledgeSet>(this.node_set_map.values());
+		this.node_list = new ArrayList<KnowledgeNode>(this.node_map.values());
+		this.check_point_list = new ArrayList<KnowledgeCheckpoint>(this.check_point_map.values());
 		this.first_set = first_set();
 	}
 	
@@ -186,7 +180,7 @@ public class GistFileParse extends BaseNodeParser{
 	}
 	private BaseKnowledgeSet find_base_set_by(String set_id){
 		BaseKnowledgeSet set;
-		if (set_id.indexOf("set-") == 1) {
+		if (set_id.indexOf("set-") != -1) {
 			set  = node_set_map.get(set_id);
 		}else{
 			set  = check_point_map.get(set_id);
