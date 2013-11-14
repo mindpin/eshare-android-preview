@@ -27,8 +27,8 @@ public class DashPathDemoActivity extends EshareBaseActivity {
         dash_path_endpoint_list.add(new DashPathEndpoint(10, 400, 700, 100));
         dash_path_endpoint_list.add(new DashPathEndpoint(10, 400, 700, 400));
         view.set_dash_path_endpoint_list(dash_path_endpoint_list);
-        view.set_color(Color.BLUE);
-        view.set_dash_icon_radius(20);
+        view.set_color(Color.RED);
+        view.set_dash_icon_radius(5);
         root_view.addView(view);
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
