@@ -11,7 +11,6 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.TestResult;
 
 public class QuestionListActivity extends EshareBaseActivity{
 

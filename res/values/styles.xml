@@ -2,6 +2,13 @@
     <style name="AppBaseTheme" parent="android:Theme.Light">
     </style>
 
+    <style name="AppTranslucentTheme" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
     <style name="AppTheme" parent="AppBaseTheme">
     	<item name="android:windowNoTitle">true</item>
         <item name="android:textColor">#333</item>

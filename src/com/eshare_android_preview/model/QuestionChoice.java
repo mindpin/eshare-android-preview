@@ -7,7 +7,11 @@ import java.util.List;
  * Created by fushang318 on 13-11-5.
  */
 public class QuestionChoice implements Serializable {
-    public int index;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public int index;
     public String sym;
     public String content;
 

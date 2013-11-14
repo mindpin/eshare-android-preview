@@ -1,7 +1,5 @@
 package com.eshare_android_preview.activity.base.groups;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
