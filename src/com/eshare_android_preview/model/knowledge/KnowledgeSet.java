@@ -9,6 +9,7 @@ public class KnowledgeSet extends BaseKnowledgeSet{
 	public String icon;
 	
 	public List<KnowledgeNode> nodes;
+	public KnowledgeNode first_node;
 
 	public KnowledgeSet(String id, String name, String icon) {
 		super();
@@ -17,14 +18,5 @@ public class KnowledgeSet extends BaseKnowledgeSet{
 		this.icon = icon;
 		
 		this.nodes = new ArrayList<KnowledgeNode>();
-	}
-	
-	public KnowledgeNode first_node(){
-		for (KnowledgeNode node: nodes) {
-			if (node.parents.size() == 0) {
-				return node;
-			}
-		}
-		return null;
 	}
 }

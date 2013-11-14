@@ -1,18 +1,22 @@
 package com.eshare_android_preview.model.knowledge;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
 
 
-public class KnowledgeNode{
+@SuppressWarnings("rawtypes")
+public class KnowledgeNode implements IParentAndChild{
 	public String node_set_id;
 	public String id;
 	public String name;
 	public boolean required;
 	public String desc;
 	
-	public HashMap<String, KnowledgeNodeRelation> relations;
-	public HashMap<String, KnowledgeNode> parents;
-	public HashMap<String, KnowledgeNode> children;
+	public List<KnowledgeNodeRelation> relations;
+	public List<KnowledgeNode> parents;
+	public List<KnowledgeNode> children;
 
 	public KnowledgeNode(String node_set_id, String id, String name,
 			String required, String desc) {
@@ -23,8 +27,23 @@ public class KnowledgeNode{
 		this.required = required.equals("true");
 		this.desc = desc;
 		
-		this.relations = new HashMap<String, KnowledgeNodeRelation>();
-		this.parents = new HashMap<String, KnowledgeNode>();
-		this.children = new HashMap<String, KnowledgeNode>();
+		this.relations = new ArrayList<KnowledgeNodeRelation>();
+		this.parents = new ArrayList<KnowledgeNode>();
+		this.children = new ArrayList<KnowledgeNode>();
+	}
+
+	@Override
+	public List relations() {
+		return relations;
+	}
+
+	@Override
+	public List parents() {
+		return parents;
+	}
+
+	@Override
+	public List children() {
+		return children;
 	}
 }
