@@ -2,7 +2,10 @@ package com.eshare_android_preview.activity.base.dash_path_demo;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
@@ -17,6 +20,21 @@ public class DashPathDemoActivity extends EshareBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dash_path_demo);
         build_view();
+        build_info_view();
+    }
+
+    private void build_info_view() {
+        TextView tv = (TextView) findViewById(R.id.dash_path_view_info_tv);
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        String info = "";
+        info = info + "屏幕宽度分辨率: " + dm.widthPixels + "px" + "\n";
+        info = info + "屏幕高度分辨率: " + dm.heightPixels + "px" + "\n";
+        info = info + "屏幕宽度dp: " + dm.widthPixels/dm.density + "dp" + "\n";
+        info = info + "屏幕高度dp: " + dm.heightPixels/dm.density + "dp" + "\n";
+
+        tv.setText(info);
     }
 
     private void build_view() {
