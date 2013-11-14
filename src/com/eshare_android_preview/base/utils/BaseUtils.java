@@ -29,7 +29,7 @@ import com.eshare_android_preview.application.EshareApplication;
 
 public class BaseUtils {
 
-    public static int dp_to_px(int dip) {
+    public static float dp_to_px(float dip) {
         Resources r = EshareApplication.context.getResources();
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, r.getDisplayMetrics());
     }

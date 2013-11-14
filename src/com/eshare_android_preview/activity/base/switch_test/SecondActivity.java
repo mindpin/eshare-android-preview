@@ -64,8 +64,8 @@ public class SecondActivity extends EshareBaseActivity {
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation) {
 				Log.i("update", ((Float) animation.getAnimatedValue()).toString());
-				int change_value = (int) (((Float) animation.getAnimatedValue())  + 0);
-                int change_value_px = BaseUtils.dp_to_px(change_value);
+                float change_value = (Float)animation.getAnimatedValue();
+                int change_value_px = (int)BaseUtils.dp_to_px(change_value);
 				set_prame(second_ll,0,change_value_px,0,0);
 			}
 		});
