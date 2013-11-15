@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -32,6 +33,10 @@ public class BaseUtils {
     public static float dp_to_px(float dip) {
         Resources r = EshareApplication.context.getResources();
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, r.getDisplayMetrics());
+    }
+
+    public static int dp_to_int_px(float dip) {
+        return (int) dp_to_px(dip);
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -276,4 +281,19 @@ public class BaseUtils {
 		}
 		return answer_list;
 	}
+
+    public static class ScreenSize {
+        public float width_dp;
+        public float height_dp;
+    }
+
+    public static ScreenSize get_screen_size() {
+        DisplayMetrics dm = EshareApplication.context.getResources().getDisplayMetrics();
+
+        ScreenSize ss = new ScreenSize();
+        ss.width_dp = dm.widthPixels / dm.density;
+        ss.height_dp = dm.heightPixels / dm.density;
+
+        return ss;
+    }
 }

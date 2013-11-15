@@ -7,6 +7,7 @@ public class KnowledgeSet extends BaseKnowledgeSet{
 	public String id;
 	public String name;
 	public String icon;
+    public int deep;
 	
 	public List<KnowledgeNode> nodes;
 	public KnowledgeNode first_node;

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
 import java.util.ArrayList;
@@ -33,6 +34,10 @@ public class DashPathDemoActivity extends EshareBaseActivity {
         info = info + "屏幕高度分辨率: " + dm.heightPixels + "px" + "\n";
         info = info + "屏幕宽度dp: " + dm.widthPixels/dm.density + "dp" + "\n";
         info = info + "屏幕高度dp: " + dm.heightPixels/dm.density + "dp" + "\n";
+
+        BaseUtils.ScreenSize ss = BaseUtils.get_screen_size();
+        info = info + ss.width_dp + "\n";
+        info = info + ss.height_dp + "\n";
 
         tv.setText(info);
     }
