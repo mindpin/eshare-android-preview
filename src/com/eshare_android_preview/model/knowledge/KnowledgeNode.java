@@ -3,10 +3,11 @@ package com.eshare_android_preview.model.knowledge;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
 
 
-public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>{
+public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>,ILearn {
 	public String node_set_id;
 	public String id;
 	public String name;
@@ -45,4 +46,21 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 	public List<KnowledgeNode> children() {
 		return children;
 	}
+
+    @Override
+    public boolean is_learned() {
+        // TODO 未实现
+        return false;
+    }
+
+    @Override
+    public boolean is_unlocked() {
+        // TODO 未实现
+        return false;
+    }
+
+    @Override
+    public void do_learn() {
+        // TODO 未实现
+    }
 }

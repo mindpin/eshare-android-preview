@@ -30,7 +30,7 @@ public class GistFileParse extends BaseNodeParser{
 	public List<KnowledgeSet> node_set_list;
 	public List<KnowledgeNode> node_list;
 	public List<KnowledgeCheckpoint> check_point_list;
-    public KnowledgeSet first_set;
+    public List<KnowledgeSet> root_sets;
 
 	public 	GistFileParse(String nodeUrl){
 		super(nodeUrl);
@@ -47,16 +47,17 @@ public class GistFileParse extends BaseNodeParser{
 		this.node_set_list = new ArrayList<KnowledgeSet>(this.node_set_map.values());
 		this.node_list = new ArrayList<KnowledgeNode>(this.node_map.values());
 		this.check_point_list = new ArrayList<KnowledgeCheckpoint>(this.check_point_map.values());
-		this.first_set = first_set();
+		this.root_sets = root_sets();
 	}
 	
-	private KnowledgeSet first_set(){
+	private List<KnowledgeSet> root_sets(){
+        ArrayList<KnowledgeSet> result = new ArrayList<KnowledgeSet>();
 		for (KnowledgeSet set : this.node_set_list) {
 			if (set.parents().size() == 0) {
-				return set;
+                result.add(set);
 			}
 		}
-		return null;
+		return result;
 	}
 	
 	
@@ -123,17 +124,18 @@ public class GistFileParse extends BaseNodeParser{
 			
 			parse_node(setElement,node_set);
 			parse_node_relation(setElement);
-			node_set.first_node = find_set_first_node_by(node_set);
+			node_set.root_nodes = find_set_root_nodes_by(node_set);
 			this.node_set_map.put(node_set.id, node_set);
 		}
 	}
-	private KnowledgeNode find_set_first_node_by(KnowledgeSet set){
+	private List<KnowledgeNode> find_set_root_nodes_by(KnowledgeSet set){
+        ArrayList<KnowledgeNode> result = new ArrayList<KnowledgeNode>();
 		for (KnowledgeNode node:set.nodes) {
 			if (node.parents().size() == 0) {
-				return node;
+                result.add(node);
 			}
 		}
-		return null;
+		return result;
 	}
 	
 	private void parse_checkpoint(Element root){

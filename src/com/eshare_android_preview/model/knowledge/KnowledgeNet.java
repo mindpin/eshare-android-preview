@@ -7,13 +7,13 @@ public class KnowledgeNet extends BaseParse{
 
     public List<KnowledgeSet> sets;
     public List<KnowledgeCheckpoint> checkpoints;
-    public KnowledgeSet first_set;
+    public List<KnowledgeSet> root_sets;
 
     private KnowledgeNet(){
         super();
         this.sets = fileParse.node_set_list;
         this.checkpoints = fileParse.check_point_list;
-        this.first_set = fileParse.first_set;
+        this.root_sets = fileParse.root_sets;
     }
 
 	public static KnowledgeNet instance(){
