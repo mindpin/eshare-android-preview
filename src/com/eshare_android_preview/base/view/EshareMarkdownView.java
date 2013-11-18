@@ -26,14 +26,14 @@ import java.util.List;
  */
 public class EshareMarkdownView extends RelativeLayout {
     public WebView view;
-    final private EshareMarkdownView that = this;
     // WebView上绑定的JSInterface
     private CodefillBridge codefillBridge;
     // 填空遮盖view的集合
     private List<Codefill> codefills = new ArrayList<Codefill>();
 
     {
-        setupWebView();
+        view = new MarkdownWebView(getContext());
+        this.addView(view);
         codefillBridge = CodefillBridge.bind(this);
     }
 
@@ -49,28 +49,6 @@ public class EshareMarkdownView extends RelativeLayout {
         super(context, attrs, defStyle);
     }
 
-    private void setupWebView() {
-        view = new WebView(getContext()) {
-            @Override
-            protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-                if (that.codefills.size() > 0) {
-                    for (Codefill codefill : that.codefills) {
-                        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) codefill.getLayoutParams();
-                        params.leftMargin = codefill.rawRect.left - l;
-                        params.topMargin  = codefill.rawRect.top - t;
-                        codefill.requestLayout();
-                    }
-                }
-                super.onScrollChanged(l, t, oldl, oldt);
-            }
-        };
-        view.getSettings().setJavaScriptEnabled(true);
-        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_LEFT | RelativeLayout.ALIGN_TOP, RelativeLayout.TRUE);
-        this.addView(view, params);
-    }
-
-    @SuppressLint("ResourceAsColor")
     public Codefill addCodefill(final JSONObject rect) throws JSONException {
         final Codefill child = new Codefill(getContext(), rect);
         this.codefills.add(child);
@@ -78,7 +56,7 @@ public class EshareMarkdownView extends RelativeLayout {
         ((Activity) getContext()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                that.addView(child);
+                EshareMarkdownView.this.addView(child);
             }
         });
 
@@ -95,21 +73,47 @@ public class EshareMarkdownView extends RelativeLayout {
         return this;
     }
 
-    public static class Codefill extends TextView {
+    public class MarkdownWebView extends WebView {
+        public MarkdownWebView(Context context) {
+            super(context);
+            setParams();
+        }
+
+        private void setParams() {
+            this.getSettings().setJavaScriptEnabled(true);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.ALIGN_LEFT | RelativeLayout.ALIGN_TOP, RelativeLayout.TRUE);
+            this.setLayoutParams(params);
+        }
+
+        @Override
+        protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+            if (EshareMarkdownView.this.codefills.size() > 0) {
+                for (Codefill codefill : EshareMarkdownView.this.codefills) {
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) codefill.getLayoutParams();
+                    params.leftMargin = codefill.rawRect.left - l;
+                    params.topMargin  = codefill.rawRect.top - t;
+                    codefill.requestLayout();
+                }
+            }
+            super.onScrollChanged(l, t, oldl, oldt);
+        }
+    }
+
+    public class Codefill extends TextView {
         public Rect rawRect;
-        public boolean filled = false;
+        public TextView appliedChoice;
 
         public Codefill(Context context, JSONObject object) throws JSONException {
             super(context);
-            rawRect = new Rect(object.getInt("left"), object.getInt("top"), object.getInt("right"), object.getInt("bottom"));;
-            setParams(object.getInt("width"), object.getInt("height"));
+            rawRect = new Rect(object.getInt("left"), object.getInt("top"), object.getInt("right"), object.getInt("bottom"));
+            setParams();
         }
 
-        private void setParams(int width, int height) {
-            this.setHeight(height);
-            this.setWidth(width);
+        @SuppressLint("ResourceAsColor")
+        private void setParams() {
             this.setBackgroundColor(R.color.black);
-            LayoutParams params = new LayoutParams(width, height);
+            LayoutParams params = new LayoutParams(rawRect.width(), rawRect.height());
             params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params.leftMargin = rawRect.left;
