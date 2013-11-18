@@ -13,7 +13,6 @@ import java.util.List;
 public class CodefillBridge {
     static public final String NAME = "CodefillBridge";
     private EshareMarkdownView view;
-    private List<JSONObject> fields = new ArrayList<JSONObject>();
 
     private CodefillBridge(EshareMarkdownView view) {
         this.view = view;
@@ -26,7 +25,6 @@ public class CodefillBridge {
 
     public void addField(String field) throws JSONException {
         JSONObject rect = new JSONObject(field);
-        this.fields.add(rect);
         view.addCodefill(rect);
     }
 }

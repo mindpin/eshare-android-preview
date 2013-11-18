@@ -35,9 +35,3 @@ document.addEventListener("DOMContentLoaded", function() {
     renderCodefills();
     getCodefills();
 });
-
-window.onload = function() {
-    window.hehe = 1;
-    window.realHeight = document.documentElement.scrollHeight;
-    window.realWidth = document.documentElement.scrollWidth;
-}

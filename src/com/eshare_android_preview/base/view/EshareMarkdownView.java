@@ -27,9 +27,15 @@ import java.util.List;
 public class EshareMarkdownView extends RelativeLayout {
     public WebView view;
     final private EshareMarkdownView that = this;
+    // WebView上绑定的JSInterface
     private CodefillBridge codefillBridge;
+    // 填空遮盖view的集合
     private List<Codefill> codefills = new ArrayList<Codefill>();
-    {init();}
+
+    {
+        setupWebView();
+        codefillBridge = CodefillBridge.bind(this);
+    }
 
     public EshareMarkdownView(Context context) {
         super(context);
@@ -43,7 +49,7 @@ public class EshareMarkdownView extends RelativeLayout {
         super(context, attrs, defStyle);
     }
 
-    private void init() {
+    private void setupWebView() {
         view = new WebView(getContext()) {
             @Override
             protected void onScrollChanged(int l, int t, int oldl, int oldt) {
@@ -59,33 +65,14 @@ public class EshareMarkdownView extends RelativeLayout {
             }
         };
         view.getSettings().setJavaScriptEnabled(true);
-        CodefillBridge.bind(this);
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_LEFT | RelativeLayout.ALIGN_TOP, RelativeLayout.TRUE);
         this.addView(view, params);
     }
 
     @SuppressLint("ResourceAsColor")
-    public void addCodefill(final JSONObject rect) throws JSONException {
-        final Rect childRect = new Rect(rect.getInt("left"), rect.getInt("top"), rect.getInt("right"), rect.getInt("bottom"));
-        int height = rect.getInt("height");
-        int width  = rect.getInt("width");
-
-        final Codefill child = new Codefill(getContext());
-        child.setRawRect(childRect);
-
-        child.setHeight(height);
-        child.setWidth(width);
-        child.setBackgroundColor(R.color.black);
-
-        final LayoutParams params = new LayoutParams(width, height);
-
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        params.leftMargin = childRect.left;
-        params.topMargin  = childRect.top;
-        child.setLayoutParams(params);
-
+    public Codefill addCodefill(final JSONObject rect) throws JSONException {
+        final Codefill child = new Codefill(getContext(), rect);
         this.codefills.add(child);
 
         ((Activity) getContext()).runOnUiThread(new Runnable() {
@@ -94,6 +81,8 @@ public class EshareMarkdownView extends RelativeLayout {
                 that.addView(child);
             }
         });
+
+        return child;
     }
 
     public EshareMarkdownView setMarkdownContent(String markdown) {
@@ -108,13 +97,24 @@ public class EshareMarkdownView extends RelativeLayout {
 
     public static class Codefill extends TextView {
         public Rect rawRect;
+        public boolean filled = false;
 
-        public Codefill(Context context) {
+        public Codefill(Context context, JSONObject object) throws JSONException {
             super(context);
+            rawRect = new Rect(object.getInt("left"), object.getInt("top"), object.getInt("right"), object.getInt("bottom"));;
+            setParams(object.getInt("width"), object.getInt("height"));
         }
 
-        public void setRawRect(Rect rect) {
-            rawRect = rect;
+        private void setParams(int width, int height) {
+            this.setHeight(height);
+            this.setWidth(width);
+            this.setBackgroundColor(R.color.black);
+            LayoutParams params = new LayoutParams(width, height);
+            params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            params.leftMargin = rawRect.left;
+            params.topMargin  = rawRect.top;
+            this.setLayoutParams(params);
         }
     }
 }
