@@ -9,12 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.model.KnowledgeNetCategory;
-import com.eshare_android_preview.widget.adapter.GroupsAdapter;
 import com.eshare_android_preview.widget.adapter.KnoweledgeNetCategoriesAdapter;
 
 /**

@@ -3,7 +3,9 @@ package com.eshare_android_preview.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.eshare_android_preview.model.parse.KnowledgeNet;
+import com.eshare_android_preview.test.GistFileParseTest;
 
 // 课程节点
 public class KnowledgeNetNode extends LearningResource implements Serializable {
@@ -35,6 +37,7 @@ public class KnowledgeNetNode extends LearningResource implements Serializable {
     }
 
     public static List<KnowledgeNetNode> all(){
+    	GistFileParseTest.test();
         return KnowledgeNet.parse_xml(XML_PATH);
     }
 
