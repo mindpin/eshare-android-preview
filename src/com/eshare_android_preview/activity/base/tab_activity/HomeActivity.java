@@ -86,12 +86,13 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     private void _draw_nodes() {
-        for (Map.Entry<Integer, List<BaseKnowledgeSet>> entry : KnowledgeSetsData.deep_hashmap.entrySet()) {
+        for (Map.Entry<Integer, List<SetPosition>> entry : KnowledgeSetsData.deep_hashmap.entrySet()) {
             int deep = entry.getKey();
-            int x = 0;
-            for (BaseKnowledgeSet set : entry.getValue()) {
-                x ++;
-                _put_knowledge_node_on_grid(x, deep, set);
+
+            List<SetPosition> grid_pos_list = KnowledgeSetsData.deep_hashmap.get(deep);
+
+            for (SetPosition pos : grid_pos_list) {
+                _put_knowledge_node_on_grid(pos.grid_left, pos.grid_top, pos.set);
             }
         }
     }
@@ -109,10 +110,10 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     private void _put_knowledge_node(int left, int top, int diameter, BaseKnowledgeSet set) {
-        KnowledgeSetsData.put_set_position(set, new NodePosition(left, top));
+        KnowledgeSetsData.put_set_position(set, new P(left, top));
 
         for(BaseKnowledgeSet parent : set.parents()) {
-            NodePosition p = KnowledgeSetsData.get_set_position(parent);
+            P p = KnowledgeSetsData.get_set_position(parent);
             int x1 = p.left + diameter / 2;
             int y1 = p.top + diameter / 2;
             int x2 = left + diameter / 2;
@@ -146,40 +147,63 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     private static class KnowledgeSetsData {
-        static HashMap<Integer, List<BaseKnowledgeSet>> deep_hashmap;
-        static HashMap<BaseKnowledgeSet, NodePosition> points_map;
+        static HashMap<Integer, List<SetPosition>> deep_hashmap;
+        static HashMap<BaseKnowledgeSet, P> points_map;
 
         static void init() {
-            deep_hashmap = new HashMap<Integer, List<BaseKnowledgeSet>>();
-            points_map = new HashMap<BaseKnowledgeSet, NodePosition>();
+            deep_hashmap = new HashMap<Integer, List<SetPosition>>();
+            points_map = new HashMap<BaseKnowledgeSet, P>();
         }
 
         static void put_set_in_map(BaseKnowledgeSet set) {
-            List list = deep_hashmap.get(set.deep);
+            List<SetPosition> list = deep_hashmap.get(set.deep);
             if (null == list) {
                 list = new ArrayList();
                 deep_hashmap.put(set.deep, list);
             }
 
-            if (list.indexOf(set) < 0) {
-                list.add(set);
+            SetPosition pos = new SetPosition(set, list.size() + 1);
+
+            if (!list.contains(pos)) {
+                list.add(pos);
             }
         }
 
-        static void put_set_position(BaseKnowledgeSet set, NodePosition position) {
+        static void put_set_position(BaseKnowledgeSet set, P position) {
             points_map.put(set, position);
         }
 
-        static NodePosition get_set_position(BaseKnowledgeSet set) {
+        static P get_set_position(BaseKnowledgeSet set) {
             return points_map.get(set);
         }
     }
 
-    private class NodePosition {
+    static private class SetPosition {
+        BaseKnowledgeSet set;
+
+        int grid_left;
+        int grid_top;
+
+        int dp_left;
+        int dp_top;
+
+        public SetPosition(BaseKnowledgeSet set, int grid_left) {
+            this.set = set;
+            this.grid_left = grid_left;
+            this.grid_top = set.deep;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return this.set.equals(((SetPosition) o).set);
+        }
+    }
+
+    static private class P {
         int left;
         int top;
 
-        public NodePosition(int left, int top) {
+        public P(int left, int top) {
             this.left = left;
             this.top = top;
         }
