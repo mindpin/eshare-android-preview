@@ -1,6 +1,9 @@
 package com.eshare_android_preview.model.knowledge;
 
 import com.eshare_android_preview.model.knowledge.base.ILearn;
+import com.eshare_android_preview.model.preferences.EsharePreference;
+
+import junit.framework.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,20 +25,30 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
 		this.nodes = new ArrayList<KnowledgeNode>();
 	}
 
+
     @Override
     public boolean is_learned() {
         // TODO 未实现
-        return false;
+        return EsharePreference.get_value(this.id);
     }
 
     @Override
     public boolean is_unlocked() {
         // TODO 未实现
-        return false;
+        if (this.parents.size() == 0 ){
+            return true;
+        }
+        boolean parent_learned = true;
+        for (BaseKnowledgeSet base_set : this.parents){
+           if (base_set.getClass() == KnowledgeSet.class){
+               parent_learned = parent_learned && ((KnowledgeSet)base_set).is_learned();
+           }
+        }
+        return false || parent_learned;
     }
 
     @Override
     public void do_learn() {
-        // TODO 未实现
+        EsharePreference.put_boolean(this.id,true);
     }
 }

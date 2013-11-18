@@ -10,8 +10,6 @@ import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 
 import junit.framework.Assert;
 
-import org.junit.Assume;
-
 /**
  * Created by fushang318 on 13-11-15.
  */

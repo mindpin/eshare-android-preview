@@ -18,7 +18,6 @@ public class GistFileParseTest {
 		System.out.println("-------set---net.sets--"  + set.id);
 		System.out.println("-------set---net.sets--"  + set.name);
 		System.out.println("-------set---net.sets--"  + set.icon);
-		System.out.println("-------set---net.sets--"  + set.root_nodes.get(0).name);
 		System.out.println("-------set---net.sets-nodes-"  + set.nodes.size());
 		System.out.println("-------set---net.sets-relations-"  + set.relations().size());
 		System.out.println("-------set---net.sets-parents-"  + set.parents().size());
@@ -29,7 +28,6 @@ public class GistFileParseTest {
 		//KnowledgeSet
 		System.out.println("-------KnowledgeNode-----");
 		KnowledgeNode node = set.nodes.get(2);
-		System.out.println("-------node---net.sets--"  + node.node_set_id);
 		System.out.println("-------node---net.sets--"  + node.id);
 		System.out.println("-------node---net.sets--"  + node.name);
 		System.out.println("-------node---net.sets--"  + node.desc);
