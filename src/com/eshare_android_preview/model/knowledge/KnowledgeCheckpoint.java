@@ -7,10 +7,7 @@ import java.util.List;
 public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
 	public String id;
 	public List<KnowledgeSet> learned_sets;
-	public String getId() {
-		return id;
-	}
-	
+
 	public KnowledgeCheckpoint(String id, List<KnowledgeSet> learned_sets) {
 		super();
 		this.id = id;
