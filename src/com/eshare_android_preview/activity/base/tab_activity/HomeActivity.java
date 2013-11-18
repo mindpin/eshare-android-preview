@@ -2,9 +2,13 @@ package com.eshare_android_preview.activity.base.tab_activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
@@ -13,12 +17,12 @@ import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
+import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 public class HomeActivity extends EshareBaseActivity {
@@ -36,7 +40,7 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     ArrayList<DashPathEndpoint> dash_path_endpoint_list;
-    static double screen_width_dp, grid_width_dp;
+    static double screen_width_dp, grid_width_dp, grid_height_dp;
     DashPathView dash_path_view;
 
     private void _init_knowledge_net() {
@@ -56,6 +60,7 @@ public class HomeActivity extends EshareBaseActivity {
         BaseUtils.ScreenSize screen_size = BaseUtils.get_screen_size();
         screen_width_dp = screen_size.width_dp;
         grid_width_dp = screen_width_dp / 3.0D;
+        grid_height_dp = grid_width_dp + 30;
     }
 
     private void _init_paper() {
@@ -71,7 +76,7 @@ public class HomeActivity extends EshareBaseActivity {
     private void _draw_dash_path_view() {
         dash_path_view.set_dash_path_endpoint_list(dash_path_endpoint_list);
         dash_path_view.set_color(Color.parseColor("#999999"));
-        dash_path_view.set_dash_icon_radius(3);
+        dash_path_view.set_dash_icon_radius(2);
         lines_paper.addView(dash_path_view);
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) dash_path_view.getLayoutParams();
@@ -87,32 +92,70 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     private void _draw_nodes() {
-        for (SetPosition pos : KnowledgeSetsData.pos_hashmap.values()) {
-            _put_knowledge_node_on_grid(pos);
-            _put_pos_to_dash_path_endpoint_list(pos);
+        for (List<SetPosition> list : KnowledgeSetsData.deep_hashmap.values()) {
+            for (SetPosition pos : list) {
+                if (list.size() == 1) {
+                    list.get(0).set_position(2F);
+                }
+
+                if (list.size() == 2) {
+                    list.get(0).set_position(1.5F);
+                    list.get(1).set_position(2.5F);
+                }
+
+                _put_knowledge_node_on_grid(pos);
+                _put_pos_to_dash_path_endpoint_list(pos);
+            }
         }
     }
 
     private void _put_knowledge_node_on_grid(SetPosition pos) {
-        int drawable = pos.is_checkpoint() ? R.drawable.btn_cfccd2d_circle_flat : R.drawable.btn_c1cb0f6_circle_flat;
+        _draw_circle(pos);
+        _draw_text(pos);
+    }
 
+    private void _draw_circle(SetPosition pos) {
         ImageView iv = new ImageView(this);
+
+        int drawable = pos.is_checkpoint() ? R.drawable.btn_cfccd2d_circle_flat : R.drawable.btn_c1cb0f6_circle_flat;
         iv.setBackgroundDrawable(getResources().getDrawable(drawable));
 
         int px = BaseUtils.dp_to_int_px((float) SetPosition.CIRCLE_RADIUS_DP * 2);
-        RelativeLayout.LayoutParams layout_params = new RelativeLayout.LayoutParams(px, px);
-        layout_params.setMargins(BaseUtils.dp_to_int_px((float) pos.circle_dp_left), BaseUtils.dp_to_int_px((float) pos.circle_dp_top), 0, 0);
-        iv.setLayoutParams(layout_params);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(px, px);
+
+        params.setMargins(BaseUtils.dp_to_int_px((float) pos.circle_dp_left), BaseUtils.dp_to_int_px((float) pos.circle_dp_top), 0, 0);
+        iv.setLayoutParams(params);
+
         nodes_paper.addView(iv);
+    }
+
+    private void _draw_text(SetPosition pos) {
+        TextView tv = new TextView(this);
+
+        tv.setText(pos.get_set_name());
+        tv.setTextSize(BaseUtils.dp_to_int_px((float) pos.TEXT_SIZE));
+        tv.setGravity(Gravity.CENTER);
+        tv.setBackgroundColor(Color.parseColor("#ffffff"));
+        tv.setTextColor(Color.parseColor("#444444"));
+//        tv.getPaint().setFakeBoldText(true);
+
+        int width_px = BaseUtils.dp_to_int_px((float) grid_width_dp);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        double top = pos.text_dp_top;
+        params.setMargins(BaseUtils.dp_to_int_px((float) pos.grid_dp_left), BaseUtils.dp_to_int_px((float) top), 0, 0);
+        tv.setLayoutParams(params);
+
+        nodes_paper.addView(tv);
     }
 
     private void _put_pos_to_dash_path_endpoint_list(SetPosition pos) {
         for(BaseKnowledgeSet parent : pos.set.parents()) {
             SetPosition parent_pos = KnowledgeSetsData.get_pos_of_set(parent);
             float x1 = (float) parent_pos.circle_center_dp_left;
-            float y1 = (float) parent_pos.circle_center_dp_top;
+            float y1 = (float) parent_pos.text_dp_top + 22;
             float x2 = (float) pos.circle_center_dp_left;
-            float y2 = (float) pos.circle_center_dp_top;
+            float y2 = (float) pos.circle_dp_top - 5;
 
             DashPathEndpoint p1 = DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2);
             dash_path_endpoint_list.add(p1);
@@ -162,12 +205,14 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     static private class SetPosition {
-        final static double CIRCLE_RADIUS_DP = 30.0D;
+//        final static double CIRCLE_RADIUS_DP = 33.3333D;
+        final static double CIRCLE_RADIUS_DP = 30;
+        final static double TEXT_SIZE = 9;
 
         BaseKnowledgeSet set;
 
-        int grid_left;
-        int grid_top;
+        float grid_left;
+        float grid_top;
 
         double grid_dp_left;
         double grid_dp_top;
@@ -179,15 +224,20 @@ public class HomeActivity extends EshareBaseActivity {
         double circle_center_dp_left;
         double circle_center_dp_top;
 
-        public SetPosition(BaseKnowledgeSet set, int grid_left) {
+        double text_dp_top;
+
+        public SetPosition(BaseKnowledgeSet set, float grid_left) {
             this.set = set;
+            set_position(grid_left);
+        }
 
+        public void set_position(float grid_left) {
             this.grid_left = grid_left;
-            this.grid_top = set.deep;
+            this.grid_top  = set.deep;
 
-            this.grid_dp_left = (grid_left - 1) * grid_width_dp;
-            this.grid_dp_top  = (grid_top  - 1) * grid_width_dp;
-            this.grid_dp_bottom = this.grid_dp_top + grid_width_dp;
+            this.grid_dp_left = (this.grid_left - 1) * grid_width_dp;
+            this.grid_dp_top  = (this.grid_top  - 1) * grid_height_dp;
+            this.grid_dp_bottom = this.grid_dp_top + grid_height_dp;
 
             this.circle_center_dp_left = this.grid_dp_left + grid_width_dp / 2.0D;
             this.circle_center_dp_top  = this.grid_dp_top  + grid_width_dp / 2.0D;
@@ -195,6 +245,7 @@ public class HomeActivity extends EshareBaseActivity {
             this.circle_dp_left = this.circle_center_dp_left - CIRCLE_RADIUS_DP;
             this.circle_dp_top  = this.circle_center_dp_top  - CIRCLE_RADIUS_DP;
 
+            this.text_dp_top = this.circle_center_dp_top + CIRCLE_RADIUS_DP + 4.0D;
         }
 
         @Override
@@ -205,6 +256,14 @@ public class HomeActivity extends EshareBaseActivity {
         boolean is_checkpoint() {
             String set_class_name = set.getClass().getName();
             return "com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint".equals(set_class_name);
+        }
+
+        String get_set_name() {
+            if (is_checkpoint()) {
+                return "checkpoint";
+            }
+
+            return ((KnowledgeSet) set).name;
         }
     }
 
