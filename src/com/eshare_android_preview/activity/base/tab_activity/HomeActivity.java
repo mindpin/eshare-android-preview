@@ -105,12 +105,12 @@ public class HomeActivity extends EshareBaseActivity {
 
         if (max_top < pos_bottom) max_top = pos_bottom;
 
-        KnowledgeSetsData.put_set_position(pos.set, new P(pos.circle_dp_left, pos.circle_dp_top));
+        KnowledgeSetsData.put_set_position(pos.set, pos);
 
         for(BaseKnowledgeSet parent : pos.set.parents()) {
-            P p = KnowledgeSetsData.get_set_position(parent);
-            float x1 = (float) p.left + 60 / 2;
-            float y1 = (float) p.top + 60 / 2;
+            SetPosition parent_pos = KnowledgeSetsData.get_set_position(parent);
+            float x1 = (float) parent_pos.circle_center_dp_left;
+            float y1 = (float) parent_pos.circle_center_dp_top;
             float x2 = (float) pos.circle_center_dp_left;
             float y2 = (float) pos.circle_center_dp_top;
 
@@ -143,11 +143,11 @@ public class HomeActivity extends EshareBaseActivity {
 
     private static class KnowledgeSetsData {
         static HashMap<Integer, List<SetPosition>> deep_hashmap;
-        static HashMap<BaseKnowledgeSet, P> points_map;
+        static HashMap<BaseKnowledgeSet, SetPosition> points_map;
 
         static void init() {
             deep_hashmap = new HashMap<Integer, List<SetPosition>>();
-            points_map = new HashMap<BaseKnowledgeSet, P>();
+            points_map = new HashMap<BaseKnowledgeSet, SetPosition>();
         }
 
         static void put_set_in_map(BaseKnowledgeSet set) {
@@ -164,16 +164,18 @@ public class HomeActivity extends EshareBaseActivity {
             }
         }
 
-        static void put_set_position(BaseKnowledgeSet set, P position) {
+        static void put_set_position(BaseKnowledgeSet set, SetPosition position) {
             points_map.put(set, position);
         }
 
-        static P get_set_position(BaseKnowledgeSet set) {
+        static SetPosition get_set_position(BaseKnowledgeSet set) {
             return points_map.get(set);
         }
     }
 
     static private class SetPosition {
+        static HashMap<BaseKnowledgeSet, SetPosition> pos_hashmap = new HashMap<BaseKnowledgeSet, SetPosition>();
+
         final static double CIRCLE_DIAMETER_DP = 60.0D;
 
         BaseKnowledgeSet set;
@@ -198,21 +200,17 @@ public class HomeActivity extends EshareBaseActivity {
 
             this.circle_center_dp_left = this.circle_dp_left + CIRCLE_DIAMETER_DP / 2.0D;
             this.circle_center_dp_top  = this.circle_dp_top  + CIRCLE_DIAMETER_DP / 2.0D;
+
+            pos_hashmap.put(set, this);
         }
 
         @Override
         public boolean equals(Object o) {
             return this.set.equals(((SetPosition) o).set);
         }
-    }
 
-    static private class P {
-        double left;
-        double top;
-
-        public P(double left, double top) {
-            this.left = left;
-            this.top = top;
+        static public SetPosition get_pos_of_set(BaseKnowledgeSet set) {
+            return pos_hashmap.get(set);
         }
     }
 
