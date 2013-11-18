@@ -1,9 +1,11 @@
 package com.eshare_android_preview.model.knowledge;
 
+import com.eshare_android_preview.activity.base.tab_activity.HomeActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeNet extends BaseParse{
+public class KnowledgeNet extends BaseParse implements HomeActivity.IHasChildren{
 	private static KnowledgeNet m_instance;
 
     public List<KnowledgeSet> sets;
@@ -18,10 +20,14 @@ public class KnowledgeNet extends BaseParse{
     }
 
     // 返回所有没有前置节点的 sets
-    public List<KnowledgeSet> root_sets() {
-        ArrayList<KnowledgeSet> re = new ArrayList<KnowledgeSet>();
+    public List<BaseKnowledgeSet> root_sets() {
+        ArrayList<BaseKnowledgeSet> re = new ArrayList<BaseKnowledgeSet>();
         re.add(this.first_set);
         return re;
+    }
+
+    public List<BaseKnowledgeSet> children() {
+        return root_sets();
     }
 
 	public static KnowledgeNet instance(){

@@ -10,6 +10,9 @@ import android.graphics.Path;
 import android.graphics.PathDashPathEffect;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.eshare_android_preview.base.utils.BaseUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -130,7 +133,8 @@ public class DashPathView extends View {
         this.color = color;
     }
 
-    public void set_dash_icon_radius(int radius){
+    public void set_dash_icon_radius(int radius_dp){
+        int radius = (int) BaseUtils.dp_to_px(radius_dp);
         this.dash_icon_radius = radius;
     }
 
