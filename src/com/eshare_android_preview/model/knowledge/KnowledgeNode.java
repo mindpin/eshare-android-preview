@@ -79,6 +79,6 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
     public void do_learn() {
         // TODO 未实现
         EsharePreference.put_boolean(this.id,true);
-            
+
     }
 }

@@ -35,9 +35,6 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
     @Override
     public boolean is_unlocked() {
         // TODO 未实现
-        if (this.parents.size() == 0 ){
-            return true;
-        }
         boolean parent_learned = true;
         for (BaseKnowledgeSet base_set : this.parents){
            if (base_set.getClass() == KnowledgeSet.class){
@@ -50,5 +47,8 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
     @Override
     public void do_learn() {
         EsharePreference.put_boolean(this.id,true);
+        for (KnowledgeNode node: this.nodes){
+            node.do_learn();
+        }
     }
 }
