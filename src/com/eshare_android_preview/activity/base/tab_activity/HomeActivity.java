@@ -36,7 +36,7 @@ public class HomeActivity extends EshareBaseActivity {
 
     ArrayList<DashPathEndpoint> dash_path_endpoint_list;
     int max_top;
-    int screen_width_dp;
+    static double screen_width_dp, grid_width_dp;
     DashPathView dash_path_view;
 
     private void _init_knowledge_net() {
@@ -54,7 +54,8 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void _init_screen_width_dp() {
         BaseUtils.ScreenSize screen_size = BaseUtils.get_screen_size();
-        screen_width_dp = (int) screen_size.width_dp;
+        screen_width_dp = screen_size.width_dp;
+        grid_width_dp = screen_width_dp / 3.0D;
     }
 
     private void _init_paper() {
@@ -92,48 +93,42 @@ public class HomeActivity extends EshareBaseActivity {
             List<SetPosition> grid_pos_list = KnowledgeSetsData.deep_hashmap.get(deep);
 
             for (SetPosition pos : grid_pos_list) {
-                _put_knowledge_node_on_grid(pos.grid_left, pos.grid_top, pos.set);
+                _put_knowledge_node_on_grid(pos);
             }
         }
     }
 
-    private void _put_knowledge_node_on_grid(int x, int y, BaseKnowledgeSet set) {
-        double grid_width = (int) screen_width_dp / 3;
-        double diameter = 60;
+    private void _put_knowledge_node_on_grid(SetPosition pos) {
+        double top = pos.circle_dp_top;
 
-        double left = (x - 0.5) * grid_width - diameter / 2.0;
-        double top = (y - 0.5) * grid_width - diameter / 2.0;
+        int pos_bottom = (int) (top + SetPosition.CIRCLE_DIAMETER_DP);
 
-        if (top + diameter > max_top) max_top = (int) (top + diameter);
+        if (max_top < pos_bottom) max_top = pos_bottom;
 
-        _put_knowledge_node((int) left, (int) top, (int) diameter, set);
-    }
+        KnowledgeSetsData.put_set_position(pos.set, new P(pos.circle_dp_left, pos.circle_dp_top));
 
-    private void _put_knowledge_node(int left, int top, int diameter, BaseKnowledgeSet set) {
-        KnowledgeSetsData.put_set_position(set, new P(left, top));
-
-        for(BaseKnowledgeSet parent : set.parents()) {
+        for(BaseKnowledgeSet parent : pos.set.parents()) {
             P p = KnowledgeSetsData.get_set_position(parent);
-            int x1 = p.left + diameter / 2;
-            int y1 = p.top + diameter / 2;
-            int x2 = left + diameter / 2;
-            int y2 = top + diameter / 2;
+            float x1 = (float) p.left + 60 / 2;
+            float y1 = (float) p.top + 60 / 2;
+            float x2 = (float) pos.circle_center_dp_left;
+            float y2 = (float) pos.circle_center_dp_top;
 
             DashPathEndpoint p1 = DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2);
             dash_path_endpoint_list.add(p1);
         }
 
         int drawable = R.drawable.btn_cfccd2d_circle_flat;
-        String classname = set.getClass().getName();
+        String classname = pos.set.getClass().getName();
         if ("com.eshare_android_preview.model.knowledge.KnowledgeSet".equals(classname)) {
             drawable = R.drawable.btn_c1cb0f6_circle_flat;
         }
 
         ImageView iv = new ImageView(this);
         iv.setBackgroundDrawable(getResources().getDrawable(drawable));
-        int px = BaseUtils.dp_to_int_px(diameter);
+        int px = BaseUtils.dp_to_int_px(60);
         RelativeLayout.LayoutParams layout_params = new RelativeLayout.LayoutParams(px, px);
-        layout_params.setMargins(BaseUtils.dp_to_int_px(left), BaseUtils.dp_to_int_px(top), 0, 0);
+        layout_params.setMargins(BaseUtils.dp_to_int_px((float) pos.circle_dp_left), BaseUtils.dp_to_int_px((float) pos.circle_dp_top), 0, 0);
         iv.setLayoutParams(layout_params);
         nodes_paper.addView(iv);
     }
@@ -179,18 +174,30 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     static private class SetPosition {
+        final static double CIRCLE_DIAMETER_DP = 60.0D;
+
         BaseKnowledgeSet set;
 
         int grid_left;
         int grid_top;
 
-        int dp_left;
-        int dp_top;
+        double circle_dp_left;
+        double circle_dp_top;
+
+        double circle_center_dp_left;
+        double circle_center_dp_top;
 
         public SetPosition(BaseKnowledgeSet set, int grid_left) {
             this.set = set;
+
             this.grid_left = grid_left;
             this.grid_top = set.deep;
+
+            this.circle_dp_left = (this.grid_left - 0.5D) * grid_width_dp - CIRCLE_DIAMETER_DP / 2.0D;
+            this.circle_dp_top  = (this.grid_top  - 0.5D) * grid_width_dp - CIRCLE_DIAMETER_DP / 2.0D;
+
+            this.circle_center_dp_left = this.circle_dp_left + CIRCLE_DIAMETER_DP / 2.0D;
+            this.circle_center_dp_top  = this.circle_dp_top  + CIRCLE_DIAMETER_DP / 2.0D;
         }
 
         @Override
@@ -200,10 +207,10 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     static private class P {
-        int left;
-        int top;
+        double left;
+        double top;
 
-        public P(int left, int top) {
+        public P(double left, double top) {
             this.left = left;
             this.top = top;
         }
