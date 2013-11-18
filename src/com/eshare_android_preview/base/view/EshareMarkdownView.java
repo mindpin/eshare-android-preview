@@ -73,6 +73,19 @@ public class EshareMarkdownView extends RelativeLayout {
         return this;
     }
 
+    public Codefill getFirstUnappliedCodefill() {
+        Codefill firstUnapplied = null;
+
+        for (Codefill codefill : this.codefills) {
+            if (codefill.appliedChoice == null) {
+                firstUnapplied = codefill;
+                break;
+            }
+        }
+
+        return firstUnapplied;
+    }
+
     public class MarkdownWebView extends WebView {
         public MarkdownWebView(Context context) {
             super(context);
