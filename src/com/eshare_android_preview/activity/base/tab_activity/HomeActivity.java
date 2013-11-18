@@ -1,6 +1,7 @@
 package com.eshare_android_preview.activity.base.tab_activity;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
@@ -19,6 +21,8 @@ import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -112,6 +116,7 @@ public class HomeActivity extends EshareBaseActivity {
     private void _put_knowledge_node_on_grid(SetPosition pos) {
         _draw_circle(pos);
         _draw_text(pos);
+        _draw_icon(pos);
     }
 
     private void _draw_circle(SetPosition pos) {
@@ -147,6 +152,29 @@ public class HomeActivity extends EshareBaseActivity {
         tv.setLayoutParams(params);
 
         nodes_paper.addView(tv);
+    }
+
+    private void _draw_icon(SetPosition pos) {
+        try {
+            ImageView iv = new ImageView(this);
+
+            InputStream stream = getAssets().open("knowledge_icons/knowledge_leaf.png");
+            Drawable drawable = Drawable.createFromStream(stream, null);
+            stream.close();
+
+            iv.setImageDrawable(drawable);
+
+            int px = BaseUtils.dp_to_int_px((float) SetPosition.CIRCLE_RADIUS_DP * 2);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(px, px);
+
+            params.setMargins(BaseUtils.dp_to_int_px((float) pos.circle_dp_left), BaseUtils.dp_to_int_px((float) pos.circle_dp_top), 0, 0);
+            iv.setLayoutParams(params);
+
+            nodes_paper.addView(iv);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void _put_pos_to_dash_path_endpoint_list(SetPosition pos) {
