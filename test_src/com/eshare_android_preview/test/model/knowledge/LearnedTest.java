@@ -10,6 +10,8 @@ import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 
 import junit.framework.Assert;
 
+import org.junit.Assume;
+
 /**
  * Created by fushang318 on 13-11-15.
  */
@@ -75,6 +77,66 @@ public class LearnedTest extends AndroidTestCase {
                 }
             }
         }
+    }
+
+    // 刚开始没有任何数据库记录的情况下学习第一个知识单元下的所有知识节点
+    public void test_4(){
+        for(KnowledgeSet set : net.root_sets){
+            for(KnowledgeNode node : set.nodes){
+                node.do_learn();
+            }
+            Assert.assertTrue(set.is_learned());
+
+            for(BaseKnowledgeSet child : set.children()){
+                if(child.getClass() == KnowledgeSet.class){
+                    Assert.assertTrue(((KnowledgeSet)child).is_unlocked());
+                    for(KnowledgeNode cnode : ((KnowledgeSet) child).nodes){
+                        if(cnode.parents().size() == 0){
+                            Assert.assertTrue(cnode.is_unlocked());
+                        }else{
+                            Assert.assertFalse(cnode.is_unlocked());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // 刚开始没有任何数据库记录的情况下通过一个检查点
+    public void test_5(){
+        KnowledgeCheckpoint checkpoint = net.checkpoints.get(0);
+        checkpoint.do_learn();
+        for(KnowledgeSet set : checkpoint.learned_sets){
+           Assert.assertTrue(set.is_learned());
+           for(KnowledgeNode node : set.nodes){
+               Assert.assertTrue(node.is_learned());
+           }
+           for(BaseKnowledgeSet cset : set.children()){
+               if(cset.getClass() == KnowledgeSet.class){
+                   Assert.assertTrue(((KnowledgeSet)cset).is_unlocked());
+               }
+           }
+        }
+    }
+
+    // 知识节点没有解锁的情况下，不可以学习
+    public void test_6(){
+        for(BaseKnowledgeSet set : net.root_sets){
+            if(set.getClass() == KnowledgeSet.class){
+                for(KnowledgeNode node : ((KnowledgeSet)set).root_nodes){
+                    for(KnowledgeNode cnode : node.children()){
+                        try{
+                            cnode.do_learn();
+                            Assert.fail("no exception throw");
+                        }catch(Exception ex){
+                            Assert.assertTrue(true);
+                        }
+                    }
+                }
+
+            }
+        }
+
     }
 
 }

@@ -9,7 +9,7 @@ public class GistFileParseTest {
 		KnowledgeNet net = KnowledgeNet.instance();
 		System.out.println("sets ====  "  + net.sets.size());
 		System.out.println("checkpoints ====  "  + net.checkpoints.size());
-		System.out.println("first_set ====  "  + net.first_set.name);
+		System.out.println("first_set ====  "  + net.root_sets.get(0).name);
 		
 		//KnowledgeSet
 		System.out.println("-------set-----");
@@ -18,7 +18,7 @@ public class GistFileParseTest {
 		System.out.println("-------set---net.sets--"  + set.id);
 		System.out.println("-------set---net.sets--"  + set.name);
 		System.out.println("-------set---net.sets--"  + set.icon);
-		System.out.println("-------set---net.sets--"  + set.first_node.name);
+		System.out.println("-------set---net.sets--"  + set.root_nodes.get(0).name);
 		System.out.println("-------set---net.sets-nodes-"  + set.nodes.size());
 		System.out.println("-------set---net.sets-relations-"  + set.relations().size());
 		System.out.println("-------set---net.sets-parents-"  + set.parents().size());
