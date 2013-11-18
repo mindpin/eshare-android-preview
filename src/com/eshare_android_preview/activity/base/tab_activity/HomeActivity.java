@@ -79,8 +79,8 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void _draw_dash_path_view() {
         dash_path_view.set_dash_path_endpoint_list(dash_path_endpoint_list);
-        dash_path_view.set_color(Color.parseColor("#999999"));
-        dash_path_view.set_dash_icon_radius(2);
+        dash_path_view.set_color(Color.parseColor("#aaaaaa"));
+        dash_path_view.set_dash_icon_radius(3);
         lines_paper.addView(dash_path_view);
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) dash_path_view.getLayoutParams();
