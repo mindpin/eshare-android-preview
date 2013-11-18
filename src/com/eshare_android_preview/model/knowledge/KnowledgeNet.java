@@ -10,24 +10,21 @@ public class KnowledgeNet extends BaseParse implements HomeActivity.IHasChildren
 
     public List<KnowledgeSet> sets;
     public List<KnowledgeCheckpoint> checkpoints;
-    public KnowledgeSet first_set;
+    public List<KnowledgeSet> root_sets;
 
     private KnowledgeNet(){
         super();
         this.sets = fileParse.node_set_list;
         this.checkpoints = fileParse.check_point_list;
-        this.first_set = fileParse.first_set;
-    }
-
-    // 返回所有没有前置节点的 sets
-    public List<BaseKnowledgeSet> root_sets() {
-        ArrayList<BaseKnowledgeSet> re = new ArrayList<BaseKnowledgeSet>();
-        re.add(this.first_set);
-        return re;
+        this.root_sets = fileParse.root_sets;
     }
 
     public List<BaseKnowledgeSet> children() {
-        return root_sets();
+        ArrayList<BaseKnowledgeSet> re = new ArrayList<BaseKnowledgeSet>();
+        for (BaseKnowledgeSet set : root_sets) {
+            re.add(set);
+        }
+        return re;
     }
 
 	public static KnowledgeNet instance(){
