@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -101,12 +103,18 @@ public class EshareMarkdownView extends RelativeLayout {
 
         @Override
         protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-            if (EshareMarkdownView.this.codefills.size() > 0) {
-                for (Codefill codefill : EshareMarkdownView.this.codefills) {
+            EshareMarkdownView that = EshareMarkdownView.this;
+            if (that.codefills.size() > 0) {
+                for (Codefill codefill : that.codefills) {
                     RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) codefill.getLayoutParams();
                     params.leftMargin = codefill.rawRect.left - l;
                     params.topMargin  = codefill.rawRect.top - t;
-                    codefill.requestLayout();
+                    if (codefill.inBoundOfView(that)) {
+                        codefill.setVisibility(View.VISIBLE);
+                        codefill.requestLayout();
+                    } else {
+                        codefill.setVisibility(View.GONE);
+                    }
                 }
             }
             super.onScrollChanged(l, t, oldl, oldt);
@@ -121,6 +129,15 @@ public class EshareMarkdownView extends RelativeLayout {
             super(context);
             rawRect = new Rect(object.getInt("left"), object.getInt("top"), object.getInt("right"), object.getInt("bottom"));
             setParams();
+        }
+
+        public boolean inBoundOfView(View view) {
+            LayoutParams params = (LayoutParams) this.getLayoutParams();
+            int x = params.leftMargin , y = params.topMargin, offset = 4;
+            boolean isXInBound = (x + this.getWidth()  > 0 - offset) && (x < view.getWidth()  + offset);
+            boolean isYInBound = (y + this.getHeight() > 0 - offset) && (y < view.getHeight() + offset);
+
+            return isXInBound && isYInBound;
         }
 
         @SuppressLint("ResourceAsColor")

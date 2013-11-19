@@ -34,7 +34,9 @@ public class WebViewDemoActivity extends EshareBaseActivity {
                       "if a > 3\n" +
                       "  p a if a [%] 10\n" +
                       "  p \"你好，世界\"\n" +
+                      "  p 2 [%] 3 == 6\n" +
                       "end\n" +
+                      "[%] {|a| a + 16}.call(3) / [%]\n" +
                       "```";
 
         preview.setMarkdownContent(h1 + image + code);
