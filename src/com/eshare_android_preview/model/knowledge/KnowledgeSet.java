@@ -29,7 +29,6 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
 
     @Override
     public boolean is_learned() {
-        // TODO 未实现
         return EsharePreference.get_learned(this.id);
     }
 
@@ -47,12 +46,11 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
     public void do_learn() {}
 
     public boolean required_nodes_is_learned(){
-        boolean is_learned = true;
         for (KnowledgeNode node:this.nodes){
-            if (node.required){
-                is_learned = is_learned && node.is_learned();
+            if (node.required && !node.is_learned()){
+              return false;
             }
         }
-        return  false||is_learned;
+        return  true;
     }
 }
