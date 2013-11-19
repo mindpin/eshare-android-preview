@@ -1,8 +1,11 @@
 package com.eshare_android_preview.model.knowledge;
 
+import com.eshare_android_preview.activity.base.tab_activity.HomeActivity;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeNet extends BaseParse{
+public class KnowledgeNet extends BaseParse implements HomeActivity.IHasChildren{
 	private static KnowledgeNet m_instance;
 
     public List<KnowledgeSet> sets;
@@ -14,6 +17,14 @@ public class KnowledgeNet extends BaseParse{
         this.sets = fileParse.node_set_list;
         this.checkpoints = fileParse.check_point_list;
         this.root_sets = fileParse.root_sets;
+    }
+
+    public List<BaseKnowledgeSet> children() {
+        ArrayList<BaseKnowledgeSet> re = new ArrayList<BaseKnowledgeSet>();
+        for (BaseKnowledgeSet set : root_sets) {
+            re.add(set);
+        }
+        return re;
     }
 
 	public static KnowledgeNet instance(){

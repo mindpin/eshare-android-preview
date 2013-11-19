@@ -12,16 +12,16 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
 	public String id;
 	public String name;
 	public String icon;
-	
+
 	public List<KnowledgeNode> nodes;
-	public List<KnowledgeNode> root_nodes;
+    public List<KnowledgeNode> root_nodes;
 
 	public KnowledgeSet(String id, String name, String icon) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.icon = icon;
-		
+
 		this.nodes = new ArrayList<KnowledgeNode>();
 	}
 

@@ -36,5 +36,6 @@ public class GistFileParseTest {
 		System.out.println("-------node---net.sets-parents-"  + node.parents().size());
 		System.out.println("-------node---net.sets-children-"  + node.children().size());
 		System.out.println("-------node-----");
+
 	}
 }
