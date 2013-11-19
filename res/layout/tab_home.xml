@@ -7,23 +7,34 @@
     <ScrollView
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:fadingEdge="none"
+        android:layout_marginBottom="-2000dp"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
         <RelativeLayout
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent">
+            android:id="@+id/scroller"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="-2000dp"
+            android:paddingTop="2000dp">
 
             <RelativeLayout
                 android:id="@+id/lines_paper"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_width="fill_parent"></RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/nodes_paper"
-                android:layout_height="fill_parent"
-                android:layout_width="fill_parent"></RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:layout_marginRight="-1000dp"
+                android:layout_marginBottom="-1000dp">
 
+            </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
-
 </RelativeLayout>

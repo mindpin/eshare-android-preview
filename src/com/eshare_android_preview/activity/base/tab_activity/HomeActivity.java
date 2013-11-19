@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,6 +21,7 @@ import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
+import com.nineoldandroids.animation.ObjectAnimator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,11 +46,12 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     ArrayList<DashPathEndpoint> dash_path_endpoint_list;
-    static double screen_width_dp, grid_width_dp, grid_height_dp;
+    static double screen_width_dp, screen_height_dp, grid_width_dp, grid_height_dp;
     DashPathView dash_path_view;
 
     private void _init_knowledge_net() {
         KnowledgeSetsData.init();
+        AniProxy.init();
 
         _init_screen_width_dp();
         _init_paper();
@@ -63,6 +66,8 @@ public class HomeActivity extends EshareBaseActivity {
     private void _init_screen_width_dp() {
         BaseUtils.ScreenSize screen_size = BaseUtils.get_screen_size();
         screen_width_dp = screen_size.width_dp;
+        screen_height_dp = screen_size.height_dp;
+
         grid_width_dp = screen_width_dp / 3.0D;
         grid_height_dp = grid_width_dp + 30;
     }
@@ -83,7 +88,7 @@ public class HomeActivity extends EshareBaseActivity {
         dash_path_view.set_dash_icon_radius(3);
         lines_paper.addView(dash_path_view);
 
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) dash_path_view.getLayoutParams();
+        ViewGroup.LayoutParams params = dash_path_view.getLayoutParams();
         params.height = BaseUtils.dp_to_int_px((float) KnowledgeSetsData.paper_bottom);
         dash_path_view.setLayoutParams(params);
     }
@@ -111,6 +116,10 @@ public class HomeActivity extends EshareBaseActivity {
                 _put_pos_to_dash_path_endpoint_list(pos);
             }
         }
+
+        ViewGroup.LayoutParams params = nodes_paper.getLayoutParams();
+        params.height = BaseUtils.dp_to_int_px((float) KnowledgeSetsData.paper_bottom);
+        nodes_paper.setLayoutParams(params);
     }
 
     private void _put_knowledge_node_on_grid(SetPosition pos) {
@@ -120,7 +129,7 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     private void _draw_circle(SetPosition pos) {
-        ImageView iv = new ImageView(this);
+        final ImageView iv = new ImageView(this);
 
         int drawable = pos.is_checkpoint() ? R.drawable.btn_cfccd2d_circle_flat : R.drawable.btn_c1cb0f6_circle_flat;
         iv.setBackgroundDrawable(getResources().getDrawable(drawable));
@@ -128,8 +137,22 @@ public class HomeActivity extends EshareBaseActivity {
         int px = BaseUtils.dp_to_int_px((float) SetPosition.CIRCLE_RADIUS_DP * 2);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(px, px);
 
-        params.setMargins(BaseUtils.dp_to_int_px((float) pos.circle_dp_left), BaseUtils.dp_to_int_px((float) pos.circle_dp_top), 0, 0);
+        params.leftMargin   = BaseUtils.dp_to_int_px((float) pos.circle_dp_left);
+        params.topMargin    = BaseUtils.dp_to_int_px((float) pos.circle_dp_top);
+        params.rightMargin  = BaseUtils.dp_to_int_px(1000);
+        params.bottomMargin = BaseUtils.dp_to_int_px(1000);
+
         iv.setLayoutParams(params);
+
+        AniProxy.put(iv);
+
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AniProxy anip = AniProxy.get(iv);
+                anip.setRadiusDp(200);
+            }
+        });
 
         nodes_paper.addView(iv);
     }
@@ -142,7 +165,6 @@ public class HomeActivity extends EshareBaseActivity {
         tv.setGravity(Gravity.CENTER);
         tv.setBackgroundColor(Color.parseColor("#ffffff"));
         tv.setTextColor(Color.parseColor("#444444"));
-//        tv.getPaint().setFakeBoldText(true);
 
         int width_px = BaseUtils.dp_to_int_px((float) grid_width_dp);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -297,5 +319,45 @@ public class HomeActivity extends EshareBaseActivity {
 
     public interface IHasChildren {
         public List<BaseKnowledgeSet> children();
+    }
+
+    static class AniProxy {
+        static HashMap<ImageView, AniProxy> ani_proxy_map;
+
+        ImageView circle_view;
+        int circle_view_margin_left_px;
+        int circle_view_margin_top_px;
+
+        public AniProxy(ImageView circle_view) {
+            this.circle_view = circle_view;
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) circle_view.getLayoutParams();
+            circle_view_margin_left_px = lp.leftMargin;
+            circle_view_margin_top_px = lp.topMargin;
+        }
+
+        static void init() {
+            ani_proxy_map = new HashMap<ImageView, AniProxy>();
+        }
+
+        static void put(ImageView circle_view) {
+            AniProxy anip = new AniProxy(circle_view);
+            ani_proxy_map.put(circle_view, anip);
+        }
+
+        static AniProxy get(ImageView circle_view) {
+            return ani_proxy_map.get(circle_view);
+        }
+
+        public void setRadiusDp(float radius_dp) {
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) circle_view.getLayoutParams();
+            params.width  = (int) BaseUtils.dp_to_px(radius_dp * 2);
+            params.height = (int) BaseUtils.dp_to_px(radius_dp * 2);
+            int margin_off_dp = (int) radius_dp - (int) SetPosition.CIRCLE_RADIUS_DP;
+
+            params.leftMargin = circle_view_margin_left_px - (int) BaseUtils.dp_to_px(margin_off_dp);
+            params.topMargin = circle_view_margin_top_px - (int) BaseUtils.dp_to_px(margin_off_dp);
+
+            circle_view.setLayoutParams(params);
+        }
     }
 }
