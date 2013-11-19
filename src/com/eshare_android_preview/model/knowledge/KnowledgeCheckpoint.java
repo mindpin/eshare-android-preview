@@ -3,6 +3,7 @@ package com.eshare_android_preview.model.knowledge;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
@@ -28,25 +29,27 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
     @Override
     public boolean is_unlocked() {
         // TODO 未实现
-        if (this.parents.size() == 0 ){
-            return  true;
-        }
-        boolean parent_learned = true;
-        for (BaseKnowledgeSet base_set : this.parents){
-            if (base_set.getClass() == KnowledgeSet.class){
-                parent_learned = parent_learned && ((KnowledgeSet)base_set).is_learned();
-            }else{
-                parent_learned = parent_learned && ((KnowledgeCheckpoint)base_set).is_learned();
-            }
-        }
-        return false || parent_learned;
+        return true;
     }
 
     @Override
     public void do_learn() {
-        for (KnowledgeSet base_set : this.learned_sets){
-            base_set.do_learn();
+        List<String> id_s = new ArrayList<String>();
+        for (KnowledgeSet set : this.learned_sets){
+            for (KnowledgeNode node: set.nodes){
+                id_s.add(node.id);
+            }
+            id_s.add(set.id);
         }
-        EsharePreference.put_learned(this.id, true);
+        id_s.add(this.id);
+        EsharePreference.put_learned_array(id_s);
+    }
+
+    public void set_learned(){
+        boolean is_learned = true;
+        for (KnowledgeSet set : this.learned_sets){
+            is_learned = is_learned && set.is_learned();
+        }
+        EsharePreference.put_learned(this.id, false || is_learned);
     }
 }

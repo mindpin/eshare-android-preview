@@ -8,6 +8,7 @@ import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
+import com.eshare_android_preview.model.preferences.EsharePreference;
 import com.nineoldandroids.animation.ObjectAnimator;
 
 import junit.framework.Assert;
@@ -21,6 +22,7 @@ public class LearnedTest extends AndroidTestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        EsharePreference.cleare_data();
         net = KnowledgeNet.instance_for_test();
     }
 
@@ -156,14 +158,8 @@ public class LearnedTest extends AndroidTestCase {
         KnowledgeNode node_32 = KnowledgeNode.find("node-32");
 
         Assert.assertFalse(node_32.is_unlocked());
-
-        try{
-            node_32.do_learn();
-            Assert.fail("no exception throw");
-        }catch(Exception ex){
-            Assert.assertTrue(true);
-        }
-
+        node_32.do_learn();
+        Assert.assertFalse(node_32.is_learned());
     }
 
 }

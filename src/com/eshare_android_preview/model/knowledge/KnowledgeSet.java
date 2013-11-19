@@ -51,10 +51,15 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
     }
 
     @Override
-    public void do_learn() {
-        for (KnowledgeNode node: this.root_nodes){
-            node.do_learn();
+    public void do_learn() {}
+
+    public void set_learned(){
+        boolean is_learned = true;
+        for (KnowledgeNode node:this.nodes){
+            if (node.required){
+                is_learned = is_learned && node.is_learned();
+            }
         }
-        EsharePreference.put_learned(this.id, true);
+        EsharePreference.put_learned(this.id, false||is_learned);
     }
 }

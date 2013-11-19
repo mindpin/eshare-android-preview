@@ -88,7 +88,16 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
     @Override
     public void do_learn() {
         // TODO 未实现
+        if (!is_unlocked()){
+            return;
+        }
+
         EsharePreference.put_learned(this.id, true);
+        if (this.base_node_set.getClass() == KnowledgeSet.class){
+            ((KnowledgeSet)this.base_node_set).set_learned();
+        }else{
+            ((KnowledgeCheckpoint)this.base_node_set).set_learned();
+        }
 
     }
 }
