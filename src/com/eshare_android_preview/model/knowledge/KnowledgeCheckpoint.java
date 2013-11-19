@@ -15,6 +15,10 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
 		this.learned_sets = learned_sets;
 	}
 
+    public static KnowledgeCheckpoint find(String checkpoint_id){
+        return BaseParse.fileParse.check_point_map.get(checkpoint_id);
+    }
+
     @Override
     public boolean is_learned() {
         // TODO 未实现

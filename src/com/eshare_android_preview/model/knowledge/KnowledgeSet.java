@@ -23,6 +23,9 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
 		this.nodes = new ArrayList<KnowledgeNode>();
 	}
 
+    public static KnowledgeSet find(String set_id){
+        return BaseParse.fileParse.node_set_map.get(set_id);
+    }
 
     @Override
     public boolean is_learned() {

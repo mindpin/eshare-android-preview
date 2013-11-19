@@ -3,6 +3,7 @@ package com.eshare_android_preview.test.model.knowledge;
 import android.test.AndroidTestCase;
 
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
+import com.eshare_android_preview.model.knowledge.BaseParse;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
@@ -20,8 +21,7 @@ public class ParseTest extends AndroidTestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        net = KnowledgeNet.instance();
-        System.out.println("set up");
+        net = KnowledgeNet.instance_for_test();
     }
 
 
@@ -29,24 +29,21 @@ public class ParseTest extends AndroidTestCase {
     public void test_1(){
         Assert.assertEquals(net.sets.size(), 8);
         Assert.assertEquals(net.checkpoints.size(), 1);
-        Assert.assertEquals(net.root_sets.size(), 2);
+        Assert.assertEquals(net.root_sets.size(), 1);
     }
 
     // KnowledgeSet
     public void test_2(){
-        KnowledgeSet rset = null;
-        for(KnowledgeSet set : net.root_sets){
-            if(set.id.equals("set-1")){
-                rset = set;
-            }
-        }
-        Assert.assertEquals(rset.id, "set-1");
-        Assert.assertEquals(rset.name, "基础概念：值");
-        Assert.assertEquals(rset.icon, "set-1");
-        Assert.assertEquals(rset.nodes.size(), 5);
-        Assert.assertEquals(rset.root_nodes.size(), 1);
-        Assert.assertEquals(rset.parents().size(), 0);
-        Assert.assertEquals(rset.children().size(), 1);
+        KnowledgeSet set_8 = KnowledgeSet.find("set-8");
+
+        Assert.assertEquals(set_8.id, "set-8");
+        Assert.assertEquals(set_8.name, "基础: 值");
+        Assert.assertEquals(set_8.icon, "set-8");
+        Assert.assertEquals(set_8.deep, 1);
+        Assert.assertEquals(set_8.nodes.size(), 5);
+        Assert.assertEquals(set_8.root_nodes.size(), 1);
+        Assert.assertEquals(set_8.parents().size(), 0);
+        Assert.assertEquals(set_8.children().size(), 1);
     }
 
     // KnowledgeCheckpoint
@@ -56,29 +53,23 @@ public class ParseTest extends AndroidTestCase {
         Assert.assertEquals(checkpoint.id, "checkpoint-1");
         Assert.assertEquals(checkpoint.learned_sets.size(), 4);
         Assert.assertEquals(checkpoint.parents().size(), 2);
-        Assert.assertEquals(checkpoint.children().size(), 0);
+        Assert.assertEquals(checkpoint.children().size(), 1);
     }
 
     // KnowledgeNode
     public void test_4(){
-        KnowledgeNode rnode = null;
-        for(KnowledgeSet set : net.root_sets){
-            if(set.id.equals("set-1")){
-                for(KnowledgeNode node : set.root_nodes){
-                    if(node.id.equals("node-1")){
-                        rnode = node;
-                    }
-                }
-            }
-        }
 
-        Assert.assertEquals(rnode.name, "字符串");
-        Assert.assertEquals(rnode.required, true);
-        Assert.assertEquals(((KnowledgeSet)rnode.base_node_set).id, "set-1");
-        Assert.assertEquals(rnode.children().size(), 2);
-        Assert.assertEquals(rnode.parents().size(), 0);
-        Assert.assertEquals(rnode.relations().size(), 2);
-        Assert.assertEquals(rnode.relations().get(0).parent, rnode);
+        KnowledgeNode node_31 = KnowledgeNode.find("node-31");
+
+        Assert.assertEquals(node_31.name, "字符串");
+        Assert.assertEquals(node_31.required, true);
+
+        Assert.assertEquals(((KnowledgeSet)node_31.base_node_set).id, "set-8");
+        Assert.assertEquals(node_31.children().size(), 2);
+        Assert.assertEquals(node_31.parents().size(), 0);
+        Assert.assertEquals(node_31.relations().size(), 2);
+        Assert.assertEquals(node_31.relations().get(0).parent, node_31);
+
     }
 
 
