@@ -1,0 +1,55 @@
+package com.eshare_android_preview.base.view;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.util.AttributeSet;
+import android.view.View;
+
+import com.eshare_android_preview.base.utils.BaseUtils;
+
+/**
+ * Created by fushang318 on 13-11-19.
+ */
+public class CircleView extends View {
+    private int color;
+    private float cx;
+    private float cy;
+    private float radius;
+
+    public CircleView(Context context) {
+        super(context);
+    }
+
+    public CircleView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public void set_color(int color){
+        this.color = color;
+        invalidate();
+    }
+
+    public void set_circle_center_position(float x_dp, float y_dp){
+        this.cx = BaseUtils.dp_to_px(x_dp);
+        this.cy = BaseUtils.dp_to_px(y_dp);
+        invalidate();
+    }
+
+    public void set_radius(float radius_dp){
+        this.radius = BaseUtils.dp_to_px(radius_dp);
+        invalidate();
+    }
+
+    protected void onDraw(Canvas canvas){
+        super.onDraw(canvas);
+
+//      画原
+        Paint p = new Paint();
+        p.setColor(color);// 设置圆颜色
+        p.setStyle(Paint.Style.FILL);//设置填满
+        canvas.drawCircle(cx,cy,radius, p);
+    }
+}
