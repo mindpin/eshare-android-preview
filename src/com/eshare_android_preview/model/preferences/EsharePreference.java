@@ -11,13 +11,13 @@ import com.eshare_android_preview.application.EshareApplication;
 public class EsharePreference {
     public static final SharedPreferences  PREFERENCES = PreferenceManager.getDefaultSharedPreferences(EshareApplication.context);
 
-    public static void put_boolean(String key_name, boolean value){
+    public static void put_learned(String key_name, boolean value){
         SharedPreferences.Editor editor = PREFERENCES.edit();
         editor.putBoolean(key_name,value);
         editor.commit();
     }
 
-    public static boolean get_value(String key){
+    public static boolean get_learned(String key){
         return PREFERENCES.getBoolean(key,false);
     }
 

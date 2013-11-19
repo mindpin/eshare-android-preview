@@ -7,8 +7,6 @@ import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 
-import junit.framework.Assert;
-
 
 public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>,ILearn {
 	public BaseKnowledgeSet base_node_set;
@@ -53,21 +51,29 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
     @Override
     public boolean is_learned() {
         // TODO 未实现
-        return EsharePreference.get_value(this.id);
+        return EsharePreference.get_learned(this.id);
     }
 
     @Override
     public boolean is_unlocked() {
         // TODO 未实现
-        KnowledgeSet set = (KnowledgeSet)this.base_node_set;
-        if (set.getClass() == KnowledgeSet.class){
-            if (this.parents().size()==0 && set.parents.size() ==0){
+
+        if (this.parents().size()==0 && this.base_node_set.parents.size() ==0){
+            return true;
+        }
+
+        if (this.base_node_set.getClass() == KnowledgeSet.class){
+            KnowledgeSet set = (KnowledgeSet)this.base_node_set;
+            if (set.is_learned()&&this.parents().size()==0){
                 return true;
             }
-            if (set.is_learned()){
+        }else{
+            KnowledgeCheckpoint ck = (KnowledgeCheckpoint)this.base_node_set;
+            if (ck.is_learned()&&this.parents().size()==0){
                 return true;
             }
         }
+
         boolean parent_learned = true;
         for (KnowledgeNode node:this.parents){
             parent_learned = parent_learned && node.is_learned();
@@ -78,7 +84,7 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
     @Override
     public void do_learn() {
         // TODO 未实现
-        EsharePreference.put_boolean(this.id,true);
+        EsharePreference.put_learned(this.id, true);
 
     }
 }

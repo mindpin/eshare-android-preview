@@ -18,15 +18,20 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
     @Override
     public boolean is_learned() {
         // TODO 未实现
-        return EsharePreference.get_value(this.id);
+        return EsharePreference.get_learned(this.id);
     }
 
     @Override
     public boolean is_unlocked() {
         // TODO 未实现
+        if (this.parents.size() == 0 ){
+            return  true;
+        }
         boolean parent_learned = true;
         for (BaseKnowledgeSet base_set : this.parents){
-            if (base_set.getClass() == KnowledgeCheckpoint.class){
+            if (base_set.getClass() == KnowledgeSet.class){
+                parent_learned = parent_learned && ((KnowledgeSet)base_set).is_learned();
+            }else{
                 parent_learned = parent_learned && ((KnowledgeCheckpoint)base_set).is_learned();
             }
         }
@@ -35,6 +40,9 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
 
     @Override
     public void do_learn() {
-        EsharePreference.put_boolean(this.id,true);
+        for (KnowledgeSet base_set : this.learned_sets){
+            base_set.do_learn();
+        }
+        EsharePreference.put_learned(this.id, true);
     }
 }
