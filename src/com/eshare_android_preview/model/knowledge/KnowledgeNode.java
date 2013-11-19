@@ -32,6 +32,10 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 		this.children = new ArrayList<KnowledgeNode>();
 	}
 
+    public static KnowledgeNode find(String node_id){
+        return BaseParse.fileParse.node_map.get(node_id);
+    }
+
 	@Override
 	public List<KnowledgeNodeRelation> relations() {
 		return relations;
