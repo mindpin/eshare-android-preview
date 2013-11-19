@@ -35,7 +35,7 @@ public class HtmlEmbeddable {
             "code {font-family:\"Courier New\", monospace !important;}" +
           "</style>" +
           // Weinre 远程调试器
-//          "<script src=\"http://192.168.1.9:8080/target/target-script-min.js#anonymous\"></script>" +
+          "<script src=\"http://192.168.1.9:8080/target/target-script-min.js#anonymous\"></script>" +
         "</head>" +
         "<body>" +
            htmlSnippet +

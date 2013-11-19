@@ -1,7 +1,11 @@
-document.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
     renderCodefills();
-    getCodefills();
-});
+
+    // 延迟获取codefill坐标位置
+    setTimeout(function(){
+        getCodefills();
+    }, 1);
+}
 
 function renderCodefills() {
     var regexp   = /\[\%\]/g

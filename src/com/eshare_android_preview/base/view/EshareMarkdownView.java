@@ -5,8 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -109,6 +110,7 @@ public class EshareMarkdownView extends RelativeLayout {
                     RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) codefill.getLayoutParams();
                     params.leftMargin = codefill.rawRect.left - l;
                     params.topMargin  = codefill.rawRect.top - t;
+
                     if (codefill.inBoundOfView(that)) {
                         codefill.setVisibility(View.VISIBLE);
                         codefill.requestLayout();
@@ -117,6 +119,7 @@ public class EshareMarkdownView extends RelativeLayout {
                     }
                 }
             }
+
             super.onScrollChanged(l, t, oldl, oldt);
         }
     }
