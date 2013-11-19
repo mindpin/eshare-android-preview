@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
@@ -105,18 +103,17 @@ public class EshareMarkdownView extends RelativeLayout {
         @Override
         protected void onScrollChanged(int l, int t, int oldl, int oldt) {
             EshareMarkdownView that = EshareMarkdownView.this;
-            if (that.codefills.size() > 0) {
-                for (Codefill codefill : that.codefills) {
-                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) codefill.getLayoutParams();
-                    params.leftMargin = codefill.rawRect.left - l;
-                    params.topMargin  = codefill.rawRect.top - t;
 
-                    if (codefill.inBoundOfView(that)) {
-                        codefill.setVisibility(View.VISIBLE);
-                        codefill.requestLayout();
-                    } else {
-                        codefill.setVisibility(View.GONE);
-                    }
+            for (Codefill codefill : that.codefills) {
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) codefill.getLayoutParams();
+                params.leftMargin = codefill.rawRect.left - l;
+                params.topMargin  = codefill.rawRect.top - t;
+
+                if (codefill.inBoundOfView(that)) {
+                    codefill.setVisibility(View.VISIBLE);
+                    codefill.requestLayout();
+                } else {
+                    codefill.setVisibility(View.GONE);
                 }
             }
 
