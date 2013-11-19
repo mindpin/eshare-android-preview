@@ -18,6 +18,8 @@ public class CircleView extends View {
     private float cx;
     private float cy;
     private float radius;
+    private int width;
+    private int height;
 
     public CircleView(Context context) {
         super(context);
@@ -41,6 +43,14 @@ public class CircleView extends View {
     public void set_radius(float radius_dp){
         this.radius = BaseUtils.dp_to_px(radius_dp);
         invalidate();
+    }
+
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        this.width = (int)(this.radius + this.cx);
+        this.height = (int)(this.radius + this.cy);
+        setMeasuredDimension(width, height);
     }
 
     protected void onDraw(Canvas canvas){
