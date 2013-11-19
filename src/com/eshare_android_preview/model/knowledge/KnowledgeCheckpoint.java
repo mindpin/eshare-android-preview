@@ -22,13 +22,11 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
 
     @Override
     public boolean is_learned() {
-        // TODO 未实现
         return EsharePreference.get_learned(this.id);
     }
 
     @Override
     public boolean is_unlocked() {
-        // TODO 未实现
         return true;
     }
 
@@ -43,13 +41,5 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
         }
         id_s.add(this.id);
         EsharePreference.put_learned_array(id_s);
-    }
-
-    public void set_learned(){
-        boolean is_learned = true;
-        for (KnowledgeSet set : this.learned_sets){
-            is_learned = is_learned && set.is_learned();
-        }
-        EsharePreference.put_learned(this.id, false || is_learned);
     }
 }

@@ -64,7 +64,7 @@ public class ParseTest extends AndroidTestCase {
         Assert.assertEquals(node_31.name, "字符串");
         Assert.assertEquals(node_31.required, true);
 
-        Assert.assertEquals(((KnowledgeSet)node_31.base_node_set).id, "set-8");
+        Assert.assertEquals(node_31.set.id, "set-8");
         Assert.assertEquals(node_31.children().size(), 2);
         Assert.assertEquals(node_31.parents().size(), 0);
         Assert.assertEquals(node_31.relations().size(), 2);

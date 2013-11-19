@@ -9,7 +9,7 @@ import com.eshare_android_preview.model.preferences.EsharePreference;
 
 
 public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>,ILearn {
-	public BaseKnowledgeSet base_node_set;
+	public KnowledgeSet set;
 	public String id;
 	public String name;
 	public boolean required;
@@ -19,10 +19,10 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 	private List<KnowledgeNode> parents;
 	private List<KnowledgeNode> children;
 
-	public KnowledgeNode(BaseKnowledgeSet base_node_set, String id, String name,
+	public KnowledgeNode(KnowledgeSet set, String id, String name,
 			String required, String desc) {
 		super();
-		this.base_node_set = base_node_set;
+		this.set = set;
 		this.id = id;
 		this.name = name;
 		this.required = required.equals("true");
@@ -54,50 +54,31 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 
     @Override
     public boolean is_learned() {
-        // TODO 未实现
         return EsharePreference.get_learned(this.id);
     }
 
     @Override
     public boolean is_unlocked() {
-        // TODO 未实现
-
-        if (this.parents().size()==0 && this.base_node_set.parents.size() ==0){
-            return true;
+        if (this.parents().size() == 0){
+            return this.set.is_unlocked();
         }
 
-        if (this.base_node_set.getClass() == KnowledgeSet.class){
-            KnowledgeSet set = (KnowledgeSet)this.base_node_set;
-            if (set.is_learned()&&this.parents().size()==0){
-                return true;
-            }
-        }else{
-            KnowledgeCheckpoint ck = (KnowledgeCheckpoint)this.base_node_set;
-            if (ck.is_learned()&&this.parents().size()==0){
-                return true;
-            }
-        }
-
-        boolean parent_learned = true;
         for (KnowledgeNode node:this.parents){
-            parent_learned = parent_learned && node.is_learned();
+            if (!node.is_learned()){
+                return false;
+            }
         }
-        return false || parent_learned;
+        return true;
     }
 
     @Override
     public void do_learn() {
-        // TODO 未实现
         if (!is_unlocked()){
             return;
         }
-
         EsharePreference.put_learned(this.id, true);
-        if (this.base_node_set.getClass() == KnowledgeSet.class){
-            ((KnowledgeSet)this.base_node_set).set_learned();
-        }else{
-            ((KnowledgeCheckpoint)this.base_node_set).set_learned();
-        }
 
+        boolean required_nodes_is_learned = this.set.required_nodes_is_learned();
+        EsharePreference.put_learned(this.set.id,required_nodes_is_learned);
     }
 }

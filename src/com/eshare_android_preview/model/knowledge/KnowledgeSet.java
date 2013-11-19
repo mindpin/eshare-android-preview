@@ -35,31 +35,24 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
 
     @Override
     public boolean is_unlocked() {
-        // TODO 未实现
-        if (this.parents.size() == 0 ){
-            return  true;
-        }
-        boolean parent_learned = true;
         for (BaseKnowledgeSet base_set : this.parents){
-           if (base_set.getClass() == KnowledgeSet.class){
-               parent_learned = parent_learned && ((KnowledgeSet)base_set).is_learned();
-           }else{
-               parent_learned = parent_learned && ((KnowledgeCheckpoint)base_set).is_learned();
-           }
+            if (!base_set.is_learned()){
+                return false;
+            }
         }
-        return false || parent_learned;
+        return true;
     }
 
     @Override
     public void do_learn() {}
 
-    public void set_learned(){
+    public boolean required_nodes_is_learned(){
         boolean is_learned = true;
         for (KnowledgeNode node:this.nodes){
             if (node.required){
                 is_learned = is_learned && node.is_learned();
             }
         }
-        EsharePreference.put_learned(this.id, false||is_learned);
+        return  false||is_learned;
     }
 }
