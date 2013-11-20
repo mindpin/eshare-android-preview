@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -95,9 +96,14 @@ public class EshareMarkdownView extends RelativeLayout {
 
         private void setParams() {
             this.getSettings().setJavaScriptEnabled(true);
+            this.setFontSize(16);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.ALIGN_LEFT | RelativeLayout.ALIGN_TOP, RelativeLayout.TRUE);
             this.setLayoutParams(params);
+        }
+
+        public void setFontSize(int size) {
+            this.getSettings().setDefaultFontSize(size);
         }
 
         @Override
