@@ -89,12 +89,12 @@
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp">
 
-                    <TextView
+                    <!-- TODO 需要支持 android:textSize="18dp"-->
+                    <com.eshare_android_preview.base.view.EshareMarkdownView
                         android:id="@+id/question_title"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="问题正文问题正文问题正文问题正文问题正文问题正文问题正文"
-                        android:textSize="18dp" />
+                        android:layout_width="wrap_content">
+                        </com.eshare_android_preview.base.view.EshareMarkdownView>
                 </LinearLayout>
 
                 <RelativeLayout

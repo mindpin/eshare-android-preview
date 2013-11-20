@@ -1,5 +1,22 @@
 - javascript_core_knowledge_questions
-- - knowledge_node_id: n0
+- - knowledge_node_id: n69
+    kind: fill
+    content: |
+        ```ruby
+            [%](a > 3) {
+                [%]("hello")
+            }
+        ```
+    choices:
+      - alert
+      - if
+      - when
+      - confirm
+      - else
+      - of
+    answer: if,alert
+
+  - knowledge_node_id: n0
     kind: true_false
     content: 字符 é 的 unicode 转义写法为 \u00E9，那这两个字符串 "café" === "caf\u00e9" 的比较结果是
     answer: T
@@ -37,21 +54,6 @@
       - "4$abc"
       - "é$str"
     answer: AC
-
-  - knowledge_node_id: n69
-    kind: fill
-    content: |
-      [#](a > 3) {
-        [#]("hello")
-      }
-    choices:
-      - alert
-      - if
-      - when
-      - confirm
-      - else
-      - of
-    answer: if,alert
 
   - knowledge_node_id: n4
     kind: multiple_choices

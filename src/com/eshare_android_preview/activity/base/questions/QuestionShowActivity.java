@@ -20,6 +20,7 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.ImageTools;
+import com.eshare_android_preview.base.view.EshareMarkdownView;
 import com.eshare_android_preview.model.MultipleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
@@ -36,7 +37,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     TestResult test_result;
 
-    TextView question_kind_tv, question_title_tv;
+    TextView question_kind_tv;
+    EshareMarkdownView  question_title_v;
     LinearLayout choices_detail_ll;
     Button add_favourite_btn;
     Button cancel_favourite_btn;
@@ -99,7 +101,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     private void init_ui() {
         question_kind_tv = (TextView) findViewById(R.id.question_kind);
-        question_title_tv = (TextView) findViewById(R.id.question_title);
+        question_title_v = (EshareMarkdownView) findViewById(R.id.question_title);
         choices_detail_ll = (LinearLayout) findViewById(R.id.choices_detail_ll);
         submit_answer_btn = (Button) findViewById(R.id.submit_answer_btn);
 
@@ -111,7 +113,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
     private void load_question_msg() {
         set_head_text("答题");
         question_kind_tv.setText(question.get_kind_str());
-        question_title_tv.setText(question.content);
+        question_title_v.setMarkdownContent(question.content);
 
         load_choice(choices_detail_ll, R.layout.q_question_choice_detail_item);
     }
