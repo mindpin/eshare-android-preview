@@ -4,37 +4,26 @@
     android:layout_height="fill_parent"
     android:background="#e7e7e7">
 
-    <ScrollView
+    <com.eshare_android_preview.base.view.LockableScrollView
+        android:id="@+id/scroll_view"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:background="#ffffff"
-        android:fadingEdge="none"
-        android:layout_marginBottom="-2000dp"
-        android:fillViewport="true"
-        android:scrollbars="none">
+        android:fadingEdge="none">
 
         <RelativeLayout
-            android:id="@+id/scroller"
             android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="-2000dp"
-            android:paddingTop="2000dp">
+            android:layout_width="fill_parent">
 
             <RelativeLayout
                 android:id="@+id/lines_paper"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"></RelativeLayout>
+                android:layout_width="fill_parent" />
 
             <RelativeLayout
                 android:id="@+id/nodes_paper"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:clipToPadding="false"
-                android:clipChildren="false"
-                android:layout_marginRight="-1000dp"
-                android:layout_marginBottom="-1000dp">
-
-            </RelativeLayout>
+                android:layout_width="wrap_content" />
         </RelativeLayout>
-    </ScrollView>
+    </com.eshare_android_preview.base.view.LockableScrollView>
 </RelativeLayout>

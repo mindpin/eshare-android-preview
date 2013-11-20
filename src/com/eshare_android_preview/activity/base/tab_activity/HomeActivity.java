@@ -3,7 +3,6 @@ package com.eshare_android_preview.activity.base.tab_activity;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,25 +12,29 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.base.view.CircleView;
+import com.eshare_android_preview.base.view.LockableScrollView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
-import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.PropertyValuesHolder;
+import com.nineoldandroids.animation.ValueAnimator;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class HomeActivity extends EshareBaseActivity {
+
+    LockableScrollView scroll_view;
 
     RelativeLayout nodes_paper;
     RelativeLayout lines_paper;
@@ -40,18 +43,21 @@ public class HomeActivity extends EshareBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.tab_home);
 
+        scroll_view = (LockableScrollView) findViewById(R.id.scroll_view);
+        int[] pos = new int[2];
+        scroll_view.getLocationInWindow(pos);
+
         _init_knowledge_net();
 
         super.onCreate(savedInstanceState);
     }
 
     ArrayList<DashPathEndpoint> dash_path_endpoint_list;
-    static double screen_width_dp, screen_height_dp, grid_width_dp, grid_height_dp;
+    static double SCREEN_WIDTH_DP, SCREEN_HEIGHT_DP, GRID_WIDTH_DP, GRID_HEIGHT_DP;
     DashPathView dash_path_view;
 
     private void _init_knowledge_net() {
         KnowledgeSetsData.init();
-        AniProxy.init();
 
         _init_screen_width_dp();
         _init_paper();
@@ -65,11 +71,11 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void _init_screen_width_dp() {
         BaseUtils.ScreenSize screen_size = BaseUtils.get_screen_size();
-        screen_width_dp = screen_size.width_dp;
-        screen_height_dp = screen_size.height_dp;
+        SCREEN_WIDTH_DP = screen_size.width_dp;
+        SCREEN_HEIGHT_DP = screen_size.height_dp;
 
-        grid_width_dp = screen_width_dp / 3.0D;
-        grid_height_dp = grid_width_dp + 30;
+        GRID_WIDTH_DP = SCREEN_WIDTH_DP / 3.0D;
+        GRID_HEIGHT_DP = GRID_WIDTH_DP + 30;
     }
 
     private void _init_paper() {
@@ -94,7 +100,7 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     private void _r_traversal(IHasChildren node) {
-        for(BaseKnowledgeSet set : node.children()) {
+        for (BaseKnowledgeSet set : node.children()) {
             KnowledgeSetsData.put_set_in_map(set);
             _r_traversal(set);
         }
@@ -116,10 +122,6 @@ public class HomeActivity extends EshareBaseActivity {
                 _put_pos_to_dash_path_endpoint_list(pos);
             }
         }
-
-        ViewGroup.LayoutParams params = nodes_paper.getLayoutParams();
-        params.height = BaseUtils.dp_to_int_px((float) KnowledgeSetsData.paper_bottom);
-        nodes_paper.setLayoutParams(params);
     }
 
     private void _put_knowledge_node_on_grid(SetPosition pos) {
@@ -129,32 +131,13 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     private void _draw_circle(SetPosition pos) {
-        final ImageView iv = new ImageView(this);
+        CircleView cv = new CircleView(this);
+        cv.set_color(Color.parseColor("#1cb0f6"));
+        cv.set_circle_center_position((float) pos.circle_center_dp_left, (float) pos.circle_center_dp_top);
+        cv.set_radius((float) SetPosition.CIRCLE_RADIUS_DP);
+        nodes_paper.addView(cv);
 
-        int drawable = pos.is_checkpoint() ? R.drawable.btn_cfccd2d_circle_flat : R.drawable.btn_c1cb0f6_circle_flat;
-        iv.setBackgroundDrawable(getResources().getDrawable(drawable));
-
-        int px = BaseUtils.dp_to_int_px((float) SetPosition.CIRCLE_RADIUS_DP * 2);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(px, px);
-
-        params.leftMargin   = BaseUtils.dp_to_int_px((float) pos.circle_dp_left);
-        params.topMargin    = BaseUtils.dp_to_int_px((float) pos.circle_dp_top);
-        params.rightMargin  = BaseUtils.dp_to_int_px(1000);
-        params.bottomMargin = BaseUtils.dp_to_int_px(1000);
-
-        iv.setLayoutParams(params);
-
-        AniProxy.put(iv);
-
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AniProxy anip = AniProxy.get(iv);
-                anip.setRadiusDp(200);
-            }
-        });
-
-        nodes_paper.addView(iv);
+        pos.ani_proxy = new AniProxy(cv);
     }
 
     private void _draw_text(SetPosition pos) {
@@ -166,7 +149,7 @@ public class HomeActivity extends EshareBaseActivity {
         tv.setBackgroundColor(Color.parseColor("#ffffff"));
         tv.setTextColor(Color.parseColor("#444444"));
 
-        int width_px = BaseUtils.dp_to_int_px((float) grid_width_dp);
+        int width_px = BaseUtils.dp_to_int_px((float) GRID_WIDTH_DP);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         double top = pos.text_dp_top;
@@ -176,7 +159,7 @@ public class HomeActivity extends EshareBaseActivity {
         nodes_paper.addView(tv);
     }
 
-    private void _draw_icon(SetPosition pos) {
+    private void _draw_icon(final SetPosition pos) {
         try {
             ImageView iv = new ImageView(this);
 
@@ -194,18 +177,28 @@ public class HomeActivity extends EshareBaseActivity {
 
             nodes_paper.addView(iv);
 
+            pos.ani_proxy.set_icon_view(iv);
+
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pos.ani_proxy.toggle();
+                    scroll_view.locked = pos.ani_proxy.is_open;
+                }
+            });
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void _put_pos_to_dash_path_endpoint_list(SetPosition pos) {
-        for(BaseKnowledgeSet parent : pos.set.parents()) {
+        for (BaseKnowledgeSet parent : pos.set.parents()) {
             SetPosition parent_pos = KnowledgeSetsData.get_pos_of_set(parent);
             float x1 = (float) parent_pos.circle_center_dp_left;
-            float y1 = (float) parent_pos.text_dp_top + 22;
+            float y1 = (float) parent_pos.text_dp_top + 25;
             float x2 = (float) pos.circle_center_dp_left;
-            float y2 = (float) pos.circle_dp_top - 5;
+            float y2 = (float) pos.circle_dp_top - 8;
 
             DashPathEndpoint p1 = DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2);
             dash_path_endpoint_list.add(p1);
@@ -255,11 +248,11 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     static private class SetPosition {
-//        final static double CIRCLE_RADIUS_DP = 33.3333D;
-        final static double CIRCLE_RADIUS_DP = 30;
+        final static double CIRCLE_RADIUS_DP = 30; // 33.3333D;
         final static double TEXT_SIZE = 9;
 
         BaseKnowledgeSet set;
+        AniProxy ani_proxy;
 
         float grid_left;
         float grid_top;
@@ -283,17 +276,17 @@ public class HomeActivity extends EshareBaseActivity {
 
         public void set_position(float grid_left) {
             this.grid_left = grid_left;
-            this.grid_top  = set.deep;
+            this.grid_top = set.deep;
 
-            this.grid_dp_left = (this.grid_left - 1) * grid_width_dp;
-            this.grid_dp_top  = (this.grid_top  - 1) * grid_height_dp;
-            this.grid_dp_bottom = this.grid_dp_top + grid_height_dp;
+            this.grid_dp_left = (this.grid_left - 1) * GRID_WIDTH_DP;
+            this.grid_dp_top = (this.grid_top - 1) * GRID_HEIGHT_DP;
+            this.grid_dp_bottom = this.grid_dp_top + GRID_HEIGHT_DP;
 
-            this.circle_center_dp_left = this.grid_dp_left + grid_width_dp / 2.0D;
-            this.circle_center_dp_top  = this.grid_dp_top  + grid_width_dp / 2.0D;
+            this.circle_center_dp_left = this.grid_dp_left + GRID_WIDTH_DP / 2.0D;
+            this.circle_center_dp_top = this.grid_dp_top + GRID_WIDTH_DP / 2.0D;
 
             this.circle_dp_left = this.circle_center_dp_left - CIRCLE_RADIUS_DP;
-            this.circle_dp_top  = this.circle_center_dp_top  - CIRCLE_RADIUS_DP;
+            this.circle_dp_top = this.circle_center_dp_top - CIRCLE_RADIUS_DP;
 
             this.text_dp_top = this.circle_center_dp_top + CIRCLE_RADIUS_DP + 4.0D;
         }
@@ -322,42 +315,96 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     static class AniProxy {
-        static HashMap<ImageView, AniProxy> ani_proxy_map;
+        static AniProxy opened_node;
+        static int[] tagget_icon_view_absolute_pos_px = new int[]{
+                BaseUtils.dp_to_int_px(0),
+                BaseUtils.dp_to_int_px(30)
+        };
 
-        ImageView circle_view;
-        int circle_view_margin_left_px;
-        int circle_view_margin_top_px;
+        CircleView circle_view;
+        ImageView icon_view;
 
-        public AniProxy(ImageView circle_view) {
+        boolean is_open = false;
+
+        int icon_view_left_margin_px;
+        int icon_view_top_margin_px;
+
+        public AniProxy(CircleView circle_view) {
             this.circle_view = circle_view;
-            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) circle_view.getLayoutParams();
-            circle_view_margin_left_px = lp.leftMargin;
-            circle_view_margin_top_px = lp.topMargin;
         }
 
-        static void init() {
-            ani_proxy_map = new HashMap<ImageView, AniProxy>();
+        public void set_icon_view(ImageView icon_view) {
+            this.icon_view = icon_view;
+
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
+            icon_view_left_margin_px = params.leftMargin;
+            icon_view_top_margin_px = params.topMargin;
         }
 
-        static void put(ImageView circle_view) {
-            AniProxy anip = new AniProxy(circle_view);
-            ani_proxy_map.put(circle_view, anip);
+        public void toggle() {
+            if (opened_node != null && !opened_node.equals(this)) {
+                return;
+            }
+
+            circle_view.bringToFront();
+            icon_view.bringToFront();
+
+            if (is_open) {
+                is_open = false;
+                opened_node = null;
+
+                circle_view.set_radius_animate((float) SetPosition.CIRCLE_RADIUS_DP, 400);
+                set_icon_view_margin(icon_view_left_margin_px, icon_view_top_margin_px);
+
+            } else {
+                is_open = true;
+                opened_node = this;
+
+                circle_view.set_radius_animate((float) SCREEN_HEIGHT_DP, 400);
+                int[] margins = get_target_margin();
+                set_icon_view_margin(margins[0], margins[1]);
+            }
         }
 
-        static AniProxy get(ImageView circle_view) {
-            return ani_proxy_map.get(circle_view);
+        private void set_icon_view_margin(int margin_left, int margin_top) {
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
+
+
+            PropertyValuesHolder pvh_left = PropertyValuesHolder.ofFloat("margin_left", params.leftMargin, margin_left);
+            PropertyValuesHolder pvh_top = PropertyValuesHolder.ofFloat("margin_top", params.topMargin, margin_top);
+
+            ValueAnimator ani = ValueAnimator
+                    .ofPropertyValuesHolder(pvh_left, pvh_top)
+                    .setDuration(400);
+
+            ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    float margin_left = (Float) valueAnimator.getAnimatedValue("margin_left");
+                    float margin_top = (Float) valueAnimator.getAnimatedValue("margin_top");
+
+                    RelativeLayout.LayoutParams p = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
+
+                    p.leftMargin = (int) margin_left;
+                    p.topMargin = (int) margin_top;
+                    icon_view.setLayoutParams(p);
+                }
+            });
+
+            ani.start();
         }
 
-        public void setRadiusDp(float radius_dp) {
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) circle_view.getLayoutParams();
-            params.width  = (int) BaseUtils.dp_to_px(radius_dp * 2);
-            params.height = (int) BaseUtils.dp_to_px(radius_dp * 2);
-            int margin_off_dp = (int) radius_dp - (int) SetPosition.CIRCLE_RADIUS_DP;
+        private int[] get_target_margin() {
+            int[] current_icon_view_absolute_pos_px = new int[2];
+            icon_view.getLocationInWindow(current_icon_view_absolute_pos_px);
 
-            params.leftMargin = circle_view_margin_left_px - (int) BaseUtils.dp_to_px(margin_off_dp);
-            params.topMargin = circle_view_margin_top_px - (int) BaseUtils.dp_to_px(margin_off_dp);
+            int x_off = current_icon_view_absolute_pos_px[0] - tagget_icon_view_absolute_pos_px[0];
+            int y_off = current_icon_view_absolute_pos_px[1] - tagget_icon_view_absolute_pos_px[1];
 
-            circle_view.setLayoutParams(params);
+            return new int[]{
+                icon_view_left_margin_px - x_off,
+                icon_view_top_margin_px - y_off
+            };
         }
     }
 }
