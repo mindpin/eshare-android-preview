@@ -53,4 +53,15 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
         }
         return  true;
     }
+
+    // 返回已学的节点数
+    public int get_learned_nodes_count(){
+        int learned_nodes_count = 0 ;
+        for (KnowledgeNode node : this.nodes){
+            if (node.is_learned()){
+                learned_nodes_count++;
+            }
+        }
+        return learned_nodes_count;
+    }
 }

@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
@@ -43,10 +44,6 @@ public class HomeActivity extends EshareBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.tab_home);
 
-        scroll_view = (LockableScrollView) findViewById(R.id.scroll_view);
-        int[] pos = new int[2];
-        scroll_view.getLocationInWindow(pos);
-
         _init_knowledge_net();
 
         super.onCreate(savedInstanceState);
@@ -58,6 +55,7 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void _init_knowledge_net() {
         KnowledgeSetsData.init();
+        AniProxy.init();
 
         _init_screen_width_dp();
         _init_paper();
@@ -81,6 +79,7 @@ public class HomeActivity extends EshareBaseActivity {
     private void _init_paper() {
         nodes_paper = (RelativeLayout) findViewById(R.id.nodes_paper);
         lines_paper = (RelativeLayout) findViewById(R.id.lines_paper);
+        scroll_view = (LockableScrollView) findViewById(R.id.scroll_view);
     }
 
     private void _init_dash_path_view() {
@@ -146,7 +145,6 @@ public class HomeActivity extends EshareBaseActivity {
         tv.setText(pos.get_set_name());
         tv.setTextSize(BaseUtils.dp_to_int_px((float) pos.TEXT_SIZE));
         tv.setGravity(Gravity.CENTER);
-        tv.setBackgroundColor(Color.parseColor("#ffffff"));
         tv.setTextColor(Color.parseColor("#444444"));
 
         int width_px = BaseUtils.dp_to_int_px((float) GRID_WIDTH_DP);
@@ -157,46 +155,59 @@ public class HomeActivity extends EshareBaseActivity {
         tv.setLayoutParams(params);
 
         nodes_paper.addView(tv);
+
+        if (!pos.is_checkpoint()) {
+            TextView count_tv = new TextView(this);
+            KnowledgeSet set = (KnowledgeSet) pos.set;
+            count_tv.setText(set.get_learned_nodes_count() + "/" + set.nodes.size());
+            count_tv.setTextSize(BaseUtils.dp_to_int_px((float) pos.TEXT_SIZE));
+            count_tv.setGravity(Gravity.CENTER);
+            count_tv.setTextColor(Color.parseColor("#aaaaaa"));
+
+            RelativeLayout.LayoutParams ctv_params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ctv_params.setMargins(BaseUtils.dp_to_int_px((float) pos.grid_dp_left), BaseUtils.dp_to_int_px((float) top + 18), 0, 0);
+            count_tv.setLayoutParams(ctv_params);
+
+            nodes_paper.addView(count_tv);
+        }
     }
 
     private void _draw_icon(final SetPosition pos) {
-        try {
-            ImageView iv = new ImageView(this);
+        ImageView iv = new ImageView(this);
 
-            InputStream stream = getAssets().open("knowledge_icons/knowledge_leaf.png");
-            Drawable drawable = Drawable.createFromStream(stream, null);
-            stream.close();
+        iv.setImageDrawable(pos.get_icon_drawable());
 
-            iv.setImageDrawable(drawable);
+        int px = BaseUtils.dp_to_int_px((float) SetPosition.CIRCLE_RADIUS_DP * 2);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(px, px);
+        params.setMargins(BaseUtils.dp_to_int_px((float) pos.circle_dp_left), BaseUtils.dp_to_int_px((float) pos.circle_dp_top), 0, 0);
+        iv.setLayoutParams(params);
 
-            int px = BaseUtils.dp_to_int_px((float) SetPosition.CIRCLE_RADIUS_DP * 2);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(px, px);
+        nodes_paper.addView(iv);
 
-            params.setMargins(BaseUtils.dp_to_int_px((float) pos.circle_dp_left), BaseUtils.dp_to_int_px((float) pos.circle_dp_top), 0, 0);
-            iv.setLayoutParams(params);
+        pos.ani_proxy.set_icon_view(iv);
 
-            nodes_paper.addView(iv);
+        _set_icon_events(pos);
+    }
 
-            pos.ani_proxy.set_icon_view(iv);
+    private void _set_icon_events(final SetPosition pos) {
+        final AniProxy proxy = pos.ani_proxy;
 
-            iv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pos.ani_proxy.toggle();
-                    scroll_view.locked = pos.ani_proxy.is_open;
+        proxy.icon_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (pos.is_unlocked()){
+                    proxy.toggle();
+                    scroll_view.locked = proxy.is_open;
                 }
-            });
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            }
+        });
     }
 
     private void _put_pos_to_dash_path_endpoint_list(SetPosition pos) {
         for (BaseKnowledgeSet parent : pos.set.parents()) {
             SetPosition parent_pos = KnowledgeSetsData.get_pos_of_set(parent);
             float x1 = (float) parent_pos.circle_center_dp_left;
-            float y1 = (float) parent_pos.text_dp_top + 25;
+            float y1 = (float) parent_pos.text_dp_top + 24 + (parent_pos.is_checkpoint() ? 0 : 18);
             float x2 = (float) pos.circle_center_dp_left;
             float y2 = (float) pos.circle_dp_top - 8;
 
@@ -211,6 +222,10 @@ public class HomeActivity extends EshareBaseActivity {
             return false;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public interface IHasChildren {
+        public List<BaseKnowledgeSet> children();
     }
 
     private static class KnowledgeSetsData {
@@ -302,6 +317,10 @@ public class HomeActivity extends EshareBaseActivity {
         }
 
         int get_circle_color() {
+            if (!is_unlocked()) {
+                return Color.parseColor("#eeeeee");
+            }
+
             if (is_checkpoint()) {
                 return Color.parseColor("#fccd2d");
             }
@@ -309,25 +328,46 @@ public class HomeActivity extends EshareBaseActivity {
             return Color.parseColor("#1cb0f6");
         }
 
+        Drawable get_icon_drawable() {
+            String path = "knowledge_icons/basic_locked.png";
+
+            if (is_unlocked()) {
+                path = "knowledge_icons/basic.png";
+            }
+
+            if (is_checkpoint()) {
+                path = "knowledge_icons/checkpoint.png";
+            }
+
+            try {
+                InputStream stream = EshareApplication.context.getAssets().open(path);
+                Drawable drawable = Drawable.createFromStream(stream, null);
+                stream.close();
+
+                return drawable;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
         String get_set_name() {
             if (is_checkpoint()) {
-                return "checkpoint";
+                return "综合测试";
             }
 
             return ((KnowledgeSet) set).name;
         }
-    }
 
-    public interface IHasChildren {
-        public List<BaseKnowledgeSet> children();
+        // 节点是否解锁（可学）
+        boolean is_unlocked() {
+            return set.is_unlocked();
+        }
     }
 
     static class AniProxy {
         static AniProxy opened_node;
-        static int[] tagget_icon_view_absolute_pos_px = new int[]{
-                BaseUtils.dp_to_int_px(0),
-                BaseUtils.dp_to_int_px(30)
-        };
+        static int[] tagget_icon_view_absolute_pos_px;
 
         CircleView circle_view;
         ImageView icon_view;
@@ -339,6 +379,14 @@ public class HomeActivity extends EshareBaseActivity {
 
         public AniProxy(CircleView circle_view) {
             this.circle_view = circle_view;
+        }
+
+        public static void init() {
+            opened_node = null;
+            tagget_icon_view_absolute_pos_px = new int[]{
+                    BaseUtils.dp_to_int_px(0),
+                    BaseUtils.dp_to_int_px(30)
+            };
         }
 
         public void set_icon_view(ImageView icon_view) {
@@ -410,8 +458,8 @@ public class HomeActivity extends EshareBaseActivity {
             int y_off = current_icon_view_absolute_pos_px[1] - tagget_icon_view_absolute_pos_px[1];
 
             return new int[]{
-                icon_view_left_margin_px - x_off,
-                icon_view_top_margin_px - y_off
+                    icon_view_left_margin_px - x_off,
+                    icon_view_top_margin_px - y_off
             };
         }
     }
