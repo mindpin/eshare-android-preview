@@ -3,15 +3,19 @@ package com.eshare_android_preview.base.view;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.utils.CodefillBridge;
 import com.eshare_android_preview.base.utils.HtmlEmbeddable;
 
@@ -39,6 +43,8 @@ public class EshareMarkdownView extends RelativeLayout {
         codefillBridge = CodefillBridge.bind(this);
     }
 
+    private OnClickListener code_fill_on_click_listener;
+
     public EshareMarkdownView(Context context) {
         super(context);
     }
@@ -62,6 +68,8 @@ public class EshareMarkdownView extends RelativeLayout {
             }
         });
 
+        child.setOnClickListener(code_fill_on_click_listener);
+
         return child;
     }
 
@@ -76,16 +84,21 @@ public class EshareMarkdownView extends RelativeLayout {
     }
 
     public Codefill getFirstUnappliedCodefill() {
-        Codefill firstUnapplied = null;
-
         for (Codefill codefill : this.codefills) {
-            if (codefill.appliedChoice == null) {
-                firstUnapplied = codefill;
-                break;
+            if (codefill.getChildCount() == 0) {
+                return codefill;
             }
         }
+        return null;
+    }
 
-        return firstUnapplied;
+    public int getFirstUnappliedCodefillIndex(){
+        Codefill code_fill = getFirstUnappliedCodefill();
+        return this.codefills.indexOf(code_fill);
+    }
+
+    public void set_on_click_listener_for_code_fill(View.OnClickListener listener){
+        this.code_fill_on_click_listener = listener;
     }
 
     public class MarkdownWebView extends WebView {
@@ -127,9 +140,8 @@ public class EshareMarkdownView extends RelativeLayout {
         }
     }
 
-    public class Codefill extends TextView {
+    public class Codefill extends LinearLayout {
         public Rect rawRect;
-        public TextView appliedChoice;
 
         public Codefill(Context context, JSONObject object) throws JSONException {
             super(context);
@@ -148,8 +160,8 @@ public class EshareMarkdownView extends RelativeLayout {
 
         @SuppressLint("ResourceAsColor")
         private void setParams() {
-            this.setBackgroundColor(R.color.black);
-            LayoutParams params = new LayoutParams(rawRect.width(), rawRect.height());
+            this.setBackgroundColor(Color.parseColor("#ffffff"));
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(rawRect.width(), rawRect.height());
             params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             params.leftMargin = rawRect.left;

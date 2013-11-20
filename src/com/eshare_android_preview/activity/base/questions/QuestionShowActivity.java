@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
@@ -115,24 +117,50 @@ public class QuestionShowActivity extends EshareBaseActivity {
         question_kind_tv.setText(question.get_kind_str());
         question_title_v.setMarkdownContent(question.content);
 
-        load_choice(choices_detail_ll, R.layout.q_question_choice_detail_item);
+        if (question.is_fill()){
+            load_question_choices_for_fill();
+            question_title_v.set_on_click_listener_for_code_fill(new FillQuestionFillItemListener());
+        }else{
+            load_question_choices_for_choice_and_true_false();
+        }
     }
 
-    // 加载并显示选项
-    private void load_choice(LinearLayout view, int item_view_layout) {
+    // 为填空类型的题目加载并显示选项
+    private void load_question_choices_for_fill() {
         for (QuestionChoice choice : question.choices_list) {
             LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-            RelativeLayout choice_item_view = (RelativeLayout) inflater.inflate(item_view_layout, null);
+            FrameLayout fill_item_view = (FrameLayout) inflater.inflate(R.layout.q_question_fill_detail_item, null);
+
+            FrameLayout fill_item_btn = (FrameLayout) fill_item_view.findViewById(R.id.fill_item_btn);
+            fill_item_btn.setOnClickListener(new QuestionChoiceItemListener(choice));
+
+            TextView fill_item_text_tv  = (TextView) fill_item_view.findViewById(R.id.fill_item_text);
+            TextView fill_item_placeholder_bg_text_tv  = (TextView) fill_item_view.findViewById(R.id.fill_item_placeholder_bg);
+            fill_item_text_tv.setText(choice.content);
+            fill_item_placeholder_bg_text_tv.setText(choice.content);
+            fill_item_text_tv.setTag(choice);
+
+            choices_detail_ll.setOrientation(LinearLayout.HORIZONTAL);
+            choices_detail_ll.addView(fill_item_view);
+        }
+    }
+
+    // 为多选，单选和判断类型的题目加载并显示选项
+    private void load_question_choices_for_choice_and_true_false() {
+        for (QuestionChoice choice : question.choices_list) {
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            RelativeLayout choice_item_view = (RelativeLayout) inflater.inflate(R.layout.q_question_choice_detail_item, null);
 
             RelativeLayout choice_item_btn = (RelativeLayout) choice_item_view.findViewById(R.id.choice_item_btn);
+            choice_item_btn.setOnClickListener(new QuestionChoiceItemListener(choice));
+
             TextView choice_item_sym  = (TextView) choice_item_view.findViewById(R.id.choice_item_sym);
-            TextView choice_item_text = (TextView) choice_item_view.findViewById(R.id.choice_item_text);
-
             choice_item_sym.setText(choice.sym);
-            choice_item_text.setText(choice.content);
-            choice_item_btn.setOnClickListener(new ClickItemListener(choice, choice_item_btn));
 
-            view.addView(choice_item_view);
+            TextView choice_item_text = (TextView) choice_item_view.findViewById(R.id.choice_item_text);
+            choice_item_text.setText(choice.content);
+
+            choices_detail_ll.addView(choice_item_view);
         }
     }
 
@@ -156,6 +184,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 		   to_do_next_question();
 		}
     }
+
     private void to_do_answer_error() {
     	new AlertDialog.Builder(QuestionShowActivity.this)
     	.setTitle("提示")
@@ -200,39 +229,69 @@ public class QuestionShowActivity extends EshareBaseActivity {
     
     
 
-    class ClickItemListener implements OnClickListener {
+    class QuestionChoiceItemListener implements OnClickListener {
         QuestionChoice choice;
-        View view;
 
-        public ClickItemListener(QuestionChoice choice, View view) {
+        public QuestionChoiceItemListener(QuestionChoice choice) {
             this.choice = choice;
-            this.view = view;
         }
 
         @Override
         public void onClick(View v) {
-
-            if (question.is_single_choice() || question.is_true_false()) {
-                select_answer.set_choice(choice);
+            if(question.is_single_choice()){
+                on_click_for_single_choice();
+            }else if(question.is_multiple_choice()){
+                on_click_for_multiple_choice();
+            }else if(question.is_true_false()){
+                on_click_for_true_false();
+            }else if(question.is_fill()){
+                on_click_for_fill(v);
             }
-            if (question.is_multiple_choice()) {
-                select_answer.add_or_remove_choice(choice);
+
+            refresh_submit_answer_btn_clickable();
+        }
+
+        private void on_click_for_fill(View v){
+            int index = question_title_v.getFirstUnappliedCodefillIndex();
+            if(index == -1){
+                return;
             }
 
-//            填空题提供的模型方法如下，和界面集成时会用到
-//            if (question.is_fill()){
-//                给第一个空填空
-//                select_answer.set_choice(1, choice);
-//
-//                给第二个空填空
-//                select_answer.set_choice(2, choice);
-//
-//                清空三个空
-//                select_answer.set_choice(3, null);
-//            }
+            select_answer.set_choice(index+1, choice);
 
-            set_choice_item_background(choices_detail_ll);
+            View fill_item_text = v.findViewById(R.id.fill_item_text);
+            ((FrameLayout) v).removeView(fill_item_text);
 
+            question_title_v.getFirstUnappliedCodefill().addView(fill_item_text);
+        }
+
+        private void on_click_for_single_choice(){
+            select_answer.set_choice(choice);
+
+            _set_choices_color_before();
+            int index = ((SingleChoiceQuestionSelectAnswer) select_answer).select_choice.index;
+            _set_choice_color_after(choices_detail_ll.getChildAt(index));
+        }
+
+        private void on_click_for_true_false(){
+            select_answer.set_choice(choice);
+
+            _set_choices_color_before();
+            int index = ((TrueFalseQuestionSelectAnswer) select_answer).select_choice.index;
+            _set_choice_color_after(choices_detail_ll.getChildAt(index));
+        }
+
+        private void on_click_for_multiple_choice(){
+            select_answer.add_or_remove_choice(choice);
+
+            _set_choices_color_before();
+            for (QuestionChoice qc : ((MultipleChoiceQuestionSelectAnswer) select_answer).select_choices) {
+                _set_choice_color_after(choices_detail_ll.getChildAt(qc.index));
+            }
+        }
+
+
+        private void refresh_submit_answer_btn_clickable(){
             if (select_answer.is_empty()) {
                 submit_answer_btn.setClickable(false);
                 submit_answer_btn.setBackgroundResource(R.drawable.btn_c6699bd3b_circle_flat);
@@ -244,55 +303,48 @@ public class QuestionShowActivity extends EshareBaseActivity {
             }
         }
 
-    }
-
-    private void set_choice_item_background(LinearLayout layout) {
-        if (question.is_single_choice()) {
-            _set_choices_color_before(layout);
-            int index = ((SingleChoiceQuestionSelectAnswer) select_answer).select_choice.index;
-            _set_choice_color_after(layout.getChildAt(index));
-        }
-
-        if (question.is_true_false()) {
-            _set_choices_color_before(layout);
-            int index = ((TrueFalseQuestionSelectAnswer) select_answer).select_choice.index;
-            _set_choice_color_after(layout.getChildAt(index));
-        }
-
-        if (question.is_multiple_choice()) {
-            _set_choices_color_before(layout);
-            for (QuestionChoice qc : ((MultipleChoiceQuestionSelectAnswer) select_answer).select_choices) {
-                _set_choice_color_after(layout.getChildAt(qc.index));
+        private void _set_choices_color_before() {
+            for(int i = 0; i < choices_detail_ll.getChildCount(); i++) {
+                View view = choices_detail_ll.getChildAt(i);
+                view.findViewById(R.id.choice_item_bg).setBackgroundColor(Color.parseColor("#ffffff"));
+                view.findViewById(R.id.choice_item_bg0).setBackgroundColor(Color.parseColor("#aaaaaa"));
+                view.findViewById(R.id.choice_item_sym).setBackgroundResource(R.drawable.btn_c444_circle_flat);
+                ((TextView) view.findViewById(R.id.choice_item_text)).setTextColor(Color.parseColor("#444444"));
+                ((TextView) view.findViewById(R.id.choice_item_text)).setShadowLayer(0, 0, 0, Color.parseColor("#00000000"));
             }
         }
 
-//      填空题提供的模型方法如下，和界面集成时会用到
-//      if (question.is_fill()){
-//        _set_choices_color_before(layout);
-//        for (QuestionChoice qc : ((FillQuestionSelectAnswer) select_answer).select_choices.values()) {
-//            _set_choice_color_after(layout.getChildAt(qc.index));
-//        }
-//       }
+        private void _set_choice_color_after(View view) {
+            view.findViewById(R.id.choice_item_bg).setBackgroundColor(Color.parseColor("#99BD3B"));
+            view.findViewById(R.id.choice_item_bg0).setBackgroundColor(Color.parseColor("#82AA2A"));
+            view.findViewById(R.id.choice_item_sym).setBackgroundResource(R.drawable.btn_c435816_circle_flat);
+            ((TextView) view.findViewById(R.id.choice_item_text)).setTextColor(Color.parseColor("#ffffff"));
+            ((TextView) view.findViewById(R.id.choice_item_text)).setShadowLayer(1, 1, 1, Color.parseColor("#66000000"));
+        }
+
     }
 
-    private void _set_choices_color_before(LinearLayout layout) {
-        for(int i = 0; i < layout.getChildCount(); i++) {
-            View view = layout.getChildAt(i);
-            view.findViewById(R.id.choice_item_bg).setBackgroundColor(Color.parseColor("#ffffff"));
-            view.findViewById(R.id.choice_item_bg0).setBackgroundColor(Color.parseColor("#aaaaaa"));
-            view.findViewById(R.id.choice_item_sym).setBackgroundResource(R.drawable.btn_c444_circle_flat);
-            ((TextView) view.findViewById(R.id.choice_item_text)).setTextColor(Color.parseColor("#444444"));
-            ((TextView) view.findViewById(R.id.choice_item_text)).setShadowLayer(0, 0, 0, Color.parseColor("#00000000"));
+    class FillQuestionFillItemListener implements OnClickListener{
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(QuestionShowActivity.this,"click",2000).show();
+
+            EshareMarkdownView.Codefill code_fill = (EshareMarkdownView.Codefill) v;
+            if(code_fill.getChildCount() == 0){
+                return;
+            }
+
+            View fill_item_text = code_fill.getChildAt(0);
+            QuestionChoice choice = (QuestionChoice) fill_item_text.getTag();
+
+            View view = choices_detail_ll.getChildAt(choice.index);
+            FrameLayout fill_item_btn = (FrameLayout) view.findViewById(R.id.fill_item_btn);
+
+            code_fill.removeView(fill_item_text);
+            fill_item_btn.addView(fill_item_text);
         }
     }
 
-    private void _set_choice_color_after(View view) {
-        view.findViewById(R.id.choice_item_bg).setBackgroundColor(Color.parseColor("#99BD3B"));
-        view.findViewById(R.id.choice_item_bg0).setBackgroundColor(Color.parseColor("#82AA2A"));
-        view.findViewById(R.id.choice_item_sym).setBackgroundResource(R.drawable.btn_c435816_circle_flat);
-        ((TextView) view.findViewById(R.id.choice_item_text)).setTextColor(Color.parseColor("#ffffff"));
-        ((TextView) view.findViewById(R.id.choice_item_text)).setShadowLayer(1, 1, 1, Color.parseColor("#66000000"));
-    }
 
     public void click_notes(View view) {
         Bundle bundle = new Bundle();
