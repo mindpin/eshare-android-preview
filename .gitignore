@@ -35,3 +35,4 @@ gen/com/eshare_android_preview/R.java
 out/
 
 .DS_Store
+*.log

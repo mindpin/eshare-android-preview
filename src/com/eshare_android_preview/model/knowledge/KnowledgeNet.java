@@ -34,4 +34,10 @@ public class KnowledgeNet extends BaseParse implements HomeActivity.IHasChildren
 		return m_instance;
 	}
 
+    public static KnowledgeNet instance_for_test(){
+        BaseParse.XML_PATH = "javascript_core_for_test.xml";
+        BaseParse.fileParse = null;
+        return new KnowledgeNet();
+    }
+
 }

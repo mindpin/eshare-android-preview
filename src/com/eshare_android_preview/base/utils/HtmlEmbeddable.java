@@ -29,14 +29,19 @@ public class HtmlEmbeddable {
         "<!DOCTYPE html>" +
         "<html>" +
         "<head>" +
-          css("prism.css") +
+           css("codefill.css") +
+           css("hl.css") +
           "<style>" +
             "code {font-family:\"Courier New\", monospace !important;}" +
           "</style>" +
+          // Weinre 远程调试器
+          "<script src=\"http://192.168.1.9:8080/target/target-script-min.js#anonymous\"></script>" +
         "</head>" +
         "<body>" +
-          HtmlCodeParser.fromString(htmlSnippet).output() +
-          js("prism.js") +
+           htmlSnippet +
+           js("hl.js") +
+           "<script>hljs.initHighlightingOnLoad();</script>" +
+           js("codefill.js") +
         "</body>" +
         "</html>";
     }
