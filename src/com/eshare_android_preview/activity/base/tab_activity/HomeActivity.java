@@ -132,7 +132,7 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void _draw_circle(SetPosition pos) {
         CircleView cv = new CircleView(this);
-        cv.set_color(Color.parseColor("#1cb0f6"));
+        cv.set_color(pos.get_circle_color());
         cv.set_circle_center_position((float) pos.circle_center_dp_left, (float) pos.circle_center_dp_top);
         cv.set_radius((float) SetPosition.CIRCLE_RADIUS_DP);
         nodes_paper.addView(cv);
@@ -299,6 +299,14 @@ public class HomeActivity extends EshareBaseActivity {
         boolean is_checkpoint() {
             String set_class_name = set.getClass().getName();
             return "com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint".equals(set_class_name);
+        }
+
+        int get_circle_color() {
+            if (is_checkpoint()) {
+                return Color.parseColor("#fccd2d");
+            }
+
+            return Color.parseColor("#1cb0f6");
         }
 
         String get_set_name() {
