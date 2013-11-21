@@ -26,30 +26,35 @@ import java.util.List;
  * Created by kaid on 11/11/13.
  */
 public class EshareMarkdownView extends RelativeLayout {
+    private int default_text_size = 18;
     public WebView view;
     // WebView上绑定的JSInterface
     private CodefillBridge codefillBridge;
     // 填空遮盖view的集合
     private List<Codefill> codefills = new ArrayList<Codefill>();
 
-    {
-        view = new MarkdownWebView(getContext());
-        this.addView(view);
-        codefillBridge = CodefillBridge.bind(this);
-    }
-
     private OnClickListener code_fill_on_click_listener;
 
     public EshareMarkdownView(Context context) {
         super(context);
+        init();
     }
 
     public EshareMarkdownView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        default_text_size = attrs.getAttributeIntValue(null,"text_size",18);
+        init();
     }
 
     public EshareMarkdownView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init();
+    }
+
+    private void init(){
+        view = new MarkdownWebView(getContext());
+        this.addView(view);
+        codefillBridge = CodefillBridge.bind(this);
     }
 
     public Codefill add_codefill(final JSONObject rect) throws JSONException {
@@ -103,12 +108,16 @@ public class EshareMarkdownView extends RelativeLayout {
     public class MarkdownWebView extends WebView {
         public MarkdownWebView(Context context) {
             super(context);
-            set_params();
+            // 当 isInEditMode() 为 true 时，表示是 ide 预览界面
+            // 下面的 if 判断，是为了让 ide 预览界面不报空指针异常
+            if(!isInEditMode()){
+                set_params();
+            }
         }
 
         private void set_params() {
             this.getSettings().setJavaScriptEnabled(true);
-            this.set_font_size(16);
+            this.set_font_size(EshareMarkdownView.this.default_text_size);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.ALIGN_LEFT | RelativeLayout.ALIGN_TOP, RelativeLayout.TRUE);
             this.setLayoutParams(params);

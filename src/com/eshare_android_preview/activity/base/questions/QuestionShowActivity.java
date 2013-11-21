@@ -157,8 +157,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
             TextView choice_item_sym  = (TextView) choice_item_view.findViewById(R.id.choice_item_sym);
             choice_item_sym.setText(choice.sym);
 
-            TextView choice_item_text = (TextView) choice_item_view.findViewById(R.id.choice_item_text);
-            choice_item_text.setText(choice.content);
+            EshareMarkdownView choice_item_text = (EshareMarkdownView) choice_item_view.findViewById(R.id.choice_item_text);
+            choice_item_text.set_markdown_content(choice.content);
 
             choices_detail_ll.addView(choice_item_view);
         }
@@ -307,8 +307,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
                 view.findViewById(R.id.choice_item_bg).setBackgroundColor(Color.parseColor("#ffffff"));
                 view.findViewById(R.id.choice_item_bg0).setBackgroundColor(Color.parseColor("#aaaaaa"));
                 view.findViewById(R.id.choice_item_sym).setBackgroundResource(R.drawable.btn_c444_circle_flat);
-                ((TextView) view.findViewById(R.id.choice_item_text)).setTextColor(Color.parseColor("#444444"));
-                ((TextView) view.findViewById(R.id.choice_item_text)).setShadowLayer(0, 0, 0, Color.parseColor("#00000000"));
+
             }
         }
 
@@ -316,8 +315,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
             view.findViewById(R.id.choice_item_bg).setBackgroundColor(Color.parseColor("#99BD3B"));
             view.findViewById(R.id.choice_item_bg0).setBackgroundColor(Color.parseColor("#82AA2A"));
             view.findViewById(R.id.choice_item_sym).setBackgroundResource(R.drawable.btn_c435816_circle_flat);
-            ((TextView) view.findViewById(R.id.choice_item_text)).setTextColor(Color.parseColor("#ffffff"));
-            ((TextView) view.findViewById(R.id.choice_item_text)).setShadowLayer(1, 1, 1, Color.parseColor("#66000000"));
         }
 
     }

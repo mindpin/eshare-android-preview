@@ -49,15 +49,14 @@
         </RelativeLayout>
 
 
-        <TextView
+        <com.eshare_android_preview.base.view.EshareMarkdownView
             android:id="@+id/choice_item_text"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="@string/placeholder"
-            android:textSize="20dp"
+            text_size="20"
             android:layout_centerVertical="true"
             android:layout_marginLeft="60dp"
-            android:textColor="#444"
             />
 
     </RelativeLayout>
