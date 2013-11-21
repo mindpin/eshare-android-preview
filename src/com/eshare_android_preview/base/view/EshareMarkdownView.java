@@ -7,15 +7,10 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.eshare_android_preview.R;
-import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.utils.CodefillBridge;
 import com.eshare_android_preview.base.utils.HtmlEmbeddable;
 
@@ -57,7 +52,7 @@ public class EshareMarkdownView extends RelativeLayout {
         super(context, attrs, defStyle);
     }
 
-    public Codefill addCodefill(final JSONObject rect) throws JSONException {
+    public Codefill add_codefill(final JSONObject rect) throws JSONException {
         final Codefill child = new Codefill(getContext(), rect);
         this.codefills.add(child);
 
@@ -73,7 +68,7 @@ public class EshareMarkdownView extends RelativeLayout {
         return child;
     }
 
-    public EshareMarkdownView setMarkdownContent(String markdown) {
+    public EshareMarkdownView set_markdown_content(String markdown) {
         try {
             String html = new Markdown4jProcessor().process(markdown);
             view.loadDataWithBaseURL(null, HtmlEmbeddable.fromString(html).output(), "text/html", "UTF-8", null);
@@ -83,7 +78,7 @@ public class EshareMarkdownView extends RelativeLayout {
         return this;
     }
 
-    public Codefill getFirstUnappliedCodefill() {
+    public Codefill get_first_unapplied_codefill() {
         for (Codefill codefill : this.codefills) {
             if (codefill.getChildCount() == 0) {
                 return codefill;
@@ -92,12 +87,12 @@ public class EshareMarkdownView extends RelativeLayout {
         return null;
     }
 
-    public int getFirstUnappliedCodefillIndex(){
-        Codefill code_fill = getFirstUnappliedCodefill();
-        return getCodefillIndex(code_fill);
+    public int get_first_unapplied_codefill_index(){
+        Codefill codefill = get_first_unapplied_codefill();
+        return get_codefill_index(codefill);
     }
 
-    public int getCodefillIndex(Codefill codefill){
+    public int get_codefill_index(Codefill codefill){
         return this.codefills.indexOf(codefill);
     }
 
@@ -108,18 +103,18 @@ public class EshareMarkdownView extends RelativeLayout {
     public class MarkdownWebView extends WebView {
         public MarkdownWebView(Context context) {
             super(context);
-            setParams();
+            set_params();
         }
 
-        private void setParams() {
+        private void set_params() {
             this.getSettings().setJavaScriptEnabled(true);
-            this.setFontSize(16);
+            this.set_font_size(16);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.ALIGN_LEFT | RelativeLayout.ALIGN_TOP, RelativeLayout.TRUE);
             this.setLayoutParams(params);
         }
 
-        public void setFontSize(int size) {
+        public void set_font_size(int size) {
             this.getSettings().setDefaultFontSize(size);
         }
 
@@ -132,7 +127,7 @@ public class EshareMarkdownView extends RelativeLayout {
                 params.leftMargin = codefill.rawRect.left - l;
                 params.topMargin  = codefill.rawRect.top - t;
 
-                if (codefill.inBoundOfView(that)) {
+                if (codefill.in_bound_of_view(that)) {
                     codefill.setVisibility(View.VISIBLE);
                     codefill.requestLayout();
                 } else {
@@ -150,10 +145,10 @@ public class EshareMarkdownView extends RelativeLayout {
         public Codefill(Context context, JSONObject object) throws JSONException {
             super(context);
             rawRect = new Rect(object.getInt("left"), object.getInt("top"), object.getInt("right"), object.getInt("bottom"));
-            setParams();
+            set_params();
         }
 
-        public boolean inBoundOfView(View view) {
+        public boolean in_bound_of_view(View view) {
             LayoutParams params = (LayoutParams) this.getLayoutParams();
             int x = params.leftMargin , y = params.topMargin, offset = 4;
             boolean isXInBound = (x + this.getWidth()  > 0 - offset) && (x < view.getWidth()  + offset);
@@ -163,7 +158,7 @@ public class EshareMarkdownView extends RelativeLayout {
         }
 
         @SuppressLint("ResourceAsColor")
-        private void setParams() {
+        private void set_params() {
             this.setBackgroundColor(Color.parseColor("#ff0040"));
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(rawRect.width(), rawRect.height());
             params.addRule(RelativeLayout.ALIGN_PARENT_TOP);

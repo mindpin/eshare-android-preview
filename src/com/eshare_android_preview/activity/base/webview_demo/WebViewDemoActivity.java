@@ -1,16 +1,10 @@
 package com.eshare_android_preview.activity.base.webview_demo;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.base.utils.CodefillBridge;
 import com.eshare_android_preview.base.view.EshareMarkdownView;
-
-import org.json.JSONObject;
 
 /**
  * Created by kaid on 11/7/13.
@@ -39,6 +33,6 @@ public class WebViewDemoActivity extends EshareBaseActivity {
                       "[%] {|a| a + 16}.call(3) / [%]\n" +
                       "```";
 
-        preview.setMarkdownContent(h1 + image + code);
+        preview.set_markdown_content(h1 + image + code);
     }
 }

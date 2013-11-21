@@ -115,7 +115,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
     private void load_question_msg() {
         set_head_text("答题");
         question_kind_tv.setText(question.get_kind_str());
-        question_title_v.setMarkdownContent(question.content);
+        question_title_v.set_markdown_content(question.content);
 
         if (question.is_fill()){
             load_question_choices_for_fill();
@@ -262,7 +262,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         }
 
         private void on_click_for_fill(View v){
-            int index = question_title_v.getFirstUnappliedCodefillIndex();
+            int index = question_title_v.get_first_unapplied_codefill_index();
             if(index == -1){
                 return;
             }
@@ -272,7 +272,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
             TextView fill_item_text = (TextView)v.findViewById(R.id.fill_item_text);
             ((FrameLayout) v).removeView(fill_item_text);
 
-            EshareMarkdownView.Codefill code_fill = question_title_v.getFirstUnappliedCodefill();
+            EshareMarkdownView.Codefill code_fill = question_title_v.get_first_unapplied_codefill();
             code_fill.addView(fill_item_text);
         }
 
@@ -332,7 +332,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
                 return;
             }
 
-            int index = question_title_v.getCodefillIndex(code_fill);
+            int index = question_title_v.get_codefill_index(code_fill);
             select_answer.set_choice(index+1, null);
 
             View fill_item_text = code_fill.getChildAt(0);

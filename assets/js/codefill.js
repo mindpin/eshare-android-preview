@@ -25,7 +25,7 @@ function getCodefills() {
     var fields = document.getElementsByTagName("codefill");
 
     for (var i = 0; i < fields.length; i++) {
-        if (window.CodefillBridge && window.CodefillBridge.addField) {
+        if (window.CodefillBridge && window.CodefillBridge.add_field) {
             var from = fields[i].getBoundingClientRect()
               , to   = {};
 
@@ -35,7 +35,7 @@ function getCodefills() {
                 }
             }
 
-            window.CodefillBridge.addField(JSON.stringify(to));
+            window.CodefillBridge.add_field(JSON.stringify(to));
         }
     }
 }

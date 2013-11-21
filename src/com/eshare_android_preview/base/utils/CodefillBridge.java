@@ -4,8 +4,6 @@ import com.eshare_android_preview.base.view.EshareMarkdownView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by kaid on 11/14/13.
@@ -23,8 +21,8 @@ public class CodefillBridge {
         return new CodefillBridge(view);
     }
 
-    public void addField(String field) throws JSONException {
+    public void add_field(String field) throws JSONException {
         JSONObject rect = new JSONObject(field);
-        view.addCodefill(rect);
+        view.add_codefill(rect);
     }
 }
