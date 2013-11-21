@@ -22,6 +22,7 @@
         android:id="@+id/fill_item_text"
         android:text="占位"
         android:textSize="20dp"
+        android:background="#fff"
         android:layout_margin="5dp"
         android:padding="5dp"
         android:layout_height="wrap_content"

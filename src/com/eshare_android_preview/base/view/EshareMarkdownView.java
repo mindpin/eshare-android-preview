@@ -94,7 +94,11 @@ public class EshareMarkdownView extends RelativeLayout {
 
     public int getFirstUnappliedCodefillIndex(){
         Codefill code_fill = getFirstUnappliedCodefill();
-        return this.codefills.indexOf(code_fill);
+        return getCodefillIndex(code_fill);
+    }
+
+    public int getCodefillIndex(Codefill codefill){
+        return this.codefills.indexOf(codefill);
     }
 
     public void set_on_click_listener_for_code_fill(View.OnClickListener listener){
@@ -160,7 +164,7 @@ public class EshareMarkdownView extends RelativeLayout {
 
         @SuppressLint("ResourceAsColor")
         private void setParams() {
-            this.setBackgroundColor(Color.parseColor("#ffffff"));
+            this.setBackgroundColor(Color.parseColor("#ff0040"));
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(rawRect.width(), rawRect.height());
             params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);

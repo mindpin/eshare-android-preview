@@ -226,9 +226,19 @@ public class QuestionShowActivity extends EshareBaseActivity {
              }
          });
     }
-    
-    
 
+    private void refresh_submit_answer_btn_clickable(){
+        if (select_answer.is_empty()) {
+            submit_answer_btn.setClickable(false);
+            submit_answer_btn.setBackgroundResource(R.drawable.btn_c6699bd3b_circle_flat);
+            submit_answer_btn.setShadowLayer(0, 0, 0, Color.parseColor("#00000000"));
+        } else {
+            submit_answer_btn.setClickable(true);
+            submit_answer_btn.setBackgroundResource(R.drawable.btn_c99bd3b_circle_flat);
+            submit_answer_btn.setShadowLayer(1, 1, 1, Color.parseColor("#66000000"));
+        }
+    }
+    
     class QuestionChoiceItemListener implements OnClickListener {
         QuestionChoice choice;
 
@@ -259,10 +269,11 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
             select_answer.set_choice(index+1, choice);
 
-            View fill_item_text = v.findViewById(R.id.fill_item_text);
+            TextView fill_item_text = (TextView)v.findViewById(R.id.fill_item_text);
             ((FrameLayout) v).removeView(fill_item_text);
 
-            question_title_v.getFirstUnappliedCodefill().addView(fill_item_text);
+            EshareMarkdownView.Codefill code_fill = question_title_v.getFirstUnappliedCodefill();
+            code_fill.addView(fill_item_text);
         }
 
         private void on_click_for_single_choice(){
@@ -287,19 +298,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
             _set_choices_color_before();
             for (QuestionChoice qc : ((MultipleChoiceQuestionSelectAnswer) select_answer).select_choices) {
                 _set_choice_color_after(choices_detail_ll.getChildAt(qc.index));
-            }
-        }
-
-
-        private void refresh_submit_answer_btn_clickable(){
-            if (select_answer.is_empty()) {
-                submit_answer_btn.setClickable(false);
-                submit_answer_btn.setBackgroundResource(R.drawable.btn_c6699bd3b_circle_flat);
-                submit_answer_btn.setShadowLayer(0, 0, 0, Color.parseColor("#00000000"));
-            } else {
-                submit_answer_btn.setClickable(true);
-                submit_answer_btn.setBackgroundResource(R.drawable.btn_c99bd3b_circle_flat);
-                submit_answer_btn.setShadowLayer(1, 1, 1, Color.parseColor("#66000000"));
             }
         }
 
@@ -334,14 +332,18 @@ public class QuestionShowActivity extends EshareBaseActivity {
                 return;
             }
 
-            View fill_item_text = code_fill.getChildAt(0);
-            QuestionChoice choice = (QuestionChoice) fill_item_text.getTag();
+            int index = question_title_v.getCodefillIndex(code_fill);
+            select_answer.set_choice(index+1, null);
 
+            View fill_item_text = code_fill.getChildAt(0);
+            code_fill.removeView(fill_item_text);
+
+            QuestionChoice choice = (QuestionChoice) fill_item_text.getTag();
             View view = choices_detail_ll.getChildAt(choice.index);
             FrameLayout fill_item_btn = (FrameLayout) view.findViewById(R.id.fill_item_btn);
-
-            code_fill.removeView(fill_item_text);
             fill_item_btn.addView(fill_item_text);
+
+            refresh_submit_answer_btn_clickable();
         }
     }
 
