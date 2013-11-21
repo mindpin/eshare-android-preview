@@ -13,10 +13,10 @@ import android.widget.RelativeLayout;
 
 import com.eshare_android_preview.base.utils.CodefillBridge;
 import com.eshare_android_preview.base.utils.HtmlEmbeddable;
+import com.eshare_android_preview.base.utils.SimpleMarkupParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.markdown4j.Markdown4jProcessor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,9 +68,9 @@ public class EshareMarkdownView extends RelativeLayout {
         return child;
     }
 
-    public EshareMarkdownView set_markdown_content(String markdown) {
+    public EshareMarkdownView set_markdown_content(String markup) {
         try {
-            String html = new Markdown4jProcessor().process(markdown);
+            String html = SimpleMarkupParser.from_string(markup).output();
             view.loadDataWithBaseURL(null, HtmlEmbeddable.fromString(html).output(), "text/html", "UTF-8", null);
         } catch (IOException e) {
             e.printStackTrace();
@@ -149,7 +149,7 @@ public class EshareMarkdownView extends RelativeLayout {
         }
 
         public boolean in_bound_of_view(View view) {
-            LayoutParams params = (LayoutParams) this.getLayoutParams();
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) this.getLayoutParams();
             int x = params.leftMargin , y = params.topMargin, offset = 4;
             boolean isXInBound = (x + this.getWidth()  > 0 - offset) && (x < view.getWidth()  + offset);
             boolean isYInBound = (y + this.getHeight() > 0 - offset) && (y < view.getHeight() + offset);
