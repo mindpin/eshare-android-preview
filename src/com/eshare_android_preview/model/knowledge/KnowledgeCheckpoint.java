@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
-	public String id;
 	public List<KnowledgeSet> learned_sets;
 
 	public KnowledgeCheckpoint(String id, List<KnowledgeSet> learned_sets) {
@@ -21,6 +20,11 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
     }
 
     @Override
+    public boolean is_checkpoint() {
+        return true;
+    }
+
+    @Override
     public boolean is_learned() {
         return EsharePreference.get_learned(this.id);
     }
@@ -28,6 +32,11 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
     @Override
     public boolean is_unlocked() {
         return true;
+    }
+
+    @Override
+    public String get_name() {
+        return "综合测试";
     }
 
     @Override

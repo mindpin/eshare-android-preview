@@ -71,6 +71,10 @@
         <activity
             android:theme="@style/AppTranslucentTheme"
             android:name=".activity.base.switch_test.SecondActivity" />
+        <activity
+            android:theme="@style/AppTranslucentTheme"
+            android:name=".activity.base.knowledge_net.KnowledgeSetShowActivity"
+            />
     </application>
 
 </manifest>

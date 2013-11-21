@@ -1,5 +1,6 @@
 package com.eshare_android_preview.activity.base.tab_activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeSetShowActivity;
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
@@ -34,6 +36,8 @@ import java.util.List;
 
 
 public class HomeActivity extends EshareBaseActivity {
+    public static int ANIMATE_DRUATION = 400;
+    public static HomeActivity instance;
 
     LockableScrollView scroll_view;
 
@@ -43,14 +47,13 @@ public class HomeActivity extends EshareBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.tab_home);
-
+        instance = this;
         _init_knowledge_net();
-
         super.onCreate(savedInstanceState);
     }
 
     ArrayList<DashPathEndpoint> dash_path_endpoint_list;
-    static double SCREEN_WIDTH_DP, SCREEN_HEIGHT_DP, GRID_WIDTH_DP, GRID_HEIGHT_DP;
+    public static double SCREEN_WIDTH_DP, SCREEN_HEIGHT_DP, GRID_WIDTH_DP, GRID_HEIGHT_DP;
     DashPathView dash_path_view;
 
     private void _init_knowledge_net() {
@@ -142,7 +145,7 @@ public class HomeActivity extends EshareBaseActivity {
     private void _draw_text(SetPosition pos) {
         TextView tv = new TextView(this);
 
-        tv.setText(pos.get_set_name());
+        tv.setText(pos.set.get_name());
         tv.setTextSize(BaseUtils.dp_to_int_px((float) pos.TEXT_SIZE));
         tv.setGravity(Gravity.CENTER);
         tv.setTextColor(Color.parseColor("#444444"));
@@ -156,7 +159,7 @@ public class HomeActivity extends EshareBaseActivity {
 
         nodes_paper.addView(tv);
 
-        if (!pos.is_checkpoint()) {
+        if (!pos.set.is_checkpoint()) {
             TextView count_tv = new TextView(this);
             KnowledgeSet set = (KnowledgeSet) pos.set;
             count_tv.setText(set.get_learned_nodes_count() + "/" + set.nodes.size());
@@ -196,18 +199,36 @@ public class HomeActivity extends EshareBaseActivity {
             @Override
             public void onClick(View view) {
                 if (pos.is_unlocked()){
-                    proxy.toggle();
-                    scroll_view.locked = proxy.is_open;
+                    AniProxy.opened_node = pos.ani_proxy;
+
+                    // open activity
+                    Intent intent = new Intent(HomeActivity.this, KnowledgeSetShowActivity.class);
+                    intent.putExtra("set_id", pos.set.id);
+                    startActivity(intent);
                 }
             }
         });
+    }
+
+    public void run_open_animate() {
+        if (null != AniProxy.opened_node) {
+            AniProxy.opened_node.toggle();
+            scroll_view.locked = true;
+        }
+    }
+
+    public void run_close_animate() {
+        if (null != AniProxy.opened_node) {
+            AniProxy.opened_node.toggle();
+            scroll_view.locked = false;
+        }
     }
 
     private void _put_pos_to_dash_path_endpoint_list(SetPosition pos) {
         for (BaseKnowledgeSet parent : pos.set.parents()) {
             SetPosition parent_pos = KnowledgeSetsData.get_pos_of_set(parent);
             float x1 = (float) parent_pos.circle_center_dp_left;
-            float y1 = (float) parent_pos.text_dp_top + 24 + (parent_pos.is_checkpoint() ? 0 : 18);
+            float y1 = (float) parent_pos.text_dp_top + 24 + (parent_pos.set.is_checkpoint() ? 0 : 18);
             float x2 = (float) pos.circle_center_dp_left;
             float y2 = (float) pos.circle_dp_top - 8;
 
@@ -311,17 +332,12 @@ public class HomeActivity extends EshareBaseActivity {
             return this.set.equals(((SetPosition) o).set);
         }
 
-        boolean is_checkpoint() {
-            String set_class_name = set.getClass().getName();
-            return "com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint".equals(set_class_name);
-        }
-
         int get_circle_color() {
             if (!is_unlocked()) {
                 return Color.parseColor("#eeeeee");
             }
 
-            if (is_checkpoint()) {
+            if (set.is_checkpoint()) {
                 return Color.parseColor("#fccd2d");
             }
 
@@ -335,7 +351,7 @@ public class HomeActivity extends EshareBaseActivity {
                 path = "knowledge_icons/basic.png";
             }
 
-            if (is_checkpoint()) {
+            if (set.is_checkpoint()) {
                 path = "knowledge_icons/checkpoint.png";
             }
 
@@ -349,14 +365,6 @@ public class HomeActivity extends EshareBaseActivity {
                 e.printStackTrace();
                 return null;
             }
-        }
-
-        String get_set_name() {
-            if (is_checkpoint()) {
-                return "综合测试";
-            }
-
-            return ((KnowledgeSet) set).name;
         }
 
         // 节点是否解锁（可学）
@@ -384,7 +392,7 @@ public class HomeActivity extends EshareBaseActivity {
         public static void init() {
             opened_node = null;
             tagget_icon_view_absolute_pos_px = new int[]{
-                    BaseUtils.dp_to_int_px(0),
+                    BaseUtils.dp_to_int_px(47),
                     BaseUtils.dp_to_int_px(30)
             };
         }
@@ -409,14 +417,14 @@ public class HomeActivity extends EshareBaseActivity {
                 is_open = false;
                 opened_node = null;
 
-                circle_view.set_radius_animate((float) SetPosition.CIRCLE_RADIUS_DP, 400);
+                circle_view.set_radius_animate((float) SetPosition.CIRCLE_RADIUS_DP, ANIMATE_DRUATION);
                 set_icon_view_margin(icon_view_left_margin_px, icon_view_top_margin_px);
 
             } else {
                 is_open = true;
                 opened_node = this;
 
-                circle_view.set_radius_animate((float) SCREEN_HEIGHT_DP, 400);
+                circle_view.set_radius_animate((float) SCREEN_HEIGHT_DP, ANIMATE_DRUATION);
                 int[] margins = get_target_margin();
                 set_icon_view_margin(margins[0], margins[1]);
             }
@@ -431,7 +439,7 @@ public class HomeActivity extends EshareBaseActivity {
 
             ValueAnimator ani = ValueAnimator
                     .ofPropertyValuesHolder(pvh_left, pvh_top)
-                    .setDuration(400);
+                    .setDuration(ANIMATE_DRUATION);
 
             ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override

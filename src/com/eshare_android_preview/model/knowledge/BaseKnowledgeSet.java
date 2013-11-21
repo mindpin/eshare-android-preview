@@ -13,6 +13,7 @@ public class BaseKnowledgeSet implements ILearn, IParentAndChild<KnowledgeSetRel
     protected List<BaseKnowledgeSet> parents = new ArrayList<BaseKnowledgeSet>();
     protected List<BaseKnowledgeSet> children = new ArrayList<BaseKnowledgeSet>();
     public int deep;
+    public String id;
 
     @Override
     public List<KnowledgeSetRelation> relations() {
@@ -43,5 +44,19 @@ public class BaseKnowledgeSet implements ILearn, IParentAndChild<KnowledgeSetRel
     @Override
     public void do_learn() {
 
+    }
+
+    public static BaseKnowledgeSet find(String id) {
+        BaseKnowledgeSet set = KnowledgeSet.find(id);
+        if (null != set) return set;
+        return KnowledgeCheckpoint.find(id);
+    }
+
+    public boolean is_checkpoint() {
+        return false;
+    }
+
+    public String get_name() {
+        return "";
     }
 }
