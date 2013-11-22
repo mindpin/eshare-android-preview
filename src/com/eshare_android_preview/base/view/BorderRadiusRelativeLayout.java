@@ -46,26 +46,26 @@ public class BorderRadiusRelativeLayout extends RelativeLayout{
         border_bottom_right_radius = border_radius;
         border_bottom_left_radius = border_radius;
 
-        int radius1 = attrs.getAttributeIntValue(null,"border_top_left_radius",0);
-        if(radius1 != 0){
+        int radius1 = attrs.getAttributeIntValue(null,"border_top_left_radius",-1);
+        if(radius1 != -1){
             radius1 = BaseUtils.dp_to_int_px(radius1);
             border_top_left_radius = radius1;
         }
 
-        int radius2 = attrs.getAttributeIntValue(null,"border_top_right_radius",0);
-        if(radius2 != 0){
+        int radius2 = attrs.getAttributeIntValue(null,"border_top_right_radius",-1);
+        if(radius2 != -1){
             radius2 = BaseUtils.dp_to_int_px(radius2);
             border_top_right_radius = radius2;
         }
 
-        int radius3 = attrs.getAttributeIntValue(null,"border_bottom_right_radius",0);
-        if(radius3 != 0){
+        int radius3 = attrs.getAttributeIntValue(null,"border_bottom_right_radius",-1);
+        if(radius3 != -1){
             radius3 = BaseUtils.dp_to_int_px(radius3);
             border_bottom_right_radius = radius3;
         }
 
-        int radius4 = attrs.getAttributeIntValue(null,"border_bottom_left_radius",0);
-        if(radius4 != 0){
+        int radius4 = attrs.getAttributeIntValue(null,"border_bottom_left_radius",-1);
+        if(radius4 != -1){
             radius4 = BaseUtils.dp_to_int_px(radius4);
             border_bottom_left_radius = radius4;
         }
