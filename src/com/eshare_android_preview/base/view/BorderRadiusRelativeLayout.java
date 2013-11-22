@@ -119,7 +119,7 @@ public class BorderRadiusRelativeLayout extends RelativeLayout{
             RectF bottom_right_rect_f = build_rectf(layout.border_bottom_right_radius, width - layout.border_bottom_right_radius*2, height - layout.border_bottom_right_radius*2);
             path.arcTo(bottom_right_rect_f, 0, 90, false);
             // 下边框
-            path.lineTo(layout.border_bottom_left_radius, width);
+            path.lineTo(layout.border_bottom_left_radius, height);
             // 左下圆角
             RectF bottom_left_rect_f = build_rectf(layout.border_bottom_left_radius, 0, height - layout.border_bottom_left_radius*2);
             path.arcTo(bottom_left_rect_f, 90, 90, false);
