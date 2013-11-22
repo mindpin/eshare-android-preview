@@ -64,6 +64,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         super.onWindowFocusChanged(hasFocus);
         if (view_on_init) {
             page_open_animate();
+            view_on_init = false;
         }
     }
 
@@ -81,7 +82,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     }
 
     public void page_open_animate() {
-        PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", BaseUtils.dp_to_px(-24), BaseUtils.dp_to_px(18));
+        PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", BaseUtils.dp_to_px(-50), 0);
         PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px((float) HomeActivity.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146));
 
         ValueAnimator ani = ValueAnimator
@@ -124,7 +125,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     }
 
     public void page_close_animate() {
-        PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", BaseUtils.dp_to_px(18), BaseUtils.dp_to_px(-24));
+        PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", 0, BaseUtils.dp_to_px(-50));
         PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px(146), BaseUtils.dp_to_px((float) HomeActivity.SCREEN_HEIGHT_DP));
 
         ValueAnimator ani = ValueAnimator
