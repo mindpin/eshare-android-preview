@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
+import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.utils.BaseUtils;
 
 /**
@@ -105,32 +106,67 @@ public class BorderRadiusRelativeLayout extends RelativeLayout{
 
             Path path = new Path();
 
+            int tl = layout.border_top_left_radius;
+            int tr = layout.border_top_right_radius;
+            int bl = layout.border_bottom_left_radius;
+            int br = layout.border_bottom_right_radius;
+
+            int xr1 = 0;
+            int yr1 = 0;
+
+            int xr2 = width  - tr * 2;
+            int yr2 = 0;
+
+            int xr3 = width  - br * 2;
+            int yr3 = height - br * 2;
+
+            int xr4 = 0;
+            int yr4 = height - bl * 2;
+
+            int xs1 = width - tr;
+            int ys1 = 0;
+
+            int xs2 = width;
+            int ys2 = height - br;
+
+            int xs3 = bl;
+            int ys3 = height;
+
+            int xs4 = 0;
+            int ys4 = tl;
+
+
             // 左上圆角
-            RectF top_left_rect_f = build_rectf(layout.border_top_left_radius, 0, 0);
-            path.arcTo(top_left_rect_f, 180, 90, false);
+            draw_radius(path, xr1, yr1, tl, 180);
             // 上边框
-            path.lineTo(width - layout.border_top_right_radius, 0);
+            path.lineTo(xs1, ys1);
+
             // 右上圆角
-            RectF top_right_rect_f = build_rectf(layout.border_top_right_radius, width - layout.border_top_right_radius*2, 0);
-            path.arcTo(top_right_rect_f, 270, 90, false);
+            draw_radius(path, xr2, yr2, tr, 270);
             // 右边框
-            path.lineTo(width, height - layout.border_bottom_right_radius);
+            path.lineTo(xs2, ys2);
+
             // 右下圆角
-            RectF bottom_right_rect_f = build_rectf(layout.border_bottom_right_radius, width - layout.border_bottom_right_radius*2, height - layout.border_bottom_right_radius*2);
-            path.arcTo(bottom_right_rect_f, 0, 90, false);
+            draw_radius(path, xr3, yr3, br, 0);
             // 下边框
-            path.lineTo(layout.border_bottom_left_radius, height);
+            path.lineTo(xs3, ys3);
+
             // 左下圆角
-            RectF bottom_left_rect_f = build_rectf(layout.border_bottom_left_radius, 0, height - layout.border_bottom_left_radius*2);
-            path.arcTo(bottom_left_rect_f, 90, 90, false);
+            draw_radius(path, xr4, yr4, bl, 90);
             // 左边框
-            path.lineTo(0, layout.border_top_left_radius);
+            path.lineTo(xs4, ys4);
 
             canvas.drawPath(path, paint);
         }
 
         private RectF build_rectf(int radius, int sx, int sy){
             return new RectF(sx, sy, sx + radius*2, sy + radius*2);
+        }
+
+        // 根据传入的左上角和起始角度以半径，画出圆弧路径
+        private void draw_radius(Path path, int x, int y, int radius, int start_angle) {
+            RectF rect_f = new RectF(x, y, x + radius * 2, y + radius * 2);
+            path.arcTo(rect_f, start_angle, 90, false);
         }
 
         @Override
