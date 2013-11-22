@@ -3,8 +3,13 @@ package com.eshare_android_preview.activity.base.knowledge_net;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,9 +18,14 @@ import com.eshare_android_preview.activity.base.tab_activity.HomeActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
+import com.eshare_android_preview.model.knowledge.KnowledgeNode;
+import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.PropertyValuesHolder;
 import com.nineoldandroids.animation.ValueAnimator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by SongLiang on 13-11-21.
@@ -25,6 +35,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     TextView set_name_tv;
     RelativeLayout top_layout;
     RelativeLayout pager_layout;
+    ViewPager view_pager;
 
     BaseKnowledgeSet set;
     int set_text_color;
@@ -56,6 +67,8 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         set_name_tv.setTextColor(set_text_color);
         set_name_tv.setText(set.get_name());
 
+        _init_view_pager();
+
         super.onCreate(savedInstanceState);
     }
 
@@ -75,6 +88,51 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
             return false;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void _init_view_pager() {
+        if (set.is_checkpoint()) return;
+
+        KnowledgeSet kset = (KnowledgeSet) set;
+        LayoutInflater lf = getLayoutInflater().from(this);
+        final List<View> view_list = new ArrayList<View>();
+        for(KnowledgeNode node : kset.nodes) {
+            View view = lf.inflate(R.layout.kn_knowledge_set_show_item, null);
+            view_list.add(view);
+        }
+
+        view_pager = (ViewPager) findViewById(R.id.view_pager);
+        view_pager.setAdapter(new PagerAdapter() {
+            @Override
+            public int getCount() {
+                return view_list.size();
+            }
+
+            @Override
+            public boolean isViewFromObject(View view, Object o) {
+                return view == o;
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                View view = view_list.get(position);
+                container.addView(view, 0);
+                return view;
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView(view_list.get(position));
+            }
+
+//            @Override
+//            public float getPageWidth(int position) {
+//                return 0.8f;
+//            }
+        });
+
+        view_pager.setPageMargin(- BaseUtils.dp_to_int_px(90));
+        view_pager.setOffscreenPageLimit(2);
     }
 
     public void finish_this(View view) {
