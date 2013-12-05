@@ -1,6 +1,9 @@
 package com.eshare_android_preview.model.elog;
 
 import com.eshare_android_preview.model.database.ExperienceLogDBHelper;
+import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
+import com.eshare_android_preview.model.knowledge.KnowledgeNode;
+import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
 
 import java.io.Serializable;
@@ -20,7 +23,19 @@ public class ExperienceLog implements Serializable {
     public String data_json;
     public long   created_at;
 
-    public int delta_num;
+    public BaseKnowledge model;
+
+    public BaseKnowledge getModel() {
+        BaseKnowledge base_knowlege = null;
+        if (this.model_type == KnowledgeSet.class.getName()){
+            base_knowlege = KnowledgeSet.find(this.model_id);
+        }else if (this.model_type == KnowledgeNode.class.getName()){
+            base_knowlege = KnowledgeNode.find(this.model_id);
+        }else if (this.model_type == KnowledgeCheckpoint.class.getName()){
+            base_knowlege = KnowledgeCheckpoint.find(this.model_id);
+        }
+        return base_knowlege;
+    }
 
     public ExperienceLog(int id, int before_exp, int after_exp, String model_type, String model_id, String data_json, long created_at) {
         this.id = id;
@@ -48,5 +63,9 @@ public class ExperienceLog implements Serializable {
     }
 
 
-
+    public static CurrentState current_state(){
+        CurrentState state = new CurrentState();
+        state.init_data();
+        return state;
+    }
 }
