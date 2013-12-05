@@ -1,12 +1,13 @@
 package com.eshare_android_preview.model.knowledge;
 
+import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
+public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,BaseKnowledge {
 	public String id;
 	public List<KnowledgeSet> learned_sets;
 
@@ -41,5 +42,12 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn{
         }
         id_s.add(this.id);
         EsharePreference.put_learned_array(id_s);
+    }
+
+    public String model(){
+        return this.getClass().getName();
+    }
+    public String model_id(){
+        return this.id;
     }
 }

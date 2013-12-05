@@ -28,7 +28,17 @@ public class BaseDBHelper extends SQLiteOpenHelper {
             Constants.TABLE_FAVOURITES__ID + " integer not null, " +
             Constants.TABLE_FAVOURITES__KIND + " text);";
 
- 
+    private static final String create_experience_logs = "create table " +
+            Constants.TABLE_EXPERIENCE_LOGS + " (" +
+            Constants.KEY_ID + " integer primary key, " +
+            Constants.TABLE_EXPERIENCE_LOGS__BEFORE_EXP + " integer not null, " +
+            Constants.TABLE_EXPERIENCE_LOGS__AFTER_EXP + " integer not null, " +
+            Constants.TABLE_EXPERIENCE_LOGS__MODEL_TYPE + " text, " +
+            Constants.TABLE_EXPERIENCE_LOGS__MODEL_ID + " text, " +
+            Constants.TABLE_EXPERIENCE_LOGS__DATA_JSON + " text, " +
+            Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT + " long);";
+
+
     public BaseDBHelper(Context context, String name, CursorFactory factory,int version) {
         super(context, name, factory, version);
     }
@@ -38,6 +48,7 @@ public class BaseDBHelper extends SQLiteOpenHelper {
         db.execSQL(create_table_notes);
         db.execSQL(create_course);
         db.execSQL(create_favourites);
+        db.execSQL(create_experience_logs);
     }
 
     @Override
@@ -45,6 +56,8 @@ public class BaseDBHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists " + Constants.TABLE_NOTES);
         db.execSQL("drop table if exists " + Constants.TABLE_COURSE);
         db.execSQL("drop table if exists " + Constants.TABLE_FAVOURITES);
+        db.execSQL("drop table if exists " + Constants.TABLE_EXPERIENCE_LOGS);
+
         onCreate(db);
     }
 }
