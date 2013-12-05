@@ -25,7 +25,7 @@ public class ExperienceLog implements Serializable {
 
     public BaseKnowledge model;
 
-    public BaseKnowledge getModel() {
+    public void setModel() {
         BaseKnowledge base_knowlege = null;
         if (this.model_type == KnowledgeSet.class.getName()){
             base_knowlege = KnowledgeSet.find(this.model_id);
@@ -34,7 +34,7 @@ public class ExperienceLog implements Serializable {
         }else if (this.model_type == KnowledgeCheckpoint.class.getName()){
             base_knowlege = KnowledgeCheckpoint.find(this.model_id);
         }
-        return base_knowlege;
+        this.model = base_knowlege;
     }
 
     public ExperienceLog(int id, int before_exp, int after_exp, String model_type, String model_id, String data_json, long created_at) {
@@ -45,6 +45,7 @@ public class ExperienceLog implements Serializable {
         this.model_id = model_id;
         this.data_json = data_json;
         this.created_at = created_at;
+        this.setModel();
     }
 
 
