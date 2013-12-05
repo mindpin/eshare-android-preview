@@ -18,7 +18,7 @@ public class CurrentState {
             if (level_num > elog.after_exp){
                 this.level = i + 1;
                 this.level_up_exp_num = elog.level_up_exp_nums[i];
-                this.exp_num = level_num - elog.after_exp;
+                this.exp_num = elog.after_exp - (level_num - this.level_up_exp_num);
                 break;
             }
         }
