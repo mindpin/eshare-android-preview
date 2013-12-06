@@ -2,6 +2,7 @@ package com.eshare_android_preview.base.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,8 @@ public class EshareBaseActivity extends Activity{
      */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 		ActivitiesStackSingleton.tidy_and_push_activity(this);
 
 //        如果存在顶栏，加载顶栏并进行一些必要设置

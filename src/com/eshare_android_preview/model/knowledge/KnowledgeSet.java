@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
-	public String id;
 	public String name;
 	public String icon;
 
@@ -52,5 +51,26 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn{
             }
         }
         return  true;
+    }
+
+    @Override
+    public boolean is_checkpoint() {
+        return false;
+    }
+
+    @Override
+    public String get_name() {
+        return name;
+    }
+
+    // 返回已学的节点数
+    public int get_learned_nodes_count(){
+        int learned_nodes_count = 0 ;
+        for (KnowledgeNode node : this.nodes){
+            if (node.is_learned()){
+                learned_nodes_count++;
+            }
+        }
+        return learned_nodes_count;
     }
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.base.view.CircleView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
 import java.util.ArrayList;
@@ -59,5 +60,11 @@ public class DashPathDemoActivity extends EshareBaseActivity {
         params.height = 2000;
         params.width = 2000;
         view.setLayoutParams(params);
+
+        CircleView cv = new CircleView(this);
+        cv.set_color(Color.parseColor("#aaaaaa"));
+        cv.set_circle_center_position(100,100);
+        cv.set_radius(20);
+        root_view.addView(cv);
     }
 }
