@@ -1,0 +1,16 @@
+knowledge_node_id: "node-31"
+kind: fill
+content: |
+  ```ruby
+    var x = "John";
+    var y = new String("John");
+    typeof(x) == [%] // return true
+    typeof(y) == [%] // return true
+  ```
+  请补全代码，让两个等式成立
+choices:
+  - object
+  - string
+  - object
+  - string
+answer: string,object

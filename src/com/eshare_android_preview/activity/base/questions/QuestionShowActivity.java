@@ -33,17 +33,18 @@ import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
 import com.eshare_android_preview.model.elog.CurrentState;
 import com.eshare_android_preview.model.elog.ExperienceLog;
+import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
 
 public class QuestionShowActivity extends EshareBaseActivity {
 
     public static class ExtraKeys {
         public static final String QUESTION = "question";
-        public static final String TEST_PAPER = "test_paper";
+        public static final String TEST_RESULT = "test_result";
     }
     public static BaseKnowledge current_target;
 
-    private TestPaper test_paper;
+    TestResult test_result;
 
     TextView question_kind_tv;
     EshareMarkdownView  question_title_v;
@@ -62,8 +63,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
         hide_head_setting_button();
 
         Bundle bundle = getIntent().getExtras();
-        test_paper = (TestPaper)bundle.getSerializable(QuestionShowActivity.ExtraKeys.TEST_PAPER);
-        question = test_paper.get_current_question();
+        test_result = (TestResult)bundle.getSerializable(ExtraKeys.TEST_RESULT);
+        question = ((KnowledgeNode)current_target).get_random_question(test_result.except_question_ids);
         select_answer = question.build_select_answer();
 
         init_ui();
@@ -88,8 +89,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
     }
 
     private void refresh_test_result() {
-        ((TextView) findViewById(R.id.correct_count)).setText(test_paper.test_result.current_correct_count + "/" + test_paper.test_result.needed_correct_count);
-        ((TextView) findViewById(R.id.error_count)).setText(test_paper.test_result.current_error_count() + "/" + test_paper.test_result.allowed_error_count);
+        ((TextView) findViewById(R.id.correct_count)).setText(test_result.current_correct_count + "/" + test_result.needed_correct_count);
+        ((TextView) findViewById(R.id.error_count)).setText(test_result.current_error_count() + "/" + test_result.allowed_error_count);
     }
 
     private void init_faved_button() {
@@ -171,17 +172,17 @@ public class QuestionShowActivity extends EshareBaseActivity {
         View tip_tv;
         if (select_answer.is_correct()) {
             tip_tv = findViewById(R.id.answer_correct_tip_tv);
-            test_paper.test_result.increase_correct_count();
+            test_result.increase_correct_count();
         } else {
             tip_tv = findViewById(R.id.answer_error_tip_tv);
-            test_paper.test_result.increase_error_count();
+            test_result.increase_error_count();
         }
         refresh_test_result();
         tip_tv.setVisibility(View.VISIBLE);
         
-        if (test_paper.test_result.is_end()) {
+        if (test_result.is_end()) {
 		   to_do_answer_error();
-        }else if(test_paper.test_result.is_pass()){
+        }else if(test_result.is_pass()){
             to_do_answer_pass();
 		}else{
 		   to_do_next_question();
@@ -192,7 +193,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         temp_print_level_info();
     	new AlertDialog.Builder(QuestionShowActivity.this)
     	.setTitle("提示")
-    	.setMessage("答题错误已经超过 " + test_paper.test_result.allowed_error_count + " 次,需要重新答题")
+    	.setMessage("答题错误已经超过 " + test_result.allowed_error_count + " 次,需要重新答题")
     	.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
@@ -207,7 +208,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         temp_print_level_info();
         new AlertDialog.Builder(QuestionShowActivity.this)
                 .setTitle("提示")
-                .setMessage("答题正确已经超过 " + test_paper.test_result.needed_correct_count + " 次, 测试通过")
+                .setMessage("答题正确已经超过 " + test_result.needed_correct_count + " 次, 测试通过")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -231,8 +232,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
              public void onClick(View v) {
                  Intent intent = new Intent(QuestionShowActivity.this, QuestionShowActivity.class);
                  Bundle bundle = new Bundle();
-                 test_paper.next();
-                 bundle.putSerializable(ExtraKeys.TEST_PAPER, test_paper);
+                 test_result.except_question_ids.add((Integer)question.id);
+                 bundle.putSerializable(ExtraKeys.TEST_RESULT, test_result);
                  intent.putExtras(bundle);
                  startActivity(intent);
                  finish();

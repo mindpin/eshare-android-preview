@@ -1,0 +1,14 @@
+knowledge_node_id: "node-31"
+kind: single_choice
+content: |
+  ```ruby
+    var txt = "Hello World!";
+    var count = txt.length;
+  ```
+  上面的代码中，count 的值是
+choices:
+  - 10
+  - 11
+  - 12
+  - 13
+answer: C

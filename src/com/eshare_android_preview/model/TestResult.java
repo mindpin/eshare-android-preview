@@ -1,6 +1,7 @@
 package com.eshare_android_preview.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class TestResult implements Serializable{
     private static final long serialVersionUID = 34564L;
@@ -10,6 +11,8 @@ public class TestResult implements Serializable{
 	
 	public int remaining_error_count;
 	public int current_correct_count;
+
+    public ArrayList<Integer> except_question_ids = new ArrayList<Integer>();
    
 
 	public void increase_correct_count(){

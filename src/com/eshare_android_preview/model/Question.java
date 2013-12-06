@@ -6,12 +6,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.eshare_android_preview.model.parse.YAMLParse;
+import com.eshare_android_preview.model.parse.QuestionYAMLParse;
 
 // 问题
 public class Question extends LearningResource implements Serializable {
-    public static final String YAML_PATH = "javascript_core_knowledge_questions.yaml";
-    public static List<Question> QUESTIONS = YAMLParse.parse_yaml(YAML_PATH);
     public static class Type{
 		public static final String   SINGLE_CHOICE = "single_choice";
 		public static final String   MULTIPLE_CHOICE = "multiple_choices";
@@ -51,28 +49,14 @@ public class Question extends LearningResource implements Serializable {
         return this.kind.equals(Type.TRUE_FALSE);
     }
 
+    public static Question find(int question_id) {
+        return null;
+    }
 
     public boolean is_fill(){
         return this.kind.equals(Type.FILL);
     }
 
-    public static List<Question> all(){
-        return QUESTIONS;
-    }
-    
-    public static Question first(){
-        Log.d("ddddd =", all().size() + "");
-    	return all().get(0);
-    }
-
-    public static Question find(int question_id) {
-    	return find_by_jump_index(question_id,0);
-    }
-    
-    public Question next(){
-        return all().get(this.id+1);
-    }
-    
     public boolean answer(String answer){
     	return this.answer.equals(answer);
     }
@@ -91,19 +75,6 @@ public class Question extends LearningResource implements Serializable {
     }
     
     
-    private static Question find_by_jump_index(int question_id,int index){
-    	 List<Question> list = all();
-    	 for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).id == question_id) {
-				int current = i +index;
-				if (current >= 0 && current <= list.size()) {
-					return list.get(i+index);
-				}
-			}
-		}
-    	return null;
-    }
-
     @Override
     public String get_note_foreign_key_id() {
         return this.id + "";

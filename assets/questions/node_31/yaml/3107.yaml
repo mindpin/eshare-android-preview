@@ -1,0 +1,15 @@
+knowledge_node_id: "node-31"
+kind: single_choice
+content: |
+  ```ruby
+    var str = "Please visit A!"
+    var n = str.replace("A","B");
+    alert(n)
+  ```
+  上面代码的运行结果，下面哪个是正确的
+choices:
+  - "![file:///android_asset/questions/node_31/9.jpg]"
+  - "![file:///android_asset/questions/node_31/10.jpg]"
+  - "![file:///android_asset/questions/node_31/11.jpg]"
+  - "![file:///android_asset/questions/node_31/12.jpg]"
+answer: A

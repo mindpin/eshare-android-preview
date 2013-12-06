@@ -1,0 +1,17 @@
+knowledge_node_id: "node-31"
+kind: fill
+content: |
+  ```ruby
+    var txt = "a,b,c,d,e";
+    var arr = txt.split( [%] );
+    alert(arr.length == 5)
+  ```
+  上面的代码运行结果如下
+  ![file:///android_asset/questions/node_31/14.jpg]
+  请用下面的选项补全代码
+choices:
+  - "\"\""
+  - "\" \" "
+  - "\",\""
+  - "\"|\""
+answer: "\",\""
