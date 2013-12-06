@@ -91,7 +91,7 @@
 
                     <com.eshare_android_preview.base.view.EshareMarkdownView
                         android:id="@+id/question_title"
-                        text_size="18"
+                        text_size="14"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content">
                         </com.eshare_android_preview.base.view.EshareMarkdownView>
