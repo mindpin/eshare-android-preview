@@ -1,5 +1,6 @@
 package com.eshare_android_preview.model.knowledge;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

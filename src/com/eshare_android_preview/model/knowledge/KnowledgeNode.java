@@ -1,8 +1,11 @@
 package com.eshare_android_preview.model.knowledge;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.TestPaper;
+import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
@@ -88,5 +91,10 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
     }
     public String model_id(){
         return this.id;
+    }
+
+    public TestPaper get_test_paper(){
+        ArrayList<Question> questions = new ArrayList<Question>(Question.all().subList(0, 12));
+        return new TestPaper(questions,new TestResult(3,10));
     }
 }

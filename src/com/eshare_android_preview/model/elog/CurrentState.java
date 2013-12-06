@@ -12,6 +12,13 @@ public class CurrentState {
 
     public void init_data() {
         ExperienceLog elog = ExperienceLogDBHelper.find_last_data();
+        if (elog == null){
+            this.level = 1;
+            this.level_up_exp_num = ExperienceLog.level_up_exp_nums[0];
+            this.exp_num = 0;
+            return;
+        }
+
         int level_num = 0;
         for(int i=0; i<elog.level_up_exp_nums.length;i++){
             level_num += elog.level_up_exp_nums[i];

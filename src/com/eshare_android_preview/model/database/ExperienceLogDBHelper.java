@@ -53,7 +53,7 @@ public class ExperienceLogDBHelper extends BaseModelDBHelper{
 
         String sql = "select * from " + Constants.TABLE_EXPERIENCE_LOGS + " order by " + Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT + " desc  limit 0,1";
 
-        Cursor cursor = db.rawQuery(sql ,get_columns());
+        Cursor cursor = db.rawQuery(sql ,null);
         boolean has_value = cursor.moveToFirst();
         if(has_value){
             elog = build_by_cursor(cursor);

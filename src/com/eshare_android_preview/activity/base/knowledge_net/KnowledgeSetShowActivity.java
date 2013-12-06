@@ -14,9 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.activity.base.tab_activity.HomeActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
@@ -96,9 +99,23 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         KnowledgeSet kset = (KnowledgeSet) set;
         LayoutInflater lf = getLayoutInflater().from(this);
         final List<View> view_list = new ArrayList<View>();
-        for(KnowledgeNode node : kset.nodes) {
+        for(final KnowledgeNode node : kset.nodes) {
             View view = lf.inflate(R.layout.kn_knowledge_set_show_item, null);
             view_list.add(view);
+
+            View to_question = view.findViewById(R.id.to_question);
+            to_question.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(KnowledgeSetShowActivity.this, QuestionShowActivity.class);
+                    Bundle bundle = new Bundle();
+                    QuestionShowActivity.current_target = node;
+                    bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_PAPER, node.get_test_paper());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+
         }
 
         view_pager = (ViewPager) findViewById(R.id.view_pager);
