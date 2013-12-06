@@ -275,17 +275,32 @@ public class QuestionShowActivity extends EshareBaseActivity {
         }
 
         private void on_click_for_fill(View v){
+            TextView fill_item_text = (TextView)v.findViewById(R.id.fill_item_text);
+            if(fill_item_text == null){
+                on_click_for_fill_unselect(v);
+            }else{
+                on_click_for_fill_select(v);
+            }
+
+        }
+
+        private void on_click_for_fill_unselect(View v){
+            EshareMarkdownView.Codefill code_fill = (EshareMarkdownView.Codefill)v.getTag();
+            unselect_fill_item(code_fill);
+        }
+
+        private void on_click_for_fill_select(View v){
             int index = question_title_v.get_first_unapplied_codefill_index();
             if(index == -1){
                 return;
             }
 
             select_answer.set_choice(index+1, choice);
-
             TextView fill_item_text = (TextView)v.findViewById(R.id.fill_item_text);
             ((FrameLayout) v).removeView(fill_item_text);
 
             EshareMarkdownView.Codefill code_fill = question_title_v.get_first_unapplied_codefill();
+            v.setTag(code_fill);
             code_fill.addView(fill_item_text);
         }
 
@@ -342,19 +357,23 @@ public class QuestionShowActivity extends EshareBaseActivity {
                 return;
             }
 
-            int index = question_title_v.get_codefill_index(code_fill);
-            select_answer.set_choice(index+1, null);
-
-            View fill_item_text = code_fill.getChildAt(0);
-            code_fill.removeView(fill_item_text);
-
-            QuestionChoice choice = (QuestionChoice) fill_item_text.getTag();
-            View view = choices_detail_ll.getChildAt(choice.index);
-            FrameLayout fill_item_btn = (FrameLayout) view.findViewById(R.id.fill_item_btn);
-            fill_item_btn.addView(fill_item_text);
-
-            refresh_submit_answer_btn_clickable();
+            unselect_fill_item(code_fill);
         }
+    }
+
+    private void unselect_fill_item(EshareMarkdownView.Codefill code_fill){
+        int index = question_title_v.get_codefill_index(code_fill);
+        select_answer.set_choice(index+1, null);
+
+        View fill_item_text = code_fill.getChildAt(0);
+        code_fill.removeView(fill_item_text);
+
+        QuestionChoice choice = (QuestionChoice) fill_item_text.getTag();
+        View view = choices_detail_ll.getChildAt(choice.index);
+        FrameLayout fill_item_btn = (FrameLayout) view.findViewById(R.id.fill_item_btn);
+        fill_item_btn.addView(fill_item_text);
+
+        refresh_submit_answer_btn_clickable();
     }
 
 
