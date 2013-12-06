@@ -101,6 +101,8 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         final List<View> view_list = new ArrayList<View>();
         for(final KnowledgeNode node : kset.nodes) {
             View view = lf.inflate(R.layout.kn_knowledge_set_show_item, null);
+            ((TextView) view.findViewById(R.id.node_name)).setText(node.name);
+            ((TextView) view.findViewById(R.id.node_desc)).setText(node.desc);
             view_list.add(view);
 
             View to_question = view.findViewById(R.id.to_question);
