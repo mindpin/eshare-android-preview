@@ -63,8 +63,4 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,Base
     public String model_id(){
         return this.id;
     }
-    public TestPaper get_test_paper(){
-        ArrayList<Question> questions = new ArrayList<Question>(Question.all().subList(0, 12));
-        return new TestPaper(questions,new TestResult(3,10));
-    }
 }

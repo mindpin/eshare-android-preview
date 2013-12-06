@@ -1,14 +1,18 @@
 package com.eshare_android_preview.model.knowledge;
 
-import java.io.Serializable;
+import android.content.res.AssetManager;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.TestPaper;
-import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
+import com.eshare_android_preview.model.parse.QuestionYAMLParse;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 
 
@@ -93,8 +97,30 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
         return this.id;
     }
 
-    public TestPaper get_test_paper(){
-        ArrayList<Question> questions = new ArrayList<Question>(Question.all().subList(0, 12));
-        return new TestPaper(questions,new TestResult(3,10));
+    public Question get_random_question(List<Integer> except_ids){
+        AssetManager asset = EshareApplication.context.getAssets();
+        String path = "questions/" + this.id.replace("-","_") + "/yaml";
+        List<String> question_files = new ArrayList<String>();
+        try {
+            String[] a = asset.list(path);
+            question_files = new ArrayList<String>(Arrays.asList(a));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for(int id : except_ids){
+            String str = id + ".yaml";
+            question_files.remove(str);
+            String str1 = str + "";
+        }
+        if(question_files.size() == 0){
+            return null;
+        }
+
+        int random_index = (int) (Math.random() * (question_files.size() - 1));
+        String file_name = question_files.get(random_index);
+        String file_path = path + "/" + file_name;
+        int question_id = Integer.parseInt(file_name.replace(".yaml",""));
+        return QuestionYAMLParse.parse_yaml(question_id,file_path);
     }
 }

@@ -1,0 +1,21 @@
+knowledge_node_id: "node-31"
+kind: multiple_choices
+content: |
+  ![file:///android_asset/questions/node_31/13.jpg]
+  如图，下面哪个代码的运行结果和图片一样
+choices:
+  - |
+    ```ruby
+    var txt="Hello World!";
+    alert(txt.toUpperCase());
+    ```
+  - |
+    ```ruby
+    var txt="Hello World!";
+    alert(txt.toLowerCase());
+    ```
+  - |
+    ```ruby
+    alert("HELLO WORLD!");
+    ```
+answer: AC

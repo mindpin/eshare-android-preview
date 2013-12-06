@@ -8,5 +8,4 @@ import com.eshare_android_preview.model.TestPaper;
 public interface BaseKnowledge {
     public String model();
     public String model_id();
-    public TestPaper get_test_paper();
 }
