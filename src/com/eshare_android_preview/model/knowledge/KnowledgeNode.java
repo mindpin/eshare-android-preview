@@ -3,12 +3,13 @@ package com.eshare_android_preview.model.knowledge;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 
 
-public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>,ILearn {
+public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>,ILearn,BaseKnowledge {
 	public KnowledgeSet set;
 	public String id;
 	public String name;
@@ -80,5 +81,12 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 
         boolean required_nodes_is_learned = this.set.required_nodes_is_learned();
         EsharePreference.put_learned(this.set.id,required_nodes_is_learned);
+    }
+
+    public String model(){
+        return this.getClass().getName();
+    }
+    public String model_id(){
+        return this.id;
     }
 }
