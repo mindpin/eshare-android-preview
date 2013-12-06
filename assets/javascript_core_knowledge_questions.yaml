@@ -1,172 +1,137 @@
 - javascript_core_knowledge_questions
-- - knowledge_node_id: "node-31"
-    kind: fill
-    content: |
-      ```ruby
-        var txt = "a,b,c,d,e";
-        var arr = txt.split( [%] );
-        alert(arr.length == 5)
-      ```
-      上面的代码运行结果如下
-      ![file:///android_asset/questions/node_31/14.jpg]
-      请用下面的选项补全代码
-    choices:
-      - "\"\""
-      - "\" \" "
-      - "\",\""
-      - "\"|\""
-    answer: "\",\""
-
-  - knowledge_node_id: "node-31"
-    kind: fill
-    content: |
-      ```ruby
-        var x = "John";
-        var y = new String("John");
-        typeof(x) == [%] // return true
-        typeof(y) == [%] // return true
-      ```
-      请补全代码，让两个等式成立
-    choices:
-      - object
-      - string
-      - object
-      - string
-    answer: string,object
-
-  - knowledge_node_id: "node-31"
+- - knowledge_node_id: "node-32"
     kind: single_choice
     content: |
       ```ruby
-      var carname = "Volvo XC60";
-      var character = carname[7];
-      alert(character)
+        var int_val = parseInt('077',10)
       ```
-      上面代码的运行结果，下面哪个是正确的
+      上面的代码中，int_val 的值是
     choices:
-      - "![file:///android_asset/questions/node_31/1.jpg]"
-      - "![file:///android_asset/questions/node_31/2.jpg]"
-      - "![file:///android_asset/questions/node_31/3.jpg]"
-    answer: A
-
-  - knowledge_node_id: "node-31"
-    kind: single_choice
-    content: |
-      ```ruby
-        var txt = "Hello World!";
-        var count = txt.length;
-      ```
-      上面的代码中，count 的值是
-    choices:
+      - 0
+      - 7
+      - 77
       - 10
-      - 11
-      - 12
-      - 13
     answer: C
 
-  - knowledge_node_id: "node-31"
-    kind: single_choice
-    content: |
-      ```ruby
-      var str = "Hello world, welcome to the universe.";
-      var n = str.indexOf("welcome");
-      ```
-      上面的代码中，n 的值是
-    choices:
-      - 10
-      - 11
-      - 12
-      - 13
-    answer: D
 
-  - knowledge_node_id: "node-31"
-    kind: single_choice
-    content: |
-      ```ruby
-      var str = "Hello world!";
-      alert(str.match("world"));
-      ```
-      上面代码的运行结果，下面哪个是正确的
-    choices:
-      - "![file:///android_asset/questions/node_31/5.jpg]"
-      - "![file:///android_asset/questions/node_31/6.jpg]"
-      - "![file:///android_asset/questions/node_31/7.jpg]"
-      - "![file:///android_asset/questions/node_31/8.jpg]"
-    answer: A
+   - knowledge_node_id: "node-32"
+     kind: single_choice
+     content: |
+       ```javascript
+       alert(Math.floor(88.77))
+       ```
+       上面代码的运行结果，下面哪个是正确的
+     choices:
+       - 88
+       - 77
+       - 88.77
+       - 0
+     answer: A
 
-  - knowledge_node_id: "node-31"
+
+  - knowledge_node_id: "node-32"
     kind: single_choice
     content: |
-      ```ruby
-        var str = "Please visit A!"
-        var n = str.replace("A","B");
-        alert(n)
+      ```javascript
+      alert(alert( ~1 ))
       ```
       上面代码的运行结果，下面哪个是正确的
     choices:
-      - "![file:///android_asset/questions/node_31/9.jpg]"
-      - "![file:///android_asset/questions/node_31/10.jpg]"
-      - "![file:///android_asset/questions/node_31/11.jpg]"
-      - "![file:///android_asset/questions/node_31/12.jpg]"
-    answer: A
+      - -1
+      - -2
+      - 0
+      - undefined
+    answer: B
 
-  - knowledge_node_id: "node-31"
-    kind: multiple_choices
+
+  - knowledge_node_id: "node-32"
+    kind: single_choice
     content: |
-      ![file:///android_asset/questions/node_31/4.jpg]
-      如图，下面哪些代码的运行结果和图片一样
+      ```javascript
+      alert(Math.ceil(1.5))
+      ```
+      上面代码的运行结果，下面哪个是正确的
     choices:
-      - |
-        ```ruby
-          alert("He is called 'Johnny'")
-        ```
-      - |
-        ```ruby
-          alert('He is called \'Johnny\'')
-        ```
-      - |
-        ```ruby
-          alert('He is called "Johnny"')
-        ```
-      - |
-        ```ruby
-          alert("He is called \"Johnny\"")
-        ```
-    answer: AB
+      - 1
+      - 2
+      - 0
+      - undefined
+    answer: B
 
-  - knowledge_node_id: "node-31"
-    kind: multiple_choices
+
+
+
+
+
+  - knowledge_node_id: "node-32"
+    kind: true_false
+    content: Number.MAX_VALUE + 1 == Number.MAX_VALUE
+    answer: T
+
+  - knowledge_node_id: "node-32"
+    kind: true_false
+    content: 1 === 1.0
+    answer: T
+
+  - knowledge_node_id: "node-32"
+    kind: true_false
+    content: isNaN(22)
+    answer: F
+
+  - knowledge_node_id: "node-32"
+    kind: true_false
+    content: typeof 9 == 'number'
+    answer: T
+
+
+
+
+
+
+
+  - knowledge_node_id: "node-32"
+    kind: fill
     content: |
-      ![file:///android_asset/questions/node_31/13.jpg]
-      如图，下面哪个代码的运行结果和图片一样
+      ```javascript
+        function is_int(val){
+          if(([%](val) == parseInt(val)) && !isNaN(val)){
+              return true;
+          } else {
+              return false;
+          }
+        }
+        alert(is_int(12.22));
+      ```
+      上面的代码运行结果如下
+      ![file:///android_asset/questions/node_32/1.png]
+      请用下面的选项补全代码
     choices:
-      - |
-        ```ruby
-        var txt="Hello World!";
-        alert(txt.toUpperCase());
-        ```
-      - |
-        ```ruby
-        var txt="Hello World!";
-        alert(txt.toLowerCase());
-        ```
-      - |
-        ```ruby
-        alert("HELLO WORLD!");
-        ```
-    answer: AC
+      - parseFloat
+      - parseStr
+      - is_int
+      - undefined
+    answer: parseFloat
 
-  - knowledge_node_id: "node-31"
-    kind: true_false
-    content: JavaScript 中的字符串采用UTF-16编码的Unicode字符集
-    answer: T
 
-  - knowledge_node_id: "node-31"
-    kind: true_false
-    content: JavaScript 中的字符串是一组由16位值组成的不可变的有序序列
-    answer: T
 
-  - knowledge_node_id: "node-31"
-    kind: true_false
-    content: JavaScript 中的字符串直接量，是由单引号或双引号括起来的字符序列
-    answer: T
+  - knowledge_node_id: "node-32"
+    kind: fill
+    content: |
+      ```javascript
+        Object.prototype.isInteger = function () {
+          return (this.[%]().search(/^-?[0-9]+$/) == 0 )
+        }
+        alert (1235.6.isInteger());
+      ```
+      上面的代码运行结果如下
+      ![file:///android_asset/questions/node_32/1.png]
+      请用下面的选项补全代码
+    choices:
+      - parseFloat
+      - toString
+      - to_Integer
+      - undefined
+    answer: toString
+
+
+
