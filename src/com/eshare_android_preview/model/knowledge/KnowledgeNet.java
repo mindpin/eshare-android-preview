@@ -28,9 +28,9 @@ public class KnowledgeNet extends BaseParse implements HomeActivity.IHasChildren
     }
 
 	public static KnowledgeNet instance(){
-//        if(m_instance == null){
+        if(m_instance == null){
             m_instance = new KnowledgeNet();
-//        }
+        }
 		return m_instance;
 	}
 
