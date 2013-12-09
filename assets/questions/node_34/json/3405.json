@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-34",
+  "kind": "single_choice",
+  "content": "```javascript\nvar n = !!!!0;\n```\n上面的代码中，n 的值是\n",
+  "choices": [
+    0,
+    1,
+    true,
+    false
+  ],
+  "answer": "D"
+}

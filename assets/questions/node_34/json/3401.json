@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-34",
+  "kind": "fill",
+  "content": "```javascript\n  var value = typeof [%];\n```\n上面的代码运行结果为: \"boolean\"\n请用下面的选项补全代码\n",
+  "choices": [
+    0,
+    1,
+    true,
+    "\"false\""
+  ],
+  "answer": true
+}

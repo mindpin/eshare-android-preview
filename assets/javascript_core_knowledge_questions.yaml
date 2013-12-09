@@ -1,169 +1,172 @@
 - javascript_core_knowledge_questions
-- - knowledge_node_id: "node-34"
+- - knowledge_node_id: "node-31"
     kind: fill
     content: |
-      ```javascript
-        var value = typeof [%];
+      ```ruby
+        var txt = "a,b,c,d,e";
+        var arr = txt.split( [%] );
+        alert(arr.length == 5)
       ```
-      上面的代码运行结果为: "boolean"
+      上面的代码运行结果如下
+      ![file:///android_asset/questions/node_31/14.jpg]
       请用下面的选项补全代码
     choices:
-      - 0
-      - 1
-      - true
-      - "\"false\""
-    answer: true
+      - "\"\""
+      - "\" \" "
+      - "\",\""
+      - "\"|\""
+    answer: "\",\""
 
-  - knowledge_node_id: "node-34"
+  - knowledge_node_id: "node-31"
     kind: fill
     content: |
-      ```javascript
-        1 == [%] // return true
-        0 == [%] // return true
+      ```ruby
+        var x = "John";
+        var y = new String("John");
+        typeof(x) == [%] // return true
+        typeof(y) == [%] // return true
       ```
       请补全代码，让两个等式成立
     choices:
-      - false
-      - "\"true\""
-      - true
-      - Number
-    answer: true,false
+      - object
+      - string
+      - object
+      - string
+    answer: string,object
 
-  - knowledge_node_id: "node-34"
+  - knowledge_node_id: "node-31"
     kind: single_choice
     content: |
-      ```javascript
-      var value1 = !true;
-      var value2 = !!false;
-      alert(value1 || value2);
+      ```ruby
+      var carname = "Volvo XC60";
+      var character = carname[7];
+      alert(character)
       ```
       上面代码的运行结果，下面哪个是正确的
     choices:
-      - true
-      - false
-      - undefined
+      - "![file:///android_asset/questions/node_31/1.jpg]"
+      - "![file:///android_asset/questions/node_31/2.jpg]"
+      - "![file:///android_asset/questions/node_31/3.jpg]"
     answer: A
 
-  - knowledge_node_id: "node-34"
+  - knowledge_node_id: "node-31"
     kind: single_choice
     content: |
-      ```javascript
-      var con = false.constructor
+      ```ruby
+        var txt = "Hello World!";
+        var count = txt.length;
       ```
-      上面的代码中，con 的值是
+      上面的代码中，count 的值是
     choices:
-      - constructor
-      - Constructor
-      - Boolean
-      - "\"boolean\""
+      - 10
+      - 11
+      - 12
+      - 13
     answer: C
 
-  - knowledge_node_id: "node-34"
+  - knowledge_node_id: "node-31"
     kind: single_choice
     content: |
-      ```javascript
-      var n = !!!!0;
+      ```ruby
+      var str = "Hello world, welcome to the universe.";
+      var n = str.indexOf("welcome");
       ```
       上面的代码中，n 的值是
     choices:
-      - 0
-      - 1
-      - true
-      - false
+      - 10
+      - 11
+      - 12
+      - 13
     answer: D
 
-  - knowledge_node_id: "node-34"
+  - knowledge_node_id: "node-31"
     kind: single_choice
     content: |
-      ```javascript
-      true + false
+      ```ruby
+      var str = "Hello world!";
+      alert(str.match("world"));
       ```
       上面代码的运行结果，下面哪个是正确的
     choices:
-      - NaN
-      - 1
-      - 0
-      - undefined
-    answer: B
-
-  - knowledge_node_id: "node-34"
-    kind: single_choice
-    content: |
-      ```javascript
-      false + "222"
-      ```
-      上面代码的运行结果，下面哪个是正确的
-    choices:
-      - "\"false222\""
-      - NaN
-      - Infinity
-      - "\"0222\""
+      - "![file:///android_asset/questions/node_31/5.jpg]"
+      - "![file:///android_asset/questions/node_31/6.jpg]"
+      - "![file:///android_asset/questions/node_31/7.jpg]"
+      - "![file:///android_asset/questions/node_31/8.jpg]"
     answer: A
 
-  - knowledge_node_id: "node-34"
+  - knowledge_node_id: "node-31"
+    kind: single_choice
+    content: |
+      ```ruby
+        var str = "Please visit A!"
+        var n = str.replace("A","B");
+        alert(n)
+      ```
+      上面代码的运行结果，下面哪个是正确的
+    choices:
+      - "![file:///android_asset/questions/node_31/9.jpg]"
+      - "![file:///android_asset/questions/node_31/10.jpg]"
+      - "![file:///android_asset/questions/node_31/11.jpg]"
+      - "![file:///android_asset/questions/node_31/12.jpg]"
+    answer: A
+
+  - knowledge_node_id: "node-31"
     kind: multiple_choices
     content: |
-      ![file:///android_asset/questions/node_34/1.png]
+      ![file:///android_asset/questions/node_31/4.jpg]
       如图，下面哪些代码的运行结果和图片一样
     choices:
       - |
-        ```javascript
-          alert(1 == 2)
+        ```ruby
+          alert("He is called 'Johnny'")
         ```
       - |
-        ```javascript
-          alert("true")
+        ```ruby
+          alert('He is called \'Johnny\'')
         ```
       - |
-        ```javascript
-          alert(1 / 0)
+        ```ruby
+          alert('He is called "Johnny"')
         ```
       - |
-        ```javascript
-          alert(true)
+        ```ruby
+          alert("He is called \"Johnny\"")
         ```
-    answer: BD
+    answer: AB
 
-  - knowledge_node_id: "node-34"
+  - knowledge_node_id: "node-31"
     kind: multiple_choices
     content: |
-      ![file:///android_asset/questions/node_34/2.png]
+      ![file:///android_asset/questions/node_31/13.jpg]
       如图，下面哪个代码的运行结果和图片一样
     choices:
       - |
-        ```javascript
+        ```ruby
         var txt="Hello World!";
-        alert(new Boolean(txt));
+        alert(txt.toUpperCase());
         ```
       - |
-        ```javascript
-        alert(new Boolean);
+        ```ruby
+        var txt="Hello World!";
+        alert(txt.toLowerCase());
         ```
       - |
-        ```javascript
+        ```ruby
         alert("HELLO WORLD!");
         ```
-      - |
-        ```javascript
-        alert(new Boolean(0));
-        ```
-      - |
-        ```javascript
-        alert(new Boolean(""));
-        ```
-    answer: BDE
+    answer: AC
 
-  - knowledge_node_id: "node-34"
+  - knowledge_node_id: "node-31"
     kind: true_false
-    content: JavaScript 中的布尔值实际上是整数0和1的别名
-    answer: F
-
-  - knowledge_node_id: "node-34"
-    kind: true_false
-    content: JavaScript 中的内置布尔对象只有true和false两个
+    content: JavaScript 中的字符串采用UTF-16编码的Unicode字符集
     answer: T
 
-  - knowledge_node_id: "node-34"
+  - knowledge_node_id: "node-31"
     kind: true_false
-    content: JavaScript 中的布尔对象只有true和false两个
-    answer: F
+    content: JavaScript 中的字符串是一组由16位值组成的不可变的有序序列
+    answer: T
+
+  - knowledge_node_id: "node-31"
+    kind: true_false
+    content: JavaScript 中的字符串直接量，是由单引号或双引号括起来的字符序列
+    answer: T

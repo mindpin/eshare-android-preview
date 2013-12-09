@@ -1,0 +1,1 @@
+{"knowledge_node_id":"node-31","kind":"single_choice","content":"```javascript\nvar str = \"Hello world, welcome to the universe.\";\nvar n = str.indexOf(\"welcome\");\n```\n上面的代码中，n 的值是\n","choices":[10,11,12,13],"answer":"D"}

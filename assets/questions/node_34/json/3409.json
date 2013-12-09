@@ -1,0 +1,13 @@
+{
+  "knowledge_node_id": "node-34",
+  "kind": "multiple_choices",
+  "content": "![file:///android_asset/questions/node_34/2.png]\n如图，下面哪个代码的运行结果和图片一样\n",
+  "choices": [
+    "```javascript\nvar txt=\"Hello World!\";\nalert(new Boolean(txt));\n```\n",
+    "```javascript\nalert(new Boolean);\n```\n",
+    "```javascript\nalert(\"HELLO WORLD!\");\n```\n",
+    "```javascript\nalert(new Boolean(0));\n```\n",
+    "```javascript\nalert(new Boolean(\"\"));\n```\n"
+  ],
+  "answer": "BDE"
+}
