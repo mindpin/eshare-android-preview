@@ -71,10 +71,10 @@
       ```
       把整数 314 转化为字符串，可用下面哪些方法来实现
     choices:
-      - num.toString()
-      - String(num)
-      - num + ""
-      - num + 1
+      - "num.toString()"
+      - "String(num)"
+      - "num + \"\""
+      - "num + 1"
     answer: ABC
 
 
