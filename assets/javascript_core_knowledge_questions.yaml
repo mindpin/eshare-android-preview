@@ -1,8 +1,8 @@
 - javascript_core_knowledge_questions
-- - knowledge_node_id: "node-32"
+- - knowledge_node_id: "node-32"    
     kind: single_choice
     content: |
-      ```ruby
+      ```javascript
         var int_val = parseInt('077',10)
       ```
       上面的代码中，int_val 的值是
@@ -14,26 +14,26 @@
     answer: C
 
 
-   - knowledge_node_id: "node-32"
-     kind: single_choice
-     content: |
-       ```javascript
-       alert(Math.floor(88.77))
-       ```
-       上面代码的运行结果，下面哪个是正确的
-     choices:
-       - 88
-       - 77
-       - 88.77
-       - 0
-     answer: A
+  - knowledge_node_id: "node-32"
+    kind: single_choice
+    content: |
+      ```javascript
+        alert(Math.floor(88.77))
+      ```
+      上面代码的运行结果，下面哪个是正确的
+    choices:
+      - 88
+      - 77
+      - 88.77
+      - 0
+    answer: A
 
 
   - knowledge_node_id: "node-32"
     kind: single_choice
     content: |
       ```javascript
-      alert(alert( ~1 ))
+        alert(alert( ~1 ))
       ```
       上面代码的运行结果，下面哪个是正确的
     choices:
@@ -48,7 +48,7 @@
     kind: single_choice
     content: |
       ```javascript
-      alert(Math.ceil(1.5))
+        alert(Math.ceil(1.5))
       ```
       上面代码的运行结果，下面哪个是正确的
     choices:
@@ -57,6 +57,25 @@
       - 0
       - undefined
     answer: B
+
+
+
+
+
+
+  - knowledge_node_id: "node-32"
+    kind: multiple_choices
+    content: |
+      ```javascript
+        var num = 314;
+      ```
+      把整数 314 转化为字符串，可用下面哪些方法来实现
+    choices:
+      - num.toString()
+      - String(num)
+      - num + ""
+      - num + 1
+    answer: ABC
 
 
 
@@ -82,6 +101,7 @@
     kind: true_false
     content: typeof 9 == 'number'
     answer: T
+
 
 
 
@@ -133,5 +153,24 @@
       - undefined
     answer: toString
 
+
+  - knowledge_node_id: "node-32"
+    kind: fill
+    content: |
+      ```javascript
+        function isInteger(s) {
+          return [%](s) == Math.floor(s);
+        }
+        alert(isInteger(2));
+      ```
+      上面的代码运行结果如下
+      ![file:///android_asset/questions/node_32/2.png]
+      请用下面的选项补全代码
+    choices:
+      - Math.ceil
+      - Math.integer
+      - to_Integer
+      - undefined
+    answer: Math.ceil
 
 
