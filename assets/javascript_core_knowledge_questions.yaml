@@ -29,8 +29,8 @@
     kind: single_choice
     content: |
       ```ruby
-      var str = "The image path is C:\\webstuff\\mypage\\gifs\\garden.gif";
-      alert(str);
+        var str = "The image path is C:\\webstuff\\mypage\\gifs\\garden.gif";
+        alert(str);
       ```
       上面代码的运行结果，下面哪个是正确的
     choices:
@@ -55,8 +55,8 @@
     kind: single_choice
     content: |
       ```ruby
-      var str = "我们的\"爱人\"";
-      var n = str.length;
+        var str = "我们的\"爱人\"";
+        var n = str.length;
       ```
       上面的代码中，n 的值是
     choices:
@@ -70,7 +70,7 @@
     kind: single_choice
     content: |
       ```ruby
-      alert("是MM就\n亲一下");
+        alert("是MM就\n亲一下");
       ```
       上面代码的运行结果，下面哪个是正确的
     choices:
