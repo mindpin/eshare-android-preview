@@ -1,17 +1,13 @@
 package com.eshare_android_preview.model.knowledge;
 
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.TestPaper;
-import com.eshare_android_preview.model.TestResult;
-import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
+import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.preferences.EsharePreference;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,BaseKnowledge{
+public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,TestPaperTarget {
 	public List<KnowledgeSet> learned_sets;
 
 	public KnowledgeCheckpoint(String id, List<KnowledgeSet> learned_sets) {
@@ -62,5 +58,9 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,Base
     }
     public String model_id(){
         return this.id;
+    }
+
+    public Question get_random_question(List<Integer> except_ids){
+        return null;
     }
 }

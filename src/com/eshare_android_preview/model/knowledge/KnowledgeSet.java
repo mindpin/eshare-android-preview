@@ -1,17 +1,10 @@
 package com.eshare_android_preview.model.knowledge;
-
-import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.TestPaper;
-import com.eshare_android_preview.model.TestResult;
-import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.preferences.EsharePreference;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeSet extends BaseKnowledgeSet implements ILearn,BaseKnowledge{
+public class KnowledgeSet extends BaseKnowledgeSet implements ILearn {
 	public String name;
 	public String icon;
 
@@ -79,11 +72,4 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn,BaseKnowled
         return learned_nodes_count;
     }
 
-    public String model(){
-        return this.getClass().getName();
-    }
-
-    public String model_id(){
-        return this.id;
-    }
 }

@@ -109,11 +109,9 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(KnowledgeSetShowActivity.this, QuestionShowActivity.class);
-                    Bundle bundle = new Bundle();
-                    QuestionShowActivity.current_target = node;
                     TestResult test_result = new TestResult(3, 10);
-                    bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_RESULT, test_result);
-                    intent.putExtras(bundle);
+                    TestPaper test_paper = new TestPaper(node, test_result);
+                    QuestionShowActivity.test_paper = test_paper;
                     startActivity(intent);
                 }
             });

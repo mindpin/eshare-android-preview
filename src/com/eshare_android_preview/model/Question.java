@@ -1,12 +1,8 @@
 package com.eshare_android_preview.model;
 
-import android.util.Log;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.eshare_android_preview.model.parse.QuestionYAMLParse;
 
 // 问题
 public class Question extends LearningResource implements Serializable {

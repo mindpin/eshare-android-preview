@@ -4,19 +4,18 @@ import android.content.res.AssetManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
+import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
-import com.eshare_android_preview.model.parse.QuestionYAMLParse;
+import com.eshare_android_preview.model.parse.QuestionJSONParse;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 
 
-public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>,ILearn,BaseKnowledge {
+public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>,ILearn,TestPaperTarget {
 	public KnowledgeSet set;
 	public String id;
 	public String name;
@@ -26,6 +25,8 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 	private List<KnowledgeNodeRelation> relations;
 	private List<KnowledgeNode> parents;
 	private List<KnowledgeNode> children;
+
+    private List<Integer> question_ids = null;
 
 	public KnowledgeNode(KnowledgeSet set, String id, String name,
 			String required, String desc) {
@@ -97,30 +98,40 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
         return this.id;
     }
 
-    public Question get_random_question(List<Integer> except_ids){
+    public List<Integer> all_question_ids(){
+        if(question_ids != null){
+            return question_ids;
+        }
+
         AssetManager asset = EshareApplication.context.getAssets();
-        String path = "questions/" + this.id.replace("-","_") + "/yaml";
-        List<String> question_files = new ArrayList<String>();
+        String path = QuestionJSONParse.get_json_list_path_by_node_id(this.id);
+        List<Integer> question_ids = new ArrayList<Integer>();
         try {
-            String[] a = asset.list(path);
-            question_files = new ArrayList<String>(Arrays.asList(a));
+            String[] file_names = asset.list(path);
+            for(String file_name : file_names){
+                String id = file_name.replace(".json","");
+                question_ids.add(Integer.parseInt(id));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.question_ids = question_ids;
+        return question_ids;
+    }
+
+    public Question get_random_question(List<Integer> except_ids){
+        List<Integer> all_ids = all_question_ids();
 
         for(int id : except_ids){
-            String str = id + ".yaml";
-            question_files.remove(str);
-            String str1 = str + "";
+            all_ids.remove((Integer)id);
         }
-        if(question_files.size() == 0){
+        if(all_ids.size() == 0){
             return null;
         }
 
-        int random_index = (int) (Math.random() * (question_files.size() - 1));
-        String file_name = question_files.get(random_index);
-        String file_path = path + "/" + file_name;
-        int question_id = Integer.parseInt(file_name.replace(".yaml",""));
-        return QuestionYAMLParse.parse_yaml(question_id,file_path);
+        int random_index = (int) (Math.random() * (all_ids.size() - 1));
+        int question_id = all_ids.get(random_index);
+        String json_path = QuestionJSONParse.get_json_path_by_id(this.id, question_id);
+        return QuestionJSONParse.parse(json_path, question_id);
     }
 }
