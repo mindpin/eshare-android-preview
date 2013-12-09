@@ -3,8 +3,8 @@
   "kind": "single_choice",
   "content": "```ruby\n  var a = \"You \\& me are singing!\";\n```\n上面代码的运行结果 a 的结果，下面哪个是正确的\n",
   "choices": [
-    "You /\\& me are singing!",
     "You \\& me are singing!",
+    "You & me are singing!",
     "You me are singing!"
   ],
   "answer": "B"
