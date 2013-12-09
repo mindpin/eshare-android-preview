@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-34",
+  "kind": "multiple_choices",
+  "content": "![file:///android_asset/questions/node_34/1.png]\n如图，下面哪些代码的运行结果和图片一样\n",
+  "choices": [
+    "```javascript\n  alert(1 == 2)\n```\n",
+    "```javascript\n  alert(\"true\")\n```\n",
+    "```javascript\n  alert(1 / 0)\n```\n",
+    "```javascript\n  alert(true)\n```\n"
+  ],
+  "answer": "BD"
+}

@@ -4,7 +4,7 @@ import com.eshare_android_preview.model.database.ExperienceLogDBHelper;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
-import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
+import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,13 +23,11 @@ public class ExperienceLog implements Serializable {
     public String data_json;
     public long   created_at;
 
-    public BaseKnowledge model;
+    public TestPaperTarget model;
 
     public void setModel() {
-        BaseKnowledge base_knowlege = null;
-        if (this.model_type == KnowledgeSet.class.getName()){
-            base_knowlege = KnowledgeSet.find(this.model_id);
-        }else if (this.model_type == KnowledgeNode.class.getName()){
+        TestPaperTarget base_knowlege = null;
+        if (this.model_type == KnowledgeNode.class.getName()){
             base_knowlege = KnowledgeNode.find(this.model_id);
         }else if (this.model_type == KnowledgeCheckpoint.class.getName()){
             base_knowlege = KnowledgeCheckpoint.find(this.model_id);
@@ -49,7 +47,7 @@ public class ExperienceLog implements Serializable {
     }
 
 
-    public static void add(int delta_num,BaseKnowledge model,String data_json){
+    public static void add(int delta_num,TestPaperTarget model,String data_json){
 
         ExperienceLog after_exp_elog = ExperienceLogDBHelper.find_last_data();
         int before_exp = after_exp_elog == null ? 0:after_exp_elog.after_exp;

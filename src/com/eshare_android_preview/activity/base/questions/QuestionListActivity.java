@@ -43,7 +43,6 @@ public class QuestionListActivity extends EshareBaseActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(QuestionListActivity.this, QuestionShowActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(QuestionShowActivity.ExtraKeys.QUESTION, Question.first());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

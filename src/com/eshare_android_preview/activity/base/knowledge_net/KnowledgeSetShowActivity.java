@@ -20,6 +20,7 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.TestPaper;
+import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
@@ -108,10 +109,9 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(KnowledgeSetShowActivity.this, QuestionShowActivity.class);
-                    Bundle bundle = new Bundle();
-                    QuestionShowActivity.current_target = node;
-                    bundle.putSerializable(QuestionShowActivity.ExtraKeys.TEST_PAPER, node.get_test_paper());
-                    intent.putExtras(bundle);
+                    TestResult test_result = new TestResult(3, 10);
+                    TestPaper test_paper = new TestPaper(node, test_result);
+                    QuestionShowActivity.test_paper = test_paper;
                     startActivity(intent);
                 }
             });

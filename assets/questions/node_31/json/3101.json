@@ -1,0 +1,1 @@
+{"knowledge_node_id":"node-31","kind":"fill","content":"```javascript\n  var txt = \"a,b,c,d,e\";\n  var arr = txt.split( [%] );\n  alert(arr.length == 5)\n```\n上面的代码运行结果如下\n![file:///android_asset/questions/node_31/14.jpg]\n请用下面的选项补全代码\n","choices":["\"\"","\" \" ","\",\"","\"|\""],"answer":"\",\""}
