@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-35",
+  "kind": "single_choice",
+  "content": "用（\\b）表示\n",
+  "choices": [
+    "返回",
+    "换行",
+    "换页",
+    "后退一格"
+  ],
+  "answer": "D"
+}

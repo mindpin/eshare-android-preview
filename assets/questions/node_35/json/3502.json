@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-35",
+  "kind": "multiple_choices",
+  "content": "请选出下面属于转义字符的\n",
+  "choices": [
+    "/b",
+    "\\b",
+    "\\t",
+    "\\a"
+  ],
+  "answer": "BC"
+}
