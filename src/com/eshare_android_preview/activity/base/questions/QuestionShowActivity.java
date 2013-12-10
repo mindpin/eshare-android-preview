@@ -33,17 +33,14 @@ import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
 import com.eshare_android_preview.model.elog.CurrentState;
 import com.eshare_android_preview.model.elog.ExperienceLog;
-import com.eshare_android_preview.model.knowledge.base.BaseKnowledge;
+import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 
 public class QuestionShowActivity extends EshareBaseActivity {
 
     public static class ExtraKeys {
         public static final String QUESTION = "question";
-        public static final String TEST_PAPER = "test_paper";
     }
-    public static BaseKnowledge current_target;
-
-    private TestPaper test_paper;
+    public static TestPaper test_paper;
 
     TextView question_kind_tv;
     EshareMarkdownView  question_title_v;
@@ -61,9 +58,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         setContentView(R.layout.q_question_show);
         hide_head_setting_button();
 
-        Bundle bundle = getIntent().getExtras();
-        test_paper = (TestPaper)bundle.getSerializable(QuestionShowActivity.ExtraKeys.TEST_PAPER);
-        question = test_paper.get_current_question();
+        question = test_paper.get_next_question();
         select_answer = question.build_select_answer();
 
         init_ui();
@@ -203,7 +198,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     private void to_do_answer_pass(){
         // 增加 10 点经验
-        ExperienceLog.add(10,QuestionShowActivity.current_target,"");
+        ExperienceLog.add(10,QuestionShowActivity.test_paper.target,"");
         temp_print_level_info();
         new AlertDialog.Builder(QuestionShowActivity.this)
                 .setTitle("提示")
@@ -230,10 +225,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
              @Override
              public void onClick(View v) {
                  Intent intent = new Intent(QuestionShowActivity.this, QuestionShowActivity.class);
-                 Bundle bundle = new Bundle();
-                 test_paper.next();
-                 bundle.putSerializable(ExtraKeys.TEST_PAPER, test_paper);
-                 intent.putExtras(bundle);
                  startActivity(intent);
                  finish();
              }

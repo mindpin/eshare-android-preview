@@ -1,0 +1,1 @@
+{"knowledge_node_id":"node-31","kind":"single_choice","content":"```javascript\n  var txt = \"Hello World!\";\n  var count = txt.length;\n```\n上面的代码中，count 的值是\n","choices":[10,11,12,13],"answer":"C"}
