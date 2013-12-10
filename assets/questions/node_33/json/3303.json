@@ -1,0 +1,1 @@
+{"knowledge_node_id":"node-33","kind":"fill","content":"```javascript\n  Math.round([%]) == 1\n```\n补全代码，使等式成立\n","choices":["0.4","1.4"],"answer":"1.4"}
