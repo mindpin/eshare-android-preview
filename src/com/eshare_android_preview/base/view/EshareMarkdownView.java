@@ -150,6 +150,7 @@ public class EshareMarkdownView extends RelativeLayout {
 
     public class Codefill extends LinearLayout {
         private int fid;
+        public boolean filled = false;
         private String text = "  ";
         public Rect rawRect;
 
@@ -171,11 +172,13 @@ public class EshareMarkdownView extends RelativeLayout {
 
         public void set_text(String text) {
             this.text = text;
+            this.filled = true;
             EshareMarkdownView.this.view.loadUrl("javascript: window.setText(" + this.fid + ", " + this.text + ");");
         }
 
         public void unset_text() {
             this.text = "  ";
+            this.filled = false;
             EshareMarkdownView.this.view.loadUrl("javascript: window.setText(" + this.fid + ", " + this.text + ");");
         }
 
