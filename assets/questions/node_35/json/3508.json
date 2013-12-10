@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-35",
+  "kind": "single_choice",
+  "content": "下面哪一个代表的时 反斜杠的转义\n",
+  "choices": [
+    "u005C",
+    "u003F",
+    "u002B",
+    "u002A"
+  ],
+  "answer": "A"
+}

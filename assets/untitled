@@ -1,0 +1,82 @@
+  - knowledge_node_id: "node-35"
+    kind: single_choice
+    content: |
+      ```ruby
+        <script type="text/javascript">
+          var str="about 5'10\' tall"
+          alert(str);
+        </script>
+      ```
+      上面代码的运行结果，下面哪个是正确的
+    choices:
+      - "about 5'10\' tall"
+      - "about 5'10\ tall"
+      - "about 5'10' tall"
+      - "about 5 10 tall"
+    answer: C
+
+  - knowledge_node_id: "node-35"
+    kind: multiple_choices
+    content: |
+      请选出下面属于转义字符的
+    choices:
+      - /b
+      - \b
+      - \t
+      - \a
+    answer: BC
+
+  - knowledge_node_id: "node-35"
+    kind: single_choice
+    content: |
+      ```ruby
+      var str = "The image path is C:\\webstuff\\mypage\\gifs\\garden.gif";
+      alert(str)
+      ```
+      上面代码的运行结果，下面哪个是正确的
+    choices:
+      - "The image path is C:/webstuff/mypage/gifs/garden.gif"
+      - "The image path is C:\webstuff\mypage\gifs\garden.gif"
+      - "The image path is C:\\webstuff\\mypage\\gifs\\garden.gif"
+      - "The image path is C://webstuff//mypage//gifs//garden.gif"
+    answer: B
+
+  - knowledge_node_id: "node-35"
+    kind: single_choice
+    content: |
+      用（\b）表示
+    choices:
+      - 返回
+      - 换行
+      - 换页
+      - 后退一格
+    answer: D
+
+  - knowledge_node_id: "node-35"
+    kind: single_choice
+    content: |
+      ```ruby
+      var str = "我们的\"爱人\"";
+      var n = str.length;
+      ```
+      上面的代码中，n 的值是
+    choices:
+      - 6
+      - 7
+      - 8
+      - 9
+    answer: B
+
+  - knowledge_node_id: "node-35"
+    kind: single_choice
+    content: |
+      ```ruby
+      alert("是MM就\n亲一下");
+      ```
+      上面代码的运行结果，下面哪个是正确的
+    choices:
+      - "是MM就\n亲一下"
+      - "是MM就\\n亲一下"
+      - "![file:///android_asset/questions/node_31/7.jpg]"
+      - "![file:///android_asset/questions/node_31/8.jpg]"
+    answer: A
