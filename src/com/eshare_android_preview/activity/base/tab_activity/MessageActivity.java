@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.dash_path_demo.DashPathDemoActivity;
+import com.eshare_android_preview.activity.base.experience.ExperienceChartActivity;
 import com.eshare_android_preview.activity.base.webview_demo.WebViewDemoActivity;
 import com.eshare_android_preview.activity.base.switch_test.FirstActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
@@ -21,6 +22,7 @@ public class MessageActivity extends EshareBaseActivity{
         this.render_markdown_button();
         this.render_dash_path_button();
         this.render_to_first_button();
+        this.render_experience_chart();
 		super.onCreate(savedInstanceState);
 	}
 
@@ -50,6 +52,17 @@ public class MessageActivity extends EshareBaseActivity{
             @Override
             public void onClick(View view) {
                 open_activity(WebViewDemoActivity.class);
+            }
+        });
+    }
+
+
+    private void render_experience_chart() {
+        Button button = (Button) findViewById(R.id.experience_chart_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                open_activity(ExperienceChartActivity.class);
             }
         });
     }
