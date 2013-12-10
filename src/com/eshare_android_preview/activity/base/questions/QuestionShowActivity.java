@@ -29,11 +29,9 @@ import com.eshare_android_preview.model.QuestionChoice;
 import com.eshare_android_preview.model.QuestionSelectAnswer;
 import com.eshare_android_preview.model.SingleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.TestPaper;
-import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
 import com.eshare_android_preview.model.elog.CurrentState;
 import com.eshare_android_preview.model.elog.ExperienceLog;
-import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 
 public class QuestionShowActivity extends EshareBaseActivity {
 
@@ -266,13 +264,12 @@ public class QuestionShowActivity extends EshareBaseActivity {
         }
 
         private void on_click_for_fill(View v){
-            TextView fill_item_text = (TextView)v.findViewById(R.id.fill_item_text);
-            if(fill_item_text == null){
-                on_click_for_fill_unselect(v);
-            }else{
+            Object tag = v.getTag();
+            if(tag == null){
                 on_click_for_fill_select(v);
+            }else{
+                on_click_for_fill_unselect(v);
             }
-
         }
 
         private void on_click_for_fill_unselect(View v){
@@ -281,18 +278,23 @@ public class QuestionShowActivity extends EshareBaseActivity {
         }
 
         private void on_click_for_fill_select(View v){
-            int index = question_title_v.get_first_unapplied_codefill_index();
+            int index = question_title_v.get_first_unfilled_codefill_index();
             if(index == -1){
                 return;
             }
 
             select_answer.set_choice(index+1, choice);
             TextView fill_item_text = (TextView)v.findViewById(R.id.fill_item_text);
-            ((FrameLayout) v).removeView(fill_item_text);
+            fill_item_text.setTextColor(Color.parseColor("#ffffff"));
 
-            EshareMarkdownView.Codefill code_fill = question_title_v.get_first_unapplied_codefill();
+            EshareMarkdownView.Codefill code_fill = question_title_v.get_first_unfilled_codefill();
+
+            String str = fill_item_text.getText().toString();
+            Toast.makeText(QuestionShowActivity.this, str,5000).show();
+            code_fill.set_text(str);
+
             v.setTag(code_fill);
-            code_fill.addView(fill_item_text);
+            code_fill.setTag(v);
         }
 
         private void on_click_for_single_choice(){
@@ -344,7 +346,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
             Toast.makeText(QuestionShowActivity.this,"click",2000).show();
 
             EshareMarkdownView.Codefill code_fill = (EshareMarkdownView.Codefill) v;
-            if(code_fill.getChildCount() == 0){
+            if(!code_fill.filled){
                 return;
             }
 
@@ -354,15 +356,17 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     private void unselect_fill_item(EshareMarkdownView.Codefill code_fill){
         int index = question_title_v.get_codefill_index(code_fill);
+
         select_answer.set_choice(index+1, null);
 
-        View fill_item_text = code_fill.getChildAt(0);
-        code_fill.removeView(fill_item_text);
+        code_fill.unset_text();
 
-        QuestionChoice choice = (QuestionChoice) fill_item_text.getTag();
-        View view = choices_detail_ll.getChildAt(choice.index);
-        FrameLayout fill_item_btn = (FrameLayout) view.findViewById(R.id.fill_item_btn);
-        fill_item_btn.addView(fill_item_text);
+        View fill_item_btn = (View)code_fill.getTag();
+        TextView fill_item_text = (TextView)fill_item_btn.findViewById(R.id.fill_item_text);
+        fill_item_text.setTextColor(Color.parseColor("#000000"));
+
+        code_fill.setTag(null);
+        fill_item_btn.setTag(null);
 
         refresh_submit_answer_btn_clickable();
     }

@@ -83,17 +83,17 @@ public class EshareMarkdownView extends RelativeLayout {
         return this;
     }
 
-    public Codefill get_first_unapplied_codefill() {
+    public Codefill get_first_unfilled_codefill() {
         for (Codefill codefill : this.codefills) {
-            if (codefill.getChildCount() == 0) {
+            if (!codefill.filled) {
                 return codefill;
             }
         }
         return null;
     }
 
-    public int get_first_unapplied_codefill_index(){
-        Codefill codefill = get_first_unapplied_codefill();
+    public int get_first_unfilled_codefill_index(){
+        Codefill codefill = get_first_unfilled_codefill();
         return get_codefill_index(codefill);
     }
 
