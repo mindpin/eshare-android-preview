@@ -1,0 +1,6 @@
+{
+  "knowledge_node_id": "node-35",
+  "kind": "true_false",
+  "content": "```\n  你要想得到下面这样的路径 \n  E:\\Program Files\\Apache Software Foundation\\Tomcat 5.5\\...\\个性化短信样本.xls \n  在用replaceAll替换的时候，只要把“\\\\”替换成“/”，即：replaceAll(\"\\\\\",\"/\")；\n```\n",
+  "answer": "T"
+}

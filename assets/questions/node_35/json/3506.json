@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-35",
+  "kind": "single_choice",
+  "content": "```ruby\n  alert(\"是MM就\\n亲一下\");\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "choices": [
+    "是MM就\n亲一下",
+    "是MM就\\n亲一下",
+    "是MM就亲一下",
+    "是MM就n亲一下"
+  ],
+  "answer": "A"
+}

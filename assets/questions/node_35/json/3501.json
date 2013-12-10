@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-35",
+  "kind": "single_choice",
+  "content": "```ruby\n  var str=\"about 5'10\\' tall\";\n  alert(str);\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "choices": [
+    "about 5'10\\' tall",
+    "about 5'10\\ tall",
+    "about 5'10' tall",
+    "about 5 10 tall"
+  ],
+  "answer": "C"
+}

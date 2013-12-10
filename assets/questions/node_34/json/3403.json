@@ -1,0 +1,11 @@
+{
+  "knowledge_node_id": "node-34",
+  "kind": "single_choice",
+  "content": "```javascript\nvar value1 = !true;\nvar value2 = !!false;\nalert(value1 || value2);\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "choices": [
+    true,
+    false,
+    "undefined"
+  ],
+  "answer": "A"
+}

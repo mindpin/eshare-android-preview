@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-34",
+  "kind": "single_choice",
+  "content": "```javascript\nfalse + \"222\"\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "choices": [
+    "\"false222\"",
+    "NaN",
+    "Infinity",
+    "\"0222\""
+  ],
+  "answer": "A"
+}
