@@ -9,8 +9,8 @@ window.onload = function() {
 }
 
 window.setText = function setText(fid, text) {
-    var fields = document.getElementsByTagName("codefill"),
-        foundField;
+    var fields = document.getElementsByTagName("codefill")
+      , foundField;
 
     for (var i = 0; i < fields.length; i++) {
         var field = fields[i];
