@@ -149,11 +149,14 @@ public class EshareMarkdownView extends RelativeLayout {
     }
 
     public class Codefill extends LinearLayout {
+        private int fid;
+        private String text = "  ";
         public Rect rawRect;
 
         public Codefill(Context context, JSONObject object) throws JSONException {
             super(context);
             rawRect = new Rect(object.getInt("left"), object.getInt("top"), object.getInt("right"), object.getInt("bottom"));
+            this.fid = object.getInt("fid");
             set_params();
         }
 
@@ -164,6 +167,16 @@ public class EshareMarkdownView extends RelativeLayout {
             boolean isYInBound = (y + this.getHeight() > 0 - offset) && (y < view.getHeight() + offset);
 
             return isXInBound && isYInBound;
+        }
+
+        public void set_text(String text) {
+            this.text = text;
+            EshareMarkdownView.this.view.loadUrl("javascript: window.setText(" + this.fid + ", " + this.text + ");");
+        }
+
+        public void unset_text() {
+            this.text = "  ";
+            EshareMarkdownView.this.view.loadUrl("javascript: window.setText(" + this.fid + ", " + this.text + ");");
         }
 
         @SuppressLint("ResourceAsColor")
