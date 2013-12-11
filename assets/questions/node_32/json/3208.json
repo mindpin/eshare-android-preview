@@ -1,1 +1,6 @@
-{"knowledge_node_id":"node-32","kind":"true_false","content":"isNaN(22)","answer":"F"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "true_false",
+  "content": "```javascript\nisNaN(22) == true\n```\n代码中的等式是成立的\n",
+  "answer": "F"
+}

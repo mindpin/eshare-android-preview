@@ -1,1 +1,6 @@
-{"knowledge_node_id":"node-33","kind":"true_false","content":"```javascript\n  var x = (0.3 - 0.2)*10\n  var y = (0.2 - 0.1)*10\n  alert(x == y)\n```\n代码的运行结果是\n![file:///android_asset/questions/node_33/1.jpg]\n","answer":"F"}
+{
+  "knowledge_node_id": "node-33",
+  "kind": "true_false",
+  "content": "```javascript\nvar x = (0.3 - 0.2)*10\nvar y = (0.2 - 0.1)*10\nalert(x == y)\n```\n代码的运行结果是\n![file:///android_asset/questions/node_33/1.jpg]\n",
+  "answer": "F"
+}

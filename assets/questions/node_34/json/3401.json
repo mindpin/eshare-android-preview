@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "fill",
-  "content": "```javascript\n  var value = typeof [%];\n```\n上面的代码运行结果为: \"boolean\"\n请用下面的选项补全代码\n",
+  "content": "```javascript\nvar result = typeof [%];\n```\n上面的代码中，result 的值是: \"boolean\"\n请用下面的选项补全代码\n",
   "choices": [
     0,
     1,

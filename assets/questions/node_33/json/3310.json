@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-33","kind":"single_choice","content":"```javascript\n  parseFloat(\".5.6\")\n```\n代码的执行结果是以下哪一个？\n","choices":["0.5","0.6","程序异常","0"],"answer":"A"}
+{
+  "knowledge_node_id": "node-33",
+  "kind": "single_choice",
+  "content": "```javascript\nparseFloat(\".5.6\")\n```\n代码的执行结果是以下哪一个？\n",
+  "choices": [
+    "0.5",
+    "0.6",
+    "程序异常",
+    "0"
+  ],
+  "answer": "A"
+}

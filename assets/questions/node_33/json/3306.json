@@ -1,1 +1,13 @@
-{"knowledge_node_id":"node-33","kind":"multiple_choices","content":"下面哪些是语法正确的小于1的数\n","choices":[".3","0.1e2","12e-2","0.3",".01e1"],"answer":"ACDE"}
+{
+  "knowledge_node_id": "node-33",
+  "kind": "multiple_choices",
+  "content": "下面哪些是语法正确的小于 1 的数\n",
+  "choices": [
+    ".3",
+    "0.1e2",
+    "12e-2",
+    "0.3",
+    ".01e1"
+  ],
+  "answer": "ACDE"
+}

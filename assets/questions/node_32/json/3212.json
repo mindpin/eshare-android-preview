@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-32","kind":"fill","content":"```javascript\n  function isInteger(s) {\n    return [%](s) == Math.floor(s);\n  }\n  alert(isInteger(2));\n```\n上面的代码运行结果如下\n![file:///android_asset/questions/node_32/2.png]\n请用下面的选项补全代码\n","choices":["Math.ceil","Math.integer","to_Integer","undefined"],"answer":"Math.ceil"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "fill",
+  "content": "```javascript\nfunction isInteger(s) {\n  return [%](s) == Math.floor(s);\n}\nalert(isInteger(2));\n```\n上面的代码运行结果如下\n![file:///android_asset/questions/node_32/2.png]\n请用下面的选项补全代码\n",
+  "choices": [
+    "Math.ceil",
+    "Math.integer",
+    "to_Integer",
+    "undefined"
+  ],
+  "answer": "Math.ceil"
+}

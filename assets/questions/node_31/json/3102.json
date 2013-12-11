@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-31","kind":"fill","content":"```javascript\n  var x = \"John\";\n  var y = new String(\"John\");\n  typeof(x) == [%] // return true\n  typeof(y) == [%] // return true\n```\n请补全代码，让两个等式成立\n","choices":["object","string","object","string"],"answer":"string,object"}
+{
+  "knowledge_node_id": "node-31",
+  "kind": "fill",
+  "content": "```javascript\nvar x = \"John\";\nvar y = new String(\"John\");\ntypeof(x) == [%] // return true\ntypeof(y) == [%] // return true\n```\n请补全代码，让两个等式成立\n",
+  "choices": [
+    "Object",
+    "String",
+    "Object",
+    "String"
+  ],
+  "answer": "String,Object"
+}

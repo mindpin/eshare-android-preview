@@ -1,1 +1,6 @@
-{"knowledge_node_id":"node-33","kind":"true_false","content":"JavaScript 中的所有数字均用浮点数值表示","answer":"T"}
+{
+  "knowledge_node_id": "node-33",
+  "kind": "true_false",
+  "content": "JavaScript 中的所有数字均用浮点数值表示",
+  "answer": "T"
+}
