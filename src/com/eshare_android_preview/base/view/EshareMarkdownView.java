@@ -5,11 +5,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.eshare_android_preview.base.utils.CodefillBridge;
 import com.eshare_android_preview.base.utils.HtmlEmbeddable;
@@ -105,6 +108,19 @@ public class EshareMarkdownView extends RelativeLayout {
         this.code_fill_on_click_listener = listener;
     }
 
+    public Codefill find_codefill(int fid) {
+        Codefill result = null;
+
+        for (Codefill fill : codefills) {
+            if (fill.fid == fid) {
+                result = fill;
+                break;
+            }
+        }
+
+        return result;
+    }
+
     public class MarkdownWebView extends WebView {
         public MarkdownWebView(Context context) {
             super(context);
@@ -148,16 +164,18 @@ public class EshareMarkdownView extends RelativeLayout {
         }
     }
 
-    public class Codefill extends LinearLayout {
-        private int fid;
+    public class Codefill extends TextView {
+        public int fid;
         public boolean filled = false;
-        private String text = "  ";
+        private String text = "";
         public Rect rawRect;
 
         public Codefill(Context context, JSONObject object) throws JSONException {
             super(context);
             rawRect = new Rect(object.getInt("left"), object.getInt("top"), object.getInt("right"), object.getInt("bottom"));
             this.fid = object.getInt("fid");
+            setTypeface(Typeface.MONOSPACE);
+            setGravity(Gravity.CENTER);
             set_params();
         }
 
@@ -171,15 +189,25 @@ public class EshareMarkdownView extends RelativeLayout {
         }
 
         public void set_text(String text) {
-            this.text = "\"" + text + "\"";
+            this.text = text;
+            this.setText(this.text);
             this.filled = true;
-            EshareMarkdownView.this.view.loadUrl("javascript: window.setText(" + this.fid + ", " + this.text + ");");
+            EshareMarkdownView.this.view.loadUrl("javascript: window.setText(" + this.fid + ", " + this.text.length() + ");");
+        }
+
+        public void update_rect(JSONObject object) throws JSONException {
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getLayoutParams();
+            rawRect = new Rect(object.getInt("left"), object.getInt("top"), object.getInt("right"), object.getInt("bottom"));
+            params.height = rawRect.height();
+            params.width  = rawRect.width();
+            this.setLayoutParams(params);
         }
 
         public void unset_text() {
-            this.text = "\"  \"";
+            this.text = "";
+            this.setText(this.text);
             this.filled = false;
-            EshareMarkdownView.this.view.loadUrl("javascript: window.setText(" + this.fid + ", " + this.text + ");");
+            EshareMarkdownView.this.view.loadUrl("javascript: window.setText(" + this.fid + ", " + this.text.length() + ");");
         }
 
         @SuppressLint("ResourceAsColor")

@@ -8,7 +8,19 @@ window.onload = function() {
     }, 1);
 }
 
-window.setText = function setText(fid, text) {
+function makeBlanks(num) {
+    var result = "  ";
+
+    if (num === 0) return result;
+
+    for (var i = 0; i < num; i++) {
+        result += " ";
+    }
+
+    return result;
+}
+
+window.setText = function setText(fid, blankNum) {
     var fields = document.getElementsByTagName("codefill")
       , foundField;
 
@@ -17,7 +29,8 @@ window.setText = function setText(fid, text) {
 
         if (field.fid === fid) {
             foundField = field;
-            foundField.textContent = text;
+            foundField.textContent = makeBlanks(blankNum);
+            window.CodefillBridge.update_codefill(getCodefillFrom(field));
             break;
         }
     }
@@ -39,25 +52,29 @@ function renderCodefills() {
     }
 }
 
+function getCodefillFrom(field) {
+    var from  = field.getBoundingClientRect()
+      , to    = {};
+
+    to.fid = field.fid;
+
+    for (var key in from) {
+        if (from.hasOwnProperty(key) && window.devicePixelRatio) {
+            to[key] = Math.round(from[key] * window.devicePixelRatio);
+        }
+    }
+
+    return JSON.stringify(to);
+}
+
 function getCodefills() {
     var fields = document.getElementsByTagName("codefill");
 
     for (var i = 0; i < fields.length; i++) {
-        if (window.CodefillBridge && window.CodefillBridge.add_field) {
-            var field = fields[i]
-              , fid   = i + 1
-              , from  = fields[i].getBoundingClientRect()
-              , to    = {};
+        fields[i].fid = i + 1;
 
-            to.fid = field.fid = fid;
-
-            for (var key in from) {
-                if (from.hasOwnProperty(key) && window.devicePixelRatio) {
-                    to[key] = Math.round(from[key] * window.devicePixelRatio);
-                }
-            }
-
-            window.CodefillBridge.add_field(JSON.stringify(to));
+        if (window.CodefillBridge) {
+            window.CodefillBridge.add_field(getCodefillFrom(fields[i]));
         }
     }
 }

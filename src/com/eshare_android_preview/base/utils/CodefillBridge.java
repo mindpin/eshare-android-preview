@@ -1,5 +1,8 @@
 package com.eshare_android_preview.base.utils;
 
+import android.app.Activity;
+import android.widget.Toast;
+
 import com.eshare_android_preview.base.view.EshareMarkdownView;
 
 import org.json.JSONException;
@@ -19,6 +22,23 @@ public class CodefillBridge {
 
     static public CodefillBridge bind(EshareMarkdownView view) {
         return new CodefillBridge(view);
+    }
+
+    public void update_codefill(String field) throws JSONException {
+        final JSONObject rect = new JSONObject(field);
+        final EshareMarkdownView.Codefill fill = view.find_codefill(rect.getInt("fid"));
+        if (fill != null) {
+            ((Activity) view.getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                try {
+                    fill.update_rect(rect);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                }
+            });
+        }
     }
 
     public void add_field(String field) throws JSONException {

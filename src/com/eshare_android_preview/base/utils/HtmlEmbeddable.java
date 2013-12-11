@@ -32,10 +32,15 @@ public class HtmlEmbeddable {
            css("codefill.css") +
            css("hl.css") +
           "<style>" +
-            "code {font-family:\"Courier New\", monospace !important;}" +
+            "code {" +
+              "font-family:\"Courier New\", monospace !important;" +
+              "overflow:visible;" +
+              "background:none !important;" +
+              "padding:0 0 0 0 !important;" +
+            "}" +
           "</style>" +
           // Weinre 远程调试器
-          "<script src=\"http://192.168.1.9:8080/target/target-script-min.js#anonymous\"></script>" +
+          //"<script src=\"http://192.168.1.9:8080/target/target-script-min.js#anonymous\"></script>" +
         "</head>" +
         "<body>" +
            htmlSnippet +
