@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp"
+    android:background="#e7e7e7">
+    
+	<com.eshare_android_preview.base.view.ExperienceOfView
+	    android:id="@+id/experience_of_view"
+        android:layout_height="80dp"
+        android:layout_width="fill_parent"
+        android:background="#ffffff"
+        android:fadingEdge="none"
+	/>
+	
+	<Button
+	    android:layout_alignParentBottom="true"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="ValueAnimator start"
+	    android:onClick="click_experience_of_animator" 
+	/>
+</RelativeLayout>
