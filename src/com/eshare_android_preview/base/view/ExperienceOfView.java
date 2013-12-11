@@ -17,15 +17,18 @@ import com.nineoldandroids.animation.ValueAnimator;
 public class ExperienceOfView extends View{
 	private int rect_color = Color.GREEN; // 背景矩形颜色
 	
-	private Float left = 20F;
-	private Float top = 20F;
+	private Float left = 20F;  // 矩形的 left
+	private Float top = 20F;   // 矩形的 top
+	
+	private Float rect_width = 100F; // 矩形里面的初始长
+	
+	
 	private Float rect_width_fill;
-	private Float rect_width = 100F;
-	private Float rect_height;
+	private Float rect_height;	
 	
-	
+	// 圆
 	private Float circle_radius = 35F; // 圆半径
-	
+
 	private Float circle_left_cx; // 左圆 坐标
 	private Float circle_left_cy;
 	
@@ -34,13 +37,15 @@ public class ExperienceOfView extends View{
 	
 	private int circle_color = Color.WHITE; // 圆背景颜色
 	
+	
+	//线条 边
 	private int line_stroke_width = 5;
 	private int line_color = Color.argb(100, 0, 0, 0);
 	
 	// text
 	private String left_text = "3";
 	private String right_text = "4";
-	
+	 
 	private int text_color = Color.BLACK;
 	private float text_size = 16.0F;
 	
