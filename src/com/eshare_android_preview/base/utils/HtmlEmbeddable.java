@@ -37,6 +37,7 @@ public class HtmlEmbeddable {
               "overflow:visible;" +
               "background:none !important;" +
               "padding:0 0 0 0 !important;" +
+              "word-wrap:break-word;" +
             "}" +
           "</style>" +
           // Weinre 远程调试器
