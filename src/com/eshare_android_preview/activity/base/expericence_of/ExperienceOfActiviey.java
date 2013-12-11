@@ -24,6 +24,8 @@ public class ExperienceOfActiviey extends EshareBaseActivity{
 
 	}
 	public void click_experience_of_animator(View view){
-		experience_of_view.set_rect_width_animate(280F, 500);
+		experience_of_view.set_rect_width_animate(2/3F, 500);
+//		experience_of_view.set_left_text(left_text);
+//		experience_of_view.set_right_text(right_text);
 	}
 }

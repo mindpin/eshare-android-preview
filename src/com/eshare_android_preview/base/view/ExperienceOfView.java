@@ -149,7 +149,9 @@ public class ExperienceOfView extends View{
     }
 
     // 根据传入的半径值和动画时间来产生动画效果
-    public void set_rect_width_animate(Float rect_width, int druation) {
+    public void set_rect_width_animate(Float fen_rect_width, int druation) {
+    	float rect_width = rect_width_fill * fen_rect_width;
+    	
         Float old_rect_width = this.rect_width;
         ValueAnimator animation = ValueAnimator.ofFloat(old_rect_width, rect_width);
         animation.setDuration(druation);
@@ -161,5 +163,17 @@ public class ExperienceOfView extends View{
             }
         });
         animation.start();
+    }
+    
+    public void set_left_text(String left_text){
+        this.left_text = left_text;
+        invalidate();
+        requestLayout();
+    }
+    
+    public void set_right_text(String right_text){
+        this.right_text = right_text;
+        invalidate();
+        requestLayout();
     }
 }
