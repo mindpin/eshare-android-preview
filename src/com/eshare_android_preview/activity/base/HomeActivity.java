@@ -38,10 +38,10 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     private void _init_knowledge_net() {
+        map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
+
         KnowledgeSetsData.init();
         AniProxy.init();
-
-        map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
 
         _r_traversal(KnowledgeNet.instance());
 
