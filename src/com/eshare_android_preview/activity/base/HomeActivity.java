@@ -48,16 +48,11 @@ public class HomeActivity extends EshareBaseActivity {
         super.onCreate(savedInstanceState);
     }
 
-    ArrayList<DashPathEndpoint> dash_path_endpoint_list;
-
-    DashPathView dash_path_view;
-
     private void _init_knowledge_net() {
         KnowledgeSetsData.init();
         AniProxy.init();
 
         map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
-        _init_dash_path_view();
 
         _r_traversal(KnowledgeNet.instance());
 
@@ -65,20 +60,17 @@ public class HomeActivity extends EshareBaseActivity {
         _draw_dash_path_view();
     }
 
-    private void _init_dash_path_view() {
-        dash_path_view = new DashPathView(this);
-        dash_path_endpoint_list = new ArrayList<DashPathEndpoint>();
-    }
+
 
     private void _draw_dash_path_view() {
-        dash_path_view.set_dash_path_endpoint_list(dash_path_endpoint_list);
-        dash_path_view.set_color(Color.parseColor("#aaaaaa"));
-        dash_path_view.set_dash_icon_radius(3);
-        map_view.lines_paper.addView(dash_path_view);
+        map_view.dash_path_view.set_dash_path_endpoint_list(map_view.dash_path_endpoint_list);
+        map_view.dash_path_view.set_color(Color.parseColor("#aaaaaa"));
+        map_view.dash_path_view.set_dash_icon_radius(3);
+        map_view.lines_paper.addView(map_view.dash_path_view);
 
-        ViewGroup.LayoutParams params = dash_path_view.getLayoutParams();
+        ViewGroup.LayoutParams params = map_view.dash_path_view.getLayoutParams();
         params.height = BaseUtils.dp_to_int_px((float) KnowledgeSetsData.paper_bottom);
-        dash_path_view.setLayoutParams(params);
+        map_view.dash_path_view.setLayoutParams(params);
     }
 
     private void _r_traversal(IHasChildren node) {
@@ -213,7 +205,7 @@ public class HomeActivity extends EshareBaseActivity {
             float y2 = (float) pos.circle_dp_top - 8;
 
             DashPathEndpoint p1 = DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2);
-            dash_path_endpoint_list.add(p1);
+            map_view.dash_path_endpoint_list.add(p1);
         }
     }
 
