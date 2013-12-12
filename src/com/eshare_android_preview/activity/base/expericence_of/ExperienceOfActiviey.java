@@ -21,7 +21,6 @@ public class ExperienceOfActiviey extends EshareBaseActivity{
 	}
 	private void init_view() {
 		experience_of_view = (ExperienceOfView)findViewById(R.id.experience_of_view);
-
 	}
 	public void click_experience_of_animator(View view){
 		experience_of_view.set_rect_width_animate(2/3F, 500);
