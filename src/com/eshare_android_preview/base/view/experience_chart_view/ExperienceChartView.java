@@ -19,14 +19,12 @@ public class ExperienceChartView extends View {
     private float maxx = 0.0f, maxy = 0.0f, minx = 0.0f, miny = 0.0f,
             locxAxis = 0.0f, locyAxis = 0.0f;
     private int vectorLength;
-    private int axes = 1;
 
 
-    public ExperienceChartView(Context context, float[] xvalues, float[] yvalues, int axes) {
+    public ExperienceChartView(Context context, float[] xvalues, float[] yvalues) {
         super(context);
         this.xvalues = xvalues;
         this.yvalues = yvalues;
-        this.axes = axes;
         vectorLength = xvalues.length;
         paint = new Paint();
 
@@ -64,39 +62,24 @@ public class ExperienceChartView extends View {
 
 
 
-        // Automatic axes markings, modify n to control the number of axes
-        // labels
+        float temp = 0.0f;
+        int n = 3;
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(20.0f);
+        for (int i = 1; i <= 6; i++) {
+            // temp = Math.round(10 * (minx + (i - 1) * (maxx - minx) / n)) / 10;
+            temp = (float) i;
 
-
-        if (axes != 0) {
-            float temp = 0.0f;
-            int n = 3;
-            paint.setTextAlign(Paint.Align.CENTER);
-            paint.setTextSize(20.0f);
-            for (int i = 1; i <= 6; i++) {
-                // temp = Math.round(10 * (minx + (i - 1) * (maxx - minx) / n)) / 10;
-                temp = (float) i;
-
-                canvas.drawText("" + (int) temp,
-                        (float) toPixelInt(canvasWidth, minx, maxx, temp),
-                        canvasHeight - locxAxisInPixels + 20, paint);
-            }
-
-//            for (int i = 1; i <= 8; i++) {
-//
-//                temp = Math.round(10 * (miny + (i - 1) * (maxy - miny) / n)) / 10;
-//                canvas.drawText("" + temp, locyAxisInPixels + 20, canvasHeight
-//                        - (float) toPixelInt(canvasHeight, miny, maxy, temp),
-//                        paint);
-//            }
-
-
-            canvas.drawText("" + maxx,
-                    (float) toPixelInt(canvasWidth, minx, maxx, maxx),
+            canvas.drawText("" + (int) temp,
+                    (float) toPixelInt(canvasWidth, minx, maxx, temp),
                     canvasHeight - locxAxisInPixels + 20, paint);
-            canvas.drawText("" + maxy, locyAxisInPixels + 20, canvasHeight
-                    - (float) toPixelInt(canvasHeight, miny, maxy, maxy), paint);
         }
+
+
+
+        canvas.drawText("" + maxx,
+                (float) toPixelInt(canvasWidth, minx, maxx, maxx),
+                canvasHeight - locxAxisInPixels + 20, paint);
 
     }
 

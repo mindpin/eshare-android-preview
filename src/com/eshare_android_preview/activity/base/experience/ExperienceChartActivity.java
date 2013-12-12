@@ -21,7 +21,7 @@ public class ExperienceChartActivity extends EshareBaseActivity {
         float[] yvalues = new float[] { 0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f };
 
 
-        ExperienceChartView graph = new ExperienceChartView(this, xvalues, yvalues, 1);
+        ExperienceChartView graph = new ExperienceChartView(this, xvalues, yvalues);
 
         root_view.addView(graph);
 
