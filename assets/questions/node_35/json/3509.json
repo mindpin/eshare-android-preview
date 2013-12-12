@@ -3,9 +3,9 @@
   "kind": "single_choice",
   "content": "<img src=\"file:///android_asset/questions/node_35/14.jpg\">\n下面的那段代码运行结果和上图一致\n",
   "choices": [
-    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">You /</span><span style=\"color:#b0b\">\\\\</span><span style=\"color:#D20\">& me are singing!</span><span style=\"color:#710\">\"</span></span>)\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">You </span><span style=\"color:#b0b\">\\\\</span><span style=\"color:#D20\">& me are singing!</span><span style=\"color:#710\">\"</span></span>)\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">You me are singing!</span><span style=\"color:#710\">\"</span></span>)\n</code></pre>"
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">You /</span><span class=\"char\">\\\\</span><span class=\"content\">& me are singing!</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">You </span><span class=\"char\">\\\\</span><span class=\"content\">& me are singing!</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">You me are singing!</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n"
   ],
   "answer": "B"
 }

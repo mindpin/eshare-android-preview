@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-33",
   "kind": "fill",
-  "content": "<pre><code class=\"javascript\">\nMath.ceil([%]) == <span style=\"color:#00D\">1</span>\n</code></pre>\n补全代码，使等式成立\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">Math.ceil([%]) == <span class=\"integer\">1</span>\n</code></pre>\n补全代码，使等式成立\n",
   "choices": [
     "0.4",
     "1.4"

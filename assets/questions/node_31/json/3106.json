@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "single_choice",
-  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> str = <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">Hello world!</span><span style=\"color:#710\">\"</span></span>;\nalert(str.match(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">world</span><span style=\"color:#710\">\"</span></span>));\n</code></pre>\n上面代码的运行结果，下面哪个是正确的\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> str = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello world!</span><span class=\"delimiter\">\"</span></span>;\nalert(str.match(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">world</span><span class=\"delimiter\">\"</span></span>));\n</code></pre>\n上面代码的运行结果，下面哪个是正确的\n",
   "choices": [
     "<img src=\"file:///android_asset/questions/node_31/5.jpg\">",
     "<img src=\"file:///android_asset/questions/node_31/6.jpg\">",

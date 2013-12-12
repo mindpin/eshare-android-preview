@@ -3,10 +3,10 @@
   "kind": "multiple_choices",
   "content": "<img src=\"file:///android_asset/questions/node_34/1.png\">\n如图，下面哪些代码的运行结果和图片一致\n",
   "choices": [
-    "<pre><code class=\"javascript\">\nalert(<span style=\"color:#00D\">1</span> == <span style=\"color:#00D\">2</span>)\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">true</span><span style=\"color:#710\">\"</span></span>)\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"color:#00D\">1</span> / <span style=\"color:#00D\">0</span>)\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"color:#069\">true</span>)\n</code></pre>"
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"integer\">1</span> == <span class=\"integer\">2</span>)\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">true</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"integer\">1</span> / <span class=\"integer\">0</span>)\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"predefined-constant\">true</span>)\n</code></pre>\n"
   ],
   "answer": "BD"
 }

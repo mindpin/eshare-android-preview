@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "multiple_choices",
-  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> num = <span style=\"color:#00D\">314</span>;\n</code></pre>\n把 num 转化为字符串，可用下面哪些方法来实现\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> num = <span class=\"integer\">314</span>;\n</code></pre>\n把 num 转化为字符串，可用下面哪些方法来实现\n",
   "choices": [
-    "<pre><code class=\"javascript\">\nnum.toString()\n</code></pre>",
-    "<pre><code class=\"javascript\">\nString(num)\n</code></pre>",
-    "<pre><code class=\"javascript\">\nnum + <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#710\">\"</span></span>\n</code></pre>",
-    "<pre><code class=\"javascript\">\nnum + <span style=\"color:#00D\">1</span>\n</code></pre>"
+    "<pre class=\"CodeRay\"><code class=\"javascript\">num.toString()\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">String(num)\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">num + <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"delimiter\">\"</span></span>\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">num + <span class=\"integer\">1</span>\n</code></pre>\n"
   ],
   "answer": "ABC"
 }

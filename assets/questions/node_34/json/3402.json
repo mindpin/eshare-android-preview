@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "fill",
-  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#00D\">1</span> == [%] <span style=\"color:#777\">// return true</span>\n<span style=\"color:#00D\">0</span> == [%] <span style=\"color:#777\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"integer\">1</span> == [%] <span class=\"comment\">// return true</span>\n<span class=\"integer\">0</span> == [%] <span class=\"comment\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立\n",
   "choices": [
     false,
     "\"true\"",

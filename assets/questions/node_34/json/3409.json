@@ -3,11 +3,11 @@
   "kind": "multiple_choices",
   "content": "<img src=\"file:///android_asset/questions/node_34/2.png\">\n如图，下面哪个代码的运行结果和图片一致\n",
   "choices": [
-    "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> txt=<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">Hello World!</span><span style=\"color:#710\">\"</span></span>;\nalert(<span style=\"color:#080;font-weight:bold\">new</span> Boolean(txt));\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"color:#080;font-weight:bold\">new</span> Boolean);\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">HELLO WORLD!</span><span style=\"color:#710\">\"</span></span>);\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"color:#080;font-weight:bold\">new</span> Boolean(<span style=\"color:#00D\">0</span>));\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"color:#080;font-weight:bold\">new</span> Boolean(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#710\">\"</span></span>));\n</code></pre>"
+    "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> txt=<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello World!</span><span class=\"delimiter\">\"</span></span>;\nalert(<span class=\"keyword\">new</span> Boolean(txt));\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"keyword\">new</span> Boolean);\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">HELLO WORLD!</span><span class=\"delimiter\">\"</span></span>);\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"keyword\">new</span> Boolean(<span class=\"integer\">0</span>));\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"keyword\">new</span> Boolean(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"delimiter\">\"</span></span>));\n</code></pre>\n"
   ],
   "answer": "BDE"
 }

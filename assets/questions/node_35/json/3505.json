@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> str = <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">我们的</span><span style=\"color:#b0b\">\\\"</span><span style=\"color:#D20\">爱人</span><span style=\"color:#b0b\">\\\"</span><span style=\"color:#710\">\"</span></span>;\n<span style=\"color:#080;font-weight:bold\">var</span> n = str.length;\n</code></pre>\n上面的代码中，n 的值是\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> str = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">我们的</span><span class=\"char\">\\\"</span><span class=\"content\">爱人</span><span class=\"char\">\\\"</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> n = str.length;\n</code></pre>\n上面的代码中，n 的值是\n",
   "choices": [
     6,
     7,

@@ -3,10 +3,10 @@
   "kind": "multiple_choices",
   "content": "<img src=\"file:///android_asset/questions/node_31/4.jpg\">\n如图，下面哪些代码的运行结果和图片一致\n",
   "choices": [
-    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">He is called 'Johnny'</span><span style=\"color:#710\">\"</span></span>)\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">'</span><span style=\"color:#D20\">He is called </span><span style=\"color:#b0b\">\\'</span><span style=\"color:#D20\">Johnny</span><span style=\"color:#b0b\">\\'</span><span style=\"color:#710\">'</span></span>)\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">'</span><span style=\"color:#D20\">He is called \"Johnny\"</span><span style=\"color:#710\">'</span></span>)\n</code></pre>",
-    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">He is called </span><span style=\"color:#b0b\">\\\"</span><span style=\"color:#D20\">Johnny</span><span style=\"color:#b0b\">\\\"</span><span style=\"color:#710\">\"</span></span>)\n</code></pre>"
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">He is called 'Johnny'</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">He is called </span><span class=\"char\">\\'</span><span class=\"content\">Johnny</span><span class=\"char\">\\'</span><span class=\"delimiter\">'</span></span>)\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">He is called \"Johnny\"</span><span class=\"delimiter\">'</span></span>)\n</code></pre>\n",
+    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">He is called </span><span class=\"char\">\\\"</span><span class=\"content\">Johnny</span><span class=\"char\">\\\"</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n"
   ],
   "answer": "AB"
 }

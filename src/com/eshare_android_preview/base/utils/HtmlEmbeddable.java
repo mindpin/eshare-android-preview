@@ -30,12 +30,12 @@ public class HtmlEmbeddable {
         "<html>" +
         "<head>" +
            css("codefill.css") +
-           css("hl.css") +
+           css("coderay_twilight.css") +
           "<style>" +
+            "pre {font-size:1em !important;}" +
             "code {" +
               "font-family:\"Courier New\", monospace !important;" +
               "overflow:visible;" +
-              "background:none !important;" +
               "padding:0 0 0 0 !important;" +
               "word-wrap:break-word;" +
             "}" +
@@ -45,8 +45,6 @@ public class HtmlEmbeddable {
         "</head>" +
         "<body>" +
            htmlSnippet +
-           js("hl.js") +
-           "<script>hljs.initHighlightingOnLoad();</script>" +
            js("codefill.js") +
         "</body>" +
         "</html>";
