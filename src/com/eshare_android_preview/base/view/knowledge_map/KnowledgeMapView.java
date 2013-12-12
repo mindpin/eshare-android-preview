@@ -22,10 +22,10 @@ import java.util.List;
  * Created by Administrator on 13-12-12.
  */
 public class KnowledgeMapView extends LockableScrollView {
-    public RelativeLayout lines_paper;
-    public RelativeLayout nodes_paper;
-
     public int SCREEN_WIDTH_DP, SCREEN_HEIGHT_DP, GRID_WIDTH_DP, GRID_HEIGHT_DP;
+
+    public RelativeLayout nodes_paper;
+    public RelativeLayout lines_paper;
     private ArrayList<DashPathEndpoint> dash_path_endpoint_list;
 
     public AniProxy opened_node = null;
@@ -48,7 +48,7 @@ public class KnowledgeMapView extends LockableScrollView {
     }
 
     private void init() {
-        kdata = new KnowledgeSetsData();
+        kdata = new KnowledgeSetsData(this);
 
         View content = inflate(getContext(), R.layout.home_knowledge_map_view, null);
         this.addView(content);
@@ -62,17 +62,6 @@ public class KnowledgeMapView extends LockableScrollView {
         _draw_nodes();
         _draw_dash_path_view();
     }
-
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//
-//        SCREEN_WIDTH_DP  = MeasureSpec.getSize(widthMeasureSpec);
-//        SCREEN_HEIGHT_DP = MeasureSpec.getSize(heightMeasureSpec);
-//
-//        GRID_WIDTH_DP  = SCREEN_WIDTH_DP / 3;
-//        GRID_HEIGHT_DP = GRID_WIDTH_DP + 30;
-//    }
 
     private void get_base_size() {
         BaseUtils.ScreenSize screen_size = BaseUtils.get_screen_size();
@@ -101,7 +90,7 @@ public class KnowledgeMapView extends LockableScrollView {
     public void _draw_nodes() {
         dash_path_endpoint_list = new ArrayList<DashPathEndpoint>();
 
-        for (List<SetPosition> list : kdata.deep_hashmap.values()) {
+        for (List<SetPosition> list : kdata.deep_pos_lists()) {
             int list_size = list.size();
             for (int index = 0; index < list_size; index++) {
                 SetPosition pos = list.get(index);
@@ -122,13 +111,13 @@ public class KnowledgeMapView extends LockableScrollView {
         lines_paper.addView(dash_path_view);
 
         ViewGroup.LayoutParams params = dash_path_view.getLayoutParams();
-        params.height = BaseUtils.dp_to_int_px((float) kdata.paper_bottom);
+        params.height = BaseUtils.dp_to_int_px(kdata.max_grid_dp_bottom);
         dash_path_view.setLayoutParams(params);
     }
 
     public void _r_traversal(IHasChildren node) {
         for (BaseKnowledgeSet set : node.children()) {
-            kdata.put_set_in_map(set, this);
+            kdata.put_set_in_map(set);
             _r_traversal(set);
         }
     }

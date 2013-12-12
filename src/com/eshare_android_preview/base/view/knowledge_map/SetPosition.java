@@ -40,12 +40,12 @@ public class SetPosition {
     public BaseKnowledgeSet set;
     public AniProxy ani_proxy;
 
-    public float grid_left;
-    public float grid_top;
+    public int grid_top;
+    public int grid_dp_top;
+    public int grid_dp_bottom;
 
+    public float grid_left;
     public double grid_dp_left;
-    public double grid_dp_top;
-    public double grid_dp_bottom;
 
     public double circle_dp_left;
     public double circle_dp_top;
@@ -55,27 +55,29 @@ public class SetPosition {
 
     public double text_dp_top;
 
-    public SetPosition(BaseKnowledgeSet set, float grid_left, KnowledgeMapView map_view) {
+    public SetPosition(BaseKnowledgeSet set, KnowledgeMapView map_view) {
         this.map_view = map_view;
         this.set = set;
-        set_position(grid_left);
+
+        set_y_position();
     }
 
-    public void set_position(float grid_left) {
+    private void set_y_position() {
+        grid_top       = set.deep;
+        grid_dp_top    = (grid_top - 1) * map_view.GRID_HEIGHT_DP;
+        grid_dp_bottom = grid_dp_top + map_view.GRID_HEIGHT_DP;
+
+        circle_center_dp_top = grid_dp_top + map_view.GRID_WIDTH_DP / 2.0D;
+        circle_dp_top = circle_center_dp_top - CIRCLE_RADIUS_DP;
+
+        text_dp_top = circle_center_dp_top + CIRCLE_RADIUS_DP + 4.0D;
+    }
+
+    public void set_x_position(float grid_left) {
         this.grid_left = grid_left;
-        this.grid_top = set.deep;
-
         this.grid_dp_left = (this.grid_left - 1) * map_view.GRID_WIDTH_DP;
-        this.grid_dp_top = (this.grid_top - 1) * map_view.GRID_HEIGHT_DP;
-        this.grid_dp_bottom = this.grid_dp_top + map_view.GRID_HEIGHT_DP;
-
         this.circle_center_dp_left = this.grid_dp_left + map_view.GRID_WIDTH_DP / 2.0D;
-        this.circle_center_dp_top = this.grid_dp_top + map_view.GRID_WIDTH_DP / 2.0D;
-
         this.circle_dp_left = this.circle_center_dp_left - CIRCLE_RADIUS_DP;
-        this.circle_dp_top = this.circle_center_dp_top - CIRCLE_RADIUS_DP;
-
-        this.text_dp_top = this.circle_center_dp_top + CIRCLE_RADIUS_DP + 4.0D;
     }
 
     @Override
@@ -198,7 +200,7 @@ public class SetPosition {
     }
 
     public void draw(int list_size, int index) {
-        set_position(GRID_DATA[list_size][index]);
+        set_x_position(GRID_DATA[list_size][index]);
 
         _draw_circle();
         _draw_text();
@@ -208,7 +210,7 @@ public class SetPosition {
 
     public void put_data_into_end_point_list(List<DashPathEndpoint> list) {
         for (BaseKnowledgeSet parent : set.parents()) {
-            SetPosition parent_pos = map_view.kdata.get_pos_of_set(parent);
+            SetPosition parent_pos = map_view.kdata.get_from(parent);
 
             float x1 = (float) parent_pos.circle_center_dp_left;
             float y1 = (float) parent_pos.text_dp_top + 24 + (parent_pos.set.is_checkpoint() ? 0 : 18);
