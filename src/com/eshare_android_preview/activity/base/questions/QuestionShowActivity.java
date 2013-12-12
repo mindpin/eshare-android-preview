@@ -155,6 +155,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
             EshareMarkdownView choice_item_text = (EshareMarkdownView) choice_item_view.findViewById(R.id.choice_item_text);
             choice_item_text.set_markdown_content(choice.content);
+            choice_item_text.disable_touch_event();
 
             choices_detail_ll.addView(choice_item_view);
         }

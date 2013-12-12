@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 public class EshareMarkdownView extends RelativeLayout {
     private int default_text_size = 18;
-    public WebView view;
+    public MarkdownWebView view;
     // WebView上绑定的JSInterface
     private CodefillBridge codefillBridge;
     // 填空遮盖view的集合
@@ -83,6 +84,10 @@ public class EshareMarkdownView extends RelativeLayout {
         return this;
     }
 
+    public void disable_touch_event(){
+        view.disable_touch_event();
+    }
+
     public Codefill get_first_unfilled_codefill() {
         for (Codefill codefill : this.codefills) {
             if (!codefill.filled) {
@@ -119,6 +124,8 @@ public class EshareMarkdownView extends RelativeLayout {
     }
 
     public class MarkdownWebView extends WebView {
+        private boolean disable_touch_event_flag = false;
+
         public MarkdownWebView(Context context) {
             super(context);
             // 当 isInEditMode() 为 true 时，表示是 ide 预览界面
@@ -158,6 +165,19 @@ public class EshareMarkdownView extends RelativeLayout {
             }
 
             super.onScrollChanged(l, t, oldl, oldt);
+        }
+
+        public void disable_touch_event(){
+            this.disable_touch_event_flag = true;
+        }
+
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent ev) {
+            if(this.disable_touch_event_flag){
+                return false;
+            }else{
+                return super.dispatchTouchEvent(ev);
+            }
         }
     }
 
