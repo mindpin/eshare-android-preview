@@ -1,11 +1,12 @@
 package com.eshare_android_preview.model.knowledge;
 
 import com.eshare_android_preview.activity.base.HomeActivity;
+import com.eshare_android_preview.base.view.knowledge_map.IHasChildren;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeNet extends BaseParse implements HomeActivity.IHasChildren{
+public class KnowledgeNet extends BaseParse implements IHasChildren{
 	private static KnowledgeNet m_instance;
 
     public List<KnowledgeSet> sets;

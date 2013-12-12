@@ -1,6 +1,7 @@
 package com.eshare_android_preview.base.view.knowledge_map;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,11 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.LockableScrollView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
+import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
+import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 13-12-12.
@@ -22,11 +26,11 @@ public class KnowledgeMapView extends LockableScrollView {
     public RelativeLayout nodes_paper;
 
     public int SCREEN_WIDTH_DP, SCREEN_HEIGHT_DP, GRID_WIDTH_DP, GRID_HEIGHT_DP;
+    private ArrayList<DashPathEndpoint> dash_path_endpoint_list;
 
-    public ArrayList<DashPathEndpoint> dash_path_endpoint_list;
-    public DashPathView dash_path_view;
+    public AniProxy opened_node = null;
 
-    public static AniProxy opened_node = null;
+    KnowledgeSetsData kdata;
 
     public KnowledgeMapView(Context context) {
         super(context);
@@ -44,6 +48,8 @@ public class KnowledgeMapView extends LockableScrollView {
     }
 
     private void init() {
+        kdata = new KnowledgeSetsData();
+
         View content = inflate(getContext(), R.layout.home_knowledge_map_view, null);
         this.addView(content);
 
@@ -52,7 +58,9 @@ public class KnowledgeMapView extends LockableScrollView {
 
         get_base_size();
 
-        _init_dash_path_view();
+        _r_traversal(KnowledgeNet.instance());
+        _draw_nodes();
+        _draw_dash_path_view();
     }
 
 //    @Override
@@ -69,16 +77,11 @@ public class KnowledgeMapView extends LockableScrollView {
     private void get_base_size() {
         BaseUtils.ScreenSize screen_size = BaseUtils.get_screen_size();
 
-        SCREEN_WIDTH_DP  = (int) screen_size.width_dp;
+        SCREEN_WIDTH_DP = (int) screen_size.width_dp;
         SCREEN_HEIGHT_DP = (int) screen_size.height_dp;
 
-        GRID_WIDTH_DP  = SCREEN_WIDTH_DP / 3;
+        GRID_WIDTH_DP = SCREEN_WIDTH_DP / 3;
         GRID_HEIGHT_DP = GRID_WIDTH_DP + 30;
-    }
-
-    private void _init_dash_path_view() {
-        dash_path_view = new DashPathView(getContext());
-        dash_path_endpoint_list = new ArrayList<DashPathEndpoint>();
     }
 
     public void run_open_animate() {
@@ -92,6 +95,41 @@ public class KnowledgeMapView extends LockableScrollView {
         if (null != opened_node) {
             opened_node.toggle();
             locked = false;
+        }
+    }
+
+    public void _draw_nodes() {
+        dash_path_endpoint_list = new ArrayList<DashPathEndpoint>();
+
+        for (List<SetPosition> list : kdata.deep_hashmap.values()) {
+            int list_size = list.size();
+            for (int index = 0; index < list_size; index++) {
+                SetPosition pos = list.get(index);
+
+                pos.draw(list_size, index);
+                pos.put_data_into_end_point_list(dash_path_endpoint_list);
+            }
+        }
+    }
+
+    public void _draw_dash_path_view() {
+        DashPathView dash_path_view = new DashPathView(getContext());
+
+        dash_path_view.set_dash_path_endpoint_list(dash_path_endpoint_list);
+        dash_path_view.set_color(Color.parseColor("#aaaaaa"));
+        dash_path_view.set_dash_icon_radius(3);
+
+        lines_paper.addView(dash_path_view);
+
+        ViewGroup.LayoutParams params = dash_path_view.getLayoutParams();
+        params.height = BaseUtils.dp_to_int_px((float) kdata.paper_bottom);
+        dash_path_view.setLayoutParams(params);
+    }
+
+    public void _r_traversal(IHasChildren node) {
+        for (BaseKnowledgeSet set : node.children()) {
+            kdata.put_set_in_map(set, this);
+            _r_traversal(set);
         }
     }
 }

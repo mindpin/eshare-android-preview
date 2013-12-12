@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.eshare_android_preview.activity.base.HomeActivity;
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeSetShowActivity;
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.utils.BaseUtils;
@@ -21,6 +20,7 @@ import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by Administrator on 13-12-12.
@@ -28,6 +28,13 @@ import java.io.InputStream;
 public class SetPosition {
     public final static double CIRCLE_RADIUS_DP = 30; // 33.3333D;
     public final static double TEXT_SIZE = 9;
+
+    final static float[][] GRID_DATA = new float[][] {
+            {},
+            {2.0F},
+            {1.5F, 2.5F},
+            {1.0F, 2.0F, 3.0F}
+    };
 
     public KnowledgeMapView map_view;
     public BaseKnowledgeSet set;
@@ -190,23 +197,25 @@ public class SetPosition {
         });
     }
 
-    public void _put_knowledge_node_on_grid() {
+    public void draw(int list_size, int index) {
+        set_position(GRID_DATA[list_size][index]);
+
         _draw_circle();
         _draw_text();
         _draw_icon();
         _set_icon_events();
     }
 
-    public void _put_pos_to_dash_path_endpoint_list() {
+    public void put_data_into_end_point_list(List<DashPathEndpoint> list) {
         for (BaseKnowledgeSet parent : set.parents()) {
-            SetPosition parent_pos = HomeActivity.KnowledgeSetsData.get_pos_of_set(parent);
+            SetPosition parent_pos = map_view.kdata.get_pos_of_set(parent);
+
             float x1 = (float) parent_pos.circle_center_dp_left;
             float y1 = (float) parent_pos.text_dp_top + 24 + (parent_pos.set.is_checkpoint() ? 0 : 18);
             float x2 = (float) circle_center_dp_left;
             float y2 = (float) circle_dp_top - 8;
 
-            DashPathEndpoint p1 = DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2);
-            map_view.dash_path_endpoint_list.add(p1);
+            list.add(DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2));
         }
     }
 }
