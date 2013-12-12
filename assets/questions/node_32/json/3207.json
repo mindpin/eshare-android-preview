@@ -1,6 +1,6 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "true_false",
-  "content": "```javascript\n1 === 1.0\n```\n代码中的等式是成立的\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#00D\">1</span> === <span style=\"color:#60E\">1.0</span>\n</code></pre>\n代码中的等式是成立的\n",
   "answer": "T"
 }

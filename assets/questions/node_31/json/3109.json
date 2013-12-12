@@ -1,11 +1,11 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "multiple_choices",
-  "content": "![file:///android_asset/questions/node_31/13.jpg]\n如图，下面哪个代码的运行结果和图片一致\n",
+  "content": "<img src=\"file:///android_asset/questions/node_31/13.jpg\">\n如图，下面哪个代码的运行结果和图片一致\n",
   "choices": [
-    "```javascript\nvar txt=\"Hello World!\";\nalert(txt.toUpperCase());\n```\n",
-    "```javascript\nvar txt=\"Hello World!\";\nalert(txt.toLowerCase());\n```\n",
-    "```javascript\nalert(\"HELLO WORLD!\");\n```\n"
+    "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> txt=<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">Hello World!</span><span style=\"color:#710\">\"</span></span>;\nalert(txt.toUpperCase());\n</code></pre>",
+    "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> txt=<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">Hello World!</span><span style=\"color:#710\">\"</span></span>;\nalert(txt.toLowerCase());\n</code></pre>",
+    "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">HELLO WORLD!</span><span style=\"color:#710\">\"</span></span>);\n</code></pre>"
   ],
   "answer": "AC"
 }

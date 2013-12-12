@@ -1,6 +1,6 @@
 {
   "knowledge_node_id": "node-33",
   "kind": "true_false",
-  "content": "```javascript\nvar x = (0.3 - 0.2)*10\nvar y = (0.2 - 0.1)*10\nalert(x == y)\n```\n代码的运行结果是\n![file:///android_asset/questions/node_33/1.jpg]\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> x = (<span style=\"color:#60E\">0.3</span> - <span style=\"color:#60E\">0.2</span>)*<span style=\"color:#00D\">10</span>\n<span style=\"color:#080;font-weight:bold\">var</span> y = (<span style=\"color:#60E\">0.2</span> - <span style=\"color:#60E\">0.1</span>)*<span style=\"color:#00D\">10</span>\nalert(x == y)\n</code></pre>\n代码的运行结果是\n<img src=\"file:///android_asset/questions/node_33/1.jpg\">",
   "answer": "F"
 }

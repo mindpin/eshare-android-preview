@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "single_choice",
-  "content": "```javascript\nvar str = \"Hello world, welcome to the universe.\";\nvar n = str.indexOf(\"welcome\");\n```\n上面的代码中，n 的值是\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> str = <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">Hello world, welcome to the universe.</span><span style=\"color:#710\">\"</span></span>;\n<span style=\"color:#080;font-weight:bold\">var</span> n = str.indexOf(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">welcome</span><span style=\"color:#710\">\"</span></span>);\n</code></pre>\n上面的代码中，n 的值是\n",
   "choices": [
     10,
     11,

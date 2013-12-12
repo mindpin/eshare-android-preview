@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "multiple_choices",
-  "content": "```javascript\nvar num = 314;\n```\n把 num 转化为字符串，可用下面哪些方法来实现\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> num = <span style=\"color:#00D\">314</span>;\n</code></pre>\n把 num 转化为字符串，可用下面哪些方法来实现\n",
   "choices": [
-    "```javascript\nnum.toString()\n```\n",
-    "```javascript\nString(num)\n```\n",
-    "```javascript\nnum + \"\"\n```\n",
-    "```javascript\nnum + 1\n```\n"
+    "<pre><code class=\"javascript\">\nnum.toString()\n</code></pre>",
+    "<pre><code class=\"javascript\">\nString(num)\n</code></pre>",
+    "<pre><code class=\"javascript\">\nnum + <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#710\">\"</span></span>\n</code></pre>",
+    "<pre><code class=\"javascript\">\nnum + <span style=\"color:#00D\">1</span>\n</code></pre>"
   ],
   "answer": "ABC"
 }

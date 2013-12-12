@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "single_choice",
-  "content": "```javascript\nvar value1 = !true;\nvar value2 = !!false;\nvar result = value1 || value2;\n```\n上面的代码中，result 的值是\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> value1 = !<span style=\"color:#069\">true</span>;\n<span style=\"color:#080;font-weight:bold\">var</span> value2 = !!<span style=\"color:#069\">false</span>;\n<span style=\"color:#080;font-weight:bold\">var</span> result = value1 || value2;\n</code></pre>\n上面的代码中，result 的值是\n",
   "choices": [
     true,
     false,

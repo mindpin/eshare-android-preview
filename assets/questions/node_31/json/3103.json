@@ -1,11 +1,11 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "single_choice",
-  "content": "```javascript\nvar carname = \"Volvo XC60\";\nvar character = carname[7];\nalert(character)\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> carname = <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">Volvo XC60</span><span style=\"color:#710\">\"</span></span>;\n<span style=\"color:#080;font-weight:bold\">var</span> character = carname[<span style=\"color:#00D\">7</span>];\nalert(character)\n</code></pre>\n上面代码的运行结果，下面哪个是正确的\n",
   "choices": [
-    "![file:///android_asset/questions/node_31/1.jpg]",
-    "![file:///android_asset/questions/node_31/2.jpg]",
-    "![file:///android_asset/questions/node_31/3.jpg]"
+    "<img src=\"file:///android_asset/questions/node_31/1.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_31/2.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_31/3.jpg\">"
   ],
   "answer": "A"
 }

@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "```javascript\nalert(\"hello\\nworld\");\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "content": "<pre><code class=\"javascript\">\nalert(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">hello</span><span style=\"color:#b0b\">\\n</span><span style=\"color:#D20\">world</span><span style=\"color:#710\">\"</span></span>);\n</code></pre>\n上面代码的运行结果，下面哪个是正确的\n",
   "choices": [
-    "![file:///android_asset/questions/node_35/9.jpg]",
-    "![file:///android_asset/questions/node_35/10.jpg]",
-    "![file:///android_asset/questions/node_35/11.jpg]",
-    "![file:///android_asset/questions/node_35/12.jpg]"
+    "<img src=\"file:///android_asset/questions/node_35/9.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_35/10.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_35/11.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_35/12.jpg\">"
   ],
   "answer": "A"
 }

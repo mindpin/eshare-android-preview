@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "single_choice",
-  "content": "```javascript\nvar str = \"Please visit A!\"\nvar n = str.replace(\"A\",\"B\");\nalert(n)\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> str = <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">Please visit A!</span><span style=\"color:#710\">\"</span></span>\n<span style=\"color:#080;font-weight:bold\">var</span> n = str.replace(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">A</span><span style=\"color:#710\">\"</span></span>,<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">B</span><span style=\"color:#710\">\"</span></span>);\nalert(n)\n</code></pre>\n上面代码的运行结果，下面哪个是正确的\n",
   "choices": [
-    "![file:///android_asset/questions/node_31/9.jpg]",
-    "![file:///android_asset/questions/node_31/10.jpg]",
-    "![file:///android_asset/questions/node_31/11.jpg]",
-    "![file:///android_asset/questions/node_31/12.jpg]"
+    "<img src=\"file:///android_asset/questions/node_31/9.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_31/10.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_31/11.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_31/12.jpg\">"
   ],
   "answer": "A"
 }

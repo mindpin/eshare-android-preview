@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "```javascript\nvar n = \"\\t\".length\n```\n上面的代码中，n 的值是\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> n = <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#b0b\">\\t</span><span style=\"color:#710\">\"</span></span>.length\n</code></pre>\n上面的代码中，n 的值是\n",
   "choices": [
     4,
     2,

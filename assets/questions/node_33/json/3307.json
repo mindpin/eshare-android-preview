@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-33",
   "kind": "multiple_choices",
-  "content": "![file:///android_asset/questions/node_33/2.jpg]\n下面哪些代码的运行结果和上图一致\n",
+  "content": "<img src=\"file:///android_asset/questions/node_33/2.jpg\">\n下面哪些代码的运行结果和上图一致\n",
   "choices": [
-    "```javascript\nalert(parseFloat(\".3a1\"))\n```\n",
-    "```javascript\nalert(parseFloat(\"0.3a1\"))\n```\n",
-    "```javascript\nalert(parseFloat(\"0.3e1\"))\n```\n",
-    "```javascript\nalert(parseFloat(\".3e1\"))\n```\n"
+    "<pre><code class=\"javascript\">\nalert(parseFloat(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">.3a1</span><span style=\"color:#710\">\"</span></span>))\n</code></pre>",
+    "<pre><code class=\"javascript\">\nalert(parseFloat(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">0.3a1</span><span style=\"color:#710\">\"</span></span>))\n</code></pre>",
+    "<pre><code class=\"javascript\">\nalert(parseFloat(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">0.3e1</span><span style=\"color:#710\">\"</span></span>))\n</code></pre>",
+    "<pre><code class=\"javascript\">\nalert(parseFloat(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">.3e1</span><span style=\"color:#710\">\"</span></span>))\n</code></pre>"
   ],
   "answer": "AB"
 }

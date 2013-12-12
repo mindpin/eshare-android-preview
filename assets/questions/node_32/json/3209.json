@@ -1,6 +1,6 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "true_false",
-  "content": "```javascript\ntypeof 9 == 'number'\n```\n代码中的等式是成立的\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">typeof</span> <span style=\"color:#00D\">9</span> == <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">'</span><span style=\"color:#D20\">number</span><span style=\"color:#710\">'</span></span>\n</code></pre>\n代码中的等式是成立的\n",
   "answer": "T"
 }

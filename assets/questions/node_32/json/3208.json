@@ -1,6 +1,6 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "true_false",
-  "content": "```javascript\nisNaN(22) == true\n```\n代码中的等式是成立的\n",
+  "content": "<pre><code class=\"javascript\">\nisNaN(<span style=\"color:#00D\">22</span>) == <span style=\"color:#069\">true</span>\n</code></pre>\n代码中的等式是成立的\n",
   "answer": "F"
 }

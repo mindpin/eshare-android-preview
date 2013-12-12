@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "single_choice",
-  "content": "```javascript\nvar result = ~1\n```\n上面的代码中，result 的值是\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> result = ~<span style=\"color:#00D\">1</span>\n</code></pre>\n上面的代码中，result 的值是\n",
   "choices": [
     -1,
     -2,

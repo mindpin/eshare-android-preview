@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "fill",
-  "content": "```javascript\nvar x = \"John\";\nvar y = new String(\"John\");\ntypeof(x) == [%] // return true\ntypeof(y) == [%] // return true\n```\n请补全代码，让两个等式成立\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> x = <span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">John</span><span style=\"color:#710\">\"</span></span>;\n<span style=\"color:#080;font-weight:bold\">var</span> y = <span style=\"color:#080;font-weight:bold\">new</span> String(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">John</span><span style=\"color:#710\">\"</span></span>);\n<span style=\"color:#080;font-weight:bold\">typeof</span>(x) == [%] <span style=\"color:#777\">// return true</span>\n<span style=\"color:#080;font-weight:bold\">typeof</span>(y) == [%] <span style=\"color:#777\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立\n",
   "choices": [
     "Object",
     "String",

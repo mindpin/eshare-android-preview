@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "```javascript\nvar str=\"about 5'10\\' tall\";\nalert(str);\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "content": "<pre><code class=\"javascript\">\n<span style=\"color:#080;font-weight:bold\">var</span> str=<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">about 5'10</span><span style=\"color:#b0b\">\\'</span><span style=\"color:#D20\"> tall</span><span style=\"color:#710\">\"</span></span>;\nalert(str);\n</code></pre>\n上面代码的运行结果，下面哪个是正确的\n",
   "choices": [
-    "![file:///android_asset/questions/node_35/1.jpg]",
-    "![file:///android_asset/questions/node_35/2.jpg]",
-    "![file:///android_asset/questions/node_35/3.jpg]",
-    "![file:///android_asset/questions/node_35/4.jpg]"
+    "<img src=\"file:///android_asset/questions/node_35/1.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_35/2.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_35/3.jpg\">",
+    "<img src=\"file:///android_asset/questions/node_35/4.jpg\">"
   ],
   "answer": "C"
 }

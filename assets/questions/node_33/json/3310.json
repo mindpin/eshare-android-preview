@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-33",
   "kind": "single_choice",
-  "content": "```javascript\nparseFloat(\".5.6\")\n```\n代码的执行结果是以下哪一个？\n",
+  "content": "<pre><code class=\"javascript\">\nparseFloat(<span style=\"background-color:hsla(0,100%,50%,0.05)\"><span style=\"color:#710\">\"</span><span style=\"color:#D20\">.5.6</span><span style=\"color:#710\">\"</span></span>)\n</code></pre>\n代码的执行结果是以下哪一个？\n",
   "choices": [
     "0.5",
     "0.6",
