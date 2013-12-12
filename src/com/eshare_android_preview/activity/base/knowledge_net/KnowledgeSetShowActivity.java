@@ -17,6 +17,7 @@ import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.activity.base.HomeActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.base.view.knowledge_map.AniProxy;
 import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
@@ -163,7 +164,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
 
         ValueAnimator ani = ValueAnimator
                 .ofPropertyValuesHolder(topbar_pvh, pager_pvh)
-                .setDuration(HomeActivity.ANIMATE_DRUATION);
+                .setDuration(AniProxy.ANIMATE_DRUATION);
 
         ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -184,7 +185,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         ani.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
-                HomeActivity.instance.run_open_animate();
+                HomeActivity.map_view.run_open_animate();
             }
 
             @Override
@@ -206,7 +207,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
 
         ValueAnimator ani = ValueAnimator
                 .ofPropertyValuesHolder(topbar_pvh, pager_pvh)
-                .setDuration(HomeActivity.ANIMATE_DRUATION);
+                .setDuration(AniProxy.ANIMATE_DRUATION);
 
         ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -227,7 +228,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         ani.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
-                HomeActivity.instance.run_close_animate();
+                HomeActivity.map_view.run_close_animate();
             }
 
             @Override

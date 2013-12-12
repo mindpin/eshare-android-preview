@@ -4,19 +4,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.base.view.CircleView;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
 import com.eshare_android_preview.base.view.knowledge_map.SetPosition;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
-import com.nineoldandroids.animation.PropertyValuesHolder;
-import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,15 +19,11 @@ import java.util.List;
 
 
 public class HomeActivity extends EshareBaseActivity {
-    public static int ANIMATE_DRUATION = 400;
-    public static HomeActivity instance;
-
     public static KnowledgeMapView map_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.home);
-        instance = this;
         _init_knowledge_net();
         super.onCreate(savedInstanceState);
     }
@@ -41,7 +32,6 @@ public class HomeActivity extends EshareBaseActivity {
         map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
 
         KnowledgeSetsData.init();
-        AniProxy.init();
 
         _r_traversal(KnowledgeNet.instance());
 
@@ -84,20 +74,6 @@ public class HomeActivity extends EshareBaseActivity {
                 pos._put_knowledge_node_on_grid();
                 pos._put_pos_to_dash_path_endpoint_list();
             }
-        }
-    }
-
-    public void run_open_animate() {
-        if (null != AniProxy.opened_node) {
-            AniProxy.opened_node.toggle();
-            map_view.locked = true;
-        }
-    }
-
-    public void run_close_animate() {
-        if (null != AniProxy.opened_node) {
-            AniProxy.opened_node.toggle();
-            map_view.locked = false;
         }
     }
 
@@ -144,105 +120,6 @@ public class HomeActivity extends EshareBaseActivity {
 
         public static SetPosition get_pos_of_set(BaseKnowledgeSet set) {
             return pos_hashmap.get(set);
-        }
-    }
-
-    public static class AniProxy {
-        public static AniProxy opened_node;
-        static int[] tagget_icon_view_absolute_pos_px;
-
-        CircleView circle_view;
-        public ImageView icon_view;
-
-        boolean is_open = false;
-
-        int icon_view_left_margin_px;
-        int icon_view_top_margin_px;
-
-        public AniProxy(CircleView circle_view) {
-            this.circle_view = circle_view;
-        }
-
-        public static void init() {
-            opened_node = null;
-            tagget_icon_view_absolute_pos_px = new int[]{
-                    BaseUtils.dp_to_int_px(47),
-                    BaseUtils.dp_to_int_px(30)
-            };
-        }
-
-        public void set_icon_view(ImageView icon_view) {
-            this.icon_view = icon_view;
-
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
-            icon_view_left_margin_px = params.leftMargin;
-            icon_view_top_margin_px = params.topMargin;
-        }
-
-        public void toggle() {
-            if (opened_node != null && !opened_node.equals(this)) {
-                return;
-            }
-
-            circle_view.bringToFront();
-            icon_view.bringToFront();
-
-            if (is_open) {
-                is_open = false;
-                opened_node = null;
-
-                circle_view.set_radius_animate((float) SetPosition.CIRCLE_RADIUS_DP, ANIMATE_DRUATION);
-                set_icon_view_margin(icon_view_left_margin_px, icon_view_top_margin_px);
-
-            } else {
-                is_open = true;
-                opened_node = this;
-
-                circle_view.set_radius_animate((float) map_view.SCREEN_HEIGHT_DP, ANIMATE_DRUATION);
-                int[] margins = get_target_margin();
-                set_icon_view_margin(margins[0], margins[1]);
-            }
-        }
-
-        private void set_icon_view_margin(int margin_left, int margin_top) {
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
-
-
-            PropertyValuesHolder pvh_left = PropertyValuesHolder.ofFloat("margin_left", params.leftMargin, margin_left);
-            PropertyValuesHolder pvh_top = PropertyValuesHolder.ofFloat("margin_top", params.topMargin, margin_top);
-
-            ValueAnimator ani = ValueAnimator
-                    .ofPropertyValuesHolder(pvh_left, pvh_top)
-                    .setDuration(ANIMATE_DRUATION);
-
-            ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    float margin_left = (Float) valueAnimator.getAnimatedValue("margin_left");
-                    float margin_top = (Float) valueAnimator.getAnimatedValue("margin_top");
-
-                    RelativeLayout.LayoutParams p = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
-
-                    p.leftMargin = (int) margin_left;
-                    p.topMargin = (int) margin_top;
-                    icon_view.setLayoutParams(p);
-                }
-            });
-
-            ani.start();
-        }
-
-        private int[] get_target_margin() {
-            int[] current_icon_view_absolute_pos_px = new int[2];
-            icon_view.getLocationInWindow(current_icon_view_absolute_pos_px);
-
-            int x_off = current_icon_view_absolute_pos_px[0] - tagget_icon_view_absolute_pos_px[0];
-            int y_off = current_icon_view_absolute_pos_px[1] - tagget_icon_view_absolute_pos_px[1];
-
-            return new int[]{
-                    icon_view_left_margin_px - x_off,
-                    icon_view_top_margin_px - y_off
-            };
         }
     }
 }

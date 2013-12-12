@@ -31,7 +31,7 @@ public class SetPosition {
 
     public KnowledgeMapView map_view;
     public BaseKnowledgeSet set;
-    public HomeActivity.AniProxy ani_proxy;
+    public AniProxy ani_proxy;
 
     public float grid_left;
     public float grid_top;
@@ -123,7 +123,7 @@ public class SetPosition {
         cv.set_radius((float) CIRCLE_RADIUS_DP);
         map_view.nodes_paper.addView(cv);
 
-        ani_proxy = new HomeActivity.AniProxy(cv);
+        ani_proxy = new AniProxy(cv, map_view);
     }
 
     private void _draw_text() {
@@ -179,7 +179,7 @@ public class SetPosition {
             @Override
             public void onClick(View view) {
                 if (is_unlocked()){
-                    HomeActivity.AniProxy.opened_node = ani_proxy;
+                    map_view.opened_node = ani_proxy;
 
                     // open activity
                     Intent intent = new Intent(map_view.getContext(), KnowledgeSetShowActivity.class);

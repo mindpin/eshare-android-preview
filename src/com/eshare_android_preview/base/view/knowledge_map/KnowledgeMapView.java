@@ -26,6 +26,8 @@ public class KnowledgeMapView extends LockableScrollView {
     public ArrayList<DashPathEndpoint> dash_path_endpoint_list;
     public DashPathView dash_path_view;
 
+    public static AniProxy opened_node = null;
+
     public KnowledgeMapView(Context context) {
         super(context);
         init();
@@ -77,5 +79,19 @@ public class KnowledgeMapView extends LockableScrollView {
     private void _init_dash_path_view() {
         dash_path_view = new DashPathView(getContext());
         dash_path_endpoint_list = new ArrayList<DashPathEndpoint>();
+    }
+
+    public void run_open_animate() {
+        if (null != opened_node) {
+            opened_node.toggle();
+            locked = true;
+        }
+    }
+
+    public void run_close_animate() {
+        if (null != opened_node) {
+            opened_node.toggle();
+            locked = false;
+        }
     }
 }
