@@ -9,6 +9,11 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.eshare_android_preview.model.DayExpInfo;
+import com.eshare_android_preview.model.elog.ExperienceLog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ExperienceChartView extends View {
@@ -55,31 +60,51 @@ public class ExperienceChartView extends View {
 //        }
 
         paint.setColor(Color.BLACK);
-        canvas.drawLine(0, canvasHeight - locxAxisInPixels, canvasWidth,
-                canvasHeight - locxAxisInPixels, paint);
-        canvas.drawLine(locyAxisInPixels, 0, locyAxisInPixels, canvasHeight,
-                paint);
-
-
-
-        float temp = 0.0f;
-        int n = 3;
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(20.0f);
-        for (int i = 1; i <= 6; i++) {
-            // temp = Math.round(10 * (minx + (i - 1) * (maxx - minx) / n)) / 10;
-            temp = (float) i;
 
-            canvas.drawText("" + (int) temp,
-                    (float) toPixelInt(canvasWidth, minx, maxx, temp),
+        // 画出X轴
+        canvas.drawLine(0, canvasHeight - locxAxisInPixels, canvasWidth,
+                canvasHeight - locxAxisInPixels, paint);
+
+
+        // 控制刻度线粗细
+        paint.setStrokeWidth(7);
+
+        List<DayExpInfo> logs = ExperienceLog.history_info();
+
+
+
+        // 将X轴分成6等分，画出5条刻度线
+        for (int i = 0; i <= 4; i++) {
+            int xPosition = (int) (((i + 1) * canvasWidth / 6));
+            float yPosition = canvasHeight - locxAxisInPixels;
+
+            Log.d("position = ", xPosition + "");
+            Log.d("canvasWidth = ", canvasWidth + "");
+
+            DayExpInfo weekday = logs.get(i);
+            Log.d("date =",  weekday.day_of_week_str);
+
+
+            // 显示刻度条
+            canvas.drawLine(xPosition, yPosition,
+                xPosition, yPosition - 50, paint);
+
+
+            // 显示刻度数字
+            canvas.drawText("" + (i + 1), xPosition,
                     canvasHeight - locxAxisInPixels + 20, paint);
+
+            // 显示星期
+            canvas.drawText("" + weekday.day_of_week_str, xPosition,
+                    canvasHeight - locxAxisInPixels + 50, paint);
+
+
+            // 显示日期
+            canvas.drawText("" + weekday.day_of_month_str, xPosition,
+                    canvasHeight - locxAxisInPixels + 80, paint);
         }
-
-
-
-        canvas.drawText("" + maxx,
-                (float) toPixelInt(canvasWidth, minx, maxx, maxx),
-                canvasHeight - locxAxisInPixels + 20, paint);
 
     }
 
@@ -89,7 +114,7 @@ public class ExperienceChartView extends View {
         int[] pint = new int[value.length];
 
         for (int i = 0; i < value.length; i++) {
-            p[i] = ((value[i] - min) / (max - min)) *  pixels + .1 * pixels;
+            p[i] = ((value[i] - min) / (max - min)) *  pixels + .2 * pixels;
             pint[i] = (int) p[i];
         }
 
@@ -109,7 +134,7 @@ public class ExperienceChartView extends View {
         double p;
         int pint;
 
-        p = ((value - min) / (max - min)) * pixels + .1 * pixels;
+        p = ((value - min) / (max - min)) * pixels + .2 * pixels;
         pint = (int) p;
 
         return (pint);
