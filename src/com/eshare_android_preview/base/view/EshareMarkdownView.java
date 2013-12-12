@@ -10,13 +10,11 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.base.utils.CodefillBridge;
 import com.eshare_android_preview.base.utils.HtmlEmbeddable;
-import com.eshare_android_preview.base.utils.SimpleMarkupParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,10 +74,9 @@ public class EshareMarkdownView extends RelativeLayout {
         return child;
     }
 
-    public EshareMarkdownView set_markdown_content(String markup) {
+    public EshareMarkdownView set_markdown_content(String content) {
         try {
-            String html = SimpleMarkupParser.from_string(markup).output();
-            view.loadDataWithBaseURL(null, HtmlEmbeddable.fromString(html).output(), "text/html", "UTF-8", null);
+            view.loadDataWithBaseURL(null, HtmlEmbeddable.fromString(content).output(), "text/html", "UTF-8", null);
         } catch (IOException e) {
             e.printStackTrace();
         }
