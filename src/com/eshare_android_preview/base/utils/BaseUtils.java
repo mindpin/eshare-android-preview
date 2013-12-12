@@ -45,6 +45,20 @@ public class BaseUtils {
         sdf.applyPattern("MM月d日");
         return sdf.format(new Date(time_seconds * 1000));
     }
+    @SuppressLint("SimpleDateFormat")
+	public static String date_all_string(Date date) {
+		String DATE_FORMAT = "yyyy-MM-dd";
+		SimpleDateFormat sdf = new java.text.SimpleDateFormat(DATE_FORMAT);
+		String dateStr = sdf.format(date);
+		return dateStr;
+	}
+    @SuppressLint("SimpleDateFormat")
+	public static String date_all_string(long date) {
+		String DATE_FORMAT = "yyyy-MM-dd";
+		SimpleDateFormat sdf = new java.text.SimpleDateFormat(DATE_FORMAT);
+		String dateStr = sdf.format(date);
+		return dateStr;
+	}
     
     @SuppressLint("SimpleDateFormat")
 	public static String time_string(long time_seconds){

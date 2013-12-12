@@ -1,5 +1,6 @@
 package com.eshare_android_preview.model.elog;
 
+import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.model.DayExpInfo;
 import com.eshare_android_preview.model.database.ExperienceLogDBHelper;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
@@ -81,7 +82,13 @@ public class ExperienceLog implements Serializable {
     public static int get_exp_num_by_day(Calendar c){
 //        TODO by menxu
 //        需要返回 c 这一天当中获取的经验总数
-        return 0;
+    	int count= 0;
+    	for (ExperienceLog elog : ExperienceLogDBHelper.all()) {
+    		if (BaseUtils.date_all_string(elog.created_at).equals(BaseUtils.date_all_string(c.getTime()))) {
+    			count += elog.after_exp - elog.before_exp; 
+			}
+		}
+        return count;
     }
 
     public static List<DayExpInfo> history_info(){
