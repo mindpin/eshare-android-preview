@@ -1,27 +1,20 @@
 package com.eshare_android_preview.activity.base;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeSetShowActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
-import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
 import com.eshare_android_preview.base.view.knowledge_map.SetPosition;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
-import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.nineoldandroids.animation.PropertyValuesHolder;
 import com.nineoldandroids.animation.ValueAnimator;
 
@@ -88,94 +81,10 @@ public class HomeActivity extends EshareBaseActivity {
                     list.get(1).set_position(2.5F);
                 }
 
-                _put_knowledge_node_on_grid(pos);
-                _put_pos_to_dash_path_endpoint_list(pos);
+                pos._put_knowledge_node_on_grid();
+                pos._put_pos_to_dash_path_endpoint_list();
             }
         }
-    }
-
-    private void _put_knowledge_node_on_grid(SetPosition pos) {
-        _draw_circle(pos);
-        _draw_text(pos);
-        _draw_icon(pos);
-    }
-
-    private void _draw_circle(SetPosition pos) {
-        CircleView cv = new CircleView(this);
-        cv.set_color(pos.get_circle_color());
-        cv.set_circle_center_position((float) pos.circle_center_dp_left, (float) pos.circle_center_dp_top);
-        cv.set_radius((float) SetPosition.CIRCLE_RADIUS_DP);
-        map_view.nodes_paper.addView(cv);
-
-        pos.ani_proxy = new AniProxy(cv);
-    }
-
-    private void _draw_text(SetPosition pos) {
-        TextView tv = new TextView(this);
-
-        tv.setText(pos.set.get_name());
-        tv.setTextSize(BaseUtils.dp_to_int_px((float) pos.TEXT_SIZE));
-        tv.setGravity(Gravity.CENTER);
-        tv.setTextColor(Color.parseColor("#444444"));
-
-        int width_px = BaseUtils.dp_to_int_px((float) map_view.GRID_WIDTH_DP);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        double top = pos.text_dp_top;
-        params.setMargins(BaseUtils.dp_to_int_px((float) pos.grid_dp_left), BaseUtils.dp_to_int_px((float) top), 0, 0);
-        tv.setLayoutParams(params);
-
-        map_view.nodes_paper.addView(tv);
-
-        if (!pos.set.is_checkpoint()) {
-            TextView count_tv = new TextView(this);
-            KnowledgeSet set = (KnowledgeSet) pos.set;
-            count_tv.setText(set.get_learned_nodes_count() + "/" + set.nodes.size());
-            count_tv.setTextSize(BaseUtils.dp_to_int_px((float) pos.TEXT_SIZE));
-            count_tv.setGravity(Gravity.CENTER);
-            count_tv.setTextColor(Color.parseColor("#aaaaaa"));
-
-            RelativeLayout.LayoutParams ctv_params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
-            ctv_params.setMargins(BaseUtils.dp_to_int_px((float) pos.grid_dp_left), BaseUtils.dp_to_int_px((float) top + 18), 0, 0);
-            count_tv.setLayoutParams(ctv_params);
-
-            map_view.nodes_paper.addView(count_tv);
-        }
-    }
-
-    private void _draw_icon(final SetPosition pos) {
-        ImageView iv = new ImageView(this);
-
-        iv.setImageDrawable(pos.get_icon_drawable());
-
-        int px = BaseUtils.dp_to_int_px((float) SetPosition.CIRCLE_RADIUS_DP * 2);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(px, px);
-        params.setMargins(BaseUtils.dp_to_int_px((float) pos.circle_dp_left), BaseUtils.dp_to_int_px((float) pos.circle_dp_top), 0, 0);
-        iv.setLayoutParams(params);
-
-        map_view.nodes_paper.addView(iv);
-
-        pos.ani_proxy.set_icon_view(iv);
-
-        _set_icon_events(pos);
-    }
-
-    private void _set_icon_events(final SetPosition pos) {
-        final AniProxy proxy = pos.ani_proxy;
-
-        proxy.icon_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (pos.is_unlocked()){
-                    AniProxy.opened_node = pos.ani_proxy;
-
-                    // open activity
-                    Intent intent = new Intent(HomeActivity.this, KnowledgeSetShowActivity.class);
-                    intent.putExtra("set_id", pos.set.id);
-                    startActivity(intent);
-                }
-            }
-        });
     }
 
     public void run_open_animate() {
@@ -192,19 +101,6 @@ public class HomeActivity extends EshareBaseActivity {
         }
     }
 
-    private void _put_pos_to_dash_path_endpoint_list(SetPosition pos) {
-        for (BaseKnowledgeSet parent : pos.set.parents()) {
-            SetPosition parent_pos = KnowledgeSetsData.get_pos_of_set(parent);
-            float x1 = (float) parent_pos.circle_center_dp_left;
-            float y1 = (float) parent_pos.text_dp_top + 24 + (parent_pos.set.is_checkpoint() ? 0 : 18);
-            float x2 = (float) pos.circle_center_dp_left;
-            float y2 = (float) pos.circle_dp_top - 8;
-
-            DashPathEndpoint p1 = DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2);
-            map_view.dash_path_endpoint_list.add(p1);
-        }
-    }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -217,7 +113,7 @@ public class HomeActivity extends EshareBaseActivity {
         public List<BaseKnowledgeSet> children();
     }
 
-    private static class KnowledgeSetsData {
+    public static class KnowledgeSetsData {
         static HashMap<Integer, List<SetPosition>> deep_hashmap;
         static HashMap<BaseKnowledgeSet, SetPosition> pos_hashmap;
         static double paper_bottom;
@@ -246,17 +142,17 @@ public class HomeActivity extends EshareBaseActivity {
             }
         }
 
-        static SetPosition get_pos_of_set(BaseKnowledgeSet set) {
+        public static SetPosition get_pos_of_set(BaseKnowledgeSet set) {
             return pos_hashmap.get(set);
         }
     }
 
     public static class AniProxy {
-        static AniProxy opened_node;
+        public static AniProxy opened_node;
         static int[] tagget_icon_view_absolute_pos_px;
 
         CircleView circle_view;
-        ImageView icon_view;
+        public ImageView icon_view;
 
         boolean is_open = false;
 

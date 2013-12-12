@@ -1,11 +1,23 @@
 package com.eshare_android_preview.base.view.knowledge_map;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.eshare_android_preview.activity.base.HomeActivity;
+import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeSetShowActivity;
 import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.base.view.CircleView;
+import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
+import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +30,6 @@ public class SetPosition {
     public final static double TEXT_SIZE = 9;
 
     public KnowledgeMapView map_view;
-
     public BaseKnowledgeSet set;
     public HomeActivity.AniProxy ani_proxy;
 
@@ -62,7 +73,7 @@ public class SetPosition {
 
     @Override
     public boolean equals(Object o) {
-        return this.set.equals(((SetPosition) o).set);
+        return this.set.id.equals(((SetPosition) o).set.id);
     }
 
     public int get_circle_color() {
@@ -103,5 +114,99 @@ public class SetPosition {
     // 节点是否解锁（可学）
     public boolean is_unlocked() {
         return set.is_unlocked();
+    }
+
+    private void _draw_circle() {
+        CircleView cv = new CircleView(map_view.getContext());
+        cv.set_color(get_circle_color());
+        cv.set_circle_center_position((float) circle_center_dp_left, (float) circle_center_dp_top);
+        cv.set_radius((float) CIRCLE_RADIUS_DP);
+        map_view.nodes_paper.addView(cv);
+
+        ani_proxy = new HomeActivity.AniProxy(cv);
+    }
+
+    private void _draw_text() {
+        TextView tv = new TextView(map_view.getContext());
+
+        tv.setText(set.get_name());
+        tv.setTextSize(BaseUtils.dp_to_int_px((float) TEXT_SIZE));
+        tv.setGravity(Gravity.CENTER);
+        tv.setTextColor(Color.parseColor("#444444"));
+
+        int width_px = BaseUtils.dp_to_int_px((float) map_view.GRID_WIDTH_DP);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        double top = text_dp_top;
+        params.setMargins(BaseUtils.dp_to_int_px((float) grid_dp_left), BaseUtils.dp_to_int_px((float) top), 0, 0);
+        tv.setLayoutParams(params);
+
+        map_view.nodes_paper.addView(tv);
+
+        if (!set.is_checkpoint()) {
+            TextView count_tv = new TextView(map_view.getContext());
+            KnowledgeSet set = (KnowledgeSet) this.set;
+            count_tv.setText(set.get_learned_nodes_count() + "/" + set.nodes.size());
+            count_tv.setTextSize(BaseUtils.dp_to_int_px((float) TEXT_SIZE));
+            count_tv.setGravity(Gravity.CENTER);
+            count_tv.setTextColor(Color.parseColor("#aaaaaa"));
+
+            RelativeLayout.LayoutParams ctv_params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ctv_params.setMargins(BaseUtils.dp_to_int_px((float) grid_dp_left), BaseUtils.dp_to_int_px((float) top + 18), 0, 0);
+            count_tv.setLayoutParams(ctv_params);
+
+            map_view.nodes_paper.addView(count_tv);
+        }
+    }
+
+    private void _draw_icon() {
+        ImageView iv = new ImageView(map_view.getContext());
+
+        iv.setImageDrawable(get_icon_drawable());
+
+        int px = BaseUtils.dp_to_int_px((float) CIRCLE_RADIUS_DP * 2);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(px, px);
+        params.setMargins(BaseUtils.dp_to_int_px((float) circle_dp_left), BaseUtils.dp_to_int_px((float) circle_dp_top), 0, 0);
+        iv.setLayoutParams(params);
+
+        map_view.nodes_paper.addView(iv);
+
+        ani_proxy.set_icon_view(iv);
+    }
+
+    private void _set_icon_events() {
+        ani_proxy.icon_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (is_unlocked()){
+                    HomeActivity.AniProxy.opened_node = ani_proxy;
+
+                    // open activity
+                    Intent intent = new Intent(map_view.getContext(), KnowledgeSetShowActivity.class);
+                    intent.putExtra("set_id", set.id);
+                    map_view.getContext().startActivity(intent);
+                }
+            }
+        });
+    }
+
+    public void _put_knowledge_node_on_grid() {
+        _draw_circle();
+        _draw_text();
+        _draw_icon();
+        _set_icon_events();
+    }
+
+    public void _put_pos_to_dash_path_endpoint_list() {
+        for (BaseKnowledgeSet parent : set.parents()) {
+            SetPosition parent_pos = HomeActivity.KnowledgeSetsData.get_pos_of_set(parent);
+            float x1 = (float) parent_pos.circle_center_dp_left;
+            float y1 = (float) parent_pos.text_dp_top + 24 + (parent_pos.set.is_checkpoint() ? 0 : 18);
+            float x2 = (float) circle_center_dp_left;
+            float y2 = (float) circle_dp_top - 8;
+
+            DashPathEndpoint p1 = DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2);
+            map_view.dash_path_endpoint_list.add(p1);
+        }
     }
 }
