@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-32","kind":"fill","content":"```javascript\n  Object.prototype.isInteger = function () {\n    return (this.[%]().search(/^-?[0-9]+$/) == 0 )\n  }\n  alert (1235.6.isInteger());\n```\n上面的代码运行结果如下\n![file:///android_asset/questions/node_32/1.png]\n请用下面的选项补全代码\n","choices":["parseFloat","toString","to_Integer","undefined"],"answer":"toString"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "fill",
+  "content": "```javascript\nObject.prototype.isInteger = function () {\n  return (this.[%]().search(/^-?[0-9]+$/) == 0 )\n}\nalert (1235.6.isInteger());\n```\n上面的代码运行结果如下\n![file:///android_asset/questions/node_32/1.png]\n请用下面的选项补全代码\n",
+  "choices": [
+    "parseFloat",
+    "toString",
+    "to_Integer",
+    "undefined"
+  ],
+  "answer": "toString"
+}

@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "```ruby\n  var str = \"我们的\\\"爱人\\\"\";\n  var n = str.length;\n```\n上面的代码中，n 的值是\n",
+  "content": "```javascript\nvar str = \"我们的\\\"爱人\\\"\";\nvar n = str.length;\n```\n上面的代码中，n 的值是\n",
   "choices": [
     6,
     7,

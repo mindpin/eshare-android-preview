@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-32","kind":"multiple_choices","content":"```javascript\n  var num = 314;\n```\n把整数 314 转化为字符串，可用下面哪些方法来实现\n","choices":["num.toString()","String(num)","num + \"\"","num + 1"],"answer":"ABC"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "multiple_choices",
+  "content": "```javascript\nvar num = 314;\n```\n把 num 转化为字符串，可用下面哪些方法来实现\n",
+  "choices": [
+    "```javascript\nnum.toString()\n```\n",
+    "```javascript\nString(num)\n```\n",
+    "```javascript\nnum + \"\"\n```\n",
+    "```javascript\nnum + 1\n```\n"
+  ],
+  "answer": "ABC"
+}

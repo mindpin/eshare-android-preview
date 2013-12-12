@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-32","kind":"fill","content":"```javascript\n  function is_int(val){\n    if(([%](val) == parseInt(val)) && !isNaN(val)){\n        return true;\n    } else {\n        return false;\n    }\n  }\n  alert(is_int(12.22));\n```\n上面的代码运行结果如下\n![file:///android_asset/questions/node_32/1.png]\n请用下面的选项补全代码\n","choices":["parseFloat","parseStr","is_int","undefined"],"answer":"parseFloat"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "fill",
+  "content": "```javascript\nfunction is_int(val){\n  if(([%](val) == parseInt(val)) && !isNaN(val)){\n      return true;\n  } else {\n      return false;\n  }\n}\nalert(is_int(12.22));\n```\n上面的代码运行结果如下\n![file:///android_asset/questions/node_32/1.png]\n请用下面的选项补全代码\n",
+  "choices": [
+    "parseFloat",
+    "parseStr",
+    "is_int",
+    "undefined"
+  ],
+  "answer": "parseFloat"
+}

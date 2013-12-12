@@ -1,1 +1,11 @@
-{"knowledge_node_id":"node-31","kind":"multiple_choices","content":"![file:///android_asset/questions/node_31/13.jpg]\n如图，下面哪个代码的运行结果和图片一样\n","choices":["```javascript\nvar txt=\"Hello World!\";\nalert(txt.toUpperCase());\n```\n","```javascript\nvar txt=\"Hello World!\";\nalert(txt.toLowerCase());\n```\n","```javascript\nalert(\"HELLO WORLD!\");\n```\n"],"answer":"AC"}
+{
+  "knowledge_node_id": "node-31",
+  "kind": "multiple_choices",
+  "content": "![file:///android_asset/questions/node_31/13.jpg]\n如图，下面哪个代码的运行结果和图片一致\n",
+  "choices": [
+    "```javascript\nvar txt=\"Hello World!\";\nalert(txt.toUpperCase());\n```\n",
+    "```javascript\nvar txt=\"Hello World!\";\nalert(txt.toLowerCase());\n```\n",
+    "```javascript\nalert(\"HELLO WORLD!\");\n```\n"
+  ],
+  "answer": "AC"
+}

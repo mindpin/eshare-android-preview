@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-32","kind":"single_choice","content":"```javascript\n  alert(Math.ceil(1.5))\n```\n上面代码的运行结果，下面哪个是正确的\n","choices":[1,2,0,"undefined"],"answer":"B"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "single_choice",
+  "content": "```javascript\nvar result = Math.ceil(1.5)\n```\n上面的代码中，result 的值是\n",
+  "choices": [
+    1,
+    2,
+    0,
+    "undefined"
+  ],
+  "answer": "B"
+}

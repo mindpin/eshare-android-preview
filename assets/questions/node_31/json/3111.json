@@ -1,1 +1,6 @@
-{"knowledge_node_id":"node-31","kind":"true_false","content":"JavaScript 中的字符串是一组由16位值组成的不可变的有序序列","answer":"T"}
+{
+  "knowledge_node_id": "node-31",
+  "kind": "true_false",
+  "content": "JavaScript 中的字符串是一组由16位值组成的不可变的有序序列",
+  "answer": "T"
+}

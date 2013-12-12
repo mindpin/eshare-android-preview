@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "fill",
-  "content": "```javascript\n  1 == [%] // return true\n  0 == [%] // return true\n```\n请补全代码，让两个等式成立\n",
+  "content": "```javascript\n1 == [%] // return true\n0 == [%] // return true\n```\n请补全代码，让两个等式成立\n",
   "choices": [
     false,
     "\"true\"",

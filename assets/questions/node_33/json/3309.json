@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-33",
+  "kind": "multiple_choices",
+  "content": "以下哪几个表达方式是正确的？",
+  "choices": [
+    "3.",
+    ".5",
+    "4.7",
+    "06.8"
+  ],
+  "answer": "ABC"
+}

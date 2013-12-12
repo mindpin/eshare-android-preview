@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-33",
+  "kind": "multiple_choices",
+  "content": "![file:///android_asset/questions/node_33/2.jpg]\n下面哪些代码的运行结果和上图一致\n",
+  "choices": [
+    "```javascript\nalert(parseFloat(\".3a1\"))\n```\n",
+    "```javascript\nalert(parseFloat(\"0.3a1\"))\n```\n",
+    "```javascript\nalert(parseFloat(\"0.3e1\"))\n```\n",
+    "```javascript\nalert(parseFloat(\".3e1\"))\n```\n"
+  ],
+  "answer": "AB"
+}

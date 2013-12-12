@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-32","kind":"single_choice","content":"```javascript\n  var int_val = parseInt('077',10)\n```\n上面的代码中，int_val 的值是\n","choices":[0,7,77,10],"answer":"C"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "single_choice",
+  "content": "```javascript\nvar result = parseInt('077', 10)\n```\n上面的代码中，result 的值是\n",
+  "choices": [
+    0,
+    7,
+    77,
+    10
+  ],
+  "answer": "C"
+}

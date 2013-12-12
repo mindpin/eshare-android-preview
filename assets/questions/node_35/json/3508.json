@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "下面哪一个代表的时 反斜杠的转义\n",
+  "content": "![file:///android_asset/questions/node_35/13.jpg]\n下面的那段代码运行结果和上图一致\n",
   "choices": [
-    "u005C",
-    "u003F",
-    "u002B",
-    "u002A"
+    "```javascript\nalert(\"/n\\n/n\\n\\\\n\")\n```\n",
+    "```javascript\nalert(\"//n/n//n/n\\n\")\n```\n",
+    "```javascript\nvar str = \"//n\\\n//n\\\n\\n\n\"\nalert(str)\n```\n",
+    "```javascript\nvar str = \"/n\\\n/n\\\n\\\\n\n\"\nalert(str)\n```\n"
   ],
   "answer": "A"
 }

@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-32","kind":"single_choice","content":"```javascript\n  alert(Math.floor(88.77))\n```\n上面代码的运行结果，下面哪个是正确的\n","choices":[88,77,88.77,0],"answer":"A"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "single_choice",
+  "content": "```javascript\nvar result = Math.floor(88.77)\n```\n上面的代码中，result 的值是\n",
+  "choices": [
+    88,
+    77,
+    88.77,
+    0
+  ],
+  "answer": "A"
+}

@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "```ruby\n  var str = \"The image path is C:\\\\webstuff\\\\mypage\\\\gifs\\\\garden.gif\";\n  alert(str);\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "content": "```javascript\nvar str = \"The image path is C:\\\\webstuff\\\\mypage\\\\gifs\\\\garden.gif\";\nalert(str);\n```\n上面代码的运行结果，下面哪个是正确的\n",
   "choices": [
-    "The image path is C:/webstuff/mypage/gifs/garden.gif",
-    "The image path is C:\\webstuff\\mypage\\gifs\\garden.gif",
-    "The image path is C:\\\\webstuff\\\\mypage\\\\gifs\\\\garden.gif",
-    "The image path is C://webstuff//mypage//gifs//garden.gif"
+    "![file:///android_asset/questions/node_35/5.jpg]",
+    "![file:///android_asset/questions/node_35/6.jpg]",
+    "![file:///android_asset/questions/node_35/7.jpg]",
+    "![file:///android_asset/questions/node_35/8.jpg]"
   ],
   "answer": "B"
 }

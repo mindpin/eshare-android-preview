@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "single_choice",
-  "content": "```javascript\nvar con = false.constructor\n```\n上面的代码中，con 的值是\n",
+  "content": "```javascript\nvar result = false.constructor\n```\n上面的代码中，result 的值是\n",
   "choices": [
     "constructor",
     "Constructor",

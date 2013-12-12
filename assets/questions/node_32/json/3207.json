@@ -1,1 +1,6 @@
-{"knowledge_node_id":"node-32","kind":"true_false","content":"1 === 1.0","answer":"T"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "true_false",
+  "content": "```javascript\n1 === 1.0\n```\n代码中的等式是成立的\n",
+  "answer": "T"
+}

@@ -1,1 +1,12 @@
-{"knowledge_node_id":"node-31","kind":"single_choice","content":"```javascript\n  var str = \"Please visit A!\"\n  var n = str.replace(\"A\",\"B\");\n  alert(n)\n```\n上面代码的运行结果，下面哪个是正确的\n","choices":["![file:///android_asset/questions/node_31/9.jpg]","![file:///android_asset/questions/node_31/10.jpg]","![file:///android_asset/questions/node_31/11.jpg]","![file:///android_asset/questions/node_31/12.jpg]"],"answer":"A"}
+{
+  "knowledge_node_id": "node-31",
+  "kind": "single_choice",
+  "content": "```javascript\nvar str = \"Please visit A!\"\nvar n = str.replace(\"A\",\"B\");\nalert(n)\n```\n上面代码的运行结果，下面哪个是正确的\n",
+  "choices": [
+    "![file:///android_asset/questions/node_31/9.jpg]",
+    "![file:///android_asset/questions/node_31/10.jpg]",
+    "![file:///android_asset/questions/node_31/11.jpg]",
+    "![file:///android_asset/questions/node_31/12.jpg]"
+  ],
+  "answer": "A"
+}

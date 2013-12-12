@@ -1,1 +1,6 @@
-{"knowledge_node_id":"node-32","kind":"true_false","content":"typeof 9 == 'number'","answer":"T"}
+{
+  "knowledge_node_id": "node-32",
+  "kind": "true_false",
+  "content": "```javascript\ntypeof 9 == 'number'\n```\n代码中的等式是成立的\n",
+  "answer": "T"
+}
