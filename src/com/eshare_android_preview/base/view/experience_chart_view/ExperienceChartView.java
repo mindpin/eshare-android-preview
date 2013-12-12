@@ -9,6 +9,11 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.eshare_android_preview.model.DayExpInfo;
+import com.eshare_android_preview.model.elog.ExperienceLog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ExperienceChartView extends View {
@@ -62,17 +67,43 @@ public class ExperienceChartView extends View {
         canvas.drawLine(0, canvasHeight - locxAxisInPixels, canvasWidth,
                 canvasHeight - locxAxisInPixels, paint);
 
-        for (int i = 1; i <= 6; i++) {
-            int xPosition = (int) (((i - 1) * canvasWidth / 6));
+
+        // 控制刻度线粗细
+        paint.setStrokeWidth(7);
+
+        List<DayExpInfo> logs = ExperienceLog.history_info();
+
+
+
+        // 将X轴分成6等分，画出5条刻度线
+        for (int i = 0; i <= 4; i++) {
+            int xPosition = (int) (((i + 1) * canvasWidth / 6));
             float yPosition = canvasHeight - locxAxisInPixels;
 
             Log.d("position = ", xPosition + "");
             Log.d("canvasWidth = ", canvasWidth + "");
 
-            if (i > 1) {
-                canvas.drawLine(xPosition, yPosition,
-                    xPosition, yPosition - 50, paint);
-            }
+            DayExpInfo weekday = logs.get(i);
+            Log.d("date =",  weekday.day_of_week_str);
+
+
+            // 显示刻度条
+            canvas.drawLine(xPosition, yPosition,
+                xPosition, yPosition - 50, paint);
+
+
+            // 显示刻度数字
+            canvas.drawText("" + (i + 1), xPosition,
+                    canvasHeight - locxAxisInPixels + 20, paint);
+
+            // 显示星期
+            canvas.drawText("" + weekday.day_of_week_str, xPosition,
+                    canvasHeight - locxAxisInPixels + 50, paint);
+
+
+            // 显示日期
+            canvas.drawText("" + weekday.day_of_month_str, xPosition,
+                    canvasHeight - locxAxisInPixels + 80, paint);
         }
 
     }
