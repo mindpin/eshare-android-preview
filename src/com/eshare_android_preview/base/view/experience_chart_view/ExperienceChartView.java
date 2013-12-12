@@ -22,7 +22,8 @@ public class ExperienceChartView extends View {
     private float[] xvalues = { 0.0f };
     private float[] yvalues = { 0.0f };
     private float maxx = 0.0f, maxy = 0.0f, minx = 0.0f, miny = 0.0f,
-            locxAxis = 0.0f, locyAxis = 0.0f;
+            locxAxis = 0.0f, locyAxis = 0.0f,
+            yBottomPosition = 0.0f, yTopPosition = 0.0f;
     private int vectorLength;
 
 
@@ -30,7 +31,7 @@ public class ExperienceChartView extends View {
         super(context);
         this.xvalues = xvalues;
         this.yvalues = yvalues;
-        vectorLength = xvalues.length;
+        vectorLength = yvalues.length;
         paint = new Paint();
 
         getAxes(xvalues, yvalues);
@@ -42,43 +43,37 @@ public class ExperienceChartView extends View {
 
         float canvasHeight = getHeight();
         float canvasWidth = getWidth();
+
         int[] xvaluesInPixels = toPixel(canvasWidth, minx, maxx, xvalues);
-        int[] yvaluesInPixels = toPixel(canvasHeight, miny, maxy, yvalues);
         int locxAxisInPixels = toPixelInt(canvasHeight, miny, maxy, locxAxis);
         int locyAxisInPixels = toPixelInt(canvasWidth, minx, maxx, locyAxis);
+
+
+        float yTopPosition = (float) .2 * canvasHeight;
+        float yBottomPosition = canvasHeight - locxAxisInPixels;
 
         paint.setStrokeWidth(2);
         int grey = 200;
         canvas.drawARGB(255, grey, grey, grey);
 
-        // 输出折线
-//        for (int i = 0; i < vectorLength - 1; i++) {
-//            paint.setColor(Color.RED);
-//            canvas.drawLine(xvaluesInPixels[i], canvasHeight
-//                    - yvaluesInPixels[i], xvaluesInPixels[i + 1], canvasHeight
-//                    - yvaluesInPixels[i + 1], paint);
-//        }
-
         paint.setColor(Color.BLACK);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(20.0f);
 
-        // 画出X轴
-        canvas.drawLine(0, canvasHeight - locxAxisInPixels, canvasWidth,
-                canvasHeight - locxAxisInPixels, paint);
+        // 画出底部X轴
+        canvas.drawLine(0, yBottomPosition, canvasWidth, yBottomPosition, paint);
 
+        // 画出顶部X轴
+        canvas.drawLine(0, yTopPosition, canvasWidth, yTopPosition, paint);
 
         // 控制刻度线粗细
         paint.setStrokeWidth(7);
 
         List<DayExpInfo> logs = ExperienceLog.history_info();
 
-
-
         // 将X轴分成6等分，画出5条刻度线
         for (int i = 0; i <= 4; i++) {
             int xPosition = (int) (((i + 1) * canvasWidth / 6));
-            float yPosition = canvasHeight - locxAxisInPixels;
 
             Log.d("position = ", xPosition + "");
             Log.d("canvasWidth = ", canvasWidth + "");
@@ -88,22 +83,38 @@ public class ExperienceChartView extends View {
 
 
             // 显示刻度条
-            canvas.drawLine(xPosition, yPosition,
-                xPosition, yPosition - 50, paint);
+            paint.setColor(Color.BLACK);
+            canvas.drawLine(xPosition, yBottomPosition,
+                xPosition, yBottomPosition - 50, paint);
 
 
             // 显示刻度数字
             canvas.drawText("" + (i + 1), xPosition,
-                    canvasHeight - locxAxisInPixels + 20, paint);
+                    yBottomPosition + 20, paint);
 
             // 显示星期
             canvas.drawText("" + weekday.day_of_week_str, xPosition,
-                    canvasHeight - locxAxisInPixels + 50, paint);
+                    yBottomPosition + 50, paint);
 
 
             // 显示日期
             canvas.drawText("" + weekday.day_of_month_str, xPosition,
-                    canvasHeight - locxAxisInPixels + 80, paint);
+                    yBottomPosition + 80, paint);
+
+
+            // 画出经验值
+            Log.d("iii = ", i + "");
+            Log.d("exp = ", yvalues[i] + "");
+            paint.setColor(Color.RED);
+            int yExp = toHeightPixel(yBottomPosition - yTopPosition, miny, maxy, yvalues[i]);
+            canvas.drawCircle(xPosition, yExp + yTopPosition, 10, paint);
+
+            // 输出折线
+            paint.setColor(Color.GREEN);
+            int xPosition2 = (int) (((i + 2) * canvasWidth / 6));
+            int yExp2 = toHeightPixel(yBottomPosition - yTopPosition, miny, maxy, yvalues[i + 1]);
+            canvas.drawLine(xPosition, yExp + yTopPosition,
+                    xPosition2, yExp2 + yTopPosition, paint);
         }
 
     }
@@ -135,6 +146,16 @@ public class ExperienceChartView extends View {
         int pint;
 
         p = ((value - min) / (max - min)) * pixels + .2 * pixels;
+        pint = (int) p;
+
+        return (pint);
+    }
+
+    private int toHeightPixel(float pixels, float min, float max, float value) {
+        double p;
+        int pint;
+
+        p = ((value - min) / (max - min)) * .8 * pixels;
         pint = (int) p;
 
         return (pint);
