@@ -206,7 +206,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
     	AnimatorSet animSet = new AnimatorSet();
     	ObjectAnimator pvh_x = ObjectAnimator.ofFloat(tip_tv, "x", location[0],ss.width_dp+50);
     	pvh_x.setDuration(duration);
-    	ObjectAnimator pvh_alpha = ObjectAnimator.ofFloat(tip_tv, "alpha", 0f, 1f);
+    	ObjectAnimator pvh_alpha = ObjectAnimator.ofFloat(tip_tv, "alpha", 1f, 0f);
     	pvh_alpha.setDuration(duration);
     	
     	animSet.addListener(new AnimatorListener() {
