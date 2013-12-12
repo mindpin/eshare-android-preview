@@ -74,8 +74,14 @@ public class ExperienceLog implements Serializable {
         return state;
     }
 
-    public static int get_exp_num_by_day(Calendar c){
+    public static int get_exp_num_by_day_by_dev(Calendar c){
         return (int)(Math.random() * 100);
+    }
+
+    public static int get_exp_num_by_day(Calendar c){
+//        TODO by menxu
+//        需要返回 c 这一天当中获取的经验总数
+        return 0;
     }
 
     public static List<DayExpInfo> history_info(){
