@@ -9,17 +9,14 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
-import com.eshare_android_preview.activity.base.tab_activity.HomeActivity;
+import com.eshare_android_preview.activity.base.HomeActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
@@ -162,7 +159,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
 
     public void page_open_animate() {
         PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", BaseUtils.dp_to_px(-50), 0);
-        PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px((float) HomeActivity.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146));
+        PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px((float) HomeActivity.map_view.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146));
 
         ValueAnimator ani = ValueAnimator
                 .ofPropertyValuesHolder(topbar_pvh, pager_pvh)
@@ -205,7 +202,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
 
     public void page_close_animate() {
         PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", 0, BaseUtils.dp_to_px(-50));
-        PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px(146), BaseUtils.dp_to_px((float) HomeActivity.SCREEN_HEIGHT_DP));
+        PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px(146), BaseUtils.dp_to_px((float) HomeActivity.map_view.SCREEN_HEIGHT_DP));
 
         ValueAnimator ani = ValueAnimator
                 .ofPropertyValuesHolder(topbar_pvh, pager_pvh)

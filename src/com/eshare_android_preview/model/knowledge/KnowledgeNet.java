@@ -1,6 +1,6 @@
 package com.eshare_android_preview.model.knowledge;
 
-import com.eshare_android_preview.activity.base.tab_activity.HomeActivity;
+import com.eshare_android_preview.activity.base.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
