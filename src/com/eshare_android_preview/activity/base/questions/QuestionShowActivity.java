@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.base.utils.BaseUtils.ScreenSize;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.EshareMarkdownView;
 import com.eshare_android_preview.model.MultipleChoiceQuestionSelectAnswer;
@@ -32,6 +35,10 @@ import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
 import com.eshare_android_preview.model.elog.CurrentState;
 import com.eshare_android_preview.model.elog.ExperienceLog;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.ObjectAnimator;
 
 public class QuestionShowActivity extends EshareBaseActivity {
 
@@ -49,6 +56,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
     Button submit_answer_btn;
     Question question;
     QuestionSelectAnswer select_answer;
+    View tip_tv;
 
     @SuppressLint("WorldReadableFiles")
     @Override
@@ -160,9 +168,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
             choices_detail_ll.addView(choice_item_view);
         }
     }
-
+    
     public void click_on_submit_answer_btn(View view) {
-        View tip_tv;
         if (select_answer.is_correct()) {
             tip_tv = findViewById(R.id.answer_correct_tip_tv);
             test_paper.test_result.increase_correct_count();
@@ -171,7 +178,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
             test_paper.test_result.increase_error_count();
         }
         refresh_test_result();
-        tip_tv.setVisibility(View.VISIBLE);
+        
+        open_tip_tv_animation(tip_tv);
         
         if (test_paper.test_result.is_end()) {
 		   to_do_answer_error();
@@ -180,6 +188,44 @@ public class QuestionShowActivity extends EshareBaseActivity {
 		}else{
 		   to_do_next_question();
 		}
+    }
+    
+    private void open_tip_tv_animation(View tip_tv){
+    	tip_tv.setVisibility(View.VISIBLE);
+    	ScreenSize ss = BaseUtils.get_screen_size();
+    	ObjectAnimator anim_scale = ObjectAnimator.ofFloat(tip_tv, "y", ss.height_dp+50,ss.height_dp/2);
+        anim_scale.setDuration(500);
+        anim_scale.start();
+    }
+    private void close_tip_tv_animation(View tip_tv){
+    	int duration = 500;
+    	ScreenSize ss = BaseUtils.get_screen_size();
+    	final int[] location = new int[2];
+    	tip_tv.getLocationOnScreen(location);
+    	
+    	AnimatorSet animSet = new AnimatorSet();
+    	ObjectAnimator pvh_x = ObjectAnimator.ofFloat(tip_tv, "x", location[0],ss.width_dp+50);
+    	pvh_x.setDuration(duration);
+    	ObjectAnimator pvh_alpha = ObjectAnimator.ofFloat(tip_tv, "alpha", 0f, 1f);
+    	pvh_alpha.setDuration(duration);
+    	
+    	animSet.addListener(new AnimatorListener() {
+			@Override
+			public void onAnimationStart(Animator arg0) {}
+			@Override
+			public void onAnimationRepeat(Animator arg0) {}
+			@Override
+			public void onAnimationEnd(Animator arg0) {
+				Intent intent = new Intent(QuestionShowActivity.this, QuestionShowActivity.class);
+                startActivity(intent);
+                finish();
+			}
+			@Override
+			public void onAnimationCancel(Animator arg0) {}
+		});
+    	animSet.play(pvh_x).with(pvh_alpha);
+    	animSet.start();
+        
     }
 
     private void to_do_answer_error() {
@@ -223,9 +269,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
          next_question_btn.setOnClickListener(new OnClickListener() {
              @Override
              public void onClick(View v) {
-                 Intent intent = new Intent(QuestionShowActivity.this, QuestionShowActivity.class);
-                 startActivity(intent);
-                 finish();
+            	 close_tip_tv_animation(tip_tv);
              }
          });
     }
