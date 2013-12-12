@@ -2,7 +2,6 @@ package com.eshare_android_preview.activity.base;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -14,21 +13,18 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeSetShowActivity;
-import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
-import com.eshare_android_preview.base.view.KnowledgeMapView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
-import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
+import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
+import com.eshare_android_preview.base.view.knowledge_map.SetPosition;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.nineoldandroids.animation.PropertyValuesHolder;
 import com.nineoldandroids.animation.ValueAnimator;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -239,7 +235,7 @@ public class HomeActivity extends EshareBaseActivity {
                 deep_hashmap.put(set.deep, list);
             }
 
-            SetPosition pos = new SetPosition(set, list.size() + 1);
+            SetPosition pos = new SetPosition(set, list.size() + 1, map_view);
 
             if (!list.contains(pos)) {
                 list.add(pos);
@@ -255,97 +251,7 @@ public class HomeActivity extends EshareBaseActivity {
         }
     }
 
-    static private class SetPosition {
-        final static double CIRCLE_RADIUS_DP = 30; // 33.3333D;
-        final static double TEXT_SIZE = 9;
-
-        BaseKnowledgeSet set;
-        AniProxy ani_proxy;
-
-        float grid_left;
-        float grid_top;
-
-        double grid_dp_left;
-        double grid_dp_top;
-        double grid_dp_bottom;
-
-        double circle_dp_left;
-        double circle_dp_top;
-
-        double circle_center_dp_left;
-        double circle_center_dp_top;
-
-        double text_dp_top;
-
-        public SetPosition(BaseKnowledgeSet set, float grid_left) {
-            this.set = set;
-            set_position(grid_left);
-        }
-
-        public void set_position(float grid_left) {
-            this.grid_left = grid_left;
-            this.grid_top = set.deep;
-
-            this.grid_dp_left = (this.grid_left - 1) * map_view.GRID_WIDTH_DP;
-            this.grid_dp_top = (this.grid_top - 1) * map_view.GRID_HEIGHT_DP;
-            this.grid_dp_bottom = this.grid_dp_top + map_view.GRID_HEIGHT_DP;
-
-            this.circle_center_dp_left = this.grid_dp_left + map_view.GRID_WIDTH_DP / 2.0D;
-            this.circle_center_dp_top = this.grid_dp_top + map_view.GRID_WIDTH_DP / 2.0D;
-
-            this.circle_dp_left = this.circle_center_dp_left - CIRCLE_RADIUS_DP;
-            this.circle_dp_top = this.circle_center_dp_top - CIRCLE_RADIUS_DP;
-
-            this.text_dp_top = this.circle_center_dp_top + CIRCLE_RADIUS_DP + 4.0D;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            return this.set.equals(((SetPosition) o).set);
-        }
-
-        int get_circle_color() {
-            if (!is_unlocked()) {
-                return Color.parseColor("#eeeeee");
-            }
-
-            if (set.is_checkpoint()) {
-                return Color.parseColor("#fccd2d");
-            }
-
-            return Color.parseColor("#1cb0f6");
-        }
-
-        Drawable get_icon_drawable() {
-            String path = "knowledge_icons/basic_locked.png";
-
-            if (is_unlocked()) {
-                path = "knowledge_icons/basic.png";
-            }
-
-            if (set.is_checkpoint()) {
-                path = "knowledge_icons/checkpoint.png";
-            }
-
-            try {
-                InputStream stream = EshareApplication.context.getAssets().open(path);
-                Drawable drawable = Drawable.createFromStream(stream, null);
-                stream.close();
-
-                return drawable;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        // 节点是否解锁（可学）
-        boolean is_unlocked() {
-            return set.is_unlocked();
-        }
-    }
-
-    static class AniProxy {
+    public static class AniProxy {
         static AniProxy opened_node;
         static int[] tagget_icon_view_absolute_pos_px;
 

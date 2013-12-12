@@ -1,4 +1,4 @@
-package com.eshare_android_preview.base.view;
+package com.eshare_android_preview.base.view.knowledge_map;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.base.view.LockableScrollView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
 
