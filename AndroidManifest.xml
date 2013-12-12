@@ -75,8 +75,10 @@
             android:theme="@style/AppTranslucentTheme"
             android:name=".activity.base.knowledge_net.KnowledgeSetShowActivity"
             />
-        
+
         <activity android:name=".activity.base.expericence_of.ExperienceOfActiviey"></activity>
+        <activity android:name=".activity.base.experience.ExperienceChartActivity"/>
+
     </application>
 
 </manifest>

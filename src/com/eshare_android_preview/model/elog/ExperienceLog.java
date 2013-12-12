@@ -1,5 +1,6 @@
 package com.eshare_android_preview.model.elog;
 
+import com.eshare_android_preview.model.DayExpInfo;
 import com.eshare_android_preview.model.database.ExperienceLogDBHelper;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
@@ -7,6 +8,8 @@ import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -69,5 +72,27 @@ public class ExperienceLog implements Serializable {
         CurrentState state = new CurrentState();
         state.init_data();
         return state;
+    }
+
+    public static int get_exp_num_by_day_by_dev(Calendar c){
+        return (int)(Math.random() * 100);
+    }
+
+    public static int get_exp_num_by_day(Calendar c){
+//        TODO by menxu
+//        需要返回 c 这一天当中获取的经验总数
+        return 0;
+    }
+
+    public static List<DayExpInfo> history_info(){
+        ArrayList<DayExpInfo> result = new ArrayList<DayExpInfo>();
+
+        for(int i=-4; i<=0; i++){
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.DATE, i);
+            result.add(new DayExpInfo(c));
+        }
+
+        return result;
     }
 }
