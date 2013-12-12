@@ -48,11 +48,7 @@
             android:layout_height="80dp"
             android:layout_width="fill_parent"
             android:text="Dash Path Demo" />
-        <Button
-            android:id="@+id/to_first_btn"
-            android:layout_height="80dp"
-            android:layout_width="fill_parent"
-            android:text="to_first_btn" />
+
 
 
         <Button
@@ -60,6 +56,13 @@
                 android:layout_height="80dp"
                 android:layout_width="fill_parent"
                 android:text="experience_chart" />
+
+
+        <Button
+                android:id="@+id/to_first_btn"
+                android:layout_height="80dp"
+                android:layout_width="fill_parent"
+                android:text="to_first_btn" />
 
 
     </LinearLayout>

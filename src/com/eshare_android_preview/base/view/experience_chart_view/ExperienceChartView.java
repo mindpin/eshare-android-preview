@@ -16,22 +16,35 @@ import java.util.List;
 public class ExperienceChartView extends View {
 
     private Paint paint;
-    private float[] xvalues = { 0.0f };
-    private float[] yvalues = { 0.0f };
-    private float maxx = 0.0f, maxy = 0.0f, minx = 0.0f, miny = 0.0f,
-            locxAxis = 0.0f, locyAxis = 0.0f,
-            vectorLength = 0.0f;
+    private float[] yvalues = new float[5];
+    private float maxy = 0.0f, miny = 0.0f, vectorLength = 0.0f;
 
 
-    public ExperienceChartView(Context context, float[] xvalues, float[] yvalues) {
+    // 日期信息
+    private List<DayExpInfo> logs = ExperienceLog.history_info();
+
+
+    public ExperienceChartView(Context context) {
         super(context);
-        this.xvalues = xvalues;
-        this.yvalues = yvalues;
-        this.vectorLength = xvalues.length;
+        this.vectorLength = 6;
+        this.yvalues = getYvalues();
+
         paint = new Paint();
 
-        getAxes(xvalues, yvalues);
+        getAxes(yvalues);
 
+    }
+
+
+
+    private float[] getYvalues() {
+        float[] yList = new float[5];
+        for (int i = 0; i <= vectorLength - 2; i++) {
+            DayExpInfo weekday = logs.get(i);
+            yList[i] = weekday.exp_num;
+        }
+
+        return yList;
     }
 
     @Override
@@ -40,10 +53,9 @@ public class ExperienceChartView extends View {
         float canvasHeight = getHeight();
         float canvasWidth = getWidth();
 
-        int yAxisInPixels = toPixelInt(canvasHeight, miny, maxy, locyAxis);
-
         float yTopPos = (float) .2 * canvasHeight;
-        float yBottomPos = canvasHeight - yAxisInPixels;
+        float yBottomPos = (float) .8 * canvasHeight;
+        float yRange = yBottomPos - yTopPos;
 
         // 刻度线 Y轴位置
         float yMarkPos = yBottomPos - 50;
@@ -71,8 +83,7 @@ public class ExperienceChartView extends View {
         // 控制刻度线粗细
         paint.setStrokeWidth(7);
 
-        // 日期信息
-        List<DayExpInfo> logs = ExperienceLog.history_info();
+
 
         // 将X轴分成6等分，画出5条刻度线
         for (int i = 0; i <= vectorLength - 2; i++) {
@@ -111,17 +122,26 @@ public class ExperienceChartView extends View {
             paint.setColor(Color.RED);
 
             // 经验值在画布 Y轴范围
-            float experienceScale = yBottomPos - yTopPos;
-
-            int yExp = toHeightPixel(experienceScale, miny, maxy, weekday.exp_num);
+            yTopPos = yTopPos + 5;
+            int yExp = toPixel(yRange, miny, maxy, weekday.exp_num);
             canvas.drawCircle(xPos, yExp + yTopPos, 10, paint);
+
+            Log.d("------", "-----");
+            Log.d("exp_num", weekday.exp_num + "");
+            Log.d("miny = ", miny + "");
+            Log.d("maxy = ", maxy + "");
+            Log.d("yExp = ", yExp + "");
+            Log.d("------", "-----");
 
             // 输出折线
             if (i < 4) {
                 DayExpInfo nextWeekday = logs.get(i + 1);
                 paint.setColor(Color.GREEN);
                 int xNextPos = (int) (((i + 2) * canvasWidth / vectorLength));
-                int yNextExp = toHeightPixel(experienceScale, miny, maxy, nextWeekday.exp_num);
+
+
+
+                int yNextExp = toPixel(yRange, miny, maxy, nextWeekday.exp_num);
                 canvas.drawLine(xPos, yExp + yTopPos,
                         xNextPos, yNextExp + yTopPos, paint);
             }
@@ -131,42 +151,20 @@ public class ExperienceChartView extends View {
     }
 
 
-    private int[] toPixel(float pixels, float min, float max, float[] value) {
-        double[] p = new double[value.length];
-        int[] pint = new int[value.length];
+    private void getAxes(float[] yvalues) {
 
-        for (int i = 0; i < value.length; i++) {
-            p[i] = ((value[i] - min) / (max - min)) *  pixels + .2 * pixels;
-            pint[i] = (int) p[i];
-        }
-
-        return (pint);
-    }
-
-    private void getAxes(float[] xvalues, float[] yvalues) {
-
-        minx = getMin(xvalues);
         miny = getMin(yvalues);
-        maxx = getMax(xvalues);
         maxy = getMax(yvalues);
 
     }
 
-    private int toPixelInt(float pixels, float min, float max, float value) {
-        double p;
-        int pint;
 
-        p = ((value - min) / (max - min)) * pixels + .2 * pixels;
-        pint = (int) p;
-
-        return (pint);
-    }
-
-    private int toHeightPixel(float pixels, float min, float max, float value) {
+    private int toPixel(float pixels, float min, float max, float value) {
         double p;
         int pint;
 
         p = ((value - min) / (max - min)) * .8 * pixels;
+
         pint = (int) p;
 
         return (pint);
