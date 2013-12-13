@@ -213,6 +213,7 @@ public class ExperienceChartView extends View {
 
     public void set_yvalue(Float value){
         yvalues[yvalues.length - 1] = value;
+        getAxes(yvalues);
         invalidate();
         requestLayout();
     }
@@ -220,10 +221,10 @@ public class ExperienceChartView extends View {
 
     public void run_animation() {
         final int length = vectorLength - 2;
-        float prev_exp = yvalues[length];
-        float current_exp = yvalues[length] - dynamic_exp;
+        float prev_exp_pos = yvalues[length];
+        float current_exp_pos = yvalues[length] - dynamic_exp;
 
-        ValueAnimator animation = ValueAnimator.ofFloat(prev_exp, current_exp );
+        ValueAnimator animation = ValueAnimator.ofFloat(prev_exp_pos, current_exp_pos );
         animation.setDuration(500);
         animation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
