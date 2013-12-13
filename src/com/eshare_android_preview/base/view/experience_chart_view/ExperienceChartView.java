@@ -56,7 +56,7 @@ public class ExperienceChartView extends View {
         paint = new Paint();
         paint.setAntiAlias(true);
 
-        getAxes(yvalues);
+        get_axes(yvalues);
     }
 
     private float[] get_yvalues() {
@@ -82,7 +82,7 @@ public class ExperienceChartView extends View {
         float yRange = yBottomPos - yTopPos;
 
         // 刻度线 Y轴位置
-        float yMarkPos = yBottomPos - 50;
+        float yMarkPos = yBottomPos - 30;
 
         // 星期线 Y轴位置
         float yWeekPos = yBottomPos + 50;
@@ -168,14 +168,14 @@ public class ExperienceChartView extends View {
 
             // 输出经验值圆圈
             paint.setColor(Color.parseColor("#333333"));
-            canvas.drawCircle(xPos, yExp + yTopPos, 30, paint);
+            canvas.drawCircle(xPos, yExp + yTopPos, 20, paint);
 
         }
 
     }
 
 
-    private void getAxes(float[] yvalues) {
+    private void get_axes(float[] yvalues) {
 
         miny = get_min(yvalues);
         maxy = get_max(yvalues);
@@ -213,7 +213,7 @@ public class ExperienceChartView extends View {
 
     public void set_yvalue(Float value){
         yvalues[yvalues.length - 1] = value;
-        getAxes(yvalues);
+        get_axes(yvalues);
         invalidate();
         requestLayout();
     }
