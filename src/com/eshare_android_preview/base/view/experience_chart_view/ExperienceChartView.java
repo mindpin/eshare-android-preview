@@ -89,7 +89,7 @@ public class ExperienceChartView extends View {
         float y_bottom_pos = (float) .8 * canvas_height;
 
         // 经验值显示的画布范围
-        float yRange = (float) ((y_bottom_pos - y_top_pos) * .7);
+        float y_range = (float) ((y_bottom_pos - y_top_pos) * .75);
 
         // 刻度线 Y轴位置, 在X轴上方30像素
         float y_mark_pos = y_bottom_pos - 30;
@@ -137,7 +137,7 @@ public class ExperienceChartView extends View {
 
             // 经验值在画布 Y轴范围, 为了不碰到最上面的线，所以多加 10
             y_top_pos = y_top_pos + 10;
-            int yExp = to_pixel(yRange, miny, maxy, yvalues[i]);
+            int yExp = to_pixel(y_range, miny, maxy, yvalues[i]);
 
 
             // 输出折线
@@ -145,7 +145,7 @@ public class ExperienceChartView extends View {
                 paint.setColor(Color.parseColor("#666666"));
                 int xNextPos = (int) (((i + 2) * canvas_width / vectorLength));
 
-                int yNextExp = to_pixel(yRange, miny, maxy, yvalues[i + 1]);
+                int yNextExp = to_pixel(y_range, miny, maxy, yvalues[i + 1]);
                 canvas.drawLine(xPos, yExp + y_top_pos,
                         xNextPos, yNextExp + y_top_pos, paint);
             }
@@ -167,10 +167,8 @@ public class ExperienceChartView extends View {
 
 
     private void get_axes(float[] yvalues) {
-
         miny = get_min(yvalues);
         maxy = get_max(yvalues);
-
     }
 
 
