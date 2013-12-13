@@ -26,13 +26,13 @@ public class ExperienceOfView extends View{
 	
 	private int rect_color = Color.GREEN; // 背景矩形颜色
 	
-	private Float left = 60F;  // 矩形的 left
-	private Float top = 20F;   // 矩形的 top
+	private Float left = 40F;  // 矩形的 left
+	private Float top = 25F;   // 矩形的 top
 	
 	private Float rect_width = 220F; // 矩形里面的初始长
 	
 	private Float rect_width_fill = 220F;
-	private Float rect_height = 50F;	
+	private Float rect_height = 60F;	
 	
 	// 圆
 	private Float circle_radius = 30F; // 圆半径
@@ -48,6 +48,8 @@ public class ExperienceOfView extends View{
 	
 	//线条 边
 	private int line_stroke_width = 5;
+	private int line_fine_width = 0;
+	
 	private int line_color = Color.argb(100, 0, 0, 0);
 	
 	// current_level
@@ -83,7 +85,7 @@ public class ExperienceOfView extends View{
 		this.circle_left_cx =  left;
 		this.circle_left_cy =  top + rect_height/2 - line_stroke_width*2;
 		
-		this.circle_right_cx = circle_left_cx + rect_width_fill - circle_radius - circle_left_cx/2 ;
+		this.circle_right_cx = rect_width_fill;
 		this.circle_right_cy = circle_left_cy;
 		
 		if(init_view){
@@ -109,10 +111,11 @@ public class ExperienceOfView extends View{
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeWidth(line_stroke_width);
 		paint.setColor(line_color);
-		canvas.drawRect(left, top-line_stroke_width, rect_width_fill, rect_height+line_stroke_width, paint);
+		canvas.drawRect(left, top, rect_width_fill, rect_height, paint);
 		
 		paint.setStyle(Paint.Style.FILL);
 		paint.setColor(rect_color);
+		paint.setStrokeWidth(line_fine_width);
 		canvas.drawRect(left, top, rect_width, rect_height, paint);
 	}
 
@@ -126,6 +129,7 @@ public class ExperienceOfView extends View{
 		canvas.drawCircle(circle_left_cx, circle_left_cy, circle_radius+line_stroke_width, paint);
 		
 		paint.setColor(circle_color);
+		paint.setStrokeWidth(line_fine_width);
 		canvas.drawCircle(circle_left_cx, circle_left_cy, circle_radius, paint);	
 	}
 	
@@ -139,6 +143,7 @@ public class ExperienceOfView extends View{
 		canvas.drawCircle(circle_right_cx, circle_right_cy, circle_radius+line_stroke_width, paint);
 		
 		paint.setColor(circle_color);
+		paint.setStrokeWidth(line_fine_width);
 		canvas.drawCircle(circle_right_cx, circle_right_cy, circle_radius, paint);
 	}
 	
