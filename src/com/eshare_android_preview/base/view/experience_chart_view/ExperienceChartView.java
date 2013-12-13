@@ -175,9 +175,8 @@ public class ExperienceChartView extends View {
 
 
     private void get_axes(float[] yvalues) {
-        // 比例范围是从经验值里取最大值跟最小值分别加10 跟 减10
         miny = get_min(yvalues) - 10;
-        maxy = get_max(yvalues) + 10;
+        maxy = get_max(yvalues);
     }
 
 
