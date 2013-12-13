@@ -147,27 +147,27 @@ public class ExperienceChartView extends View {
 
 
             // 输出折线
-            int yExp = to_pixel(y_range, miny, maxy, yvalues[i]);
+            int y_exp = to_pixel(y_range, miny, maxy, yvalues[i]);
             if (i < 4) {
                 paint.setColor(Color.parseColor("#666666"));
-                int xNextPos = (int) (((i + 2) * canvas_width / vectorLength));
+                int x_next_pos = (int) (((i + 2) * canvas_width / vectorLength));
 
-                int yNextExp = to_pixel(y_range, miny, maxy, yvalues[i + 1]);
-                canvas.drawLine(x_pos, yExp + y_top_pos,
-                        xNextPos, yNextExp + y_top_pos, paint);
+                int y_next_exp = to_pixel(y_range, miny, maxy, yvalues[i + 1]);
+                canvas.drawLine(x_pos, y_exp + y_top_pos,
+                        x_next_pos, y_next_exp + y_top_pos, paint);
             }
 
             Log.d("------", "-----");
             Log.d("exp_num", weekday.exp_num + "");
             Log.d("miny = ", miny + "");
             Log.d("maxy = ", maxy + "");
-            Log.d("yExp = ", yExp + "");
+            Log.d("yExp = ", y_exp + "");
             Log.d("------", "-----");
 
 
             // 输出经验值圆圈
             paint.setColor(Color.parseColor("#333333"));
-            canvas.drawCircle(x_pos, yExp + y_top_pos, radius, paint);
+            canvas.drawCircle(x_pos, y_exp + y_top_pos, radius, paint);
 
         }
 
