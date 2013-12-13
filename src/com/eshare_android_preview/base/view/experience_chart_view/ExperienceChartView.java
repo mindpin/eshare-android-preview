@@ -109,18 +109,11 @@ public class ExperienceChartView extends View {
         // 控制刻度线粗细
         paint.setStrokeWidth(7);
 
-
-
         // 将X轴分成6等分，画出5条刻度线
         for (int i = 0; i <= vectorLength - 2; i++) {
             int xPos = (int) (((i + 1) * canvas_width / vectorLength));
 
-            Log.d("position = ", xPos + "");
-            Log.d("canvas_width = ", canvas_width + "");
-
             DayExpInfo weekday = logs.get(i);
-            Log.d("date =",  weekday.day_of_week_str);
-
 
             // 显示刻度条
             paint.setColor(Color.BLACK);
@@ -141,10 +134,6 @@ public class ExperienceChartView extends View {
             canvas.drawText("" + weekday.day_of_month_str, xPos,
                     y_date_pos, paint);
 
-
-            // 画出经验值
-            Log.d("iii = ", i + "");
-            Log.d("exp = ", weekday.exp_num + "");
 
             // 经验值在画布 Y轴范围, 为了不碰到最上面的线，所以多加 10
             y_top_pos = y_top_pos + 10;
