@@ -168,8 +168,8 @@ public class ExperienceChartView extends View {
 
 
     private void get_axes(float[] yvalues) {
-        miny = get_min(yvalues);
-        maxy = get_max(yvalues);
+        miny = get_min(yvalues) - 10;
+        maxy = get_max(yvalues) + 10;
     }
 
 
