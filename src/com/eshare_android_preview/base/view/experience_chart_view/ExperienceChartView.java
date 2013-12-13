@@ -45,6 +45,7 @@ public class ExperienceChartView extends View {
         this.yvalues = getYvalues();
 
         paint = new Paint();
+        paint.setAntiAlias(true);
 
         getAxes(yvalues);
     }
@@ -140,7 +141,7 @@ public class ExperienceChartView extends View {
             // 输出折线
             if (i < 4) {
                 DayExpInfo nextWeekday = logs.get(i + 1);
-                paint.setColor(Color.GREEN);
+                paint.setColor(Color.parseColor("#666666"));
                 int xNextPos = (int) (((i + 2) * canvasWidth / vectorLength));
 
                 int yNextExp = toPixel(yRange, miny, maxy, nextWeekday.exp_num);
@@ -155,8 +156,8 @@ public class ExperienceChartView extends View {
             Log.d("yExp = ", yExp + "");
             Log.d("------", "-----");
 
-            paint.setColor(Color.RED);
-            canvas.drawCircle(xPos, yExp + yTopPos, 10, paint);
+            paint.setColor(Color.parseColor("#333333"));
+            canvas.drawCircle(xPos, yExp + yTopPos, 30, paint);
 
         }
 
