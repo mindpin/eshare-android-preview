@@ -13,20 +13,30 @@ import com.eshare_android_preview.model.DayExpInfo;
 import com.eshare_android_preview.model.elog.ExperienceLog;
 import java.util.List;
 
+import com.nineoldandroids.animation.ValueAnimator;
+
+
 
 public class ExperienceChartView extends View {
 
     private Paint paint;
+    private int dynamic_exp, vectorLength = 6;
     private float[] yvalues = new float[5];
-    private float maxy = 0.0f, miny = 0.0f, vectorLength = 0.0f;
+    private float maxy = 0.0f, miny = 0.0f;
 
 
     // 日期信息
     private List<DayExpInfo> logs = ExperienceLog.history_info();
 
-
     public ExperienceChartView(Context context) {
         super(context);
+        init();
+    }
+
+
+    public ExperienceChartView(Context context, int dynamic) {
+        super(context);
+        this.dynamic_exp = dynamic;
         init();
     }
 
@@ -41,8 +51,7 @@ public class ExperienceChartView extends View {
     }
 
     private void init(){
-        this.vectorLength = 6;
-        this.yvalues = getYvalues();
+        this.yvalues = get_yvalues();
 
         paint = new Paint();
         paint.setAntiAlias(true);
@@ -50,7 +59,7 @@ public class ExperienceChartView extends View {
         getAxes(yvalues);
     }
 
-    private float[] getYvalues() {
+    private float[] get_yvalues() {
         float[] yList = new float[5];
         for (int i = 0; i <= vectorLength - 2; i++) {
             DayExpInfo weekday = logs.get(i);
@@ -68,6 +77,8 @@ public class ExperienceChartView extends View {
 
         float yTopPos = (float) .2 * canvasHeight;
         float yBottomPos = (float) .8 * canvasHeight;
+
+        // 经验值显示的画布范围
         float yRange = yBottomPos - yTopPos;
 
         // 刻度线 Y轴位置
@@ -135,16 +146,15 @@ public class ExperienceChartView extends View {
 
             // 经验值在画布 Y轴范围
             yTopPos = yTopPos + 5;
-            int yExp = toPixel(yRange, miny, maxy, weekday.exp_num);
+            int yExp = to_pixel(yRange, miny, maxy, yvalues[i]);
 
 
             // 输出折线
             if (i < 4) {
-                DayExpInfo nextWeekday = logs.get(i + 1);
                 paint.setColor(Color.parseColor("#666666"));
                 int xNextPos = (int) (((i + 2) * canvasWidth / vectorLength));
 
-                int yNextExp = toPixel(yRange, miny, maxy, nextWeekday.exp_num);
+                int yNextExp = to_pixel(yRange, miny, maxy, yvalues[i + 1]);
                 canvas.drawLine(xPos, yExp + yTopPos,
                         xNextPos, yNextExp + yTopPos, paint);
             }
@@ -156,6 +166,7 @@ public class ExperienceChartView extends View {
             Log.d("yExp = ", yExp + "");
             Log.d("------", "-----");
 
+            // 输出经验值圆圈
             paint.setColor(Color.parseColor("#333333"));
             canvas.drawCircle(xPos, yExp + yTopPos, 30, paint);
 
@@ -166,13 +177,13 @@ public class ExperienceChartView extends View {
 
     private void getAxes(float[] yvalues) {
 
-        miny = getMin(yvalues);
-        maxy = getMax(yvalues);
+        miny = get_min(yvalues);
+        maxy = get_max(yvalues);
 
     }
 
 
-    private int toPixel(float pixels, float min, float max, float value) {
+    private int to_pixel(float pixels, float min, float max, float value) {
         double p;
         int pint;
 
@@ -183,7 +194,7 @@ public class ExperienceChartView extends View {
         return (pint);
     }
 
-    private float getMax(float[] v) {
+    private float get_max(float[] v) {
         float largest = v[0];
         for (int i = 0; i < v.length; i++)
             if (v[i] > largest)
@@ -191,12 +202,39 @@ public class ExperienceChartView extends View {
         return largest;
     }
 
-    private float getMin(float[] v) {
+    private float get_min(float[] v) {
         float smallest = v[0];
         for (int i = 0; i < v.length; i++)
             if (v[i] < smallest)
                 smallest = v[i];
         return smallest;
+    }
+
+
+    public void set_yvalue(Float value){
+        yvalues[yvalues.length - 1] = value;
+        invalidate();
+        requestLayout();
+    }
+
+
+    public void run_animation() {
+        final int length = vectorLength - 2;
+        float prev_exp = yvalues[length];
+        float current_exp = yvalues[length] - dynamic_exp;
+
+        ValueAnimator animation = ValueAnimator.ofFloat(prev_exp, current_exp );
+        animation.setDuration(500);
+        animation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+
+                float v = (Float) animation.getAnimatedValue();
+                set_yvalue(v);
+            }
+        });
+        animation.start();
     }
 
 }
