@@ -15,13 +15,6 @@ public class ExperienceChartActivity extends EshareBaseActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.experience_chart);
-        LinearLayout root_view = (LinearLayout)findViewById(R.id.experience_chart);
-
-        ExperienceChartView graph = new ExperienceChartView(this);
-
-        root_view.addView(graph);
-
         super.onCreate(savedInstanceState);
-
     }
 }

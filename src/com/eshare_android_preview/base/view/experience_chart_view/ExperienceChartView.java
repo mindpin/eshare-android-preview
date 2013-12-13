@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
@@ -26,16 +27,27 @@ public class ExperienceChartView extends View {
 
     public ExperienceChartView(Context context) {
         super(context);
+        init();
+    }
+
+    public ExperienceChartView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+    public ExperienceChartView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init();
+    }
+
+    private void init(){
         this.vectorLength = 6;
         this.yvalues = getYvalues();
 
         paint = new Paint();
 
         getAxes(yvalues);
-
     }
-
-
 
     private float[] getYvalues() {
         float[] yList = new float[5];
