@@ -144,8 +144,8 @@ public class ExperienceChartView extends View {
             Log.d("iii = ", i + "");
             Log.d("exp = ", weekday.exp_num + "");
 
-            // 经验值在画布 Y轴范围
-            yTopPos = yTopPos + 5;
+            // 经验值在画布 Y轴范围, 为了不碰到最上面的线，所以多加 10
+            yTopPos = yTopPos + 10;
             int yExp = to_pixel(yRange, miny, maxy, yvalues[i]);
 
 
