@@ -87,10 +87,10 @@ public class ExperienceChartView extends View {
 
         float top_pos = (float) .1 * canvas_height;
         float y_top_pos = (float) .2 * canvas_height;
-        float y_bottom_pos = (float) .8 * canvas_height;
+        float y_bottom_pos = (float) .85 * canvas_height;
 
         // 经验值显示的画布范围
-        float y_range = (float) ((y_bottom_pos - y_top_pos) * .75);
+        float y_range = (float) ((y_bottom_pos - y_top_pos) * .8);
 
         // 刻度线 Y轴位置, 在X轴上方30像素
         float y_mark_pos = y_bottom_pos - 30;
