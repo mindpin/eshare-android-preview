@@ -157,7 +157,6 @@ public class ExperienceChartView extends View {
             Log.d("yExp = ", yExp + "");
             Log.d("------", "-----");
 
-            Log.d("hhhh = ", (int)(3.6) + "");
 
             // 输出经验值圆圈
             paint.setColor(Color.parseColor("#333333"));
