@@ -136,11 +136,8 @@ public class ExperienceChartView extends View {
                     y_date_pos, paint);
 
 
-            // 经验值在画布 Y轴范围, 为了不碰到最上面的线，所以多加 10
-            int yExp = to_pixel(y_range, miny, maxy, yvalues[i]);
-
-
             // 输出折线
+            int yExp = to_pixel(y_range, miny, maxy, yvalues[i]);
             if (i < 4) {
                 paint.setColor(Color.parseColor("#666666"));
                 int xNextPos = (int) (((i + 2) * canvas_width / vectorLength));
