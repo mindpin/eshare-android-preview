@@ -6,6 +6,6 @@
               android:layout_height="match_parent">
 
     <com.eshare_android_preview.base.view.experience_chart_view.ExperienceChartView
-        android:layout_height="200dp"
-        android:layout_width="200dp" />
+        android:layout_height="500dp"
+        android:layout_width="300dp" />
 </LinearLayout>

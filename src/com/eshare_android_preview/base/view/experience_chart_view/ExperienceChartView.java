@@ -131,12 +131,22 @@ public class ExperienceChartView extends View {
             // 画出经验值
             Log.d("iii = ", i + "");
             Log.d("exp = ", weekday.exp_num + "");
-            paint.setColor(Color.RED);
 
             // 经验值在画布 Y轴范围
             yTopPos = yTopPos + 5;
             int yExp = toPixel(yRange, miny, maxy, weekday.exp_num);
-            canvas.drawCircle(xPos, yExp + yTopPos, 10, paint);
+
+
+            // 输出折线
+            if (i < 4) {
+                DayExpInfo nextWeekday = logs.get(i + 1);
+                paint.setColor(Color.GREEN);
+                int xNextPos = (int) (((i + 2) * canvasWidth / vectorLength));
+
+                int yNextExp = toPixel(yRange, miny, maxy, nextWeekday.exp_num);
+                canvas.drawLine(xPos, yExp + yTopPos,
+                        xNextPos, yNextExp + yTopPos, paint);
+            }
 
             Log.d("------", "-----");
             Log.d("exp_num", weekday.exp_num + "");
@@ -145,18 +155,8 @@ public class ExperienceChartView extends View {
             Log.d("yExp = ", yExp + "");
             Log.d("------", "-----");
 
-            // 输出折线
-            if (i < 4) {
-                DayExpInfo nextWeekday = logs.get(i + 1);
-                paint.setColor(Color.GREEN);
-                int xNextPos = (int) (((i + 2) * canvasWidth / vectorLength));
-
-
-
-                int yNextExp = toPixel(yRange, miny, maxy, nextWeekday.exp_num);
-                canvas.drawLine(xPos, yExp + yTopPos,
-                        xNextPos, yNextExp + yTopPos, paint);
-            }
+            paint.setColor(Color.RED);
+            canvas.drawCircle(xPos, yExp + yTopPos, 10, paint);
 
         }
 
