@@ -54,7 +54,13 @@ public class ExperienceChartView extends View {
         this.yvalues = get_yvalues();
 
         paint = new Paint();
+
+        // 去掉锯齿
         paint.setAntiAlias(true);
+
+        paint.setColor(Color.BLACK);
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(20.0f);
 
         get_axes(yvalues);
     }
@@ -71,38 +77,34 @@ public class ExperienceChartView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        canvas.drawARGB(255, 200, 200, 200);
 
-        float canvasHeight = getHeight();
-        float canvasWidth = getWidth();
+        // 默认画线粗细
+        paint.setStrokeWidth(2);
 
-        float yTopPos = (float) .2 * canvasHeight;
-        float yBottomPos = (float) .8 * canvasHeight;
+        float canvas_height = getHeight();
+        float canvas_width = getWidth();
+
+        float y_top_pos = (float) .2 * canvas_height;
+        float y_bottom_pos = (float) .8 * canvas_height;
 
         // 经验值显示的画布范围
-        float yRange = yBottomPos - yTopPos;
+        float yRange = (float) ((y_bottom_pos - y_top_pos) * .7);
 
-        // 刻度线 Y轴位置
-        float yMarkPos = yBottomPos - 30;
+        // 刻度线 Y轴位置, 在X轴上方30像素
+        float y_mark_pos = y_bottom_pos - 30;
 
-        // 星期线 Y轴位置
-        float yWeekPos = yBottomPos + 50;
+        // 星期线 Y轴位置, 在X轴下方50像素
+        float y_week_pos = y_bottom_pos + 50;
 
-        // 日期线 Y轴位置
-        float yDatePos = yBottomPos + 80;
-
-        paint.setStrokeWidth(2);
-        int grey = 200;
-        canvas.drawARGB(255, grey, grey, grey);
-
-        paint.setColor(Color.BLACK);
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize(20.0f);
+        // 日期线 Y轴位置, 在X轴上方80像素
+        float y_date_pos = y_bottom_pos + 80;
 
         // 画出底部X轴
-        canvas.drawLine(0, yBottomPos, canvasWidth, yBottomPos, paint);
+        canvas.drawLine(0, y_bottom_pos, canvas_width, y_bottom_pos, paint);
 
         // 画出顶部X轴
-        canvas.drawLine(0, yTopPos, canvasWidth, yTopPos, paint);
+        canvas.drawLine(0, y_top_pos, canvas_width, y_top_pos, paint);
 
         // 控制刻度线粗细
         paint.setStrokeWidth(7);
@@ -111,10 +113,10 @@ public class ExperienceChartView extends View {
 
         // 将X轴分成6等分，画出5条刻度线
         for (int i = 0; i <= vectorLength - 2; i++) {
-            int xPos = (int) (((i + 1) * canvasWidth / vectorLength));
+            int xPos = (int) (((i + 1) * canvas_width / vectorLength));
 
             Log.d("position = ", xPos + "");
-            Log.d("canvasWidth = ", canvasWidth + "");
+            Log.d("canvas_width = ", canvas_width + "");
 
             DayExpInfo weekday = logs.get(i);
             Log.d("date =",  weekday.day_of_week_str);
@@ -122,22 +124,22 @@ public class ExperienceChartView extends View {
 
             // 显示刻度条
             paint.setColor(Color.BLACK);
-            canvas.drawLine(xPos, yBottomPos,
-                xPos, yMarkPos, paint);
+            canvas.drawLine(xPos, y_bottom_pos,
+                xPos, y_mark_pos, paint);
 
 
             // 显示刻度数字
             canvas.drawText("" + (i + 1), xPos,
-                    yBottomPos + 20, paint);
+                    y_bottom_pos + 20, paint);
 
             // 显示星期
             canvas.drawText("" + weekday.day_of_week_str, xPos,
-                    yWeekPos, paint);
+                    y_week_pos, paint);
 
 
             // 显示日期
             canvas.drawText("" + weekday.day_of_month_str, xPos,
-                    yDatePos, paint);
+                    y_date_pos, paint);
 
 
             // 画出经验值
@@ -145,18 +147,18 @@ public class ExperienceChartView extends View {
             Log.d("exp = ", weekday.exp_num + "");
 
             // 经验值在画布 Y轴范围, 为了不碰到最上面的线，所以多加 10
-            yTopPos = yTopPos + 10;
+            y_top_pos = y_top_pos + 10;
             int yExp = to_pixel(yRange, miny, maxy, yvalues[i]);
 
 
             // 输出折线
             if (i < 4) {
                 paint.setColor(Color.parseColor("#666666"));
-                int xNextPos = (int) (((i + 2) * canvasWidth / vectorLength));
+                int xNextPos = (int) (((i + 2) * canvas_width / vectorLength));
 
                 int yNextExp = to_pixel(yRange, miny, maxy, yvalues[i + 1]);
-                canvas.drawLine(xPos, yExp + yTopPos,
-                        xNextPos, yNextExp + yTopPos, paint);
+                canvas.drawLine(xPos, yExp + y_top_pos,
+                        xNextPos, yNextExp + y_top_pos, paint);
             }
 
             Log.d("------", "-----");
@@ -168,7 +170,7 @@ public class ExperienceChartView extends View {
 
             // 输出经验值圆圈
             paint.setColor(Color.parseColor("#333333"));
-            canvas.drawCircle(xPos, yExp + yTopPos, 20, paint);
+            canvas.drawCircle(xPos, yExp + y_top_pos, 20, paint);
 
         }
 
@@ -187,7 +189,7 @@ public class ExperienceChartView extends View {
         double p;
         int pint;
 
-        p = ((value - min) / (max - min)) * .8 * pixels;
+        p = ((value - min) / (max - min)) * pixels;
 
         pint = (int) p;
 
@@ -220,9 +222,8 @@ public class ExperienceChartView extends View {
 
 
     public void run_animation() {
-        final int length = vectorLength - 2;
-        float prev_exp_pos = yvalues[length];
-        float current_exp_pos = yvalues[length] - dynamic_exp;
+        float prev_exp_pos = yvalues[vectorLength - 2];
+        float current_exp_pos = prev_exp_pos - dynamic_exp;
 
         ValueAnimator animation = ValueAnimator.ofFloat(prev_exp_pos, current_exp_pos );
         animation.setDuration(500);
