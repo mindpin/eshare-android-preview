@@ -3,6 +3,8 @@ package com.eshare_android_preview.base.view.knowledge_map;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.eshare_android_preview.R;
+import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
 import com.nineoldandroids.animation.PropertyValuesHolder;
@@ -13,97 +15,64 @@ import com.nineoldandroids.animation.ValueAnimator;
  */
 public class AniProxy {
     public static final int ANIMATE_DRUATION = 400;
-    public static final int[] TAGGET_ICON_VIEW_ABSOLUTE_POS_PX = new int[]{
+    public static final int[] TARGET_ICON_VIEW_ABSOLUTE_POS_PX = new int[]{
             BaseUtils.dp_to_int_px(47),
-            BaseUtils.dp_to_int_px(30)
+            BaseUtils.dp_to_int_px(5)
     };
 
-    public KnowledgeMapView map_view;
+    private SetPosition pos;
+    private KnowledgeMapView map_view;
 
-    CircleView circle_view;
-    public ImageView icon_view;
-
-    boolean is_open = false;
-
-    int icon_view_left_margin_px;
-    int icon_view_top_margin_px;
-
-    public AniProxy(CircleView circle_view, KnowledgeMapView map_view) {
-        this.map_view = map_view;
-        this.circle_view = circle_view;
+    public AniProxy(SetPosition pos) {
+        this.pos = pos;
+        this.map_view = pos.map_view;
     }
 
-    public void set_icon_view(ImageView icon_view) {
-        this.icon_view = icon_view;
+    private CircleView circle_view;
+    private ImageView icon_view;
+    public MarginAni open(EshareBaseActivity target_activity) {
+        // 复制一个相同位置的 circle_view 和 icon
+        circle_view = new CircleView(target_activity);
+        circle_view.set_color(pos.get_circle_color());
+        circle_view.set_circle_center_position(
+                pos.grid_dp_left + pos.circle_center_offset,
+                pos.grid_dp_top + pos.circle_center_offset
+        );
+        circle_view.set_radius(pos.CIRCLE_RADIUS_DP);
 
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
-        icon_view_left_margin_px = params.leftMargin;
-        icon_view_top_margin_px = params.topMargin;
+        icon_view = new ImageView(target_activity);
+        icon_view.setImageDrawable(pos.get_icon_drawable());
+        pos._set_dp_params(
+                icon_view,
+                pos.CIRCLE_RADIUS_DP * 2, pos.CIRCLE_RADIUS_DP * 2,
+                pos.grid_dp_left + pos.icon_offset,
+                pos.grid_dp_top + pos.icon_offset
+        );
+
+        RelativeLayout group = (RelativeLayout) target_activity.findViewById(R.id.animate_layer);
+        group.addView(circle_view);
+        group.addView(icon_view);
+
+        map_view.opened_node = this;
+
+        circle_view.set_radius_animate(map_view.SCREEN_HEIGHT_DP, ANIMATE_DRUATION);
+
+        return new MarginAni(
+                "icon", icon_view,
+                pos.grid_dp_left + pos.icon_offset, TARGET_ICON_VIEW_ABSOLUTE_POS_PX[0],
+                pos.grid_dp_top + pos.icon_offset, TARGET_ICON_VIEW_ABSOLUTE_POS_PX[1]
+        );
     }
 
-    public void toggle() {
-        if (map_view.opened_node != null && !map_view.opened_node.equals(this)) {
-            return;
-        }
+    public MarginAni close() {
+        map_view.opened_node = null;
 
-        circle_view.bringToFront();
-        icon_view.bringToFront();
+        circle_view.set_radius_animate(pos.CIRCLE_RADIUS_DP, ANIMATE_DRUATION);
 
-        if (is_open) {
-            is_open = false;
-            map_view.opened_node = null;
-
-            circle_view.set_radius_animate((float) SetPosition.CIRCLE_RADIUS_DP, ANIMATE_DRUATION);
-            set_icon_view_margin(icon_view_left_margin_px, icon_view_top_margin_px);
-
-        } else {
-            is_open = true;
-            map_view.opened_node = this;
-
-            circle_view.set_radius_animate((float) map_view.SCREEN_HEIGHT_DP, ANIMATE_DRUATION);
-            int[] margins = get_target_margin();
-            set_icon_view_margin(margins[0], margins[1]);
-        }
-    }
-
-    private void set_icon_view_margin(int margin_left, int margin_top) {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
-
-
-        PropertyValuesHolder pvh_left = PropertyValuesHolder.ofFloat("margin_left", params.leftMargin, margin_left);
-        PropertyValuesHolder pvh_top = PropertyValuesHolder.ofFloat("margin_top", params.topMargin, margin_top);
-
-        ValueAnimator ani = ValueAnimator
-                .ofPropertyValuesHolder(pvh_left, pvh_top)
-                .setDuration(ANIMATE_DRUATION);
-
-        ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float margin_left = (Float) valueAnimator.getAnimatedValue("margin_left");
-                float margin_top = (Float) valueAnimator.getAnimatedValue("margin_top");
-
-                RelativeLayout.LayoutParams p = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
-
-                p.leftMargin = (int) margin_left;
-                p.topMargin = (int) margin_top;
-                icon_view.setLayoutParams(p);
-            }
-        });
-
-        ani.start();
-    }
-
-    private int[] get_target_margin() {
-        int[] current_icon_view_absolute_pos_px = new int[2];
-        icon_view.getLocationInWindow(current_icon_view_absolute_pos_px);
-
-        int x_off = current_icon_view_absolute_pos_px[0] - TAGGET_ICON_VIEW_ABSOLUTE_POS_PX[0];
-        int y_off = current_icon_view_absolute_pos_px[1] - TAGGET_ICON_VIEW_ABSOLUTE_POS_PX[1];
-
-        return new int[]{
-                icon_view_left_margin_px - x_off,
-                icon_view_top_margin_px - y_off
-        };
+        return new MarginAni(
+                "icon", icon_view,
+                TARGET_ICON_VIEW_ABSOLUTE_POS_PX[0], pos.grid_dp_left + pos.icon_offset,
+                TARGET_ICON_VIEW_ABSOLUTE_POS_PX[1], pos.grid_dp_top + pos.icon_offset
+        );
     }
 }

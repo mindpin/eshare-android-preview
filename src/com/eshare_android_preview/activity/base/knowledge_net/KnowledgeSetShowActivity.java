@@ -18,6 +18,7 @@ import com.eshare_android_preview.activity.base.HomeActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.knowledge_map.AniProxy;
+import com.eshare_android_preview.base.view.knowledge_map.MarginAni;
 import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
@@ -143,11 +144,6 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
             public void destroyItem(ViewGroup container, int position, Object object) {
                 container.removeView(view_list.get(position));
             }
-
-//            @Override
-//            public float getPageWidth(int position) {
-//                return 0.8f;
-//            }
         });
 
         view_pager.setPageMargin(- BaseUtils.dp_to_int_px(90));
@@ -158,78 +154,80 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         page_close_animate();
     }
 
+    // ------------------------------------
+
     public void page_open_animate() {
-        PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", BaseUtils.dp_to_px(-50), 0);
-        PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px((float) HomeActivity.map_view.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146));
+        final MarginAni ma_topbar = new MarginAni(
+                "topbar", top_layout,
+                0, 0,
+                BaseUtils.dp_to_px(-50), 0
+        );
+
+        final MarginAni ma_pager = new MarginAni(
+                "pager",  pager_layout,
+                0, 0,
+                BaseUtils.dp_to_px(HomeActivity.map_view.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146)
+        );
+
+        final MarginAni ma_icon = HomeActivity.map_view.opened_node.open(this);
 
         ValueAnimator ani = ValueAnimator
-                .ofPropertyValuesHolder(topbar_pvh, pager_pvh)
+                .ofPropertyValuesHolder(
+                        ma_topbar.get_y_values_holder(),
+                        ma_pager.get_y_values_holder(),
+                        ma_icon.get_x_values_holder(),
+                        ma_icon.get_y_values_holder()
+                )
                 .setDuration(AniProxy.ANIMATE_DRUATION);
 
         ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float margin_top_topbar = (Float) valueAnimator.getAnimatedValue("topbar");
-                float margin_top_pager = (Float) valueAnimator.getAnimatedValue("pager");
-
-                RelativeLayout.LayoutParams p = (RelativeLayout.LayoutParams) top_layout.getLayoutParams();
-                p.topMargin = (int) margin_top_topbar;
-                top_layout.setLayoutParams(p);
-
-                RelativeLayout.LayoutParams p1 = (RelativeLayout.LayoutParams) pager_layout.getLayoutParams();
-                p1.topMargin = (int) margin_top_pager;
-                pager_layout.setLayoutParams(p1);
+                ma_topbar.update_y(valueAnimator);
+                ma_pager.update_y(valueAnimator);
+                ma_icon.update_xy(valueAnimator);
             }
-        });
-
-        ani.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-                HomeActivity.map_view.run_open_animate();
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {}
-
-            @Override
-            public void onAnimationCancel(Animator animator) {}
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {}
         });
 
         ani.start();
     }
 
     public void page_close_animate() {
-        PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", 0, BaseUtils.dp_to_px(-50));
-        PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px(146), BaseUtils.dp_to_px((float) HomeActivity.map_view.SCREEN_HEIGHT_DP));
+        final MarginAni ma_topbar = new MarginAni(
+                "topbar", top_layout,
+                0, 0,
+                0, BaseUtils.dp_to_px(-50)
+        );
+
+        final MarginAni ma_pager = new MarginAni(
+                "pager",  pager_layout,
+                0, 0,
+                BaseUtils.dp_to_px(146), BaseUtils.dp_to_px(HomeActivity.map_view.SCREEN_HEIGHT_DP)
+        );
+
+        final MarginAni ma_icon = HomeActivity.map_view.opened_node.close();
 
         ValueAnimator ani = ValueAnimator
-                .ofPropertyValuesHolder(topbar_pvh, pager_pvh)
+                .ofPropertyValuesHolder(
+                        ma_topbar.get_y_values_holder(),
+                        ma_pager.get_y_values_holder(),
+                        ma_icon.get_x_values_holder(),
+                        ma_icon.get_y_values_holder()
+                )
                 .setDuration(AniProxy.ANIMATE_DRUATION);
 
         ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float margin_top_topbar = (Float) valueAnimator.getAnimatedValue("topbar");
-                float margin_top_pager = (Float) valueAnimator.getAnimatedValue("pager");
-
-                RelativeLayout.LayoutParams p = (RelativeLayout.LayoutParams) top_layout.getLayoutParams();
-                p.topMargin = (int) margin_top_topbar;
-                top_layout.setLayoutParams(p);
-
-                RelativeLayout.LayoutParams p1 = (RelativeLayout.LayoutParams) pager_layout.getLayoutParams();
-                p1.topMargin = (int) margin_top_pager;
-                pager_layout.setLayoutParams(p1);
+                ma_topbar.update_y(valueAnimator);
+                ma_pager.update_y(valueAnimator);
+                ma_icon.update_xy(valueAnimator);
             }
         });
 
         ani.addListener(new Animator.AnimatorListener() {
             @Override
-            public void onAnimationStart(Animator animator) {
-                HomeActivity.map_view.run_close_animate();
-            }
+            public void onAnimationStart(Animator animator) {}
 
             @Override
             public void onAnimationEnd(Animator animator) {

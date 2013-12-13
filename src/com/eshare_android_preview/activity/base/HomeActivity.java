@@ -15,6 +15,8 @@ public class HomeActivity extends EshareBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.home);
         map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
+        map_view.init(this);
+
         super.onCreate(savedInstanceState);
     }
 

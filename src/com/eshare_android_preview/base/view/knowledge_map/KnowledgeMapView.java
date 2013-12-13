@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.LockableScrollView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
@@ -22,6 +23,8 @@ import java.util.List;
  * Created by Administrator on 13-12-12.
  */
 public class KnowledgeMapView extends LockableScrollView {
+    public EshareBaseActivity activity;
+
     public int SCREEN_WIDTH_DP, SCREEN_HEIGHT_DP, GRID_WIDTH_DP, GRID_HEIGHT_DP;
 
     public RelativeLayout nodes_paper;
@@ -34,36 +37,34 @@ public class KnowledgeMapView extends LockableScrollView {
 
     public KnowledgeMapView(Context context) {
         super(context);
-        init();
     }
 
     public KnowledgeMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public KnowledgeMapView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init();
     }
 
-    private void init() {
+    public void init(EshareBaseActivity activity) {
+        this.activity = activity;
         kdata = new KnowledgeSetsData(this);
 
-        View content = inflate(getContext(), R.layout.home_knowledge_map_view, null);
+        View content = inflate(activity, R.layout.home_knowledge_map_view, null);
         this.addView(content);
 
         nodes_paper = (RelativeLayout) findViewById(R.id.nodes_paper);
         lines_paper = (RelativeLayout) findViewById(R.id.lines_paper);
 
-        get_base_size();
+        _get_screen_size();
 
         _r_traversal(KnowledgeNet.instance());
         _draw_nodes();
         _draw_dash_path_view();
     }
 
-    private void get_base_size() {
+    private void _get_screen_size() {
         BaseUtils.ScreenSize screen_size = BaseUtils.get_screen_size();
 
         SCREEN_WIDTH_DP = (int) screen_size.width_dp;
@@ -73,16 +74,9 @@ public class KnowledgeMapView extends LockableScrollView {
         GRID_HEIGHT_DP = GRID_WIDTH_DP + 30;
     }
 
-    public void run_open_animate() {
+    public void run_close_animate(EshareBaseActivity target_activity) {
         if (null != opened_node) {
-            opened_node.toggle();
-            locked = true;
-        }
-    }
-
-    public void run_close_animate() {
-        if (null != opened_node) {
-            opened_node.toggle();
+            opened_node.close();
             locked = false;
         }
     }
@@ -102,7 +96,7 @@ public class KnowledgeMapView extends LockableScrollView {
     }
 
     public void _draw_dash_path_view() {
-        DashPathView dash_path_view = new DashPathView(getContext());
+        DashPathView dash_path_view = new DashPathView(activity);
 
         dash_path_view.set_dash_path_endpoint_list(dash_path_endpoint_list);
         dash_path_view.set_color(Color.parseColor("#aaaaaa"));

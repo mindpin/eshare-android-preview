@@ -26,10 +26,10 @@ import java.util.List;
  * Created by Administrator on 13-12-12.
  */
 public class SetPosition {
-    public final static double CIRCLE_RADIUS_DP = 30; // 33.3333D;
-    public final static double TEXT_SIZE = 9;
+    public final static int CIRCLE_RADIUS_DP = 30; // 33;
+    public final static int TEXT_SIZE = 9;
 
-    final static float[][] GRID_DATA = new float[][] {
+    final static float[][] GRID_DATA = new float[][]{
             {},
             {2.0F},
             {1.5F, 2.5F},
@@ -40,20 +40,24 @@ public class SetPosition {
     public BaseKnowledgeSet set;
     public AniProxy ani_proxy;
 
+    // grid
     public int grid_top;
     public int grid_dp_top;
     public int grid_dp_bottom;
 
     public float grid_left;
-    public double grid_dp_left;
+    public int grid_dp_left;
 
-    public double circle_dp_left;
-    public double circle_dp_top;
+    // offset
+    public int circle_center_offset;
+    public int icon_offset;
+    public int text_offset_top;
 
-    public double circle_center_dp_left;
-    public double circle_center_dp_top;
-
-    public double text_dp_top;
+    // views
+    public CircleView circle_view;
+    public ImageView icon_view;
+    public TextView title_view;
+    public TextView count_view;
 
     public SetPosition(BaseKnowledgeSet set, KnowledgeMapView map_view) {
         this.map_view = map_view;
@@ -63,21 +67,18 @@ public class SetPosition {
     }
 
     private void set_y_position() {
-        grid_top       = set.deep;
-        grid_dp_top    = (grid_top - 1) * map_view.GRID_HEIGHT_DP;
-        grid_dp_bottom = grid_dp_top + map_view.GRID_HEIGHT_DP;
+        grid_top = set.deep;
+        grid_dp_bottom = grid_top * map_view.GRID_HEIGHT_DP;
+        grid_dp_top = grid_dp_bottom - map_view.GRID_HEIGHT_DP;
 
-        circle_center_dp_top = grid_dp_top + map_view.GRID_WIDTH_DP / 2.0D;
-        circle_dp_top = circle_center_dp_top - CIRCLE_RADIUS_DP;
-
-        text_dp_top = circle_center_dp_top + CIRCLE_RADIUS_DP + 4.0D;
+        circle_center_offset = map_view.GRID_WIDTH_DP / 2;
+        icon_offset = circle_center_offset - CIRCLE_RADIUS_DP;
+        text_offset_top = circle_center_offset + CIRCLE_RADIUS_DP + 4;
     }
 
     public void set_x_position(float grid_left) {
         this.grid_left = grid_left;
-        this.grid_dp_left = (this.grid_left - 1) * map_view.GRID_WIDTH_DP;
-        this.circle_center_dp_left = this.grid_dp_left + map_view.GRID_WIDTH_DP / 2.0D;
-        this.circle_dp_left = this.circle_center_dp_left - CIRCLE_RADIUS_DP;
+        this.grid_dp_left = (int) ((grid_left - 1) * map_view.GRID_WIDTH_DP);
     }
 
     @Override
@@ -125,97 +126,122 @@ public class SetPosition {
         return set.is_unlocked();
     }
 
-    private void _draw_circle() {
-        CircleView cv = new CircleView(map_view.getContext());
-        cv.set_color(get_circle_color());
-        cv.set_circle_center_position((float) circle_center_dp_left, (float) circle_center_dp_top);
-        cv.set_radius((float) CIRCLE_RADIUS_DP);
-        map_view.nodes_paper.addView(cv);
-
-        ani_proxy = new AniProxy(cv, map_view);
-    }
-
-    private void _draw_text() {
-        TextView tv = new TextView(map_view.getContext());
-
-        tv.setText(set.get_name());
-        tv.setTextSize(BaseUtils.dp_to_int_px((float) TEXT_SIZE));
-        tv.setGravity(Gravity.CENTER);
-        tv.setTextColor(Color.parseColor("#444444"));
-
-        int width_px = BaseUtils.dp_to_int_px((float) map_view.GRID_WIDTH_DP);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        double top = text_dp_top;
-        params.setMargins(BaseUtils.dp_to_int_px((float) grid_dp_left), BaseUtils.dp_to_int_px((float) top), 0, 0);
-        tv.setLayoutParams(params);
-
-        map_view.nodes_paper.addView(tv);
-
-        if (!set.is_checkpoint()) {
-            TextView count_tv = new TextView(map_view.getContext());
-            KnowledgeSet set = (KnowledgeSet) this.set;
-            count_tv.setText(set.get_learned_nodes_count() + "/" + set.nodes.size());
-            count_tv.setTextSize(BaseUtils.dp_to_int_px((float) TEXT_SIZE));
-            count_tv.setGravity(Gravity.CENTER);
-            count_tv.setTextColor(Color.parseColor("#aaaaaa"));
-
-            RelativeLayout.LayoutParams ctv_params = new RelativeLayout.LayoutParams(width_px, ViewGroup.LayoutParams.WRAP_CONTENT);
-            ctv_params.setMargins(BaseUtils.dp_to_int_px((float) grid_dp_left), BaseUtils.dp_to_int_px((float) top + 18), 0, 0);
-            count_tv.setLayoutParams(ctv_params);
-
-            map_view.nodes_paper.addView(count_tv);
-        }
-    }
-
-    private void _draw_icon() {
-        ImageView iv = new ImageView(map_view.getContext());
-
-        iv.setImageDrawable(get_icon_drawable());
-
-        int px = BaseUtils.dp_to_int_px((float) CIRCLE_RADIUS_DP * 2);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(px, px);
-        params.setMargins(BaseUtils.dp_to_int_px((float) circle_dp_left), BaseUtils.dp_to_int_px((float) circle_dp_top), 0, 0);
-        iv.setLayoutParams(params);
-
-        map_view.nodes_paper.addView(iv);
-
-        ani_proxy.set_icon_view(iv);
-    }
-
     private void _set_icon_events() {
-        ani_proxy.icon_view.setOnClickListener(new View.OnClickListener() {
+        icon_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (is_unlocked()){
+                if (is_unlocked()) {
                     map_view.opened_node = ani_proxy;
 
                     // open activity
-                    Intent intent = new Intent(map_view.getContext(), KnowledgeSetShowActivity.class);
+                    Intent intent = new Intent(map_view.activity, KnowledgeSetShowActivity.class);
                     intent.putExtra("set_id", set.id);
-                    map_view.getContext().startActivity(intent);
+                    map_view.activity.startActivity(intent);
                 }
             }
         });
     }
 
+    // -------------------------------------------------
+
+    RelativeLayout grid;
+
     public void draw(int list_size, int index) {
         set_x_position(GRID_DATA[list_size][index]);
 
-        _draw_circle();
-        _draw_text();
-        _draw_icon();
+        grid = new RelativeLayout(map_view.activity);
+        _set_dp_params(
+                grid,
+                map_view.GRID_WIDTH_DP, map_view.GRID_HEIGHT_DP,
+                grid_dp_left, grid_dp_top
+        );
+
+        ani_proxy = new AniProxy(this);
+
+        _draw_circle_view();
+        _draw_icon_view();
+        _draw_title_view();
+        _draw_count_view();
+
+        map_view.nodes_paper.addView(grid);
+
         _set_icon_events();
     }
+
+    private void _draw_circle_view() {
+        circle_view = new CircleView(map_view.activity);
+        circle_view.set_color(get_circle_color());
+        circle_view.set_circle_center_position(circle_center_offset, circle_center_offset);
+        circle_view.set_radius(CIRCLE_RADIUS_DP);
+
+        grid.addView(circle_view);
+    }
+
+    private void _draw_icon_view() {
+        icon_view = new ImageView(map_view.activity);
+        icon_view.setImageDrawable(get_icon_drawable());
+
+        _set_dp_params(icon_view,
+                CIRCLE_RADIUS_DP * 2, CIRCLE_RADIUS_DP * 2,
+                icon_offset, icon_offset);
+
+        grid.addView(icon_view);
+    }
+
+    private void _draw_title_view() {
+        title_view = new TextView(map_view.activity);
+        title_view.setText(set.get_name());
+        title_view.setTextSize(BaseUtils.dp_to_int_px(TEXT_SIZE));
+        title_view.setGravity(Gravity.CENTER);
+        title_view.setTextColor(Color.parseColor("#444444"));
+
+        _set_dp_params(title_view,
+                map_view.GRID_WIDTH_DP, ViewGroup.LayoutParams.WRAP_CONTENT,
+                0, text_offset_top);
+
+        grid.addView(title_view);
+    }
+
+    private void _draw_count_view() {
+        if (set.is_checkpoint()) return;
+
+        KnowledgeSet set = (KnowledgeSet) this.set;
+
+        count_view = new TextView(map_view.activity);
+        count_view.setText(set.get_learned_nodes_count() + "/" + set.nodes.size());
+        count_view.setTextSize(BaseUtils.dp_to_int_px(TEXT_SIZE));
+        count_view.setGravity(Gravity.CENTER);
+        count_view.setTextColor(Color.parseColor("#aaaaaa"));
+
+        _set_dp_params(count_view,
+                map_view.GRID_WIDTH_DP, ViewGroup.LayoutParams.WRAP_CONTENT,
+                0, text_offset_top + 18);
+
+        grid.addView(count_view);
+    }
+
+    public void _set_dp_params(View view, int w, int h, int left, int top) {
+        int pxw = (w < 0 ? w : BaseUtils.dp_to_int_px(w));
+        int pxh = (h < 0 ? h : BaseUtils.dp_to_int_px(h));
+
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(pxw, pxh);
+        lp.leftMargin = BaseUtils.dp_to_int_px(left);
+        lp.topMargin = BaseUtils.dp_to_int_px(top);
+        view.setLayoutParams(lp);
+    }
+
+    // --------------------------------
 
     public void put_data_into_end_point_list(List<DashPathEndpoint> list) {
         for (BaseKnowledgeSet parent : set.parents()) {
             SetPosition parent_pos = map_view.kdata.get_from(parent);
 
-            float x1 = (float) parent_pos.circle_center_dp_left;
-            float y1 = (float) parent_pos.text_dp_top + 24 + (parent_pos.set.is_checkpoint() ? 0 : 18);
-            float x2 = (float) circle_center_dp_left;
-            float y2 = (float) circle_dp_top - 8;
+            float x1 = parent_pos.grid_dp_left + parent_pos.circle_center_offset;
+            float y1 = parent_pos.grid_dp_top + parent_pos.text_offset_top + 24
+                    + (parent_pos.set.is_checkpoint() ? 0 : 18);
+
+            float x2 = grid_dp_left + circle_center_offset;
+            float y2 = grid_dp_top + icon_offset - 8;
 
             list.add(DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2));
         }
