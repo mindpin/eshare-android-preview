@@ -85,24 +85,34 @@ public class ExperienceChartView extends View {
         float canvas_height = getHeight();
         float canvas_width = getWidth();
 
+        // 圆圈半径
+        float radius = 20.0f;
+
+        // 刻度线高度
+        float mark_height = 30.0f;
+
+        // 顶部线的Y轴位置
         float top_pos = (float) .1 * canvas_height;
-        float y_top_pos = (float) .2 * canvas_height;
-        float y_bottom_pos = (float) .85 * canvas_height;
+
+        // 底部线的Y轴位置
+        float bottom_pos = (float) .85 * canvas_height;
 
         // 经验值显示的画布范围
-        float y_range = (float) ((y_bottom_pos - y_top_pos) * .8);
+        float y_top_pos = top_pos + radius + 10;
+        float y_bottom_pos = bottom_pos - radius - mark_height - 10;
+        float y_range = y_bottom_pos - y_top_pos;
 
         // 刻度线 Y轴位置, 在X轴上方30像素
-        float y_mark_pos = y_bottom_pos - 30;
+        float y_mark_pos = bottom_pos - mark_height;
 
         // 星期线 Y轴位置, 在X轴下方50像素
-        float y_week_pos = y_bottom_pos + 50;
+        float y_week_pos = bottom_pos + 50;
 
         // 日期线 Y轴位置, 在X轴上方80像素
-        float y_date_pos = y_bottom_pos + 80;
+        float y_date_pos = bottom_pos + 80;
 
         // 画出底部X轴
-        canvas.drawLine(0, y_bottom_pos, canvas_width, y_bottom_pos, paint);
+        canvas.drawLine(0, bottom_pos, canvas_width, bottom_pos, paint);
 
         // 画出顶部X轴
         canvas.drawLine(0, top_pos, canvas_width, top_pos, paint);
@@ -118,13 +128,13 @@ public class ExperienceChartView extends View {
 
             // 显示刻度条
             paint.setColor(Color.BLACK);
-            canvas.drawLine(x_pos, y_bottom_pos,
+            canvas.drawLine(x_pos, bottom_pos,
                 x_pos, y_mark_pos, paint);
 
 
             // 显示刻度数字
             canvas.drawText("" + (i + 1), x_pos,
-                    y_bottom_pos + 20, paint);
+                    bottom_pos + 20, paint);
 
             // 显示星期
             canvas.drawText("" + weekday.day_of_week_str, x_pos,
@@ -157,7 +167,7 @@ public class ExperienceChartView extends View {
 
             // 输出经验值圆圈
             paint.setColor(Color.parseColor("#333333"));
-            canvas.drawCircle(x_pos, yExp + y_top_pos, 20, paint);
+            canvas.drawCircle(x_pos, yExp + y_top_pos, radius, paint);
 
         }
 
