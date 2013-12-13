@@ -175,9 +175,8 @@ public class ExperienceChartView extends View {
 
 
     private void get_axes(float[] yvalues) {
-        // 10像素的空间是为了让最后一个圆圈可以一直向上移动
         miny = get_min(yvalues) - 10;
-        maxy = get_max(yvalues);
+        maxy = get_max(yvalues) + 10;
     }
 
 
