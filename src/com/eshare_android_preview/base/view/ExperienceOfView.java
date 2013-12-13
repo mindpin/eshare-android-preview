@@ -26,10 +26,10 @@ public class ExperienceOfView extends View{
 	
 	private int rect_color = Color.GREEN; // 背景矩形颜色
 	
-	private Float left = 40F;  // 矩形的 left
-	private Float top = 25F;   // 矩形的 top
+	private Float left = 50F;  // 矩形的 left
+	private Float top = 20F;   // 矩形的 top
 	
-	private Float rect_width = 220F; // 矩形里面的初始长
+	private Float rect_width = 300F; // 矩形里面的初始长
 	
 	private Float rect_width_fill = 220F;
 	private Float rect_height = 60F;	
@@ -83,7 +83,7 @@ public class ExperienceOfView extends View{
 	private void init() {
 		// circle
 		this.circle_left_cx =  left;
-		this.circle_left_cy =  top + rect_height/2 - line_stroke_width*2;
+		this.circle_left_cy =  top + rect_height/2;
 		
 		this.circle_right_cx = rect_width_fill;
 		this.circle_right_cy = circle_left_cy;
@@ -111,12 +111,12 @@ public class ExperienceOfView extends View{
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeWidth(line_stroke_width);
 		paint.setColor(line_color);
-		canvas.drawRect(left, top, rect_width_fill, rect_height, paint);
+		canvas.drawRect(left, top, rect_width_fill, rect_height + top, paint);
 		
 		paint.setStyle(Paint.Style.FILL);
 		paint.setColor(rect_color);
 		paint.setStrokeWidth(line_fine_width);
-		canvas.drawRect(left, top, rect_width, rect_height, paint);
+		canvas.drawRect(left, top, rect_width, rect_height + top, paint);
 	}
 
 	private void draw_left_circle(Canvas canvas){

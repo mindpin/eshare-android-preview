@@ -7,7 +7,7 @@
     
 	<com.eshare_android_preview.base.view.ExperienceOfView
 	    android:id="@+id/experience_of_view"
-        android:layout_height="80dp"
+        android:layout_height="280dp"
         android:layout_width="fill_parent"
         android:background="#ffffff"
         android:fadingEdge="none"
