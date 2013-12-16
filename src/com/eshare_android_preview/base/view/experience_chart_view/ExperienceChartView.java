@@ -93,7 +93,7 @@ public class ExperienceChartView extends View {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(20.0f);
 
-        get_axes(yvalues);
+        get_axes();
     }
 
     private float[] get_yvalues() {
@@ -159,28 +159,23 @@ public class ExperienceChartView extends View {
             canvas.drawLine(x_pos, bottom_pos,
                 x_pos, y_mark_pos, paint);
 
-
-            // 显示刻度数字
-            canvas.drawText("" + (i + 1), x_pos,
-                    bottom_pos + 20, paint);
-
             // 显示星期
-            canvas.drawText("" + weekday.day_of_week_str, x_pos,
+            canvas.drawText(weekday.day_of_week_str, x_pos,
                     y_week_pos, paint);
 
 
             // 显示日期
-            canvas.drawText("" + weekday.day_of_month_str, x_pos,
+            canvas.drawText(weekday.day_of_month_str, x_pos,
                     y_date_pos, paint);
 
 
             // 输出折线
-            int y_exp = to_pixel(y_range, yvalues[i]);
+            int y_exp = to_pixel(yvalues[i]);
             if (i < 4) {
                 paint.setColor(Color.parseColor("#666666"));
                 int x_next_pos = (int) (((i + 2) * canvas_width / vectorLength));
 
-                int y_next_exp = to_pixel(y_range, yvalues[i + 1]);
+                int y_next_exp = to_pixel(yvalues[i + 1]);
                 canvas.drawLine(x_pos, y_exp,
                         x_next_pos, y_next_exp, paint);
             }
@@ -194,7 +189,7 @@ public class ExperienceChartView extends View {
     }
 
 
-    private void get_axes(float[] yvalues) {
+    private void get_axes() {
         // miny = get_min(yvalues);
         miny = 0;
         maxy = get_max(yvalues) + 10;
@@ -202,11 +197,11 @@ public class ExperienceChartView extends View {
 
 
 
-    private int to_pixel(float pixels, float value) {
+    private int to_pixel(float value) {
         double p;
         int pint;
 
-        p = ((value - miny) / (maxy - miny)) * pixels;
+        p = ((value - miny) / (maxy - miny)) * y_range;
 
         p = y_bottom_pos - p;
 
@@ -234,7 +229,7 @@ public class ExperienceChartView extends View {
 
     public void set_yvalue(Float value){
         yvalues[yvalues.length - 1] = value;
-        get_axes(yvalues);
+        get_axes();
         invalidate();
         requestLayout();
     }
