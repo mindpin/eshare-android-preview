@@ -26,16 +26,19 @@ public class ExperienceOfView extends View{
 	
 	private int rect_color = Color.GREEN; // 背景矩形颜色
 	
-	private Float left = 50F;  // 矩形的 left
-	private Float top = 20F;   // 矩形的 top
+	private Float left = 70F;  // 矩形的 left   	  		  可以修改
+	private Float top = 20F;   // 矩形的 top   	  		  可以修改
 	
-	private Float rect_width = 300F; // 矩形里面的初始长
+	private Float rect_width; // 矩形里面的初始长  (exp_num/level_up_exp_num)
 	
-	private Float rect_width_fill = 220F;
-	private Float rect_height = 60F;	
+	private Float rect_width_fill = 220F;	// 矩形宽   	  可以修改
+	private Float rect_height = 60F;	   	// 矩形高   	  可以修改 
 	
 	// 圆
-	private Float circle_radius = 30F; // 圆半径
+	private Float circle_radius = 30F; 		// 圆半径   	  可以修改
+	private int circle_color = Color.WHITE; // 圆背景颜色   可以修改
+	private int circle_radius_relative_rect = -15; // 圆心相对于矩形的位置  可以修改
+	
 
 	private Float circle_left_cx; // 左圆 坐标
 	private Float circle_left_cy;
@@ -43,9 +46,7 @@ public class ExperienceOfView extends View{
 	private Float circle_right_cx;// 右圆 坐标
 	private Float circle_right_cy;
 	
-	private int circle_color = Color.WHITE; // 圆背景颜色
-	
-	
+
 	//线条 边
 	private int line_stroke_width = 5;
 	private int line_fine_width = 0;
@@ -71,21 +72,20 @@ public class ExperienceOfView extends View{
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		init();
-
+		
+		draw_background_rect(canvas);
 		
 		draw_left_circle(canvas);
 		draw_right_circle(canvas);
 		draw_text_left(canvas);
 		draw_text_right(canvas);
-		
-		draw_background_rect(canvas);
 	}
 	private void init() {
 		// circle
-		this.circle_left_cx =  left;
+		this.circle_left_cx =  left + circle_radius_relative_rect;
 		this.circle_left_cy =  top + rect_height/2;
 		
-		this.circle_right_cx = rect_width_fill;
+		this.circle_right_cx = rect_width_fill + (-circle_radius_relative_rect);
 		this.circle_right_cy = circle_left_cy;
 		
 		if(init_view){
@@ -149,6 +149,7 @@ public class ExperienceOfView extends View{
 	
 	private void draw_text_left(Canvas canvas){
 		Paint paint = new Paint();
+		paint.setAntiAlias(true);
 		paint.setColor(text_color);
 		paint.setTextSize(text_size);
 		
@@ -160,6 +161,7 @@ public class ExperienceOfView extends View{
 	
 	private void draw_text_right(Canvas canvas){
 		Paint paint = new Paint();
+		paint.setAntiAlias(true);
 		paint.setColor(text_color);
 		paint.setTextSize(text_size);
 		
