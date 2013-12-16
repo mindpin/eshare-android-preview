@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.activity.base.HomeActivity;
@@ -19,14 +18,13 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.knowledge_map.AniProxy;
 import com.eshare_android_preview.base.view.knowledge_map.MarginAni;
+import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.PropertyValuesHolder;
 import com.nineoldandroids.animation.ValueAnimator;
-
 import java.util.ArrayList;
 import java.util.List;
 
