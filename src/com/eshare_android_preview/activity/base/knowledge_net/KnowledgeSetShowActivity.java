@@ -9,17 +9,16 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
-import com.eshare_android_preview.activity.base.tab_activity.HomeActivity;
+import com.eshare_android_preview.activity.base.HomeActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.TestPaper;
+import com.eshare_android_preview.base.view.knowledge_map.AniProxy;
+import com.eshare_android_preview.base.view.knowledge_map.MarginAni;
 import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
@@ -44,7 +43,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     BaseKnowledgeSet set;
     int set_text_color;
 
-    boolean view_on_init = true;
+    boolean loaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +78,9 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (view_on_init) {
+        if (!loaded) {
             page_open_animate();
-            view_on_init = false;
+            loaded = true;
         }
     }
 
@@ -94,6 +93,11 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    // called by goback icon
+    public void finish_this(View view) {
+        page_close_animate();
+    }
+
     private void _init_view_pager() {
         if (set.is_checkpoint()) return;
 
@@ -102,6 +106,8 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         final List<View> view_list = new ArrayList<View>();
         for(final KnowledgeNode node : kset.nodes) {
             View view = lf.inflate(R.layout.kn_knowledge_set_show_item, null);
+            ((TextView) view.findViewById(R.id.node_name)).setText(node.name);
+            ((TextView) view.findViewById(R.id.node_desc)).setText(node.desc);
             view_list.add(view);
 
             View to_question = view.findViewById(R.id.to_question);
@@ -141,97 +147,85 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
             public void destroyItem(ViewGroup container, int position, Object object) {
                 container.removeView(view_list.get(position));
             }
-
-//            @Override
-//            public float getPageWidth(int position) {
-//                return 0.8f;
-//            }
         });
 
         view_pager.setPageMargin(- BaseUtils.dp_to_int_px(90));
         view_pager.setOffscreenPageLimit(2);
     }
 
-    public void finish_this(View view) {
-        page_close_animate();
-    }
+    // ------------------------------------
+
+    private MarginAni ma_topbar, ma_pager, ma_icon;
+    private AniProxy.AniBundle bundle;
 
     public void page_open_animate() {
-        PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", BaseUtils.dp_to_px(-50), 0);
-        PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px((float) HomeActivity.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146));
+        ma_topbar = new MarginAni(
+                "topbar", top_layout,
+                0, 0,
+                BaseUtils.dp_to_px(-50), 0
+        );
+
+        ma_pager = new MarginAni(
+                "pager",  pager_layout,
+                0, 0,
+                BaseUtils.dp_to_px(HomeActivity.map_view.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146)
+        );
+
+        bundle = HomeActivity.map_view.opened_node.open(this);
+        ma_icon = bundle.icon_ani;
 
         ValueAnimator ani = ValueAnimator
-                .ofPropertyValuesHolder(topbar_pvh, pager_pvh)
-                .setDuration(HomeActivity.ANIMATE_DRUATION);
+                .ofPropertyValuesHolder(
+                        ma_topbar.get_y_values_holder(),
+                        ma_pager.get_y_values_holder(),
+                        ma_icon.get_x_values_holder(),
+                        ma_icon.get_y_values_holder(),
+                        bundle.open_holder
+                )
+                .setDuration(AniProxy.ANIMATE_DRUATION);
 
         ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float margin_top_topbar = (Float) valueAnimator.getAnimatedValue("topbar");
-                float margin_top_pager = (Float) valueAnimator.getAnimatedValue("pager");
-
-                RelativeLayout.LayoutParams p = (RelativeLayout.LayoutParams) top_layout.getLayoutParams();
-                p.topMargin = (int) margin_top_topbar;
-                top_layout.setLayoutParams(p);
-
-                RelativeLayout.LayoutParams p1 = (RelativeLayout.LayoutParams) pager_layout.getLayoutParams();
-                p1.topMargin = (int) margin_top_pager;
-                pager_layout.setLayoutParams(p1);
+                ma_topbar.update_y(valueAnimator);
+                ma_pager.update_y(valueAnimator);
+                ma_icon.update_xy(valueAnimator);
+                bundle.circle_view.set_radius_px((Float) valueAnimator.getAnimatedValue("radius"));
             }
-        });
-
-        ani.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-                HomeActivity.instance.run_open_animate();
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {}
-
-            @Override
-            public void onAnimationCancel(Animator animator) {}
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {}
         });
 
         ani.start();
     }
 
     public void page_close_animate() {
-        PropertyValuesHolder topbar_pvh = PropertyValuesHolder.ofFloat("topbar", 0, BaseUtils.dp_to_px(-50));
-        PropertyValuesHolder pager_pvh = PropertyValuesHolder.ofFloat("pager", BaseUtils.dp_to_px(146), BaseUtils.dp_to_px((float) HomeActivity.SCREEN_HEIGHT_DP));
-
         ValueAnimator ani = ValueAnimator
-                .ofPropertyValuesHolder(topbar_pvh, pager_pvh)
-                .setDuration(HomeActivity.ANIMATE_DRUATION);
+                .ofPropertyValuesHolder(
+                        ma_topbar.get_reverse_y_values_holder(),
+                        ma_pager.get_reverse_y_values_holder(),
+                        ma_icon.get_reverse_x_values_holder(),
+                        ma_icon.get_reverse_y_values_holder(),
+                        bundle.close_holder
+                )
+                .setDuration(AniProxy.ANIMATE_DRUATION);
 
         ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float margin_top_topbar = (Float) valueAnimator.getAnimatedValue("topbar");
-                float margin_top_pager = (Float) valueAnimator.getAnimatedValue("pager");
-
-                RelativeLayout.LayoutParams p = (RelativeLayout.LayoutParams) top_layout.getLayoutParams();
-                p.topMargin = (int) margin_top_topbar;
-                top_layout.setLayoutParams(p);
-
-                RelativeLayout.LayoutParams p1 = (RelativeLayout.LayoutParams) pager_layout.getLayoutParams();
-                p1.topMargin = (int) margin_top_pager;
-                pager_layout.setLayoutParams(p1);
+                ma_topbar.update_y(valueAnimator);
+                ma_pager.update_y(valueAnimator);
+                ma_icon.update_xy(valueAnimator);
+                bundle.circle_view.set_radius_px((Float) valueAnimator.getAnimatedValue("radius"));
             }
         });
 
         ani.addListener(new Animator.AnimatorListener() {
             @Override
-            public void onAnimationStart(Animator animator) {
-                HomeActivity.instance.run_close_animate();
-            }
+            public void onAnimationStart(Animator animator) {}
 
             @Override
             public void onAnimationEnd(Animator animator) {
                 KnowledgeSetShowActivity.this.finish();
+                HomeActivity.map_view.locked = false;
             }
 
             @Override

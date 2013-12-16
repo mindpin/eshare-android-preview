@@ -39,6 +39,11 @@ public class BaseUtils {
         return (int) dp_to_px(dip);
     }
 
+    public static int px_to_dp(float px) {
+        final float scale = EshareApplication.context.getResources().getDisplayMetrics().density;
+        return (int) (px / scale + 0.5f);
+    }
+
     @SuppressLint("SimpleDateFormat")
 	public static String date_string(long time_seconds) {
         SimpleDateFormat sdf = new SimpleDateFormat();

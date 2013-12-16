@@ -15,7 +15,7 @@
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:background="#455467"
-            android:layout_margin="5dp">
+            android:layout_margin="0dp">
 
             <TextView
                 android:id="@+id/icon_t1"
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     style="@style/shadow_white_text_light"
-                    android:text="界面演示版 demo-1"
+                    android:text="界面演示版 demo-2"
                     android:layout_marginBottom="20dp"
                     android:textSize="15dp" />
 
@@ -70,14 +70,14 @@
                     android:layout_width="240dp"
                     style="@style/shadow_white_text_light"
                     android:layout_marginBottom="20dp"
-                    android:text="程序原型:门旭; 程序开发/素材采集：门旭,李飞,黄锴,肖少富; 集成:李飞; 视觉/交互设计:宋亮; "
+                    android:text="程序原型:门旭; \n程序开发/素材采集：门旭,李飞,黄锴,肖少富; \n集成:李飞; \n视觉/交互设计:宋亮; "
                     android:textSize="15dp" />
 
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     style="@style/shadow_white_text_light"
-                    android:text="2013.11"
+                    android:text="2013.12"
                     android:layout_marginBottom="20dp"
                     android:textSize="15dp" />
 

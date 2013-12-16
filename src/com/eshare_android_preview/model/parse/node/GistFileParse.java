@@ -89,7 +89,7 @@ public class GistFileParse extends BaseNodeParser{
             String desc = "";
             if (descNodeList.getLength() > 0) {
                 Element descElement= (Element) descNodeList.item(0);
-                desc = descElement.getNodeValue();
+                desc = descElement.getTextContent();
             }
             KnowledgeNode node = new KnowledgeNode(node_set,nodeElement.getAttribute("id"),nodeElement.getAttribute("name"),nodeElement.getAttribute("required"),desc);
             this.node_map.put(node.id, node);
