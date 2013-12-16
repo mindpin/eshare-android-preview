@@ -255,7 +255,7 @@ public class SetPosition {
         circle_view.set_color(get_circle_color());
         circle_view.set_circle_center_position(
                 grid_dp_left + circle_center_offset,
-                grid_dp_top + circle_center_offset
+                grid_dp_top + circle_center_offset - BaseUtils.px_to_dp(map_view.getScrollY())
         );
         circle_view.set_radius(CIRCLE_RADIUS_DP);
         return circle_view;
@@ -268,7 +268,7 @@ public class SetPosition {
                 icon_view,
                 CIRCLE_RADIUS_DP * 2, CIRCLE_RADIUS_DP * 2,
                 grid_dp_left + icon_offset,
-                grid_dp_top + icon_offset
+                grid_dp_top + icon_offset - BaseUtils.px_to_dp(map_view.getScrollY())
         );
         return icon_view;
     }
