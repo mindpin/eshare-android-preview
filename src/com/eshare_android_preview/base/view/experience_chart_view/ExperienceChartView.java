@@ -178,8 +178,9 @@ public class ExperienceChartView extends View {
 
 
         // 将X轴分成6等分，画出5条刻度线
-        paint.setColor(Color.parseColor(line_color));
         for (int i = 0; i <= vectorLength - 2; i++) {
+            paint.setColor(Color.parseColor(line_color));
+
             int x_pos = (int) (((i + 1) * canvas_width / vectorLength));
 
             DayExpInfo weekday = logs.get(i);
