@@ -157,6 +157,8 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     private AniProxy.AniBundle bundle;
 
     public void page_open_animate() {
+        HomeActivity.map_view.dash_path_view.pause();
+
         ma_topbar = new MarginAni(
                 "topbar", top_layout,
                 0, 0,
@@ -224,6 +226,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
             public void onAnimationEnd(Animator animator) {
                 KnowledgeSetShowActivity.this.finish();
                 HomeActivity.map_view.locked = false;
+                HomeActivity.map_view.dash_path_view.resume();
             }
 
             @Override

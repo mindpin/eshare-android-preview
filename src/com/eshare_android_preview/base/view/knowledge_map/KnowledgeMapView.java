@@ -29,6 +29,8 @@ public class KnowledgeMapView extends LockableScrollView {
 
     public RelativeLayout nodes_paper;
     public RelativeLayout lines_paper;
+
+    public DashPathView dash_path_view;
     private ArrayList<DashPathEndpoint> dash_path_endpoint_list;
 
     public AniProxy opened_node = null;
@@ -61,7 +63,7 @@ public class KnowledgeMapView extends LockableScrollView {
 
         _r_traversal(KnowledgeNet.instance());
         _draw_nodes();
-//        _draw_dash_path_view();
+        _draw_dash_path_view();
     }
 
     private void _get_screen_size() {
@@ -89,7 +91,7 @@ public class KnowledgeMapView extends LockableScrollView {
     }
 
     public void _draw_dash_path_view() {
-        DashPathView dash_path_view = new DashPathView(activity);
+        dash_path_view = new DashPathView(activity);
 
         dash_path_view.set_dash_path_endpoint_list(dash_path_endpoint_list);
         dash_path_view.set_color(Color.parseColor("#aaaaaa"));
