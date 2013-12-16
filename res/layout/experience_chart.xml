@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/experience_chart"
+        android:layout_height="460dp"
+        android:layout_width="300dp" >
+    </LinearLayout>
+
+
+    <Button
+            android:id="@+id/test_animation_btn"
+            android:layout_height="50dp"
+            android:layout_width="120dp"
+            android:text="animation"
+            android:onClick="run_animation"/>
+
+</LinearLayout>
