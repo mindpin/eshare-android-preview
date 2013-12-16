@@ -17,7 +17,9 @@ import com.eshare_android_preview.activity.base.HomeActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.knowledge_map.AniProxy;
+import com.eshare_android_preview.base.view.knowledge_map.KnowledgeSetsData;
 import com.eshare_android_preview.base.view.knowledge_map.MarginAni;
+import com.eshare_android_preview.base.view.knowledge_map.SetPosition;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
@@ -157,10 +159,8 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     private AniProxy.AniBundle bundle;
 
     public void page_open_animate() {
-        if (null == HomeActivity.map_view || null == HomeActivity.map_view.opened_node) {
-            this.finish();
-            return;
-        }
+        SetPosition pos = HomeActivity.map_view.kdata.get_from(set);
+        AniProxy opened_node = pos.ani_proxy;
 
         HomeActivity.map_view.dash_path_view.pause();
 
@@ -176,7 +176,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
                 BaseUtils.dp_to_px(HomeActivity.map_view.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146)
         );
 
-        bundle = HomeActivity.map_view.opened_node.open(this);
+        bundle = opened_node.open(this);
         ma_icon = bundle.icon_ani;
 
         ValueAnimator ani = ValueAnimator

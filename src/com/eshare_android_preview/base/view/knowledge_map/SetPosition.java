@@ -132,7 +132,6 @@ public class SetPosition {
             @Override
             public void onClick(View view) {
                 if (is_unlocked()) {
-                    map_view.opened_node = ani_proxy;
                     map_view.locked = true;
 
                     // open activity

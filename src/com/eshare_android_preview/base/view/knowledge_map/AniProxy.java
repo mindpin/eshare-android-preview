@@ -28,8 +28,6 @@ public class AniProxy {
     }
 
     public AniBundle open(EshareBaseActivity target_activity) {
-        map_view.opened_node = this;
-
         // 复制一个相同位置的 circle_view 和 icon
         CircleView circle_view = pos.clone_circle_view_on(target_activity);
         ImageView icon_view = pos.clone_icon_view_on(target_activity);

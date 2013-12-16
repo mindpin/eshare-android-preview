@@ -33,9 +33,7 @@ public class KnowledgeMapView extends LockableScrollView {
     public DashPathView dash_path_view;
     private ArrayList<DashPathEndpoint> dash_path_endpoint_list;
 
-    public AniProxy opened_node = null;
-
-    KnowledgeSetsData kdata;
+    public KnowledgeSetsData kdata;
 
     public KnowledgeMapView(Context context) {
         super(context);
