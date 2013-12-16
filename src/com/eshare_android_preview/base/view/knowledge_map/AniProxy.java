@@ -8,7 +8,6 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
 import com.nineoldandroids.animation.PropertyValuesHolder;
-import com.nineoldandroids.animation.ValueAnimator;
 
 /**
  * Created by Administrator on 13-12-12.
@@ -28,51 +27,37 @@ public class AniProxy {
         this.map_view = pos.map_view;
     }
 
-    private CircleView circle_view;
-    private ImageView icon_view;
-    public MarginAni open(EshareBaseActivity target_activity) {
-        // 复制一个相同位置的 circle_view 和 icon
-        circle_view = new CircleView(target_activity);
-        circle_view.set_color(pos.get_circle_color());
-        circle_view.set_circle_center_position(
-                pos.grid_dp_left + pos.circle_center_offset,
-                pos.grid_dp_top + pos.circle_center_offset
-        );
-        circle_view.set_radius(pos.CIRCLE_RADIUS_DP);
+    public AniBundle open(EshareBaseActivity target_activity) {
+        map_view.opened_node = this;
 
-        icon_view = new ImageView(target_activity);
-        icon_view.setImageDrawable(pos.get_icon_drawable());
-        pos._set_dp_params(
-                icon_view,
-                pos.CIRCLE_RADIUS_DP * 2, pos.CIRCLE_RADIUS_DP * 2,
-                pos.grid_dp_left + pos.icon_offset,
-                pos.grid_dp_top + pos.icon_offset
-        );
+        // 复制一个相同位置的 circle_view 和 icon
+        CircleView circle_view = pos.clone_circle_view_on(target_activity);
+        ImageView icon_view = pos.clone_icon_view_on(target_activity);
 
         RelativeLayout group = (RelativeLayout) target_activity.findViewById(R.id.animate_layer);
         group.addView(circle_view);
         group.addView(icon_view);
 
-        map_view.opened_node = this;
-
-        circle_view.set_radius_animate(map_view.SCREEN_HEIGHT_DP, ANIMATE_DRUATION);
-
-        return new MarginAni(
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) icon_view.getLayoutParams();
+        MarginAni icon_ani  = new MarginAni(
                 "icon", icon_view,
-                pos.grid_dp_left + pos.icon_offset, TARGET_ICON_VIEW_ABSOLUTE_POS_PX[0],
-                pos.grid_dp_top + pos.icon_offset, TARGET_ICON_VIEW_ABSOLUTE_POS_PX[1]
+                params.leftMargin, TARGET_ICON_VIEW_ABSOLUTE_POS_PX[0],
+                params.topMargin, TARGET_ICON_VIEW_ABSOLUTE_POS_PX[1]
         );
+
+        return new AniBundle(icon_ani, circle_view, BaseUtils.dp_to_px(pos.CIRCLE_RADIUS_DP), BaseUtils.dp_to_px(map_view.SCREEN_HEIGHT_DP));
     }
 
-    public MarginAni close() {
-        map_view.opened_node = null;
+    public static class AniBundle {
+        public MarginAni icon_ani;
+        public CircleView circle_view;
+        public PropertyValuesHolder open_holder, close_holder;
 
-        circle_view.set_radius_animate(pos.CIRCLE_RADIUS_DP, ANIMATE_DRUATION);
-
-        return new MarginAni(
-                "icon", icon_view,
-                TARGET_ICON_VIEW_ABSOLUTE_POS_PX[0], pos.grid_dp_left + pos.icon_offset,
-                TARGET_ICON_VIEW_ABSOLUTE_POS_PX[1], pos.grid_dp_top + pos.icon_offset
-        );
+        public AniBundle(MarginAni icon_ani, CircleView circle_view, float r1, float r2) {
+            this.icon_ani = icon_ani;
+            this.circle_view = circle_view;
+            this.open_holder = PropertyValuesHolder.ofFloat("radius", r1, r2);
+            this.close_holder = PropertyValuesHolder.ofFloat("radius", r2, r1);
+        }
     }
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeSetShowActivity;
 import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
@@ -132,6 +133,7 @@ public class SetPosition {
             public void onClick(View view) {
                 if (is_unlocked()) {
                     map_view.opened_node = ani_proxy;
+                    map_view.locked = true;
 
                     // open activity
                     Intent intent = new Intent(map_view.activity, KnowledgeSetShowActivity.class);
@@ -245,5 +247,29 @@ public class SetPosition {
 
             list.add(DashPathEndpoint.build_by_dp_point(x1, y1, x2, y2));
         }
+    }
+
+    // 复制一个相同位置的 circle_view 和 icon 在指定的 activity 上
+    public CircleView clone_circle_view_on(EshareBaseActivity target_activity) {
+        CircleView circle_view = new CircleView(target_activity);
+        circle_view.set_color(get_circle_color());
+        circle_view.set_circle_center_position(
+                grid_dp_left + circle_center_offset,
+                grid_dp_top + circle_center_offset
+        );
+        circle_view.set_radius(CIRCLE_RADIUS_DP);
+        return circle_view;
+    }
+
+    public ImageView clone_icon_view_on(EshareBaseActivity target_activity) {
+        ImageView icon_view = new ImageView(target_activity);
+        icon_view.setImageDrawable(get_icon_drawable());
+        _set_dp_params(
+                icon_view,
+                CIRCLE_RADIUS_DP * 2, CIRCLE_RADIUS_DP * 2,
+                grid_dp_left + icon_offset,
+                grid_dp_top + icon_offset
+        );
+        return icon_view;
     }
 }

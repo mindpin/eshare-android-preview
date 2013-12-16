@@ -61,7 +61,7 @@ public class KnowledgeMapView extends LockableScrollView {
 
         _r_traversal(KnowledgeNet.instance());
         _draw_nodes();
-        _draw_dash_path_view();
+//        _draw_dash_path_view();
     }
 
     private void _get_screen_size() {
@@ -72,13 +72,6 @@ public class KnowledgeMapView extends LockableScrollView {
 
         GRID_WIDTH_DP = SCREEN_WIDTH_DP / 3;
         GRID_HEIGHT_DP = GRID_WIDTH_DP + 30;
-    }
-
-    public void run_close_animate(EshareBaseActivity target_activity) {
-        if (null != opened_node) {
-            opened_node.close();
-            locked = false;
-        }
     }
 
     public void _draw_nodes() {

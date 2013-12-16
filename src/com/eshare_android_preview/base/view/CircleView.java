@@ -22,8 +22,6 @@ public class CircleView extends View {
     private int width;
     private int height;
 
-    private float radius_dp;
-
     public CircleView(Context context) {
         super(context);
     }
@@ -45,25 +43,13 @@ public class CircleView extends View {
     }
 
     public void set_radius(float radius_dp){
-        this.radius_dp = radius_dp;
-        this.radius = BaseUtils.dp_to_px(radius_dp);
-        invalidate();
-        requestLayout();
+        set_radius_px(BaseUtils.dp_to_px(radius_dp));
     }
 
-    // 根据传入的半径值和动画时间来产生动画效果
-    public void set_radius_animate(float radius_dp, int druation) {
-        float old_radius_dp = this.radius_dp;
-        ValueAnimator animation = ValueAnimator.ofFloat(old_radius_dp, radius_dp);
-        animation.setDuration(druation);
-        animation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Float value = (Float) animation.getAnimatedValue();
-                set_radius(value);
-            }
-        });
-        animation.start();
+    public void set_radius_px(float radius_px) {
+        this.radius = radius_px;
+        invalidate();
+        requestLayout();
     }
 
 
