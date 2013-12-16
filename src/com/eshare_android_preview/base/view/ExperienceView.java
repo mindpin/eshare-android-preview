@@ -29,7 +29,7 @@ public class ExperienceView extends View{
 	private Float left = 70F;  // 矩形的 left   	  		  可以修改
 	private Float top = 20F;   // 矩形的 top   	  		  可以修改
 	
-	private Float rect_width; // 矩形里面的初始长  (exp_num/level_up_exp_num)
+	private Float rect_width = 10F; // 矩形里面的初始长  (exp_num/level_up_exp_num)
 	
 	private Float rect_width_fill = 220F;	// 矩形宽   	  可以修改
 	private Float rect_height = 60F;	   	// 矩形高   	  可以修改 
@@ -95,6 +95,9 @@ public class ExperienceView extends View{
 	}
 	
 	private void set_default_rect_width() {
+        if(isInEditMode()){
+           return;
+        }
 		CurrentState state = ExperienceLog.current_state();
 		Float level_up_exp_num = (float) state.level_up_exp_num;
 		Float exp_num = (float) state.exp_num;
