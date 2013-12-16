@@ -1,13 +1,12 @@
 package com.eshare_android_preview.model.elog;
 
+import java.io.Serializable;
+import java.util.List;
+
 import com.eshare_android_preview.model.database.ExperienceLogDBHelper;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
-import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
-
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by menxu on 13-12-5.
@@ -63,7 +62,13 @@ public class ExperienceLog implements Serializable {
     public static List<ExperienceLog> all(){
         return ExperienceLogDBHelper.all();
     }
-
+    
+    public static int get_level_up_exp_num_by(int level){
+    	if (level >= level_up_exp_nums.length -1) {
+			level = 1;
+		}
+    	return level_up_exp_nums[level-1];
+    }
 
     public static CurrentState current_state(){
         CurrentState state = new CurrentState();

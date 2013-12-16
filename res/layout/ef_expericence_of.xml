@@ -7,13 +7,21 @@
     
 	<com.eshare_android_preview.base.view.ExperienceOfView
 	    android:id="@+id/experience_of_view"
-        android:layout_height="80dp"
+        android:layout_height="280dp"
         android:layout_width="fill_parent"
         android:background="#ffffff"
         android:fadingEdge="none"
 	/>
 	
+	<EditText
+	    android:id="@+id/exp_tv"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="20dp"
+	    android:layout_below="@+id/experience_of_view"
+	/>
 	<Button
+	    android:id="@+id/but"
 	    android:layout_alignParentBottom="true"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
