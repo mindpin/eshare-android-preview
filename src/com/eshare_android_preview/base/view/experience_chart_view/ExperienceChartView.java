@@ -175,12 +175,12 @@ public class ExperienceChartView extends View {
 
 
             // 输出折线
-            int y_exp = to_pixel(y_range, miny, maxy, yvalues[i]);
+            int y_exp = to_pixel(y_range, yvalues[i]);
             if (i < 4) {
                 paint.setColor(Color.parseColor("#666666"));
                 int x_next_pos = (int) (((i + 2) * canvas_width / vectorLength));
 
-                int y_next_exp = to_pixel(y_range, miny, maxy, yvalues[i + 1]);
+                int y_next_exp = to_pixel(y_range, yvalues[i + 1]);
                 canvas.drawLine(x_pos, y_exp,
                         x_next_pos, y_next_exp, paint);
             }
@@ -202,11 +202,11 @@ public class ExperienceChartView extends View {
 
 
 
-    private int to_pixel(float pixels, float min, float max, float value) {
+    private int to_pixel(float pixels, float value) {
         double p;
         int pint;
 
-        p = ((value - min) / (max - min)) * pixels;
+        p = ((value - miny) / (maxy - miny)) * pixels;
 
         p = y_bottom_pos - p;
 
