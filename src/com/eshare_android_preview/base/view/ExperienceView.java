@@ -19,7 +19,7 @@ import com.nineoldandroids.animation.ValueAnimator;
 /**
  * Created by menxu on 13-12-10.
  */
-public class ExperienceOfView extends View{
+public class ExperienceView extends View{
 	private boolean init_view = true;
 
 	private int druation = 500;
@@ -61,10 +61,10 @@ public class ExperienceOfView extends View{
 	
 	
 	
-	public ExperienceOfView(Context context) {
+	public ExperienceView(Context context) {
 		super(context);
 	}
-	public ExperienceOfView(Context context, AttributeSet attrs){
+	public ExperienceView(Context context, AttributeSet attrs){
 		super(context, attrs);
 	}
 	

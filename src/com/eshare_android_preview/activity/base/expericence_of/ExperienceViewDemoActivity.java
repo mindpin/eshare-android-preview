@@ -7,24 +7,24 @@ import android.widget.EditText;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.base.view.ExperienceOfView;
+import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.model.elog.CurrentState;
 import com.eshare_android_preview.model.elog.ExperienceLog;
 /**
  * Created by menxu on 13-12-10.
  */
-public class ExperienceOfActiviey extends EshareBaseActivity{
-	ExperienceOfView experience_of_view;
+public class ExperienceViewDemoActivity extends EshareBaseActivity{
+	ExperienceView experience_of_view;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.ef_expericence_of);
+		setContentView(R.layout.demo_expericence_view);
 		
 		init_view();
 	}
 	private void init_view() {
-		experience_of_view = (ExperienceOfView)findViewById(R.id.experience_of_view);
+		experience_of_view = (ExperienceView)findViewById(R.id.experience_view);
 	}
 	public void click_experience_of_animator(View view){
 		EditText exp_tv = (EditText)findViewById(R.id.exp_tv);

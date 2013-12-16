@@ -8,7 +8,7 @@ import android.widget.Button;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.dash_path_demo.DashPathDemoActivity;
 
-import com.eshare_android_preview.activity.base.expericence_of.ExperienceOfActiviey;
+import com.eshare_android_preview.activity.base.expericence_of.ExperienceViewDemoActivity;
 
 import com.eshare_android_preview.activity.base.experience.ExperienceChartActivity;
 import com.eshare_android_preview.activity.base.webview_demo.WebViewDemoActivity;
@@ -61,7 +61,7 @@ public class MessageActivity extends EshareBaseActivity{
     }
 
     public void click_experience_of_button(View view){
-    	open_activity(ExperienceOfActiviey.class);
+    	open_activity(ExperienceViewDemoActivity.class);
     }
     
     private void render_experience_chart() {
