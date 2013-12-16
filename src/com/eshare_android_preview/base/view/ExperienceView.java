@@ -25,27 +25,29 @@ public class ExperienceView extends View{
 	private int druation = 500;
 	
 	private int rect_color = Color.GREEN; // 背景矩形颜色
-	
-	private Float left = 70F;  // 矩形的 left   	  		  可以修改
-	private Float top = 20F;   // 矩形的 top   	  		  可以修改
-	
-	private Float rect_width = 10F; // 矩形里面的初始长  (exp_num/level_up_exp_num)
-	
-	private Float rect_width_fill = 220F;	// 矩形宽   	  可以修改
-	private Float rect_height = 60F;	   	// 矩形高   	  可以修改 
-	
+
 	// 圆
 	private Float circle_radius = 30F; 		// 圆半径   	  可以修改
 	private int circle_color = Color.WHITE; // 圆背景颜色   可以修改
-	private int circle_radius_relative_rect = -15; // 圆心相对于矩形的位置  可以修改
 	
-
-	private Float circle_left_cx; // 左圆 坐标
-	private Float circle_left_cy;
+	private Float circle_left_cx = 40F; // 左圆 坐标
+	private Float circle_left_cy = 40F; // 圆 top
 	
-	private Float circle_right_cx;// 右圆 坐标
-	private Float circle_right_cy;
+	private Float circle_right_cx = 60F;// 右圆 坐标
+	private Float circle_right_cy = circle_left_cy;
 	
+	// 矩形
+	private Float rect_width = 60F; // 矩形里面的初始长  (exp_num/level_up_exp_num)
+	private Float rect_height = 60F;// 矩形高
+	
+	private int circle_radius_relative_rect = 15; // 圆心相对于矩形的位置  可以修改
+	
+	private Float rect_width_fill;	// 矩形宽
+	
+	private Float rect_left;  			// 矩形的 left
+	private Float rect_top;   			// 矩形的 top
+	private Float rect_right;
+	private Float rect_bottom;
 
 	//线条 边
 	private int line_stroke_width = 5;
@@ -54,7 +56,7 @@ public class ExperienceView extends View{
 	private int line_color = Color.argb(100, 0, 0, 0);
 	
 	// current_level
-	private int current_level = 3;
+	private int current_level = 1;
 	 
 	private int text_color = Color.BLACK;
 	private float text_size = 16.0F;
@@ -82,11 +84,14 @@ public class ExperienceView extends View{
 	}
 	private void init() {
 		// circle
-		this.circle_left_cx =  left + circle_radius_relative_rect;
-		this.circle_left_cy =  top + rect_height/2;
+		this.circle_right_cx = getWidth() - this.circle_left_cy;
 		
-		this.circle_right_cx = rect_width_fill + (-circle_radius_relative_rect);
-		this.circle_right_cy = circle_left_cy;
+		this.rect_left = this.circle_left_cx + this.circle_radius_relative_rect;
+		this.rect_top  = this.circle_left_cy - this.rect_height/2;
+		this.rect_right= this.circle_right_cx - this.circle_radius_relative_rect;
+		this.rect_bottom = this.circle_left_cy + this.rect_height/2;
+		
+		this.rect_width_fill = this.rect_right - this.rect_left; 
 		
 		if(init_view){
 			this.init_view = false;
@@ -102,7 +107,7 @@ public class ExperienceView extends View{
 		Float level_up_exp_num = (float) state.level_up_exp_num;
 		Float exp_num = (float) state.exp_num;
 		Float fen_rect_width = (exp_num/level_up_exp_num);
-		this.rect_width  = (rect_width_fill - left) * fen_rect_width + left;
+		this.rect_width  = rect_width_fill * fen_rect_width;
 		
 		this.current_level = state.level;
 	}
@@ -114,12 +119,12 @@ public class ExperienceView extends View{
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeWidth(line_stroke_width);
 		paint.setColor(line_color);
-		canvas.drawRect(left, top, rect_width_fill, rect_height + top, paint);
-		
+		canvas.drawRect(rect_left, rect_top, rect_right, rect_bottom, paint);
+
 		paint.setStyle(Paint.Style.FILL);
 		paint.setColor(rect_color);
 		paint.setStrokeWidth(line_fine_width);
-		canvas.drawRect(left, top, rect_width, rect_height + top, paint);
+		canvas.drawRect(rect_left, rect_top+2, this.rect_width + rect_left, rect_bottom-2, paint);
 	}
 
 	private void draw_left_circle(Canvas canvas){
@@ -185,7 +190,7 @@ public class ExperienceView extends View{
 		Float level_up_exp_num = (float) state.level_up_exp_num;
 		Float fen_rect_width = (count/level_up_exp_num);
 		
-		float rect = (rect_width_fill - left) * fen_rect_width;
+		float rect = rect_width_fill * fen_rect_width;
 		return rect + this.rect_width;
 	}
 	
@@ -214,7 +219,7 @@ public class ExperienceView extends View{
 				if (rect_width_fill <= add_to) {
 					float current_count = ((add_to-rect_width_fill)/rect_width_fill) * ExperienceLog.get_level_up_exp_num_by(current_level);
 					set_velel(current_level+1);
-					set_rect_width(left);
+					set_rect_width(0F);
 					add((int) current_count);
 				}
 			}

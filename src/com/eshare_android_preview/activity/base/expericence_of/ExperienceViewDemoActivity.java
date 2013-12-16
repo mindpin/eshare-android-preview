@@ -8,8 +8,6 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.ExperienceView;
-import com.eshare_android_preview.model.elog.CurrentState;
-import com.eshare_android_preview.model.elog.ExperienceLog;
 /**
  * Created by menxu on 13-12-10.
  */
@@ -32,16 +30,7 @@ public class ExperienceViewDemoActivity extends EshareBaseActivity{
 		int num = 0;
 		if (!BaseUtils.is_str_blank(e_s)) {
 			num = Integer.parseInt(e_s);
-//			BaseUtils.toast(num + " : ");
 		}
-		CurrentState state = ExperienceLog.current_state();
-		Float level_up_exp_num = (float) state.level_up_exp_num;
-		Float f = (num/level_up_exp_num);
-		
 		experience_of_view.add(num);
-		
-//		experience_of_view.set_rect_width_animate(2/3F, 500);
-//		experience_of_view.set_left_text(left_text);
-//		experience_of_view.set_right_text(right_text);
 	}
 }
