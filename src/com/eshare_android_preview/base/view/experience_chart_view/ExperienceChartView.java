@@ -25,6 +25,37 @@ public class ExperienceChartView extends View {
     private float maxy = 0.0f, miny = 0.0f;
 
 
+    float canvas_height;
+    float canvas_width;
+
+
+    // 圆圈半径
+    float radius = 20.0f;
+
+    // 刻度线高度
+    float mark_height = 30.0f;
+
+    // 顶部线的Y轴位置
+    float top_pos;
+
+    // 底部线的Y轴位置
+    float bottom_pos;
+
+    // 经验值显示的画布范围
+    float y_top_pos;
+    float y_bottom_pos;
+    float y_range;
+
+    // 刻度线 Y轴位置, 在X轴上方30像素
+    float y_mark_pos;
+
+    // 星期线 Y轴位置, 在X轴下方50像素
+    float y_week_pos;
+
+    // 日期线 Y轴位置, 在X轴上方80像素
+    float y_date_pos;
+
+
     // 日期信息
     private List<DayExpInfo> logs = ExperienceLog.history_info();
 
@@ -82,34 +113,31 @@ public class ExperienceChartView extends View {
         // 默认画线粗细
         paint.setStrokeWidth(2);
 
-        float canvas_height = getHeight();
-        float canvas_width = getWidth();
-
-        // 圆圈半径
-        float radius = 20.0f;
+        canvas_height = getHeight();
+        canvas_width = getWidth();
 
         // 刻度线高度
-        float mark_height = 30.0f;
+        mark_height = 30.0f;
 
         // 顶部线的Y轴位置
-        float top_pos = (float) .1 * canvas_height;
+        top_pos = (float) .1 * canvas_height;
 
         // 底部线的Y轴位置
-        float bottom_pos = (float) .85 * canvas_height;
+        bottom_pos = (float) .85 * canvas_height;
 
         // 经验值显示的画布范围
-        float y_top_pos = top_pos + radius + 10;
-        float y_bottom_pos = bottom_pos - radius - mark_height - 10;
-        float y_range = y_bottom_pos - y_top_pos;
+        y_top_pos = top_pos + radius + 10;
+        y_bottom_pos = bottom_pos - radius - mark_height - 10;
+        y_range = y_bottom_pos - y_top_pos;
 
-        // 刻度线 Y轴位置, 在X轴上方30像素
-        float y_mark_pos = bottom_pos - mark_height;
+        // 刻度线 Y轴位置
+        y_mark_pos = bottom_pos - mark_height;
 
         // 星期线 Y轴位置, 在X轴下方50像素
-        float y_week_pos = bottom_pos + 50;
+        y_week_pos = bottom_pos + 50;
 
         // 日期线 Y轴位置, 在X轴上方80像素
-        float y_date_pos = bottom_pos + 80;
+        y_date_pos = bottom_pos + 80;
 
         // 画出底部X轴
         canvas.drawLine(0, bottom_pos, canvas_width, bottom_pos, paint);
@@ -153,21 +181,13 @@ public class ExperienceChartView extends View {
                 int x_next_pos = (int) (((i + 2) * canvas_width / vectorLength));
 
                 int y_next_exp = to_pixel(y_range, miny, maxy, yvalues[i + 1]);
-                canvas.drawLine(x_pos, y_exp + y_top_pos,
-                        x_next_pos, y_next_exp + y_top_pos, paint);
+                canvas.drawLine(x_pos, y_exp,
+                        x_next_pos, y_next_exp, paint);
             }
-
-            Log.d("------", "-----");
-            Log.d("exp_num", weekday.exp_num + "");
-            Log.d("miny = ", miny + "");
-            Log.d("maxy = ", maxy + "");
-            Log.d("yExp = ", y_exp + "");
-            Log.d("------", "-----");
-
 
             // 输出经验值圆圈
             paint.setColor(Color.parseColor("#333333"));
-            canvas.drawCircle(x_pos, y_exp + y_top_pos, radius, paint);
+            canvas.drawCircle(x_pos, y_exp, radius, paint);
 
         }
 
@@ -175,9 +195,11 @@ public class ExperienceChartView extends View {
 
 
     private void get_axes(float[] yvalues) {
-        miny = get_min(yvalues) - 10;
+        // miny = get_min(yvalues);
+        miny = 0;
         maxy = get_max(yvalues) + 10;
     }
+
 
 
     private int to_pixel(float pixels, float min, float max, float value) {
@@ -185,6 +207,8 @@ public class ExperienceChartView extends View {
         int pint;
 
         p = ((value - min) / (max - min)) * pixels;
+
+        p = y_bottom_pos - p;
 
         pint = (int) p;
 
@@ -218,7 +242,7 @@ public class ExperienceChartView extends View {
 
     public void run_animation() {
         float prev_exp_pos = yvalues[vectorLength - 2];
-        float current_exp_pos = prev_exp_pos - dynamic_exp;
+        float current_exp_pos = prev_exp_pos + dynamic_exp;
 
         ValueAnimator animation = ValueAnimator.ofFloat(prev_exp_pos, current_exp_pos );
         animation.setDuration(500);
