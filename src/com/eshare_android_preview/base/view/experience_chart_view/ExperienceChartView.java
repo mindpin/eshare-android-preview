@@ -28,9 +28,35 @@ public class ExperienceChartView extends View {
     float canvas_height;
     float canvas_width;
 
+    // 字体大小
+    float text_size = 20.0f;
+
+    // 默认画线宽度
+    float line_width = 2.0f;
+
+    // 默认线颜色
+    String line_color = "#000000";
 
     // 圆圈半径
     float radius = 20.0f;
+
+    // 圆连线宽度
+    float circle_line_width = 8;
+
+    // 圆连线颜色
+    String circle_line_color = "#666666";
+
+    // 圆的颜色
+    String circle_color = "#333333";
+
+    // 刻度线宽度
+    float mark_line_width = 7;
+
+    // 顶部线颜色
+    String top_line_color = "#000000";
+
+    // 底部线颜色
+    String bottom_line_color = "#000000";
 
     // 刻度线高度
     float mark_height = 30.0f;
@@ -46,14 +72,21 @@ public class ExperienceChartView extends View {
     float y_bottom_pos;
     float y_range;
 
-    // 刻度线 Y轴位置, 在X轴上方30像素
+    // 刻度线 Y轴位置
     float y_mark_pos;
 
-    // 星期线 Y轴位置, 在X轴下方50像素
+    // 星期线 Y轴位置
     float y_week_pos;
 
-    // 日期线 Y轴位置, 在X轴上方80像素
+    // 日期线 Y轴位置
     float y_date_pos;
+
+
+    // 星期跟底部线的间隔高度
+    float week_space_with_bottom_pos = 30;
+
+    // 日期跟星期的间隔高度
+    float date_space_with_week_pos = 20;
 
 
     // 日期信息
@@ -86,14 +119,7 @@ public class ExperienceChartView extends View {
 
         paint = new Paint();
 
-        // 去掉锯齿
-        paint.setAntiAlias(true);
-
-        paint.setColor(Color.BLACK);
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize(20.0f);
-
-        get_axes(yvalues);
+        get_axes();
     }
 
     private float[] get_yvalues() {
@@ -110,20 +136,15 @@ public class ExperienceChartView extends View {
     protected void onDraw(Canvas canvas) {
         canvas.drawARGB(255, 200, 200, 200);
 
-        // 默认画线粗细
-        paint.setStrokeWidth(2);
-
         canvas_height = getHeight();
         canvas_width = getWidth();
-
-        // 刻度线高度
-        mark_height = 30.0f;
 
         // 顶部线的Y轴位置
         top_pos = (float) .1 * canvas_height;
 
         // 底部线的Y轴位置
         bottom_pos = (float) .85 * canvas_height;
+
 
         // 经验值显示的画布范围
         y_top_pos = top_pos + radius + 10;
@@ -133,60 +154,67 @@ public class ExperienceChartView extends View {
         // 刻度线 Y轴位置
         y_mark_pos = bottom_pos - mark_height;
 
-        // 星期线 Y轴位置, 在X轴下方50像素
-        y_week_pos = bottom_pos + 50;
+        // 星期线 Y轴位置, 底部X轴 + 间隔区 + 文字大小
+        y_week_pos = bottom_pos + week_space_with_bottom_pos + text_size;
 
-        // 日期线 Y轴位置, 在X轴上方80像素
-        y_date_pos = bottom_pos + 80;
+        // 日期线 Y轴位置, 星期线位置 + 间隔区 + 文字大小
+        y_date_pos = y_week_pos + date_space_with_week_pos + text_size;
+
+        // 初始化画笔
+        paint.setAntiAlias(true);
+        paint.setColor(Color.parseColor(line_color));
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(text_size);
 
         // 画出底部X轴
+        paint.setColor(Color.parseColor(bottom_line_color));
+        paint.setStrokeWidth(line_width);
         canvas.drawLine(0, bottom_pos, canvas_width, bottom_pos, paint);
 
         // 画出顶部X轴
+        paint.setColor(Color.parseColor(top_line_color));
+        paint.setStrokeWidth(line_width);
         canvas.drawLine(0, top_pos, canvas_width, top_pos, paint);
 
-        // 控制刻度线粗细
-        paint.setStrokeWidth(7);
 
         // 将X轴分成6等分，画出5条刻度线
         for (int i = 0; i <= vectorLength - 2; i++) {
+            paint.setColor(Color.parseColor(line_color));
+
             int x_pos = (int) (((i + 1) * canvas_width / vectorLength));
 
             DayExpInfo weekday = logs.get(i);
 
             // 显示刻度条
-            paint.setColor(Color.BLACK);
+            paint.setStrokeWidth(mark_line_width);
             canvas.drawLine(x_pos, bottom_pos,
                 x_pos, y_mark_pos, paint);
 
-
-            // 显示刻度数字
-            canvas.drawText("" + (i + 1), x_pos,
-                    bottom_pos + 20, paint);
-
             // 显示星期
-            canvas.drawText("" + weekday.day_of_week_str, x_pos,
+            paint.setStrokeWidth(line_width);
+            canvas.drawText(weekday.day_of_week_str, x_pos,
                     y_week_pos, paint);
 
 
             // 显示日期
-            canvas.drawText("" + weekday.day_of_month_str, x_pos,
+            canvas.drawText(weekday.day_of_month_str, x_pos,
                     y_date_pos, paint);
 
 
             // 输出折线
-            int y_exp = to_pixel(y_range, miny, maxy, yvalues[i]);
+            paint.setColor(Color.parseColor(circle_line_color));
+            paint.setStrokeWidth(circle_line_width);
+            int y_exp = to_pixel(yvalues[i]);
             if (i < 4) {
-                paint.setColor(Color.parseColor("#666666"));
                 int x_next_pos = (int) (((i + 2) * canvas_width / vectorLength));
 
-                int y_next_exp = to_pixel(y_range, miny, maxy, yvalues[i + 1]);
+                int y_next_exp = to_pixel(yvalues[i + 1]);
                 canvas.drawLine(x_pos, y_exp,
                         x_next_pos, y_next_exp, paint);
             }
 
             // 输出经验值圆圈
-            paint.setColor(Color.parseColor("#333333"));
+            paint.setColor(Color.parseColor(circle_color));
             canvas.drawCircle(x_pos, y_exp, radius, paint);
 
         }
@@ -194,7 +222,7 @@ public class ExperienceChartView extends View {
     }
 
 
-    private void get_axes(float[] yvalues) {
+    private void get_axes() {
         // miny = get_min(yvalues);
         miny = 0;
         maxy = get_max(yvalues) + 10;
@@ -202,11 +230,11 @@ public class ExperienceChartView extends View {
 
 
 
-    private int to_pixel(float pixels, float min, float max, float value) {
+    private int to_pixel(float value) {
         double p;
         int pint;
 
-        p = ((value - min) / (max - min)) * pixels;
+        p = ((value - miny) / (maxy - miny)) * y_range;
 
         p = y_bottom_pos - p;
 
@@ -234,7 +262,7 @@ public class ExperienceChartView extends View {
 
     public void set_yvalue(Float value){
         yvalues[yvalues.length - 1] = value;
-        get_axes(yvalues);
+        get_axes();
         invalidate();
         requestLayout();
     }
