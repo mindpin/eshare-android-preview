@@ -193,7 +193,7 @@ public class SetPosition {
     private void _draw_title_view() {
         title_view = new TextView(map_view.activity);
         title_view.setText(set.get_name());
-        title_view.setTextSize(BaseUtils.dp_to_int_px(TEXT_SIZE));
+        title_view.setTextSize(BaseUtils.dp_to_px(TEXT_SIZE));
         title_view.setGravity(Gravity.CENTER);
         title_view.setTextColor(Color.parseColor("#444444"));
 
@@ -211,7 +211,7 @@ public class SetPosition {
 
         count_view = new TextView(map_view.activity);
         count_view.setText(set.get_learned_nodes_count() + "/" + set.nodes.size());
-        count_view.setTextSize(BaseUtils.dp_to_int_px(TEXT_SIZE));
+        count_view.setTextSize(BaseUtils.dp_to_px(TEXT_SIZE));
         count_view.setGravity(Gravity.CENTER);
         count_view.setTextColor(Color.parseColor("#aaaaaa"));
 
@@ -223,12 +223,12 @@ public class SetPosition {
     }
 
     public void _set_dp_params(View view, int w, int h, int left, int top) {
-        int pxw = (w < 0 ? w : BaseUtils.dp_to_int_px(w));
-        int pxh = (h < 0 ? h : BaseUtils.dp_to_int_px(h));
+        int pxw = (w < 0 ? w : BaseUtils.dp_to_px(w));
+        int pxh = (h < 0 ? h : BaseUtils.dp_to_px(h));
 
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(pxw, pxh);
-        lp.leftMargin = BaseUtils.dp_to_int_px(left);
-        lp.topMargin = BaseUtils.dp_to_int_px(top);
+        lp.leftMargin = BaseUtils.dp_to_px(left);
+        lp.topMargin = BaseUtils.dp_to_px(top);
         view.setLayoutParams(lp);
     }
 

@@ -30,13 +30,9 @@ import com.eshare_android_preview.application.EshareApplication;
 
 public class BaseUtils {
 
-    public static float dp_to_px(float dip) {
-        Resources r = EshareApplication.context.getResources();
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, r.getDisplayMetrics());
-    }
-
-    public static int dp_to_int_px(float dip) {
-        return (int) dp_to_px(dip);
+    public static int dp_to_px(float dp) {
+        final float scale = EshareApplication.context.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
     }
 
     public static int px_to_dp(float px) {

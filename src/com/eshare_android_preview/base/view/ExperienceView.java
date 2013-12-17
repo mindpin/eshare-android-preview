@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -19,218 +18,234 @@ import com.nineoldandroids.animation.ValueAnimator;
 /**
  * Created by menxu on 13-12-10.
  */
-public class ExperienceView extends View{
-	private boolean init_view = true;
+public class ExperienceView extends View {
+    private boolean is_on_init = true;
 
-	private int druation = 500;
-	
-	private int rect_color = Color.GREEN; // 背景矩形颜色
+    final private static int ANIMATE_DRUATION = 500;
 
-	// 圆
-	private Float circle_radius = 30F; 		// 圆半径   	  可以修改
-	private int circle_color = Color.WHITE; // 圆背景颜色   可以修改
-	
-	private Float circle_left_cx = 40F; // 左圆 坐标
-	private Float circle_left_cy = 40F; // 圆 top
-	
-	private Float circle_right_cx = 60F;// 右圆 坐标
-	private Float circle_right_cy = circle_left_cy;
-	
-	// 矩形
-	private Float rect_width = 60F; // 矩形里面的初始长  (exp_num/level_up_exp_num)
-	private Float rect_height = 60F;// 矩形高
-	
-	private int circle_radius_relative_rect = 15; // 圆心相对于矩形的位置  可以修改
-	
-	private Float rect_width_fill;	// 矩形宽
-	
-	private Float rect_left;  			// 矩形的 left
-	private Float rect_top;   			// 矩形的 top
-	private Float rect_right;
-	private Float rect_bottom;
+    // 圆
+    final private static int CIRCLE_RADIUS = BaseUtils.dp_to_px(18); // 左右圆半径 可以修改
+    final private static int LEFT_CIRCLE_BG_COLOR = Color.parseColor("#fccd2d"); // 左圆背景颜色 可以修改
+    final private static int RIGHT_CIRCLE_BG_COLOR = Color.parseColor("#eeeeee"); // 右圆背景颜色 可以修改
 
-	//线条 边
-	private int line_stroke_width = 5;
-	private int line_fine_width = 0;
-	
-	private int line_color = Color.argb(100, 0, 0, 0);
-	
-	// current_level
-	private int current_level = 1;
-	 
-	private int text_color = Color.BLACK;
-	private float text_size = 16.0F;
-	
-	
-	
-	public ExperienceView(Context context) {
-		super(context);
-	}
-	public ExperienceView(Context context, AttributeSet attrs){
-		super(context, attrs);
-	}
-	
-	@Override
-	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);
-		init();
-		
-		draw_background_rect(canvas);
-		
-		draw_left_circle(canvas);
-		draw_right_circle(canvas);
-		draw_text_left(canvas);
-		draw_text_right(canvas);
-	}
-	private void init() {
-		// circle
-		this.circle_right_cx = getWidth() - this.circle_left_cy;
-		
-		this.rect_left = this.circle_left_cx + this.circle_radius_relative_rect;
-		this.rect_top  = this.circle_left_cy - this.rect_height/2;
-		this.rect_right= this.circle_right_cx - this.circle_radius_relative_rect;
-		this.rect_bottom = this.circle_left_cy + this.rect_height/2;
-		
-		this.rect_width_fill = this.rect_right - this.rect_left; 
-		
-		if(init_view){
-			this.init_view = false;
-			set_default_rect_width();
-		}
-	}
-	
-	private void set_default_rect_width() {
-        if(isInEditMode()){
-           return;
+    final private static int LEFT_CIRCLE_LEFT   = BaseUtils.dp_to_px(25); // 左圆圆心相对于view左边缘的距离
+    final private static int LEFT_CIRCLE_TOP    = BaseUtils.dp_to_px(25);  // 左圆圆心相对于view顶部的距离
+
+    final private static int RIGHT_CIRCLE_RIGHT = LEFT_CIRCLE_LEFT; // 右圆圆心相对于view右边缘的距离
+    final private static int RIGHT_CIRCLE_TOP   = LEFT_CIRCLE_TOP;  // 右圆圆心相对于view顶部的距离
+
+    // 矩形
+    final private static int RECT_BG_COLOR = Color.parseColor("#eeeeee"); // 矩形背景颜色
+
+    final private static int RECT_LEFT   = BaseUtils.dp_to_px(25); // 矩形的左边缘与view左边缘的距离
+    final private static int RECT_TOP    = BaseUtils.dp_to_px(10); // 矩形的上边缘与view上边缘的距离
+    final private static int RECT_RIGHT  = RECT_LEFT;                  // 矩形的右边缘与view右边缘的距离
+    final private static int RECT_BOTTOM = RECT_TOP;                   // 矩形的下边缘与view下边缘的距离
+
+    // 描边
+    final private static int LINE_STROKE_WIDTH = BaseUtils.dp_to_px(5);
+    final private static int CIRCLE_STROKE_COLOR = Color.parseColor("#ffffff");
+    final private static int RECT_STROKE_COLOR = Color.parseColor("#ffffff");
+
+    // 文字
+    final private static int TEXT_COLOR = Color.parseColor("#555555");
+    final private static int TEXT_SIZE  = BaseUtils.dp_to_px(16);
+
+    // current_level
+    private int current_level;
+
+    private int view_width;
+    private int view_height;
+    private int rect_width;
+    private float rect_exp_bar_width; // 矩形里面的经验条的初始长度  (exp_num/level_up_exp_num)
+    private Paint paint;
+
+    public ExperienceView(Context context) {
+        super(context);
+    }
+
+    public ExperienceView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        init();
+
+        paint = new Paint();
+        paint.setAntiAlias(true);
+
+        draw_background_rect(canvas);
+        draw_left_circle(canvas);
+        draw_right_circle(canvas);
+        draw_text_left(canvas);
+        draw_text_right(canvas);
+    }
+
+    private void init() {
+        // circle
+        if (is_on_init) {
+            is_on_init = false;
+
+            view_width  = getWidth();
+            view_height = getHeight();
+            rect_width = view_width - RECT_LEFT - RECT_RIGHT;
+
+            init_exp_and_level();
         }
-		CurrentState state = ExperienceLog.current_state();
-		Float level_up_exp_num = (float) state.level_up_exp_num;
-		Float exp_num = (float) state.exp_num;
-		Float fen_rect_width = (exp_num/level_up_exp_num);
-		this.rect_width  = rect_width_fill * fen_rect_width;
-		
-		this.current_level = state.level;
-	}
-	
-	private void draw_background_rect(Canvas canvas){
-		Paint paint = new Paint();
-		paint.setAntiAlias(true);
-		
-		paint.setStyle(Paint.Style.STROKE);
-		paint.setStrokeWidth(line_stroke_width);
-		paint.setColor(line_color);
-		canvas.drawRect(rect_left, rect_top, rect_right, rect_bottom, paint);
+    }
 
-		paint.setStyle(Paint.Style.FILL);
-		paint.setColor(rect_color);
-		paint.setStrokeWidth(line_fine_width);
-		canvas.drawRect(rect_left, rect_top+2, this.rect_width + rect_left, rect_bottom-2, paint);
-	}
+    private void init_exp_and_level() {
+        if (isInEditMode()) {
+            rect_exp_bar_width = 60;
+            current_level = 1;
+            return;
+        }
 
-	private void draw_left_circle(Canvas canvas){
-		Paint paint = new Paint();
-		paint.setAntiAlias(true);
-		paint.setStyle(Paint.Style.FILL);
-		
-		paint.setStrokeWidth(line_stroke_width);
-		paint.setColor(line_color);
-		canvas.drawCircle(circle_left_cx, circle_left_cy, circle_radius+line_stroke_width, paint);
-		
-		paint.setColor(circle_color);
-		paint.setStrokeWidth(line_fine_width);
-		canvas.drawCircle(circle_left_cx, circle_left_cy, circle_radius, paint);	
-	}
-	
-	private void draw_right_circle(Canvas canvas){
-		Paint paint = new Paint();
-		paint.setAntiAlias(true);
-		paint.setStyle(Paint.Style.FILL);
-		
-		paint.setStrokeWidth(line_stroke_width);
-		paint.setColor(line_color);
-		canvas.drawCircle(circle_right_cx, circle_right_cy, circle_radius+line_stroke_width, paint);
-		
-		paint.setColor(circle_color);
-		paint.setStrokeWidth(line_fine_width);
-		canvas.drawCircle(circle_right_cx, circle_right_cy, circle_radius, paint);
-	}
-	
-	private void draw_text_left(Canvas canvas){
-		Paint paint = new Paint();
-		paint.setAntiAlias(true);
-		paint.setColor(text_color);
-		paint.setTextSize(text_size);
-		
-		Rect rect = new Rect();
-		paint.getTextBounds(current_level+"", 0, 1, rect); 
-		
-		canvas.drawText(current_level+"", circle_left_cx - rect.width()/2, circle_left_cy, paint);
-	}
-	
-	private void draw_text_right(Canvas canvas){
-		Paint paint = new Paint();
-		paint.setAntiAlias(true);
-		paint.setColor(text_color);
-		paint.setTextSize(text_size);
-		
-		Rect rect = new Rect();
-		paint.getTextBounds((current_level + 1)+"", 0, 1, rect); 
-		
-		canvas.drawText((current_level + 1)+"", circle_right_cx - rect.width()/2, circle_right_cy, paint);
-	}
+        CurrentState state = ExperienceLog.current_state();
+        rect_exp_bar_width = rect_width * state.exp_num / state.level_up_exp_num;
+        current_level = state.level;
+    }
 
-	private void set_rect_width(Float rect_width){
-        this.rect_width  = rect_width;
+    private void draw_background_rect(Canvas canvas) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(RECT_BG_COLOR);
+
+        canvas.drawRect(
+                RECT_LEFT, RECT_TOP,
+                view_width - RECT_RIGHT, view_height - RECT_BOTTOM,
+                paint
+        );
+
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(LINE_STROKE_WIDTH);
+        paint.setColor(RECT_STROKE_COLOR);
+
+        canvas.drawRect(
+                RECT_LEFT, RECT_TOP,
+                view_width - RECT_RIGHT, view_height - RECT_BOTTOM,
+                paint
+        );
+    }
+
+    private void draw_left_circle(Canvas canvas) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(LEFT_CIRCLE_BG_COLOR);
+
+        canvas.drawCircle(LEFT_CIRCLE_LEFT, LEFT_CIRCLE_TOP, CIRCLE_RADIUS, paint);
+
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(LINE_STROKE_WIDTH);
+        paint.setColor(CIRCLE_STROKE_COLOR);
+
+        canvas.drawCircle(LEFT_CIRCLE_LEFT, LEFT_CIRCLE_TOP, CIRCLE_RADIUS, paint);
+    }
+
+    private void draw_right_circle(Canvas canvas) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(RIGHT_CIRCLE_BG_COLOR);
+
+        canvas.drawCircle(view_width - RIGHT_CIRCLE_RIGHT, RIGHT_CIRCLE_TOP, CIRCLE_RADIUS, paint);
+
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(LINE_STROKE_WIDTH);
+        paint.setColor(CIRCLE_STROKE_COLOR);
+
+        canvas.drawCircle(view_width - RIGHT_CIRCLE_RIGHT, RIGHT_CIRCLE_TOP, CIRCLE_RADIUS, paint);
+    }
+
+    private void draw_text_left(Canvas canvas) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(TEXT_COLOR);
+        paint.setTextSize(TEXT_SIZE);
+        paint.setFakeBoldText(true);
+
+        String text = current_level + "";
+        Rect bounds = new Rect();
+        paint.getTextBounds(text, 0, text.length(), bounds);
+
+        canvas.drawText(
+                text,
+                LEFT_CIRCLE_LEFT - paint.measureText(text) / 2,
+                LEFT_CIRCLE_TOP + bounds.height() / 2,
+                paint
+        );
+    }
+
+    private void draw_text_right(Canvas canvas) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(TEXT_COLOR);
+        paint.setTextSize(TEXT_SIZE);
+        paint.setFakeBoldText(true);
+
+        String text = current_level + 1 + "";
+        Rect bounds = new Rect();
+        paint.getTextBounds(text, 0, text.length(), bounds);
+
+        canvas.drawText(
+                text,
+                view_width - RIGHT_CIRCLE_RIGHT - paint.measureText(text) / 2,
+                RIGHT_CIRCLE_TOP + bounds.height() / 2,
+                paint
+        );
+    }
+
+    private void set_rect_width(float rect_width) {
+        rect_exp_bar_width = rect_width;
         invalidate();
         requestLayout();
     }
-	
-	private float get_add_rect(int count){
-		CurrentState state = ExperienceLog.current_state();
-		Float level_up_exp_num = (float) state.level_up_exp_num;
-		Float fen_rect_width = (count/level_up_exp_num);
-		
-		float rect = rect_width_fill * fen_rect_width;
-		return rect + this.rect_width;
-	}
-	
-    // 根据传入的半径值和动画时间来产生动画效果
-    public void add(int count) {
-        Float old_rect_width = this.rect_width;
 
-        final float add_to = get_add_rect(count);
-        ValueAnimator animation = ValueAnimator.ofFloat(old_rect_width, add_to);
-        animation.setDuration(druation);
+    private float get_added_rect_width(int added_exp) {
+        CurrentState state = ExperienceLog.current_state();
+        float added_width = rect_width * added_exp / state.level_up_exp_num;
+        return added_width + rect_exp_bar_width;
+    }
+
+    // 根据传入的半径值和动画时间来产生动画效果
+    // 升级时的逻辑可能有些问题，回头改
+    public void add(int added_exp) {
+        float old_rect_width = rect_exp_bar_width;
+        final float new_rect_width = get_added_rect_width(added_exp);
+
+        ValueAnimator animation = ValueAnimator.ofFloat(old_rect_width, new_rect_width);
+        animation.setDuration(ANIMATE_DRUATION);
         animation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                Float value = (Float) animation.getAnimatedValue();
-                value = value >= rect_width_fill ? rect_width_fill:value;
-                set_rect_width(value); 
+                float value = (Float) animation.getAnimatedValue();
+                value = value >= rect_width ? rect_width : value;
+                set_rect_width(value);
             }
         });
         animation.addListener(new AnimatorListener() {
-			@Override
-			public void onAnimationStart(Animator arg0) {}
-			@Override
-			public void onAnimationRepeat(Animator arg0) {}
-			@Override
-			public void onAnimationEnd(Animator arg0) {
-				if (rect_width_fill <= add_to) {
-					float current_count = ((add_to-rect_width_fill)/rect_width_fill) * ExperienceLog.get_level_up_exp_num_by(current_level);
-					set_velel(current_level+1);
-					set_rect_width(0F);
-					add((int) current_count);
-				}
-			}
-			@Override
-			public void onAnimationCancel(Animator arg0) {}
-		});
+            @Override
+            public void onAnimationStart(Animator arg0) {}
+
+            @Override
+            public void onAnimationRepeat(Animator arg0) {}
+
+            @Override
+            public void onAnimationEnd(Animator arg0) {
+                if (rect_width <= new_rect_width) {
+                    level_up();
+                    float current_count = ((new_rect_width - rect_width) / rect_width) * ExperienceLog.get_level_up_exp_num_by(current_level);
+                    set_rect_width(0F);
+                    add((int) current_count);
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator arg0) {
+            }
+        });
         animation.start();
     }
-    
-    private void set_velel(int velel){
-        this.current_level = velel;
+
+    private void level_up() {
+        current_level = current_level + 1;
         invalidate();
         requestLayout();
     }

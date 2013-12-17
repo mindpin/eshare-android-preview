@@ -15,8 +15,8 @@ import com.nineoldandroids.animation.PropertyValuesHolder;
 public class AniProxy {
     public static final int ANIMATE_DRUATION = 400;
     public static final int[] TARGET_ICON_VIEW_ABSOLUTE_POS_PX = new int[]{
-            BaseUtils.dp_to_int_px(47),
-            BaseUtils.dp_to_int_px(5)
+            BaseUtils.dp_to_px(47),
+            BaseUtils.dp_to_px(5)
     };
 
     private SetPosition pos;

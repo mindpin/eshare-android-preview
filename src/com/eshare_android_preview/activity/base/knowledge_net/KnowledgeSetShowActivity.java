@@ -150,7 +150,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
             }
         });
 
-        view_pager.setPageMargin(- BaseUtils.dp_to_int_px(90));
+        view_pager.setPageMargin(- BaseUtils.dp_to_px(90));
         view_pager.setOffscreenPageLimit(2);
     }
 
