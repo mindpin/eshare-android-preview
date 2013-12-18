@@ -49,11 +49,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
     }
     public static TestPaper test_paper;
 
-    TextView question_kind_tv;
     EshareMarkdownView  question_title_v;
     LinearLayout choices_detail_ll;
-    Button add_favourite_btn;
-    Button cancel_favourite_btn;
 
     Button submit_answer_btn;
     Question question;
@@ -62,6 +59,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     HealthView health_view;
     CorrectPointView correct_point_view;
+    TextView question_kind_desc_text_view;
 
     @SuppressLint("WorldReadableFiles")
     @Override
@@ -74,35 +72,12 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
         init_ui();
 
-        init_faved_button();
         load_question_msg();
-
-        _set_icon_fonts();
 
         super.onCreate(savedInstanceState);
     }
 
-    private void _set_icon_fonts() {
-        BitmapDrawable drawable = ImageTools.toRoundCorner(
-                (BitmapDrawable) getResources().getDrawable(R.drawable.lan_js), 100);
-        ImageView lan_icon_iv = (ImageView) findViewById(R.id.lan_icon);
-        lan_icon_iv.setBackgroundDrawable(drawable);
-    }
-
-    private void init_faved_button() {
-        add_favourite_btn = (Button) findViewById(R.id.add_favourite_btn);
-        cancel_favourite_btn = (Button) findViewById(R.id.cancel_favourite_btn);
-        if (!question.is_faved()) {
-            add_favourite_btn.setVisibility(View.VISIBLE);
-            cancel_favourite_btn.setVisibility(View.GONE);
-        } else {
-            add_favourite_btn.setVisibility(View.GONE);
-            cancel_favourite_btn.setVisibility(View.VISIBLE);
-        }
-    }
-
     private void init_ui() {
-        question_kind_tv = (TextView) findViewById(R.id.question_kind);
         question_title_v = (EshareMarkdownView) findViewById(R.id.question_title);
         choices_detail_ll = (LinearLayout) findViewById(R.id.choices_detail_ll);
         submit_answer_btn = (Button) findViewById(R.id.submit_answer_btn);
@@ -115,11 +90,12 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
         health_view = (HealthView) findViewById(R.id.health_view);
         correct_point_view = (CorrectPointView) findViewById(R.id.correct_point_view);
+        question_kind_desc_text_view = (TextView) findViewById(R.id.question_kind_desc_text_view);
     }
 
     private void load_question_msg() {
-        set_head_text("答题");
-        question_kind_tv.setText(question.get_kind_str());
+        question_kind_desc_text_view.setText(question.get_kind_desc_str());
+
         question_title_v.set_markdown_content(question.content);
 
         if (question.is_fill()){
@@ -426,21 +402,5 @@ public class QuestionShowActivity extends EshareBaseActivity {
         Intent intent = new Intent(QuestionShowActivity.this, AddNoteActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
-    }
-
-    @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
-    public void add_favourite(View view) {
-        question.add_to_fav();
-
-        add_favourite_btn.setVisibility(View.GONE);
-        cancel_favourite_btn.setVisibility(View.VISIBLE);
-    }
-
-    @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
-    public void cancel_favourite(View view) {
-        question.remove_from_fav();
-
-        add_favourite_btn.setVisibility(View.VISIBLE);
-        cancel_favourite_btn.setVisibility(View.GONE);
     }
 }

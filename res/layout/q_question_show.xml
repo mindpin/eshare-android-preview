@@ -37,58 +37,26 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_below="@+id/head"
-        android:orientation="horizontal"
-        android:id="@+id/question_action_bar"
-        android:padding="3dp"
-        android:background="@color/choice_before"
-        android:baselineAligned="false"
-        android:layout_width="fill_parent"
+        android:id="@+id/question_kind_desc"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:layout_width="fill_parent">
 
-        <Button
-            android:onClick="click_notes"
-            android:layout_width="0.0dp"
-            android:layout_weight="1.0"
-            android:layout_height="wrap_content"
-            android:text="添加笔记"
-            android:layout_margin="0dp"
-
+        <TextView
+            android:id="@+id/question_kind_desc_text_view"
+            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:text="选择一个正确答案"
+            android:textSize="20dp"
+            android:paddingLeft="13dp"
+            android:gravity="center_vertical"
             />
 
-        <Button
-            android:id="@+id/add_favourite_btn"
-            android:onClick="add_favourite"
-            android:layout_width="0.0dp"
-            android:layout_weight="1.0"
-            android:layout_height="wrap_content"
-            android:text="添加收藏"
-            android:layout_margin="0dp" />
-
-        <Button
-            android:id="@+id/cancel_favourite_btn"
-            android:onClick="cancel_favourite"
-            android:layout_width="0.0dp"
-            android:layout_weight="1.0"
-            android:layout_height="wrap_content"
-            android:text="取消收藏"
-            android:layout_margin="0dp"
-            android:visibility="gone" />
-
-        <Button
-            android:onClick="click_notes"
-            android:layout_width="0.0dp"
-            android:layout_weight="1.0"
-            android:layout_height="wrap_content"
-            android:text="----"
-            android:layout_margin="0dp" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <ScrollView
-        android:layout_below="@+id/question_action_bar"
+        android:layout_below="@+id/question_kind_desc"
         android:id="@+id/question_content_sv"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -111,14 +79,10 @@
                     android:layout_width="fill_parent"
                     android:orientation="vertical"
                     android:background="#fff"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:paddingTop="45dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="20dp">
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp">
 
                     <com.eshare_android_preview.base.view.EshareMarkdownView
                         android:id="@+id/question_title"
@@ -126,42 +90,6 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"></com.eshare_android_preview.base.view.EshareMarkdownView>
                 </LinearLayout>
-
-                <RelativeLayout
-                    android:id="@+id/kind_layout"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:background="@drawable/btn_e7e7e7_circle_flat"
-                    android:padding="5dp"
-                    android:layout_marginLeft="5dp">
-
-                    <TextView
-                        android:id="@+id/question_kind"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:gravity="center"
-                        android:text="问题类型"
-                        android:textSize="14dp"
-                        android:textColor="#fff"
-                        android:background="@drawable/btn_cf15b31_circle_flat"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_toRightOf="@+id/kind_layout"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:background="@drawable/btn_e7e7e7_circle_flat"
-                    android:padding="5dp"
-                    android:layout_marginLeft="-5dp">
-
-                    <ImageView
-                        android:id="@+id/lan_icon"
-                        android:layout_height="30dp"
-                        android:layout_width="30dp"
-                        android:background="@drawable/lan_js" />
-                </RelativeLayout>
 
             </RelativeLayout>
 
