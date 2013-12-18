@@ -142,8 +142,9 @@ public class ExperienceChartView extends View {
         // 顶部线的Y轴位置
         top_pos = (float) .1 * canvas_height;
 
-        // 底部线的Y轴位置
-        bottom_pos = (float) .85 * canvas_height;
+        // 底部线的Y轴位置 两个间隔区的高度 + 两行文字的高度 + 10空间大小
+        bottom_pos = canvas_height - (week_space_with_bottom_pos + date_space_with_week_pos
+                        + text_size + text_size + 10);
 
 
         // 经验值显示的画布范围
