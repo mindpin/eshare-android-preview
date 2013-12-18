@@ -3,11 +3,163 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/cell_head_bar" />
+    <RelativeLayout
+        android:id="@+id/head"
+        android:layout_height="50dp"
+        android:layout_width="fill_parent">
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            bg_color="#00000000"
+            text_color="#666666"
+            text_size="20"
+            text="&#xf060;"
+            />
+
+        <RelativeLayout
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            >
+
+            <com.eshare_android_preview.base.view.ui.CircleIconView
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                bg_color="#00000000"
+                text_color="#ff0000"
+                text_size="20"
+                text="&#xf004;"
+                />
+
+            <com.eshare_android_preview.base.view.ui.CircleIconView
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                bg_color="#00000000"
+                text_color="#ff0000"
+                text_size="20"
+                text="&#xf004;"
+                android:layout_marginLeft="30dp"
+                />
+
+            <com.eshare_android_preview.base.view.ui.CircleIconView
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                bg_color="#00000000"
+                text_color="#eeeeee"
+                text_size="20"
+                text="&#xf004;"
+                android:layout_marginLeft="60dp"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
+        android:layout_below="@id/head"
+        android:id="@+id/head1"
+        android:layout_height="30dp"
+        android:layout_width="fill_parent"
+        >
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+        <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            bg_color="#00000000"
+            text_color="#98CD27"
+            text_size="15"
+            text="&#xf06c;"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/head1"
         android:orientation="horizontal"
-        android:layout_below="@+id/head_bar"
         android:id="@+id/question_action_bar"
         android:padding="3dp"
         android:background="@color/choice_before"
@@ -72,8 +224,7 @@
             <RelativeLayout
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
-                android:layout_marginBottom="5dp"
-                >
+                android:layout_marginBottom="5dp">
 
                 <LinearLayout
                     android:layout_height="wrap_content"
@@ -93,8 +244,7 @@
                         android:id="@+id/question_title"
                         text_size="14"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content">
-                        </com.eshare_android_preview.base.view.EshareMarkdownView>
+                        android:layout_width="wrap_content"></com.eshare_android_preview.base.view.EshareMarkdownView>
                 </LinearLayout>
 
                 <RelativeLayout
@@ -139,15 +289,13 @@
                     android:padding="5dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="5dp"
-                    android:background="@drawable/btn_e7e7e7_circle_flat"
-                    >
+                    android:background="@drawable/btn_e7e7e7_circle_flat">
 
                     <LinearLayout
                         android:layout_height="30dp"
                         android:layout_width="wrap_content"
                         android:minWidth="100dp"
-                        android:background="@drawable/btn_white_circle_flat"
-                        >
+                        android:background="@drawable/btn_white_circle_flat">
 
                         <TextView
                             android:id="@+id/correct_icon"
@@ -157,8 +305,7 @@
                             android:text="@string/icon_check_circle"
                             android:textSize="22dp"
                             android:textColor="#50ce00"
-                            android:layout_marginLeft="5dp"
-                            />
+                            android:layout_marginLeft="5dp" />
 
                         <TextView
                             android:id="@+id/correct_count"
@@ -167,8 +314,7 @@
                             android:gravity="center"
                             android:text="0"
                             android:textSize="18dp"
-                            android:textColor="#50ce00"
-                            />
+                            android:textColor="#50ce00" />
 
                         <TextView
                             android:id="@+id/error_icon"
@@ -178,8 +324,7 @@
                             android:text="@string/icon_times_circle"
                             android:textSize="22dp"
                             android:textColor="#ff0000"
-                            android:layout_marginLeft="10dp"
-                            />
+                            android:layout_marginLeft="10dp" />
 
                         <TextView
                             android:id="@+id/error_count"
@@ -189,8 +334,7 @@
                             android:text="0"
                             android:textSize="18dp"
                             android:textColor="#ff0000"
-                            android:layout_marginRight="10dp"
-                            />
+                            android:layout_marginRight="10dp" />
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -216,8 +360,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="#e7e7e7"
-        android:padding="5dp"
-        >
+        android:padding="5dp">
 
         <Button
             android:id="@+id/submit_answer_btn"
@@ -228,8 +371,7 @@
             android:background="@drawable/btn_c6699bd3b_circle_flat"
             android:textColor="#ffffff"
             android:textSize="20dp"
-            android:text="确定"
-            />
+            android:text="确定" />
 
         <Button
             android:id="@+id/next_question_btn"
@@ -241,8 +383,7 @@
             android:textColor="#ffffff"
             android:textSize="20dp"
             android:text="下一题"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
     </LinearLayout>
 
     <TextView
@@ -256,8 +397,7 @@
         android:gravity="center"
         android:textSize="20dp"
         android:textColor="#50ce00"
-        android:text="回答正确"
-        />
+        android:text="回答正确" />
 
     <TextView
         android:id="@+id/answer_error_tip_tv"
@@ -270,6 +410,5 @@
         android:gravity="center"
         android:textSize="20dp"
         android:textColor="#f00"
-        android:text="回答错误"
-        />
+        android:text="回答错误" />
 </RelativeLayout>

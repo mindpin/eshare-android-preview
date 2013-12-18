@@ -15,8 +15,8 @@ import com.nineoldandroids.animation.PropertyValuesHolder;
 public class AniProxy {
     public static final int ANIMATE_DRUATION = 400;
     public static final int[] TARGET_ICON_VIEW_ABSOLUTE_POS_PX = new int[]{
-            BaseUtils.dp_to_int_px(47),
-            BaseUtils.dp_to_int_px(5)
+            BaseUtils.dp_to_px(47),
+            BaseUtils.dp_to_px(5)
     };
 
     private SetPosition pos;
@@ -28,8 +28,6 @@ public class AniProxy {
     }
 
     public AniBundle open(EshareBaseActivity target_activity) {
-        map_view.opened_node = this;
-
         // 复制一个相同位置的 circle_view 和 icon
         CircleView circle_view = pos.clone_circle_view_on(target_activity);
         ImageView icon_view = pos.clone_icon_view_on(target_activity);

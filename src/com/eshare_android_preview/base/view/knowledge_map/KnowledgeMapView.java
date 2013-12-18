@@ -33,9 +33,7 @@ public class KnowledgeMapView extends LockableScrollView {
     public DashPathView dash_path_view;
     private ArrayList<DashPathEndpoint> dash_path_endpoint_list;
 
-    public AniProxy opened_node = null;
-
-    KnowledgeSetsData kdata;
+    public KnowledgeSetsData kdata;
 
     public KnowledgeMapView(Context context) {
         super(context);
@@ -100,7 +98,7 @@ public class KnowledgeMapView extends LockableScrollView {
         lines_paper.addView(dash_path_view);
 
         ViewGroup.LayoutParams params = dash_path_view.getLayoutParams();
-        params.height = BaseUtils.dp_to_int_px(kdata.max_grid_dp_bottom);
+        params.height = BaseUtils.dp_to_px(kdata.max_grid_dp_bottom);
         dash_path_view.setLayoutParams(params);
     }
 
