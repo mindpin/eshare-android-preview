@@ -5,18 +5,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +23,6 @@ import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.BaseUtils.ScreenSize;
-import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.EshareMarkdownView;
 import com.eshare_android_preview.base.view.ui.CorrectPointView;
 import com.eshare_android_preview.base.view.ui.HealthView;
@@ -36,8 +33,6 @@ import com.eshare_android_preview.model.QuestionSelectAnswer;
 import com.eshare_android_preview.model.SingleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
-import com.eshare_android_preview.model.elog.CurrentState;
-import com.eshare_android_preview.model.elog.ExperienceLog;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.AnimatorSet;
@@ -61,20 +56,14 @@ public class QuestionShowActivity extends EshareBaseActivity {
     HealthView health_view;
     CorrectPointView correct_point_view;
     TextView question_kind_desc_text_view;
+    ScrollView question_content_sv;
 
     @SuppressLint("WorldReadableFiles")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.q_question_show);
-        hide_head_setting_button();
-
-        question = test_paper.get_next_question();
-        select_answer = question.build_select_answer();
-
         init_ui();
-
-        load_question_msg();
-
+        load_question();
         super.onCreate(savedInstanceState);
     }
 
@@ -103,6 +92,28 @@ public class QuestionShowActivity extends EshareBaseActivity {
                 }).show();
     }
 
+    private void load_question(){
+        question = test_paper.get_next_question();
+        select_answer = question.build_select_answer();
+
+        question_kind_desc_text_view.setText(question.get_kind_desc_str());
+
+        question_title_v.set_markdown_content(question.content);
+
+        if (question.is_fill()){
+            load_question_choices_for_fill();
+            question_title_v.set_on_click_listener_for_code_fill(new FillQuestionFillItemListener());
+        }else{
+            load_question_choices_for_choice_and_true_false();
+        }
+
+        question_content_sv.requestLayout();
+        question_content_sv.invalidate();
+        findViewById(R.id.question_content_transparent_view).setVisibility(View.GONE);
+        submit_answer_btn.setVisibility(View.VISIBLE);
+        refresh_submit_answer_btn_clickable();
+    }
+
     private void init_ui() {
         question_title_v = (EshareMarkdownView) findViewById(R.id.question_title);
         choices_detail_ll = (LinearLayout) findViewById(R.id.choices_detail_ll);
@@ -117,23 +128,13 @@ public class QuestionShowActivity extends EshareBaseActivity {
         health_view = (HealthView) findViewById(R.id.health_view);
         correct_point_view = (CorrectPointView) findViewById(R.id.correct_point_view);
         question_kind_desc_text_view = (TextView) findViewById(R.id.question_kind_desc_text_view);
-    }
 
-    private void load_question_msg() {
-        question_kind_desc_text_view.setText(question.get_kind_desc_str());
-
-        question_title_v.set_markdown_content(question.content);
-
-        if (question.is_fill()){
-            load_question_choices_for_fill();
-            question_title_v.set_on_click_listener_for_code_fill(new FillQuestionFillItemListener());
-        }else{
-            load_question_choices_for_choice_and_true_false();
-        }
+        question_content_sv = (ScrollView)findViewById(R.id.question_content_sv);
     }
 
     // 为填空类型的题目加载并显示选项
     private void load_question_choices_for_fill() {
+        choices_detail_ll.removeAllViews();
         for (QuestionChoice choice : question.choices_list) {
             LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
             FrameLayout fill_item_view = (FrameLayout) inflater.inflate(R.layout.q_question_fill_detail_item, null);
@@ -154,6 +155,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     // 为多选，单选和判断类型的题目加载并显示选项
     private void load_question_choices_for_choice_and_true_false() {
+        choices_detail_ll.removeAllViews();
         for (QuestionChoice choice : question.choices_list) {
             LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
             RelativeLayout choice_item_view = (RelativeLayout) inflater.inflate(R.layout.q_question_choice_detail_item, null);
@@ -202,6 +204,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         anim_scale.setDuration(500);
         anim_scale.start();
     }
+
     private void close_tip_tv_animation(View tip_tv){
     	int duration = 500;
     	ScreenSize ss = BaseUtils.get_screen_size();
@@ -221,9 +224,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 			public void onAnimationRepeat(Animator arg0) {}
 			@Override
 			public void onAnimationEnd(Animator arg0) {
-				Intent intent = new Intent(QuestionShowActivity.this, QuestionShowActivity.class);
-                startActivity(intent);
-                finish();
+                load_question();
 			}
 			@Override
 			public void onAnimationCancel(Animator arg0) {}
