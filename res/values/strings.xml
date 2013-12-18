@@ -36,6 +36,7 @@
     <string name="icon_smile_o">&#xf118;</string>
 
     <string name="icon_arrow_left">&#xf060;</string>
+    <string name="icon_heart">&#xf004;</string>
 
     <!-- 登录页面 -->
     <string name="login_email">邮箱</string>
