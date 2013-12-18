@@ -256,37 +256,14 @@ public class QuestionShowActivity extends EshareBaseActivity {
     }
 
     private void to_do_answer_error() {
-        temp_print_level_info();
-    	new AlertDialog.Builder(QuestionShowActivity.this)
-    	.setTitle("提示")
-    	.setMessage("答题错误已经超过 " + test_paper.test_result.allowed_error_count + " 次,需要重新答题")
-    	.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
-				finish();
-			}
-		}).show();
+        open_activity(TestFailedActivity.class);
+        finish();
 	}
 
     private void to_do_answer_pass(){
-        // 增加 10 点经验
-        ExperienceLog.add(10,QuestionShowActivity.test_paper.target,"");
-        temp_print_level_info();
-        new AlertDialog.Builder(QuestionShowActivity.this)
-                .setTitle("提示")
-                .setMessage("答题正确已经超过 " + test_paper.test_result.needed_correct_count + " 次, 测试通过")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        finish();
-                    }
-                }).show();
-    }
-
-    private void temp_print_level_info(){
-        CurrentState state = ExperienceLog.current_state();
-        String str = "等级 : " + state.level + " 经验 " + state.exp_num + "/" + state.level_up_exp_num;
-        Toast.makeText(this, str, 3000).show();
+        TestSuccessActivity.test_paper = this.test_paper;
+        open_activity(TestSuccessActivity.class);
+        finish();
     }
 
 	private void to_do_next_question(){
