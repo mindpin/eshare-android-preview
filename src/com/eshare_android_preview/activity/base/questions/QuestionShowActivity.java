@@ -206,6 +206,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         }
         refresh_test_result();
         
+        ((Button)findViewById(R.id.question_content_transparent_view)).setVisibility(View.VISIBLE);
         open_tip_tv_animation(tip_tv);
         
         if (test_paper.test_result.is_end()) {
