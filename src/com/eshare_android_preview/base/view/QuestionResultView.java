@@ -17,7 +17,9 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
-
+/**
+ * Created by menxu on 13-12-18.
+ */
 public class QuestionResultView extends View{
 	private boolean is_on_init = true;
 	
