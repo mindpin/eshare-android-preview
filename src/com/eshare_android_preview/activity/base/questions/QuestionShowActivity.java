@@ -5,16 +5,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,10 +20,8 @@ import android.widget.Toast;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.base.utils.BaseUtils.ScreenSize;
-import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.EshareMarkdownView;
+import com.eshare_android_preview.base.view.QuestionResultView;
 import com.eshare_android_preview.base.view.ui.CorrectPointView;
 import com.eshare_android_preview.base.view.ui.HealthView;
 import com.eshare_android_preview.model.MultipleChoiceQuestionSelectAnswer;
@@ -36,12 +31,6 @@ import com.eshare_android_preview.model.QuestionSelectAnswer;
 import com.eshare_android_preview.model.SingleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
-import com.eshare_android_preview.model.elog.CurrentState;
-import com.eshare_android_preview.model.elog.ExperienceLog;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.Animator.AnimatorListener;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.nineoldandroids.animation.ObjectAnimator;
 
 public class QuestionShowActivity extends EshareBaseActivity {
 
@@ -56,7 +45,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
     Button submit_answer_btn;
     Question question;
     QuestionSelectAnswer select_answer;
-    View tip_tv;
+    QuestionResultView question_result_view;
 
     HealthView health_view;
     CorrectPointView correct_point_view;
@@ -108,8 +97,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
         choices_detail_ll = (LinearLayout) findViewById(R.id.choices_detail_ll);
         submit_answer_btn = (Button) findViewById(R.id.submit_answer_btn);
 
-        findViewById(R.id.answer_correct_tip_tv).setVisibility(View.GONE);
-        findViewById(R.id.answer_error_tip_tv).setVisibility(View.GONE);
+        question_result_view = (QuestionResultView)findViewById(R.id.question_result_view); 
+        
         findViewById(R.id.next_question_btn).setVisibility(View.GONE);
 
         // --- 12.18
@@ -174,17 +163,16 @@ public class QuestionShowActivity extends EshareBaseActivity {
     
     public void click_on_submit_answer_btn(View view) {
         if (select_answer.is_correct()) {
-            tip_tv = findViewById(R.id.answer_correct_tip_tv);
+        	question_result_view.show_true();
             test_paper.test_result.increase_correct_count();
             correct_point_view.add_point();
         } else {
-            tip_tv = findViewById(R.id.answer_error_tip_tv);
+        	question_result_view.show_false();
             test_paper.test_result.increase_error_count();
             health_view.break_heart();
         }
         
         ((Button)findViewById(R.id.question_content_transparent_view)).setVisibility(View.VISIBLE);
-        open_tip_tv_animation(tip_tv);
         
         if (test_paper.test_result.is_end()) {
 		   to_do_answer_error();
@@ -195,44 +183,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
 		}
     }
     
-    private void open_tip_tv_animation(View tip_tv){
-    	tip_tv.setVisibility(View.VISIBLE);
-    	ScreenSize ss = BaseUtils.get_screen_size();
-    	ObjectAnimator anim_scale = ObjectAnimator.ofFloat(tip_tv, "y", ss.height_dp+50,ss.height_dp/2);
-        anim_scale.setDuration(500);
-        anim_scale.start();
-    }
-    private void close_tip_tv_animation(View tip_tv){
-    	int duration = 500;
-    	ScreenSize ss = BaseUtils.get_screen_size();
-    	final int[] location = new int[2];
-    	tip_tv.getLocationOnScreen(location);
-    	
-    	AnimatorSet animSet = new AnimatorSet();
-    	ObjectAnimator pvh_x = ObjectAnimator.ofFloat(tip_tv, "x", location[0],ss.width_dp+50);
-    	pvh_x.setDuration(duration);
-    	ObjectAnimator pvh_alpha = ObjectAnimator.ofFloat(tip_tv, "alpha", 1f, 0f);
-    	pvh_alpha.setDuration(duration);
-    	
-    	animSet.addListener(new AnimatorListener() {
-			@Override
-			public void onAnimationStart(Animator arg0) {}
-			@Override
-			public void onAnimationRepeat(Animator arg0) {}
-			@Override
-			public void onAnimationEnd(Animator arg0) {
-				Intent intent = new Intent(QuestionShowActivity.this, QuestionShowActivity.class);
-                startActivity(intent);
-                finish();
-			}
-			@Override
-			public void onAnimationCancel(Animator arg0) {}
-		});
-    	animSet.play(pvh_x).with(pvh_alpha);
-    	animSet.start();
-        
-    }
-
     private void to_do_answer_error() {
         open_activity(TestFailedActivity.class);
         finish();
@@ -251,7 +201,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
          next_question_btn.setOnClickListener(new OnClickListener() {
              @Override
              public void onClick(View v) {
-            	 close_tip_tv_animation(tip_tv);
+            	 question_result_view.close();
              }
          });
     }
