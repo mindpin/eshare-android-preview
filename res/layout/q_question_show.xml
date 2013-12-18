@@ -352,6 +352,7 @@
         </LinearLayout>
     </ScrollView>
 	
+    <!-- 覆盖scrollview的view -->
     <Button
         android:layout_below="@+id/question_action_bar"
         android:id="@+id/question_content_transparent_view"
