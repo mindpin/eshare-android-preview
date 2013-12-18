@@ -60,9 +60,9 @@ public class QuestionResultView extends View{
 		}
 	}
 	private void draw_text(Canvas canvas){
-		String answer_text = question_answer ? TRUE__TEXT : FALSE__TEXT;
-		int color = question_answer ? TRUE__COLOR : FALSE__COLOR;
-		int bg_color = question_answer ? TRUE__BG_COLOR : FALSE__BG_COLOR;
+		String answer_text = 	question_answer ? TRUE__TEXT : FALSE__TEXT;
+		int color = 			question_answer ? TRUE__COLOR : FALSE__COLOR;
+		int bg_color = 			question_answer ? TRUE__BG_COLOR : FALSE__BG_COLOR;
 
 		Paint paint = new Paint();
         paint.setAntiAlias(true);
