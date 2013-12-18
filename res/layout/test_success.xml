@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+ <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.eshare_android_preview.base.view.ExperienceView
-        android:id="@+id/experience_view"
-        android:layout_height="100dp"
-        android:layout_width="fill_parent" />
+    <LinearLayout
+        android:id="@+id/test_success_parent"
+        android:layout_above="@+id/ok"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <com.eshare_android_preview.base.view.experience_chart_view.ExperienceChartView
-        android:id="@+id/experience_chart_view"
-        android:layout_height="380dp"
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ok"
+        android:onClick="ok"
+        android:text="确定"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
         android:layout_width="fill_parent" />
-</LinearLayout>
+ </RelativeLayout>
+

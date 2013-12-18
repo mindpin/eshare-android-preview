@@ -63,4 +63,12 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,Test
     public Question get_random_question(List<Integer> except_ids){
         return null;
     }
+
+    public int node_count(){
+        int count = 0;
+        for(KnowledgeSet set : this.learned_sets){
+            count += set.nodes.size();
+        }
+        return count;
+    }
 }
