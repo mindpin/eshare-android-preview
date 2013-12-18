@@ -26,6 +26,8 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.BaseUtils.ScreenSize;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.EshareMarkdownView;
+import com.eshare_android_preview.base.view.ui.CorrectPointView;
+import com.eshare_android_preview.base.view.ui.HealthView;
 import com.eshare_android_preview.model.MultipleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
@@ -58,6 +60,9 @@ public class QuestionShowActivity extends EshareBaseActivity {
     QuestionSelectAnswer select_answer;
     View tip_tv;
 
+    HealthView health_view;
+    CorrectPointView correct_point_view;
+
     @SuppressLint("WorldReadableFiles")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +74,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
         init_ui();
 
-        refresh_test_result();
         init_faved_button();
         load_question_msg();
 
@@ -83,14 +87,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
                 (BitmapDrawable) getResources().getDrawable(R.drawable.lan_js), 100);
         ImageView lan_icon_iv = (ImageView) findViewById(R.id.lan_icon);
         lan_icon_iv.setBackgroundDrawable(drawable);
-
-        set_fontawesome((TextView) findViewById(R.id.correct_icon));
-        set_fontawesome((TextView) findViewById(R.id.error_icon));
-    }
-
-    private void refresh_test_result() {
-        ((TextView) findViewById(R.id.correct_count)).setText(test_paper.test_result.current_correct_count + "/" + test_paper.test_result.needed_correct_count);
-        ((TextView) findViewById(R.id.error_count)).setText(test_paper.test_result.current_error_count() + "/" + test_paper.test_result.allowed_error_count);
     }
 
     private void init_faved_button() {
@@ -114,6 +110,11 @@ public class QuestionShowActivity extends EshareBaseActivity {
         findViewById(R.id.answer_correct_tip_tv).setVisibility(View.GONE);
         findViewById(R.id.answer_error_tip_tv).setVisibility(View.GONE);
         findViewById(R.id.next_question_btn).setVisibility(View.GONE);
+
+        // --- 12.18
+
+        health_view = (HealthView) findViewById(R.id.health_view);
+        correct_point_view = (CorrectPointView) findViewById(R.id.correct_point_view);
     }
 
     private void load_question_msg() {
@@ -173,11 +174,12 @@ public class QuestionShowActivity extends EshareBaseActivity {
         if (select_answer.is_correct()) {
             tip_tv = findViewById(R.id.answer_correct_tip_tv);
             test_paper.test_result.increase_correct_count();
+            correct_point_view.add_point();
         } else {
             tip_tv = findViewById(R.id.answer_error_tip_tv);
             test_paper.test_result.increase_error_count();
+            health_view.break_heart();
         }
-        refresh_test_result();
         
         open_tip_tv_animation(tip_tv);
         

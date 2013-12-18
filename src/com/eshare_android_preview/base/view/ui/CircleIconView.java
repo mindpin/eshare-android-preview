@@ -22,35 +22,58 @@ public class CircleIconView extends RelativeLayout {
     private int bg_color, text_color, text_size;
     private String text;
 
+    private TextView text_view;
+
+    public CircleIconView(Context context) {
+        super(context);
+    }
+
     public CircleIconView(Context context, AttributeSet attrs) {
         super(context, attrs);
         add_text(context, attrs);
     }
 
     private void add_text(Context context, AttributeSet attrs) {
+        init_params(attrs);
+        init_text_view(context);
+        setWillNotDraw(false);
+    }
+
+    // 用程序构建时调用此方法
+    public void init(String bg_color_s, String text_color_s, int text_size_ipt, int text_id) {
+        bg_color = Color.parseColor(bg_color_s);
+        text_color = Color.parseColor(text_color_s);
+        text_size = text_size_ipt;
+        text = getContext().getResources().getString(text_id);
+
+        init_text_view(getContext());
+        setWillNotDraw(false);
+    }
+
+    private void init_params(AttributeSet attrs) {
         bg_color = Color.parseColor(attrs.getAttributeValue(null, "bg_color"));
         text_color = Color.parseColor(attrs.getAttributeValue(null, "text_color"));
         text_size = attrs.getAttributeIntValue(null, "text_size", 20);
         text = attrs.getAttributeValue(null, "text");
+    }
 
-        TextView tv = new TextView(context);
+    private void init_text_view(Context context) {
+        text_view = new TextView(context);
 
         if (!isInEditMode()) {
             Typeface fontawesome_font = Typeface.createFromAsset(context.getAssets(), "fonts/fontawesome-webfont.ttf");
-            tv.setTypeface(fontawesome_font);
+            text_view.setTypeface(fontawesome_font);
         }
 
-        tv.setText(text);
-        tv.setTextSize(text_size);
-        tv.setTextColor(text_color);
-        tv.setGravity(Gravity.CENTER);
+        text_view.setText(text);
+        text_view.setTextSize(text_size);
+        text_view.setTextColor(text_color);
+        text_view.setGravity(Gravity.CENTER);
 
         LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-        tv.setLayoutParams(lp);
+        text_view.setLayoutParams(lp);
 
-        addView(tv);
-
-        setWillNotDraw(false);
+        addView(text_view);
     }
 
     private void init() {
@@ -74,5 +97,9 @@ public class CircleIconView extends RelativeLayout {
         p.setStyle(Paint.Style.FILL);
 
         canvas.drawCircle(width / 2, height / 2, width / 2, p);
+    }
+
+    public void set_text_color(String color) {
+        text_view.setTextColor(Color.parseColor(color));
     }
 }
