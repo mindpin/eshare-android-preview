@@ -9,6 +9,7 @@
         android:layout_width="fill_parent">
 
         <com.eshare_android_preview.base.view.ui.CircleIconView
+            android:onClick="back"
             android:layout_height="50dp"
             android:layout_width="50dp"
             bg_color="#00000000"

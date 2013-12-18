@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -77,6 +78,32 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            back(null);
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void back(View v){
+        new AlertDialog.Builder(QuestionShowActivity.this)
+                .setMessage("确定退出测试吗？")
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                }).show();
+    }
+
 
     private void _set_icon_fonts() {
         BitmapDrawable drawable = ImageTools.toRoundCorner(
