@@ -78,11 +78,23 @@ public class EshareMarkdownView extends RelativeLayout {
     public EshareMarkdownView set_markdown_content(String content) {
         try {
             view.loadDataWithBaseURL(null, HtmlEmbeddable.fromString(content).output(), "text/html", "UTF-8", null);
-            codefills.clear();
+            clear_codefills();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return this;
+    }
+
+    private void clear_codefills() {
+        for (final Codefill fill : codefills) {
+            ((Activity) getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    EshareMarkdownView.this.removeView(fill);
+                }
+            });
+        }
+        codefills.clear();
     }
 
     public void disable_touch_event(){
