@@ -92,6 +92,7 @@ public class EshareMarkdownView extends RelativeLayout {
 
         codefills.clear();
     }
+
     public void disable_touch_event(){
         view.disable_touch_event();
     }
@@ -157,19 +158,8 @@ public class EshareMarkdownView extends RelativeLayout {
 
         @Override
         protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-            EshareMarkdownView that = EshareMarkdownView.this;
-
-            for (Codefill codefill : that.codefills) {
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) codefill.getLayoutParams();
-                params.leftMargin = codefill.rawRect.left - l;
-                params.topMargin  = codefill.rawRect.top - t;
-
-                if (codefill.in_bound_of_view(that)) {
-                    codefill.setVisibility(View.VISIBLE);
-                    codefill.requestLayout();
-                } else {
-                    codefill.setVisibility(View.GONE);
-                }
+            for (Codefill codefill : EshareMarkdownView.this.codefills) {
+                codefill.relocate(l, t);
             }
 
             super.onScrollChanged(l, t, oldl, oldt);
@@ -223,8 +213,10 @@ public class EshareMarkdownView extends RelativeLayout {
         public void update_rect(JSONObject object) throws JSONException {
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getLayoutParams();
             rawRect = new Rect(object.getInt("left"), object.getInt("top"), object.getInt("right"), object.getInt("bottom"));
-            params.height = rawRect.height();
-            params.width  = rawRect.width();
+            params.height     = rawRect.height();
+            params.width      = rawRect.width();
+            params.leftMargin = rawRect.left;
+            params.topMargin  = rawRect.top;
             this.setLayoutParams(params);
         }
 
@@ -233,6 +225,19 @@ public class EshareMarkdownView extends RelativeLayout {
             this.setText(this.text);
             this.filled = false;
             EshareMarkdownView.this.view.loadUrl("javascript: window.setText(" + this.fid + ", " + this.text.length() + ");");
+        }
+
+        public void relocate(int l, int t) {
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) getLayoutParams();
+            params.leftMargin = rawRect.left - l;
+            params.topMargin  = rawRect.top - t;
+
+            if (in_bound_of_view(EshareMarkdownView.this)) {
+                setVisibility(View.VISIBLE);
+                requestLayout();
+            } else {
+                setVisibility(View.GONE);
+            }
         }
 
         @SuppressLint("ResourceAsColor")
