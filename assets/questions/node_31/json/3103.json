@@ -1,11 +1,11 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> carname = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Volvo XC60</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> character = carname[<span class=\"integer\">7</span>];\nalert(character)\n</code></pre>\n上面代码的运行结果，下面哪个是正确的\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> carname = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Volvo XC60</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> result = carname[<span class=\"integer\">7</span>];\n</code></pre>\n上面的代码中，result 的值是\n",
   "choices": [
-    "<img src=\"file:///android_asset/questions/node_31/1.jpg\">",
-    "<img src=\"file:///android_asset/questions/node_31/2.jpg\">",
-    "<img src=\"file:///android_asset/questions/node_31/3.jpg\">"
+    "\"C\"\n",
+    "\"6\"\n",
+    "\"X\"\n"
   ],
   "answer": "A"
 }

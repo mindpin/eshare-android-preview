@@ -1,11 +1,10 @@
 {
   "knowledge_node_id": "node-31",
-  "kind": "multiple_choices",
-  "content": "<img src=\"file:///android_asset/questions/node_31/13.jpg\">\n如图，下面哪个代码的运行结果和图片一致\n",
+  "kind": "fill",
+  "content": "<pre class=\"CodeRay\"><code class=\"\">  <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello World!</span><span class=\"delimiter\">\"</span></span>.[%]() == <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">HELLO WORLD!</span><span class=\"delimiter\">\"</span></span> <span class=\"comment\">// return true</span>\n  <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">HELLO WORLD!</span><span class=\"delimiter\">\"</span></span>.[%]() == <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello World!</span><span class=\"delimiter\">\"</span></span> <span class=\"comment\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立\n",
   "choices": [
-    "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> txt=<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello World!</span><span class=\"delimiter\">\"</span></span>;\nalert(txt.toUpperCase());\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> txt=<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello World!</span><span class=\"delimiter\">\"</span></span>;\nalert(txt.toLowerCase());\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">HELLO WORLD!</span><span class=\"delimiter\">\"</span></span>);\n</code></pre>\n"
+    "toUpperCase",
+    "toLowerCase"
   ],
-  "answer": "AC"
+  "answer": "toUpperCase,toLowerCase"
 }
