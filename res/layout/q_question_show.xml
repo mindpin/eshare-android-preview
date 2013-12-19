@@ -151,29 +151,13 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/answer_correct_tip_tv"
+    <com.eshare_android_preview.base.view.QuestionResultView
+        android:id="@+id/question_result_view"
         android:layout_height="50dp"
         android:layout_width="120dp"
-        android:background="#ffffff"
         android:layout_alignParentRight="true"
         android:layout_above="@+id/btns"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="#50ce00"
-        android:text="回答正确" />
-
-    <TextView
-        android:id="@+id/answer_error_tip_tv"
-        android:layout_height="50dp"
-        android:layout_width="120dp"
-        android:background="#ffffff"
-        android:layout_alignParentRight="true"
-        android:layout_above="@+id/btns"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="#f00"
-        android:text="回答错误" />
+    />
 </RelativeLayout>
