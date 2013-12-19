@@ -35,7 +35,7 @@ public class QuestionResultView extends RelativeLayout{
 		super(context);
 		add_view(context);
 	}
-	
+
 	public QuestionResultView(Context context, AttributeSet attrs){
 		super(context, attrs);
 		add_view(context);

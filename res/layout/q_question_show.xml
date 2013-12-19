@@ -51,27 +51,27 @@
             android:text="选择一个正确答案"
             android:textSize="20dp"
             android:paddingLeft="13dp"
-            android:gravity="center_vertical"
-            />
+            android:gravity="center_vertical" />
 
     </RelativeLayout>
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/question_content"
         android:layout_below="@+id/question_kind_desc"
-        android:id="@+id/question_content_sv"
-        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
         android:layout_marginBottom="50dp"
-        android:background="#e7e7e7">
-
-        <!--问题类型，正文以及选项-->
-        <LinearLayout
+        >
+        <!-- 问题正文 -->
+        <ScrollView
+            android:layout_height="fill_parent"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_above="@+id/question_choices_view"
+            >
 
             <RelativeLayout
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
                 android:layout_marginBottom="5dp">
 
@@ -87,25 +87,28 @@
 
                     <com.eshare_android_preview.base.view.EshareMarkdownView
                         android:id="@+id/question_title"
-                        text_size="14"
+                        text_size="16"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"></com.eshare_android_preview.base.view.EshareMarkdownView>
+                        android:layout_width="wrap_content" />
                 </LinearLayout>
 
             </RelativeLayout>
 
-            <!--选项-->
-            <LinearLayout
-                android:id="@+id/choices_detail_ll"
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+        </ScrollView>
 
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-	
-    <!-- 覆盖scrollview的view -->
+
+        <!-- 选项 -->
+        <com.eshare_android_preview.base.view.QuestionChoicesView
+            android:id="@+id/question_choices_view"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:padding="3dp"
+            android:layout_marginBottom="-6dp"
+            />
+    </RelativeLayout>
+
+    <!-- 用于覆盖的view -->
     <Button
         android:layout_below="@+id/question_action_bar"
         android:id="@+id/question_content_transparent_view"
@@ -114,9 +117,8 @@
         android:layout_marginBottom="50dp"
         android:visibility="gone"
         android:enabled="false"
-        android:background="#00000000"
-    />
-    
+        android:background="#00000000" />
+
     <!--提交按钮-->
     <LinearLayout
         android:id="@+id/btns"
@@ -124,7 +126,6 @@
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="#e7e7e7"
         android:padding="5dp">
 
         <Button
