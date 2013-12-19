@@ -1,11 +1,11 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<img src=\"file:///android_asset/questions/node_35/14.jpg\">\n下面的那段代码运行结果和上图一致\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(val)\n</code></pre>\n代码运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/5.jpg\">\n代码中的 val 的值是\n",
   "choices": [
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">You /</span><span class=\"char\">\\\\</span><span class=\"content\">& me are singing!</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">You </span><span class=\"char\">\\\\</span><span class=\"content\">& me are singing!</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">You me are singing!</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n"
+    "\"You /\\\\& me are singing!\"\n",
+    "\"You \\\\& me are singing!\"\n",
+    "\"You me are singing!\"\n"
   ],
   "answer": "B"
 }

@@ -1,12 +1,10 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<img src=\"file:///android_asset/questions/node_35/13.jpg\">\n下面的那段代码运行结果和上图一致\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(val)\n</code></pre>\n代码运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/4.jpg\">\n代码中的 val 的值是\n",
   "choices": [
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">/n</span><span class=\"char\">\\n</span><span class=\"content\">/n</span><span class=\"char\">\\n</span><span class=\"char\">\\\\</span><span class=\"content\">n</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">//n/n//n/n</span><span class=\"char\">\\n</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> str = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">//n</span><span class=\"char\">\\\n</span><span class=\"content\">//n</span><span class=\"char\">\\\n</span><span class=\"char\">\\n</span><span class=\"content\">\n</span><span class=\"delimiter\">\"</span></span>\nalert(str)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> str = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">/n</span><span class=\"char\">\\\n</span><span class=\"content\">/n</span><span class=\"char\">\\\n</span><span class=\"char\">\\\\</span><span class=\"content\">n\n</span><span class=\"delimiter\">\"</span></span>\nalert(str)\n</code></pre>\n"
+    "\"/n\\n/n\\n\\\\n\"\n",
+    "\"//n/n//n/n\\n\"\n"
   ],
   "answer": "A"
 }
