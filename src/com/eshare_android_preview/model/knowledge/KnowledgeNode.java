@@ -100,7 +100,7 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 
     public List<Integer> all_question_ids(){
         if(question_ids != null){
-            return question_ids;
+            return new ArrayList<Integer>(question_ids);
         }
 
         AssetManager asset = EshareApplication.context.getAssets();
@@ -116,7 +116,7 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
             e.printStackTrace();
         }
         this.question_ids = question_ids;
-        return question_ids;
+        return new ArrayList<Integer>(question_ids);
     }
 
     public Question get_random_question(List<Integer> except_ids){
@@ -131,7 +131,6 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 
         int random_index = (int) (Math.random() * (all_ids.size() - 1));
         int question_id = all_ids.get(random_index);
-        System.out.println("~~~   " + question_id);
         String json_path = QuestionJSONParse.get_json_path_by_id(this.id, question_id);
         return QuestionJSONParse.parse(json_path, question_id);
     }
