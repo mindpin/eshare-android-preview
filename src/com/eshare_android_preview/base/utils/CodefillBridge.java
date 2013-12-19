@@ -1,12 +1,13 @@
 package com.eshare_android_preview.base.utils;
 
 import android.app.Activity;
-import android.widget.Toast;
 
 import com.eshare_android_preview.base.view.EshareMarkdownView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Created by kaid on 11/14/13.

@@ -10,8 +10,6 @@ import android.view.Gravity;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.eshare_android_preview.R;
-
 /**
  * Created by Administrator on 13-12-17.
  */

@@ -30,9 +30,9 @@ window.setText = function setText(fid, blankNum) {
         if (field.fid === fid) {
             foundField = field;
             foundField.textContent = makeBlanks(blankNum);
-            window.CodefillBridge.update_codefill(getCodefillFrom(field));
-            break;
         }
+
+        window.CodefillBridge.update_codefill(getCodefillFrom(field));
     }
 }
 
