@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-34",
-  "kind": "multiple_choices",
-  "content": "<img src=\"file:///android_asset/questions/node_34/1.png\">\n如图，下面哪些代码的运行结果和图片一致\n",
+  "kind": "single_choice",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = !<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"delimiter\">\"</span></span>;\n</code></pre>\n上面的代码中，result 的值是\n",
   "choices": [
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"integer\">1</span> == <span class=\"integer\">2</span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">true</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"integer\">1</span> / <span class=\"integer\">0</span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"predefined-constant\">true</span>)\n</code></pre>\n"
+    0,
+    1,
+    true,
+    false
   ],
-  "answer": "BD"
+  "answer": "C"
 }
