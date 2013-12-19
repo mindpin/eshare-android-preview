@@ -78,7 +78,7 @@ public class EshareMarkdownView extends RelativeLayout {
     public EshareMarkdownView set_markdown_content(String content) {
         try {
             clear_codefills();
-            view.loadDataWithBaseURL("file:///markup", HtmlEmbeddable.fromString(content).output(), "text/html", "UTF-8", "about:blank");
+            view.loadDataWithBaseURL("file:///markup", HtmlEmbeddable.fromString(content).output(), "text/html", "UTF-8", null);
         } catch (IOException e) {
             e.printStackTrace();
         }
