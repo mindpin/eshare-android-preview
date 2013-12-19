@@ -34,16 +34,26 @@ public class QuestionResultView extends View{
 	final private static String TRUE__TEXT = "回答正确";
 	final private static String FALSE__TEXT = "回答错误";
 	
-	final private static int TEXT_SIZE = BaseUtils.dp_to_px(18);
+	private int TEXT_SIZE;
 	
 	private boolean question_answer;
     private CloseListener listener;
 	
 	public QuestionResultView(Context context) {
 		super(context);
+        init_text_size();
 	}
 	public QuestionResultView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init_text_size();
+    }
+
+    private void init_text_size() {
+        if (isInEditMode()) {
+            TEXT_SIZE = 18;
+        } else {
+            TEXT_SIZE = BaseUtils.dp_to_px(18);
+        }
     }
 	
 	@Override

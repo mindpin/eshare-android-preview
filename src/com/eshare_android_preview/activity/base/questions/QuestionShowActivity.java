@@ -51,7 +51,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
     HealthView health_view;
     CorrectPointView correct_point_view;
     TextView question_kind_desc_text_view;
-    ScrollView question_content_sv;
 
     @SuppressLint("WorldReadableFiles")
     @Override
@@ -102,8 +101,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
             load_question_choices_for_choice_and_true_false();
         }
 
-        question_content_sv.requestLayout();
-        question_content_sv.invalidate();
         findViewById(R.id.question_content_transparent_view).setVisibility(View.GONE);
         submit_answer_btn.setVisibility(View.VISIBLE);
         refresh_submit_answer_btn_clickable();
@@ -123,8 +120,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
         health_view = (HealthView) findViewById(R.id.health_view);
         correct_point_view = (CorrectPointView) findViewById(R.id.correct_point_view);
         question_kind_desc_text_view = (TextView) findViewById(R.id.question_kind_desc_text_view);
-
-        question_content_sv = (ScrollView)findViewById(R.id.question_content_sv);
 
         question_result_view.set_close_listener(new QuestionResultView.CloseListener() {
             @Override
