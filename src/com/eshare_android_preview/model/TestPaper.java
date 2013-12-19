@@ -20,8 +20,6 @@ public class TestPaper implements Serializable{
 
     public Question get_next_question(){
         Question question = this.target.get_random_question(expect_ids);
-        System.out.println("get_next_question 1 " + expect_ids);
-        System.out.println("get_next_question 2 " + question);
         expect_ids.add(question.id);
         return question;
     }
