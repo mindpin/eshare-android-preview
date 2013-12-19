@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import android.widget.Toast;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.base.task.BaseAsyncTask;
+import com.eshare_android_preview.base.utils.CameraLogic;
 import com.eshare_android_preview.base.view.EshareMarkdownView;
 import com.eshare_android_preview.base.view.QuestionResultView;
 import com.eshare_android_preview.base.view.ui.CorrectPointView;
@@ -32,6 +36,8 @@ import com.eshare_android_preview.model.QuestionSelectAnswer;
 import com.eshare_android_preview.model.SingleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
+
+import java.io.FileNotFoundException;
 
 public class QuestionShowActivity extends EshareBaseActivity {
 
@@ -88,25 +94,35 @@ public class QuestionShowActivity extends EshareBaseActivity {
     }
 
     private void load_question(){
-        question = test_paper.get_next_question();
-        select_answer = question.build_select_answer();
 
-        question_kind_desc_text_view.setText(question.get_kind_desc_str());
+        new BaseAsyncTask<Void, Void, Void>(this,"正在载入"){
+            @Override
+            public Void do_in_background(Void... params) throws Exception {
+                question = test_paper.get_next_question();
+                select_answer = question.build_select_answer();
+                return null;
+            }
+            @Override
+            public void on_success(Void result) {
+                question_kind_desc_text_view.setText(question.get_kind_desc_str());
 
-        question_title_v.set_markdown_content(question.content);
+                question_title_v.set_markdown_content(question.content);
 
-        if (question.is_fill()){
-            load_question_choices_for_fill();
-            question_title_v.set_on_click_listener_for_code_fill(new FillQuestionFillItemListener());
-        }else{
-            load_question_choices_for_choice_and_true_false();
-        }
+                if (question.is_fill()){
+                    load_question_choices_for_fill();
+                    question_title_v.set_on_click_listener_for_code_fill(new FillQuestionFillItemListener());
+                }else{
+                    load_question_choices_for_choice_and_true_false();
+                }
 
-        question_content_sv.requestLayout();
-        question_content_sv.invalidate();
-        findViewById(R.id.question_content_transparent_view).setVisibility(View.GONE);
-        submit_answer_btn.setVisibility(View.VISIBLE);
-        refresh_submit_answer_btn_clickable();
+                question_content_sv.requestLayout();
+                question_content_sv.invalidate();
+                findViewById(R.id.question_content_transparent_view).setVisibility(View.GONE);
+                submit_answer_btn.setVisibility(View.VISIBLE);
+                refresh_submit_answer_btn_clickable();
+            }
+        }.execute();
+
     }
 
     private void init_ui() {
