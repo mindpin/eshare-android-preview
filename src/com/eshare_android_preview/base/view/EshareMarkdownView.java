@@ -30,8 +30,6 @@ import java.util.List;
 public class EshareMarkdownView extends RelativeLayout {
     private int default_text_size = 18;
     public MarkdownWebView view;
-    // WebView上绑定的JSInterface
-    private CodefillBridge codefillBridge;
     // 填空遮盖view的集合
     private List<Codefill> codefills = new ArrayList<Codefill>();
 
@@ -54,9 +52,10 @@ public class EshareMarkdownView extends RelativeLayout {
     }
 
     private void init(){
+        if (view != null) removeView(view);
         view = new MarkdownWebView(getContext());
         this.addView(view);
-        codefillBridge = CodefillBridge.bind(this);
+        CodefillBridge.bind(this);
     }
 
     public Codefill add_codefill(final JSONObject rect) throws JSONException {
@@ -78,7 +77,8 @@ public class EshareMarkdownView extends RelativeLayout {
     public EshareMarkdownView set_markdown_content(String content) {
         try {
             clear_codefills();
-            view.loadDataWithBaseURL("file:///markup", HtmlEmbeddable.fromString(content).output(), "text/html", "UTF-8", null);
+            init();
+            view.loadDataWithBaseURL(null, HtmlEmbeddable.fromString(content).output(), "text/html", "UTF-8", null);
         } catch (IOException e) {
             e.printStackTrace();
         }
