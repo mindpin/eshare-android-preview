@@ -84,8 +84,6 @@ public class ExperienceLog implements Serializable {
     }
 
     public static int get_exp_num_by_day(Calendar c){
-//        TODO by menxu
-//        需要返回 c 这一天当中获取的经验总数
     	int count= 0;
     	for (ExperienceLog elog : ExperienceLogDBHelper.all()) {
     		if (BaseUtils.date_all_string(elog.created_at).equals(BaseUtils.date_all_string(c.getTime()))) {
