@@ -3,9 +3,9 @@
   "kind": "single_choice",
   "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> carname = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Volvo XC60</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> result = carname[<span class=\"integer\">7</span>];\n</code></pre>\n上面的代码中，result 的值是\n",
   "choices": [
-    "\"C\"\n",
-    "\"6\"\n",
-    "\"X\"\n"
+    "\"C\"",
+    "\"6\"",
+    "\"X\""
   ],
   "answer": "A"
 }

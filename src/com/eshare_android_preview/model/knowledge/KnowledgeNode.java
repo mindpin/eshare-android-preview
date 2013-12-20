@@ -132,6 +132,8 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
         int random_index = (int) (Math.random() * (all_ids.size() - 1));
         int question_id = all_ids.get(random_index);
         question_id = 3112; // 判断
+        question_id = 3103; // 单选，三选项
+        question_id = 3104; // 单选，四选项
         System.out.println("~~~   " + question_id);
         String json_path = QuestionJSONParse.get_json_path_by_id(this.id, question_id);
         return QuestionJSONParse.parse(json_path, question_id);

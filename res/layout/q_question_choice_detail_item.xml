@@ -10,6 +10,7 @@
         border_radius="5"
         border_radius_background_color="#eeeeee"
         android:layout_margin="3dp"
+        android:padding="2dp"
         >
 
         <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
@@ -18,10 +19,8 @@
             android:layout_width="fill_parent"
             border_radius="3"
             border_radius_background_color="#ffffff"
-            android:layout_margin="2dp"
             android:gravity="center"
             >
-
         </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
 
     </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>

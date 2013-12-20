@@ -3,23 +3,19 @@ package com.eshare_android_preview.base.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.ui.CircleIconView;
-import com.eshare_android_preview.model.MultipleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
 import com.eshare_android_preview.model.QuestionSelectAnswer;
-import com.eshare_android_preview.model.SingleChoiceQuestionSelectAnswer;
-import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +53,7 @@ public class QuestionChoicesView extends RelativeLayout {
         }
 
         load_select_kind_content();
+        relayout_choices();
     }
 
     private void load_fill_kind_content() {}
@@ -94,39 +91,42 @@ public class QuestionChoicesView extends RelativeLayout {
     }
 
     private void load_select_kind_content() {
-        removeAllViews();
-        items_list = new ArrayList<View>();
-
         for (QuestionChoice choice : question.choices_list) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService("layout_inflater");
             RelativeLayout choice_item_view = (RelativeLayout) inflater.inflate(R.layout.q_question_choice_detail_item, null);
+
             addView(choice_item_view);
             items_list.add(choice_item_view);
-        }
 
-        relayout_choices();
+            TextView tv = new TextView(getContext());
+            tv.setText(choice.content);
+            tv.setTextSize(24);
+            tv.setTextColor(Color.parseColor("#555555"));
+
+            ((RelativeLayout) choice_item_view.findViewById(R.id.item_content)).addView(tv);
+
+            choice_item_view.setOnClickListener(new QuestionChoiceItemListener(choice_item_view, choice));
+        }
     }
 
     private void relayout_choices() {
+        _relayout_horizontal();
+    }
+
+    private void _relayout_horizontal() {
         BaseUtils.ScreenSize s = BaseUtils.get_screen_size();
         int width  = s.width_px;
 
-        if (items_list.size() == 2) {
-            int w = width / 2;
-            int h = w * 6 / 10;
+        int w = width / items_list.size();
+        int h = width / 4;
 
-            View view0 = items_list.get(0);
-            LayoutParams lp0 = (LayoutParams) view0.getLayoutParams();
-            lp0.width = w;
-            lp0.height = h;
-            view0.setLayoutParams(lp0);
-
-            View view1 = items_list.get(1);
-            LayoutParams lp1 = (LayoutParams) view1.getLayoutParams();
-            lp1.width = w;
-            lp1.height = h;
-            lp1.leftMargin = w;
-            view1.setLayoutParams(lp1);
+        for(int i = 0; i < items_list.size(); i++) {
+            View view = items_list.get(i);
+            LayoutParams lp = (LayoutParams) view.getLayoutParams();
+            lp.width = w;
+            lp.height = h;
+            lp.leftMargin = w * i;
+            view.setLayoutParams(lp);
         }
     }
 
