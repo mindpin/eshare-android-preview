@@ -48,10 +48,21 @@ public class QuestionShowActivity extends EshareBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.q_question_show);
+
         this.test_paper = getIntent().getParcelableExtra(ExtraKeys.TEST_PAPER);
+        if(savedInstanceState != null){
+            this.test_paper = savedInstanceState.getParcelable(ExtraKeys.TEST_PAPER);
+        }
+
         init_ui();
         load_question();
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(ExtraKeys.TEST_PAPER, this.test_paper);
     }
 
     @Override

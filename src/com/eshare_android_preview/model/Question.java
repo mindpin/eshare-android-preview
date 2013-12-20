@@ -107,4 +107,12 @@ public class Question extends LearningResource implements Serializable {
         }
         return null;
     }
+
+    public int choice_max_length(){
+        int length = 0;
+        for(QuestionChoice c : this.choices_list){
+            length = Math.max(length, c.content.length());
+        }
+        return length;
+    }
 }
