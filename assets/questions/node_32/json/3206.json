@@ -1,6 +1,6 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "true_false",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">Number.MAX_VALUE + <span class=\"integer\">1</span> == Number.MAX_VALUE\n</code></pre>\n代码中的等式是成立的\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">Number.MAX_VALUE + <span class=\"integer\">1</span> == Number.MAX_VALUE\n</code></pre>\n代码中的等式是成立的",
   "answer": "T"
 }

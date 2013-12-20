@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-33",
   "kind": "multiple_choices",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(parseFloat(str))\n</code></pre>\n代码运行如下图\n<img src=\"file:///android_asset/questions/node_33/2.jpg\">\n代码中的 str 的值可以是\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(parseFloat(str))\n</code></pre>\n代码运行如下图\n<img src=\"file:///android_asset/questions/node_33/2.jpg\">\n代码中的 str 的值可以是",
   "choices": [
-    "\".3a1\"\n",
-    "\"0.3a1\"\n",
-    "\"0.3e1\"\n",
-    "\".3e1\"\n"
+    "\".3a1\"",
+    "\"0.3a1\"",
+    "\"0.3e1\"",
+    "\".3e1\""
   ],
   "answer": "AB"
 }

@@ -1,11 +1,11 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(str);\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/1.jpg\">\n代码中 str 的值是\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(str);\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/1.jpg\">\n代码中 str 的值是",
   "choices": [
-    "\"5\"\\t\"\"\n",
-    "\"5/\"/\\t/\"\"\n",
-    "\"5\\\"\\\\t\\\"\"\n"
+    "\"5\"\\t\"\"",
+    "\"5/\"/\\t/\"\"",
+    "\"5\\\"\\\\t\\\"\""
   ],
   "answer": "C"
 }

@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "multiple_choices",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"keyword\">new</span> Boolean(val))\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_34/1.png\">\n代码中的 val 的值是\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"keyword\">new</span> Boolean(val))\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_34/1.png\">\n代码中的 val 的值是",
   "choices": [
-    "\"hello\"\n",
-    "1\n",
-    "0\n",
-    "\"\"\n"
+    "\"hello\"",
+    "1",
+    "0",
+    "\"\""
   ],
   "answer": "CD"
 }

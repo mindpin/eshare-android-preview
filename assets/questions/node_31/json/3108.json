@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "multiple_choices",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">  alert(str)\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_31/2.jpg\">\nstr 的值是\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">  alert(str)\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_31/2.jpg\">\nstr 的值是",
   "choices": [
-    "\"He is called 'Johnny'\"\n",
-    "'He is called \\'Johnny\\''\n",
-    "'He is called \"Johnny\"'\n",
-    "\"He is called \\\"Johnny\\\"\"\n"
+    "\"He is called 'Johnny'\"",
+    "'He is called \\'Johnny\\''",
+    "'He is called \"Johnny\"'",
+    "\"He is called \\\"Johnny\\\"\""
   ],
   "answer": "AB"
 }

@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-33",
   "kind": "multiple_choices",
-  "content": "下面哪些是语法正确的小于 1 的数\n",
+  "content": "下面哪些是语法正确的小于 1 的数",
   "choices": [
     ".3",
     "0.1e2",

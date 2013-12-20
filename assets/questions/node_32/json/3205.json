@@ -1,6 +1,6 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "true_false",
-  "content": "095 == 95\n",
+  "content": "095 == 95",
   "answer": "T"
 }

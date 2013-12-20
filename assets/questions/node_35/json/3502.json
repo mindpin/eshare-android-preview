@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> n = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"char\">\\t</span><span class=\"delimiter\">\"</span></span>.length\n</code></pre>\n上面的代码中，n 的值是\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> n = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"char\">\\t</span><span class=\"delimiter\">\"</span></span>.length\n</code></pre>\n上面的代码中，n 的值是",
   "choices": [
     4,
     2,
