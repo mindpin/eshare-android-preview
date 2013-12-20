@@ -12,9 +12,6 @@ public class TestResult implements Serializable{
 	public int remaining_error_count;
 	public int current_correct_count;
 
-    public ArrayList<Integer> except_question_ids = new ArrayList<Integer>();
-   
-
 	public void increase_correct_count(){
 		this.current_correct_count++;
 	}
