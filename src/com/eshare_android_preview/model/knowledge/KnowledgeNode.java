@@ -16,6 +16,7 @@ import com.eshare_android_preview.model.preferences.EsharePreference;
 
 
 public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,KnowledgeNode>,ILearn,TestPaperTarget {
+    public static final int EXP_NUM = 10;
 	public KnowledgeSet set;
 	public String id;
 	public String name;
@@ -135,5 +136,9 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
         System.out.println("~~~   " + question_id);
         String json_path = QuestionJSONParse.get_json_path_by_id(this.id, question_id);
         return QuestionJSONParse.parse(json_path, question_id);
+    }
+
+    public int exp_num(){
+        return EXP_NUM;
     }
 }
