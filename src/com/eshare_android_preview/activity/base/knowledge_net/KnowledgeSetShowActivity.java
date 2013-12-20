@@ -118,7 +118,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
                     Intent intent = new Intent(KnowledgeSetShowActivity.this, QuestionShowActivity.class);
                     TestResult test_result = new TestResult(3, 10);
                     TestPaper test_paper = new TestPaper(node, test_result);
-                    QuestionShowActivity.test_paper = test_paper;
+                    intent.putExtra(QuestionShowActivity.ExtraKeys.TEST_PAPER, test_paper);
                     startActivity(intent);
                 }
             });

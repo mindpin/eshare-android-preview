@@ -5,48 +5,32 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.notes.AddNoteActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
-import com.eshare_android_preview.base.utils.CameraLogic;
 import com.eshare_android_preview.base.view.EshareMarkdownView;
 import com.eshare_android_preview.base.view.QuestionChoicesView;
 import com.eshare_android_preview.base.view.QuestionResultView;
 import com.eshare_android_preview.base.view.ui.CorrectPointView;
 import com.eshare_android_preview.base.view.ui.HealthView;
-import com.eshare_android_preview.model.MultipleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.QuestionChoice;
-import com.eshare_android_preview.model.QuestionSelectAnswer;
-import com.eshare_android_preview.model.SingleChoiceQuestionSelectAnswer;
 import com.eshare_android_preview.model.TestPaper;
-import com.eshare_android_preview.model.TrueFalseQuestionSelectAnswer;
-
-import java.io.FileNotFoundException;
 
 public class QuestionShowActivity extends EshareBaseActivity {
 
     public static class ExtraKeys {
         public static final String QUESTION = "question";
+        public static final String TEST_PAPER = "test_paper";
     }
 
-    public static TestPaper test_paper;
+    public TestPaper test_paper;
 
     EshareMarkdownView question_title_v;
 
@@ -63,9 +47,23 @@ public class QuestionShowActivity extends EshareBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.q_question_show);
+
+        this.test_paper = getIntent().getParcelableExtra(ExtraKeys.TEST_PAPER);
+        if(savedInstanceState != null){
+            this.test_paper = savedInstanceState.getParcelable(ExtraKeys.TEST_PAPER);
+        }
+
         init_ui();
+        this.health_view.set_hp(this.test_paper.test_result.hp);
+        this.correct_point_view.set_point(this.test_paper.test_result.point);
         load_question();
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(ExtraKeys.TEST_PAPER, this.test_paper);
     }
 
     @Override
@@ -158,11 +156,11 @@ public class QuestionShowActivity extends EshareBaseActivity {
     public void click_on_submit_answer_btn(View view) {
         if (question_choices_view.is_answer_correct()) {
             question_result_view.show_true();
-            test_paper.test_result.increase_correct_count();
+            test_paper.test_result.increase_point();
             correct_point_view.add_point();
         } else {
             question_result_view.show_false();
-            test_paper.test_result.increase_error_count();
+            test_paper.test_result.decrease_hp();
             health_view.break_heart();
         }
 
@@ -175,8 +173,9 @@ public class QuestionShowActivity extends EshareBaseActivity {
     }
 
     private void to_do_answer_pass() {
-        TestSuccessActivity.test_paper = this.test_paper;
-        open_activity(TestSuccessActivity.class);
+        Intent intent = new Intent(this, TestSuccessActivity.class);
+        intent.putExtra(TestSuccessActivity.ExtraKeys.TEST_PAPER, test_paper);
+        startActivity(intent);
         finish();
     }
 

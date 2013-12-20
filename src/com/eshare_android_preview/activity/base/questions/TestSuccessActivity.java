@@ -14,13 +14,16 @@ import com.eshare_android_preview.model.elog.ExperienceLog;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
-import java.util.logging.LogRecord;
 
 /**
  * Created by fushang318 on 13-12-18.
  */
 public class TestSuccessActivity extends EshareBaseActivity {
-    public static TestPaper test_paper;
+    public static class ExtraKeys {
+        public static final String TEST_PAPER = "test_paper";
+    }
+
+    public TestPaper test_paper;
 
     private ExperienceView experience_view;
     private ExperienceChartView experience_chart_view;
@@ -36,6 +39,7 @@ public class TestSuccessActivity extends EshareBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_success);
+        this.test_paper = getIntent().getParcelableExtra(ExtraKeys.TEST_PAPER);
 
         if(this.test_paper.target.getClass() == KnowledgeNode.class){
             this.is_learned = ((KnowledgeNode)this.test_paper.target).is_learned();

@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "fill",
-  "content": "<pre class=\"CodeRay\"><code class=\"\">  <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello World!</span><span class=\"delimiter\">\"</span></span>.[%]() == <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">HELLO WORLD!</span><span class=\"delimiter\">\"</span></span> <span class=\"comment\">// return true</span>\n  <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">HELLO WORLD!</span><span class=\"delimiter\">\"</span></span>.[%]() == <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello World!</span><span class=\"delimiter\">\"</span></span> <span class=\"comment\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"\">  <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello World!</span><span class=\"delimiter\">\"</span></span>.[%]() == <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">HELLO WORLD!</span><span class=\"delimiter\">\"</span></span> <span class=\"comment\">// return true</span>\n  <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">HELLO WORLD!</span><span class=\"delimiter\">\"</span></span>.[%]() == <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello World!</span><span class=\"delimiter\">\"</span></span> <span class=\"comment\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立",
   "choices": [
     "toUpperCase",
     "toLowerCase"

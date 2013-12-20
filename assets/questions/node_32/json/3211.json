@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "fill",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">Object.prototype.<span class=\"function\">isInteger</span> = <span class=\"keyword\">function</span> () {\n  <span class=\"keyword\">return</span> (<span class=\"local-variable\">this</span>.[%]().search(<span class=\"regexp\"><span class=\"delimiter\">/</span><span class=\"content\">^-?[0-9]+$</span><span class=\"delimiter\">/</span></span>) == <span class=\"integer\">0</span> )\n}\nalert (<span class=\"float\">1235.6</span>.isInteger());\n</code></pre>\n上面的代码运行结果如下\n<img src=\"file:///android_asset/questions/node_32/1.png\">\n请用下面的选项补全代码\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">Object.prototype.<span class=\"function\">isInteger</span> = <span class=\"keyword\">function</span> () {\n  <span class=\"keyword\">return</span> (<span class=\"local-variable\">this</span>.[%]().search(<span class=\"regexp\"><span class=\"delimiter\">/</span><span class=\"content\">^-?[0-9]+$</span><span class=\"delimiter\">/</span></span>) == <span class=\"integer\">0</span> )\n}\nalert (<span class=\"float\">1235.6</span>.isInteger());\n</code></pre>\n上面的代码运行结果如下\n<img src=\"file:///android_asset/questions/node_32/1.png\">\n请用下面的选项补全代码",
   "choices": [
     "parseFloat",
     "toString",

@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "fill",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> x = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">John</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> y = <span class=\"keyword\">new</span> String(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">John</span><span class=\"delimiter\">\"</span></span>);\n<span class=\"keyword\">typeof</span>(x) == [%] <span class=\"comment\">// return true</span>\n<span class=\"keyword\">typeof</span>(y) == [%] <span class=\"comment\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> x = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">John</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> y = <span class=\"keyword\">new</span> String(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">John</span><span class=\"delimiter\">\"</span></span>);\n<span class=\"keyword\">typeof</span>(x) == [%] <span class=\"comment\">// return true</span>\n<span class=\"keyword\">typeof</span>(y) == [%] <span class=\"comment\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立",
   "choices": [
     "Object",
     "String",
