@@ -1,6 +1,8 @@
 package com.eshare_android_preview.activity.base.questions;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.LinearLayout;
 import com.eshare_android_preview.R;
@@ -12,6 +14,7 @@ import com.eshare_android_preview.model.elog.ExperienceLog;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
+import java.util.logging.LogRecord;
 
 /**
  * Created by fushang318 on 13-12-18.
@@ -22,7 +25,13 @@ public class TestSuccessActivity extends EshareBaseActivity {
     private ExperienceView experience_view;
     private ExperienceChartView experience_chart_view;
     private boolean is_learned = false;
-    private int exp;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            run_animation();
+        }
+    };
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,15 +39,13 @@ public class TestSuccessActivity extends EshareBaseActivity {
 
         if(this.test_paper.target.getClass() == KnowledgeNode.class){
             this.is_learned = ((KnowledgeNode)this.test_paper.target).is_learned();
-            this.exp = 10;
         }else if(this.test_paper.target.getClass() == KnowledgeCheckpoint.class){
             this.is_learned = ((KnowledgeCheckpoint)this.test_paper.target).is_learned();
-            this.exp = ((KnowledgeCheckpoint)this.test_paper.target).node_count() * 10;
         }
 
 
         this.experience_view = new ExperienceView(this);
-        this.experience_chart_view = new ExperienceChartView(this, this.exp);
+        this.experience_chart_view = new ExperienceChartView(this, this.test_paper.target.exp_num());
 
         LinearLayout.LayoutParams experience_view_params = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.FILL_PARENT,
@@ -63,10 +70,14 @@ public class TestSuccessActivity extends EshareBaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
+        handler.sendEmptyMessageDelayed(0,500);
+    }
+
+    private void run_animation(){
         if(!is_learned){
             this.experience_chart_view.run_animation();
-            this.experience_view.add(this.exp);
-            ExperienceLog.add(this.exp, this.test_paper.target, "");
+            this.experience_view.add(this.test_paper.target.exp_num());
+            ExperienceLog.add(this.test_paper.target.exp_num(), this.test_paper.target, "");
             ((ILearn)this.test_paper.target).do_learn();
             is_learned = true;
         }

@@ -139,12 +139,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
         question_choices_view = (QuestionChoicesView) findViewById(R.id.question_choices_view);
         question_choices_view.activity = this;
 
-        question_result_view.set_close_listener(new QuestionResultView.CloseListener() {
-            @Override
-            public void on_close() {
-                load_question();
-            }
-        });
     }
 
     // 根据答案选择情况刷新提交按钮
@@ -172,15 +166,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
             health_view.break_heart();
         }
 
-        (findViewById(R.id.question_content_transparent_view)).setVisibility(View.VISIBLE);
-
-        if (test_paper.test_result.is_end()) {
-            to_do_answer_error();
-        } else if (test_paper.test_result.is_pass()) {
-            to_do_answer_pass();
-        } else {
-            to_do_next_question();
-        }
+        show_next_question_btn();
     }
 
     private void to_do_answer_error() {
@@ -194,14 +180,22 @@ public class QuestionShowActivity extends EshareBaseActivity {
         finish();
     }
 
-    private void to_do_next_question() {
+    private void show_next_question_btn() {
+        (findViewById(R.id.question_content_transparent_view)).setVisibility(View.VISIBLE);
         submit_answer_btn.setVisibility(View.GONE);
         Button next_question_btn = (Button) findViewById(R.id.next_question_btn);
         next_question_btn.setVisibility(View.VISIBLE);
         next_question_btn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                question_result_view.close();
+                if (test_paper.test_result.is_end()) {
+                    to_do_answer_error();
+                } else if (test_paper.test_result.is_pass()) {
+                    to_do_answer_pass();
+                } else {
+                    question_result_view.close();
+                    load_question();
+                }
             }
         });
     }
