@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">hello</span><span class=\"char\">\\n</span><span class=\"content\">world</span><span class=\"delimiter\">\"</span></span>);\n</code></pre>\n上面代码的运行结果，下面哪个是正确的\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(str);\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/3.jpg\">\n代码中的 str 的值是",
   "choices": [
-    "<img src=\"file:///android_asset/questions/node_35/9.jpg\">",
-    "<img src=\"file:///android_asset/questions/node_35/10.jpg\">",
-    "<img src=\"file:///android_asset/questions/node_35/11.jpg\">",
-    "<img src=\"file:///android_asset/questions/node_35/12.jpg\">"
+    "\"hello\\nworld\"",
+    "\"hello\\tworld\"",
+    "\"hello/nworld\"",
+    "\"hello/tworld\""
   ],
   "answer": "A"
 }

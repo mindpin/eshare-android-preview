@@ -1,13 +1,12 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "multiple_choices",
-  "content": "下面哪些是有意义的转义字符\n",
+  "content": "下面哪些是有意义的转义字符",
   "choices": [
     "\\r",
     "\\n",
     "\\t",
-    "\\u",
-    "\\a"
+    "\\u"
   ],
   "answer": "ABCD"
 }

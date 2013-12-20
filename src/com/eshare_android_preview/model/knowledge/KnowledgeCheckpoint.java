@@ -71,4 +71,8 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,Test
         }
         return count;
     }
+
+    public int exp_num(){
+        return node_count() * KnowledgeNode.EXP_NUM;
+    }
 }

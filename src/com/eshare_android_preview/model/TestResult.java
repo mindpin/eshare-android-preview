@@ -1,45 +1,37 @@
 package com.eshare_android_preview.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class TestResult implements Serializable{
     private static final long serialVersionUID = 34564L;
 
-	public int allowed_error_count;
-	public int needed_correct_count;
+	public int max_hp;
+	public int max_point;
 	
-	public int remaining_error_count;
-	public int current_correct_count;
+	public int hp;
+	public int point;
 
-    public ArrayList<Integer> except_question_ids = new ArrayList<Integer>();
-   
-
-	public void increase_correct_count(){
-		this.current_correct_count++;
+	public void increase_point(){
+		this.point++;
 	}
 	
-	public void increase_error_count(){
-		this.remaining_error_count--;
-	}
-	
-	public int current_error_count(){
-		return this.allowed_error_count - this.remaining_error_count;
+	public void decrease_hp(){
+		this.hp--;
 	}
 	
 	public boolean is_end(){
-		return this.remaining_error_count == 0;
+		return this.hp == 0;
 	}
 	
 	public boolean is_pass(){
-		return this.current_correct_count >= this.needed_correct_count;
+		return this.point >= this.max_point;
 	}
 
-	public TestResult(int allowed_error_count, int needed_correct_count) {
+	public TestResult(int max_hp, int max_point) {
 		super();
-		this.allowed_error_count = allowed_error_count;
-		this.needed_correct_count = needed_correct_count;
-		this.remaining_error_count = this.allowed_error_count;
+		this.max_hp = max_hp;
+		this.max_point = max_point;
+		this.hp = this.max_hp;
 	}
 	
 	

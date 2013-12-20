@@ -15,7 +15,7 @@ public class DayExpInfo {
     public DayExpInfo(Calendar c){
         set_day_of_week_str(c);
         this.day_of_month_str = c.get(Calendar.DAY_OF_MONTH) + "";
-        this.exp_num = ExperienceLog.get_exp_num_by_day_by_dev(c);
+        this.exp_num = ExperienceLog.get_exp_num_by_day(c);
     }
 
     public void set_day_of_week_str(Calendar c) {

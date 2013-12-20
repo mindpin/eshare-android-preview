@@ -1,12 +1,12 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "multiple_choices",
-  "content": "<img src=\"file:///android_asset/questions/node_31/4.jpg\">\n如图，下面哪些代码的运行结果和图片一致\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">  alert(str)\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_31/2.jpg\">\nstr 的值是",
   "choices": [
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">He is called 'Johnny'</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">He is called </span><span class=\"char\">\\'</span><span class=\"content\">Johnny</span><span class=\"char\">\\'</span><span class=\"delimiter\">'</span></span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">He is called \"Johnny\"</span><span class=\"delimiter\">'</span></span>)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">alert(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">He is called </span><span class=\"char\">\\\"</span><span class=\"content\">Johnny</span><span class=\"char\">\\\"</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n"
+    "\"He is called 'Johnny'\"",
+    "'He is called \\'Johnny\\''",
+    "'He is called \"Johnny\"'",
+    "\"He is called \\\"Johnny\\\"\""
   ],
   "answer": "AB"
 }

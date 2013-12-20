@@ -1,12 +1,11 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> str = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">The image path is C:</span><span class=\"char\">\\\\</span><span class=\"content\">webstuff</span><span class=\"char\">\\\\</span><span class=\"content\">mypage</span><span class=\"char\">\\\\</span><span class=\"content\">gifs</span><span class=\"char\">\\\\</span><span class=\"content\">garden.gif</span><span class=\"delimiter\">\"</span></span>;\nalert(str);\n</code></pre>\n上面代码的运行结果，下面哪个是正确的\n",
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(str);\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/2.jpg\">\n代码中的 str 的值是",
   "choices": [
-    "<img src=\"file:///android_asset/questions/node_35/5.jpg\">",
-    "<img src=\"file:///android_asset/questions/node_35/6.jpg\">",
-    "<img src=\"file:///android_asset/questions/node_35/7.jpg\">",
-    "<img src=\"file:///android_asset/questions/node_35/8.jpg\">"
+    "\"C:\\\\dir\\a.txt\"",
+    "\"C:\\\\\\\\dir\\\\a.txt\"",
+    "\"C:/\\/\\dir/\\a.txt\""
   ],
   "answer": "B"
 }

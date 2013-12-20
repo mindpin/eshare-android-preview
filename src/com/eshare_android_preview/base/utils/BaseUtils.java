@@ -300,6 +300,8 @@ public class BaseUtils {
     public static class ScreenSize {
         public float width_dp;
         public float height_dp;
+        public int width_px;
+        public int height_px;
     }
 
     public static ScreenSize get_screen_size() {
@@ -308,6 +310,8 @@ public class BaseUtils {
         ScreenSize ss = new ScreenSize();
         ss.width_dp = dm.widthPixels / dm.density;
         ss.height_dp = dm.heightPixels / dm.density;
+        ss.width_px = dm.widthPixels;
+        ss.height_px = dm.heightPixels;
 
         return ss;
     }

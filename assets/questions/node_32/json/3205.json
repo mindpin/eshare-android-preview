@@ -1,12 +1,6 @@
 {
   "knowledge_node_id": "node-32",
-  "kind": "multiple_choices",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> num = <span class=\"integer\">314</span>;\n</code></pre>\n把 num 转化为字符串，可用下面哪些方法来实现\n",
-  "choices": [
-    "<pre class=\"CodeRay\"><code class=\"javascript\">num.toString()\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">String(num)\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">num + <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"delimiter\">\"</span></span>\n</code></pre>\n",
-    "<pre class=\"CodeRay\"><code class=\"javascript\">num + <span class=\"integer\">1</span>\n</code></pre>\n"
-  ],
-  "answer": "ABC"
+  "kind": "true_false",
+  "content": "095 == 95",
+  "answer": "T"
 }
