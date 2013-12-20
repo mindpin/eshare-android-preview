@@ -15,16 +15,19 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.PropertyValuesHolder;
+import com.nineoldandroids.animation.ValueAnimator;
+import com.nineoldandroids.animation.ValueAnimator.AnimatorUpdateListener;
 /**
  * Created by menxu on 13-12-18.
  */
 public class QuestionResultView extends RelativeLayout{
-	private boolean is_on_init = true;
-    private int height, width;
-    
 	final private static int ANIMATE_DRUATION = 500;
 	final private static int TEXT_SIZE  = BaseUtils.dp_to_px(16);
 	final private static ScreenSize ss 	= BaseUtils.get_screen_size();
+	
+	final private static int INIT_MARGIN_LEFT = ss.width_px/2; // left 值
+	final private static int INIT_MARGIN_TOP = ss.height_px/2;   // top  值
 
     private TextView text_true_view, text_false_view;
 
@@ -42,9 +45,11 @@ public class QuestionResultView extends RelativeLayout{
 	}
 
 	private void add_view(Context context) {
+		setWillNotDraw(false);
 		init_false_text_view(context);
 		init_true_text_view(context);
-		setWillNotDraw(false);
+		
+		this.setVisibility(View.INVISIBLE);
 	}
 
 	private void init_false_text_view(Context context) {
@@ -72,25 +77,9 @@ public class QuestionResultView extends RelativeLayout{
         
         addView(text_true_view);
 	}
-	
-	private void init() {
-        if (is_on_init) {
-            is_on_init = false;
 
-            height = getHeight();
-            width  = getWidth();
-            
-            this.setVisibility(View.GONE);
-        }
-    }
-	@Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        init();
-	}
-	
 	private void set_view_visibility() {
-		setVisibility(View.VISIBLE);
+		this.setVisibility(View.VISIBLE);
 		text_true_view.setVisibility(View.GONE);
 		text_false_view.setVisibility(View.GONE);
 		View view = question_result ? text_true_view : text_false_view;
@@ -99,16 +88,16 @@ public class QuestionResultView extends RelativeLayout{
 	private void show_animation(){
 		set_view_visibility();
 
-		ObjectAnimator pvh_alpha = ObjectAnimator.ofFloat(this, "alpha", 1f, 1f);
-		pvh_alpha.setDuration(0);
-		pvh_alpha.start();
-
 		AnimatorSet animSet = new AnimatorSet();
-    	ObjectAnimator pvh_scale = ObjectAnimator.ofFloat(this, "y", ss.height_dp + height,ss.height_dp/2);
-    	pvh_scale.setDuration(ANIMATE_DRUATION);
-    	ObjectAnimator pvh_x = ObjectAnimator.ofFloat(this, "x", ss.width_dp - width,ss.width_dp - width);
-    	pvh_x.setDuration(ANIMATE_DRUATION);
-    	animSet.play(pvh_x).with(pvh_scale);
+		ObjectAnimator oa_alpha = ObjectAnimator.ofFloat(this, "alpha", 1f, 1f);
+		oa_alpha.setDuration(0);
+    	ObjectAnimator oa_x = ObjectAnimator.ofFloat(this, "x", INIT_MARGIN_LEFT,INIT_MARGIN_LEFT);
+    	oa_x.setDuration(ANIMATE_DRUATION);
+    	ObjectAnimator oa_y = ObjectAnimator.ofFloat(this, "y", ss.height_px,INIT_MARGIN_TOP);
+    	oa_y.setDuration(ANIMATE_DRUATION);
+    	
+    	animSet.play(oa_alpha);
+    	animSet.playTogether(oa_x,oa_y);
     	animSet.start();
 	}
 
@@ -123,11 +112,10 @@ public class QuestionResultView extends RelativeLayout{
 
 	public void close(){
     	AnimatorSet animSet = new AnimatorSet();
-    	ObjectAnimator pvh_x = ObjectAnimator.ofFloat(this, "x", ss.width_dp - width,ss.width_dp + width);
-    	pvh_x.setDuration(ANIMATE_DRUATION);
-    	ObjectAnimator pvh_alpha = ObjectAnimator.ofFloat(this, "alpha", 1f, 0f);
-    	pvh_alpha.setDuration(ANIMATE_DRUATION);
-    	
+    	ObjectAnimator oa_x = ObjectAnimator.ofFloat(this, "x", INIT_MARGIN_LEFT, ss.width_px);
+    	oa_x.setDuration(ANIMATE_DRUATION);
+    	ObjectAnimator oa_alpha = ObjectAnimator.ofFloat(this, "alpha", 1f, 0f);
+    	oa_alpha.setDuration(ANIMATE_DRUATION);
     	animSet.addListener(new AnimatorListener() {
 			@Override
 			public void onAnimationStart(Animator arg0) {}
@@ -142,7 +130,7 @@ public class QuestionResultView extends RelativeLayout{
 			@Override
 			public void onAnimationCancel(Animator arg0) {}
 		});
-    	animSet.play(pvh_x).with(pvh_alpha);
+    	animSet.play(oa_x).with(oa_alpha);
     	animSet.start();
 	}
 
