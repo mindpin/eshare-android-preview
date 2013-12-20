@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -55,6 +54,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
         }
 
         init_ui();
+        this.health_view.set_hp(this.test_paper.test_result.hp);
+        this.correct_point_view.set_point(this.test_paper.test_result.point);
         load_question();
         super.onCreate(savedInstanceState);
     }
@@ -155,11 +156,11 @@ public class QuestionShowActivity extends EshareBaseActivity {
     public void click_on_submit_answer_btn(View view) {
         if (question_choices_view.is_answer_correct()) {
             question_result_view.show_true();
-            test_paper.test_result.increase_correct_count();
+            test_paper.test_result.increase_point();
             correct_point_view.add_point();
         } else {
             question_result_view.show_false();
-            test_paper.test_result.increase_error_count();
+            test_paper.test_result.decrease_hp();
             health_view.break_heart();
         }
 
