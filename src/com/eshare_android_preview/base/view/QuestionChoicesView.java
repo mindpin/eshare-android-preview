@@ -158,7 +158,7 @@ public class QuestionChoicesView extends RelativeLayout {
 
             answer.set_choice(choice);
 
-            activity.refresh_submit_answer_btn_clickable();
+            activity.refresh_question_button();
         }
     }
 }
