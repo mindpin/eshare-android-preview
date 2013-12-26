@@ -1,6 +1,7 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "true_false",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">Number.MAX_VALUE + <span class=\"integer\">1</span> == Number.MAX_VALUE\n</code></pre>\n代码中的等式是成立的",
+  "difficulty": 1,
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> a = <span class=\"integer\">095</span>;\n</code></pre>\n上面的代码中, a 等于 95",
   "answer": "T"
 }

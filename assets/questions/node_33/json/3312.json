@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-33",
-  "kind": "single_choice",
-  "content": "0xfe2 和以下哪个数相等？",
+  "kind": "multiple_choices",
+  "difficulty": 2,
+  "content": "以下哪些表达方式是不合法的？",
   "choices": [
-    "4066",
-    "1600",
-    "32",
-    "4"
+    "05.8",
+    "06.8",
+    "07.8",
+    "08.8"
   ],
-  "answer": "A"
+  "answer": "ABC"
 }

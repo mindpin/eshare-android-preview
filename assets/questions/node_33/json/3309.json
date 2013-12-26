@@ -1,12 +1,7 @@
 {
   "knowledge_node_id": "node-33",
-  "kind": "multiple_choices",
-  "content": "以下哪几个表达方式是正确的？",
-  "choices": [
-    "3.",
-    ".5",
-    "4.7",
-    "06.8"
-  ],
-  "answer": "ABC"
+  "kind": "true_false",
+  "difficulty": 2,
+  "content": "2e-3 和 .2e-2 表示相同的小数",
+  "answer": "T"
 }

@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-33",
   "kind": "multiple_choices",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(parseFloat(str))\n</code></pre>\n代码运行如下图\n<img src=\"file:///android_asset/questions/node_33/2.jpg\">\n代码中的 str 的值可以是",
+  "difficulty": 2,
+  "content": "下面哪些是小于 1 的小数",
   "choices": [
-    "\".3a1\"",
-    "\"0.3a1\"",
-    "\"0.3e1\"",
-    "\".3e1\""
+    ".3",
+    "0.1e2",
+    "12e-2",
+    "0.3"
   ],
-  "answer": "AB"
+  "answer": "ACD"
 }

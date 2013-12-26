@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = !<span class=\"integer\">0</span>;\n</code></pre>\n上面的代码中，result 的值是",
+  "difficulty": 1,
+  "content": "下列选项中，哪个是布尔值-假",
   "choices": [
+    "wrong",
+    false,
     0,
-    1,
-    true,
     false
   ],
-  "answer": "C"
+  "answer": "D"
 }

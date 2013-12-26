@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-32",
-  "kind": "fill",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">function</span> <span class=\"function\">is_int</span>(val){\n  <span class=\"keyword\">if</span>(([%](val) == parseInt(val)) && !isNaN(val)){\n      <span class=\"keyword\">return</span> <span class=\"predefined-constant\">true</span>;\n  } <span class=\"keyword\">else</span> {\n      <span class=\"keyword\">return</span> <span class=\"predefined-constant\">false</span>;\n  }\n}\nalert(is_int(<span class=\"float\">12.22</span>));\n</code></pre>\n上面的代码运行结果如下\n<img src=\"file:///android_asset/questions/node_32/1.png\">\n请用下面的选项补全代码",
+  "kind": "single_choice",
+  "difficulty": 2,
+  "content": "下列选项中, 0Xff 转化为十进制是多少",
   "choices": [
-    "parseFloat",
-    "parseStr",
-    "is_int",
-    "undefined"
+    24,
+    255,
+    321,
+    0
   ],
-  "answer": "parseFloat"
+  "answer": "B"
 }

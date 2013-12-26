@@ -1,6 +1,13 @@
 {
-  "knowledge_node_id": "node-32",
-  "kind": "true_false",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"integer\">1</span> === <span class=\"float\">1.0</span>\n</code></pre>\n代码中的等式是成立的",
-  "answer": "T"
+  "knowledge_node_id": "node-33",
+  "kind": "multiple_choices",
+  "difficulty": 2,
+  "content": "下列选项中, 哪些不是整数",
+  "choices": [
+    "0XCAFE9",
+    "0XAA",
+    "03H",
+    "hello000"
+  ],
+  "answer": "CD"
 }

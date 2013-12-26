@@ -1,12 +1,7 @@
 {
   "knowledge_node_id": "node-31",
-  "kind": "fill",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> x = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">John</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> y = <span class=\"keyword\">new</span> String(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">John</span><span class=\"delimiter\">\"</span></span>);\n<span class=\"keyword\">typeof</span>(x) == [%] <span class=\"comment\">// return true</span>\n<span class=\"keyword\">typeof</span>(y) == [%] <span class=\"comment\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立",
-  "choices": [
-    "Object",
-    "String",
-    "Object",
-    "String"
-  ],
-  "answer": "String,Object"
+  "kind": "true_false",
+  "difficulty": 1,
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> x = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">John</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> y = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">john</span><span class=\"delimiter\">\"</span></span>;\n</code></pre>\n上面的代码中，x 和 y 表示的是相同的字符串",
+  "answer": "F"
 }
