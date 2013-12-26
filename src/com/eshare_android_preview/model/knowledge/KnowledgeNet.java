@@ -28,6 +28,19 @@ public class KnowledgeNet extends BaseParse implements IHasChildren{
         return re;
     }
 
+    public static KnowledgeNet find_by_name(String name){
+        if(name.equals("javascript")){
+            return javascript_core_instance();
+        }else if(name.equals("english")){
+            return englisth_instance();
+        }
+        return null;
+    }
+
+    public static KnowledgeNet get_current_net(){
+        return javascript_core_instance();
+    }
+
     public static KnowledgeNet instance(){
         return javascript_core_instance();
     }
