@@ -4,10 +4,10 @@
   "difficulty": 2,
   "content": "[%] 的值为真",
   "choices": [
-    "",
-    false,
+    "\"\"",
+    "false",
     "\"false\"",
-    false
+    "no"
   ],
   "answer": "\"false\""
 }

@@ -5,9 +5,9 @@
   "content": "下面哪些是正确的布尔值",
   "choices": [
     "\"false\"",
-    false,
+    "false",
     "\"true\"",
-    true
+    "true"
   ],
   "answer": "BD"
 }

@@ -5,11 +5,11 @@
   "content": "依次选出布尔值-真 [%]，与布尔值-假 [%]",
   "choices": [
     "\"true\"",
-    1,
-    0,
-    false,
+    "1",
+    "0",
+    "false",
     "'no'",
-    true
+    "true"
   ],
   "answer": "true,false"
 }
