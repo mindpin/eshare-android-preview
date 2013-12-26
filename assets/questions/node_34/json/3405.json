@@ -5,9 +5,9 @@
   "content": "下列选项中，哪个是布尔值-假",
   "choices": [
     "wrong",
-    false,
-    0,
-    false
+    "no",
+    "0",
+    "false"
   ],
   "answer": "D"
 }

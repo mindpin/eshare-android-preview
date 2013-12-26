@@ -4,9 +4,9 @@
   "difficulty": 2,
   "content": "[%] 的值为假",
   "choices": [
-    false,
-    false,
-    true,
+    "false",
+    "no",
+    "true",
     "\"''\""
   ],
   "answer": false
