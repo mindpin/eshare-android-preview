@@ -61,14 +61,12 @@
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="50dp"
-        >
+        android:layout_marginBottom="50dp">
         <!-- 问题正文 -->
         <ScrollView
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
-            android:layout_above="@+id/question_choices_view"
-            >
+            android:layout_above="@+id/question_choices_view">
 
             <RelativeLayout
                 android:layout_height="fill_parent"
@@ -104,61 +102,23 @@
             android:layout_width="fill_parent"
             android:layout_alignParentBottom="true"
             android:padding="3dp"
-            android:layout_marginBottom="-6dp"
-            />
+            android:layout_marginBottom="-6dp" />
     </RelativeLayout>
 
-    <!-- 用于覆盖的view -->
-    <Button
-        android:layout_below="@+id/question_action_bar"
-        android:id="@+id/question_content_transparent_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="50dp"
-        android:visibility="gone"
-        android:enabled="false"
-        android:background="#00000000" />
-
-    <!--提交按钮-->
-    <LinearLayout
-        android:id="@+id/btns"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:padding="5dp">
-
-        <Button
-            android:id="@+id/submit_answer_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:clickable="false"
-            android:onClick="click_on_submit_answer_btn"
-            android:background="@drawable/btn_c6699bd3b_circle_flat"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
-            android:text="确定" />
-
-        <Button
-            android:id="@+id/next_question_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:clickable="false"
-            android:onClick="click_on_submit_answer_btn"
-            android:background="@drawable/btn_c99bd3b_circle_flat"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
-            android:text="下一题"
-            android:visibility="gone" />
-    </LinearLayout>
-
+    <!-- 正确错误提示 -->
     <com.eshare_android_preview.base.view.QuestionResultView
         android:id="@+id/question_result_view"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:clickable="true"
+        android:visibility="gone"
+        />
+
+    <!-- 提交按钮 -->
+    <com.eshare_android_preview.base.view.ui.QuestionButton
+        android:id="@+id/question_button"
         android:layout_height="50dp"
-        android:layout_width="120dp"
-        android:layout_alignParentRight="true"
-        android:layout_above="@+id/btns"
-        android:layout_marginBottom="0dp"
-        android:gravity="center"
-    />
+        android:layout_width="fill_parent"
+        android:padding="5dp"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

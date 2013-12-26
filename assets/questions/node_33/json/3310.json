@@ -1,12 +1,7 @@
 {
   "knowledge_node_id": "node-33",
-  "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">parseFloat(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">.5.6</span><span class=\"delimiter\">\"</span></span>)\n</code></pre>\n代码的执行结果是以下哪一个？",
-  "choices": [
-    "0.5",
-    "0.6",
-    "程序异常",
-    "0"
-  ],
-  "answer": "A"
+  "kind": "true_false",
+  "difficulty": 2,
+  "content": "-.1 不是一个小数",
+  "answer": "F"
 }

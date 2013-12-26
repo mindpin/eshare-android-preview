@@ -1,6 +1,13 @@
 {
   "knowledge_node_id": "node-33",
-  "kind": "true_false",
-  "content": "JavaScript 中的所有数字均用浮点数值表示",
-  "answer": "T"
+  "kind": "single_choice",
+  "difficulty": 1,
+  "content": "下面哪个是小数",
+  "choices": [
+    "1",
+    "-1",
+    "0.1",
+    "\"0.1\""
+  ],
+  "answer": "C"
 }

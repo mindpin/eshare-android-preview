@@ -115,4 +115,10 @@ public class Question extends LearningResource implements Serializable {
         }
         return length;
     }
+
+    public boolean is_choice_contain_image() {
+        String content = choices_list.get(0).content;
+        String f = "![file:///";
+        return content.indexOf(f) >= 0;
+    }
 }

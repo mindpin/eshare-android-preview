@@ -1,6 +1,5 @@
 package com.eshare_android_preview.model.knowledge;
 
-import com.eshare_android_preview.activity.base.HomeActivity;
 import com.eshare_android_preview.base.view.knowledge_map.IHasChildren;
 
 import java.util.ArrayList;

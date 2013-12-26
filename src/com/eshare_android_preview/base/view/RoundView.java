@@ -23,10 +23,10 @@ public class RoundView extends View {
         super(context, attrs);
 
         arc_acolor = Color.parseColor(attrs.getAttributeValue(null, "arc_color"));
-        arc_angle = attrs.getAttributeIntValue(null,"arc_angle",360);
+        arc_angle = attrs.getAttributeIntValue(null, "arc_angle", 360);
     }
 
-    protected void onDraw(Canvas canvas){
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
 //      根据 android:background 绘制背景色

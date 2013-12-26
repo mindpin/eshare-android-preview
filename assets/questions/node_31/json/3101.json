@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-31",
-  "kind": "fill",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> txt = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">a,b,c,d,e</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> arr = txt.split( [%] );\nalert(arr.length == <span class=\"integer\">5</span>)\n</code></pre>\n上面的代码运行结果如下\n<img src=\"file:///android_asset/questions/node_31/1.jpg\">\n请用下面的选项补全代码",
+  "kind": "single_choice",
+  "difficulty": 1,
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> count = txt.length;\n</code></pre>\n上面的代码中，count 的值是 2，那么 txt 应该是",
   "choices": [
     "\"\"",
-    "\" \"",
-    "\",\"",
-    "\"|\""
+    "\"a\"",
+    "\"in\"",
+    "\"for\""
   ],
-  "answer": "\",\""
+  "answer": "C"
 }

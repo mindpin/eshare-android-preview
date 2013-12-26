@@ -1,12 +1,7 @@
 {
   "knowledge_node_id": "node-31",
-  "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> str = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Please visit A!</span><span class=\"delimiter\">\"</span></span>\n<span class=\"keyword\">var</span> result = str.replace(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">A</span><span class=\"delimiter\">\"</span></span>,<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">B</span><span class=\"delimiter\">\"</span></span>);\n</code></pre>\n上面的代码中，result 的值是",
-  "choices": [
-    "\"Please visit B!\"",
-    "true",
-    "\"B\"",
-    "\"A\""
-  ],
-  "answer": "A"
+  "kind": "true_false",
+  "difficulty": 1,
+  "content": "\"'\" 和 '\"' 是相同的字符串",
+  "answer": "F"
 }

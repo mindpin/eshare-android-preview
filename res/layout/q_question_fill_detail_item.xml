@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fill_item_btn"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingBottom="5dp">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/fill_item_placeholder_bg"
-        android:text="占位"
-        android:textSize="20dp"
-        android:textColor="#fff"
-        android:background="#fff"
-        android:layout_margin="5dp"
-        android:padding="5dp"
+    <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
+        android:id="@+id/item_border"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content" />
+        android:layout_width="wrap_content"
+        border_radius="5"
+        border_radius_background_color="#eeeeee"
+        android:padding="2dp">
 
-    <TextView
-        android:id="@+id/fill_item_text"
-        android:text="占位"
-        android:textSize="20dp"
-        android:background="#fff"
-        android:layout_margin="5dp"
-        android:padding="5dp"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content" />
-    </FrameLayout>
+        <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
+            android:id="@+id/item_content"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            border_radius="3"
+            border_radius_background_color="#ffffff"
+            android:gravity="center"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:id="@+id/item_text"
+                android:layout_height="26dp"
+                android:layout_width="wrap_content"
+                android:text="toUpperCase"
+                android:textSize="16dp"
+                />
+
+        </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
+
+    </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
+</RelativeLayout>

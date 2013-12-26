@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_height="80dp"
+        android:layout_width="240dp"
+        android:background="#b3a7a6"
+        android:padding="3dp"
+        android:layout_marginRight="-240dp"
+        >
+
+        <RelativeLayout
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:background="#FEEDEB"
+            >
+
+            <com.eshare_android_preview.base.view.ui.CircleIconView
+                android:layout_height="40dp"
+                android:layout_width="40dp"
+                bg_color="#00000000"
+                text_color="#A00D00"
+                text="&#xf00d;"
+                text_size="40"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                ></com.eshare_android_preview.base.view.ui.CircleIconView>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="#A00D00"
+                android:text="答错了"
+                android:textSize="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80dp"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

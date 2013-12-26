@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-31",
-  "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> str = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello world, welcome to the universe.</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> n = str.indexOf(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">welcome</span><span class=\"delimiter\">\"</span></span>);\n</code></pre>\n上面的代码中，n 的值是",
+  "kind": "multiple_choices",
+  "difficulty": 2,
+  "content": "下面哪些是不正确的",
   "choices": [
-    10,
-    11,
-    12,
-    13
+    "\"hello\" 和 'hello' 相同",
+    "\"Hello\" 和 \"hello\" 相同",
+    "'Hello' 和 'hello' 相同",
+    "\"hello\" 和 'Hello' 相同"
   ],
-  "answer": "D"
+  "answer": "BCD"
 }

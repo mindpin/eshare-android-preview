@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = Math.ceil(<span class=\"float\">1.5</span>)\n</code></pre>\n上面的代码中，result 的值是",
+  "difficulty": 1,
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> a = <span class=\"octal\">0377</span>\n</code></pre>\n上面的数字表示方式是",
   "choices": [
-    1,
-    2,
-    0,
+    "八进制",
+    "十进制",
+    null,
     "undefined"
   ],
-  "answer": "B"
+  "answer": "A"
 }

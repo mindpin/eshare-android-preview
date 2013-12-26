@@ -22,6 +22,8 @@ public class CircleIconView extends RelativeLayout {
 
     private TextView text_view;
 
+    static Typeface fontawesome_font;
+
     public CircleIconView(Context context) {
         super(context);
     }
@@ -59,7 +61,9 @@ public class CircleIconView extends RelativeLayout {
         text_view = new TextView(context);
 
         if (!isInEditMode()) {
-            Typeface fontawesome_font = Typeface.createFromAsset(context.getAssets(), "fonts/fontawesome-webfont.ttf");
+            if (fontawesome_font == null) {
+                fontawesome_font = Typeface.createFromAsset(context.getAssets(), "fonts/fontawesome-webfont.ttf");
+            }
             text_view.setTypeface(fontawesome_font);
         }
 

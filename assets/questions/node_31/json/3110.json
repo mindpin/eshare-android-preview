@@ -1,6 +1,7 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "true_false",
-  "content": "JavaScript 中的字符串采用UTF-16编码的Unicode字符集",
-  "answer": "T"
+  "difficulty": 1,
+  "content": "\"ēa\" 不是一个合理的字符串",
+  "answer": "F"
 }

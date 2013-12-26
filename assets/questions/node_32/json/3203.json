@@ -1,12 +1,7 @@
 {
   "knowledge_node_id": "node-32",
-  "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = ~<span class=\"integer\">1</span>\n</code></pre>\n上面的代码中，result 的值是",
-  "choices": [
-    -1,
-    -2,
-    0,
-    "undefined"
-  ],
-  "answer": "B"
+  "kind": "true_false",
+  "difficulty": 1,
+  "content": "00 是整数",
+  "answer": "T"
 }

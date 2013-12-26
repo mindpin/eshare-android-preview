@@ -1,12 +1,13 @@
 {
-  "knowledge_node_id": "node-32",
-  "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = Math.floor(<span class=\"float\">88.77</span>)\n</code></pre>\n上面的代码中，result 的值是",
+  "knowledge_node_id": "node-33",
+  "kind": "multiple_choices",
+  "difficulty": 1,
+  "content": "下列选项中, 哪些是整数",
   "choices": [
-    88,
-    77,
-    88.77,
-    0
+    "0",
+    "-600",
+    "100000",
+    ".3e1"
   ],
-  "answer": "A"
+  "answer": "ABC"
 }
