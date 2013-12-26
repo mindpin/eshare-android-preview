@@ -12,6 +12,7 @@ import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
 import com.eshare_android_preview.model.parse.QuestionJSONParse;
+import com.eshare_android_preview.model.parse.node.GistFileParse;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 
 
@@ -44,7 +45,13 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 	}
 
     public static KnowledgeNode find(String node_id){
-        return BaseParse.fileParse.node_map.get(node_id);
+        for(GistFileParse parse : BaseParse.file_parses){
+            KnowledgeNode node = parse.node_map.get(node_id);
+            if(node != null){
+                return node;
+            }
+        }
+        return null;
     }
 
 	@Override

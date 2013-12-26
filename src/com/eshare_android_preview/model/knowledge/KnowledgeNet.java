@@ -6,17 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KnowledgeNet extends BaseParse implements IHasChildren{
-	private static KnowledgeNet m_instance;
+	private static KnowledgeNet javascript_core_instance;
+    private static KnowledgeNet englisth_instance;
 
     public List<KnowledgeSet> sets;
     public List<KnowledgeCheckpoint> checkpoints;
     public List<KnowledgeSet> root_sets;
 
-    private KnowledgeNet(){
+    private KnowledgeNet(int index){
         super();
-        this.sets = fileParse.node_set_list;
-        this.checkpoints = fileParse.check_point_list;
-        this.root_sets = fileParse.root_sets;
+        this.sets = file_parses.get(index).node_set_list;
+        this.checkpoints = file_parses.get(index).check_point_list;
+        this.root_sets = file_parses.get(index).root_sets;
     }
 
     public List<BaseKnowledgeSet> children() {
@@ -27,17 +28,26 @@ public class KnowledgeNet extends BaseParse implements IHasChildren{
         return re;
     }
 
-	public static KnowledgeNet instance(){
-        if(m_instance == null){
-            m_instance = new KnowledgeNet();
+    public static KnowledgeNet instance(){
+        return javascript_core_instance();
+    }
+
+	public static KnowledgeNet javascript_core_instance(){
+        if(javascript_core_instance == null){
+            javascript_core_instance = new KnowledgeNet(0);
         }
-		return m_instance;
+		return javascript_core_instance;
 	}
 
+    public static KnowledgeNet englisth_instance(){
+        if(englisth_instance == null){
+            englisth_instance = new KnowledgeNet(1);
+        }
+        return englisth_instance;
+    }
+
     public static KnowledgeNet instance_for_test(){
-        BaseParse.XML_PATH = "javascript_core_for_test.xml";
-        BaseParse.fileParse = null;
-        return new KnowledgeNet();
+        return new KnowledgeNet(2);
     }
 
 }

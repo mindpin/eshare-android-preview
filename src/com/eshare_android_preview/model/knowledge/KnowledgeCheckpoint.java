@@ -3,6 +3,7 @@ package com.eshare_android_preview.model.knowledge;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
+import com.eshare_android_preview.model.parse.node.GistFileParse;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,13 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,Test
 	}
 
     public static KnowledgeCheckpoint find(String checkpoint_id){
-        return BaseParse.fileParse.check_point_map.get(checkpoint_id);
+        for(GistFileParse parse : BaseParse.file_parses){
+            KnowledgeCheckpoint cp = parse.check_point_map.get(checkpoint_id);
+            if(cp != null){
+                return cp;
+            }
+        }
+        return null;
     }
 
     @Override
