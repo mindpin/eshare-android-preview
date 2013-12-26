@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-31",
+  "kind": "single_choice",
+  "content": "Which means 'cat'?",
+  "choices": [
+    "![file:///android_asset/questions/node_31/girl.jpg]",
+    "![file:///android_asset/questions/node_31/cat.jpg]",
+    "![file:///android_asset/questions/node_31/chicken.jpg]",
+    "![file:///android_asset/questions/node_31/water.jpg]"
+  ],
+  "answer": "B"
+}

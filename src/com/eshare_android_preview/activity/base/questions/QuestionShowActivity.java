@@ -31,7 +31,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     public TestPaper test_paper;
 
-    EshareMarkdownView question_content_webview;
+    public EshareMarkdownView question_content_webview;
 
     Question question;
     QuestionResultView question_result_view;
@@ -79,6 +79,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         question_content_webview = (EshareMarkdownView) findViewById(R.id.question_title);
 
         question_result_view = (QuestionResultView) findViewById(R.id.question_result_view);
+        question_result_view.activity = this;
 
         question_button = (QuestionButton) findViewById(R.id.question_button);
 
@@ -86,16 +87,16 @@ public class QuestionShowActivity extends EshareBaseActivity {
             @Override
             public void onClick(View view) {
                 if (question_choices_view.is_answer_correct()) {
-                    question_result_view.show_true();
+                    question_result_view.show_correct();
                     test_paper.test_result.increase_point();
                     correct_point_view.add_point();
                 } else {
-                    question_result_view.show_false();
+                    question_result_view.show_error();
                     test_paper.test_result.decrease_hp();
                     health_view.break_heart();
                 }
 
-                show_next_question_btn();
+                question_button.show_next_button();
             }
         });
 
@@ -107,8 +108,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
                 } else if (test_paper.test_result.is_pass()) {
                     to_do_answer_pass();
                 } else {
-                    question_result_view.close();
-                    load_question();
+                    question_result_view.close_animate();
                 }
             }
         });
@@ -143,7 +143,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
                 }).show();
     }
 
-    private void load_question() {
+    public void load_question() {
         new BaseAsyncTask<Void, Void, Void>(this, "正在载入") {
 
             @Override
@@ -156,18 +156,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
             public void on_success(Void aVoid) {
                 question_kind_desc_text_view.setText(question.get_kind_desc_str());
                 question_content_webview.set_markdown_content(question.content);
-
-                //        if (question.is_fill()){
-                //            load_question_choices_for_fill();
-                //            question_content_webview.set_on_click_listener_for_code_fill(new FillQuestionFillItemListener());
-                //        }else{
-                //            load_question_choices_for_choice_and_true_false();
-                //        }
-
                 question_choices_view.load_question(question);
-
-                findViewById(R.id.question_content_transparent_view).setVisibility(View.GONE);
-
+                question_button.reset();
                 question_button.disable_submit();
             }
         }.execute();
@@ -184,42 +174,6 @@ public class QuestionShowActivity extends EshareBaseActivity {
         startActivity(intent);
         finish();
     }
-
-    private void show_next_question_btn() {
-        (findViewById(R.id.question_content_transparent_view)).setVisibility(View.VISIBLE);
-        question_button.show_next_button();
-    }
-
-//    class FillQuestionFillItemListener implements OnClickListener{
-//        @Override
-//        public void onClick(View v) {
-//            Toast.makeText(QuestionShowActivity.this,"click",2000).show();
-//
-//            EshareMarkdownView.Codefill code_fill = (EshareMarkdownView.Codefill) v;
-//            if(!code_fill.filled){
-//                return;
-//            }
-//
-//            unselect_fill_item(code_fill);
-//        }
-//    }
-
-//    private void unselect_fill_item(EshareMarkdownView.Codefill code_fill){
-//        int index = question_content_webview.get_codefill_index(code_fill);
-//
-//        select_answer.set_choice(index+1, null);
-//
-//        code_fill.unset_text();
-//
-//        View fill_item_btn = (View)code_fill.getTag();
-//        TextView fill_item_text = (TextView)fill_item_btn.findViewById(R.id.fill_item_text);
-//        fill_item_text.setTextColor(Color.parseColor("#000000"));
-//
-//        code_fill.setTag(null);
-//        fill_item_btn.setTag(null);
-//
-//        refresh_question_button();
-//    }
 
     // 根据答案选择情况刷新提交按钮
     public void refresh_question_button() {

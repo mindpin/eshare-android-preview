@@ -28,7 +28,7 @@ public class HealthView extends LinearLayout {
     int hp;
 
     String COLOR_GOOD = "#D62525";
-    String COLOR_BAD  = "#aaaaaa";
+    String COLOR_BAD  = "#dbdbdb";
 
     private void add_child_view(Context context) {
         icon_list = new ArrayList<CircleIconView>();

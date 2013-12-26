@@ -27,8 +27,8 @@ public class CorrectPointView extends LinearLayout {
     List<CircleIconView> icon_list;
     int point;
 
-    String COLOR_EMPTY = "#aaaaaa";
-    String COLOR_FILL  = "#82AA2A";
+    String COLOR_EMPTY = "#dbdbdb";
+    String COLOR_FILL  = "#98cc27";
 
     private void add_child_view(Context context) {
         icon_list = new ArrayList<CircleIconView>();
@@ -44,7 +44,7 @@ public class CorrectPointView extends LinearLayout {
 
         for (int i = 0; i < 10; i++) {
             CircleIconView civ = new CircleIconView(context);
-            civ.init("#00000000", "#aaaaaa", 16, R.string.icon_leaf);
+            civ.init("#00000000", COLOR_EMPTY, 16, R.string.icon_leaf);
             LayoutParams lp = new LayoutParams(size0, size1);
             civ.setLayoutParams(lp);
 
@@ -54,7 +54,7 @@ public class CorrectPointView extends LinearLayout {
     }
 
     public void add_point() {
-        icon_list.get(point).set_text_color("#82AA2A");
+        icon_list.get(point).set_text_color(COLOR_FILL);
         point = point + 1;
     }
 

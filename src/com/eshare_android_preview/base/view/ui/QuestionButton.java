@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.base.utils.BaseUtils;
 
 /**
  * Created by Administrator on 13-12-24.
@@ -24,7 +23,7 @@ public class QuestionButton extends RelativeLayout {
 
     private void init() {
         submit_button = new Button(getContext());
-        submit_button.setBackgroundResource(R.drawable.btn_c6699bd3b_circle_flat);
+        submit_button.setBackgroundResource(R.drawable.btn_cdbdbdb_circle_flat);
         submit_button.setTextSize(18);
         submit_button.setTextColor(Color.parseColor("#ffffff"));
         submit_button.setGravity(Gravity.CENTER);
@@ -36,8 +35,10 @@ public class QuestionButton extends RelativeLayout {
         lp.height = LayoutParams.FILL_PARENT;
         submit_button.setLayoutParams(lp);
 
+        // ---------------
+
         next_button = new Button(getContext());
-        next_button.setBackgroundResource(R.drawable.btn_c99bd3b_circle_flat);
+        next_button.setBackgroundResource(R.drawable.btn_c98cc27_circle_flat);
         next_button.setTextSize(18);
         next_button.setTextColor(Color.parseColor("#ffffff"));
         submit_button.setGravity(Gravity.CENTER);
@@ -50,6 +51,7 @@ public class QuestionButton extends RelativeLayout {
         next_button.setLayoutParams(lp1);
 
         next_button.setVisibility(GONE);
+        next_button.setShadowLayer(1, 1, 1, Color.parseColor("#22000000"));
     }
 
     public void set_submit_button_listener(OnClickListener l) {
@@ -61,22 +63,18 @@ public class QuestionButton extends RelativeLayout {
     }
 
     public void enable_submit() {
-        reset();
-
         submit_button.setClickable(true);
-        submit_button.setBackgroundResource(R.drawable.btn_c99bd3b_circle_flat);
-        submit_button.setShadowLayer(1, 1, 1, Color.parseColor("#66000000"));
+        submit_button.setBackgroundResource(R.drawable.btn_c98cc27_circle_flat);
+        submit_button.setShadowLayer(1, 1, 1, Color.parseColor("#22000000"));
     }
 
     public void disable_submit() {
-        reset();
-
         submit_button.setClickable(false);
-        submit_button.setBackgroundResource(R.drawable.btn_c6699bd3b_circle_flat);
+        submit_button.setBackgroundResource(R.drawable.btn_cdbdbdb_circle_flat);
         submit_button.setShadowLayer(0, 0, 0, Color.parseColor("#00000000"));
     }
 
-    private void reset() {
+    public void reset() {
         submit_button.setVisibility(VISIBLE);
         next_button.setVisibility(GONE);
     }
