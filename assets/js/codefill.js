@@ -37,19 +37,16 @@ window.setText = function setText(fid, blankNum) {
 }
 
 function renderCodefills() {
-    var regexp   = /\[\%\]/g
-      , fieldEl  = document.createElement("codefill")
-      , snippets = document.getElementsByTagName("code");
+    var regexp  = /\[\%\]/g
+      , fieldEl = document.createElement("codefill")
+      , content = document.getElementById("content");
 
     fieldEl.textContent = "  ";
 
-    for (var i = 0; i < snippets.length; i++) {
-        var snippet    = snippets[i]
-          , oldContent = snippet.innerHTML
-          , newContent = oldContent.replace(regexp, fieldEl.outerHTML);
+    var oldContent = content.innerHTML
+      , newContent = oldContent.replace(regexp, fieldEl.outerHTML);
 
-        snippet.innerHTML = newContent;
-    }
+    content.innerHTML = newContent;
 }
 
 function getCodefillFrom(field) {
