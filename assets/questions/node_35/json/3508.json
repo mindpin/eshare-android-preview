@@ -5,7 +5,8 @@
   "content": "代码alert(val)运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/4.jpg\">\n代码中的 val 的值是",
   "choices": [
     "\"/n\\n/n\\n\\\\n\"",
-    "\"//n/n//n/n\\n\""
+    "\"//n/n//n/n\\n\"",
+    "\"/\\n/n\\/n/n\\n\""
   ],
   "answer": "A"
 }
