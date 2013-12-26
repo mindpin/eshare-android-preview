@@ -4,10 +4,10 @@
   "difficulty": 1,
   "content": "下列选项中，哪个是布尔值-真",
   "choices": [
-    1,
+    "1",
     "real",
-    true,
-    true
+    "true",
+    "yes"
   ],
   "answer": "C"
 }

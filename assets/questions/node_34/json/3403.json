@@ -4,10 +4,10 @@
   "difficulty": 1,
   "content": "下列选项中，哪个是正确的布尔值",
   "choices": [
-    true,
+    "true",
     "\"false\"",
     "'true'",
-    1
+    "1"
   ],
   "answer": "A"
 }
