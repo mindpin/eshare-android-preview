@@ -36,6 +36,7 @@ public class ExperienceView extends View {
 
     // 矩形
     final private static int RECT_BG_COLOR = Color.parseColor("#eeeeee"); // 矩形背景颜色
+    final private static int RECT_EXP_COLOR = Color.parseColor("#FF6A2D"); // 经验条颜色
 
     final private static int RECT_LEFT   = BaseUtils.dp_to_px(25); // 矩形的左边缘与view左边缘的距离
     final private static int RECT_TOP    = BaseUtils.dp_to_px(10); // 矩形的上边缘与view上边缘的距离
@@ -78,6 +79,7 @@ public class ExperienceView extends View {
         paint.setAntiAlias(true);
 
         draw_background_rect(canvas);
+        draw_exp_rect(canvas);
         draw_left_circle(canvas);
         draw_right_circle(canvas);
         draw_text_left(canvas);
@@ -126,6 +128,17 @@ public class ExperienceView extends View {
         canvas.drawRect(
                 RECT_LEFT, RECT_TOP,
                 view_width - RECT_RIGHT, view_height - RECT_BOTTOM,
+                paint
+        );
+    }
+
+    private void draw_exp_rect(Canvas canvas) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(RECT_EXP_COLOR);
+
+        canvas.drawRect(
+                RECT_LEFT + LINE_STROKE_WIDTH / 2, RECT_TOP + LINE_STROKE_WIDTH / 2,
+                rect_exp_bar_width, view_height - RECT_BOTTOM - LINE_STROKE_WIDTH / 2,
                 paint
         );
     }

@@ -15,7 +15,7 @@ import java.util.Calendar;
  * Created by menxu on 13-12-5.
  */
 public class ExperienceLog implements Serializable {
-    public static int[] level_up_exp_nums = {10,15,23};
+    public static int[] level_up_exp_nums = {30, 50, 80};
 
     public int id;
     public int before_exp;

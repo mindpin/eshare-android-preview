@@ -77,6 +77,7 @@
         <activity android:name=".activity.base.experience.ExperienceChartActivity"/>
         <activity android:name=".activity.base.questions.TestFailedActivity" />
         <activity android:name=".activity.base.questions.TestSuccessActivity" />
+        <activity android:name=".activity.base.ChangeCourseActivity" />
 
     </application>
 

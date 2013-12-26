@@ -1,10 +1,13 @@
 package com.eshare_android_preview.activity.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
 
 
@@ -26,5 +29,10 @@ public class HomeActivity extends EshareBaseActivity {
             return false;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void change_course(View view) {
+        Intent intent = new Intent(this, ChangeCourseActivity.class);
+        startActivity(intent);
     }
 }
