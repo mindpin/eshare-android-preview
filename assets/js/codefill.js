@@ -9,12 +9,12 @@ window.onload = function() {
 }
 
 function makeBlanks(num) {
-    var result = "  ";
+    var result = "ss";
 
     if (num === 0) return result;
 
     for (var i = 0; i < num; i++) {
-        result += " ";
+        result += "s";
     }
 
     return result;
@@ -41,7 +41,7 @@ function renderCodefills() {
       , fieldEl = document.createElement("codefill")
       , content = document.getElementById("content");
 
-    fieldEl.textContent = "  ";
+    fieldEl.textContent = "s";
 
     var oldContent = content.innerHTML
       , newContent = oldContent.replace(regexp, fieldEl.outerHTML);

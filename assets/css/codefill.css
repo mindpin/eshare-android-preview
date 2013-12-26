@@ -1,7 +1,9 @@
 codefill {
   height:1.6em;
   line-height:1.6em;
+  margin:1px;
   font-family:"Courier New", monospace !important;
+  font-size:1em;
   display:inline-block;
   background:#fff;
 }
