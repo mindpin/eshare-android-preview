@@ -44,7 +44,9 @@ public class HtmlEmbeddable {
           //"<script src=\"http://192.168.1.9:8080/target/target-script-min.js#anonymous\"></script>" +
         "</head>" +
         "<body>" +
-           htmlSnippet +
+           "<div id=\"content\">" +
+                htmlSnippet +
+           "</div>" +
            js("codefill.js") +
         "</body>" +
         "</html>";
