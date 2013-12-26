@@ -4,10 +4,10 @@
   "difficulty": 1,
   "content": "下列选项中，哪个可以用来替代布尔值-假",
   "choices": [
-    0,
+    "0",
     "\"false\"",
-    true,
-    "nothing"
+    "true",
+    "\"nothing\""
   ],
   "answer": "A"
 }
