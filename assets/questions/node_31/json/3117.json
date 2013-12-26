@@ -1,7 +1,7 @@
 {
   "knowledge_node_id": "node-31",
   "kind": "fill",
-  "content": "翻译这句话：我是一个程序员\n[%][%][%][%].",
+  "content": "翻译这句话：我是一个程序员<br/>[%][%][%][%].",
   "choices": [
     "coder",
     "you",

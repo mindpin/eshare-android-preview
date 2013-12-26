@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         border_radius="5"
         border_radius_background_color="#eeeeee"
-        android:layout_margin="3dp"
         android:padding="2dp">
 
         <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout

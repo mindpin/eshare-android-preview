@@ -52,7 +52,7 @@ public class FlatGridView extends LinearLayout {
 
             if (xc == 1) {
                 lp.height = SCREEN_SIZE.width_px / 7;
-            } else if (xc == 2) {
+            } else if (xc == 2 && yc == 2) {
                 lp.height = SCREEN_SIZE.width_px / 3;
             } else {
                 lp.height = SCREEN_SIZE.width_px / 4;

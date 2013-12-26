@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,8 +60,14 @@ public class QuestionChoicesView extends FlatGridView {
         set_grid(1, 1);
         set_warp_height();
         FlowLayout fl = new FlowLayout(getContext());
+        fl.verticalSpacing = BaseUtils.dp_to_px(3);
+        fl.horizontalSpacing = BaseUtils.dp_to_px(3);
 
         add_view(fl);
+
+        LayoutParams lp = (LayoutParams) fl.getLayoutParams();
+        lp.bottomMargin = BaseUtils.dp_to_px(2);
+        fl.setLayoutParams(lp);
 
         for (QuestionChoice choice : question.choices_list) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService("layout_inflater");
