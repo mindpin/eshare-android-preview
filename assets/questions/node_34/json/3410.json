@@ -1,6 +1,7 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "true_false",
+  "difficulty": 1,
   "content": "JavaScript 中的布尔值实际上是整数0和1的别名",
   "answer": "F"
 }

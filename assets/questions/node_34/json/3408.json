@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-34",
-  "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = !<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"delimiter\">\"</span></span>;\n</code></pre>\n上面的代码中，result 的值是",
+  "kind": "fill",
+  "difficulty": 2,
+  "content": "[%] 的值为假",
   "choices": [
-    0,
-    1,
-    true,
-    false
+    "false",
+    "no",
+    "true",
+    "\"''\""
   ],
-  "answer": "C"
+  "answer": false
 }

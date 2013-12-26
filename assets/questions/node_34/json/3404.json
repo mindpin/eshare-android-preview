@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = <span class=\"predefined-constant\">false</span>.constructor\n</code></pre>\n上面的代码中，result 的值是",
+  "difficulty": 1,
+  "content": "下列选项中，哪个是布尔值-真",
   "choices": [
-    "constructor",
-    "Constructor",
-    "Boolean",
-    "\"boolean\""
+    "1",
+    "real",
+    "true",
+    "yes"
   ],
   "answer": "C"
 }

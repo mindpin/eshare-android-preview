@@ -1,12 +1,15 @@
 {
   "knowledge_node_id": "node-34",
-  "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = <span class=\"predefined-constant\">true</span> + <span class=\"predefined-constant\">false</span>\n</code></pre>\n上面的代码中，result 的值是",
+  "kind": "fill",
+  "difficulty": 1,
+  "content": "依次选出布尔值-真 [%]，与布尔值-假 [%]",
   "choices": [
-    "NaN",
-    1,
-    0,
-    "undefined"
+    "\"true\"",
+    "1",
+    "0",
+    "false",
+    "'no'",
+    "true"
   ],
-  "answer": "B"
+  "answer": "true,false"
 }

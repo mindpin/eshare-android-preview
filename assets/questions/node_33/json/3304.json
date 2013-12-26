@@ -1,10 +1,13 @@
 {
   "knowledge_node_id": "node-33",
-  "kind": "fill",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">Math.floor([%]) == <span class=\"integer\">1</span>\n</code></pre>\n补全代码，使等式成立",
+  "kind": "multiple_choices",
+  "difficulty": 1,
+  "content": "下面哪些不是小数",
   "choices": [
-    "0.4",
-    "1.4"
+    ".1",
+    "-1",
+    "1",
+    "\"0.1\""
   ],
-  "answer": "1.4"
+  "answer": "BCD"
 }

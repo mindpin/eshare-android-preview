@@ -1,6 +1,7 @@
 {
   "knowledge_node_id": "node-32",
   "kind": "true_false",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">isNaN(<span class=\"integer\">22</span>) == <span class=\"predefined-constant\">true</span>\n</code></pre>\n代码中的等式是成立的",
-  "answer": "F"
+  "difficulty": 2,
+  "content": "0Xff 是整数",
+  "answer": "T"
 }

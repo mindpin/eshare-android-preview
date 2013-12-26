@@ -1,10 +1,12 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(val)\n</code></pre>\n代码运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/4.jpg\">\n代码中的 val 的值是",
+  "difficulty": 1,
+  "content": "代码alert(val)运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/4.jpg\">\n代码中的 val 的值是",
   "choices": [
     "\"/n\\n/n\\n\\\\n\"",
-    "\"//n/n//n/n\\n\""
+    "\"//n/n//n/n\\n\"",
+    "\"/\\n/n\\/n/n\\n\""
   ],
   "answer": "A"
 }

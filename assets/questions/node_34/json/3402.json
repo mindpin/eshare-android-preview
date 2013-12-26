@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-34",
-  "kind": "fill",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"integer\">1</span> == [%] <span class=\"comment\">// return true</span>\n<span class=\"integer\">0</span> == [%] <span class=\"comment\">// return true</span>\n</code></pre>\n请补全代码，让两个等式成立",
+  "kind": "single_choice",
+  "difficulty": 1,
+  "content": "下列选项中，哪个可以用来替代布尔值-假",
   "choices": [
-    false,
-    "\"true\"",
+    0,
+    "\"false\"",
     true,
-    "Number"
+    "nothing"
   ],
-  "answer": "true,false"
+  "answer": "A"
 }

@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-34",
-  "kind": "fill",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = <span class=\"keyword\">typeof</span> [%];\n</code></pre>\n上面的代码中，result 的值是: \"boolean\"\n请用下面的选项补全代码",
+  "kind": "single_choice",
+  "difficulty": 1,
+  "content": "下列的选项中，哪个可以用来替代布尔值-真",
   "choices": [
     0,
     1,
-    true,
-    "\"false\""
+    "\"\"",
+    "''"
   ],
-  "answer": true
+  "answer": "B"
 }

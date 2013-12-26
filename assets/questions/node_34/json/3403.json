@@ -1,11 +1,13 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> value1 = !<span class=\"predefined-constant\">true</span>;\n<span class=\"keyword\">var</span> value2 = !!<span class=\"predefined-constant\">false</span>;\n<span class=\"keyword\">var</span> result = value1 || value2;\n</code></pre>\n上面的代码中，result 的值是",
+  "difficulty": 1,
+  "content": "下列选项中，哪个是正确的布尔值",
   "choices": [
-    true,
-    false,
-    "undefined"
+    "true",
+    "\"false\"",
+    "'true'",
+    "1"
   ],
-  "answer": "B"
+  "answer": "A"
 }

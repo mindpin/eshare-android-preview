@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">a</span><span class=\"delimiter\">\"</span></span>.length + <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">b</span><span class=\"delimiter\">\"</span></span>.length;\n</code></pre>\n上面的代码中，result 的值是",
+  "difficulty": 2,
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">a</span><span class=\"char\">\\b</span><span class=\"content\">b</span><span class=\"delimiter\">\"</span></span>.length;\n</code></pre>\n上面的代码中，result 的值是",
   "choices": [
-    "0",
     "1",
     "2",
-    "-1"
+    "3",
+    "4"
   ],
   "answer": "C"
 }

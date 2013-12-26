@@ -1,7 +1,8 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">alert(str);\n</code></pre>\n代码的运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/3.jpg\">\n代码中的 str 的值是",
+  "difficulty": 1,
+  "content": "代码alert(str)运行结果如下图\n<img src=\"file:///android_asset/questions/node_35/3.jpg\">\nstr 的值是",
   "choices": [
     "\"hello\\nworld\"",
     "\"hello\\tworld\"",

@@ -1,12 +1,15 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "multiple_choices",
+  "difficulty": 1,
   "content": "下面哪些是有意义的转义字符",
   "choices": [
     "\\r",
     "\\n",
     "\\t",
-    "\\u"
+    "\\u",
+    "\\m",
+    "\\k"
   ],
   "answer": "ABCD"
 }

@@ -1,6 +1,7 @@
 {
   "knowledge_node_id": "node-34",
   "kind": "true_false",
-  "content": "JavaScript 中的内置布尔对象只有true和false两个",
-  "answer": "T"
+  "difficulty": 1,
+  "content": "JavaScript 中false与“false”相同",
+  "answer": "F"
 }

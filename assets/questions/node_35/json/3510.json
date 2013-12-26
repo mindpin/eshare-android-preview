@@ -1,6 +1,7 @@
 {
   "knowledge_node_id": "node-35",
   "kind": "true_false",
-  "content": "JavaScript 中的字符串采用反斜杠用来在文本字符串中插入省略号、换行符、引号和其他特殊字符",
-  "answer": "T"
+  "difficulty": 1,
+  "content": "在JavaScript中 \"\\~ ， \\n ， \\' \" 的结果是 \"~ ， n ， ' \"",
+  "answer": "F"
 }

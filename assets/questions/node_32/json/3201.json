@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-32",
-  "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> result = parseInt(<span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">077</span><span class=\"delimiter\">'</span></span>, <span class=\"integer\">10</span>)\n</code></pre>\n上面的代码中，result 的值是",
+  "kind": "fill",
+  "difficulty": 1,
+  "content": "<pre class=\"CodeRay\"><code class=\"javascript\">[%]\n</code></pre>\n根据整数定义，请写出一个大100的整数",
   "choices": [
-    0,
-    7,
-    77,
-    10
+    20,
+    -35,
+    101,
+    0
   ],
-  "answer": "C"
+  "answer": 101
 }

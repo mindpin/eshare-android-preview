@@ -1,12 +1,13 @@
 {
   "knowledge_node_id": "node-31",
-  "kind": "single_choice",
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> str = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">Hello world!</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> result = str.match(<span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">world</span><span class=\"delimiter\">\"</span></span>);\n</code></pre>\n上面的代码中，result 的值是",
+  "kind": "multiple_choices",
+  "difficulty": 1,
+  "content": "以下哪些是正确的字符串定义",
   "choices": [
-    "\"world\"",
-    "true",
-    "\"Hello world!\"",
-    "\"Hello !\""
+    "\"\"\"",
+    "\"'\"",
+    "'\"'",
+    "\"\"'\""
   ],
-  "answer": "A"
+  "answer": "BC"
 }
