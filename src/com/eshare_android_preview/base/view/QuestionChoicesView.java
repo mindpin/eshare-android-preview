@@ -2,12 +2,12 @@ package com.eshare_android_preview.base.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,9 +38,13 @@ public class QuestionChoicesView extends FlatGridView {
 
     public QuestionShowActivity activity;
 
+    LayoutInflater inflater;
+
     public void load_question(Question question) {
         this.question = question;
         this.answer = question.build_select_answer();
+
+        this.inflater = (LayoutInflater) getContext().getSystemService("layout_inflater");
 
         if (question.is_fill()) {
             load_fill_kind_content();
@@ -70,7 +74,6 @@ public class QuestionChoicesView extends FlatGridView {
         fl.setLayoutParams(lp);
 
         for (QuestionChoice choice : question.choices_list) {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService("layout_inflater");
             RelativeLayout fill_item_view = (RelativeLayout) inflater.inflate(R.layout.q_question_fill_detail_item, null);
 
             fl.addView(fill_item_view);
@@ -83,12 +86,11 @@ public class QuestionChoicesView extends FlatGridView {
     private void load_true_false_kind_content() {
         set_grid(2, 1);
 
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService("layout_inflater");
-
         RelativeLayout correct_view = (RelativeLayout) inflater.inflate(R.layout.q_question_choice_detail_item, null);
         RelativeLayout error_view = (RelativeLayout) inflater.inflate(R.layout.q_question_choice_detail_item, null);
 
         int s = BaseUtils.dp_to_px(60);
+
         CircleIconView correct_icon = new CircleIconView(getContext());
         correct_icon.init("#00000000", "#82AA2A", 40, R.string.icon_check);
         LayoutParams lp_correct = new LayoutParams(s, s);
@@ -115,7 +117,6 @@ public class QuestionChoicesView extends FlatGridView {
             set_grid(2, 2);
 
             for (QuestionChoice choice : question.choices_list) {
-                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService("layout_inflater");
                 RelativeLayout choice_item_view = (RelativeLayout) inflater.inflate(R.layout.q_question_choice_detail_item, null);
 
                 add_view(choice_item_view);
@@ -159,7 +160,6 @@ public class QuestionChoicesView extends FlatGridView {
         }
 
         for (QuestionChoice choice : question.choices_list) {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService("layout_inflater");
             RelativeLayout choice_item_view = (RelativeLayout) inflater.inflate(R.layout.q_question_choice_detail_item, null);
 
             add_view(choice_item_view);
@@ -176,6 +176,7 @@ public class QuestionChoicesView extends FlatGridView {
                 tv.setTextSize(BaseUtils.dp_to_px(16));
             }
             tv.setTextColor(Color.parseColor("#555555"));
+            tv.setTypeface(Typeface.MONOSPACE);
 
             rl.addView(tv);
 

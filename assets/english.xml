@@ -156,7 +156,7 @@
                 <parent-child parent="node-29" child="node-30"/>
             </nodes-relations>
         </set>
-        <set id="set-8" name="英语基础: 值" icon="set-8" deep="1">
+        <set id="set-e8" name="英语基础: 值" icon="set-8" deep="1">
             <nodes>
                 <node id="node-31" name="字符串" required="true">
                     <desc>怎样在程序里表示一个字符串</desc>

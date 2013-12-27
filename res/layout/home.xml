@@ -7,13 +7,30 @@
     <RelativeLayout
         android:layout_height="50dp"
         android:layout_width="fill_parent"
-        android:background="#fff"
+        android:background="#f1f1f1"
         >
+
+        <RelativeLayout
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:layout_marginRight="90dp"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                />
+
+        </RelativeLayout>
+
         <com.eshare_android_preview.base.view.ExperienceView
             android:id="@+id/experience_view"
             android:layout_height="50dp"
             android:layout_width="fill_parent"
-            android:background="#ffffff"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="90dp"
             android:fadingEdge="none" />
 
@@ -21,7 +38,7 @@
             android:layout_height="30dp"
             android:layout_width="80dp"
             border_radius="15"
-            border_radius_background_color="#1cb0f6"
+            border_radius_background_color="#555555"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"

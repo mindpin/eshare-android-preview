@@ -41,10 +41,6 @@ public class KnowledgeNet extends BaseParse implements IHasChildren{
         return javascript_core_instance();
     }
 
-    public static KnowledgeNet instance(){
-        return javascript_core_instance();
-    }
-
 	public static KnowledgeNet javascript_core_instance(){
         if(javascript_core_instance == null){
             javascript_core_instance = new KnowledgeNet(0);

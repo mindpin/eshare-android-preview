@@ -1,13 +1,31 @@
+body {
+  font-family: monospace;
+  font-size: 16px;
+}
+
+codefill {
+  margin: 1px;
+  display: inline-block;
+  background: #fff;
+}
+
+code {
+  overflow:hidden;
+  padding:0;
+  word-wrap:break-word;
+}
+
 /*
   TextMate Twilight Theme for CodeRay syntax highlighter.
   by: russbrooks.com
 */
 .CodeRay {
   background-color: #000;
-  font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
-  font-size: 10px;
+  font-family: monospace;
+  font-size: 14px;
   color: #F8F8F8;
-  padding: 1em 0px 1em 1em;
+  padding: 10px 15px;
+  border-radius: 5px;
 }
 
 .CodeRay pre {

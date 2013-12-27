@@ -1,5 +1,6 @@
 package com.eshare_android_preview.activity.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -22,10 +23,14 @@ public class ChangeCourseActivity extends EshareBaseActivity {
     }
 
     public void change_to_javascript(View view) {
-
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("course", "javascript");
+        startActivity(intent);
     }
 
     public void change_to_english(View view) {
-
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("course", "english");
+        startActivity(intent);
     }
 }

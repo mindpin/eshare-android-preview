@@ -47,7 +47,7 @@ public class KnowledgeMapView extends LockableScrollView {
         super(context, attrs, defStyle);
     }
 
-    public void init(EshareBaseActivity activity) {
+    public void init(EshareBaseActivity activity, String course) {
         this.activity = activity;
         kdata = new KnowledgeSetsData(this);
 
@@ -59,7 +59,7 @@ public class KnowledgeMapView extends LockableScrollView {
 
         _get_screen_size();
 
-        _r_traversal(KnowledgeNet.instance());
+        _r_traversal(KnowledgeNet.find_by_name(course));
         _draw_nodes();
         _draw_dash_path_view();
     }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public abstract class BaseParse {
 	public static String JAVASCRIPT_CORE_XML_PATH = "javascript_core.xml";
-    public static String ENGLISTH_XML_PATH = "javascript_core.xml";
+    public static String ENGLISTH_XML_PATH = "english.xml";
     public static String TEST_XML_PATH = "javascript_core_for_test.xml";
     public static ArrayList<GistFileParse> file_parses;
 
