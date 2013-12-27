@@ -21,7 +21,7 @@ import com.eshare_android_preview.model.knowledge.KnowledgeNodeRelation;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeSetRelation;
 
-public class GistFileParse extends BaseNodeParser{
+public class KnowledgeNetXMLParse extends BaseNodeParser{
 
     public HashMap<String, KnowledgeSet> node_set_map;
     public HashMap<String, KnowledgeNode> node_map;
@@ -32,8 +32,14 @@ public class GistFileParse extends BaseNodeParser{
     public List<KnowledgeCheckpoint> check_point_list;
     public List<KnowledgeSet> root_sets;
 
-    public 	GistFileParse(String nodeUrl){
-        super(nodeUrl);
+    public static KnowledgeNetXMLParse parse(String xml_path){
+        KnowledgeNetXMLParse parse = new KnowledgeNetXMLParse(xml_path);
+        parse.parse();
+        return parse;
+    }
+
+    public KnowledgeNetXMLParse(String xml_path){
+        super(xml_path);
         this.node_set_map = new HashMap<String, KnowledgeSet>();
         this.node_map = new HashMap<String, KnowledgeNode>();
         this.check_point_map = new HashMap<String, KnowledgeCheckpoint>();

@@ -2,14 +2,11 @@ package com.eshare_android_preview.test.model.knowledge;
 
 import android.test.AndroidTestCase;
 
-import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
-import com.eshare_android_preview.model.knowledge.BaseParse;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.eshare_android_preview.model.preferences.EsharePreference;
-import com.nineoldandroids.animation.ObjectAnimator;
 
 import junit.framework.Assert;
 

@@ -1,6 +1,6 @@
 package com.eshare_android_preview.model.knowledge;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
-import com.eshare_android_preview.model.parse.node.GistFileParse;
+import com.eshare_android_preview.model.parse.node.KnowledgeNetXMLParse;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,8 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn {
 	}
 
     public static KnowledgeSet find(String set_id){
-        for(GistFileParse parse : BaseParse.file_parses){
-            KnowledgeSet set = parse.node_set_map.get(set_id);
+        for(KnowledgeNet net : KnowledgeNet.all()){
+            KnowledgeSet set = net.parse.node_set_map.get(set_id);
             if(set != null){
                 return set;
             }
