@@ -15,6 +15,7 @@ import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.experience_chart_view.ExperienceChartView;
 import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
+import com.eshare_android_preview.base.view.ui.UiSound;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.elog.ExperienceLog;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
@@ -47,6 +48,8 @@ public class TestSuccessActivity extends EshareBaseActivity {
         load_avatar();
         init_experience_view();
         init_chart_view();
+
+        UiSound.SUCCESS.start();
 
         super.onCreate(savedInstanceState);
     }
