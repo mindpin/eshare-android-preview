@@ -22,8 +22,7 @@ public class ExperienceChartActivity extends EshareBaseActivity {
         LinearLayout root_view = (LinearLayout)findViewById(R.id.experience_chart);
 
         // 增加的经验值
-        int dynamic_exp = 10;
-        graph = new ExperienceChartView(this, dynamic_exp);
+        graph = new ExperienceChartView(this);
 
         root_view.addView(graph);
 
@@ -31,6 +30,6 @@ public class ExperienceChartActivity extends EshareBaseActivity {
     }
 
     public void run_animation(View view) {
-        graph.run_animation();
+        graph.run_animation(10);
     }
 }

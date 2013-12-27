@@ -20,7 +20,7 @@ import com.nineoldandroids.animation.ValueAnimator;
 public class ExperienceChartView extends View {
 
     private Paint paint;
-    private int dynamic_exp, vectorLength = 6;
+    private int vectorLength = 6;
     private float[] yvalues = new float[5];
     private float maxy = 0.0f, miny = 0.0f;
 
@@ -97,13 +97,6 @@ public class ExperienceChartView extends View {
         init();
     }
 
-
-    public ExperienceChartView(Context context, int dynamic) {
-        super(context);
-        this.dynamic_exp = dynamic;
-        init();
-    }
-
     public ExperienceChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
@@ -134,8 +127,6 @@ public class ExperienceChartView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawARGB(255, 200, 200, 200);
-
         canvas_height = getHeight();
         canvas_width = getWidth();
 
@@ -269,7 +260,7 @@ public class ExperienceChartView extends View {
     }
 
 
-    public void run_animation() {
+    public void run_animation(int dynamic_exp) {
         float prev_exp_pos = yvalues[vectorLength - 2];
         float current_exp_pos = prev_exp_pos + dynamic_exp;
 
