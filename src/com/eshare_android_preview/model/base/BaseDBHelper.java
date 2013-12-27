@@ -31,7 +31,6 @@ public class BaseDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + Constants.TABLE_EXPERIENCE_LOGS);
-
         onCreate(db);
     }
 }
