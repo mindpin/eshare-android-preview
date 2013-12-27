@@ -19,11 +19,11 @@ public class TestResult implements Serializable{
 		this.hp--;
 	}
 	
-	public boolean is_end(){
+	public boolean is_fail(){
 		return this.hp == 0;
 	}
 	
-	public boolean is_pass(){
+	public boolean is_success(){
 		return this.point >= this.max_point;
 	}
 
