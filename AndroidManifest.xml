@@ -45,9 +45,6 @@
         <activity android:name=".activity.base.questions.QuestionListActivity"></activity>
         <activity android:name=".activity.base.questions.QuestionShowActivity" android:windowSoftInputMode="stateHidden"></activity>
         
-        <activity android:name=".activity.base.groups.GroupShowUserListActivity"></activity>
-        <activity android:name=".activity.base.groups.UserShowActivity"></activity>
-        <activity android:name=".activity.base.groups.GroupListActivity" />
         <activity android:name=".activity.base.webview_demo.WebViewDemoActivity" />
         <activity android:name=".activity.base.dash_path_demo.DashPathDemoActivity" />
         <activity android:name=".activity.base.switch_test.FirstActivity" />
