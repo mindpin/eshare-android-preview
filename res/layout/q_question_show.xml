@@ -49,7 +49,7 @@
             android:layout_height="30dp"
             android:layout_width="wrap_content"
             android:text="选择一个正确答案"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:paddingLeft="13dp"
             android:gravity="center_vertical" />
 
@@ -62,38 +62,21 @@
         android:layout_width="fill_parent"
         android:orientation="vertical"
         android:layout_marginBottom="50dp">
+
         <!-- 问题正文 -->
-        <ScrollView
-            android:layout_height="fill_parent"
+        <RelativeLayout
+            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
-            android:layout_above="@+id/question_choices_view">
+            android:padding="5dp"
+            >
 
-            <RelativeLayout
-                android:layout_height="fill_parent"
-                android:layout_width="fill_parent"
-                android:layout_marginBottom="5dp">
+            <com.eshare_android_preview.base.view.EshareMarkdownView
+                android:id="@+id/question_title"
+                text_size="16dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
 
-                <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="fill_parent"
-                    android:orientation="vertical"
-                    android:background="#fff"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="5dp">
-
-                    <com.eshare_android_preview.base.view.EshareMarkdownView
-                        android:id="@+id/question_title"
-                        text_size="16"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </ScrollView>
-
+        </RelativeLayout>
 
         <!-- 选项 -->
         <com.eshare_android_preview.base.view.QuestionChoicesView

@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.model.elog.CurrentState;
 import com.eshare_android_preview.model.elog.ExperienceLog;
 import com.nineoldandroids.animation.Animator;
@@ -25,8 +26,6 @@ public class ExperienceView extends View {
 
     // 圆
     final private static int CIRCLE_RADIUS = BaseUtils.dp_to_px(18); // 左右圆半径 可以修改
-    final private static int LEFT_CIRCLE_BG_COLOR = Color.parseColor("#fccd2d"); // 左圆背景颜色 可以修改
-    final private static int RIGHT_CIRCLE_BG_COLOR = Color.parseColor("#eeeeee"); // 右圆背景颜色 可以修改
 
     final private static int LEFT_CIRCLE_LEFT   = BaseUtils.dp_to_px(25); // 左圆圆心相对于view左边缘的距离
     final private static int LEFT_CIRCLE_TOP    = BaseUtils.dp_to_px(25);  // 左圆圆心相对于view顶部的距离
@@ -35,8 +34,6 @@ public class ExperienceView extends View {
     final private static int RIGHT_CIRCLE_TOP   = LEFT_CIRCLE_TOP;  // 右圆圆心相对于view顶部的距离
 
     // 矩形
-    final private static int RECT_BG_COLOR = Color.parseColor("#eeeeee"); // 矩形背景颜色
-
     final private static int RECT_LEFT   = BaseUtils.dp_to_px(25); // 矩形的左边缘与view左边缘的距离
     final private static int RECT_TOP    = BaseUtils.dp_to_px(10); // 矩形的上边缘与view上边缘的距离
     final private static int RECT_RIGHT  = RECT_LEFT;                  // 矩形的右边缘与view右边缘的距离
@@ -44,11 +41,8 @@ public class ExperienceView extends View {
 
     // 描边
     final private static int LINE_STROKE_WIDTH = BaseUtils.dp_to_px(5);
-    final private static int CIRCLE_STROKE_COLOR = Color.parseColor("#ffffff");
-    final private static int RECT_STROKE_COLOR = Color.parseColor("#ffffff");
 
     // 文字
-    final private static int TEXT_COLOR = Color.parseColor("#555555");
     final private static int TEXT_SIZE  = BaseUtils.dp_to_px(16);
 
     // current_level
@@ -78,6 +72,7 @@ public class ExperienceView extends View {
         paint.setAntiAlias(true);
 
         draw_background_rect(canvas);
+        draw_exp_rect(canvas);
         draw_left_circle(canvas);
         draw_right_circle(canvas);
         draw_text_left(canvas);
@@ -111,7 +106,7 @@ public class ExperienceView extends View {
 
     private void draw_background_rect(Canvas canvas) {
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(RECT_BG_COLOR);
+        paint.setColor(UiColor.EXP_BAR_EMPTY);
 
         canvas.drawRect(
                 RECT_LEFT, RECT_TOP,
@@ -121,44 +116,55 @@ public class ExperienceView extends View {
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(LINE_STROKE_WIDTH);
-        paint.setColor(RECT_STROKE_COLOR);
+        paint.setColor(UiColor.EXP_STROKE_COLOR);
 
         canvas.drawRect(
                 RECT_LEFT, RECT_TOP,
                 view_width - RECT_RIGHT, view_height - RECT_BOTTOM,
+                paint
+        );
+    }
+
+    private void draw_exp_rect(Canvas canvas) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(UiColor.EXP_BAR_FILL);
+
+        canvas.drawRect(
+                RECT_LEFT + LINE_STROKE_WIDTH / 2, RECT_TOP + LINE_STROKE_WIDTH / 2,
+                RECT_LEFT + rect_exp_bar_width + LINE_STROKE_WIDTH / 2, view_height - RECT_BOTTOM - LINE_STROKE_WIDTH / 2,
                 paint
         );
     }
 
     private void draw_left_circle(Canvas canvas) {
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(LEFT_CIRCLE_BG_COLOR);
+        paint.setColor(UiColor.EXP_LEFT_CIRCLE);
 
         canvas.drawCircle(LEFT_CIRCLE_LEFT, LEFT_CIRCLE_TOP, CIRCLE_RADIUS, paint);
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(LINE_STROKE_WIDTH);
-        paint.setColor(CIRCLE_STROKE_COLOR);
+        paint.setColor(UiColor.EXP_STROKE_COLOR);
 
         canvas.drawCircle(LEFT_CIRCLE_LEFT, LEFT_CIRCLE_TOP, CIRCLE_RADIUS, paint);
     }
 
     private void draw_right_circle(Canvas canvas) {
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(RIGHT_CIRCLE_BG_COLOR);
+        paint.setColor(UiColor.EXP_RIGHT_CIRCLE);
 
         canvas.drawCircle(view_width - RIGHT_CIRCLE_RIGHT, RIGHT_CIRCLE_TOP, CIRCLE_RADIUS, paint);
 
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(LINE_STROKE_WIDTH);
-        paint.setColor(CIRCLE_STROKE_COLOR);
+        paint.setColor(UiColor.EXP_STROKE_COLOR);
 
         canvas.drawCircle(view_width - RIGHT_CIRCLE_RIGHT, RIGHT_CIRCLE_TOP, CIRCLE_RADIUS, paint);
     }
 
     private void draw_text_left(Canvas canvas) {
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(TEXT_COLOR);
+        paint.setColor(UiColor.EXP_CIRCLE_TEXT);
         paint.setTextSize(TEXT_SIZE);
         paint.setFakeBoldText(true);
 
@@ -176,7 +182,7 @@ public class ExperienceView extends View {
 
     private void draw_text_right(Canvas canvas) {
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(TEXT_COLOR);
+        paint.setColor(UiColor.EXP_CIRCLE_TEXT);
         paint.setTextSize(TEXT_SIZE);
         paint.setFakeBoldText(true);
 

@@ -29,22 +29,12 @@ public class HtmlEmbeddable {
         "<!DOCTYPE html>" +
         "<html>" +
         "<head>" +
-           css("codefill.css") +
            css("coderay_twilight.css") +
-          "<style>" +
-            "pre {font-size:1em !important;}" +
-            "code {" +
-              "font-family:\"Courier New\", monospace !important;" +
-              "overflow:visible;" +
-              "padding:0 0 0 0 !important;" +
-              "word-wrap:break-word;" +
-            "}" +
-          "</style>" +
           // Weinre 远程调试器
           //"<script src=\"http://192.168.1.9:8080/target/target-script-min.js#anonymous\"></script>" +
         "</head>" +
         "<body>" +
-           "<div id=\"content\">" +
+           "<div id='content'>" +
                 htmlSnippet +
            "</div>" +
            js("codefill.js") +

@@ -17,8 +17,7 @@ import java.util.Calendar;
  */
 public class ExperienceLog implements Serializable {
 	public final static String COURSE = "javascript";
-	
-    public static int[] level_up_exp_nums = {10,15,23};
+    public static int[] level_up_exp_nums = {30, 50, 80};
 
     public int id;
     public int before_exp;

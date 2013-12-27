@@ -79,11 +79,11 @@ public class Question implements Serializable {
     }
 
     public String get_kind_desc_str() {
-        if (is_single_choice()) return "选择一个正确答案";
-        if (is_multiple_choice()) return "选择所有正确答案";
+        if (is_single_choice()) return "选择唯一的正确答案";
+        if (is_multiple_choice()) return "选择多个正确答案";
         if (is_true_false()) return "判断以下说法的对错";
         if (is_fill()) return "选择正确的选项来完成填空";
-        return "选择一个正确答案";
+        return "选择唯一的正确答案";
     }
 
     public QuestionSelectAnswer build_select_answer(){

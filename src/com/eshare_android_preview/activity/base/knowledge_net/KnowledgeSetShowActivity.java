@@ -23,6 +23,7 @@ import com.eshare_android_preview.base.view.knowledge_map.SetPosition;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
+import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.nineoldandroids.animation.Animator;
@@ -56,8 +57,9 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         pager_layout = (RelativeLayout) findViewById(R.id.pager);
 
         Intent intent = getIntent();
+        String course = intent.getStringExtra("course");
         String set_id = intent.getStringExtra("set_id");
-        set = BaseKnowledgeSet.find(set_id);
+        set = KnowledgeNet.find_by_name(course).find_set_by_id(set_id);
 
         if (set.is_checkpoint()) {
             set_text_color = Color.parseColor("#844C1D");

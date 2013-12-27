@@ -16,6 +16,7 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
+import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 
@@ -88,18 +89,6 @@ public class SetPosition {
         return this.set.id.equals(((SetPosition) o).set.id);
     }
 
-    public int get_circle_color() {
-        if (!is_unlocked()) {
-            return Color.parseColor("#eeeeee");
-        }
-
-        if (set.is_checkpoint()) {
-            return Color.parseColor("#fccd2d");
-        }
-
-        return Color.parseColor("#1cb0f6");
-    }
-
     public Drawable get_icon_drawable() {
         String path = "knowledge_icons/basic_locked.png";
 
@@ -137,6 +126,7 @@ public class SetPosition {
 
                     // open activity
                     Intent intent = new Intent(map_view.activity, KnowledgeSetShowActivity.class);
+                    intent.putExtra("course", map_view.course);
                     intent.putExtra("set_id", set.id);
                     map_view.activity.startActivity(intent);
                 }
@@ -172,7 +162,7 @@ public class SetPosition {
 
     private void _draw_circle_view() {
         circle_view = new CircleView(map_view.activity);
-        circle_view.set_color(get_circle_color());
+        circle_view.set_color(UiColor.get_set_color(set));
         circle_view.set_circle_center_position(circle_center_offset, circle_center_offset);
         circle_view.set_radius(CIRCLE_RADIUS_DP);
 
@@ -252,7 +242,7 @@ public class SetPosition {
     // 复制一个相同位置的 circle_view 和 icon 在指定的 activity 上
     public CircleView clone_circle_view_on(EshareBaseActivity target_activity) {
         CircleView circle_view = new CircleView(target_activity);
-        circle_view.set_color(get_circle_color());
+        circle_view.set_color(UiColor.get_set_color(set));
         circle_view.set_circle_center_position(
                 grid_dp_left + circle_center_offset,
                 grid_dp_top + circle_center_offset - BaseUtils.px_to_dp(map_view.getScrollY()) + MAP_VIEW_TOP_OFFSET

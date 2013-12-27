@@ -27,9 +27,6 @@ public class HealthView extends LinearLayout {
     List<CircleIconView> icon_list;
     int hp;
 
-    String COLOR_GOOD = "#D62525";
-    String COLOR_BAD  = "#dbdbdb";
-
     private void add_child_view(Context context) {
         icon_list = new ArrayList<CircleIconView>();
         hp = 3;
@@ -43,7 +40,7 @@ public class HealthView extends LinearLayout {
 
         for (int i = 0; i < hp; i++) {
             CircleIconView civ = new CircleIconView(context);
-            civ.init("#00000015", COLOR_GOOD, 20, R.string.icon_heart);
+            civ.init("#00000015", UiColor.HEALTH_STRING, 20, R.string.icon_star);
             LayoutParams lp = new LayoutParams(size, size);
             civ.setLayoutParams(lp);
 
@@ -53,7 +50,7 @@ public class HealthView extends LinearLayout {
     }
 
     public void break_heart() {
-        icon_list.get(hp - 1).set_text_color(COLOR_BAD);
+        icon_list.get(hp - 1).set_text_color(UiColor.HEALTH_EMPTY_STRING);
         hp = hp - 1;
     }
 
@@ -63,9 +60,9 @@ public class HealthView extends LinearLayout {
         for (int i = 0; i < 3; i++) {
             CircleIconView cv = icon_list.get(i);
             if (i < hp) {
-                cv.set_text_color(COLOR_GOOD);
+                cv.set_text_color(UiColor.HEALTH_STRING);
             } else {
-                cv.set_text_color(COLOR_BAD);
+                cv.set_text_color(UiColor.HEALTH_EMPTY_STRING);
             }
         }
     }
