@@ -15,7 +15,8 @@ public class BaseDBHelper extends SQLiteOpenHelper {
             Constants.TABLE_EXPERIENCE_LOGS__MODEL_TYPE + " text, " +
             Constants.TABLE_EXPERIENCE_LOGS__MODEL_ID + " text, " +
             Constants.TABLE_EXPERIENCE_LOGS__DATA_JSON + " text, " +
-            Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT + " long);";
+            Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT + " long, " +
+            Constants.TABLE_EXPERIENCE_LOGS_COURSE + " text);";
 
 
     public BaseDBHelper(Context context, String name, CursorFactory factory,int version) {

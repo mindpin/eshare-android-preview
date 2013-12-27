@@ -9,9 +9,15 @@ public class CurrentState {
     public int level;
     public int level_up_exp_num;
     public int exp_num;
-
+    
+    public String course;
+    
+    public CurrentState(String course){
+    	this.course = course;
+    }
+    
     public void init_data() {
-        ExperienceLog elog = ExperienceLogDBHelper.find_last_data();
+        ExperienceLog elog = ExperienceLogDBHelper.find_last_data(course);
         if (elog == null){
             this.level = 1;
             this.level_up_exp_num = ExperienceLog.level_up_exp_nums[0];

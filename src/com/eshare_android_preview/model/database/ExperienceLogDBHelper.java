@@ -25,17 +25,20 @@ public class ExperienceLogDBHelper extends BaseModelDBHelper{
         values.put(Constants.TABLE_EXPERIENCE_LOGS__MODEL_ID,  elog.model_id);
         values.put(Constants.TABLE_EXPERIENCE_LOGS__DATA_JSON, elog.data_json);
         values.put(Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT, elog.created_at);
+        values.put(Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT, elog.course);
 
         db.insert(Constants.TABLE_EXPERIENCE_LOGS, null, values);
         db.close();
     }
 
-    public static List<ExperienceLog> all(){
+    public static List<ExperienceLog> all(String coruse){
         SQLiteDatabase db = get_read_db();
         Cursor cursor = db.query(
                 Constants.TABLE_EXPERIENCE_LOGS,
-                get_columns()
-                , null, null, null, null,
+                get_columns(),
+                Constants.TABLE_EXPERIENCE_LOGS_COURSE + " = ?",
+                new String[]{coruse},
+                null, null,
                 Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT + " ASC"
         );
         List<ExperienceLog> elogs = new ArrayList<ExperienceLog>();
@@ -47,12 +50,12 @@ public class ExperienceLogDBHelper extends BaseModelDBHelper{
         return elogs;
     }
 
-    public static ExperienceLog find_last_data() {
+    public static ExperienceLog find_last_data(String course) {
         ExperienceLog elog = null;
         SQLiteDatabase db = get_read_db();
 
-        String sql = "select * from " + Constants.TABLE_EXPERIENCE_LOGS + " order by " + Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT + " desc  limit 0,1";
-
+        String sql = "select * from " + Constants.TABLE_EXPERIENCE_LOGS + " where " + Constants.TABLE_EXPERIENCE_LOGS_COURSE + " = '" + course + "' order by " + Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT + " desc  limit 0,1";
+        System.out.println("find_last_data_sql = " + sql);
         Cursor cursor = db.rawQuery(sql ,null);
         boolean has_value = cursor.moveToFirst();
         if(has_value){
@@ -71,8 +74,9 @@ public class ExperienceLogDBHelper extends BaseModelDBHelper{
         String model_id = cursor.getString(4);
         String data_json = cursor.getString(5);
         long created_at = cursor.getLong(6);
+        String course = cursor.getString(7);
 
-        return new ExperienceLog(id,before_exp,after_exp,model_type,model_id,data_json,created_at);
+        return new ExperienceLog(id,before_exp,after_exp,model_type,model_id,data_json,created_at,course);
     }
 
     private static String[] get_columns() {
@@ -83,7 +87,8 @@ public class ExperienceLogDBHelper extends BaseModelDBHelper{
             Constants.TABLE_EXPERIENCE_LOGS__MODEL_TYPE,
             Constants.TABLE_EXPERIENCE_LOGS__MODEL_ID,
             Constants.TABLE_EXPERIENCE_LOGS__DATA_JSON,
-            Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT
+            Constants.TABLE_EXPERIENCE_LOGS_CREATED_AT,
+            Constants.TABLE_EXPERIENCE_LOGS_COURSE,
         };
     }
 }
