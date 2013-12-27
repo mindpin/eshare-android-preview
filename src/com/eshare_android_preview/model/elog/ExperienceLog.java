@@ -6,6 +6,7 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.model.DayExpInfo;
 import com.eshare_android_preview.model.database.ExperienceLogDBHelper;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
+import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 import java.util.ArrayList;
@@ -32,10 +33,11 @@ public class ExperienceLog implements Serializable {
 
     public void setModel() {
         TestPaperTarget base_knowlege = null;
+        KnowledgeNet net = KnowledgeNet.find_by_name(this.course);
         if (this.model_type == KnowledgeNode.class.getName()){
-            base_knowlege = KnowledgeNode.find(this.model_id);
+            base_knowlege = net.find_node_by_id(this.model_id);
         }else if (this.model_type == KnowledgeCheckpoint.class.getName()){
-            base_knowlege = KnowledgeCheckpoint.find(this.model_id);
+            base_knowlege = net.find_checkpoint_by_id(this.model_id);
         }
         this.model = base_knowlege;
     }

@@ -47,12 +47,6 @@ public class BaseKnowledgeSet implements ILearn, IParentAndChild<KnowledgeSetRel
 
     }
 
-    public static BaseKnowledgeSet find(String id) {
-        BaseKnowledgeSet set = KnowledgeSet.find(id);
-        if (null != set) return set;
-        return KnowledgeCheckpoint.find(id);
-    }
-
     public boolean is_checkpoint() {
         return false;
     }

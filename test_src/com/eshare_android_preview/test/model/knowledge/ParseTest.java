@@ -32,7 +32,7 @@ public class ParseTest extends AndroidTestCase {
 
     // KnowledgeSet
     public void test_2(){
-        KnowledgeSet set_8 = KnowledgeSet.find("set-8");
+        KnowledgeSet set_8 = net.find_set_by_id("set-8");
 
         Assert.assertEquals(set_8.id, "set-8");
         Assert.assertEquals(set_8.name, "基础: 值");
@@ -57,7 +57,7 @@ public class ParseTest extends AndroidTestCase {
     // KnowledgeNode
     public void test_4(){
 
-        KnowledgeNode node_31 = KnowledgeNode.find("node-31");
+        KnowledgeNode node_31 = net.find_node_by_id("node-31");
 
         Assert.assertEquals(node_31.name, "字符串");
         Assert.assertEquals(node_31.required, true);
