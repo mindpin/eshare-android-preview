@@ -64,10 +64,14 @@ public class ExperienceView extends View {
         super(context, attrs);
     }
 
+    public void refresh(){
+        init_exp_and_level();
+        postInvalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Toast.makeText(this.getContext(), ExperienceLog.current_state().exp_num + "", 5000).show();
 
         init();
 

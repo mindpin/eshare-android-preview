@@ -17,11 +17,6 @@ import java.util.List;
 public class ExperienceLogDBHelper extends BaseModelDBHelper{
 
     public static void create(ExperienceLog elog) {
-        System.out.println("elog create  before_exp" + elog.before_exp);
-        System.out.println("elog create  after_exp" + elog.after_exp);
-        System.out.println("elog create  model_type" + elog.model_type);
-        System.out.println("elog create  model_id" + elog.model_id);
-        System.out.println("elog create  course" + elog.course);
         SQLiteDatabase db = get_write_db();
         ContentValues values = new ContentValues();
         values.put(Constants.TABLE_EXPERIENCE_LOGS__BEFORE_EXP,elog.before_exp);

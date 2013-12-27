@@ -70,4 +70,11 @@ public class HomeActivity extends EshareBaseActivity {
         Intent intent = new Intent(this, ChangeCourseActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        ExperienceView view = (ExperienceView) findViewById(R.id.experience_view);
+        view.refresh();
+    }
 }

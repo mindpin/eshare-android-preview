@@ -55,9 +55,6 @@ public class ExperienceLog implements Serializable {
     }
 
     public static void add(String course, int delta_num, TestPaperTarget model, String data_json) {
-        System.out.println("~~~~~~~~~~~~~~~~! add ");
-        System.out.println("course " + course);
-        System.out.println("delta_num " + delta_num);
         ExperienceLog after_exp_elog = ExperienceLogDBHelper.find_last_data(course);
         int before_exp = after_exp_elog == null ? 0 : after_exp_elog.after_exp;
 
