@@ -18,6 +18,7 @@ import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
 import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.CircleImageView;
+import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 
 
 public class HomeActivity extends EshareBaseActivity {
@@ -29,11 +30,7 @@ public class HomeActivity extends EshareBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.home);
 
-        Intent intent = getIntent();
-        course = intent.getStringExtra("course");
-        if (BaseUtils.is_str_blank(course)) {
-            course = "javascript";
-        }
+        course = KnowledgeNet.get_current_net().get_course();
 
         load_map_view();
         load_avatar();
@@ -44,7 +41,7 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void load_map_view() {
         map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
-        map_view.init(this, course);
+        map_view.init(this);
     }
 
     private void load_avatar() {
@@ -59,7 +56,6 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void init_exp_view() {
         ExperienceView ev = (ExperienceView) findViewById(R.id.experience_view);
-        ev.course = course;
     }
 
     @Override

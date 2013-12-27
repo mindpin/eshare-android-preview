@@ -126,7 +126,6 @@ public class SetPosition {
 
                     // open activity
                     Intent intent = new Intent(map_view.activity, KnowledgeSetShowActivity.class);
-                    intent.putExtra("course", map_view.course);
                     intent.putExtra("set_id", set.id);
                     map_view.activity.startActivity(intent);
                 }

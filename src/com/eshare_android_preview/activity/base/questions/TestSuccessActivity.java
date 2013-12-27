@@ -57,7 +57,6 @@ public class TestSuccessActivity extends EshareBaseActivity {
         );
         experience_view_params.weight = 3;
         this.experience_view.setLayoutParams(experience_view_params);
-        this.experience_view.course = test_paper.target.get_course();
 
         LinearLayout.LayoutParams experience_chart_view_params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,

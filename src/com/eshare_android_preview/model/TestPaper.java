@@ -16,14 +16,12 @@ import java.util.ArrayList;
  * Created by fushang318 on 13-12-6.
  */
 public class TestPaper implements Parcelable {
-    public KnowledgeNet net;
     public TestPaperTarget target;
     public TestResult test_result;
     private ArrayList<Integer> expect_ids = new ArrayList<Integer>();
 
     public TestPaper(TestPaperTarget target, TestResult test_result){
         this.target = target;
-        this.net = KnowledgeNet.find_by_name(target.get_course());
         this.test_result = test_result;
     }
 
@@ -45,9 +43,7 @@ public class TestPaper implements Parcelable {
     public TestPaper(Parcel parcel){
         String model = parcel.readString();
         String model_id = parcel.readString();
-        String course = parcel.readString();
-        this.net = KnowledgeNet.find_by_name(course);
-        this.target = find(this.net, model,model_id);
+        this.target = find(KnowledgeNet.get_current_net(), model,model_id);
         this.test_result = (TestResult)parcel.readSerializable();
         this.expect_ids = (ArrayList<Integer>)parcel.readSerializable();
     }
@@ -61,7 +57,6 @@ public class TestPaper implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(target.model());
         dest.writeString(target.model_id());
-        dest.writeString(target.get_course());
         dest.writeSerializable(test_result);
         dest.writeSerializable(expect_ids);
     }

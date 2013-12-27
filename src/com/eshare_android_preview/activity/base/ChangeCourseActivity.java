@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 
 /**
  * Created by Administrator on 13-12-26.
@@ -24,13 +25,13 @@ public class ChangeCourseActivity extends EshareBaseActivity {
 
     public void change_to_javascript(View view) {
         Intent intent = new Intent(this, HomeActivity.class);
-        intent.putExtra("course", "javascript");
+        KnowledgeNet.switch_to("javascript");
         startActivity(intent);
     }
 
     public void change_to_english(View view) {
         Intent intent = new Intent(this, HomeActivity.class);
-        intent.putExtra("course", "english");
+        KnowledgeNet.switch_to("english");
         startActivity(intent);
     }
 }

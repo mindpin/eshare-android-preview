@@ -55,7 +55,9 @@ public class ExperienceLog implements Serializable {
     }
 
     public static void add(String course, int delta_num, TestPaperTarget model, String data_json) {
-
+        System.out.println("~~~~~~~~~~~~~~~~! add ");
+        System.out.println("course " + course);
+        System.out.println("delta_num " + delta_num);
         ExperienceLog after_exp_elog = ExperienceLogDBHelper.find_last_data(course);
         int before_exp = after_exp_elog == null ? 0 : after_exp_elog.after_exp;
 
@@ -64,6 +66,7 @@ public class ExperienceLog implements Serializable {
         String model_id = model.model_id();
         long created_at = System.currentTimeMillis();
         ExperienceLog elog = new ExperienceLog(-1, before_exp, after_exp, model_type, model_id, data_json, created_at, course);
+
         ExperienceLogDBHelper.create(elog);
     }
 
@@ -78,15 +81,17 @@ public class ExperienceLog implements Serializable {
         return level_up_exp_nums[level - 1];
     }
 
-    public static CurrentState current_state(String course) {
+    public static CurrentState current_state() {
+        String course = KnowledgeNet.get_current_net().get_course();
         CurrentState state = new CurrentState(course);
         state.init_data();
         return state;
     }
 
-    public static int get_exp_num_by_day(String course, Calendar c) {
+    public static int get_exp_num_by_day(Calendar c) {
+        String course = KnowledgeNet.get_current_net().get_course();
         int count = 0;
-        for (ExperienceLog elog : ExperienceLogDBHelper.all(course)) {
+        for (ExperienceLog elog : ExperienceLog.all(course)) {
             if (BaseUtils.date_all_string(elog.created_at).equals(BaseUtils.date_all_string(c.getTime()))) {
                 count += elog.after_exp - elog.before_exp;
             }
@@ -94,13 +99,13 @@ public class ExperienceLog implements Serializable {
         return count;
     }
 
-    public static List<DayExpInfo> history_info(String course) {
+    public static List<DayExpInfo> history_info() {
         ArrayList<DayExpInfo> result = new ArrayList<DayExpInfo>();
 
         for (int i = -4; i <= 0; i++) {
             Calendar c = Calendar.getInstance();
             c.add(Calendar.DATE, i);
-            result.add(new DayExpInfo(course, c));
+            result.add(new DayExpInfo(c));
         }
 
         return result;

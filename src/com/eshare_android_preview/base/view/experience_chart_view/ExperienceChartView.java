@@ -90,7 +90,7 @@ public class ExperienceChartView extends View {
 
 
     // 日期信息
-    private List<DayExpInfo> logs = ExperienceLog.history_info("javascript");
+    private List<DayExpInfo> logs = ExperienceLog.history_info();
 
     public ExperienceChartView(Context context) {
         super(context);

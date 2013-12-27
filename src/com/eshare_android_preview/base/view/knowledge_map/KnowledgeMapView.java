@@ -34,7 +34,6 @@ public class KnowledgeMapView extends LockableScrollView {
     private ArrayList<DashPathEndpoint> dash_path_endpoint_list;
 
     public KnowledgeSetsData kdata;
-    public String course;
 
     public KnowledgeMapView(Context context) {
         super(context);
@@ -48,10 +47,9 @@ public class KnowledgeMapView extends LockableScrollView {
         super(context, attrs, defStyle);
     }
 
-    public void init(EshareBaseActivity activity, String course) {
+    public void init(EshareBaseActivity activity) {
         this.activity = activity;
         kdata = new KnowledgeSetsData(this);
-        this.course = course;
 
         View content = inflate(activity, R.layout.home_knowledge_map_view, null);
         this.addView(content);
@@ -61,7 +59,7 @@ public class KnowledgeMapView extends LockableScrollView {
 
         _get_screen_size();
 
-        _r_traversal(KnowledgeNet.find_by_name(course));
+        _r_traversal(KnowledgeNet.get_current_net());
         _draw_nodes();
         _draw_dash_path_view();
     }
