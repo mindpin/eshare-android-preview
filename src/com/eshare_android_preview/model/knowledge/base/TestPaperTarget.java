@@ -10,6 +10,7 @@ import java.util.List;
 public interface TestPaperTarget {
     public String model();
     public String model_id();
+    public String get_course();
     public Question get_random_question(List<Integer> except_ids);
     public int exp_num();
 }

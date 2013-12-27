@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
+import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
@@ -15,12 +16,14 @@ import java.util.ArrayList;
  * Created by fushang318 on 13-12-6.
  */
 public class TestPaper implements Parcelable {
+    public KnowledgeNet net;
     public TestPaperTarget target;
     public TestResult test_result;
     private ArrayList<Integer> expect_ids = new ArrayList<Integer>();
 
     public TestPaper(TestPaperTarget target, TestResult test_result){
         this.target = target;
+        this.net = KnowledgeNet.find_by_name(target.get_course());
         this.test_result = test_result;
     }
 
@@ -30,11 +33,11 @@ public class TestPaper implements Parcelable {
         return question;
     }
 
-    public static TestPaperTarget find(String class_name, String id){
+    public static TestPaperTarget find(KnowledgeNet net, String class_name, String id){
         if (KnowledgeNode.class.getName().equals(class_name)) {
-            return KnowledgeNode.find(id);
+            return net.find_node_by_id(id);
         } else if (KnowledgeCheckpoint.class.getName().equals(class_name)) {
-            return KnowledgeCheckpoint.find(id);
+            return net.find_checkpoint_by_id(id);
         }
         return null;
     }
@@ -42,7 +45,9 @@ public class TestPaper implements Parcelable {
     public TestPaper(Parcel parcel){
         String model = parcel.readString();
         String model_id = parcel.readString();
-        this.target = find(model,model_id);
+        String course = parcel.readString();
+        this.net = KnowledgeNet.find_by_name(course);
+        this.target = find(this.net, model,model_id);
         this.test_result = (TestResult)parcel.readSerializable();
         this.expect_ids = (ArrayList<Integer>)parcel.readSerializable();
     }
@@ -56,6 +61,7 @@ public class TestPaper implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(target.model());
         dest.writeString(target.model_id());
+        dest.writeString(target.get_course());
         dest.writeSerializable(test_result);
         dest.writeSerializable(expect_ids);
     }

@@ -16,8 +16,11 @@ public class KnowledgeNet implements IHasChildren{
     public List<KnowledgeCheckpoint> checkpoints;
     public List<KnowledgeSet> root_sets;
 
-    private KnowledgeNet(KnowledgeNetXMLParse parse){
+    public KnowledgeNet(KnowledgeNetXMLParse parse){
         this.parse = parse;
+    }
+
+    public void syn_parse_data_to_field(){
         this.sets = parse.node_set_list;
         this.checkpoints = parse.check_point_list;
         this.root_sets = parse.root_sets;
@@ -32,12 +35,10 @@ public class KnowledgeNet implements IHasChildren{
     }
 
     public static KnowledgeNet find_by_name(String name){
-        String xml_path = "knowledge_nets/" + name + ".xml";
-        KnowledgeNet net = net_map.get(xml_path);
+        KnowledgeNet net = net_map.get(name);
         if(net == null){
-            KnowledgeNetXMLParse parse = KnowledgeNetXMLParse.parse(xml_path);
-            net = new KnowledgeNet(parse);
-            net_map.put(xml_path, net);
+            net = KnowledgeNetXMLParse.parse(name).net;
+            net_map.put(name, net);
         }
 
         return net;
@@ -57,6 +58,18 @@ public class KnowledgeNet implements IHasChildren{
 
     public static KnowledgeNet instance_for_test(){
         return find_by_name("test");
+    }
+
+    public KnowledgeSet find_set_by_id(String set_id){
+        return this.parse.node_set_map.get(set_id);
+    }
+
+    public KnowledgeCheckpoint find_checkpoint_by_id(String checkpoint_id){
+        return this.parse.check_point_map.get(checkpoint_id);
+    }
+
+    public KnowledgeNode find_node_by_id(String node_id){
+        return this.parse.node_map.get(node_id);
     }
 
 }

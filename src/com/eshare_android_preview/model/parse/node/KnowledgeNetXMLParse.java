@@ -16,13 +16,14 @@ import org.xml.sax.SAXException;
 
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
+import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
 import com.eshare_android_preview.model.knowledge.KnowledgeNodeRelation;
 import com.eshare_android_preview.model.knowledge.KnowledgeSet;
 import com.eshare_android_preview.model.knowledge.KnowledgeSetRelation;
 
 public class KnowledgeNetXMLParse extends BaseNodeParser{
-
+    public KnowledgeNet net;
     public HashMap<String, KnowledgeSet> node_set_map;
     public HashMap<String, KnowledgeNode> node_map;
     public HashMap<String, KnowledgeCheckpoint> check_point_map;
@@ -32,22 +33,24 @@ public class KnowledgeNetXMLParse extends BaseNodeParser{
     public List<KnowledgeCheckpoint> check_point_list;
     public List<KnowledgeSet> root_sets;
 
-    public static KnowledgeNetXMLParse parse(String xml_path){
-        KnowledgeNetXMLParse parse = new KnowledgeNetXMLParse(xml_path);
+    public static KnowledgeNetXMLParse parse(String name){
+        KnowledgeNetXMLParse parse = new KnowledgeNetXMLParse(name);
         parse.parse();
         return parse;
     }
 
-    public KnowledgeNetXMLParse(String xml_path){
-        super(xml_path);
+    private KnowledgeNetXMLParse(String name){
+        super(name);
+        this.net = new KnowledgeNet(this);
         this.node_set_map = new HashMap<String, KnowledgeSet>();
         this.node_map = new HashMap<String, KnowledgeNode>();
         this.check_point_map = new HashMap<String, KnowledgeCheckpoint>();
     }
 
-    public void parse(){
+    private void parse(){
         parse_to_hash();
         return_to_list();
+        this.net.syn_parse_data_to_field();
     }
     private void return_to_list(){
         this.node_set_list = new ArrayList<KnowledgeSet>(this.node_set_map.values());
@@ -126,7 +129,7 @@ public class KnowledgeNetXMLParse extends BaseNodeParser{
         NodeList sets=root.getElementsByTagName("set");
         for(int i=0;i<sets.getLength();i++){
             Element setElement=(Element)(sets.item(i));
-            KnowledgeSet node_set = new KnowledgeSet(setElement.getAttribute("id"),setElement.getAttribute("name"),setElement.getAttribute("icon"));
+            KnowledgeSet node_set = new KnowledgeSet(this.net, setElement.getAttribute("id"),setElement.getAttribute("name"),setElement.getAttribute("icon"));
             node_set.deep = Integer.parseInt(setElement.getAttribute("deep"));
 
             parse_node(setElement,node_set);
@@ -158,7 +161,7 @@ public class KnowledgeNetXMLParse extends BaseNodeParser{
                 String node_set_id = learnedElement.getAttribute("target");
                 learned_sets.add(node_set_map.get(node_set_id));
             }
-            KnowledgeCheckpoint checkpoint = new KnowledgeCheckpoint(checkpointElement.getAttribute("id"),learned_sets);
+            KnowledgeCheckpoint checkpoint = new KnowledgeCheckpoint(this.net, checkpointElement.getAttribute("id"),learned_sets);
             checkpoint.deep = Integer.parseInt(checkpointElement.getAttribute("deep"));
 
             this.check_point_map.put(checkpoint.id, checkpoint);

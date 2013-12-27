@@ -6,30 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KnowledgeSet extends BaseKnowledgeSet implements ILearn {
+    public KnowledgeNet net;
 	public String name;
 	public String icon;
 
 	public List<KnowledgeNode> nodes;
     public List<KnowledgeNode> root_nodes;
 
-	public KnowledgeSet(String id, String name, String icon) {
+	public KnowledgeSet(KnowledgeNet net, String id, String name, String icon) {
 		super();
+        this.net = net;
 		this.id = id;
 		this.name = name;
 		this.icon = icon;
 
 		this.nodes = new ArrayList<KnowledgeNode>();
 	}
-
-    public static KnowledgeSet find(String set_id){
-        for(KnowledgeNet net : KnowledgeNet.all()){
-            KnowledgeSet set = net.parse.node_set_map.get(set_id);
-            if(set != null){
-                return set;
-            }
-        }
-        return null;
-    }
 
     @Override
     public boolean is_learned() {

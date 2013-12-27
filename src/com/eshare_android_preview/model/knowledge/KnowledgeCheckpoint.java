@@ -9,23 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,TestPaperTarget {
+    public KnowledgeNet net;
 	public List<KnowledgeSet> learned_sets;
 
-	public KnowledgeCheckpoint(String id, List<KnowledgeSet> learned_sets) {
+	public KnowledgeCheckpoint(KnowledgeNet net, String id, List<KnowledgeSet> learned_sets) {
 		super();
+        this.net = net;
 		this.id = id;
 		this.learned_sets = learned_sets;
 	}
-
-    public static KnowledgeCheckpoint find(String checkpoint_id){
-        for(KnowledgeNet net : KnowledgeNet.all()){
-            KnowledgeCheckpoint cp = net.parse.check_point_map.get(checkpoint_id);
-            if(cp != null){
-                return cp;
-            }
-        }
-        return null;
-    }
 
     @Override
     public boolean is_checkpoint() {
@@ -81,5 +73,9 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,Test
 
     public int exp_num(){
         return node_count() * KnowledgeNode.EXP_NUM;
+    }
+
+    public String get_course(){
+        return this.net.parse.name;
     }
 }

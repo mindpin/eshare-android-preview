@@ -44,16 +44,6 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 		this.children = new ArrayList<KnowledgeNode>();
 	}
 
-    public static KnowledgeNode find(String node_id){
-        for(KnowledgeNet net : KnowledgeNet.all()){
-            KnowledgeNode node = net.parse.node_map.get(node_id);
-            if(node != null){
-                return node;
-            }
-        }
-        return null;
-    }
-
 	@Override
 	public List<KnowledgeNodeRelation> relations() {
 		return relations;
@@ -147,5 +137,9 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation,Know
 
     public int exp_num(){
         return EXP_NUM;
+    }
+
+    public String get_course(){
+        return this.set.net.parse.name;
     }
 }

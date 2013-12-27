@@ -7,9 +7,12 @@ import com.eshare_android_preview.application.EshareApplication;
 
 public abstract class BaseNodeParser{
 	String xml_path;
+    public String name;
 	
-	protected BaseNodeParser(String xml_path) {
+	protected BaseNodeParser(String name) {
+        String xml_path = "knowledge_nets/" + name + ".xml";
 		this.xml_path = xml_path;
+        this.name = name;
 	}
 	protected InputStream getInputStream(){
 		try {
