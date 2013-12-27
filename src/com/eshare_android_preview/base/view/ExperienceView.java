@@ -54,6 +54,8 @@ public class ExperienceView extends View {
     private float rect_exp_bar_width; // 矩形里面的经验条的初始长度  (exp_num/level_up_exp_num)
     private Paint paint;
 
+    public String course;
+
     public ExperienceView(Context context) {
         super(context);
     }
@@ -65,6 +67,8 @@ public class ExperienceView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        if (null == course) return;
 
         init();
 
@@ -99,7 +103,7 @@ public class ExperienceView extends View {
             return;
         }
 
-        CurrentState state = ExperienceLog.current_state();
+        CurrentState state = ExperienceLog.current_state(course);
         rect_exp_bar_width = rect_width * state.exp_num / state.level_up_exp_num;
         current_level = state.level;
     }
@@ -205,7 +209,7 @@ public class ExperienceView extends View {
     }
 
     private float get_added_rect_width(int added_exp) {
-        CurrentState state = ExperienceLog.current_state();
+        CurrentState state = ExperienceLog.current_state(course);
         float added_width = rect_width * added_exp / state.level_up_exp_num;
         return added_width + rect_exp_bar_width;
     }

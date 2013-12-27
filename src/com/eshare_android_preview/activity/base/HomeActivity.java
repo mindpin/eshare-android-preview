@@ -14,6 +14,7 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
+import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
 import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.CircleImageView;
@@ -36,6 +37,7 @@ public class HomeActivity extends EshareBaseActivity {
 
         load_map_view();
         load_avatar();
+        init_exp_view();
 
         super.onCreate(savedInstanceState);
     }
@@ -53,6 +55,11 @@ public class HomeActivity extends EshareBaseActivity {
         b = ImageTools.createBitmapBySize(b, BaseUtils.dp_to_px(30), BaseUtils.dp_to_px(30));
         CircleAvatarDrawable d = new CircleAvatarDrawable(b);
         iv.setBackgroundDrawable(d);
+    }
+
+    private void init_exp_view() {
+        ExperienceView ev = (ExperienceView) findViewById(R.id.experience_view);
+        ev.course = course;
     }
 
     @Override

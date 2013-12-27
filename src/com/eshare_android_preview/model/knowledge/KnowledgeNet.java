@@ -52,10 +52,6 @@ public class KnowledgeNet implements IHasChildren{
         return find_by_name("javascript");
     }
 
-    public static KnowledgeNet instance(){
-        return find_by_name("javascript");
-    }
-
     public static KnowledgeNet instance_for_test(){
         return find_by_name("test");
     }

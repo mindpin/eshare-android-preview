@@ -57,6 +57,7 @@ public class TestSuccessActivity extends EshareBaseActivity {
         );
         experience_view_params.weight = 3;
         this.experience_view.setLayoutParams(experience_view_params);
+        this.experience_view.course = test_paper.target.get_course();
 
         LinearLayout.LayoutParams experience_chart_view_params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,
@@ -81,7 +82,7 @@ public class TestSuccessActivity extends EshareBaseActivity {
         if(!is_learned){
             this.experience_chart_view.run_animation();
             this.experience_view.add(this.test_paper.target.exp_num());
-            ExperienceLog.add(this.test_paper.target.exp_num(), this.test_paper.target, "");
+            ExperienceLog.add(this.test_paper.target.get_course(), this.test_paper.target.exp_num(), this.test_paper.target, "");
             ((ILearn)this.test_paper.target).do_learn();
             is_learned = true;
         }
