@@ -34,4 +34,5 @@ public class Constants {
     public static final String TABLE_EXPERIENCE_LOGS__MODEL_ID = "model_id";
     public static final String TABLE_EXPERIENCE_LOGS__DATA_JSON = "data_json";
     public static final String TABLE_EXPERIENCE_LOGS_CREATED_AT = "created_at";
+    public static final String TABLE_EXPERIENCE_LOGS_COURSE = "course";
 }

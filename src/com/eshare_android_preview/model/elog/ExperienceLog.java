@@ -15,6 +15,8 @@ import java.util.Calendar;
  * Created by menxu on 13-12-5.
  */
 public class ExperienceLog implements Serializable {
+	public final static String COURSE = "javascript";
+	
     public static int[] level_up_exp_nums = {10,15,23};
 
     public int id;
@@ -24,6 +26,7 @@ public class ExperienceLog implements Serializable {
     public String model_id;
     public String data_json;
     public long   created_at;
+    public String course;
 
     public TestPaperTarget model;
 
@@ -37,7 +40,7 @@ public class ExperienceLog implements Serializable {
         this.model = base_knowlege;
     }
 
-    public ExperienceLog(int id, int before_exp, int after_exp, String model_type, String model_id, String data_json, long created_at) {
+    public ExperienceLog(int id, int before_exp, int after_exp, String model_type, String model_id, String data_json, long created_at, String course) {
         this.id = id;
         this.before_exp = before_exp;
         this.after_exp = after_exp;
@@ -45,25 +48,33 @@ public class ExperienceLog implements Serializable {
         this.model_id = model_id;
         this.data_json = data_json;
         this.created_at = created_at;
+        this.course = course;
         this.setModel();
     }
-
-
+    
     public static void add(int delta_num,TestPaperTarget model,String data_json){
+    	add(COURSE,delta_num,model,data_json);
+    }
+    
+    public static void add(String course,int delta_num,TestPaperTarget model,String data_json){
 
-        ExperienceLog after_exp_elog = ExperienceLogDBHelper.find_last_data();
+        ExperienceLog after_exp_elog = ExperienceLogDBHelper.find_last_data(course);
         int before_exp = after_exp_elog == null ? 0:after_exp_elog.after_exp;
 
         int after_exp = before_exp + delta_num;
         String model_type = model.model();
         String model_id = model.model_id();
         long created_at = System.currentTimeMillis();
-        ExperienceLog elog = new ExperienceLog(-1,before_exp,after_exp,model_type,model_id,data_json,created_at);
+        ExperienceLog elog = new ExperienceLog(-1,before_exp,after_exp,model_type,model_id,data_json,created_at,course);
         ExperienceLogDBHelper.create(elog);
     }
-
+    
     public static List<ExperienceLog> all(){
-        return ExperienceLogDBHelper.all();
+    	return all(COURSE);
+    }
+    
+    public static List<ExperienceLog> all(String coruse){
+        return ExperienceLogDBHelper.all(coruse);
     }
     
     public static int get_level_up_exp_num_by(int level){
@@ -74,7 +85,10 @@ public class ExperienceLog implements Serializable {
     }
 
     public static CurrentState current_state(){
-        CurrentState state = new CurrentState();
+        return current_state(COURSE);
+    }
+    public static CurrentState current_state(String course){
+        CurrentState state = new CurrentState(course);
         state.init_data();
         return state;
     }
@@ -84,8 +98,12 @@ public class ExperienceLog implements Serializable {
     }
 
     public static int get_exp_num_by_day(Calendar c){
+        return get_exp_num_by_day(COURSE,c);
+    }
+    
+    public static int get_exp_num_by_day(String course,Calendar c){
     	int count= 0;
-    	for (ExperienceLog elog : ExperienceLogDBHelper.all()) {
+    	for (ExperienceLog elog : ExperienceLogDBHelper.all(course)) {
     		if (BaseUtils.date_all_string(elog.created_at).equals(BaseUtils.date_all_string(c.getTime()))) {
     			count += elog.after_exp - elog.before_exp; 
 			}
