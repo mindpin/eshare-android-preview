@@ -103,13 +103,15 @@ public class QuestionShowActivity extends EshareBaseActivity {
         question_button.set_next_button_listener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (test_paper.test_result.is_end()) {
-                    to_do_answer_error();
-                } else if (test_paper.test_result.is_pass()) {
-                    to_do_answer_pass();
-                } else {
-                    question_result_view.close_animate();
-                }
+                go_success();
+
+//                if (test_paper.test_result.is_end()) {
+//                    to_do_answer_error();
+//                } else if (test_paper.test_result.is_pass()) {
+//                    go_success();
+//                } else {
+//                    question_result_view.close_animate();
+//                }
             }
         });
     }
@@ -168,7 +170,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
         finish();
     }
 
-    private void to_do_answer_pass() {
+    // 打开成功画面
+    private void go_success() {
         Intent intent = new Intent(this, TestSuccessActivity.class);
         intent.putExtra(TestSuccessActivity.ExtraKeys.TEST_PAPER, test_paper);
         startActivity(intent);

@@ -134,8 +134,6 @@ public class ExperienceChartView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawARGB(255, 200, 200, 200);
-
         canvas_height = getHeight();
         canvas_width = getWidth();
 
