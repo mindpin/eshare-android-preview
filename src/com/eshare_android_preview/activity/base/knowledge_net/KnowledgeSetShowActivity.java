@@ -59,7 +59,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         Intent intent = getIntent();
         String course = intent.getStringExtra("course");
         String set_id = intent.getStringExtra("set_id");
-        set = KnowledgeNet.find_by_name(course).find_set_by_id(set_id);
+        set = KnowledgeNet.find_by_name(course).find_base_set_by_id(set_id);
 
         if (set.is_checkpoint()) {
             set_text_color = Color.parseColor("#844C1D");

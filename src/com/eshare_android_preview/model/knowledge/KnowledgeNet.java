@@ -56,6 +56,14 @@ public class KnowledgeNet implements IHasChildren{
         return find_by_name("test");
     }
 
+    public BaseKnowledgeSet find_base_set_by_id(String base_set_id){
+        BaseKnowledgeSet base_set = find_set_by_id(base_set_id);
+        if(base_set == null){
+            base_set = find_checkpoint_by_id(base_set_id);
+        }
+        return base_set;
+    }
+
     public KnowledgeSet find_set_by_id(String set_id){
         return this.parse.node_set_map.get(set_id);
     }
