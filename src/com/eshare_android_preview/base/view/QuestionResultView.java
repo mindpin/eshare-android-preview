@@ -14,6 +14,7 @@ import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.BaseUtils.ScreenSize;
+import com.eshare_android_preview.base.view.ui.UiSound;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.PropertyValuesHolder;
@@ -35,9 +36,6 @@ public class QuestionResultView extends RelativeLayout {
     private RelativeLayout error_view;
 
     public QuestionShowActivity activity;
-
-    public MediaPlayer correct_mp = MediaPlayer.create(EshareApplication.context, R.raw.heal);
-    public MediaPlayer error_mp = MediaPlayer.create(EshareApplication.context, R.raw.drop);
 
     public QuestionResultView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -65,7 +63,7 @@ public class QuestionResultView extends RelativeLayout {
         showing_view = correct_view;
         open_animate();
 
-        correct_mp.start();
+        UiSound.CORRECT.start();
     }
 
     public void show_error() {
@@ -76,7 +74,7 @@ public class QuestionResultView extends RelativeLayout {
         showing_view = error_view;
         open_animate();
 
-        error_mp.start();
+        UiSound.ERROR.start();
     }
 
     private void open_animate() {
