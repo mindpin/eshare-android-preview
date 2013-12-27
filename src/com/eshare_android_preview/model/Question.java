@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 问题
-public class Question extends LearningResource implements Serializable {
+public class Question implements Serializable {
     public static class Type{
 		public static final String   SINGLE_CHOICE = "single_choice";
 		public static final String   MULTIPLE_CHOICE = "multiple_choices";
@@ -70,12 +70,6 @@ public class Question extends LearningResource implements Serializable {
         return result;
     }
     
-    
-    @Override
-    public String get_note_foreign_key_id() {
-        return this.id + "";
-    }
-
     public String get_kind_str() {
         if (is_single_choice()) return "单选题";
         if (is_multiple_choice()) return "多选题";
