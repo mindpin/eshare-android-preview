@@ -26,7 +26,9 @@ public class FontAwesomeTextView extends TextView {
     }
 
     private void init() {
-        setTypeface(UiFont.FONTAWESOME_FONT);
+        if (!isInEditMode()) {
+            setTypeface(UiFont.FONTAWESOME_FONT);
+        }
         setGravity(Gravity.CENTER);
     }
 }

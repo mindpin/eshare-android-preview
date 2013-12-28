@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.LoginActivity;
+import com.eshare_android_preview.base.view.ui.UiFont;
 
 public class EshareBaseActivity extends Activity{
 
@@ -23,9 +24,6 @@ public class EshareBaseActivity extends Activity{
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		ActivitiesStackSingleton.tidy_and_push_activity(this);
-
-//        如果存在顶栏，加载顶栏并进行一些必要设置
-        _load_head_bar();
 
 		super.onCreate(savedInstanceState);
 	}
@@ -63,33 +61,17 @@ public class EshareBaseActivity extends Activity{
 		startActivity(new Intent(getApplicationContext(), cls));
 	}
 
-    private void _load_head_bar() {
-        RelativeLayout head_bar_rl = (RelativeLayout) findViewById(R.id.head_bar);
-
-        if (null != head_bar_rl) {
-            Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
-
-            Button go_back_button = (Button) findViewById(R.id.button_go_back);
-            go_back_button.setTypeface(font);
-
-            Button setting_button = (Button) findViewById(R.id.button_setting);
-            setting_button.setTypeface(font);
-        }
-    }
-
     // 隐藏顶部的回退按钮
     public void hide_head_go_back_button() {
         try {
-            Button button = (Button) findViewById(R.id.button_go_back);
-            button.setVisibility(View.GONE);
+            findViewById(R.id.button_go_back).setVisibility(View.GONE);
         } catch (Exception e) {}
     }
 
     // 隐藏顶部的设置按钮
     public void hide_head_setting_button() {
         try {
-            Button button = (Button) findViewById(R.id.button_setting);
-            button.setVisibility(View.GONE);
+            findViewById(R.id.button_setting).setVisibility(View.GONE);
         } catch (Exception e) {}
     }
 
