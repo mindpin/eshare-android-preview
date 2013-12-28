@@ -15,9 +15,10 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.base.view.ui.CircleIconView;
 import com.eshare_android_preview.base.view.ui.FlatGridView;
 import com.eshare_android_preview.base.view.ui.FlowLayout;
+import com.eshare_android_preview.base.view.ui.FontAwesomeTextView;
+import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
 import com.eshare_android_preview.model.QuestionSelectAnswer;
@@ -91,13 +92,19 @@ public class QuestionChoicesView extends FlatGridView {
 
         int s = BaseUtils.dp_to_px(60);
 
-        CircleIconView correct_icon = new CircleIconView(getContext());
-        correct_icon.init("#00000000", "#82AA2A", 40, R.string.icon_check);
+        FontAwesomeTextView correct_icon = new FontAwesomeTextView(getContext());
+        correct_icon.setText(R.string.icon_check);
+        correct_icon.setTextColor(UiColor.QUESTION_ANSWER_TRUE);
+        correct_icon.setGravity(Gravity.CENTER);
+        correct_icon.setTextSize(40);
         LayoutParams lp_correct = new LayoutParams(s, s);
         correct_icon.setLayoutParams(lp_correct);
 
-        CircleIconView error_icon = new CircleIconView(getContext());
-        error_icon.init("#00000000", "#D62525", 40, R.string.icon_times);
+        FontAwesomeTextView error_icon = new FontAwesomeTextView(getContext());
+        error_icon.setText(R.string.icon_times);
+        error_icon.setTextColor(UiColor.QUESTION_ANSWER_FALSE);
+        error_icon.setGravity(Gravity.CENTER);
+        error_icon.setTextSize(40);
         LayoutParams lp_error = new LayoutParams(s, s);
         error_icon.setLayoutParams(lp_error);
 

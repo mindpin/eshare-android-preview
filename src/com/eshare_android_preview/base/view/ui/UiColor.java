@@ -23,8 +23,14 @@ public class UiColor {
 
     // question icons
 //    public final static String HEALTH_STRING = "#D62525"; // 红心
-    public final static String HEALTH_STRING = "#fccd2d"; // 黄色星星
-    public final static String HEALTH_EMPTY_STRING = "#dbdbdb";
+    public final static int HEALTH = Color.parseColor("#fccd2d"); // 黄色星星
+    public final static int HEALTH_EMPTY = Color.parseColor("#dbdbdb");
+
+    public final static int CORRECT_POINT = Color.parseColor("#98cc27");
+    public final static int CORRECT_POINT_EMPTY = Color.parseColor("#dbdbdb");
+
+    public final static int QUESTION_ANSWER_TRUE = Color.parseColor("#82AA2A");
+    public final static int QUESTION_ANSWER_FALSE = Color.parseColor("#D62525");
 
     // experience bar
     public final static int EXP_LEFT_CIRCLE = Color.parseColor("#fccd2d");

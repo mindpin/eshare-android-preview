@@ -25,7 +25,6 @@ import com.eshare_android_preview.model.TestPaper;
 public class QuestionShowActivity extends EshareBaseActivity {
 
     public static class ExtraKeys {
-        public static final String QUESTION = "question";
         public static final String TEST_PAPER = "test_paper";
     }
 
@@ -129,12 +128,8 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     public void back(View v) {
         new AlertDialog.Builder(QuestionShowActivity.this)
-                .setMessage("要退出测试吗？")
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
+                .setMessage("要退出练习吗？")
+                .setNegativeButton("取消", null)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {

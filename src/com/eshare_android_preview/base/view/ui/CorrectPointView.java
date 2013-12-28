@@ -24,14 +24,11 @@ public class CorrectPointView extends LinearLayout {
         add_child_view(context);
     }
 
-    List<CircleIconView> icon_list;
+    List<FontAwesomeTextView> icon_list;
     int point;
 
-    String COLOR_EMPTY = "#dbdbdb";
-    String COLOR_FILL  = "#98cc27";
-
     private void add_child_view(Context context) {
-        icon_list = new ArrayList<CircleIconView>();
+        icon_list = new ArrayList<FontAwesomeTextView>();
         point = 0;
 
         int size0, size1;
@@ -43,18 +40,20 @@ public class CorrectPointView extends LinearLayout {
         }
 
         for (int i = 0; i < 10; i++) {
-            CircleIconView civ = new CircleIconView(context);
-            civ.init("#00000000", COLOR_EMPTY, 16, R.string.icon_leaf);
+            FontAwesomeTextView ftv = new FontAwesomeTextView(context);
+            ftv.setText(R.string.icon_leaf);
+            ftv.setTextColor(UiColor.CORRECT_POINT_EMPTY);
+            ftv.setTextSize(16);
             LayoutParams lp = new LayoutParams(size0, size1);
-            civ.setLayoutParams(lp);
+            ftv.setLayoutParams(lp);
 
-            addView(civ);
-            icon_list.add(civ);
+            addView(ftv);
+            icon_list.add(ftv);
         }
     }
 
     public void add_point() {
-        icon_list.get(point).set_text_color(COLOR_FILL);
+        icon_list.get(point).setTextColor(UiColor.CORRECT_POINT);
         point = point + 1;
     }
 
@@ -62,11 +61,11 @@ public class CorrectPointView extends LinearLayout {
         this.point = point;
 
         for (int i = 0; i < 10; i++) {
-            CircleIconView cv = icon_list.get(i);
+            FontAwesomeTextView cv = icon_list.get(i);
             if (i < point) {
-                cv.set_text_color(COLOR_FILL);
+                cv.setTextColor(UiColor.CORRECT_POINT);
             } else {
-                cv.set_text_color(COLOR_EMPTY);
+                cv.setTextColor(UiColor.CORRECT_POINT_EMPTY);
             }
         }
     }

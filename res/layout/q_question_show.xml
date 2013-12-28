@@ -8,16 +8,17 @@
         android:layout_height="80dp"
         android:layout_width="fill_parent">
 
-        <com.eshare_android_preview.base.view.ui.CircleIconView
+        <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+            android:clickable="true"
             android:onClick="back"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_height="50dp"
             android:layout_width="50dp"
-            bg_color="#00000000"
-            text_color="#666666"
-            text_size="20"
-            text="&#xf060;" />
+            android:textColor="#666666"
+            android:textSize="20dp"
+            android:text="@string/icon_arrow_left"
+            />
 
         <com.eshare_android_preview.base.view.ui.HealthView
             android:id="@+id/health_view"
