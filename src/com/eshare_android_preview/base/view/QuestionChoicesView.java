@@ -71,7 +71,8 @@ public class QuestionChoicesView extends FlatGridView {
         add_view(fl);
 
         LayoutParams lp = (LayoutParams) fl.getLayoutParams();
-        lp.bottomMargin = BaseUtils.dp_to_px(2);
+        lp.leftMargin = BaseUtils.dp_to_px(2);
+        lp.rightMargin = BaseUtils.dp_to_px(2);
         fl.setLayoutParams(lp);
 
         for (QuestionChoice choice : question.choices_list) {
@@ -224,12 +225,12 @@ public class QuestionChoicesView extends FlatGridView {
 
         public void click_single() {
             for (View view : children) {
-                (view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#eeeeee"));
-                (view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#ffffff"));
+                (view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER);
+                (view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG);
             }
 
-            (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#1CB0F6"));
-            (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#D2EFFD"));
+            (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER_ACTIVE);
+            (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG_ACTIVE);
 
             answer.set_choice(choice);
         }
@@ -238,11 +239,11 @@ public class QuestionChoicesView extends FlatGridView {
             answer.add_or_remove_choice(choice);
 
             if(selected) {
-                (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#eeeeee"));
-                (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#ffffff"));
+                (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER);
+                (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG);
             } else {
-                (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#1CB0F6"));
-                (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#D2EFFD"));
+                (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER_ACTIVE);
+                (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG_ACTIVE);
             }
 
             selected = !selected;
@@ -281,8 +282,8 @@ public class QuestionChoicesView extends FlatGridView {
             answer.set_choice(index + 1, choice);
 
             // 设置底部选项样式
-            (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#1CB0F6"));
-            (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#D2EFFD"));
+            (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER_ACTIVE);
+            (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG_ACTIVE);
 
             // 设置 CodeFill 样式
             EshareMarkdownView.Codefill cf = activity.question_content_webview.get_first_unfilled_codefill();
@@ -318,8 +319,8 @@ public class QuestionChoicesView extends FlatGridView {
         code_fill.unset_text();
 
         // 设置底部选项样式
-        (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#eeeeee"));
-        (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#ffffff"));
+        (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER);
+        (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG);
 
         item_view.setTag(null);
         code_fill.setTag(null);

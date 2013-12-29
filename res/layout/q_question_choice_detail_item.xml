@@ -7,17 +7,18 @@
         android:id="@+id/item_border"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        border_radius="5"
-        border_radius_background_color="#eeeeee"
-        android:layout_margin="3dp"
-        android:padding="2dp"
+        border_radius="3"
+        border_radius_background_color="#e7e7e7"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:padding="1dp"
         >
 
         <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
             android:id="@+id/item_content"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
-            border_radius="3"
+            border_radius="2"
             border_radius_background_color="#ffffff"
             android:gravity="center"
             >

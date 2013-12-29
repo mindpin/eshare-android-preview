@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f1f1f1"
+    >
 
     <RelativeLayout
         android:id="@+id/head"
@@ -34,31 +36,16 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_height="30dp"
-            android:layout_width="wrap_content"
-            android:layout_marginRight="15dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_below="@+id/head"
-        android:id="@+id/question_kind_desc"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent">
-
-        <TextView
-            android:id="@+id/question_kind_desc_text_view"
-            android:layout_height="30dp"
-            android:layout_width="wrap_content"
-            android:text="选择一个正确答案"
-            android:textSize="16dp"
-            android:paddingLeft="13dp"
-            android:gravity="center_vertical" />
+            android:layout_width="fill_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/question_content"
-        android:layout_below="@+id/question_kind_desc"
+        android:layout_below="@+id/head"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:orientation="vertical"
@@ -66,16 +53,43 @@
 
         <!-- 问题正文 -->
         <RelativeLayout
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/question_choices_view"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
-            android:padding="5dp"
+            android:padding="1dp"
+            android:background="#e7e7e7"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="4dp"
             >
 
-            <com.eshare_android_preview.base.view.EshareMarkdownView
-                android:id="@+id/question_title"
-                text_size="16"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content" />
+            <RelativeLayout
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:background="#ffffff"
+                android:padding="5dp"
+                >
+
+                <TextView
+                    android:id="@+id/question_kind_desc_text_view"
+                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:text="选择一个正确答案"
+                    android:textSize="16dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#222"
+                    />
+
+                <com.eshare_android_preview.base.view.EshareMarkdownView
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/question_title"
+                    text_size="16"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -85,8 +99,9 @@
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:layout_alignParentBottom="true"
-            android:padding="3dp"
-            android:layout_marginBottom="-6dp" />
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            />
     </RelativeLayout>
 
     <!-- 正确错误提示 -->

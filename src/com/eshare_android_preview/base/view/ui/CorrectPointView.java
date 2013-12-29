@@ -31,6 +31,8 @@ public class CorrectPointView extends LinearLayout {
         icon_list = new ArrayList<FontAwesomeTextView>();
         point = 0;
 
+        setOrientation(HORIZONTAL);
+
         int size0, size1;
         if (isInEditMode()) {
             size0 = size1 = 20;
@@ -44,11 +46,15 @@ public class CorrectPointView extends LinearLayout {
             ftv.setText(R.string.icon_leaf);
             ftv.setTextColor(UiColor.CORRECT_POINT_EMPTY);
             ftv.setTextSize(16);
-            LayoutParams lp = new LayoutParams(size0, size1);
-            ftv.setLayoutParams(lp);
 
             addView(ftv);
             icon_list.add(ftv);
+
+            LayoutParams lp = (LayoutParams) ftv.getLayoutParams();
+            lp.width = LayoutParams.FILL_PARENT;
+            lp.height = size1;
+            lp.weight = 1;
+            ftv.setLayoutParams(lp);
         }
     }
 

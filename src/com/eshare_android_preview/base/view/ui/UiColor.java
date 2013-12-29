@@ -40,6 +40,12 @@ public class UiColor {
     public final static int QUESTION_ANSWER_TRUE = Color.parseColor("#82AA2A");
     public final static int QUESTION_ANSWER_FALSE = Color.parseColor("#D62525");
 
+    // question choices
+    public final static int CHOICE_BORDER = Color.parseColor("#e7e7e7");
+    public final static int CHOICE_BG = Color.parseColor("#ffffff");
+    public final static int CHOICE_BORDER_ACTIVE = Color.parseColor("#1CB0F6");
+    public final static int CHOICE_BG_ACTIVE = Color.parseColor("#D2EFFD");
+
     // experience bar
     public final static int EXP_LEFT_CIRCLE = Color.parseColor("#fccd2d");
     public final static int EXP_RIGHT_CIRCLE = Color.parseColor("#dbdbdb");
