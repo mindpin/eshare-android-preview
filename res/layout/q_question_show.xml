@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f1f1"
-    >
+    android:background="#f1f1f1">
 
     <RelativeLayout
         android:id="@+id/head"
@@ -19,8 +18,7 @@
             android:layout_width="50dp"
             android:textColor="#666666"
             android:textSize="20dp"
-            android:text="@string/icon_arrow_left"
-            />
+            android:text="@string/icon_arrow_left" />
 
         <com.eshare_android_preview.base.view.ui.HealthView
             android:id="@+id/health_view"
@@ -38,8 +36,7 @@
             android:layout_height="30dp"
             android:layout_width="fill_parent"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            />
+            android:layout_marginLeft="10dp" />
 
     </RelativeLayout>
 
@@ -59,35 +56,68 @@
             android:layout_width="fill_parent"
             android:padding="1dp"
             android:background="#e7e7e7"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="4dp"
-            >
+            android:layout_marginBottom="4dp">
 
             <RelativeLayout
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
-                android:background="#ffffff"
-                android:padding="5dp"
-                >
+                android:background="#ffffff">
 
-                <TextView
-                    android:id="@+id/question_kind_desc_text_view"
-                    android:layout_height="30dp"
-                    android:layout_width="wrap_content"
-                    android:text="选择一个正确答案"
-                    android:textSize="16dp"
-                    android:gravity="center_vertical"
-                    android:textColor="#222"
-                    />
+                <RelativeLayout
+                    android:layout_height="40dp"
+                    android:layout_width="fill_parent"
+                    android:background="#ffffda"
+                    >
 
-                <com.eshare_android_preview.base.view.webview.EshareMarkdownView
-                    android:layout_marginTop="30dp"
-                    android:id="@+id/question_title"
-                    text_size="16"
+                    <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+                        android:layout_height="40dp"
+                        android:layout_width="40dp"
+                        android:textColor="#fccd2d"
+                        android:text="@string/icon_question_circle"
+                        android:textSize="20dp"
+                        android:gravity="center"
+                        android:shadowColor="#66000000"
+                        android:shadowDy="1"
+                        android:shadowDx="1"
+                        android:shadowRadius="1"
+                        />
+
+                    <TextView
+                        android:id="@+id/question_kind_desc_text_view"
+                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:text="LOADING..."
+                        android:textSize="16dp"
+                        android:gravity="center_vertical"
+                        android:textColor="#222"
+                        android:layout_marginLeft="40dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_height="1dp"
+                    android:layout_width="fill_parent"
+                    android:background="#e7e7e7"
+                    android:layout_marginTop="40dp">
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content" />
+                    android:layout_width="fill_parent"
+                    android:layout_marginTop="41dp"
+                    android:padding="10dp">
+
+                    <com.eshare_android_preview.base.view.webview.EshareMarkdownView
+                        android:id="@+id/question_title"
+                        text_size="16"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content" />
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 
@@ -100,8 +130,7 @@
             android:layout_width="fill_parent"
             android:layout_alignParentBottom="true"
             android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            />
+            android:paddingRight="3dp" />
     </RelativeLayout>
 
     <!-- 正确错误提示 -->
@@ -110,8 +139,7 @@
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:clickable="true"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <!-- 提交按钮 -->
     <com.eshare_android_preview.base.view.ui.QuestionButton

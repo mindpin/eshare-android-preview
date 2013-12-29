@@ -5,6 +5,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
 
+import com.eshare_android_preview.base.utils.BaseUtils;
+
 /**
 * Created by Administrator on 13-12-30.
 */
@@ -22,9 +24,11 @@ public class MarkdownWebView extends WebView {
         setVerticalScrollBarEnabled(false);
 
         getSettings().setJavaScriptEnabled(true);
-        getSettings().setDefaultFontSize(16);
+        getSettings().setDefaultFontSize(BaseUtils.dp_to_px(16));
         getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
         getSettings().setBlockNetworkImage(true);
+
+        setPadding(0, 0, 0, 0);
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
