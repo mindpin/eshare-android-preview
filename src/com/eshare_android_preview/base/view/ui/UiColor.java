@@ -21,6 +21,14 @@ public class UiColor {
         return set.is_unlocked() ? SET_COLOR : LOCKED_SET_COLOR;
     }
 
+    public static int get_set_text_color(BaseKnowledgeSet set) {
+        if (set.is_checkpoint()) {
+            return Color.parseColor("#844C1D");
+        }
+
+        return Color.parseColor("#ffffff");
+    }
+
     // question icons
 //    public final static String HEALTH_STRING = "#D62525"; // 红心
     public final static int HEALTH = Color.parseColor("#fccd2d"); // 黄色星星

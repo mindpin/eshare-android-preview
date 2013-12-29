@@ -20,6 +20,8 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.knowledge_map.AniProxy;
 import com.eshare_android_preview.base.view.knowledge_map.MarginAni;
 import com.eshare_android_preview.base.view.knowledge_map.SetPosition;
+import com.eshare_android_preview.base.view.ui.FontAwesomeTextView;
+import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TestResult;
 import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
@@ -36,14 +38,13 @@ import java.util.List;
  * Created by SongLiang on 13-11-21.
  */
 public class KnowledgeSetShowActivity extends EshareBaseActivity {
-    TextView go_back_icon_tv;
+    FontAwesomeTextView go_back_icon_tv;
     TextView set_name_tv;
     RelativeLayout top_layout;
     RelativeLayout pager_layout;
     ViewPager view_pager;
 
     BaseKnowledgeSet set;
-    int set_text_color;
 
     boolean loaded = false;
 
@@ -51,26 +52,19 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.kn_knowledge_set_show);
 
-        go_back_icon_tv = (TextView) findViewById(R.id.go_back_icon);
-        set_name_tv = (TextView) findViewById(R.id.set_name);
-        top_layout = (RelativeLayout) findViewById(R.id.top_layout);
-        pager_layout = (RelativeLayout) findViewById(R.id.pager);
-
         Intent intent = getIntent();
         String set_id = intent.getStringExtra("set_id");
         set = KnowledgeNet.get_current_net().find_base_set_by_id(set_id);
 
-        if (set.is_checkpoint()) {
-            set_text_color = Color.parseColor("#844C1D");
-        } else {
-            set_text_color = Color.parseColor("#ffffff");
-        }
+        go_back_icon_tv = (FontAwesomeTextView) findViewById(R.id.go_back_icon);
+        go_back_icon_tv.setTextColor(UiColor.get_set_text_color(set));
 
-        go_back_icon_tv.setTextColor(set_text_color);
-        set_fontawesome(go_back_icon_tv);
-
-        set_name_tv.setTextColor(set_text_color);
+        set_name_tv = (TextView) findViewById(R.id.set_name);
+        set_name_tv.setTextColor(UiColor.get_set_text_color(set));
         set_name_tv.setText(set.get_name());
+
+        top_layout = (RelativeLayout) findViewById(R.id.top_layout);
+        pager_layout = (RelativeLayout) findViewById(R.id.pager);
 
         _init_view_pager();
 

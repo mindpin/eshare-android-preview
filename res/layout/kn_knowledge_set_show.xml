@@ -17,7 +17,7 @@
         android:layout_marginTop="-18dp"
         >
 
-        <TextView
+        <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
             android:id="@+id/go_back_icon"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -29,7 +29,6 @@
             android:clickable="true"
             android:padding="18dp"
             />
-
 
         <TextView
             android:id="@+id/set_name"
@@ -50,6 +49,7 @@
         android:layout_width="fill_parent"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="146.5dp"
+        android:layout_marginBottom="-240dp"
         >
 
         <android.support.v4.view.ViewPager
