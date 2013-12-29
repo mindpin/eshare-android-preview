@@ -46,6 +46,9 @@ public class UiColor {
     public final static int CHOICE_BORDER_ACTIVE = Color.parseColor("#1CB0F6");
     public final static int CHOICE_BG_ACTIVE = Color.parseColor("#D2EFFD");
 
+    // question text_fill
+    public final static int TEXT_FILL = Color.parseColor("#661CB0F6");
+
     // experience bar
     public final static int EXP_LEFT_CIRCLE = Color.parseColor("#fccd2d");
     public final static int EXP_RIGHT_CIRCLE = Color.parseColor("#dbdbdb");

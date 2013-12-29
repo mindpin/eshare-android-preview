@@ -4,9 +4,7 @@ body {
 }
 
 codefill {
-  margin: 1px;
   display: inline-block;
-  background: #fff;
 }
 
 code {

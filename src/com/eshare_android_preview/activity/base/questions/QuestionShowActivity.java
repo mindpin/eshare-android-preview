@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
-import com.eshare_android_preview.base.view.EshareMarkdownView;
+import com.eshare_android_preview.base.view.webview.EshareMarkdownView;
 import com.eshare_android_preview.base.view.QuestionChoicesView;
 import com.eshare_android_preview.base.view.QuestionResultView;
 import com.eshare_android_preview.base.view.ui.CorrectPointView;

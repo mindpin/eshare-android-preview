@@ -19,6 +19,7 @@ import com.eshare_android_preview.base.view.ui.FlatGridView;
 import com.eshare_android_preview.base.view.ui.FlowLayout;
 import com.eshare_android_preview.base.view.ui.FontAwesomeTextView;
 import com.eshare_android_preview.base.view.ui.UiColor;
+import com.eshare_android_preview.base.view.webview.TextFill;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
 import com.eshare_android_preview.model.QuestionSelectAnswer;
@@ -254,7 +255,7 @@ public class QuestionChoicesView extends FlatGridView {
         RelativeLayout item_view;
         QuestionChoice choice;
 
-//        EshareMarkdownView.Codefill binded_codefill;
+//        EshareMarkdownView.TextFill binded_codefill;
 
         public QuestionFillItemListener(RelativeLayout item_view, QuestionChoice choice) {
             this.item_view = item_view;
@@ -286,7 +287,7 @@ public class QuestionChoicesView extends FlatGridView {
             (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG_ACTIVE);
 
             // 设置 CodeFill 样式
-            EshareMarkdownView.Codefill cf = activity.question_content_webview.get_first_unfilled_codefill();
+            TextFill cf = activity.question_content_webview.get_first_unfilled_codefill();
             cf.set_text(choice.content);
 
             v.setTag(cf);
@@ -294,14 +295,14 @@ public class QuestionChoicesView extends FlatGridView {
         }
 
         public void unselect(View v) {
-            unselect_fill_choice((EshareMarkdownView.Codefill) v.getTag(), v);
+            unselect_fill_choice((TextFill) v.getTag(), v);
         }
     }
 
     class CodefillViewListener implements OnClickListener {
         @Override
         public void onClick(View view) {
-            EshareMarkdownView.Codefill code_fill = (EshareMarkdownView.Codefill) view;
+            TextFill code_fill = (TextFill) view;
             if (!code_fill.filled) {
                 return;
             }
@@ -312,7 +313,7 @@ public class QuestionChoicesView extends FlatGridView {
         }
     }
 
-    private void unselect_fill_choice(EshareMarkdownView.Codefill code_fill, View item_view) {
+    private void unselect_fill_choice(TextFill code_fill, View item_view) {
         // 设置答案
         int index = activity.question_content_webview.get_codefill_index(code_fill);
         answer.set_choice(index + 1, null);

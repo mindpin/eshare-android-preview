@@ -82,7 +82,7 @@
                     android:textColor="#222"
                     />
 
-                <com.eshare_android_preview.base.view.EshareMarkdownView
+                <com.eshare_android_preview.base.view.webview.EshareMarkdownView
                     android:layout_marginTop="30dp"
                     android:id="@+id/question_title"
                     text_size="16"
