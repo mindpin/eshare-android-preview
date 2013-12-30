@@ -43,8 +43,8 @@ public class BaseKnowledgeSet implements ILearn, IParentAndChild<KnowledgeSetRel
     }
 
     @Override
-    public void do_learn() {
-
+    public int do_learn() {
+        return 0;
     }
 
     public boolean is_checkpoint() {

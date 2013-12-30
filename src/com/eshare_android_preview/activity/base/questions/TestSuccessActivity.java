@@ -86,14 +86,10 @@ public class TestSuccessActivity extends EshareBaseActivity {
     private void run_animation() {
         TestPaperTarget target = test_paper.target;
 
-        int exp_num = target.exp_num();
-
-        ExperienceLog.add(target.get_course(), exp_num, this.test_paper.target, "");
+        int exp_num = target.do_learn();
 
         experience_chart_view.run_animation(exp_num);
         experience_view.add(exp_num);
-
-        ((ILearn) target).do_learn();
     }
 
     public void finish(View view) {

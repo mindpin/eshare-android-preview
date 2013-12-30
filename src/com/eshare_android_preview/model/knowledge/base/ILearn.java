@@ -6,6 +6,5 @@ package com.eshare_android_preview.model.knowledge.base;
 public interface ILearn {
     public boolean is_learned();
     public boolean is_unlocked();
-
-    public void do_learn();
+    public int do_learn();
 }

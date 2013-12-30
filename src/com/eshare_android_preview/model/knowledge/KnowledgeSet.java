@@ -39,7 +39,7 @@ public class KnowledgeSet extends BaseKnowledgeSet implements ILearn {
     }
 
     @Override
-    public void do_learn() {}
+    public int do_learn() {return 0;}
 
     public boolean required_nodes_is_learned(){
         for (KnowledgeNode node:this.nodes){

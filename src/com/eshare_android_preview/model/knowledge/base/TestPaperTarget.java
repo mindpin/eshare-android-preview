@@ -12,6 +12,6 @@ public interface TestPaperTarget {
     public String model_id();
     public String get_course();
     public Question get_random_question(List<Integer> except_ids);
-    public int exp_num();
     public boolean is_learned();
+    public int do_learn();
 }

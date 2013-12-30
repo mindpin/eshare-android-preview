@@ -4,6 +4,7 @@ import android.content.res.AssetManager;
 
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.elog.ExperienceLog;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.knowledge.base.IParentAndChild;
 import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
@@ -16,7 +17,6 @@ import java.util.List;
 
 
 public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation, KnowledgeNode>, ILearn, TestPaperTarget {
-    public static final int EXP_NUM = 10;
     public KnowledgeSet set;
     public String id;
     public String name;
@@ -78,14 +78,22 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation, Kno
     }
 
     @Override
-    public void do_learn() {
+    public int do_learn() {
         if (!is_unlocked()) {
-            return;
+            return 0;
         }
+        if(is_learned()){
+            ExperienceLog.add(get_course(), 5, this, null);
+            return 5;
+        }
+
         EsharePreference.put_learned(this.id, true);
 
         boolean required_nodes_is_learned = this.set.required_nodes_is_learned();
         EsharePreference.put_learned(this.set.id, required_nodes_is_learned);
+
+        ExperienceLog.add(get_course(), 10, this, null);
+        return 10;
     }
 
     public String model() {
@@ -133,13 +141,6 @@ public class KnowledgeNode implements IParentAndChild<KnowledgeNodeRelation, Kno
         System.out.println("~~~   " + question_id);
         String json_path = QuestionJSONParse.get_json_path_by_id(this.id, question_id);
         return QuestionJSONParse.parse(json_path, question_id);
-    }
-
-    public int exp_num() {
-        if (is_learned()) {
-            return 5;
-        }
-        return EXP_NUM;
     }
 
     public String get_course() {

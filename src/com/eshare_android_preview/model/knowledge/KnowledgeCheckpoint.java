@@ -1,6 +1,7 @@
 package com.eshare_android_preview.model.knowledge;
 
 import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.elog.ExperienceLog;
 import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.parse.node.KnowledgeNetXMLParse;
@@ -41,7 +42,12 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn, Tes
     }
 
     @Override
-    public void do_learn() {
+    public int do_learn() {
+        if(is_learned()){
+            ExperienceLog.add(this.get_course(), 5, this, null);
+            return 5;
+        }
+
         List<String> id_s = new ArrayList<String>();
         for (KnowledgeSet set : this.learned_sets) {
             for (KnowledgeNode node : set.nodes) {
@@ -51,6 +57,8 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn, Tes
         }
         id_s.add(this.id);
         EsharePreference.put_learned_array(id_s);
+        ExperienceLog.add(this.get_course(), 10, this, null);
+        return 10;
     }
 
     public String model() {
@@ -71,14 +79,6 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn, Tes
             count += set.nodes.size();
         }
         return count;
-    }
-
-    public int exp_num() {
-        if (is_learned()) {
-            return 10;
-        }
-
-        return node_count() * KnowledgeNode.EXP_NUM;
     }
 
     public String get_course() {
