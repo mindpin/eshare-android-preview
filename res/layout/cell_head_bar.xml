@@ -6,36 +6,36 @@
     android:layout_height="50dp"
     android:background="#fff">
 
-    <RelativeLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+        android:id="@+id/button_go_back"
+        android:clickable="true"
+        android:onClick="go_back"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:padding="10dp"
-        android:onClick="go_back">
-
-        <Button
-            android:id="@+id/button_go_back"
-            style="@style/head_bar_button_go_back" />
-    </RelativeLayout>
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:textColor="#666666"
+        android:textSize="20dp"
+        android:text="@string/icon_arrow_left"
+        />
 
     <TextView
         android:id="@+id/head_bar_title_tv"
         style="@style/head_bar_text_center"
         android:text="@string/tab_home" />
 
-    <RelativeLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+        android:id="@+id/button_setting"
+        android:clickable="true"
+        android:onClick="go_back"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:padding="10dp"
-        android:onClick="setting">
-
-        <Button
-            android:id="@+id/button_setting"
-            style="@style/head_bar_button_setting" />
-    </RelativeLayout>
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:textColor="#666666"
+        android:textSize="20dp"
+        android:text="@string/icon_cog"
+        />
 
     <RelativeLayout
         android:id="@+id/head_bottom_line"

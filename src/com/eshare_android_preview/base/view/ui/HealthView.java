@@ -24,11 +24,11 @@ public class HealthView extends LinearLayout {
         add_child_view(context);
     }
 
-    List<CircleIconView> icon_list;
+    List<FontAwesomeTextView> icon_list;
     int hp;
 
     private void add_child_view(Context context) {
-        icon_list = new ArrayList<CircleIconView>();
+        icon_list = new ArrayList<FontAwesomeTextView>();
         hp = 3;
 
         int size;
@@ -39,18 +39,20 @@ public class HealthView extends LinearLayout {
         }
 
         for (int i = 0; i < hp; i++) {
-            CircleIconView civ = new CircleIconView(context);
-            civ.init("#00000015", UiColor.HEALTH_STRING, 20, R.string.icon_star);
+            FontAwesomeTextView ftv = new FontAwesomeTextView(context);
+            ftv.setText(R.string.icon_star);
+            ftv.setTextColor(UiColor.HEALTH);
+            ftv.setTextSize(20);
             LayoutParams lp = new LayoutParams(size, size);
-            civ.setLayoutParams(lp);
+            ftv.setLayoutParams(lp);
 
-            addView(civ);
-            icon_list.add(civ);
+            addView(ftv);
+            icon_list.add(ftv);
         }
     }
 
     public void break_heart() {
-        icon_list.get(hp - 1).set_text_color(UiColor.HEALTH_EMPTY_STRING);
+        icon_list.get(hp - 1).setTextColor(UiColor.HEALTH_EMPTY);
         hp = hp - 1;
     }
 
@@ -58,11 +60,11 @@ public class HealthView extends LinearLayout {
         this.hp = hp;
 
         for (int i = 0; i < 3; i++) {
-            CircleIconView cv = icon_list.get(i);
+            FontAwesomeTextView cv = icon_list.get(i);
             if (i < hp) {
-                cv.set_text_color(UiColor.HEALTH_STRING);
+                cv.setTextColor(UiColor.HEALTH);
             } else {
-                cv.set_text_color(UiColor.HEALTH_EMPTY_STRING);
+                cv.setTextColor(UiColor.HEALTH_EMPTY);
             }
         }
     }

@@ -7,15 +7,15 @@
         android:id="@+id/item_border"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        border_radius="5"
-        border_radius_background_color="#eeeeee"
-        android:padding="2dp">
+        border_radius="3"
+        border_radius_background_color="#e7e7e7"
+        android:padding="1dp">
 
         <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
             android:id="@+id/item_content"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            border_radius="3"
+            border_radius="2"
             border_radius_background_color="#ffffff"
             android:gravity="center"
             android:padding="5dp"

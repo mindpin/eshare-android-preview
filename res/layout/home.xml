@@ -76,4 +76,27 @@
         android:fadingEdge="none"
         android:layout_marginTop="51dp"
         />
+
+    <!-- 控件预加载，防止问答界面网页载入不进来。可能有效。试试。 -->
+    <com.eshare_android_preview.base.view.webview.EshareMarkdownView
+        android:id="@+id/webview_preload"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        />
+
+    <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_marginTop="51dp"
+        android:text="@string/icon_exclamation_circle"
+        android:textColor="#66000000"
+        android:textSize="34dp"
+        android:gravity="center"
+        android:clickable="true"
+        android:onClick="open_about"
+        />
+    
+    <include layout="@layout/home_about"/>
+
 </RelativeLayout>

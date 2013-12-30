@@ -309,14 +309,25 @@ public class BaseUtils {
     }
 
     public static ScreenSize get_screen_size() {
-        DisplayMetrics dm = EshareApplication.context.getResources().getDisplayMetrics();
+        try {
+            DisplayMetrics dm = EshareApplication.context.getResources().getDisplayMetrics();
 
-        ScreenSize ss = new ScreenSize();
-        ss.width_dp = dm.widthPixels / dm.density;
-        ss.height_dp = dm.heightPixels / dm.density;
-        ss.width_px = dm.widthPixels;
-        ss.height_px = dm.heightPixels;
+            ScreenSize ss = new ScreenSize();
+            ss.width_dp = dm.widthPixels / dm.density;
+            ss.height_dp = dm.heightPixels / dm.density;
+            ss.width_px = dm.widthPixels;
+            ss.height_px = dm.heightPixels;
 
-        return ss;
+            return ss;
+        } catch (Exception e) {
+
+            ScreenSize ss = new ScreenSize();
+            ss.width_dp = 320;
+            ss.height_dp = 533;
+            ss.width_px = 480;
+            ss.height_px = 800;
+
+            return ss;
+        }
     }
 }

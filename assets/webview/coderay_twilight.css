@@ -1,17 +1,18 @@
 body {
   font-family: monospace;
-  font-size: 16px;
+  padding:0;
+  margin:0;
+  font-size:16px;
 }
 
 codefill {
-  margin: 1px;
   display: inline-block;
-  background: #fff;
 }
 
-code {
+code, pre{
   overflow:hidden;
   padding:0;
+  margin:0;
   word-wrap:break-word;
 }
 
@@ -24,21 +25,9 @@ code {
   font-family: monospace;
   font-size: 14px;
   color: #F8F8F8;
-  padding: 10px 15px;
-  border-radius: 5px;
-}
-
-.CodeRay pre {
-  margin: 0px;
-}
-
-div.CodeRay { }
-span.CodeRay { white-space: pre; border: 0px; padding: 2px }
-
-table.CodeRay { border-collapse: collapse; width: 100%; padding: 2px }
-table.CodeRay td {
-  padding: 1em 0.5em;
-  vertical-align: top;
+  padding: 8px 14px;
+  border-radius: 3px;
+  margin-bottom:0.5em;
 }
 
 .CodeRay .line-numbers, .CodeRay .no {
@@ -56,9 +45,6 @@ table.CodeRay td {
 .CodeRay .line { display: block; float: left; width: 100%; }
 .CodeRay span.line-numbers { padding: 0px 4px }
 .CodeRay .code { width: 100% }
-
-ol.CodeRay { font-size: 10pt }
-ol.CodeRay li { white-space: pre }
 
 .CodeRay .code pre { overflow: auto }
 .CodeRay .debug { color:white ! important; background:blue ! important; }

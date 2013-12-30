@@ -17,7 +17,6 @@ public class ChangeCourseActivity extends EshareBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.change_course);
 
-
         set_head_text("选择课程");
         hide_head_setting_button();
         super.onCreate(savedInstanceState);

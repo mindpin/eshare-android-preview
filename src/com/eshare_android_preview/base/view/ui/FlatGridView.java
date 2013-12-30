@@ -58,6 +58,10 @@ public class FlatGridView extends LinearLayout {
                 lp.height = SCREEN_SIZE.width_px / 4;
             }
 
+            if (i != yc - 1) {
+                lp.bottomMargin = BaseUtils.dp_to_px(4);
+            }
+
             ll.setLayoutParams(lp);
         }
     }

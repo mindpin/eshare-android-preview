@@ -21,10 +21,33 @@ public class UiColor {
         return set.is_unlocked() ? SET_COLOR : LOCKED_SET_COLOR;
     }
 
+    public static int get_set_text_color(BaseKnowledgeSet set) {
+        if (set.is_checkpoint()) {
+            return Color.parseColor("#844C1D");
+        }
+
+        return Color.parseColor("#ffffff");
+    }
+
     // question icons
 //    public final static String HEALTH_STRING = "#D62525"; // 红心
-    public final static String HEALTH_STRING = "#fccd2d"; // 黄色星星
-    public final static String HEALTH_EMPTY_STRING = "#dbdbdb";
+    public final static int HEALTH = Color.parseColor("#fccd2d"); // 黄色星星
+    public final static int HEALTH_EMPTY = Color.parseColor("#dbdbdb");
+
+    public final static int CORRECT_POINT = Color.parseColor("#98cc27");
+    public final static int CORRECT_POINT_EMPTY = Color.parseColor("#dbdbdb");
+
+    public final static int QUESTION_ANSWER_TRUE = Color.parseColor("#82AA2A");
+    public final static int QUESTION_ANSWER_FALSE = Color.parseColor("#D62525");
+
+    // question choices
+    public final static int CHOICE_BORDER = Color.parseColor("#e7e7e7");
+    public final static int CHOICE_BG = Color.parseColor("#ffffff");
+    public final static int CHOICE_BORDER_ACTIVE = Color.parseColor("#1CB0F6");
+    public final static int CHOICE_BG_ACTIVE = Color.parseColor("#D2EFFD");
+
+    // question text_fill
+    public final static int TEXT_FILL = Color.parseColor("#661CB0F6");
 
     // experience bar
     public final static int EXP_LEFT_CIRCLE = Color.parseColor("#fccd2d");

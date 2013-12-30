@@ -19,6 +19,7 @@ import com.eshare_android_preview.base.view.ui.UiSound;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.elog.ExperienceLog;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
+import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 
 /**
  * Created by fushang318 on 13-12-18.
@@ -83,14 +84,16 @@ public class TestSuccessActivity extends EshareBaseActivity {
     }
 
     private void run_animation() {
-        if (is_learned()) return;
+        TestPaperTarget target = test_paper.target;
 
-        int exp_num = this.test_paper.target.exp_num();
+        int exp_num = target.exp_num();
+
+        ExperienceLog.add(target.get_course(), exp_num, this.test_paper.target, "");
 
         experience_chart_view.run_animation(exp_num);
         experience_view.add(exp_num);
-        ExperienceLog.add(this.test_paper.target.get_course(), exp_num, this.test_paper.target, "");
-        ((ILearn) this.test_paper.target).do_learn();
+
+        ((ILearn) target).do_learn();
     }
 
     public void finish(View view) {

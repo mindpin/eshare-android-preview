@@ -15,9 +15,11 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.base.view.ui.CircleIconView;
 import com.eshare_android_preview.base.view.ui.FlatGridView;
 import com.eshare_android_preview.base.view.ui.FlowLayout;
+import com.eshare_android_preview.base.view.ui.FontAwesomeTextView;
+import com.eshare_android_preview.base.view.ui.UiColor;
+import com.eshare_android_preview.base.view.webview.TextFill;
 import com.eshare_android_preview.model.Question;
 import com.eshare_android_preview.model.QuestionChoice;
 import com.eshare_android_preview.model.QuestionSelectAnswer;
@@ -70,7 +72,8 @@ public class QuestionChoicesView extends FlatGridView {
         add_view(fl);
 
         LayoutParams lp = (LayoutParams) fl.getLayoutParams();
-        lp.bottomMargin = BaseUtils.dp_to_px(2);
+        lp.leftMargin = BaseUtils.dp_to_px(2);
+        lp.rightMargin = BaseUtils.dp_to_px(2);
         fl.setLayoutParams(lp);
 
         for (QuestionChoice choice : question.choices_list) {
@@ -91,13 +94,19 @@ public class QuestionChoicesView extends FlatGridView {
 
         int s = BaseUtils.dp_to_px(60);
 
-        CircleIconView correct_icon = new CircleIconView(getContext());
-        correct_icon.init("#00000000", "#82AA2A", 40, R.string.icon_check);
+        FontAwesomeTextView correct_icon = new FontAwesomeTextView(getContext());
+        correct_icon.setText(R.string.icon_check);
+        correct_icon.setTextColor(UiColor.QUESTION_ANSWER_TRUE);
+        correct_icon.setGravity(Gravity.CENTER);
+        correct_icon.setTextSize(40);
         LayoutParams lp_correct = new LayoutParams(s, s);
         correct_icon.setLayoutParams(lp_correct);
 
-        CircleIconView error_icon = new CircleIconView(getContext());
-        error_icon.init("#00000000", "#D62525", 40, R.string.icon_times);
+        FontAwesomeTextView error_icon = new FontAwesomeTextView(getContext());
+        error_icon.setText(R.string.icon_times);
+        error_icon.setTextColor(UiColor.QUESTION_ANSWER_FALSE);
+        error_icon.setGravity(Gravity.CENTER);
+        error_icon.setTextSize(40);
         LayoutParams lp_error = new LayoutParams(s, s);
         error_icon.setLayoutParams(lp_error);
 
@@ -217,12 +226,12 @@ public class QuestionChoicesView extends FlatGridView {
 
         public void click_single() {
             for (View view : children) {
-                (view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#eeeeee"));
-                (view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#ffffff"));
+                (view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER);
+                (view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG);
             }
 
-            (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#1CB0F6"));
-            (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#D2EFFD"));
+            (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER_ACTIVE);
+            (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG_ACTIVE);
 
             answer.set_choice(choice);
         }
@@ -231,11 +240,11 @@ public class QuestionChoicesView extends FlatGridView {
             answer.add_or_remove_choice(choice);
 
             if(selected) {
-                (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#eeeeee"));
-                (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#ffffff"));
+                (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER);
+                (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG);
             } else {
-                (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#1CB0F6"));
-                (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#D2EFFD"));
+                (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER_ACTIVE);
+                (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG_ACTIVE);
             }
 
             selected = !selected;
@@ -246,7 +255,7 @@ public class QuestionChoicesView extends FlatGridView {
         RelativeLayout item_view;
         QuestionChoice choice;
 
-//        EshareMarkdownView.Codefill binded_codefill;
+//        EshareMarkdownView.TextFill binded_codefill;
 
         public QuestionFillItemListener(RelativeLayout item_view, QuestionChoice choice) {
             this.item_view = item_view;
@@ -274,11 +283,11 @@ public class QuestionChoicesView extends FlatGridView {
             answer.set_choice(index + 1, choice);
 
             // 设置底部选项样式
-            (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#1CB0F6"));
-            (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#D2EFFD"));
+            (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER_ACTIVE);
+            (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG_ACTIVE);
 
             // 设置 CodeFill 样式
-            EshareMarkdownView.Codefill cf = activity.question_content_webview.get_first_unfilled_codefill();
+            TextFill cf = activity.question_content_webview.get_first_unfilled_codefill();
             cf.set_text(choice.content);
 
             v.setTag(cf);
@@ -286,14 +295,14 @@ public class QuestionChoicesView extends FlatGridView {
         }
 
         public void unselect(View v) {
-            unselect_fill_choice((EshareMarkdownView.Codefill) v.getTag(), v);
+            unselect_fill_choice((TextFill) v.getTag(), v);
         }
     }
 
     class CodefillViewListener implements OnClickListener {
         @Override
         public void onClick(View view) {
-            EshareMarkdownView.Codefill code_fill = (EshareMarkdownView.Codefill) view;
+            TextFill code_fill = (TextFill) view;
             if (!code_fill.filled) {
                 return;
             }
@@ -304,15 +313,15 @@ public class QuestionChoicesView extends FlatGridView {
         }
     }
 
-    private void unselect_fill_choice(EshareMarkdownView.Codefill code_fill, View item_view) {
+    private void unselect_fill_choice(TextFill code_fill, View item_view) {
         // 设置答案
         int index = activity.question_content_webview.get_codefill_index(code_fill);
         answer.set_choice(index + 1, null);
         code_fill.unset_text();
 
         // 设置底部选项样式
-        (item_view.findViewById(R.id.item_border)).setBackgroundColor(Color.parseColor("#eeeeee"));
-        (item_view.findViewById(R.id.item_content)).setBackgroundColor(Color.parseColor("#ffffff"));
+        (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER);
+        (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG);
 
         item_view.setTag(null);
         code_fill.setTag(null);

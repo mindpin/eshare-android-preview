@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.base.view.EshareMarkdownView;
+import com.eshare_android_preview.base.view.webview.EshareMarkdownView;
 
 /**
  * Created by kaid on 11/7/13.
