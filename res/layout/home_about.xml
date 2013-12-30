@@ -19,7 +19,7 @@
         <TextView
             android:layout_height="50dp"
             android:layout_width="fill_parent"
-            android:text="四叶学习手册·体验版"
+            android:text="四叶草知识手册·体验版"
             android:textColor="#fff"
             android:gravity="center_vertical"
             android:textSize="20dp"

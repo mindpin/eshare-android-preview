@@ -16,6 +16,17 @@
         border_radius_background_color="#ffffff"
         >
 
+        <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+            android:id="@+id/learned_icon"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:text="@string/icon_check_circle"
+            android:textColor="#1CB0F6"
+            android:textSize="20dp"
+            android:layout_marginTop="-6dp"
+            android:layout_marginLeft="-10dp"
+            />
+        
         <TextView
             android:id="@+id/node_name"
             android:layout_height="wrap_content"
@@ -26,6 +37,7 @@
             android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/required"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_centerHorizontal="true"

@@ -104,6 +104,19 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
             View view = lf.inflate(R.layout.kn_knowledge_set_show_item, null);
             ((TextView) view.findViewById(R.id.node_name)).setText(node.name);
             ((TextView) view.findViewById(R.id.node_desc)).setText(node.desc);
+
+            if (node.required) {
+                ((TextView) view.findViewById(R.id.required)).setText("必学");
+            } else {
+                ((TextView) view.findViewById(R.id.required)).setText("选学");
+            }
+
+            if (node.is_learned()) {
+                view.findViewById(R.id.learned_icon).setVisibility(View.VISIBLE);
+            } else {
+                view.findViewById(R.id.learned_icon).setVisibility(View.GONE);
+            }
+
             view_list.add(view);
 
             View to_question = view.findViewById(R.id.to_question);

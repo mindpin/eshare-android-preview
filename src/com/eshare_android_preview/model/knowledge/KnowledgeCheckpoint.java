@@ -5,19 +5,20 @@ import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
 import com.eshare_android_preview.model.knowledge.base.ILearn;
 import com.eshare_android_preview.model.parse.node.KnowledgeNetXMLParse;
 import com.eshare_android_preview.model.preferences.EsharePreference;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,TestPaperTarget {
+public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn, TestPaperTarget {
     public KnowledgeNet net;
-	public List<KnowledgeSet> learned_sets;
+    public List<KnowledgeSet> learned_sets;
 
-	public KnowledgeCheckpoint(KnowledgeNet net, String id, List<KnowledgeSet> learned_sets) {
-		super();
+    public KnowledgeCheckpoint(KnowledgeNet net, String id, List<KnowledgeSet> learned_sets) {
+        super();
         this.net = net;
-		this.id = id;
-		this.learned_sets = learned_sets;
-	}
+        this.id = id;
+        this.learned_sets = learned_sets;
+    }
 
     @Override
     public boolean is_checkpoint() {
@@ -42,8 +43,8 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,Test
     @Override
     public void do_learn() {
         List<String> id_s = new ArrayList<String>();
-        for (KnowledgeSet set : this.learned_sets){
-            for (KnowledgeNode node: set.nodes){
+        for (KnowledgeSet set : this.learned_sets) {
+            for (KnowledgeNode node : set.nodes) {
                 id_s.add(node.id);
             }
             id_s.add(set.id);
@@ -52,30 +53,35 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet implements ILearn,Test
         EsharePreference.put_learned_array(id_s);
     }
 
-    public String model(){
+    public String model() {
         return this.getClass().getName();
     }
-    public String model_id(){
+
+    public String model_id() {
         return this.id;
     }
 
-    public Question get_random_question(List<Integer> except_ids){
+    public Question get_random_question(List<Integer> except_ids) {
         return null;
     }
 
-    public int node_count(){
+    public int node_count() {
         int count = 0;
-        for(KnowledgeSet set : this.learned_sets){
+        for (KnowledgeSet set : this.learned_sets) {
             count += set.nodes.size();
         }
         return count;
     }
 
-    public int exp_num(){
+    public int exp_num() {
+        if (is_learned()) {
+            return 10;
+        }
+
         return node_count() * KnowledgeNode.EXP_NUM;
     }
 
-    public String get_course(){
+    public String get_course() {
         return this.net.parse.name;
     }
 }
