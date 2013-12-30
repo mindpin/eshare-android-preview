@@ -27,6 +27,7 @@ public class MarkdownWebView extends WebView {
         getSettings().setDefaultFontSize(BaseUtils.dp_to_px(16));
         getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
         getSettings().setBlockNetworkImage(true);
+        getSettings().setPluginState(WebSettings.PluginState.ON);
 
         setPadding(0, 0, 0, 0);
 

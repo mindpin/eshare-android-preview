@@ -3,18 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
         android:layout_height="80dp"
         android:layout_width="240dp"
-        android:background="#adb397"
-        android:padding="3dp"
+        border_radius="3"
+        border_radius_background_color="#adb397"
+        android:padding="1dp"
         android:layout_marginRight="-240dp"
         >
 
-        <RelativeLayout
+        <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
-            android:background="#F5FED6"
+            border_radius="2"
+            border_radius_background_color="#F5FED6"
             >
 
             <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
@@ -37,8 +39,8 @@
                 android:layout_marginLeft="80dp"
                 />
 
-        </RelativeLayout>
+        </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
 
-    </RelativeLayout>
+    </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
 
 </RelativeLayout>
