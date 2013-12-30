@@ -100,13 +100,13 @@
     </set>
     <set id="set-6" name="基础词汇: 食物" icon="set-6" deep="1">
       <nodes>
-        <node id="node-19" name="主食" required="true">
+        <node id="node-101" name="主食" required="true">
           <desc>正餐中的常见食品，如米饭，面食，面包等。</desc>
         </node>
-        <node id="node-20" name="菜肴" required="true">
+        <node id="node-102" name="菜肴" required="true">
           <desc>包括肉类，禽蛋类，鱼类等菜肴。</desc>
         </node>
-        <node id="node-21" name="零食/饮料" required="true">
+        <node id="node-103" name="零食/饮料" required="true">
           <desc>常见零食和饮料，如蛋糕，冰淇淋，咖啡等。</desc>
         </node>
       </nodes>

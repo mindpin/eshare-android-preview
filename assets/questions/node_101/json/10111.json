@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-101",
+  "kind": "single_choice",
+  "content": "<img src=\"file:///android_asset/questions/node_101/cheese.png\">\n图中物品所表示的单词怎么拼写？",
+  "choices": [
+    "bread",
+    "cheese",
+    "pancake",
+    "rice"
+  ],
+  "answer": "B"
+}
