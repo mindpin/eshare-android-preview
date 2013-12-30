@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">eshare-android-preview</string>
+    <string name="app_name">四叶学习手册</string>
     <string name="app_version">0.01</string>
 
     <!-- 图标字符 -->
@@ -38,6 +38,7 @@
 
     <string name="icon_arrow_left">&#xf060;</string>
     <string name="icon_heart">&#xf004;</string>
+    <string name="icon_exclamation_circle">&#xf06a;</string>
 
     <!-- 登录页面 -->
     <string name="login_email">邮箱</string>

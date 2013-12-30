@@ -18,6 +18,7 @@ import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
 import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.CircleImageView;
+import com.eshare_android_preview.base.view.webview.EshareMarkdownView;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 
 
@@ -35,6 +36,8 @@ public class HomeActivity extends EshareBaseActivity {
         load_map_view();
         load_avatar();
         init_exp_view();
+
+        webview_preload();
 
         super.onCreate(savedInstanceState);
     }
@@ -76,5 +79,17 @@ public class HomeActivity extends EshareBaseActivity {
         super.onWindowFocusChanged(hasFocus);
         ExperienceView view = (ExperienceView) findViewById(R.id.experience_view);
         view.refresh();
+    }
+
+    private void webview_preload() {
+        ((EshareMarkdownView) findViewById(R.id.webview_preload)).set_markdown_content("...");
+    }
+
+    public void open_about(View view) {
+        findViewById(R.id.about).setVisibility(View.VISIBLE);
+    }
+
+    public void close_about(View view) {
+        findViewById(R.id.about).setVisibility(View.GONE);
     }
 }

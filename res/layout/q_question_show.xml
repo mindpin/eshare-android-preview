@@ -112,7 +112,6 @@
 
                     <com.eshare_android_preview.base.view.webview.EshareMarkdownView
                         android:id="@+id/question_title"
-                        text_size="16"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content" />
 

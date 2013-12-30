@@ -2,6 +2,7 @@ package com.eshare_android_preview.base.view.knowledge_map;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
@@ -203,6 +204,7 @@ public class SetPosition {
         count_view.setTextSize(BaseUtils.dp_to_px(TEXT_SIZE));
         count_view.setGravity(Gravity.CENTER);
         count_view.setTextColor(Color.parseColor("#aaaaaa"));
+        count_view.setTypeface(Typeface.MONOSPACE);
 
         _set_dp_params(count_view,
                 map_view.GRID_WIDTH_DP, ViewGroup.LayoutParams.WRAP_CONTENT,
