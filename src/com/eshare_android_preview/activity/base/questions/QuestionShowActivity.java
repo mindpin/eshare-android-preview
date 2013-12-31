@@ -102,13 +102,13 @@ public class QuestionShowActivity extends EshareBaseActivity {
         question_button.set_next_button_listener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (test_paper.test_result.is_fail()) {
-                    go_fail();
-                } else if (test_paper.test_result.is_success()) {
+//                if (test_paper.test_result.is_fail()) {
+//                    go_fail();
+//                } else if (test_paper.test_result.is_success()) {
                     go_success();
-                } else {
-                    question_result_view.close_animate();
-                }
+//                } else {
+//                    question_result_view.close_animate();
+//                }
             }
         });
     }

@@ -25,6 +25,8 @@ import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
  * Created by fushang318 on 13-12-18.
  */
 public class TestSuccessActivity extends EshareBaseActivity {
+    private boolean loaded = false;
+
     public static class ExtraKeys {
         public static final String TEST_PAPER = "test_paper";
     }
@@ -42,7 +44,17 @@ public class TestSuccessActivity extends EshareBaseActivity {
         }
     };
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("loaded", loaded);
+    }
+
     public void onCreate(Bundle savedInstanceState) {
+        if (null != savedInstanceState) {
+            loaded = savedInstanceState.getBoolean("loaded");
+        }
+
         setContentView(R.layout.test_success);
         test_paper = getIntent().getParcelableExtra(ExtraKeys.TEST_PAPER);
 
@@ -73,10 +85,6 @@ public class TestSuccessActivity extends EshareBaseActivity {
         experience_chart_view = (ExperienceChartView) findViewById(R.id.chart_view);
     }
 
-    private boolean is_learned() {
-        return test_paper.target.is_learned();
-    }
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -84,12 +92,16 @@ public class TestSuccessActivity extends EshareBaseActivity {
     }
 
     private void run_animation() {
-        TestPaperTarget target = test_paper.target;
+        if (!loaded) {
+            TestPaperTarget target = test_paper.target;
 
-        int exp_num = target.do_learn();
+            int exp_num = target.do_learn();
 
-        experience_chart_view.run_animation(exp_num);
-        experience_view.add(exp_num);
+            experience_view.add(exp_num);
+            experience_chart_view.run_animation(exp_num);
+
+            loaded = true;
+        }
     }
 
     public void finish(View view) {

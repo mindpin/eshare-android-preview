@@ -30,6 +30,6 @@ public class ExperienceChartActivity extends EshareBaseActivity {
     }
 
     public void run_animation(View view) {
-        graph.run_animation(10);
+//        graph.run_animation(10);
     }
 }

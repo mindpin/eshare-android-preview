@@ -5,12 +5,17 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
+import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.model.DayExpInfo;
 import com.eshare_android_preview.model.elog.ExperienceLog;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.nineoldandroids.animation.ValueAnimator;
@@ -20,73 +25,14 @@ import com.nineoldandroids.animation.ValueAnimator;
 public class ExperienceChartView extends View {
 
     private Paint paint;
-    private int vectorLength = 6;
-    private float[] yvalues = new float[5];
-    private float maxy = 0.0f, miny = 0.0f;
-
+    private List<Float> exps;
+    private float max_exp;
 
     float canvas_height;
     float canvas_width;
 
-    // 字体大小
-    float text_size = 20.0f;
-
-    // 默认画线宽度
-    float line_width = 2.0f;
-
-    // 默认线颜色
-    String line_color = "#000000";
-
-    // 圆圈半径
-    float radius = 20.0f;
-
-    // 圆连线宽度
-    float circle_line_width = 8;
-
-    // 圆连线颜色
-    String circle_line_color = "#666666";
-
-    // 圆的颜色
-    String circle_color = "#333333";
-
-    // 刻度线宽度
-    float mark_line_width = 7;
-
-    // 顶部线颜色
-    String top_line_color = "#000000";
-
-    // 底部线颜色
-    String bottom_line_color = "#000000";
-
-    // 刻度线高度
-    float mark_height = 30.0f;
-
-    // 顶部线的Y轴位置
-    float top_pos;
-
-    // 底部线的Y轴位置
-    float bottom_pos;
-
-    // 经验值显示的画布范围
-    float y_top_pos;
-    float y_bottom_pos;
-    float y_range;
-
-    // 刻度线 Y轴位置
-    float y_mark_pos;
-
-    // 星期线 Y轴位置
-    float y_week_pos;
-
-    // 日期线 Y轴位置
-    float y_date_pos;
-
-
-    // 星期跟底部线的间隔高度
-    float week_space_with_bottom_pos = 30;
-
-    // 日期跟星期的间隔高度
-    float date_space_with_week_pos = 20;
+    // 坐标轴线条宽度
+    final private float AXIS_WIDTH = 2.0F;
 
 
     // 日期信息
@@ -108,173 +54,192 @@ public class ExperienceChartView extends View {
     }
 
     private void init(){
-        this.yvalues = get_yvalues();
+        // 读取每个节点的经验值
+        get_exps();
+
+        // 计算最大经验值
+        get_max_exp();
 
         paint = new Paint();
-
-        get_axes();
+        paint.setAntiAlias(true);
+        paint.setTypeface(Typeface.MONOSPACE);
     }
 
-    private float[] get_yvalues() {
-        float[] yList = new float[5];
-        for (int i = 0; i <= vectorLength - 2; i++) {
-            DayExpInfo weekday = logs.get(i);
-            yList[i] = weekday.exp_num;
+    private void get_exps() {
+        exps = new ArrayList<Float>();
+        for(int i = 0; i < 5; i++) {
+            exps.add((float) logs.get(i).exp_num);
+        }
+    }
+
+    private void get_max_exp() {
+        max_exp = 0;
+        for(float exp : exps) {
+            if (exp > max_exp) {
+                max_exp = exp;
+            }
         }
 
-        return yList;
+        max_exp = max_exp + 20;
     }
+
+    private float top_line_y;
+    private float bottom_line_y;
+    private float axis_left_offset = 50; // 坐标轴横线相对于绘图区域左侧的偏移量
+    private int axis_font_size = 24; // 坐标轴文字大小
+    private int day_font_size = 20; // 日期星期文字大小
+    private float circle_line_width = 6; // 圆连线宽度
+    int circle_radius = 12; // 圆圈半径
 
     @Override
     protected void onDraw(Canvas canvas) {
         canvas_height = getHeight();
         canvas_width = getWidth();
 
-        // 顶部线的Y轴位置
-        top_pos = (float) .1 * canvas_height;
+        // 顶部线的 Y 坐标
+        top_line_y = 40;
 
-        // 底部线的Y轴位置 两个间隔区的高度 + 两行文字的高度 + 10空间大小
-        bottom_pos = canvas_height - (week_space_with_bottom_pos + date_space_with_week_pos
-                        + text_size + text_size + 10);
+        // 底部线的 Y 坐标
+        bottom_line_y = canvas_height - 80;
 
+        draw_axis(canvas);
 
-        // 经验值显示的画布范围
-        y_top_pos = top_pos + radius + 10;
-        y_bottom_pos = bottom_pos - radius - mark_height - 10;
-        y_range = y_bottom_pos - y_top_pos;
+        draw_scale_marks(canvas);
+    }
 
-        // 刻度线 Y轴位置
-        y_mark_pos = bottom_pos - mark_height;
+    // 画坐标系
+    private void draw_axis(Canvas canvas) {
+        // 底X轴
+        draw_horizontal_line(bottom_line_y, 0, canvas);
 
-        // 星期线 Y轴位置, 底部X轴 + 间隔区 + 文字大小
-        y_week_pos = bottom_pos + week_space_with_bottom_pos + text_size;
+        // 顶X轴
+        draw_horizontal_line(top_line_y, max_exp, canvas);
 
-        // 日期线 Y轴位置, 星期线位置 + 间隔区 + 文字大小
-        y_date_pos = y_week_pos + date_space_with_week_pos + text_size;
+        // top_line_y : max_exp
+        // bottom_line_y : 0
+        // 每隔 50 画一根横线
+        int e = 50;
 
-        // 初始化画笔
-        paint.setAntiAlias(true);
-        paint.setColor(Color.parseColor(line_color));
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize(text_size);
+        while (e < max_exp) {
+            float y = get_relative_y(e);
+            draw_horizontal_line(y, e, canvas);
+            e = e + 50;
+        }
+    }
 
-        // 画出底部X轴
-        paint.setColor(Color.parseColor(bottom_line_color));
-        paint.setStrokeWidth(line_width);
-        canvas.drawLine(0, bottom_pos, canvas_width, bottom_pos, paint);
+    private void draw_horizontal_line(float y, float exp, Canvas canvas) {
+        String exp_text = (int) exp + "";
 
-        // 画出顶部X轴
-        paint.setColor(Color.parseColor(top_line_color));
-        paint.setStrokeWidth(line_width);
-        canvas.drawLine(0, top_pos, canvas_width, top_pos, paint);
+        paint.setColor(UiColor.EXP_CHART_AXIS);
+        paint.setStrokeWidth(AXIS_WIDTH);
+        paint.setTextSize(axis_font_size);
 
+        canvas.drawLine(axis_left_offset, y, canvas_width - axis_left_offset, y, paint);
 
-        // 将X轴分成6等分，画出5条刻度线
-        for (int i = 0; i <= vectorLength - 2; i++) {
-            paint.setColor(Color.parseColor(line_color));
+        Rect bounds = new Rect();
+        paint.getTextBounds(exp_text, 0, exp_text.length(), bounds);
 
-            int x_pos = (int) (((i + 1) * canvas_width / vectorLength));
+        canvas.drawText(exp_text,
+                20 - bounds.width() / 2,
+                y + bounds.height() / 2,
+                paint
+        );
+    }
 
-            DayExpInfo weekday = logs.get(i);
-
-            // 显示刻度条
-            paint.setStrokeWidth(mark_line_width);
-            canvas.drawLine(x_pos, bottom_pos,
-                x_pos, y_mark_pos, paint);
-
-            // 显示星期
-            paint.setStrokeWidth(line_width);
-            canvas.drawText(weekday.day_of_week_str, x_pos,
-                    y_week_pos, paint);
+    private float get_relative_y(float exp) {
+        return bottom_line_y - exp * (bottom_line_y - top_line_y) / max_exp;
+    }
 
 
-            // 显示日期
-            canvas.drawText(weekday.day_of_month_str, x_pos,
-                    y_date_pos, paint);
+    // 画刻度线
+    private void draw_scale_marks(Canvas canvas) {
+        int length = exps.size();
+        float grid_width = (canvas_width - axis_left_offset) / length;
 
+        for (int i = 0; i < length; i++) {
+            float mark_x = grid_width * i + axis_left_offset;
+            float mark_y = bottom_line_y;
 
-            // 输出折线
-            paint.setColor(Color.parseColor(circle_line_color));
+            // 画刻度
+            paint.setColor(UiColor.EXP_CHART_SCALE_MARK);
+            paint.setStrokeWidth(AXIS_WIDTH);
+            canvas.drawLine(mark_x, mark_y, mark_x, mark_y - 5, paint);
+
+            // 画星期文字
+            DayExpInfo day = logs.get(i);
+            Rect bounds = new Rect();
+            paint.setColor(UiColor.EXP_CHART_SCALE_MARK_TEXT);
+            paint.setTextSize(day_font_size);
+            paint.getTextBounds(day.day_of_week_str, 0, day.day_of_week_str.length(), bounds);
+            canvas.drawText(day.day_of_week_str,
+                    mark_x - bounds.width() / 2,
+                    mark_y + 26 + bounds.height() / 2,
+                    paint
+            );
+
+            // 画日期文字
+            paint.getTextBounds(day.day_of_month_str, 0, day.day_of_month_str.length(), bounds);
+            canvas.drawText(day.day_of_month_str,
+                    mark_x - bounds.width() / 2,
+                    mark_y + 26 + 30 + bounds.height() / 2,
+                    paint
+            );
+
+            // 画折线
+            paint.setColor(UiColor.EXP_CHART_CIRCLE_LINE);
             paint.setStrokeWidth(circle_line_width);
-            int y_exp = to_pixel(yvalues[i]);
-            if (i < 4) {
-                int x_next_pos = (int) (((i + 2) * canvas_width / vectorLength));
 
-                int y_next_exp = to_pixel(yvalues[i + 1]);
-                canvas.drawLine(x_pos, y_exp,
-                        x_next_pos, y_next_exp, paint);
+            if (i < length - 1) {
+                // 只有前 4 个点才需画线
+                float exp = exps.get(i);
+                float exp_next = exps.get(i + 1);
+
+                float y1 = get_relative_y(exp);
+                float y2 = get_relative_y(exp_next);
+                float x1 = mark_x;
+                float x2 = mark_x + grid_width;
+
+                canvas.drawLine(x1, y1, x2, y2, paint);
             }
-
-            // 输出经验值圆圈
-            paint.setColor(Color.parseColor(circle_color));
-            canvas.drawCircle(x_pos, y_exp, radius, paint);
-
         }
 
+        // 再循环一次 画圆
+        for (int i = 0; i < length; i++) {
+            float cx = grid_width * i + axis_left_offset;
+            float cy = get_relative_y(exps.get(i));
+
+            if (i < length - 1) {
+                paint.setColor(UiColor.EXP_CHART_CIRCLE_BORDER);
+                canvas.drawCircle(cx, cy, circle_radius + 2, paint);
+
+                paint.setColor(UiColor.EXP_CHART_CIRCLE);
+                canvas.drawCircle(cx, cy, circle_radius - 2, paint);
+            } else {
+                paint.setColor(UiColor.EXP_CHART_CURRENT_CIRCLE_BORDER);
+                canvas.drawCircle(cx, cy, circle_radius + 2, paint);
+
+                paint.setColor(UiColor.EXP_CHART_CURRENT_CIRCLE);
+                canvas.drawCircle(cx, cy, circle_radius - 2, paint);
+            }
+        }
     }
-
-
-    private void get_axes() {
-        // miny = get_min(yvalues);
-        miny = 0;
-        maxy = get_max(yvalues) + 10;
-    }
-
-
-
-    private int to_pixel(float value) {
-        double p;
-        int pint;
-
-        p = ((value - miny) / (maxy - miny)) * y_range;
-
-        p = y_bottom_pos - p;
-
-        pint = (int) p;
-
-        return (pint);
-    }
-
-    private float get_max(float[] v) {
-        float largest = v[0];
-        for (int i = 0; i < v.length; i++)
-            if (v[i] > largest)
-                largest = v[i];
-        return largest;
-    }
-
-    private float get_min(float[] v) {
-        float smallest = v[0];
-        for (int i = 0; i < v.length; i++)
-            if (v[i] < smallest)
-                smallest = v[i];
-        return smallest;
-    }
-
-
-    public void set_yvalue(Float value){
-        yvalues[yvalues.length - 1] = value;
-        get_axes();
-        invalidate();
-        requestLayout();
-    }
-
 
     public void run_animation(int dynamic_exp) {
-        float prev_exp_pos = yvalues[vectorLength - 2];
-        float current_exp_pos = prev_exp_pos + dynamic_exp;
+        float exp = exps.get(exps.size() - 1);
+        float after_exp = exp + dynamic_exp;
 
-        ValueAnimator animation = ValueAnimator.ofFloat(prev_exp_pos, current_exp_pos );
+        ValueAnimator animation = ValueAnimator.ofFloat(exp, after_exp);
         animation.setDuration(500);
         animation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-
                 float v = (Float) animation.getAnimatedValue();
-                set_yvalue(v);
+                exps.set(4, v);
+                invalidate();
             }
         });
+
         animation.start();
     }
 

@@ -2,18 +2,15 @@ package com.eshare_android_preview.base.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Toast;
 
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.model.elog.CurrentState;
 import com.eshare_android_preview.model.elog.ExperienceLog;
-import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.ValueAnimator;
@@ -244,7 +241,7 @@ public class ExperienceView extends View {
             public void onAnimationEnd(Animator arg0) {
                 if (rect_width <= new_rect_width) {
                     level_up();
-                    float current_count = ((new_rect_width - rect_width) / rect_width) * ExperienceLog.get_level_up_exp_num_by(current_level);
+                    float current_count = ((new_rect_width - rect_width) / rect_width) * ExperienceLog.get_level_up_exp(current_level);
                     set_rect_width(0F);
                     add((int) current_count);
                 }

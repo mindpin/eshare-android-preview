@@ -18,8 +18,6 @@ import java.util.Calendar;
  * Created by menxu on 13-12-5.
  */
 public class ExperienceLog implements Serializable {
-    public static int[] level_up_exp_nums = {30, 50, 80};
-
     public int id;
     public int before_exp;
     public int after_exp;
@@ -71,11 +69,15 @@ public class ExperienceLog implements Serializable {
         return ExperienceLogDBHelper.all(coruse);
     }
 
-    public static int get_level_up_exp_num_by(int level) {
-        if (level >= level_up_exp_nums.length - 1) {
-            level = 1;
-        }
-        return level_up_exp_nums[level - 1];
+    // 传入的级别是当前级别，求得的是当前级别到下一级别所需的经验
+    // 例如：传入的是 1 ，则求出的是 1 ~ 2 升级所需经验
+    // 传入的是 3 ，则求出的是 3 ~ 4 升级所需经验
+    public static int get_level_up_exp(int level) {
+        int base = 30;
+        int p1 = 20 * (level - 1);
+        int p2 = 10 * (level - 2) * (level - 1) / 2;
+
+        return base + p1 + p2;
     }
 
     public static CurrentState current_state() {

@@ -53,7 +53,17 @@ public class UiColor {
     public final static int EXP_LEFT_CIRCLE = Color.parseColor("#fccd2d");
     public final static int EXP_RIGHT_CIRCLE = Color.parseColor("#dbdbdb");
     public final static int EXP_BAR_EMPTY = Color.parseColor("#dbdbdb");
-    public final static int EXP_BAR_FILL = Color.parseColor("#FF8857"); // "#FF6A2D"
+    public final static int EXP_BAR_FILL = Color.parseColor("#F9AA29"); // "#FF6A2D"
     public final static int EXP_CIRCLE_TEXT = Color.parseColor("#555555");
     public final static int EXP_STROKE_COLOR = Color.parseColor("#f1f1f1");
+
+    // experience chart
+    public final static int EXP_CHART_AXIS = Color.parseColor("#cccccc");
+    public final static int EXP_CHART_SCALE_MARK = Color.parseColor("#bbbbbb");
+    public final static int EXP_CHART_SCALE_MARK_TEXT = Color.parseColor("#bbbbbb");
+    public final static int EXP_CHART_CIRCLE_LINE = Color.parseColor("#fccd2d");
+    public final static int EXP_CHART_CIRCLE_BORDER = Color.parseColor("#ffffff");
+    public final static int EXP_CHART_CIRCLE = Color.parseColor("#fccd2d");
+    public final static int EXP_CHART_CURRENT_CIRCLE_BORDER = Color.parseColor("#fccd2d");
+    public final static int EXP_CHART_CURRENT_CIRCLE = Color.parseColor("#F9AA29");
 }
