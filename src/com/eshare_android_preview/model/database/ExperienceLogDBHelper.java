@@ -91,4 +91,10 @@ public class ExperienceLogDBHelper extends BaseModelDBHelper{
             Constants.TABLE_EXPERIENCE_LOGS_COURSE,
         };
     }
+
+    public static void clear_data(){
+        SQLiteDatabase db = get_write_db();
+        db.execSQL("delete from " + Constants.TABLE_EXPERIENCE_LOGS);
+        db.close();
+    }
 }

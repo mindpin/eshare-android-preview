@@ -2,6 +2,8 @@ package com.eshare_android_preview.test.model.knowledge;
 
 import android.test.AndroidTestCase;
 
+import com.eshare_android_preview.model.database.ExperienceLogDBHelper;
+import com.eshare_android_preview.model.elog.ExperienceLog;
 import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 import com.eshare_android_preview.model.knowledge.KnowledgeNode;
@@ -19,7 +21,7 @@ public class LearnedTest extends AndroidTestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        EsharePreference.cleare_data();
+        EsharePreference.clear_data();
         net = KnowledgeNet.instance_for_test();
     }
 

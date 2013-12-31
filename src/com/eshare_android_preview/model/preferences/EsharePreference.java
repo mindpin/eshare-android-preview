@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 
 import java.util.List;
 
@@ -30,7 +31,18 @@ public class EsharePreference {
     public static boolean get_learned(String key){
         return PREFERENCES.getBoolean(key,false);
     }
-    public static void cleare_data(){
+
+    public static String get_current_net(){
+       return PREFERENCES.getString("current_net", "javascript");
+    }
+
+    public static void switch_to(String course){
+        SharedPreferences.Editor pre_edit = PREFERENCES.edit();
+        pre_edit.putString("current_net", course);
+        pre_edit.commit();
+    }
+
+    public static void clear_data(){
         SharedPreferences.Editor editor =  PREFERENCES.edit();
         editor.clear();
         editor.commit();

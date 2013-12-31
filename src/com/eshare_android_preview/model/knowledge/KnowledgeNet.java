@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.view.knowledge_map.IHasChildren;
 import com.eshare_android_preview.model.parse.node.KnowledgeNetXMLParse;
+import com.eshare_android_preview.model.preferences.EsharePreference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class KnowledgeNet implements IHasChildren{
-    public static final SharedPreferences PREFERENCES = PreferenceManager.getDefaultSharedPreferences(EshareApplication.context);
     private static HashMap<String,KnowledgeNet> net_map = new HashMap<String,KnowledgeNet>();
 
     public KnowledgeNetXMLParse parse;
@@ -55,14 +55,12 @@ public class KnowledgeNet implements IHasChildren{
     }
 
     public static KnowledgeNet get_current_net(){
-        String name = PREFERENCES.getString("current_net", "javascript");
+        String name = EsharePreference.get_current_net();
         return find_by_name(name);
     }
 
     public static void switch_to(String course){
-        SharedPreferences.Editor pre_edit = PREFERENCES.edit();
-        pre_edit.putString("current_net", course);
-        pre_edit.commit();
+        EsharePreference.switch_to(course);
     }
 
     public static KnowledgeNet instance_for_test(){

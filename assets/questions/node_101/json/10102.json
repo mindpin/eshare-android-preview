@@ -1,0 +1,12 @@
+{
+  "knowledge_node_id": "node-101",
+  "kind": "fill",
+  "content": "<img src=\"file:///android_asset/questions/node_101/bread.png\">\n与图片相对应的单词是？[%]",
+  "choices": [
+    "noodle",
+    "sandwich",
+    "bread",
+    "pizza"
+  ],
+  "answer": "bread"
+}
