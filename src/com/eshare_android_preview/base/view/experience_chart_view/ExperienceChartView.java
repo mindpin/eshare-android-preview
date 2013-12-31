@@ -36,7 +36,7 @@ public class ExperienceChartView extends View {
 
 
     // 日期信息
-    private List<DayExpInfo> logs = ExperienceLog.history_info();
+    private List<DayExpInfo> logs;
 
     public ExperienceChartView(Context context) {
         super(context);
@@ -54,6 +54,10 @@ public class ExperienceChartView extends View {
     }
 
     private void init(){
+        if (isInEditMode()) return;
+
+        logs = ExperienceLog.history_info();
+
         // 读取每个节点的经验值
         get_exps();
 
@@ -93,6 +97,8 @@ public class ExperienceChartView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if (isInEditMode()) return;
+
         canvas_height = getHeight();
         canvas_width = getWidth();
 
@@ -117,13 +123,22 @@ public class ExperienceChartView extends View {
 
         // top_line_y : max_exp
         // bottom_line_y : 0
-        // 每隔 50 画一根横线
-        int e = 50;
+        // 每隔 delta 画一根横线
+        int delta;
 
+        if (max_exp > 100) {
+            delta = 50;
+        } else if (max_exp > 50) {
+            delta = 20;
+        } else {
+            delta = 10;
+        }
+
+        int e = delta;
         while (e < max_exp) {
             float y = get_relative_y(e);
             draw_horizontal_line(y, e, canvas);
-            e = e + 50;
+            e = e + delta;
         }
     }
 
@@ -173,7 +188,7 @@ public class ExperienceChartView extends View {
             paint.getTextBounds(day.day_of_week_str, 0, day.day_of_week_str.length(), bounds);
             canvas.drawText(day.day_of_week_str,
                     mark_x - bounds.width() / 2,
-                    mark_y + 26 + bounds.height() / 2,
+                    mark_y + 31 + bounds.height() / 2,
                     paint
             );
 
@@ -181,7 +196,7 @@ public class ExperienceChartView extends View {
             paint.getTextBounds(day.day_of_month_str, 0, day.day_of_month_str.length(), bounds);
             canvas.drawText(day.day_of_month_str,
                     mark_x - bounds.width() / 2,
-                    mark_y + 26 + 30 + bounds.height() / 2,
+                    mark_y + 31 + 30 + bounds.height() / 2,
                     paint
             );
 

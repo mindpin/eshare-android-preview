@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
@@ -99,6 +100,9 @@ public class TestSuccessActivity extends EshareBaseActivity {
 
             experience_view.add(exp_num);
             experience_chart_view.run_animation(exp_num);
+
+            findViewById(R.id.added_exp_rl).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.added_exp)).setText("+" + exp_num);
 
             loaded = true;
         }

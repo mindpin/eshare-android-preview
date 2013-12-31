@@ -5,6 +5,11 @@ body {
   font-size:16px;
 }
 
+body img {
+  display:block;
+  width:40%;
+}
+
 codefill {
   display: inline-block;
 }
@@ -76,7 +81,7 @@ code, pre{
 .CodeRay .filename { color:#099; }
 .CodeRay .function { color:#dacf85; }
 .CodeRay .global-variable { color:#9a859c; font-weight:bold }
-.CodeRay .hex { color:#058; font-weight:bold }
+.CodeRay .hex { color:#4dbcff; font-weight:bold }
 .CodeRay .integer  { color:#ddf2a3; }
 .CodeRay .include { color:#B44; font-weight:bold }
 .CodeRay .inline { color: #DAEFA3 }
@@ -89,7 +94,7 @@ code, pre{
 .CodeRay .instance-variable { color:#7587A6 }
 .CodeRay .label { color:#970; font-weight:bold }
 .CodeRay .local-variable { color:#963 }
-.CodeRay .octal { color:#40E; font-weight:bold }
+.CodeRay .octal { color:#9266ff; font-weight:bold }
 .CodeRay .operator { }
 .CodeRay .predefined-constant {  font-weight:bold }
 .CodeRay .predefined { color:#369; font-weight:bold }
