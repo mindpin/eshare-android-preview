@@ -39,6 +39,7 @@
     <string name="icon_arrow_left">&#xf060;</string>
     <string name="icon_heart">&#xf004;</string>
     <string name="icon_exclamation_circle">&#xf06a;</string>
+    <string name="icon_lock">&#xf023;</string>
 
     <!-- 登录页面 -->
     <string name="login_email">邮箱</string>

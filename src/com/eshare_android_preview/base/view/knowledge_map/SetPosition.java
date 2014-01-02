@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class SetPosition {
     public final static int CIRCLE_RADIUS_DP = 30; // 33;
-    public final static int TEXT_SIZE = 9;
+    public final static int TEXT_SIZE = 13;
     public final static int MAP_VIEW_TOP_OFFSET = 50;
 
     final static float[][] GRID_DATA = new float[][]{
@@ -183,7 +183,7 @@ public class SetPosition {
     private void _draw_title_view() {
         title_view = new TextView(map_view.activity);
         title_view.setText(set.get_name());
-        title_view.setTextSize(BaseUtils.dp_to_px(TEXT_SIZE));
+        title_view.setTextSize(TEXT_SIZE);
         title_view.setGravity(Gravity.CENTER);
         title_view.setTextColor(Color.parseColor("#444444"));
 
@@ -201,7 +201,7 @@ public class SetPosition {
 
         count_view = new TextView(map_view.activity);
         count_view.setText(set.get_learned_nodes_count() + "/" + set.nodes.size());
-        count_view.setTextSize(BaseUtils.dp_to_px(TEXT_SIZE));
+        count_view.setTextSize(TEXT_SIZE);
         count_view.setGravity(Gravity.CENTER);
         count_view.setTextColor(Color.parseColor("#aaaaaa"));
         count_view.setTypeface(Typeface.MONOSPACE);

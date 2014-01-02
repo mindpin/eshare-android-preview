@@ -1,5 +1,7 @@
 package com.eshare_android_preview.activity.base;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -64,7 +66,15 @@ public class HomeActivity extends EshareBaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            return false;
+            new AlertDialog.Builder(this)
+                    .setMessage("要退出吗？")
+                    .setNegativeButton("取消", null)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            finish();
+                        }
+                    }).show();
         }
         return super.onKeyDown(keyCode, event);
     }

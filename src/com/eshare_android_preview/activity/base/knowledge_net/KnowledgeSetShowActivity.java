@@ -21,6 +21,7 @@ import com.eshare_android_preview.base.view.knowledge_map.AniProxy;
 import com.eshare_android_preview.base.view.knowledge_map.MarginAni;
 import com.eshare_android_preview.base.view.knowledge_map.SetPosition;
 import com.eshare_android_preview.base.view.ui.FontAwesomeTextView;
+import com.eshare_android_preview.base.view.ui.KnowledgeSetViewPagerAdapter;
 import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TestResult;
@@ -98,66 +99,9 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         if (set.is_checkpoint()) return;
 
         KnowledgeSet kset = (KnowledgeSet) set;
-        LayoutInflater lf = getLayoutInflater().from(this);
-        final List<View> view_list = new ArrayList<View>();
-        for(final KnowledgeNode node : kset.nodes) {
-            View view = lf.inflate(R.layout.kn_knowledge_set_show_item, null);
-            ((TextView) view.findViewById(R.id.node_name)).setText(node.name);
-            ((TextView) view.findViewById(R.id.node_desc)).setText(node.desc);
-
-            if (node.required) {
-                ((TextView) view.findViewById(R.id.required)).setText("必学");
-            } else {
-                ((TextView) view.findViewById(R.id.required)).setText("选学");
-            }
-
-            if (node.is_learned()) {
-                view.findViewById(R.id.learned_icon).setVisibility(View.VISIBLE);
-            } else {
-                view.findViewById(R.id.learned_icon).setVisibility(View.GONE);
-            }
-
-            view_list.add(view);
-
-            View to_question = view.findViewById(R.id.to_question);
-            to_question.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(KnowledgeSetShowActivity.this, QuestionShowActivity.class);
-                    TestResult test_result = new TestResult(3, 10);
-                    TestPaper test_paper = new TestPaper(node, test_result);
-                    intent.putExtra(QuestionShowActivity.ExtraKeys.TEST_PAPER, test_paper);
-                    startActivity(intent);
-                }
-            });
-
-        }
 
         view_pager = (ViewPager) findViewById(R.id.view_pager);
-        view_pager.setAdapter(new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return view_list.size();
-            }
-
-            @Override
-            public boolean isViewFromObject(View view, Object o) {
-                return view == o;
-            }
-
-            @Override
-            public Object instantiateItem(ViewGroup container, int position) {
-                View view = view_list.get(position);
-                container.addView(view, 0);
-                return view;
-            }
-
-            @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
-                container.removeView(view_list.get(position));
-            }
-        });
-
+        view_pager.setAdapter(new KnowledgeSetViewPagerAdapter(kset, this));
         view_pager.setPageMargin(- BaseUtils.dp_to_px(90));
         view_pager.setOffscreenPageLimit(2);
     }

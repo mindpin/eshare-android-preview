@@ -66,4 +66,8 @@ public class UiColor {
     public final static int EXP_CHART_CIRCLE = Color.parseColor("#fccd2d");
     public final static int EXP_CHART_CURRENT_CIRCLE_BORDER = Color.parseColor("#fccd2d");
     public final static int EXP_CHART_CURRENT_CIRCLE = Color.parseColor("#F9AA29");
+
+    // kset viewpager
+    public final static int VIEW_PAGER_BUTTON_LOCKED = Color.parseColor("#dbdbdb");
+    public final static int VIEW_PAGER_BUTTON_UNLOCKED = Color.parseColor("#1CB0F6");
 }
