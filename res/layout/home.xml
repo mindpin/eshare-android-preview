@@ -99,4 +99,10 @@
     
     <include layout="@layout/home_about"/>
 
+    <com.eshare_android_preview.base.view.ui.RichCodeTextView
+        android:padding="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_height="300dp"
+        android:layout_width="fill_parent" />
+
 </RelativeLayout>
