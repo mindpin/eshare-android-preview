@@ -1,4 +1,4 @@
-package com.eshare_android_preview.model;
+package com.eshare_android_preview.http.model;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +7,7 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.eshare_android_preview.Logic.HttpApi;
+import com.eshare_android_preview.http.api.BaseHttpApi;
 import com.eshare_android_preview.model.base.BaseModel;
 
 
@@ -42,7 +42,7 @@ public class AccountUser extends BaseModel{
         this.email = json.getString("email");
         this.avatar_url = json.getString("avatar_url");
         if(this.avatar_url != null && !this.avatar_url.equals("")){
-          InputStream is = HttpApi.download_image(this.avatar_url);
+          InputStream is = BaseHttpApi.download_image(this.avatar_url);
           byte[] avatar = IOUtils.toByteArray(is);
           this.avatar = avatar;
         }

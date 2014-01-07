@@ -1,4 +1,4 @@
-package com.eshare_android_preview.Logic;
+package com.eshare_android_preview.http.logic.user_auth;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.application.EshareApplication;
 
-public class APPPreferences {
+public class UserAuthPreferences {
 	public static final SharedPreferences PREFERENCES = PreferenceManager
 			.getDefaultSharedPreferences(EshareApplication.context);
 
@@ -41,7 +41,7 @@ public class APPPreferences {
 
 	public static void set_current_user_id(int id) {
 		String key = get_resource_string(R.string.preferences_key_current_user_id);
-		APPPreferences.put_int(key, id);
+		UserAuthPreferences.put_int(key, id);
 	}
 
 	public static int current_user_id() {

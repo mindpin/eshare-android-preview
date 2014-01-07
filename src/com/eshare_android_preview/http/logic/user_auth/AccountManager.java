@@ -1,11 +1,11 @@
-package com.eshare_android_preview.Logic;
+package com.eshare_android_preview.http.logic.user_auth;
 
 import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;
 
 import com.eshare_android_preview.base.http.CookieHelper;
 import com.eshare_android_preview.base.http.EshareHttpRequest.AuthenticateException;
-import com.eshare_android_preview.model.AccountUser;
+import com.eshare_android_preview.http.model.AccountUser;
 import com.eshare_android_preview.model.database.AccountUserDBHelper;
 
 public class AccountManager {
@@ -20,7 +20,7 @@ public class AccountManager {
     }
 	
 	public static void switch_account(AccountUser account_user) {
-        APPPreferences.set_current_user_id(account_user.user_id);
+        UserAuthPreferences.set_current_user_id(account_user.user_id);
     }
 	
 	public static boolean is_logged_in(){
@@ -28,7 +28,7 @@ public class AccountManager {
 	}
 	
 	public static AccountUser current_user() {
-		int user_id = APPPreferences.current_user_id();
+		int user_id = UserAuthPreferences.current_user_id();
         return AccountUserDBHelper.find(user_id);
 	}
 	

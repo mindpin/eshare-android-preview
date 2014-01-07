@@ -36,3 +36,5 @@ out/
 
 .DS_Store
 *.log
+
+res/values/http_site.xml

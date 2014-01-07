@@ -18,11 +18,13 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.commons.io.IOUtils;
 
-import com.eshare_android_preview.Logic.AccountManager;
-import com.eshare_android_preview.Logic.HttpApi;
+import com.eshare_android_preview.R;
+import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.http.logic.user_auth.AccountManager;
+import com.eshare_android_preview.http.api.BaseHttpApi;
 
 public abstract class EshareHttpRequest<TResult> {
-    public static final String SITE = HttpApi.SITE;
+    public static final String SITE = EshareApplication.context.getResources().getString(R.string.http_site);
     protected HttpUriRequest http_uri_request;
     private DefaultHttpClient http_client;
 

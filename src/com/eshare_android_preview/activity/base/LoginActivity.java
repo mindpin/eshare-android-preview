@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.Logic.HttpApi;
+import com.eshare_android_preview.http.api.UserAuthHttpApi;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
 import com.eshare_android_preview.base.utils.BaseUtils;
@@ -61,7 +61,7 @@ public class LoginActivity extends EshareBaseActivity{
     	new BaseAsyncTask<String, Void, VersionCheck>(this, R.string.login_now_login) {
 			@Override
 			public VersionCheck do_in_background(String... params) throws Exception {
-				HttpApi.user_authenticate(login, password);
+				UserAuthHttpApi.user_authenticate(login, password);
 				String version = getResources().getString(R.string.app_version);
 				return null;
 			}
