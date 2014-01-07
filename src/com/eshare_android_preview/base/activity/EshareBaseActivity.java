@@ -6,13 +6,13 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.Logic.AccountManager;
 import com.eshare_android_preview.activity.base.LoginActivity;
-import com.eshare_android_preview.base.view.ui.UiFont;
+import com.eshare_android_preview.model.AccountUser;
 
 public class EshareBaseActivity extends Activity{
 
@@ -27,6 +27,15 @@ public class EshareBaseActivity extends Activity{
 
 		super.onCreate(savedInstanceState);
 	}
+	
+	final public boolean is_logged_in() {
+		return AccountManager.is_logged_in();
+	}
+
+	final public AccountUser current_user() {
+		return AccountManager.current_user();
+	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

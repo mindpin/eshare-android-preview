@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.eshare_android_preview.R;
+import com.eshare_android_preview.application.EshareApplication;
+
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -364,7 +367,24 @@ public class ValidateUtil {
 		}
 		return true;
 	}
-
+	
+	// 可以空,非空时必须正确
+	public static boolean maybeMobileEmpty(TextView w, String error_str) {
+		if (!StringUtil.empty(w.getText().toString().trim())) {
+			return ValidateUtil.isMobileNumber(w);
+		}
+		return true;
+	}
+	
+	public static void setViewError(TextView w, String error_str){
+		w.setError(error_str);
+		w.setFocusable(true);
+	}
+	public static void setViewError(TextView w, int error_str_id){
+		w.setError(EshareApplication.context.getResources().getString(error_str_id));
+		w.setFocusable(true);
+	}
+	
 	public static boolean isArea(TextView w) {
 		if (!RegexUtil.isArea(w.getText().toString().trim())) {
 			w.setError("面积有非法字符！");

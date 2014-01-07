@@ -31,9 +31,9 @@
         
         <uses-library android:name="android.test.runner" />
         
-
-        <activity android:name=".activity.base.LoginActivity"></activity>
-        <activity android:name=".activity.base.HomeActivity">
+		<activity android:name=".activity.base.LoginActivity"></activity>
+        <activity android:name=".activity.base.HomeActivity"></activity>
+        <activity android:name=".activity.base.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

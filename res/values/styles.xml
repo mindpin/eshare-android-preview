@@ -220,4 +220,12 @@
 
         <item name="android:background">@drawable/base_process_dialog_background</item>
     </style>
+    
+    <!-- base_loading_layout -->
+    <style name="loading_layout_text">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
