@@ -4,6 +4,8 @@ package com.eshare_android_preview.http.model;
 import com.eshare_android_preview.base.http.EshareGetRequest;
 import com.google.gson.Gson;
 
+import java.util.Calendar;
+
 
 public class TestSuccess {
     public int add_exp_num;
@@ -22,6 +24,12 @@ public class TestSuccess {
 
 
         }.go();
+    }
+
+
+    public DayExp day_exp(int history_day) {
+
+        return new DayExp(history_day, history_info);
     }
 
 
