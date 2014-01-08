@@ -4,11 +4,10 @@ package com.eshare_android_preview.http.model;
 import com.eshare_android_preview.base.http.EshareGetRequest;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 
 public class TestSuccess {
     public int add_exp_num;
-    public ArrayList<DayExp> history_info;
+    public int[] history_info;
 
 
     public static TestSuccess build_test_success(String net_id, String id) throws Exception {
