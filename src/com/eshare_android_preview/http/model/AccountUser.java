@@ -40,11 +40,11 @@ public class AccountUser extends BaseModel{
         this.name = json.getString("name");
         this.login = json.getString("login");
         this.email = json.getString("email");
-        this.avatar_url = json.getString("avatar_url");
+        this.avatar_url = json.getString("avatar");
         if(this.avatar_url != null && !this.avatar_url.equals("")){
           InputStream is = BaseHttpApi.download_image(this.avatar_url);
-          byte[] avatar = IOUtils.toByteArray(is);
-          this.avatar = avatar;
+//          byte[] avatar = IOUtils.toByteArray(is);
+//          this.avatar = avatar;
         }
     }
 

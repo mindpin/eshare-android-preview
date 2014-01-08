@@ -4,7 +4,7 @@ package com.eshare_android_preview.model.base;
 
 public class Constants {
     public static final String DATABASE_NAME = "eshare";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String KEY_ID = "_id";
     
     // 账号 数据表的常量

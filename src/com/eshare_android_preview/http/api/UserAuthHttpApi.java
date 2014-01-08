@@ -18,8 +18,8 @@ public class UserAuthHttpApi {
     	System.out.println("login : = " + 用户登录 +" : " +login + " : " +  password);
     	return new EsharePostRequest<Boolean>(
                 用户登录,
-                new PostParamText("login", login),
-                new PostParamText("password", password)
+                new PostParamText("user[login]", login),
+                new PostParamText("user[password]", password)
         ) {
             @Override
             public Boolean on_success(String response_text) throws Exception {
