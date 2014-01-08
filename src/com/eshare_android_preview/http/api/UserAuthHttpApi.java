@@ -38,7 +38,7 @@ public class UserAuthHttpApi {
     	return new EshareGetRequest<Boolean>(用户登出) {
 			@Override
 			public Boolean on_success(String response_text) throws Exception {
-				return null;
+				return true;
 			}
 		}.go();
     }
