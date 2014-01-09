@@ -1,14 +1,10 @@
 package com.eshare_android_preview.test.http.api;
 
 import android.test.AndroidTestCase;
-import android.util.Log;
-
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
-import com.eshare_android_preview.http.logic.knowledge_net.BaseKnowledgeSetTreeBuilder;
-import com.eshare_android_preview.http.model.BaseKnowledgeSetTree;
+import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNetGsonBuilder;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
-
 import junit.framework.Assert;
 import java.util.List;
 
@@ -34,16 +30,15 @@ public class KnowledgeNetListTest extends AndroidTestCase{
     }
 
     public void test_2(){
-        BaseKnowledgeSetTreeBuilder builder = null;
+        KnowledgeNet net = null;
         try {
-            builder = KnowledgeNetHttpApi.net_sets("javascript");
+            net = KnowledgeNetHttpApi.net("javascript");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        BaseKnowledgeSetTree tree = builder.build();
-        Assert.assertEquals(1, tree.children.size());
+        Assert.assertEquals(1, net.children.size());
 
-        KnowledgeSet set_8 = (KnowledgeSet)tree.children.get(0);
+        KnowledgeSet set_8 = (KnowledgeSet)net.children.get(0);
         Assert.assertEquals("set-8", set_8.id  );
 
         Assert.assertEquals(1, set_8.children.size());

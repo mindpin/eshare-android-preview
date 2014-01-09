@@ -1,11 +1,10 @@
 package com.eshare_android_preview.http.api;
 
 import com.eshare_android_preview.base.http.EshareGetRequest;
-import com.eshare_android_preview.http.logic.knowledge_net.BaseKnowledgeSetTreeBuilder;
+import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNetGsonBuilder;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -24,12 +23,13 @@ public class KnowledgeNetHttpApi {
         }.go();
     }
 
-    public static BaseKnowledgeSetTreeBuilder net_sets(String net_id) throws Exception{
-        return new EshareGetRequest<BaseKnowledgeSetTreeBuilder>("/knowledge_nets/" +  net_id + "/sets") {
+    public static KnowledgeNet net(String net_id) throws Exception{
+        return new EshareGetRequest<KnowledgeNet>("/knowledge_nets/" +  net_id) {
             @Override
-            public BaseKnowledgeSetTreeBuilder on_success(String response_text) throws Exception {
+            public KnowledgeNet on_success(String response_text) throws Exception {
                 Gson gson = new Gson();
-                return gson.fromJson(response_text, BaseKnowledgeSetTreeBuilder.class);
+                KnowledgeNetGsonBuilder builder = gson.fromJson(response_text, KnowledgeNetGsonBuilder.class);
+                return builder.build();
             }
         }.go();
     }

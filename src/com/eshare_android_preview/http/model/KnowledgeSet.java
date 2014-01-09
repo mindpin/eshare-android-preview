@@ -10,4 +10,6 @@ public class KnowledgeSet extends BaseKnowledgeSet {
     public int deep;
     public boolean is_unlocked;
     public boolean is_learned;
+    public int node_count;
+    public int learned_node_count;
 }
