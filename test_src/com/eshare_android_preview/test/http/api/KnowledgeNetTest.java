@@ -2,7 +2,6 @@ package com.eshare_android_preview.test.http.api;
 
 import android.test.AndroidTestCase;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
-import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNetGsonBuilder;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
 import junit.framework.Assert;
@@ -11,7 +10,7 @@ import java.util.List;
 /**
  * Created by fushang318 on 14-1-8.
  */
-public class KnowledgeNetListTest extends AndroidTestCase{
+public class KnowledgeNetTest extends AndroidTestCase{
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -44,5 +43,21 @@ public class KnowledgeNetListTest extends AndroidTestCase{
         Assert.assertEquals(1, set_8.children.size());
 
         Assert.assertEquals(2, set_8.children.get(0).children.size());
+    }
+
+    public void test_3(){
+        KnowledgeSet set = null;
+
+        try {
+            set = KnowledgeNetHttpApi.set("javascript","set-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals("set-8", set.id);
+        Assert.assertEquals("基础: 值", set.name);
+        Assert.assertEquals(5, set.nodes.size());
+        Assert.assertEquals("node-31", set.nodes.get(0).id);
+        Assert.assertEquals("字符串", set.nodes.get(0).name);
     }
 }
