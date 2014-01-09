@@ -2,6 +2,8 @@ package com.eshare_android_preview.test.http.api;
 
 import android.test.AndroidTestCase;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
+import com.eshare_android_preview.http.api.UserAuthHttpApi;
+import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
 import junit.framework.Assert;
@@ -14,6 +16,12 @@ public class KnowledgeNetTest extends AndroidTestCase{
     @Override
     public void setUp() throws Exception {
         super.setUp();
+        try {
+            UserAuthHttpApi.user_authenticate("admin@edu.dev","1234");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Assert.assertEquals(AccountManager.is_logged_in(), true);
     }
 
     public void test_1(){
