@@ -3,6 +3,7 @@ package com.eshare_android_preview.http.api;
 import org.json.JSONObject;
 
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
+import com.eshare_android_preview.http.model.AccountUser;
 import com.eshare_android_preview.base.http.PostParamText;
 import com.eshare_android_preview.base.http.EshareGetRequest;
 import com.eshare_android_preview.base.http.EsharePostRequest;
@@ -34,13 +35,8 @@ public class UserAuthHttpApi {
         }.go();
     }
     
-    public static boolean user_auth_out() throws Exception {
-    	return new EshareGetRequest<Boolean>(用户登出) {
-			@Override
-			public Boolean on_success(String response_text) throws Exception {
-				return true;
-			}
-		}.go();
+    public static boolean user_auth_out(){
+    	return AccountUser.auth_out(AccountManager.current_user());
     }
 
 }

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import com.eshare_android_preview.http.api.BaseHttpApi;
 import com.eshare_android_preview.model.base.BaseModel;
+import com.eshare_android_preview.model.database.AccountUserDBHelper;
 
 
 public class AccountUser extends BaseModel{
@@ -59,5 +60,7 @@ public class AccountUser extends BaseModel{
 		this.avatar = avatar;
 	}
 	
-	
+	public static boolean auth_out(AccountUser current_user){
+		return AccountUserDBHelper.destroy(current_user);
+	}
 }
