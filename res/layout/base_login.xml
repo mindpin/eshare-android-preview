@@ -37,7 +37,7 @@
         
         <EditText
                 android:id="@+id/login_et"
-                android:text="qwer"
+                android:text="admin@edu.dev"
                 android:inputType="textEmailAddress"
                 android:imeOptions="actionDone"
                 android:hint="@string/login_email"
