@@ -29,7 +29,7 @@ public class Question implements Serializable {
     public List<ContentToken> content;
     public int difficulty;
     public String kind;
-    public List<QuestionChoice> choices_list;
+    public List<QuestionChoice> choices_list = new ArrayList<QuestionChoice>();
 
     public static Question from_json(String json) {
         Gson gson = new GsonBuilder().create();
