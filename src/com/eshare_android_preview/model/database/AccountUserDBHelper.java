@@ -87,4 +87,19 @@ public class AccountUserDBHelper extends BaseModelDBHelper{
                 Constants.TABLE_ACCOUNT_USERS__COOKIES,
                 Constants.TABLE_ACCOUNT_USERS__INFO};
 	}
+
+	public static boolean destroy(AccountUser account_user) {
+		if (account_user.is_nil()) return false;
+        SQLiteDatabase db = get_write_db();
+        
+        try {
+			db.delete(Constants.TABLE_ACCOUNT_USERS, 
+					Constants.TABLE_ACCOUNT_USERS__USER_ID + " = ?",
+					new String[]{account_user.user_id+""});
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
