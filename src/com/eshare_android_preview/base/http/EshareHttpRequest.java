@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -16,12 +17,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
-import org.apache.commons.io.IOUtils;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
-import com.eshare_android_preview.http.api.BaseHttpApi;
 
 public abstract class EshareHttpRequest<TResult> {
     public static final String SITE = EshareApplication.context.getResources().getString(R.string.http_site);
