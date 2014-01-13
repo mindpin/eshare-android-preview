@@ -4,8 +4,6 @@ import android.test.AndroidTestCase;
 
 import com.eshare_android_preview.http.api.UserAuthHttpApi;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
-import com.eshare_android_preview.model.elog.ExperienceLog;
-import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 
 import junit.framework.Assert;
 

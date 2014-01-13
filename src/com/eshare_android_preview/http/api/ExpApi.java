@@ -8,9 +8,9 @@ public class ExpApi {
 	public static final String 经验 = "/knowledge_nets/";
 	public static final String 获取 = "/exp_info";
 	
-	public static CurrentState exp_info(String course_or_id){
+	public static CurrentState exp_info(String net_id){
 		try {
-			return new EshareGetRequest<CurrentState>(经验 + course_or_id + 获取) {
+			return new EshareGetRequest<CurrentState>(经验 + net_id + 获取) {
 				@Override
 				public CurrentState on_success(String response_text)throws Exception {
 					Gson gson = new Gson();

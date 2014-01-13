@@ -1,6 +1,5 @@
 package com.eshare_android_preview.http.logic.knowledge_net;
 
-import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 import com.eshare_android_preview.http.model.KnowledgeNode;
 import com.eshare_android_preview.http.model.KnowledgeSet;
 

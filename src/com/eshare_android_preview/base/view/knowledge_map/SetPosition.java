@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeSetShowActivity;
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
@@ -18,8 +17,8 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.ui.UiColor;
-import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
-import com.eshare_android_preview.model.knowledge.KnowledgeSet;
+import com.eshare_android_preview.http.model.BaseKnowledgeSet;
+import com.eshare_android_preview.http.model.KnowledgeSet;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -115,7 +114,7 @@ public class SetPosition {
 
     // 节点是否解锁（可学）
     public boolean is_unlocked() {
-        return set.is_unlocked();
+        return set.is_unlocked;
     }
 
     private void _set_icon_events() {
@@ -200,7 +199,7 @@ public class SetPosition {
         KnowledgeSet set = (KnowledgeSet) this.set;
 
         count_view = new TextView(map_view.activity);
-        count_view.setText(set.get_learned_nodes_count() + "/" + set.nodes.size());
+        count_view.setText(set.learned_node_count + "/" + set.node_count);
         count_view.setTextSize(TEXT_SIZE);
         count_view.setGravity(Gravity.CENTER);
         count_view.setTextColor(Color.parseColor("#aaaaaa"));
@@ -226,8 +225,8 @@ public class SetPosition {
     // --------------------------------
 
     public void put_data_into_end_point_list(List<DashPathEndpoint> list) {
-        for (BaseKnowledgeSet parent : set.parents()) {
-            SetPosition parent_pos = map_view.kdata.get_from(parent);
+        for (BaseKnowledgeSet parent : set.parents) {
+            SetPosition parent_pos = map_view.kdata.get_from(parent.id);
 
             float x1 = parent_pos.grid_dp_left + parent_pos.circle_center_offset;
             float y1 = parent_pos.grid_dp_top + parent_pos.text_offset_top + 24

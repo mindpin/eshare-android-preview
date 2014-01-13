@@ -7,16 +7,16 @@ import java.util.Arrays;
 /**
  * Created by fushang318 on 13-11-11.
  */
-public class MultipleChoiceQuestionSelectAnswer extends QuestionSelectAnswer {
-    public Question question;
-    public ArrayList<QuestionChoice> select_choices = new ArrayList<QuestionChoice>();
+public class OldMultipleChoiceQuestionSelectAnswer extends OldQuestionSelectAnswer {
+    public OldQuestion question;
+    public ArrayList<OldQuestionChoice> select_choices = new ArrayList<OldQuestionChoice>();
 
-    public MultipleChoiceQuestionSelectAnswer(Question question){
+    public OldMultipleChoiceQuestionSelectAnswer(OldQuestion question){
         this.question = question;
     }
 
     @Override
-    public void add_or_remove_choice(QuestionChoice select_choice){
+    public void add_or_remove_choice(OldQuestionChoice select_choice){
         if (select_choices.indexOf(select_choice) != -1) {
             select_choices.remove(select_choice);
         } else {
@@ -30,7 +30,7 @@ public class MultipleChoiceQuestionSelectAnswer extends QuestionSelectAnswer {
         Arrays.sort(answers);
 
         ArrayList<String> choice_str_list = new ArrayList<String>();
-        for(QuestionChoice choice : select_choices){
+        for(OldQuestionChoice choice : select_choices){
             choice_str_list.add(choice.sym);
         }
         String[] select_answers = new String[choice_str_list.size()];

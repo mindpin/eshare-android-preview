@@ -6,13 +6,11 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
+import com.eshare_android_preview.http.model.KnowledgeNode;
+import com.eshare_android_preview.http.model.KnowledgeSet;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TestResult;
-import com.eshare_android_preview.model.knowledge.KnowledgeNode;
-import com.eshare_android_preview.model.knowledge.KnowledgeSet;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,11 +40,11 @@ public class KnowledgeSetViewPagerAdapter extends PagerAdapter {
             kspv.set_listener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!node.is_unlocked()) return;
+                    if (!node.is_unlocked) return;
 
                     Intent intent = new Intent(activity, QuestionShowActivity.class);
                     TestResult test_result = new TestResult(3, 10);
-                    TestPaper test_paper = new TestPaper(node, test_result);
+                    TestPaper test_paper = new TestPaper(node.id, test_result);
                     intent.putExtra(QuestionShowActivity.ExtraKeys.TEST_PAPER, test_paper);
                     activity.startActivity(intent);
                 }

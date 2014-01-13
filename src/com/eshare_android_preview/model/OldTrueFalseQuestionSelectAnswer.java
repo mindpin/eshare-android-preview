@@ -3,16 +3,16 @@ package com.eshare_android_preview.model;
 /**
  * Created by fushang318 on 13-11-11.
  */
-public class TrueFalseQuestionSelectAnswer extends QuestionSelectAnswer{
-    public Question question;
-    public QuestionChoice select_choice;
+public class OldTrueFalseQuestionSelectAnswer extends OldQuestionSelectAnswer {
+    public OldQuestion question;
+    public OldQuestionChoice select_choice;
 
-    public TrueFalseQuestionSelectAnswer(Question question){
+    public OldTrueFalseQuestionSelectAnswer(OldQuestion question){
         this.question = question;
     }
 
     @Override
-    public void set_choice(QuestionChoice select_choice){
+    public void set_choice(OldQuestionChoice select_choice){
         this.select_choice = select_choice;
     }
 

@@ -6,6 +6,7 @@ import com.eshare_android_preview.http.api.UserAuthHttpApi;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
+
 import junit.framework.Assert;
 import java.util.List;
 

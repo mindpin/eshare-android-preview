@@ -1,7 +1,6 @@
 package com.eshare_android_preview.base.view.knowledge_map;
 
-import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
-
+import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 import java.util.List;
 
 /**

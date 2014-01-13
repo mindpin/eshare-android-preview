@@ -13,8 +13,8 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.LockableScrollView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
-import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
-import com.eshare_android_preview.model.knowledge.KnowledgeNet;
+import com.eshare_android_preview.http.model.BaseKnowledgeSet;
+import com.eshare_android_preview.http.model.KnowledgeNet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class KnowledgeMapView extends LockableScrollView {
 
         _get_screen_size();
 
-        _r_traversal(KnowledgeNet.get_current_net());
+        _r_traversal(KnowledgeNet.current_net);
         _draw_nodes();
         _draw_dash_path_view();
     }

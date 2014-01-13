@@ -2,7 +2,7 @@ package com.eshare_android_preview.base.view.ui;
 
 import android.graphics.Color;
 
-import com.eshare_android_preview.model.knowledge.BaseKnowledgeSet;
+import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 
 /**
  * Created by Administrator on 13-12-27.
@@ -18,7 +18,7 @@ public class UiColor {
             return CHECKPOINT_COLOR;
         }
 
-        return set.is_unlocked() ? SET_COLOR : LOCKED_SET_COLOR;
+        return set.is_unlocked ? SET_COLOR : LOCKED_SET_COLOR;
     }
 
     public static int get_set_text_color(BaseKnowledgeSet set) {

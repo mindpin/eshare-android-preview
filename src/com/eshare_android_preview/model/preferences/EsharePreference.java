@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.eshare_android_preview.application.EshareApplication;
-import com.eshare_android_preview.model.knowledge.KnowledgeNet;
 
 import java.util.List;
 

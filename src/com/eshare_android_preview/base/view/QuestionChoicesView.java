@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
@@ -20,9 +19,9 @@ import com.eshare_android_preview.base.view.ui.FlowLayout;
 import com.eshare_android_preview.base.view.ui.FontAwesomeTextView;
 import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.base.view.webview.TextFill;
-import com.eshare_android_preview.model.Question;
-import com.eshare_android_preview.model.QuestionChoice;
-import com.eshare_android_preview.model.QuestionSelectAnswer;
+import com.eshare_android_preview.http.model.Question;
+import com.eshare_android_preview.http.model.QuestionChoice;
+import com.eshare_android_preview.http.model.QuestionSelectAnswer;
 
 import java.io.IOException;
 

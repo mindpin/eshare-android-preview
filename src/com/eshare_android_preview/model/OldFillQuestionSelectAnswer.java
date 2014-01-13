@@ -5,16 +5,16 @@ import java.util.HashMap;
 /**
  * Created by fushang318 on 13-11-11.
  */
-public class FillQuestionSelectAnswer extends QuestionSelectAnswer {
-    public Question question;
-    public HashMap<Integer,QuestionChoice> select_choices = new HashMap<Integer, QuestionChoice>();
+public class OldFillQuestionSelectAnswer extends OldQuestionSelectAnswer {
+    public OldQuestion question;
+    public HashMap<Integer,OldQuestionChoice> select_choices = new HashMap<Integer, OldQuestionChoice>();
 
-    public FillQuestionSelectAnswer(Question question){
+    public OldFillQuestionSelectAnswer(OldQuestion question){
         this.question = question;
     }
 
     @Override
-    public void set_choice(int num, QuestionChoice select_choice){
+    public void set_choice(int num, OldQuestionChoice select_choice){
         if(select_choice == null){
             select_choices.remove(num);
         }else{
@@ -36,7 +36,7 @@ public class FillQuestionSelectAnswer extends QuestionSelectAnswer {
     private String select_answer(){
         String select_answer = "";
         for(int i=1; i<=select_choices.size(); i++){
-            QuestionChoice choice = select_choices.get(i);
+            OldQuestionChoice choice = select_choices.get(i);
             String current_choice_answer = choice == null ? "" : choice.content;
             select_answer += current_choice_answer;
             if(i != select_choices.size()){

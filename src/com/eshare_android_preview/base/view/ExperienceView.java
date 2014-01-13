@@ -6,11 +6,9 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.ui.UiColor;
-import com.eshare_android_preview.model.elog.CurrentState;
-import com.eshare_android_preview.model.elog.ExperienceLog;
+import com.eshare_android_preview.http.model.CurrentState;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.ValueAnimator;
@@ -103,7 +101,7 @@ public class ExperienceView extends View {
             return;
         }
 
-        CurrentState state = ExperienceLog.current_state();
+        CurrentState state = CurrentState.current_state;
         rect_exp_bar_width = rect_width * state.exp_num / state.level_up_exp_num;
         current_level = state.level;
     }
@@ -209,7 +207,7 @@ public class ExperienceView extends View {
     }
 
     private float get_added_rect_width(int added_exp) {
-        CurrentState state = ExperienceLog.current_state();
+        CurrentState state = CurrentState.current_state;
         float added_width = rect_width * added_exp / state.level_up_exp_num;
         return added_width + rect_exp_bar_width;
     }
@@ -241,7 +239,7 @@ public class ExperienceView extends View {
             public void onAnimationEnd(Animator arg0) {
                 if (rect_width <= new_rect_width) {
                     level_up();
-                    float current_count = ((new_rect_width - rect_width) / rect_width) * ExperienceLog.get_level_up_exp(current_level);
+                    float current_count = ((new_rect_width - rect_width) / rect_width) * CurrentState.get_level_up_exp(current_level);
                     set_rect_width(0F);
                     add((int) current_count);
                 }

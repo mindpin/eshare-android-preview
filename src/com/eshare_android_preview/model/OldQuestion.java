@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 问题
-public class Question implements Serializable {
+public class OldQuestion implements Serializable {
     public static class Type{
 		public static final String   SINGLE_CHOICE = "single_choice";
 		public static final String   MULTIPLE_CHOICE = "multiple_choices";
@@ -18,12 +18,12 @@ public class Question implements Serializable {
 	public String knowledge_node_id;
 	public String kind;
 	public String content;
-	public List<QuestionChoice> choices_list;
+	public List<OldQuestionChoice> choices_list;
 	public String answer;
 
 
 	// 选择题
-	public Question(int id,String knowledge_node_id, String kind, String content, List<QuestionChoice> choices_list, String answer) {
+	public OldQuestion(int id, String knowledge_node_id, String kind, String content, List<OldQuestionChoice> choices_list, String answer) {
 		super();
 		this.id = id;
 		this.knowledge_node_id = knowledge_node_id;
@@ -45,7 +45,7 @@ public class Question implements Serializable {
         return this.kind.equals(Type.TRUE_FALSE);
     }
 
-    public static Question find(int question_id) {
+    public static OldQuestion find(int question_id) {
         return null;
     }
 
@@ -57,10 +57,10 @@ public class Question implements Serializable {
     	return this.answer.equals(answer);
     }
 
-    public List<QuestionChoice> select_choice_by_str(String answer){
-        List<QuestionChoice> result = new ArrayList<QuestionChoice>();
+    public List<OldQuestionChoice> select_choice_by_str(String answer){
+        List<OldQuestionChoice> result = new ArrayList<OldQuestionChoice>();
         String[] symbols = answer.split("");
-        for(QuestionChoice choice : this.choices_list){
+        for(OldQuestionChoice choice : this.choices_list){
             for(String symbol : symbols){
                 if(symbol.equals(choice.sym)){
                     result.add(choice);
@@ -86,25 +86,25 @@ public class Question implements Serializable {
         return "选择唯一的正确答案";
     }
 
-    public QuestionSelectAnswer build_select_answer(){
+    public OldQuestionSelectAnswer build_select_answer(){
         if(is_single_choice()){
-            return new SingleChoiceQuestionSelectAnswer(this);
+            return new OldSingleChoiceQuestionSelectAnswer(this);
         }
         if(is_multiple_choice()){
-            return new MultipleChoiceQuestionSelectAnswer(this);
+            return new OldMultipleChoiceQuestionSelectAnswer(this);
         }
         if(is_true_false()){
-            return new TrueFalseQuestionSelectAnswer(this);
+            return new OldTrueFalseQuestionSelectAnswer(this);
         }
         if(is_fill()){
-            return new FillQuestionSelectAnswer(this);
+            return new OldFillQuestionSelectAnswer(this);
         }
         return null;
     }
 
     public int choice_max_length(){
         int length = 0;
-        for(QuestionChoice c : this.choices_list){
+        for(OldQuestionChoice c : this.choices_list){
             length = Math.max(length, c.content.length());
         }
         return length;

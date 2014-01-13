@@ -3,13 +3,9 @@ package com.eshare_android_preview.model.elog;
 import java.io.Serializable;
 import java.util.List;
 
-import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.model.DayExpInfo;
 import com.eshare_android_preview.model.database.ExperienceLogDBHelper;
-import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
-import com.eshare_android_preview.model.knowledge.KnowledgeNet;
-import com.eshare_android_preview.model.knowledge.KnowledgeNode;
-import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
+import com.eshare_android_preview.http.model.TestPaperTarget;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,14 +26,6 @@ public class ExperienceLog implements Serializable {
     public TestPaperTarget model;
 
     public void setModel() {
-        TestPaperTarget base_knowlege = null;
-        KnowledgeNet net = KnowledgeNet.find_by_name(this.course);
-        if (this.model_type == KnowledgeNode.class.getName()) {
-            base_knowlege = net.find_node_by_id(this.model_id);
-        } else if (this.model_type == KnowledgeCheckpoint.class.getName()) {
-            base_knowlege = net.find_checkpoint_by_id(this.model_id);
-        }
-        this.model = base_knowlege;
     }
 
     public ExperienceLog(int id, int before_exp, int after_exp, String model_type, String model_id, String data_json, long created_at, String course) {
@@ -81,21 +69,13 @@ public class ExperienceLog implements Serializable {
     }
 
     public static CurrentState current_state() {
-        String course = KnowledgeNet.get_current_net().get_course();
-        CurrentState state = new CurrentState(course);
+        CurrentState state = new CurrentState("javascript");
         state.init_data();
         return state;
     }
 
     public static int get_exp_num_by_day(Calendar c) {
-        String course = KnowledgeNet.get_current_net().get_course();
-        int count = 0;
-        for (ExperienceLog elog : ExperienceLog.all(course)) {
-            if (BaseUtils.date_all_string(elog.created_at).equals(BaseUtils.date_all_string(c.getTime()))) {
-                count += elog.after_exp - elog.before_exp;
-            }
-        }
-        return count;
+        return 0;
     }
 
     public static List<DayExpInfo> history_info() {

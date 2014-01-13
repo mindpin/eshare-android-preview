@@ -18,9 +18,7 @@ import com.eshare_android_preview.base.view.experience_chart_view.ExperienceChar
 import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.UiSound;
 import com.eshare_android_preview.model.TestPaper;
-import com.eshare_android_preview.model.elog.ExperienceLog;
-import com.eshare_android_preview.model.knowledge.base.ILearn;
-import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
+import com.eshare_android_preview.http.model.TestPaperTarget;
 
 /**
  * Created by fushang318 on 13-12-18.
@@ -94,17 +92,18 @@ public class TestSuccessActivity extends EshareBaseActivity {
 
     private void run_animation() {
         if (!loaded) {
-            TestPaperTarget target = test_paper.target;
-
-            int exp_num = target.do_learn();
-
-            experience_view.add(exp_num);
-            experience_chart_view.run_animation(exp_num);
-
-            findViewById(R.id.added_exp_rl).setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.added_exp)).setText("+" + exp_num);
-
-            loaded = true;
+//            TODO 待集成
+//            TestPaperTarget target = test_paper.target;
+//
+//            int exp_num = target.do_learn();
+//
+//            experience_view.add(exp_num);
+//            experience_chart_view.run_animation(exp_num);
+//
+//            findViewById(R.id.added_exp_rl).setVisibility(View.VISIBLE);
+//            ((TextView) findViewById(R.id.added_exp)).setText("+" + exp_num);
+//
+//            loaded = true;
         }
     }
 

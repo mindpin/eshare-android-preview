@@ -1,15 +1,13 @@
 package com.eshare_android_preview.base.view.ui;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.view.BorderRadiusRelativeLayout;
-import com.eshare_android_preview.model.knowledge.KnowledgeNode;
+import com.eshare_android_preview.http.model.KnowledgeNode;
 
 /**
  * Created by Administrator on 14-1-2.
@@ -59,7 +57,7 @@ public class KnowledgeSetPagerView extends RelativeLayout {
     }
 
     private void set_learned_icon() {
-        if (node.is_learned()) {
+        if (node.is_learned) {
             view.findViewById(R.id.learned_icon).setVisibility(View.VISIBLE);
         } else {
             view.findViewById(R.id.learned_icon).setVisibility(View.GONE);
@@ -67,7 +65,7 @@ public class KnowledgeSetPagerView extends RelativeLayout {
     }
 
     private void set_locked_icon() {
-        if (node.is_unlocked()) {
+        if (node.is_unlocked) {
             view.findViewById(R.id.lock_icon).setVisibility(View.GONE);
         } else {
             view.findViewById(R.id.lock_icon).setVisibility(View.VISIBLE);
@@ -78,7 +76,7 @@ public class KnowledgeSetPagerView extends RelativeLayout {
         BorderRadiusRelativeLayout bl = (BorderRadiusRelativeLayout) view.findViewById(R.id.start_btn);
         TextView tv = (TextView) view.findViewById(R.id.start_btn_text);
 
-        if (node.is_unlocked()) {
+        if (node.is_unlocked) {
             tv.setText("开始练习");
             bl.setBackgroundColor(UiColor.VIEW_PAGER_BUTTON_UNLOCKED);
         } else {

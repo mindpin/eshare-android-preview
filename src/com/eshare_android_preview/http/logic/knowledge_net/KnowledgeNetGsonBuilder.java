@@ -4,6 +4,7 @@ import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 import com.eshare_android_preview.http.model.KnowledgeCheckpoint;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

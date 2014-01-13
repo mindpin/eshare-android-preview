@@ -5,27 +5,28 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.base.task.BaseAsyncTask;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
 import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
-import com.eshare_android_preview.base.view.ui.CircleImageView;
 import com.eshare_android_preview.base.view.webview.EshareMarkdownView;
-import com.eshare_android_preview.model.knowledge.KnowledgeNet;
+import com.eshare_android_preview.http.api.ExpApi;
+import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
+import com.eshare_android_preview.http.logic.user_auth.AccountManager;
+import com.eshare_android_preview.http.model.CurrentState;
+import com.eshare_android_preview.http.model.KnowledgeNet;
 
 
 public class HomeActivity extends EshareBaseActivity {
-    public static String course;
+    public static String net_id;
     public static KnowledgeMapView map_view;
 
 
@@ -33,15 +34,31 @@ public class HomeActivity extends EshareBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.home);
 
-        course = KnowledgeNet.get_current_net().get_course();
+        net_id = KnowledgeNet.current_net_id();
 
-        load_map_view();
-        load_avatar();
-        init_exp_view();
-
-        webview_preload();
+        send_http_request();
 
         super.onCreate(savedInstanceState);
+    }
+
+    private void send_http_request(){
+        new BaseAsyncTask<Void, Void, Void>(this, R.string.now_loading) {
+            @Override
+            public Void do_in_background(Void... params) throws Exception {
+                CurrentState.current_state = ExpApi.exp_info(net_id);
+                KnowledgeNet.current_net = KnowledgeNetHttpApi.net(net_id);
+                return null;
+            }
+
+            @Override
+            public void on_success(Void result) {
+                load_map_view();
+                load_avatar();
+                init_exp_view();
+
+                webview_preload();
+            }
+        }.execute();
     }
 
     private void load_map_view() {
@@ -53,7 +70,10 @@ public class HomeActivity extends EshareBaseActivity {
         ImageView iv = (ImageView) findViewById(R.id.avatar);
         BitmapFactory.Options o = new BitmapFactory.Options();
         o.inScaled = false;
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.avatar_ben7th, o);
+
+        byte[] avatar = AccountManager.current_user().avatar;
+        Bitmap b = BitmapFactory.decodeByteArray(avatar, 0, avatar.length, o);
+
         b = ImageTools.createBitmapBySize(b, BaseUtils.dp_to_px(30), BaseUtils.dp_to_px(30));
         CircleAvatarDrawable d = new CircleAvatarDrawable(b);
         iv.setBackgroundDrawable(d);
@@ -61,6 +81,7 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void init_exp_view() {
         ExperienceView ev = (ExperienceView) findViewById(R.id.experience_view);
+        ev.refresh();
     }
 
     @Override
@@ -80,7 +101,7 @@ public class HomeActivity extends EshareBaseActivity {
     }
 
     public void change_course(View view) {
-        Intent intent = new Intent(this, ChangeCourseActivity.class);
+        Intent intent = new Intent(this, ChangeNetActivity.class);
         startActivity(intent);
     }
 

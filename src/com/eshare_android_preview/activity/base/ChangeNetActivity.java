@@ -3,15 +3,14 @@ package com.eshare_android_preview.activity.base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
-import com.eshare_android_preview.model.knowledge.KnowledgeNet;
+import com.eshare_android_preview.http.model.KnowledgeNet;
 
 /**
  * Created by Administrator on 13-12-26.
  */
-public class ChangeCourseActivity extends EshareBaseActivity {
+public class ChangeNetActivity extends EshareBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,49 +3,47 @@ package com.eshare_android_preview.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.eshare_android_preview.model.knowledge.KnowledgeCheckpoint;
-import com.eshare_android_preview.model.knowledge.KnowledgeNet;
-import com.eshare_android_preview.model.knowledge.KnowledgeNode;
-import com.eshare_android_preview.model.knowledge.KnowledgeSet;
-import com.eshare_android_preview.model.knowledge.base.TestPaperTarget;
+import com.eshare_android_preview.http.api.QuestionHttpApi;
+import com.eshare_android_preview.http.model.KnowledgeNet;
+import com.eshare_android_preview.http.model.Question;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by fushang318 on 13-12-6.
  */
 public class TestPaper implements Parcelable {
-    public TestPaperTarget target;
+    public String node_or_checkpoint_id;
     public TestResult test_result;
-    private ArrayList<Integer> expect_ids = new ArrayList<Integer>();
+    public List<Question> questions = new ArrayList<Question>();
+    private int current_index = 0;
 
-    public TestPaper(TestPaperTarget target, TestResult test_result){
-        this.target = target;
+    public TestPaper(String node_or_checkpoint_id, TestResult test_result){
+        this.node_or_checkpoint_id = node_or_checkpoint_id;
         this.test_result = test_result;
     }
 
     public Question get_next_question(){
-        Question question = this.target.get_random_question(expect_ids);
-        expect_ids.add(question.id);
+        if(questions.size() == 0){
+            try {
+                questions = QuestionHttpApi.get_random_questions(KnowledgeNet.current_net_id(), this.node_or_checkpoint_id);
+                current_index = 0;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        Question question = questions.get(current_index);
+        current_index += 1;
         return question;
     }
 
-    public static TestPaperTarget find(KnowledgeNet net, String class_name, String id){
-        if (KnowledgeNode.class.getName().equals(class_name)) {
-            return net.find_node_by_id(id);
-        } else if (KnowledgeCheckpoint.class.getName().equals(class_name)) {
-            return net.find_checkpoint_by_id(id);
-        }
-        return null;
-    }
-
     public TestPaper(Parcel parcel){
-        String model = parcel.readString();
-        String model_id = parcel.readString();
-        this.target = find(KnowledgeNet.get_current_net(), model,model_id);
+        this.node_or_checkpoint_id = parcel.readString();
         this.test_result = (TestResult)parcel.readSerializable();
-        this.expect_ids = (ArrayList<Integer>)parcel.readSerializable();
+        parcel.readList(this.questions, null);
+        this.current_index = parcel.readInt();
     }
 
     @Override
@@ -55,10 +53,10 @@ public class TestPaper implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(target.model());
-        dest.writeString(target.model_id());
-        dest.writeSerializable(test_result);
-        dest.writeSerializable(expect_ids);
+        dest.writeString(this.node_or_checkpoint_id);
+        dest.writeSerializable(this.test_result);
+        dest.writeList(this.questions);
+        dest.writeInt(this.current_index);
     }
 
     public static final Parcelable.Creator<TestPaper> CREATOR = new Creator<TestPaper>() {

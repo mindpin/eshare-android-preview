@@ -6,9 +6,9 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.adapter.EshareBaseAdapter;
-import com.eshare_android_preview.model.Question;
+import com.eshare_android_preview.model.OldQuestion;
 
-public class QuestionsAdapter extends EshareBaseAdapter<Question> {
+public class QuestionsAdapter extends EshareBaseAdapter<OldQuestion> {
     public QuestionsAdapter(EshareBaseActivity activity) {
         super(activity);
     }
@@ -28,7 +28,7 @@ public class QuestionsAdapter extends EshareBaseAdapter<Question> {
     }
 
     @Override
-    public void fill_with_data(BaseViewHolder holder, Question item, int position) {
+    public void fill_with_data(BaseViewHolder holder, OldQuestion item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.item_tv.setText(item.content);
 //	     view_holder.item_iv.setBackgroundResource((Integer)item.get("img"));
