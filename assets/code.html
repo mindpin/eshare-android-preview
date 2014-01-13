@@ -1,17 +1,19 @@
-<span class="CodeRay">require <span class="string"><span class="delimiter">'</span><span class="content">rubygems</span><span class="delimiter">'</span></span>
+<div class="CodeRay">
+    <div class="code"><pre>require <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">rubygems</span><span style="color:#710">'</span></span>
 
-<span class="keyword">class</span> <span class="class">Set</span>
-  attr_accessor <span class="symbol">:id</span>, <span class="symbol">:name</span>
+<span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Set</span>
+  attr_accessor <span style="color:#A60">:id</span>, <span style="color:#A60">:name</span>
 
-  <span class="keyword">def</span> <span class="function">initialize</span>(id, attrs)
-    <span class="instance-variable">@id</span> = id
-    <span class="instance-variable">@name</span> = attrs[<span class="string"><span class="delimiter">'</span><span class="content">name</span><span class="delimiter">'</span></span>]
-    <span class="instance-variable">@children</span> = []
-    <span class="instance-variable">@deep</span> = <span class="integer">123</span>
-    <span class="instance-variable">@reg</span> = <span class="regexp"><span class="delimiter">/</span><span class="content">[1-9]</span><span class="char">\d</span><span class="content">{5}(?!</span><span class="char">\d</span><span class="content">)</span><span class="delimiter">/</span></span>
-  <span class="keyword">end</span>
+  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">initialize</span>(id, attrs)
+    <span style="color:#33B">@id</span> = id
+    <span style="color:#33B">@name</span> = attrs[<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">name</span><span style="color:#710">'</span></span>]
+    <span style="color:#33B">@children</span> = []
+    <span style="color:#33B">@deep</span> = <span style="color:#00D">123</span>
+    <span style="color:#33B">@reg</span> = <span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">[1-9]</span><span style="color:#D20">\d</span><span style="color:#808">{5}(?!</span><span style="color:#D20">\d</span><span style="color:#808">)</span><span style="color:#404">/</span></span>
+  <span style="color:#080;font-weight:bold">end</span>
 
-  <span class="keyword">def</span> <span class="function">build</span>(builder, &amp;block)
-    builder.set(<span class="symbol">:id</span> =&gt; <span class="instance-variable">@id</span>, <span class="symbol">:name</span> =&gt; <span class="instance-variable">@name</span>, <span class="symbol">:icon</span> =&gt; <span class="instance-variable">@id</span>, &amp;block)
-  <span class="keyword">end</span>
-<span class="keyword">end</span></span>
+  <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">build</span>(builder, &amp;block)
+    builder.set(<span style="color:#A60">:id</span> =&gt; <span style="color:#33B">@id</span>, <span style="color:#A60">:name</span> =&gt; <span style="color:#33B">@name</span>, <span style="color:#A60">:icon</span> =&gt; <span style="color:#33B">@id</span>, &amp;block)
+  <span style="color:#080;font-weight:bold">end</span>
+<span style="color:#080;font-weight:bold">end</span></pre></div>
+</div>

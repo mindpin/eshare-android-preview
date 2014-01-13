@@ -3,6 +3,7 @@ package com.eshare_android_preview.activity.base;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,8 +21,13 @@ import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
 import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.CircleImageView;
+import com.eshare_android_preview.base.view.ui.question.QuestionContentView;
 import com.eshare_android_preview.base.view.webview.EshareMarkdownView;
 import com.eshare_android_preview.model.knowledge.KnowledgeNet;
+import com.google.gson.Gson;
+
+import java.io.InputStream;
+import java.util.List;
 
 
 public class HomeActivity extends EshareBaseActivity {
@@ -39,7 +45,7 @@ public class HomeActivity extends EshareBaseActivity {
         load_avatar();
         init_exp_view();
 
-        webview_preload();
+        test_load_question_content();
 
         super.onCreate(savedInstanceState);
     }
@@ -91,15 +97,27 @@ public class HomeActivity extends EshareBaseActivity {
         view.refresh();
     }
 
-    private void webview_preload() {
-        ((EshareMarkdownView) findViewById(R.id.webview_preload)).set_markdown_content("...");
-    }
-
     public void open_about(View view) {
         findViewById(R.id.about).setVisibility(View.VISIBLE);
     }
 
     public void close_about(View view) {
         findViewById(R.id.about).setVisibility(View.GONE);
+    }
+
+    private void test_load_question_content() {
+        QuestionContentView qcv = (QuestionContentView) findViewById(R.id.question_content_view);
+
+        AssetManager am = getAssets();
+        InputStream is;
+        String content = "";
+
+        try {
+            is = am.open("question_content.example");
+            content = BaseUtils.convert_stream_to_string(is);
+        } catch (Exception e) {
+        }
+
+        qcv.set_content(content);
     }
 }
