@@ -125,9 +125,9 @@ public class SetPosition {
                     map_view.locked = true;
 
                     // open activity
-                    Intent intent = new Intent(map_view.activity, KnowledgeSetShowActivity.class);
+                    Intent intent = new Intent(map_view.getContext(), KnowledgeSetShowActivity.class);
                     intent.putExtra("set_id", set.id);
-                    map_view.activity.startActivity(intent);
+                    map_view.getContext().startActivity(intent);
                 }
             }
         });
@@ -140,7 +140,7 @@ public class SetPosition {
     public void draw(int list_size, int index) {
         set_x_position(GRID_DATA[list_size][index]);
 
-        grid = new RelativeLayout(map_view.activity);
+        grid = new RelativeLayout(map_view.getContext());
         _set_dp_params(
                 grid,
                 map_view.GRID_WIDTH_DP, map_view.GRID_HEIGHT_DP,
@@ -160,7 +160,7 @@ public class SetPosition {
     }
 
     private void _draw_circle_view() {
-        circle_view = new CircleView(map_view.activity);
+        circle_view = new CircleView(map_view.getContext());
         circle_view.set_color(UiColor.get_set_color(set));
         circle_view.set_circle_center_position(circle_center_offset, circle_center_offset);
         circle_view.set_radius(CIRCLE_RADIUS_DP);
@@ -169,7 +169,7 @@ public class SetPosition {
     }
 
     private void _draw_icon_view() {
-        icon_view = new ImageView(map_view.activity);
+        icon_view = new ImageView(map_view.getContext());
         icon_view.setImageDrawable(get_icon_drawable());
 
         _set_dp_params(icon_view,
@@ -180,7 +180,7 @@ public class SetPosition {
     }
 
     private void _draw_title_view() {
-        title_view = new TextView(map_view.activity);
+        title_view = new TextView(map_view.getContext());
         title_view.setText(set.get_name());
         title_view.setTextSize(TEXT_SIZE);
         title_view.setGravity(Gravity.CENTER);
@@ -198,7 +198,7 @@ public class SetPosition {
 
         KnowledgeSet set = (KnowledgeSet) this.set;
 
-        count_view = new TextView(map_view.activity);
+        count_view = new TextView(map_view.getContext());
         count_view.setText(set.learned_node_count + "/" + set.node_count);
         count_view.setTextSize(TEXT_SIZE);
         count_view.setGravity(Gravity.CENTER);

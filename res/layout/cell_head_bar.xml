@@ -4,7 +4,7 @@
     android:id="@+id/head_bar"
     android:layout_width="fill_parent"
     android:layout_height="50dp"
-    android:background="#fff">
+    android:background="#f1f1f1">
 
     <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
         android:id="@+id/button_go_back"

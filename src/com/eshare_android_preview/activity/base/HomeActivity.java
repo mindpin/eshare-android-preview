@@ -46,15 +46,15 @@ public class HomeActivity extends EshareBaseActivity {
 
             @Override
             public void on_success(Void result) {
-                load_map_view();
+                init_map_view();
                 init_exp_view();
             }
         }.execute();
     }
 
-    private void load_map_view() {
+    private void init_map_view() {
         map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
-        map_view.init(this);
+        map_view.init();
     }
 
     private void init_exp_view() {

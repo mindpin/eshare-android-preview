@@ -29,7 +29,7 @@ public class AboutView extends FontAwesomeTextView {
         public void onClick(View view) {
             if (null == about_layer) {
                 Activity activity = (Activity) getContext();
-                about_layer = activity.getLayoutInflater().inflate(R.layout.home_about, null);
+                about_layer = inflate(activity, R.layout.home_about, null);
                 activity.addContentView(about_layer, new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT

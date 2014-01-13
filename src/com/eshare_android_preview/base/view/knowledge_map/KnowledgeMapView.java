@@ -23,8 +23,6 @@ import java.util.List;
  * Created by Administrator on 13-12-12.
  */
 public class KnowledgeMapView extends LockableScrollView {
-    public EshareBaseActivity activity;
-
     public int SCREEN_WIDTH_DP, SCREEN_HEIGHT_DP, GRID_WIDTH_DP, GRID_HEIGHT_DP;
 
     public RelativeLayout nodes_paper;
@@ -35,26 +33,17 @@ public class KnowledgeMapView extends LockableScrollView {
 
     public KnowledgeSetsData kdata;
 
-    public KnowledgeMapView(Context context) {
-        super(context);
-    }
-
     public KnowledgeMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public KnowledgeMapView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
-    public void init(EshareBaseActivity activity) {
+    public void init() {
         removeAllViews();
 
-        this.activity = activity;
         kdata = new KnowledgeSetsData(this);
 
-        View content = inflate(activity, R.layout.home_knowledge_map_view, null);
-        this.addView(content);
+        View content = inflate(getContext(), R.layout.home_knowledge_map_view, null);
+        addView(content);
 
         nodes_paper = (RelativeLayout) findViewById(R.id.nodes_paper);
         lines_paper = (RelativeLayout) findViewById(R.id.lines_paper);
@@ -91,10 +80,10 @@ public class KnowledgeMapView extends LockableScrollView {
     }
 
     public void _draw_dash_path_view() {
-        dash_path_view = new DashPathView(activity);
+        dash_path_view = new DashPathView(getContext());
 
         dash_path_view.set_dash_path_endpoint_list(dash_path_endpoint_list);
-        dash_path_view.set_color(Color.parseColor("#aaaaaa"));
+        dash_path_view.set_color(Color.parseColor("#cccccc"));
         dash_path_view.set_dash_icon_radius(3);
 
         lines_paper.addView(dash_path_view);
