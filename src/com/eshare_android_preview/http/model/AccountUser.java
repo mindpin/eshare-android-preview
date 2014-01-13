@@ -45,8 +45,10 @@ public class AccountUser extends BaseModel{
         this.avatar_url = json.getString("avatar");
         if(this.avatar_url != null && !this.avatar_url.equals("")){
           InputStream is = BaseHttpApi.download_image(EshareHttpRequest.SITE + this.avatar_url);
-          byte[] avatar = IOUtils.toByteArray(is);
-          this.avatar = avatar;
+          if(is !=null){
+              byte[] avatar = IOUtils.toByteArray(is);
+              this.avatar = avatar;
+          }
         }
     }
 
