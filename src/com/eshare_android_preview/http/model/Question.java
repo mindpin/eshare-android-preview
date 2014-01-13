@@ -25,7 +25,7 @@ public class Question implements Serializable {
     public String knowledge_node_id;
     public String knowledge_net_id;
     public String answer;
-    public List<String> choices;
+    public List<String> choices = new ArrayList<String>();
     public List<ContentToken> content;
     public int difficulty;
     public String kind;
@@ -109,26 +109,24 @@ public class Question implements Serializable {
     }
 
     private Question set_choices_list() {
-        if (this.choices != null && this.choices.size() > 0) {
-            if (kind.equals(Question.Type.SINGLE_CHOICE) || kind.equals(Question.Type.MULTIPLE_CHOICE)) {
-                String[] choices_sym = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P".split(",");
-                for (int j = 0; j < choices.size(); j++) {
-                    QuestionChoice qc = new QuestionChoice(j, choices_sym[j], choices.get(j));
-                    choices_list.add(qc);
-                }
+        if (kind.equals(Question.Type.SINGLE_CHOICE) || kind.equals(Question.Type.MULTIPLE_CHOICE)) {
+            String[] choices_sym = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P".split(",");
+            for (int j = 0; j < choices.size(); j++) {
+                QuestionChoice qc = new QuestionChoice(j, choices_sym[j], choices.get(j));
+                choices_list.add(qc);
             }
+        }
 
-            if (kind.equals(Question.Type.FILL)) {
-                for (int j = 0; j < choices.size(); j++) {
-                    QuestionChoice qc = new FillQuestionChoice(j, choices.get(j));
-                    choices_list.add(qc);
-                }
+        if (kind.equals(Question.Type.FILL)) {
+            for (int j = 0; j < choices.size(); j++) {
+                QuestionChoice qc = new FillQuestionChoice(j, choices.get(j));
+                choices_list.add(qc);
             }
+        }
 
-            if (kind.equals(Question.Type.TRUE_FALSE)) {
-                choices_list.add(new QuestionChoice(0, "T", "正确"));
-                choices_list.add(new QuestionChoice(1, "F", "错误"));
-            }
+        if (kind.equals(Question.Type.TRUE_FALSE)) {
+            choices_list.add(new QuestionChoice(0, "T", "正确"));
+            choices_list.add(new QuestionChoice(1, "F", "错误"));
         }
         return this;
     }
