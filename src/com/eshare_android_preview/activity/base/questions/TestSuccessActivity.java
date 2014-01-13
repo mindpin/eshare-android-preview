@@ -11,12 +11,20 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
+import com.eshare_android_preview.base.task.BaseAsyncTask;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.experience_chart_view.ExperienceChartView;
 import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.UiSound;
+import com.eshare_android_preview.http.api.ExpApi;
+import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
+import com.eshare_android_preview.http.api.TestSuccessHttpApi;
+import com.eshare_android_preview.http.logic.user_auth.AccountManager;
+import com.eshare_android_preview.http.model.CurrentState;
+import com.eshare_android_preview.http.model.KnowledgeNet;
+import com.eshare_android_preview.http.model.TestSuccess;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.http.model.TestPaperTarget;
 
@@ -34,6 +42,7 @@ public class TestSuccessActivity extends EshareBaseActivity {
 
     private ExperienceView experience_view;
     private ExperienceChartView experience_chart_view;
+    private TestSuccess test_success;
 
     private Handler handler = new Handler() {
         @Override
@@ -63,14 +72,40 @@ public class TestSuccessActivity extends EshareBaseActivity {
 
         UiSound.SUCCESS.start();
 
+        if(!loaded){
+            send_http_request();
+        }
+
         super.onCreate(savedInstanceState);
+    }
+
+    private void send_http_request() {
+        new BaseAsyncTask<Void, Void, Void>(this, R.string.now_loading) {
+            @Override
+            public Void do_in_background(Void... params) throws Exception {
+                String net_id = KnowledgeNet.current_net_id();
+                String node_or_checkpoint_id = test_paper.node_or_checkpoint_id;
+                CurrentState.current_state = ExpApi.exp_info(net_id);
+                test_success = TestSuccessHttpApi.build_test_success(net_id, node_or_checkpoint_id);
+                return null;
+            }
+
+            @Override
+            public void on_success(Void result) {
+                loaded = true;
+                experience_view.refresh();
+                experience_chart_view.init(test_success.day_exps);
+                handler.sendEmptyMessageDelayed(0, 500);
+            }
+        }.execute();
     }
 
     private void load_avatar() {
         ImageView iv = (ImageView) findViewById(R.id.avatar);
         BitmapFactory.Options o = new BitmapFactory.Options();
         o.inScaled = false;
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.avatar_ben7th, o);
+        byte[] avatar = AccountManager.current_user().avatar;
+        Bitmap b = BitmapFactory.decodeByteArray(avatar, 0, avatar.length, o);
         b = ImageTools.createBitmapBySize(b, BaseUtils.dp_to_px(30), BaseUtils.dp_to_px(30));
         CircleAvatarDrawable d = new CircleAvatarDrawable(b);
         iv.setBackgroundDrawable(d);
@@ -84,27 +119,12 @@ public class TestSuccessActivity extends EshareBaseActivity {
         experience_chart_view = (ExperienceChartView) findViewById(R.id.chart_view);
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        handler.sendEmptyMessageDelayed(0, 500);
-    }
-
     private void run_animation() {
-        if (!loaded) {
-//            TODO 待集成
-//            TestPaperTarget target = test_paper.target;
-//
-//            int exp_num = target.do_learn();
-//
-//            experience_view.add(exp_num);
-//            experience_chart_view.run_animation(exp_num);
-//
-//            findViewById(R.id.added_exp_rl).setVisibility(View.VISIBLE);
-//            ((TextView) findViewById(R.id.added_exp)).setText("+" + exp_num);
-//
-//            loaded = true;
-        }
+        int exp_num = test_success.add_exp_num;
+        experience_view.add(exp_num);
+        experience_chart_view.run_animation(exp_num);
+        findViewById(R.id.added_exp_rl).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.added_exp)).setText("+" + exp_num);
     }
 
     public void finish(View view) {

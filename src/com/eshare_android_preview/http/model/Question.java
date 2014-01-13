@@ -131,7 +131,7 @@ public class Question implements Serializable {
         return this;
     }
 
-    public class ContentToken {
+    public class ContentToken implements Serializable{
         String type;
         HashMap data;
     }

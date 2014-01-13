@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.ui.UiColor;
+import com.eshare_android_preview.http.model.DayExp;
 import com.eshare_android_preview.model.DayExpInfo;
 import com.eshare_android_preview.model.elog.ExperienceLog;
 
@@ -36,27 +37,26 @@ public class ExperienceChartView extends View {
 
 
     // 日期信息
-    private List<DayExpInfo> logs;
+    private List<DayExp> day_exps;
+
+    private boolean inited = false;
 
     public ExperienceChartView(Context context) {
         super(context);
-        init();
     }
 
     public ExperienceChartView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public ExperienceChartView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init();
     }
 
-    private void init(){
+    public void init(List<DayExp> day_exps){
         if (isInEditMode()) return;
 
-        logs = ExperienceLog.history_info();
+        this.day_exps = day_exps;
 
         // 读取每个节点的经验值
         get_exps();
@@ -67,12 +67,15 @@ public class ExperienceChartView extends View {
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setTypeface(Typeface.MONOSPACE);
+
+        inited = true;
+        invalidate();
     }
 
     private void get_exps() {
         exps = new ArrayList<Float>();
         for(int i = 0; i < 5; i++) {
-            exps.add((float) logs.get(i).exp_num);
+            exps.add((float) day_exps.get(i).exp_num);
         }
     }
 
@@ -98,6 +101,8 @@ public class ExperienceChartView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         if (isInEditMode()) return;
+
+        if(!inited) return;
 
         canvas_height = getHeight();
         canvas_width = getWidth();
@@ -181,20 +186,20 @@ public class ExperienceChartView extends View {
             canvas.drawLine(mark_x, mark_y, mark_x, mark_y - 5, paint);
 
             // 画星期文字
-            DayExpInfo day = logs.get(i);
+            DayExp day = day_exps.get(i);
             Rect bounds = new Rect();
             paint.setColor(UiColor.EXP_CHART_SCALE_MARK_TEXT);
             paint.setTextSize(day_font_size);
-            paint.getTextBounds(day.day_of_week_str, 0, day.day_of_week_str.length(), bounds);
-            canvas.drawText(day.day_of_week_str,
+            paint.getTextBounds(day.week_day, 0, day.week_day.length(), bounds);
+            canvas.drawText(day.week_day,
                     mark_x - bounds.width() / 2,
                     mark_y + 31 + bounds.height() / 2,
                     paint
             );
 
             // 画日期文字
-            paint.getTextBounds(day.day_of_month_str, 0, day.day_of_month_str.length(), bounds);
-            canvas.drawText(day.day_of_month_str,
+            paint.getTextBounds(day.month_day, 0, day.month_day.length(), bounds);
+            canvas.drawText(day.month_day,
                     mark_x - bounds.width() / 2,
                     mark_y + 31 + 30 + bounds.height() / 2,
                     paint

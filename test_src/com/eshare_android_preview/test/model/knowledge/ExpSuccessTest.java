@@ -23,9 +23,9 @@ public class ExpSuccessTest extends AndroidTestCase {
 
             test_success = TestSuccessHttpApi.build_test_success("javascript", "node-31");
             Assert.assertEquals(test_success.add_exp_num, 5);
-            Assert.assertEquals(test_success.history_info.length, 5);
-            Assert.assertEquals(test_success.day_exp(0).week_day, "周三");
-            Assert.assertEquals(test_success.day_exp(1).month_day, "7");
+            Assert.assertEquals(test_success.day_exps.size(), 5);
+            Assert.assertEquals(test_success.day_exps.get(0).week_day, "周三");
+            Assert.assertEquals(test_success.day_exps.get(1).month_day, "7");
         } catch(Exception e) {
             e.printStackTrace();
         }
