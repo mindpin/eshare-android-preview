@@ -7,24 +7,13 @@
     <RelativeLayout
         android:layout_height="50dp"
         android:layout_width="fill_parent"
-        android:background="#f1f1f1"
-        >
+        android:background="#f1f1f1">
 
-        <RelativeLayout
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:layout_marginRight="90dp"
-            android:layout_alignParentLeft="true"
-            android:gravity="center"
-            >
-
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_height="30dp"
-                android:layout_width="30dp"
-                />
-
-        </RelativeLayout>
+        <com.eshare_android_preview.base.view.ui.avatar.AvatarImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="30dp"
+            android:layout_width="30dp" />
 
         <com.eshare_android_preview.base.view.ExperienceView
             android:id="@+id/experience_view"
@@ -34,30 +23,14 @@
             android:layout_marginRight="90dp"
             android:fadingEdge="none" />
 
-        <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
+        <com.eshare_android_preview.base.view.ui.navigation.ChangeCourseView
             android:layout_height="30dp"
             android:layout_width="80dp"
             border_radius="15"
             border_radius_background_color="#555555"
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:onClick="change_course"
-            >
-
-            <TextView
-                android:layout_height="fill_parent"
-                android:layout_width="fill_parent"
-                android:gravity="center"
-                android:text="更改课程"
-                android:textColor="#fff"
-                android:shadowColor="#66000000"
-                android:shadowDy="1"
-                android:shadowDx="1"
-                android:shadowRadius="1"
-                />
-
-            </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
+            android:layout_marginRight="10dp" />
 
     </RelativeLayout>
 
@@ -65,8 +38,7 @@
         android:layout_height="1dp"
         android:layout_width="fill_parent"
         android:background="#e7e7e7"
-        android:layout_marginTop="50dp"
-        ></RelativeLayout>
+        android:layout_marginTop="50dp"></RelativeLayout>
 
     <com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView
         android:id="@+id/knowledge_map_view"
@@ -74,29 +46,15 @@
         android:layout_width="fill_parent"
         android:background="#ffffff"
         android:fadingEdge="none"
-        android:layout_marginTop="51dp"
-        />
+        android:layout_marginTop="51dp" />
 
-    <!-- 控件预加载，防止问答界面网页载入不进来。可能有效。试试。 -->
-    <com.eshare_android_preview.base.view.webview.EshareMarkdownView
-        android:id="@+id/webview_preload"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        />
-
-    <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+    <com.eshare_android_preview.base.view.ui.navigation.AboutView
         android:layout_height="40dp"
         android:layout_width="50dp"
         android:layout_marginTop="51dp"
         android:text="@string/icon_exclamation_circle"
         android:textColor="#66000000"
         android:textSize="34dp"
-        android:gravity="center"
-        android:clickable="true"
-        android:onClick="open_about"
-        />
-    
-    <include layout="@layout/home_about"/>
+        android:gravity="center" />
 
 </RelativeLayout>

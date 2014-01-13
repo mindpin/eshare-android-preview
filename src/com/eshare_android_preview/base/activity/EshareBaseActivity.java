@@ -14,17 +14,14 @@ import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.activity.base.LoginActivity;
 import com.eshare_android_preview.http.model.AccountUser;
 
-public class EshareBaseActivity extends Activity{
-
+public class EshareBaseActivity extends Activity {
     /**
      * 此方法务必要在子类的 onCreate 中 layout 加载后再调用
      */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
 		ActivitiesStackSingleton.tidy_and_push_activity(this);
-
 		super.onCreate(savedInstanceState);
 	}
 	
@@ -60,28 +57,36 @@ public class EshareBaseActivity extends Activity{
     }
 
     // 钩子，自行重载
-    public void on_go_back() {};
+    public void on_go_back() {
+    }
+
+    ;
 
     // 钩子，自行重载
-    public void on_setting() {};
+    public void on_setting() {
+    }
 
-	// 打开一个新的activity，此方法用来简化调用
-	final public void open_activity(Class<?> cls) {
-		startActivity(new Intent(getApplicationContext(), cls));
-	}
+    ;
+
+    // 打开一个新的activity，此方法用来简化调用
+    final public void open_activity(Class<?> cls) {
+        startActivity(new Intent(getApplicationContext(), cls));
+    }
 
     // 隐藏顶部的回退按钮
     public void hide_head_go_back_button() {
         try {
             findViewById(R.id.button_go_back).setVisibility(View.GONE);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     // 隐藏顶部的设置按钮
     public void hide_head_setting_button() {
         try {
             findViewById(R.id.button_setting).setVisibility(View.GONE);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     // 隐藏顶栏底边
@@ -89,7 +94,8 @@ public class EshareBaseActivity extends Activity{
         try {
             RelativeLayout rl = (RelativeLayout) findViewById(R.id.head_bottom_line);
             rl.setVisibility(View.GONE);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     // 设置顶部文字
@@ -97,7 +103,8 @@ public class EshareBaseActivity extends Activity{
         try {
             TextView tv = (TextView) findViewById(R.id.head_bar_title_tv);
             tv.setText(text);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     // 设置顶部文字
@@ -105,10 +112,12 @@ public class EshareBaseActivity extends Activity{
         try {
             TextView tv = (TextView) findViewById(R.id.head_bar_title_tv);
             tv.setText(res_id);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     private Typeface fontawesome_font;
+
     public void set_fontawesome(TextView tv) {
         if (null == fontawesome_font) {
             fontawesome_font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");

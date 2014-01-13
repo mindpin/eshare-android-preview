@@ -241,4 +241,6 @@ public class FileDirs {
      }
     public final static File MX_CAPTURE_TEMP_DIR = get_or_create_dir("/mx/capture_temp");
     public final static String MX_FILE_PATH = Environment.getExternalStorageDirectory().getPath() + "/mx/temp";
+
+    public final static File IMAGE_CACHE_DIR = get_or_create_dir("/teamkn/image_cache");
 }

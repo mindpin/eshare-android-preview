@@ -1,0 +1,26 @@
+[
+  {
+    type: 'code',
+    data: {
+      lang: 'javascript',
+      content: [["keyword","function"],["space"," "],["function","foo"],["operator","("],["operator",")"],["operator","{"],["space","\n  "],["keyword","var"],["space"," "],["ident","str"],["space"," "],["operator","="],["space"," "],["delimiter","'","string"],["content","HTML","string"],["delimiter","'","string"],["operator",";"],["space","\n  "],["keyword","var"],["space"," "],["ident","reg"],["space"," "],["operator","="],["space"," "],["delimiter","/","regexp"],["content","[1-9]","regexp"],["char","\\d","regexp"],["content","{5}(?!","regexp"],["char","\\d","regexp"],["content",")","regexp"],["delimiter","/","regexp"],["operator",";"],["space","\n  "],["keyword","var"],["space"," "],["ident","i"],["space"," "],["operator","="],["space"," "],["integer","123"],["operator",";"],["space","\n  "],["keyword","var"],["space"," "],["ident","i1"],["space"," "],["operator","="],["space"," "],["octal","034"],["operator",";"],["space","\n  "],["keyword","var"],["space"," "],["ident","i2"],["space"," "],["operator","="],["space"," "],["hex","0x27"],["operator",";"],["space","\n  "],["keyword","return"],["space"," "],["ident","bar"],["operator","("],["operator",")"],["operator",";"],["space","\n"],["operator","}"]]
+    }
+  },
+  // 代码段
+
+  {
+    type: 'text',
+    data: {
+      content: '一个问题的正文部分可能会包含：代码段，图片，普通文字段落。'
+    }
+  },
+  // 文本
+
+  {
+    type: 'image',
+    data: {
+      url: 'http://ww4.sinaimg.cn/mw1024/548cebedjw1e9e6hjmeykj205f06yaaj.jpg'
+    }
+  }
+  // 图片
+]

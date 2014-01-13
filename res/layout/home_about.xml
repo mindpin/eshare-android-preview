@@ -5,21 +5,17 @@
     >
 
     <RelativeLayout
-        android:id="@+id/about"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:background="#cc000000"
         android:layout_margin="4dp"
         android:paddingLeft="15dp"
-        android:clickable="true"
-        android:onClick="close_about"
-        android:visibility="gone"
         >
 
         <TextView
             android:layout_height="50dp"
             android:layout_width="fill_parent"
-            android:text="四叶草知识手册·体验版"
+            android:text="四叶草知识手册·β测试版"
             android:textColor="#fff"
             android:gravity="center_vertical"
             android:textSize="20dp"

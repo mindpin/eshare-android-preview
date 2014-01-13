@@ -2,25 +2,16 @@ package com.eshare_android_preview.activity.base;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageView;
+
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
-import com.eshare_android_preview.base.utils.BaseUtils;
-import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
-import com.eshare_android_preview.base.view.ui.avatar.CircleAvatarDrawable;
-import com.eshare_android_preview.base.view.webview.EshareMarkdownView;
 import com.eshare_android_preview.http.api.ExpApi;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
-import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.CurrentState;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 
@@ -34,8 +25,6 @@ public class HomeActivity extends EshareBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.home);
         net_id = KnowledgeNet.current_net_id();
-
-        load_avatar();
 
         super.onCreate(savedInstanceState);
     }
@@ -59,8 +48,6 @@ public class HomeActivity extends EshareBaseActivity {
             public void on_success(Void result) {
                 load_map_view();
                 init_exp_view();
-
-                webview_preload();
             }
         }.execute();
     }
@@ -68,19 +55,6 @@ public class HomeActivity extends EshareBaseActivity {
     private void load_map_view() {
         map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
         map_view.init(this);
-    }
-
-    private void load_avatar() {
-        ImageView iv = (ImageView) findViewById(R.id.avatar);
-        BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inScaled = false;
-
-        byte[] avatar = AccountManager.current_user().avatar;
-        Bitmap b = BitmapFactory.decodeByteArray(avatar, 0, avatar.length, o);
-
-        b = ImageTools.createBitmapBySize(b, BaseUtils.dp_to_px(30), BaseUtils.dp_to_px(30));
-        CircleAvatarDrawable d = new CircleAvatarDrawable(b);
-        iv.setBackgroundDrawable(d);
     }
 
     private void init_exp_view() {
@@ -102,22 +76,5 @@ public class HomeActivity extends EshareBaseActivity {
                     }).show();
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    public void change_course(View view) {
-        Intent intent = new Intent(this, ChangeNetActivity.class);
-        startActivity(intent);
-    }
-
-    private void webview_preload() {
-        ((EshareMarkdownView) findViewById(R.id.webview_preload)).set_markdown_content("...");
-    }
-
-    public void open_about(View view) {
-        findViewById(R.id.about).setVisibility(View.VISIBLE);
-    }
-
-    public void close_about(View view) {
-        findViewById(R.id.about).setVisibility(View.GONE);
     }
 }
