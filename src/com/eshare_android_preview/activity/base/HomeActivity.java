@@ -36,9 +36,13 @@ public class HomeActivity extends EshareBaseActivity {
 
         net_id = KnowledgeNet.current_net_id();
 
-        send_http_request();
-
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        send_http_request();
     }
 
     private void send_http_request(){
@@ -63,6 +67,7 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void load_map_view() {
         map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
+//        TODO 这里重复调用时，会报错，需要支持重复调用（当做完一个单元的题时需要刷新 map）
         map_view.init(this);
     }
 
@@ -103,13 +108,6 @@ public class HomeActivity extends EshareBaseActivity {
     public void change_course(View view) {
         Intent intent = new Intent(this, ChangeNetActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        ExperienceView view = (ExperienceView) findViewById(R.id.experience_view);
-        view.refresh();
     }
 
     private void webview_preload() {
