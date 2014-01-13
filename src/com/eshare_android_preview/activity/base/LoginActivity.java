@@ -3,14 +3,12 @@ package com.eshare_android_preview.activity.base;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.http.api.UserAuthHttpApi;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ValidateUtil;
-import com.eshare_android_preview.model.VersionCheck;
 
 public class LoginActivity extends EshareBaseActivity{
 	EditText login_et;
@@ -58,16 +56,15 @@ public class LoginActivity extends EshareBaseActivity{
     		return;
     	}
     	
-    	new BaseAsyncTask<String, Void, VersionCheck>(this, R.string.login_now_login) {
+    	new BaseAsyncTask<String, Void, Void>(this, R.string.login_now_login) {
 			@Override
-			public VersionCheck do_in_background(String... params) throws Exception {
+			public Void do_in_background(String... params) throws Exception {
 				UserAuthHttpApi.user_authenticate(login, password);
-				String version = getResources().getString(R.string.app_version);
 				return null;
 			}
 
 			@Override
-			public void on_success(VersionCheck result) {
+			public void on_success(Void result) {
 				open_activity(HomeActivity.class);
 				finish();
 			}

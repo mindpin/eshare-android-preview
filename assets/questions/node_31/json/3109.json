@@ -1,7 +1,0 @@
-{
-  "knowledge_node_id": "node-31",
-  "kind": "true_false",
-  "difficulty": 1,
-  "content": "\"a'b\" 和 'a\"b' 是相同的字符串",
-  "answer": "F"
-}

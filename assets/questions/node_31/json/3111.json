@@ -1,7 +1,0 @@
-{
-  "knowledge_node_id": "node-31",
-  "kind": "true_false",
-  "difficulty": 1,
-  "content": "\"a'b\" 的字符串长度是 2",
-  "answer": "F"
-}

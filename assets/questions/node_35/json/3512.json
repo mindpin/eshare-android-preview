@@ -1,7 +1,0 @@
-{
-  "knowledge_node_id": "node-35",
-  "kind": "true_false",
-  "difficulty": 1,
-  "content": "在JavaScript中 \"\\\" ， \\\\ ， \\' \" 的结果是 \"\" ， \\ ， ' \"",
-  "answer": "T"
-}

@@ -8,7 +8,6 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
@@ -19,14 +18,12 @@ import com.eshare_android_preview.base.view.experience_chart_view.ExperienceChar
 import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.UiSound;
 import com.eshare_android_preview.http.api.ExpApi;
-import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
 import com.eshare_android_preview.http.api.TestSuccessHttpApi;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.CurrentState;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.TestSuccess;
 import com.eshare_android_preview.model.TestPaper;
-import com.eshare_android_preview.http.model.TestPaperTarget;
 
 /**
  * Created by fushang318 on 13-12-18.

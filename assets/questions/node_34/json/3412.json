@@ -1,7 +1,0 @@
-{
-  "knowledge_node_id": "node-34",
-  "kind": "true_false",
-  "difficulty": 1,
-  "content": "JavaScript 中true与\"true\"不同",
-  "answer": "T"
-}

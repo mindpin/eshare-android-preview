@@ -1,7 +1,0 @@
-{
-  "knowledge_node_id": "node-32",
-  "kind": "true_false",
-  "difficulty": 1,
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> a = <span class=\"integer\">095</span>;\n</code></pre>\n上面的代码中, a 等于 95",
-  "answer": "T"
-}

@@ -1,7 +1,0 @@
-{
-  "knowledge_node_id": "node-31",
-  "kind": "true_false",
-  "difficulty": 1,
-  "content": "<pre class=\"CodeRay\"><code class=\"javascript\"><span class=\"keyword\">var</span> x = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">John</span><span class=\"delimiter\">\"</span></span>;\n<span class=\"keyword\">var</span> y = <span class=\"string\"><span class=\"delimiter\">\"</span><span class=\"content\">john</span><span class=\"delimiter\">\"</span></span>;\n</code></pre>\n上面的代码中，x 和 y 表示的是相同的字符串",
-  "answer": "F"
-}
