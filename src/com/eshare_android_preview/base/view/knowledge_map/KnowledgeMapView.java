@@ -48,6 +48,8 @@ public class KnowledgeMapView extends LockableScrollView {
     }
 
     public void init(EshareBaseActivity activity) {
+        removeAllViews();
+
         this.activity = activity;
         kdata = new KnowledgeSetsData(this);
 
