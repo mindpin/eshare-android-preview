@@ -10,7 +10,7 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
-import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
+import com.eshare_android_preview.base.view.ui.avatar.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.UiSound;
 
 /**

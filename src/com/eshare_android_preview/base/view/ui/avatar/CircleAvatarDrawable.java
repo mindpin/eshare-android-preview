@@ -1,4 +1,4 @@
-package com.eshare_android_preview.base.view.ui;
+package com.eshare_android_preview.base.view.ui.avatar;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

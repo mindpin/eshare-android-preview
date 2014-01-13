@@ -15,7 +15,7 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.experience_chart_view.ExperienceChartView;
-import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
+import com.eshare_android_preview.base.view.ui.avatar.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.UiSound;
 import com.eshare_android_preview.http.api.ExpApi;
 import com.eshare_android_preview.http.api.TestSuccessHttpApi;

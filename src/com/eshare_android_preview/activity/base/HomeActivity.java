@@ -16,7 +16,7 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ImageTools;
 import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
-import com.eshare_android_preview.base.view.ui.CircleAvatarDrawable;
+import com.eshare_android_preview.base.view.ui.avatar.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.webview.EshareMarkdownView;
 import com.eshare_android_preview.http.api.ExpApi;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
@@ -33,8 +33,9 @@ public class HomeActivity extends EshareBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.home);
-
         net_id = KnowledgeNet.current_net_id();
+
+        load_avatar();
 
         super.onCreate(savedInstanceState);
     }
@@ -57,7 +58,6 @@ public class HomeActivity extends EshareBaseActivity {
             @Override
             public void on_success(Void result) {
                 load_map_view();
-                load_avatar();
                 init_exp_view();
 
                 webview_preload();
@@ -67,7 +67,6 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void load_map_view() {
         map_view = (KnowledgeMapView) findViewById(R.id.knowledge_map_view);
-//        TODO 这里重复调用时，会报错，需要支持重复调用（当做完一个单元的题时需要刷新 map）
         map_view.init(this);
     }
 
