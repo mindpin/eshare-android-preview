@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
-import com.eshare_android_preview.http.model.KnowledgeNode;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.model.KnowledgeSet;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TestResult;
@@ -35,16 +35,16 @@ public class KnowledgeSetViewPagerAdapter extends PagerAdapter {
     private void init() {
         LayoutInflater lf = activity.getLayoutInflater().from(activity);
 
-        for(final KnowledgeNode node : set.nodes) {
+        for(final IUserKnowledgeNode node : set.nodes(false)) {
             KnowledgeSetPagerView kspv = new KnowledgeSetPagerView(activity, node);
             kspv.set_listener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!node.is_unlocked) return;
+                    if (!node.is_unlocked()) return;
 
                     Intent intent = new Intent(activity, QuestionShowActivity.class);
                     TestResult test_result = new TestResult(3, 10);
-                    TestPaper test_paper = new TestPaper(node.id, test_result);
+                    TestPaper test_paper = new TestPaper(node.get_id(), test_result);
                     intent.putExtra(QuestionShowActivity.ExtraKeys.TEST_PAPER, test_paper);
                     activity.startActivity(intent);
                 }

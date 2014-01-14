@@ -1,9 +1,11 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
+import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.IDataIcon;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
-import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeSetGsonBuilder;
+import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNodesGsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,25 +18,7 @@ public class KnowledgeSet extends BaseKnowledgeSet implements IUserKnowledgeSet 
     private String icon;
     private int node_count;
     private int learned_node_count;
-    public List<KnowledgeNode> nodes;
-
-//   必须保留，不然 GSON 不能正常初始化父类上的 children parents 两个字段
-    public KnowledgeSet(){
-        super();
-    }
-
-    public KnowledgeSet(KnowledgeSetGsonBuilder builder){
-        super();
-        this.id = builder.id;
-        this.name = builder.name;
-        this.icon = builder.icon;
-        this.deep = builder.deep;
-        this.is_unlocked = builder.is_unlocked;
-        this.is_learned = builder.is_learned;
-        this.node_count = builder.node_count;
-        this.learned_node_count = builder.learned_node_count;
-        this.nodes = new ArrayList<KnowledgeNode>(builder.node_map.values());
-    }
+    private List<IUserKnowledgeNode> nodes;
 
     public String get_name(){
         return name;
@@ -47,8 +31,16 @@ public class KnowledgeSet extends BaseKnowledgeSet implements IUserKnowledgeSet 
 
     @Override
     public List<IUserKnowledgeNode> nodes(boolean remote) {
-//        TODO 未实现
-        return null;
+        if(remote){
+            String net_id = UserData.instance().get_current_knowledge_net_id();
+            List<KnowledgeNode> temp_nodes = KnowledgeNetHttpApi.set_nodes(net_id, id);
+            nodes = new ArrayList<IUserKnowledgeNode>();
+            for(KnowledgeNode node :temp_nodes){
+                nodes.add(node);
+            }
+        }
+
+        return nodes;
     }
 
     public int get_learned_node_count(){

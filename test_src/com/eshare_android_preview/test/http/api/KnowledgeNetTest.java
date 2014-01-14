@@ -5,9 +5,12 @@ import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
 import com.eshare_android_preview.http.api.UserAuthHttpApi;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.KnowledgeNet;
+import com.eshare_android_preview.http.model.KnowledgeNode;
 import com.eshare_android_preview.http.model.KnowledgeSet;
 
 import junit.framework.Assert;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,18 +58,16 @@ public class KnowledgeNetTest extends AndroidTestCase{
     }
 
     public void test_3(){
-        KnowledgeSet set = null;
+        List<KnowledgeNode> nodes = new ArrayList<KnowledgeNode>();
 
         try {
-            set = KnowledgeNetHttpApi.set("javascript","set-8");
+            nodes = KnowledgeNetHttpApi.set_nodes("javascript", "set-8");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Assert.assertEquals("set-8", set.id);
-        Assert.assertEquals("基础: 值", set.get_name());
-        Assert.assertEquals(5, set.nodes.size());
-        Assert.assertEquals("node-31", set.nodes.get(0).id);
-        Assert.assertEquals("字符串", set.nodes.get(0).name);
+        Assert.assertEquals(5, nodes.size());
+        Assert.assertEquals("node-31", nodes.get(0).get_id());
+        Assert.assertEquals("字符串", nodes.get(0).get_name());
     }
 }

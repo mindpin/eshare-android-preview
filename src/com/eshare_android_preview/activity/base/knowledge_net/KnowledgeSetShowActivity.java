@@ -20,6 +20,8 @@ import com.eshare_android_preview.base.view.ui.KnowledgeSetViewPagerAdapter;
 import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
 import com.eshare_android_preview.http.c.UserData;
+import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
@@ -36,7 +38,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     RelativeLayout pager_layout;
     ViewPager view_pager;
 
-    BaseKnowledgeSet set;
+    IUserBaseKnowledgeSet set;
 
     boolean loaded = false;
     private String set_id;
@@ -60,8 +62,10 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         new BaseAsyncTask<Void, Void, Void>(this, R.string.now_loading) {
             @Override
             public Void do_in_background(Void... params) throws Exception {
-                String net_id = UserData.instance().get_current_knowledge_net_id();
-                set = KnowledgeNetHttpApi.set(net_id, set_id);
+                set = UserData.instance().get_current_knowledge_net(false).find_by_set_id(set_id);
+                if(!set.is_checkpoint()){
+                    ((KnowledgeSet)set).nodes(true);
+                }
                 return null;
             }
 

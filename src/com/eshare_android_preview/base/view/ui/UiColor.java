@@ -22,7 +22,7 @@ public class UiColor {
         return set.is_unlocked() ? SET_COLOR : LOCKED_SET_COLOR;
     }
 
-    public static int get_set_text_color(BaseKnowledgeSet set) {
+    public static int get_set_text_color(IUserBaseKnowledgeSet set) {
         if (set.is_checkpoint()) {
             return Color.parseColor("#844C1D");
         }

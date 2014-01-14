@@ -12,6 +12,10 @@ public interface IUserKnowledgeNode {
     // 节点名称
     public String get_name();
 
+    public String get_desc();
+
+    public boolean get_required();
+
     // 子节点信息
     public List<IUserKnowledgeNode> children();
 
@@ -20,4 +24,6 @@ public interface IUserKnowledgeNode {
 
     // 是否已经解锁
     public boolean is_unlocked();
+
+    public boolean is_learned();
 }

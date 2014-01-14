@@ -7,16 +7,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.view.BorderRadiusRelativeLayout;
-import com.eshare_android_preview.http.model.KnowledgeNode;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 
 /**
  * Created by Administrator on 14-1-2.
  */
 public class KnowledgeSetPagerView extends RelativeLayout {
-    KnowledgeNode node;
+    IUserKnowledgeNode node;
     View view;
 
-    public KnowledgeSetPagerView(Context context, KnowledgeNode node) {
+    public KnowledgeSetPagerView(Context context, IUserKnowledgeNode node) {
         super(context);
 
         this.node = node;
@@ -41,15 +41,15 @@ public class KnowledgeSetPagerView extends RelativeLayout {
     }
 
     private void set_name() {
-        ((TextView) view.findViewById(R.id.node_name)).setText(node.name);
+        ((TextView) view.findViewById(R.id.node_name)).setText(node.get_name());
     }
 
     private void set_desc() {
-        ((TextView) view.findViewById(R.id.node_desc)).setText(node.desc);
+        ((TextView) view.findViewById(R.id.node_desc)).setText(node.get_desc());
     }
 
     private void set_required_desc() {
-        if (node.required) {
+        if (node.get_required()) {
             ((TextView) view.findViewById(R.id.required)).setText("必学");
         } else {
             ((TextView) view.findViewById(R.id.required)).setText("选学");
@@ -57,7 +57,7 @@ public class KnowledgeSetPagerView extends RelativeLayout {
     }
 
     private void set_learned_icon() {
-        if (node.is_learned) {
+        if (node.is_learned()) {
             view.findViewById(R.id.learned_icon).setVisibility(View.VISIBLE);
         } else {
             view.findViewById(R.id.learned_icon).setVisibility(View.GONE);
@@ -65,7 +65,7 @@ public class KnowledgeSetPagerView extends RelativeLayout {
     }
 
     private void set_locked_icon() {
-        if (node.is_unlocked) {
+        if (node.is_unlocked()) {
             view.findViewById(R.id.lock_icon).setVisibility(View.GONE);
         } else {
             view.findViewById(R.id.lock_icon).setVisibility(View.VISIBLE);
@@ -76,7 +76,7 @@ public class KnowledgeSetPagerView extends RelativeLayout {
         BorderRadiusRelativeLayout bl = (BorderRadiusRelativeLayout) view.findViewById(R.id.start_btn);
         TextView tv = (TextView) view.findViewById(R.id.start_btn_text);
 
-        if (node.is_unlocked) {
+        if (node.is_unlocked()) {
             tv.setText("开始练习");
             bl.setBackgroundColor(UiColor.VIEW_PAGER_BUTTON_UNLOCKED);
         } else {

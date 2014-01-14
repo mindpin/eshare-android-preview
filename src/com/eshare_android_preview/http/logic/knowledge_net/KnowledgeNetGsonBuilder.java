@@ -31,13 +31,11 @@ public class KnowledgeNetGsonBuilder {
     }
 
     private KnowledgeNet _build_root_base_set(){
-        List<IUserBaseKnowledgeSet> root_base_set = new ArrayList<IUserBaseKnowledgeSet>();
-        for(BaseKnowledgeSet base_set : base_set_map.values()){
-            if(base_set.is_root()){
-                root_base_set.add(base_set);
-            }
+        List<IUserBaseKnowledgeSet> sets = new ArrayList<IUserBaseKnowledgeSet>();
+        for(BaseKnowledgeSet set : base_set_map.values()){
+            sets.add(set);
         }
-        return new KnowledgeNet(id, name, root_base_set, exp_status);
+        return new KnowledgeNet(id, name, exp_status, base_set_map);
     }
 
     private void _process_relations(){

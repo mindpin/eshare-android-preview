@@ -1,13 +1,16 @@
 package com.eshare_android_preview.http.api;
 
 import com.eshare_android_preview.base.http.EshareGetRequest;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNetGsonBuilder;
-import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeSetGsonBuilder;
+import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNodesGsonBuilder;
 import com.eshare_android_preview.http.model.KnowledgeNet;
+import com.eshare_android_preview.http.model.KnowledgeNode;
 import com.eshare_android_preview.http.model.KnowledgeSet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,14 +44,19 @@ public class KnowledgeNetHttpApi {
         }
     }
 
-    public static KnowledgeSet set(String net_id, String set_id) throws Exception{
-        return new EshareGetRequest<KnowledgeSet>("/knowledge_nets/" +  net_id + "/knowledge_sets/" + set_id) {
-            @Override
-            public KnowledgeSet on_success(String response_text) throws Exception {
-                Gson gson = new Gson();
-                KnowledgeSetGsonBuilder builder = gson.fromJson(response_text, KnowledgeSetGsonBuilder.class);
-                return builder.build();
-            }
-        }.go();
+    public static List<KnowledgeNode> set_nodes(String net_id, String set_id){
+        try {
+            return new EshareGetRequest<List<KnowledgeNode>>("/knowledge_nets/" +  net_id + "/knowledge_sets/" + set_id) {
+                @Override
+                public List<KnowledgeNode> on_success(String response_text) throws Exception {
+                    Gson gson = new Gson();
+                    KnowledgeNodesGsonBuilder builder = gson.fromJson(response_text, KnowledgeNodesGsonBuilder.class);
+                    return builder.build();
+                }
+            }.go();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<KnowledgeNode>();
+        }
     }
 }
