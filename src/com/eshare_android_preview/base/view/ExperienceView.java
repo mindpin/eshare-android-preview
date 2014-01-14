@@ -8,6 +8,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.ui.UiColor;
+import com.eshare_android_preview.http.c.UserData;
+import com.eshare_android_preview.http.i.knowledge.IUserExp;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.model.CurrentState;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
@@ -101,9 +104,11 @@ public class ExperienceView extends View {
             return;
         }
 
-        CurrentState state = CurrentState.current_state;
-        rect_exp_bar_width = rect_width * state.exp_num / state.level_up_exp_num;
-        current_level = state.level;
+        IUserKnowledgeNet net = UserData.instance().get_current_knowledge_net(false);
+        IUserExp exp = net.get_exp();
+
+        rect_exp_bar_width = rect_width * exp.get_level_exp() / exp.get_next_level_total_exp();
+        current_level = exp.get_level();
     }
 
     private void draw_background_rect(Canvas canvas) {

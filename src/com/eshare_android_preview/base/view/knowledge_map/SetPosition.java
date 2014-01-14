@@ -17,6 +17,7 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.ui.UiColor;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
 
@@ -40,7 +41,7 @@ public class SetPosition {
     };
 
     public KnowledgeMapView map_view;
-    public BaseKnowledgeSet set;
+    public IUserKnowledgeSet set;
     public AniProxy ani_proxy;
 
     // grid
@@ -62,7 +63,7 @@ public class SetPosition {
     public TextView title_view;
     public TextView count_view;
 
-    public SetPosition(BaseKnowledgeSet set, KnowledgeMapView map_view) {
+    public SetPosition(IUserKnowledgeSet set, KnowledgeMapView map_view) {
         this.map_view = map_view;
         this.set = set;
 
@@ -70,7 +71,7 @@ public class SetPosition {
     }
 
     private void set_y_position() {
-        grid_top = set.deep;
+        grid_top = set.get_deep();
         grid_dp_bottom = grid_top * map_view.GRID_HEIGHT_DP;
         grid_dp_top = grid_dp_bottom - map_view.GRID_HEIGHT_DP;
 
@@ -86,7 +87,7 @@ public class SetPosition {
 
     @Override
     public boolean equals(Object o) {
-        return this.set.id.equals(((SetPosition) o).set.id);
+        return this.set.get_id().equals(((SetPosition) o).set.get_id());
     }
 
     public Drawable get_icon_drawable() {
@@ -114,7 +115,7 @@ public class SetPosition {
 
     // 节点是否解锁（可学）
     public boolean is_unlocked() {
-        return set.is_unlocked;
+        return set.is_unlocked();
     }
 
     private void _set_icon_events() {
@@ -126,7 +127,7 @@ public class SetPosition {
 
                     // open activity
                     Intent intent = new Intent(map_view.getContext(), KnowledgeSetShowActivity.class);
-                    intent.putExtra("set_id", set.id);
+                    intent.putExtra("set_id", set.get_id());
                     map_view.getContext().startActivity(intent);
                 }
             }
@@ -225,8 +226,8 @@ public class SetPosition {
     // --------------------------------
 
     public void put_data_into_end_point_list(List<DashPathEndpoint> list) {
-        for (BaseKnowledgeSet parent : set.parents) {
-            SetPosition parent_pos = map_view.kdata.get_from(parent.id);
+        for (IUserKnowledgeSet parent : set.parents()) {
+            SetPosition parent_pos = map_view.kdata.get_from(parent.get_id());
 
             float x1 = parent_pos.grid_dp_left + parent_pos.circle_center_offset;
             float y1 = parent_pos.grid_dp_top + parent_pos.text_offset_top + 24

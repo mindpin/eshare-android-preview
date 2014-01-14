@@ -1,5 +1,6 @@
 package com.eshare_android_preview.base.view.knowledge_map;
 
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 
 import java.util.ArrayList;
@@ -24,19 +25,19 @@ public class KnowledgeSetsData {
         this.max_grid_dp_bottom = 0;
     }
 
-    public void put_set_in_map(BaseKnowledgeSet set) {
-        List<SetPosition> list = deep_hashmap.get(set.deep);
+    public void put_set_in_map(IUserKnowledgeSet set) {
+        List<SetPosition> list = deep_hashmap.get(set.get_deep());
 
         if (null == list) {
             list = new ArrayList();
-            deep_hashmap.put(set.deep, list);
+            deep_hashmap.put(set.get_deep(), list);
         }
 
         SetPosition pos = new SetPosition(set, map_view);
 
         if (!list.contains(pos)) {
             list.add(pos);
-            pos_hashmap.put(set.id, pos);
+            pos_hashmap.put(set.get_id(), pos);
             max_grid_dp_bottom = Math.max(pos.grid_dp_bottom, max_grid_dp_bottom);
         }
     }

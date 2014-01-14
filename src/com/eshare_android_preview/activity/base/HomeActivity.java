@@ -10,22 +10,15 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
 import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView;
-import com.eshare_android_preview.http.api.ExpApi;
-import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
-import com.eshare_android_preview.http.model.CurrentState;
-import com.eshare_android_preview.http.model.KnowledgeNet;
+import com.eshare_android_preview.http.c.UserData;
 
 
 public class HomeActivity extends EshareBaseActivity {
-    public static String net_id;
     public static KnowledgeMapView map_view;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.home);
-        net_id = KnowledgeNet.current_net_id();
-
         super.onCreate(savedInstanceState);
     }
 
@@ -39,8 +32,7 @@ public class HomeActivity extends EshareBaseActivity {
         new BaseAsyncTask<Void, Void, Void>(this, R.string.now_loading) {
             @Override
             public Void do_in_background(Void... params) throws Exception {
-                CurrentState.current_state = ExpApi.exp_info(net_id);
-                KnowledgeNet.current_net = KnowledgeNetHttpApi.net(net_id);
+                UserData.instance().get_current_knowledge_net(true);
                 return null;
             }
 
