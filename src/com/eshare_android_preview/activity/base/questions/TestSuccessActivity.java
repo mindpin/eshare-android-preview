@@ -19,6 +19,7 @@ import com.eshare_android_preview.base.view.ui.avatar.CircleAvatarDrawable;
 import com.eshare_android_preview.base.view.ui.UiSound;
 import com.eshare_android_preview.http.api.ExpApi;
 import com.eshare_android_preview.http.api.TestSuccessHttpApi;
+import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.CurrentState;
 import com.eshare_android_preview.http.model.KnowledgeNet;
@@ -80,9 +81,9 @@ public class TestSuccessActivity extends EshareBaseActivity {
         new BaseAsyncTask<Void, Void, Void>(this, R.string.now_loading) {
             @Override
             public Void do_in_background(Void... params) throws Exception {
-                String net_id = KnowledgeNet.current_net_id();
+                UserData.instance().get_current_knowledge_net(true);
+                String net_id = UserData.instance().get_current_knowledge_net_id();
                 String node_or_checkpoint_id = test_paper.node_or_checkpoint_id;
-                CurrentState.current_state = ExpApi.exp_info(net_id);
                 test_success = TestSuccessHttpApi.build_test_success(net_id, node_or_checkpoint_id);
                 return null;
             }

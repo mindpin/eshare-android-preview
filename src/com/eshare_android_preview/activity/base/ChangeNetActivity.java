@@ -11,6 +11,7 @@ import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
 import com.eshare_android_preview.http.api.ExpApi;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
+import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.model.CurrentState;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.widget.adapter.ChangeNetsAdapter;
@@ -55,7 +56,7 @@ public class ChangeNetActivity extends EshareBaseActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         KnowledgeNet net = (KnowledgeNet) view.getTag(R.id.adapter_item_tag);
                         Intent intent = new Intent(ChangeNetActivity.this, HomeActivity.class);
-                        KnowledgeNet.switch_to(net.id);
+                        UserData.instance().set_current_knowledge_net_id(net.get_id());
                         startActivity(intent);
                         finish();
                     }

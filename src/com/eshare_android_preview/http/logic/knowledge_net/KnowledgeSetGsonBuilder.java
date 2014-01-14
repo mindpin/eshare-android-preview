@@ -19,10 +19,9 @@ public class KnowledgeSetGsonBuilder {
     public boolean is_learned;
     public int node_count;
     public int learned_node_count;
-    private KnowledgeNode[] nodes;
-    private KnowledgeNodeRelation[] relations;
-
-    private Map<String,KnowledgeNode> node_map = new HashMap<String, KnowledgeNode>();
+    public KnowledgeNode[] nodes;
+    public KnowledgeNodeRelation[] relations;
+    public Map<String,KnowledgeNode> node_map = new HashMap<String, KnowledgeNode>();
 
     public KnowledgeSet build(){
         _build_node_map();
@@ -31,18 +30,8 @@ public class KnowledgeSetGsonBuilder {
     }
 
     private KnowledgeSet _build_set() {
-        KnowledgeSet set = new KnowledgeSet();
+        KnowledgeSet set = new KnowledgeSet(this);
 
-        set.id = this.id;
-        set.name = this.name;
-        set.icon = this.icon;
-        set.deep = this.deep;
-        set.is_unlocked = this.is_unlocked;
-        set.is_learned = this.is_learned;
-        set.node_count = this.node_count;
-        set.learned_node_count = this.learned_node_count;
-        set.nodes = new ArrayList<KnowledgeNode>(this.node_map.values());
-        
         return set;
     }
 

@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.KeyEvent;
-
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
@@ -51,7 +50,7 @@ public class HomeActivity extends EshareBaseActivity {
 
     private void init_exp_view() {
         ExperienceView ev = (ExperienceView) findViewById(R.id.experience_view);
-        ev.refresh();
+        ev.init();
     }
 
     @Override

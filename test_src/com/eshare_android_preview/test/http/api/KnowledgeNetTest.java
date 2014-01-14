@@ -33,8 +33,8 @@ public class KnowledgeNetTest extends AndroidTestCase{
             e.printStackTrace();
         }
         KnowledgeNet net = net_list.get(0);
-        Assert.assertEquals("javascript", net.id);
-        Assert.assertEquals("javascript", net.name);
+        Assert.assertEquals("javascript", net.get_id());
+        Assert.assertEquals("javascript", net.get_name());
     }
 
     public void test_2(){
@@ -44,14 +44,14 @@ public class KnowledgeNetTest extends AndroidTestCase{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(1, net.children.size());
+        Assert.assertEquals(1, net.children().size());
 
-        KnowledgeSet set_8 = (KnowledgeSet)net.children.get(0);
+        KnowledgeSet set_8 = (KnowledgeSet)net.children().get(0);
         Assert.assertEquals("set-8", set_8.id  );
 
         Assert.assertEquals(1, set_8.children.size());
 
-        Assert.assertEquals(2, set_8.children.get(0).children.size());
+        Assert.assertEquals(2, set_8.children.get(0).children().size());
     }
 
     public void test_3(){
@@ -64,7 +64,7 @@ public class KnowledgeNetTest extends AndroidTestCase{
         }
 
         Assert.assertEquals("set-8", set.id);
-        Assert.assertEquals("基础: 值", set.name);
+        Assert.assertEquals("基础: 值", set.get_name());
         Assert.assertEquals(5, set.nodes.size());
         Assert.assertEquals("node-31", set.nodes.get(0).id);
         Assert.assertEquals("字符串", set.nodes.get(0).name);

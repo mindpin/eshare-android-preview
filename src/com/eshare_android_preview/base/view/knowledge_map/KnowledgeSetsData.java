@@ -1,5 +1,6 @@
 package com.eshare_android_preview.base.view.knowledge_map;
 
+import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 
@@ -25,7 +26,7 @@ public class KnowledgeSetsData {
         this.max_grid_dp_bottom = 0;
     }
 
-    public void put_set_in_map(IUserKnowledgeSet set) {
+    public void put_set_in_map(IUserBaseKnowledgeSet set) {
         List<SetPosition> list = deep_hashmap.get(set.get_deep());
 
         if (null == list) {

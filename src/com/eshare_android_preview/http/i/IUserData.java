@@ -29,4 +29,6 @@ public interface IUserData {
     // 设置和获取“当前选择”的知识网络信息
     public void set_current_knowlegde_net(IUserKnowledgeNet net);
     public IUserKnowledgeNet get_current_knowledge_net(boolean remote);
+    public void set_current_knowledge_net_id(String net_id);
+    public String get_current_knowledge_net_id();
 }

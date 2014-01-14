@@ -2,7 +2,7 @@ package com.eshare_android_preview.base.view.ui;
 
 import android.graphics.Color;
 
-import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
+import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
 import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 
 /**
@@ -14,7 +14,7 @@ public class UiColor {
     public final static int SET_COLOR = Color.parseColor("#1cb0f6");
     public final static int CHECKPOINT_COLOR = Color.parseColor("#fccd2d");
 
-    public static int get_set_color(IUserKnowledgeSet set) {
+    public static int get_set_color(IUserBaseKnowledgeSet set) {
         if (set.is_checkpoint()) {
             return CHECKPOINT_COLOR;
         }

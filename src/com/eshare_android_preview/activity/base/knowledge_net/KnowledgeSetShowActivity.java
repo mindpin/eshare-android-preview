@@ -19,6 +19,7 @@ import com.eshare_android_preview.base.view.ui.FontAwesomeTextView;
 import com.eshare_android_preview.base.view.ui.KnowledgeSetViewPagerAdapter;
 import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
+import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
@@ -59,7 +60,8 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         new BaseAsyncTask<Void, Void, Void>(this, R.string.now_loading) {
             @Override
             public Void do_in_background(Void... params) throws Exception {
-                set = KnowledgeNetHttpApi.set(KnowledgeNet.current_net_id(), set_id);
+                String net_id = UserData.instance().get_current_knowledge_net_id();
+                set = KnowledgeNetHttpApi.set(net_id, set_id);
                 return null;
             }
 

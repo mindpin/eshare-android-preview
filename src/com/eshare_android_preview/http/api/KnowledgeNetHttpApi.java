@@ -25,15 +25,20 @@ public class KnowledgeNetHttpApi {
         }.go();
     }
 
-    public static KnowledgeNet net(String net_id) throws Exception{
-        return new EshareGetRequest<KnowledgeNet>("/knowledge_nets/" +  net_id) {
-            @Override
-            public KnowledgeNet on_success(String response_text) throws Exception {
-                Gson gson = new Gson();
-                KnowledgeNetGsonBuilder builder = gson.fromJson(response_text, KnowledgeNetGsonBuilder.class);
-                return builder.build();
-            }
-        }.go();
+    public static KnowledgeNet net(String net_id){
+        try {
+            return new EshareGetRequest<KnowledgeNet>("/knowledge_nets/" +  net_id) {
+                @Override
+                public KnowledgeNet on_success(String response_text) throws Exception {
+                    Gson gson = new Gson();
+                    KnowledgeNetGsonBuilder builder = gson.fromJson(response_text, KnowledgeNetGsonBuilder.class);
+                    return builder.build();
+                }
+            }.go();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static KnowledgeSet set(String net_id, String set_id) throws Exception{

@@ -20,7 +20,7 @@ import com.nineoldandroids.animation.ValueAnimator;
  * Created by menxu on 13-12-10.
  */
 public class ExperienceView extends View {
-    private boolean is_on_init = true;
+    private boolean is_inited = false;
 
     final private static int ANIMATE_DRUATION = 500;
 
@@ -71,7 +71,7 @@ public class ExperienceView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        init();
+        if(!is_inited) return;
 
         paint = new Paint();
         paint.setAntiAlias(true);
@@ -84,17 +84,16 @@ public class ExperienceView extends View {
         draw_text_right(canvas);
     }
 
-    private void init() {
+    public void init() {
         // circle
-        if (is_on_init) {
-            is_on_init = false;
+        if (!is_inited) {
+            is_inited = true;
 
             view_width  = getWidth();
             view_height = getHeight();
             rect_width = view_width - RECT_LEFT - RECT_RIGHT;
-
-            init_exp_and_level();
         }
+        refresh();
     }
 
     private void init_exp_and_level() {
@@ -212,8 +211,8 @@ public class ExperienceView extends View {
     }
 
     private float get_added_rect_width(int added_exp) {
-        CurrentState state = CurrentState.current_state;
-        float added_width = rect_width * added_exp / state.level_up_exp_num;
+        IUserExp state = UserData.instance().get_current_knowledge_net(false).get_exp();
+        float added_width = rect_width * added_exp / state.get_next_level_total_exp();
         return added_width + rect_exp_bar_width;
     }
 

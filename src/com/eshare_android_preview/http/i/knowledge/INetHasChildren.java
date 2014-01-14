@@ -6,5 +6,5 @@ import java.util.List;
  * Created by Administrator on 14-1-14.
  */
 public interface INetHasChildren {
-    public List<IUserKnowledgeSet> children();
+    public List<IUserBaseKnowledgeSet> children();
 }

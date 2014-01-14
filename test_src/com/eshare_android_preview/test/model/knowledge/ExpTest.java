@@ -23,8 +23,8 @@ public class ExpTest extends AndroidTestCase{
 	public void test_exp_info(){
 		Assert.assertNotNull(ExpApi.exp_info("javascript"));
 		CurrentState cs = ExpApi.exp_info("javascript");
-		Assert.assertEquals(cs.level, 1);
-		Assert.assertEquals(cs.level_up_exp_num, 10);
-		Assert.assertEquals(cs.exp_num, 0);
+		Assert.assertEquals(cs.get_level(), 1);
+		Assert.assertEquals(cs.get_next_level_total_exp(), 10);
+		Assert.assertEquals(cs.get_level_exp(), 0);
 	}
 }

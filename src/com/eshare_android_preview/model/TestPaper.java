@@ -2,11 +2,9 @@ package com.eshare_android_preview.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.eshare_android_preview.http.api.QuestionHttpApi;
-import com.eshare_android_preview.http.model.KnowledgeNet;
+import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.model.Question;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +25,8 @@ public class TestPaper implements Parcelable {
     public Question get_next_question(){
         if(questions.size() == 0){
             try {
-                questions = QuestionHttpApi.get_random_questions(KnowledgeNet.current_net_id(), this.node_or_checkpoint_id);
+                String net_id = UserData.instance().get_current_knowledge_net_id();
+                questions = QuestionHttpApi.get_random_questions(net_id, this.node_or_checkpoint_id);
                 current_index = 0;
             } catch (Exception e) {
                 e.printStackTrace();

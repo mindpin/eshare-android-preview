@@ -7,36 +7,10 @@ import java.util.List;
 /**
  * Created by Administrator on 14-1-13.
  */
-public interface IUserKnowledgeSet extends INetHasChildren {
-    // ID
-    public String get_id();
-
-    // 单元名称
-    public String get_name();
-
+public interface IUserKnowledgeSet extends IUserBaseKnowledgeSet {
     // 单元图标
     public IDataIcon get_icon();
 
-    // 深度
-    public int get_deep();
-
-    // 子单元信息
-    public List<IUserKnowledgeSet> children();
-
-    // 父单元信息
-    public List<IUserKnowledgeSet> parents();
-
-    // 是否是根节点
-    public boolean is_root();
-
-    // 是否是 checkpoint
-    public boolean is_checkpoint();
-
-    // 是否已经解锁
-    public boolean is_unlocked();
-
     // 节点信息
-    public List<IUserKnowledgeNode> nodes();
-    public List<IUserKnowledgeNode> nodes_remote();
-    public List<IUserKnowledgeNode> nodes_local();
+    public List<IUserKnowledgeNode> nodes(boolean remote);
 }

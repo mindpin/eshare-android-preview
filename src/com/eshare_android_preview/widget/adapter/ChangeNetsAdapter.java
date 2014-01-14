@@ -32,7 +32,7 @@ public class ChangeNetsAdapter extends EshareBaseAdapter<KnowledgeNet> {
     @Override
     public void fill_with_data(BaseViewHolder holder, KnowledgeNet item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
-        view_holder.net_name_tv.setText(item.name);
+        view_holder.net_name_tv.setText(item.get_name());
     }
 
     private class ViewHolder implements BaseViewHolder {
