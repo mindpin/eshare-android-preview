@@ -34,6 +34,6 @@ public interface IUserKnowledgeSet {
 
     // 节点信息
     public List<IUserKnowledgeNode> nodes();
-    public List<IUserKnowledgeNode> nodes_remoate();
+    public List<IUserKnowledgeNode> nodes_remote();
     public List<IUserKnowledgeNode> nodes_local();
 }

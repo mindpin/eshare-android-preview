@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.logic.knowledge_net;
 
 import com.eshare_android_preview.http.model.BaseKnowledgeSet;
+import com.eshare_android_preview.http.model.CurrentState;
 import com.eshare_android_preview.http.model.KnowledgeCheckpoint;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
@@ -14,6 +15,7 @@ import java.util.Map;
  * Created by fushang318 on 14-1-8.
  */
 public class KnowledgeNetGsonBuilder {
+    private CurrentState exp_status;
     private String id;
     private String name;
     private KnowledgeSet[] sets;
@@ -35,7 +37,7 @@ public class KnowledgeNetGsonBuilder {
                 root_base_set.add(base_set);
             }
         }
-        return new KnowledgeNet(id, name, root_base_set);
+        return new KnowledgeNet(id, name, root_base_set, exp_status);
     }
 
     private void _process_relations(){

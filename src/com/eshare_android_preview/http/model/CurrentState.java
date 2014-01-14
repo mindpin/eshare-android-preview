@@ -5,6 +5,7 @@ public class CurrentState {
 	public int level = 1;
     public int level_up_exp_num = 30;
     public int exp_num = 0;
+    public int total_exp_num = 0;
     
 	public int getLevel() {
 		return level;

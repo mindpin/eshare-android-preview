@@ -14,11 +14,13 @@ public class KnowledgeNet implements IHasChildren {
     public String id;
     public String name;
     public List<BaseKnowledgeSet> children = new ArrayList<BaseKnowledgeSet>();
+    public CurrentState exp_status;
 
-    public KnowledgeNet(String id, String name, List<BaseKnowledgeSet> root_base_set){
+    public KnowledgeNet(String id, String name, List<BaseKnowledgeSet> root_base_set, CurrentState exp_status){
         this.id = id;
         this.name = name;
         this.children = root_base_set;
+        this.exp_status = exp_status;
     }
 
     public static String current_net_id(){
