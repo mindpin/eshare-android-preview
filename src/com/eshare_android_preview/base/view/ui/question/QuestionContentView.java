@@ -30,21 +30,17 @@ public class QuestionContentView extends LinearLayout {
     public void set_content(Question question) {
         removeAllViews();
 
-        question_content = new QuestionContent(question);
-        for (QuestionContent.Item item : question_content.list) {
-            View v = item.get_view(getContext());
-            if (null != v) {
-                addView(v);
-            }
+        question_content = new QuestionContent(getContext(), question);
+        for (View view : question_content.view_list) {
+            addView(view);
         }
     }
 
     // 获取下一个还没填的空
     public QuestionFill get_next_empty_fill() {
         for (QuestionFill fill : question_content.fill_list) {
-            if (fill.is_empty) return fill;
+            if (null == fill.filled_text) return fill;
         }
-
         return null;
     }
 }

@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
-import android.text.style.BackgroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,38 +26,59 @@ import java.util.List;
  * Created by Administrator on 14-1-8.
  */
 public class QuestionContent {
-    public List<Item> list;
+    public Context context;
+
+    public List<View> view_list;
     public List<QuestionFill> fill_list;
 
-    public QuestionContent(Question question) {
-        list = new ArrayList<Item>();
+    public QuestionContent(Context context, Question question) {
+        this.context = context;
+        this.view_list = new ArrayList<View>();
+        this.fill_list = new ArrayList<QuestionFill>();
+
         for (Question.ContentToken token : question.content) {
             Item item = new Item();
             item.type = token.type;
             item.data = token.data;
-            list.add(item);
+
+            ViewPack vp = item.get_pack(context);
+
+            if (null != vp.view) {
+                view_list.add(vp.view);
+            }
+
+            if (null != vp.fill_list) {
+                for (QuestionFill qf : vp.fill_list) {
+                    qf.text_view = (TextView) vp.view;
+                    fill_list.add(qf);
+                }
+            }
         }
 
-        fill_list = new ArrayList<QuestionFill>();
+        int i = 0;
+        for (QuestionFill qf : fill_list) {
+            i++;
+            qf.index = i;
+        }
     }
 
     class Item {
         String type;
         HashMap<String, Object> data;
 
-        public View get_view(Context context) {
-            if ("text".equals(type)) return get_text_view(context);
-            if ("code".equals(type)) return get_code_view(context);
-            if ("image".equals(type)) return get_image_view(context);
+        public ViewPack get_pack(Context context) {
+            if ("text".equals(type)) return get_text_pack(context);
+            if ("code".equals(type)) return get_code_pack(context);
+            if ("image".equals(type)) return get_image_pack(context);
             return null;
         }
 
-        private View get_text_view(Context context) {
+        private ViewPack get_text_pack(Context context) {
             TextView tv = new TextView(context);
 
             String content = (String) data.get("content");
-            SpannableStringBuilder ssb = QuestionFill.get_text_include_fills(content);
-            tv.setText(ssb);
+            QuestionFill.Pack p = QuestionFill.get_text_include_fills(content);
+            tv.setText(p.string_builder);
 
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -69,13 +89,13 @@ public class QuestionContent {
             tv.setTextSize(18);
             tv.setTypeface(Typeface.MONOSPACE);
 
-            return tv;
+            return new ViewPack(tv, p.fill_list);
         }
 
-        private View get_code_view(Context context) {
+        private ViewPack get_code_pack(Context context) {
             RichCodeTextView rtv = new RichCodeTextView(context);
             List<List<String>> list = (List<List<String>>) data.get("content");
-            rtv.set_content(list);
+            List<QuestionFill> fill_list = rtv.set_content(list);
 
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -87,10 +107,10 @@ public class QuestionContent {
             rtv.setPadding(p, p, p, p);
             rtv.setTextSize(14);
 
-            return rtv;
+            return new ViewPack(rtv, fill_list);
         }
 
-        private View get_image_view(final Context context) {
+        private ViewPack get_image_pack(final Context context) {
             final ImageView iv = new ImageView(context);
             iv.setBackgroundColor(Color.parseColor("#0000ff"));
 
@@ -113,7 +133,8 @@ public class QuestionContent {
                     iv.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.image_border));
                 }
             });
-            return iv;
+
+            return new ViewPack(iv, null);
         }
 
         private Bitmap resize_bitmap_in_box(Bitmap bitmap, int w, int h) {
@@ -134,6 +155,16 @@ public class QuestionContent {
             }
 
             return Bitmap.createScaledBitmap(bitmap, rw, rh, true);
+        }
+    }
+
+    class ViewPack {
+        View view;
+        List<QuestionFill> fill_list;
+
+        ViewPack(View view, List<QuestionFill> fill_list) {
+            this.view = view;
+            this.fill_list = fill_list;
         }
     }
 }

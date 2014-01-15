@@ -105,8 +105,9 @@ public class TwilightTheme implements RichCodeTextView.ColorTheme {
     }
 
     @Override
-    public SpannableStringBuilder get_string(RichCodeTextView.Token token) {
-        SpannableStringBuilder ssb = QuestionFill.get_text_include_fills(token.text);
+    public QuestionFill.Pack get_string(RichCodeTextView.Token token) {
+        QuestionFill.Pack p = QuestionFill.get_text_include_fills(token.text);
+        SpannableStringBuilder ssb = p.string_builder;
 
         String key = token.key();
         TextStyle style = map.get(key);
@@ -125,7 +126,7 @@ public class TwilightTheme implements RichCodeTextView.ColorTheme {
             }
         }
 
-        return ssb;
+        return p;
     }
 
     private void put(String key, String color_s) {

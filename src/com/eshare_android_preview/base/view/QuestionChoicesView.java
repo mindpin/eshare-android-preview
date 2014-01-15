@@ -285,8 +285,8 @@ public class QuestionChoicesView extends FlatGridView {
             (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER_ACTIVE);
             (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG_ACTIVE);
 
-            // 设置 Fill 样式
-            qf.set_text(choice.content);
+            // 填写问题正文的空
+            qf.fill_text(choice.content);
 
             v.setTag(qf);
             qf.set_linked_view(v);

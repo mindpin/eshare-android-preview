@@ -7,6 +7,8 @@ import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.eshare_android_preview.base.view.ui.question.QuestionFill;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
 public class RichCodeTextView extends TextView {
 
     private ColorTheme theme;
+    public List<QuestionFill> fill_list;
 
     public RichCodeTextView(Context context) {
         super(context);
@@ -35,11 +38,25 @@ public class RichCodeTextView extends TextView {
         setTypeface(Typeface.MONOSPACE);
     }
 
-    public void set_content(List<List<String>> list) {
+    public List<QuestionFill> set_content(List<List<String>> list) {
+        fill_list = new ArrayList<QuestionFill>();
+        SpannableStringBuilder ssb = new SpannableStringBuilder();
+
         for (Token t : _make_token_list(list)) {
-            SpannableStringBuilder ss = theme.get_string(t);
-            append(ss);
+            QuestionFill.Pack p = theme.get_string(t);
+            ssb.append(p.string_builder);
+
+            if (null != p.fill_list) {
+                for (QuestionFill qf : p.fill_list) {
+                    qf.string_builder = ssb;
+                    fill_list.add(qf);
+                }
+            }
         }
+
+        setText(ssb);
+
+        return fill_list;
     }
 
     private List<Token> _make_token_list(List<List<String>> list) {
@@ -96,6 +113,6 @@ public class RichCodeTextView extends TextView {
     }
 
     interface ColorTheme {
-        public SpannableStringBuilder get_string(Token token);
+        public QuestionFill.Pack get_string(Token token);
     }
 }
