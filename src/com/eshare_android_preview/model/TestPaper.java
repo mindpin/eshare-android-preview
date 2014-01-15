@@ -34,8 +34,14 @@ public class TestPaper implements Parcelable {
             }
         }
 
-        Question question = questions.get(current_index);
-        current_index += 1;
+//        Question question = questions.get(current_index);
+//        current_index += 1;
+//        return question;
+
+        Question question = null;
+        for (Question q : questions) {
+            if (q.is_fill()) question = q;
+        }
         return question;
     }
 

@@ -3,6 +3,9 @@ package com.eshare_android_preview.base.view.ui.question;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.text.SpannableStringBuilder;
+import android.text.style.BackgroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,11 +15,11 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.ui.code.RichCodeTextView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.eshare_android_preview.http.model.Question;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,10 +28,18 @@ import java.util.List;
  */
 public class QuestionContent {
     public List<Item> list;
+    public List<QuestionFill> fill_list;
 
-    public QuestionContent(String content_json_string) {
-        Gson gson = new Gson();
-        list = gson.fromJson(content_json_string, new TypeToken<List<Item>>(){}.getType());
+    public QuestionContent(Question question) {
+        list = new ArrayList<Item>();
+        for (Question.ContentToken token : question.content) {
+            Item item = new Item();
+            item.type = token.type;
+            item.data = token.data;
+            list.add(item);
+        }
+
+        fill_list = new ArrayList<QuestionFill>();
     }
 
     class Item {
@@ -44,12 +55,19 @@ public class QuestionContent {
 
         private View get_text_view(Context context) {
             TextView tv = new TextView(context);
-            tv.setText((String) data.get("content"));
 
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            String content = (String) data.get("content");
+            SpannableStringBuilder ssb = QuestionFill.get_text_include_fills(content);
+            tv.setText(ssb);
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
             lp.bottomMargin = BaseUtils.dp_to_px(10);
             tv.setLayoutParams(lp);
-            tv.setTextSize(16);
+            tv.setTextSize(18);
+            tv.setTypeface(Typeface.MONOSPACE);
 
             return tv;
         }
@@ -59,7 +77,10 @@ public class QuestionContent {
             List<List<String>> list = (List<List<String>>) data.get("content");
             rtv.set_content(list);
 
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
             lp.bottomMargin = BaseUtils.dp_to_px(10);
             rtv.setLayoutParams(lp);
             int p = BaseUtils.dp_to_px(5);
@@ -73,7 +94,10 @@ public class QuestionContent {
             final ImageView iv = new ImageView(context);
             iv.setBackgroundColor(Color.parseColor("#0000ff"));
 
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
             lp.bottomMargin = BaseUtils.dp_to_px(10);
             iv.setLayoutParams(lp);
 

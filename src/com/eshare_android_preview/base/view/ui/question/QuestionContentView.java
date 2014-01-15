@@ -4,7 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import com.eshare_android_preview.http.model.Question;
 
 /**
  * Created by Administrator on 14-1-8.
@@ -24,13 +25,26 @@ public class QuestionContentView extends LinearLayout {
         setOrientation(VERTICAL);
     }
 
-    public void set_content(String content_json_string) {
-        QuestionContent qc = new QuestionContent(content_json_string);
-        for(QuestionContent.Item item : qc.list) {
+    private QuestionContent question_content;
+
+    public void set_content(Question question) {
+        removeAllViews();
+
+        question_content = new QuestionContent(question);
+        for (QuestionContent.Item item : question_content.list) {
             View v = item.get_view(getContext());
             if (null != v) {
                 addView(v);
             }
         }
+    }
+
+    // 获取下一个还没填的空
+    public QuestionFill get_next_empty_fill() {
+        for (QuestionFill fill : question_content.fill_list) {
+            if (fill.is_empty) return fill;
+        }
+
+        return null;
     }
 }

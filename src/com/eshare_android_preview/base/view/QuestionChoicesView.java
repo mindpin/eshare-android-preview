@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
@@ -18,7 +19,7 @@ import com.eshare_android_preview.base.view.ui.FlatGridView;
 import com.eshare_android_preview.base.view.ui.FlowLayout;
 import com.eshare_android_preview.base.view.ui.FontAwesomeTextView;
 import com.eshare_android_preview.base.view.ui.UiColor;
-import com.eshare_android_preview.base.view.webview.TextFill;
+import com.eshare_android_preview.base.view.ui.question.QuestionFill;
 import com.eshare_android_preview.http.model.Question;
 import com.eshare_android_preview.http.model.QuestionChoice;
 import com.eshare_android_preview.http.model.QuestionSelectAnswer;
@@ -49,7 +50,9 @@ public class QuestionChoicesView extends FlatGridView {
 
         if (question.is_fill()) {
             load_fill_kind_content();
-            activity.question_content_webview.set_on_click_listener_for_code_fill(new CodefillViewListener());
+            // TODO
+//            activity.question_content_webview.set_on_click_listener_for_code_fill(new CodefillViewListener());
+//            activity.question_content_view.set_on_click_listener_for_text_fill()
             return;
         }
 
@@ -254,8 +257,6 @@ public class QuestionChoicesView extends FlatGridView {
         RelativeLayout item_view;
         QuestionChoice choice;
 
-//        EshareMarkdownView.TextFill binded_codefill;
-
         public QuestionFillItemListener(RelativeLayout item_view, QuestionChoice choice) {
             this.item_view = item_view;
             this.choice = choice;
@@ -273,56 +274,53 @@ public class QuestionChoicesView extends FlatGridView {
         }
 
         public void select(View v) {
-            // 设置答案
-            int index = activity.question_content_webview.get_first_unfilled_codefill_index();
-            if (index == -1) {
-                return;
-            }
+            // 找到下一个没填的空，如果已经没有下一个没有填的空了，结束。
+            QuestionFill qf = activity.question_content_view.get_next_empty_fill();
 
-            answer.set_choice(index + 1, choice);
+            if (null == qf) return;
+
+            answer.set_choice(qf.index, choice);
 
             // 设置底部选项样式
             (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER_ACTIVE);
             (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG_ACTIVE);
 
-            // 设置 CodeFill 样式
-            TextFill cf = activity.question_content_webview.get_first_unfilled_codefill();
-            cf.set_text(choice.content);
+            // 设置 Fill 样式
+            qf.set_text(choice.content);
 
-            v.setTag(cf);
-            cf.setTag(v);
+            v.setTag(qf);
+            qf.set_linked_view(v);
         }
 
         public void unselect(View v) {
-            unselect_fill_choice((TextFill) v.getTag(), v);
+            unselect_fill_choice((QuestionFill) v.getTag(), v);
         }
     }
 
-    class CodefillViewListener implements OnClickListener {
-        @Override
-        public void onClick(View view) {
-            TextFill code_fill = (TextFill) view;
-            if (!code_fill.filled) {
-                return;
-            }
+//    class CodefillViewListener implements OnClickListener {
+//        @Override
+//        public void onClick(View view) {
+//            QuestionFill code_fill = (QuestionFill) view;
+//            if (!code_fill.filled) {
+//                return;
+//            }
+//
+//            unselect_fill_choice(code_fill, (View) code_fill.getTag());
+//
+//            activity.refresh_question_button();
+//        }
+//    }
 
-            unselect_fill_choice(code_fill, (View) code_fill.getTag());
-
-            activity.refresh_question_button();
-        }
-    }
-
-    private void unselect_fill_choice(TextFill code_fill, View item_view) {
+    private void unselect_fill_choice(QuestionFill fill, View item_view) {
         // 设置答案
-        int index = activity.question_content_webview.get_codefill_index(code_fill);
-        answer.set_choice(index + 1, null);
-        code_fill.unset_text();
+        answer.set_choice(fill.index, null);
+        fill.clear_text();
 
         // 设置底部选项样式
         (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER);
         (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG);
 
         item_view.setTag(null);
-        code_fill.setTag(null);
+        fill.set_linked_view(null);
     }
 }
