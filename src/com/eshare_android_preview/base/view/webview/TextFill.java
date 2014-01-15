@@ -1,12 +1,7 @@
 package com.eshare_android_preview.base.view.webview;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.view.Gravity;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 

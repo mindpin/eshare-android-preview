@@ -1,7 +1,6 @@
 package com.eshare_android_preview.base.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Parcel;
@@ -15,8 +14,6 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.Scroller;
-
-import com.eshare_android_preview.R;
 
 import java.util.ArrayList;
 import java.util.HashSet;

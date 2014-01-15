@@ -1,7 +1,5 @@
 package com.eshare_android_preview.http.api;
 
-import com.eshare_android_preview.R;
-import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.http.EshareHttpRequest;
 
 import org.apache.http.HttpResponse;

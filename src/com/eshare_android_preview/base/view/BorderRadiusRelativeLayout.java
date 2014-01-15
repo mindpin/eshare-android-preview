@@ -11,7 +11,6 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.utils.BaseUtils;
 
 /**

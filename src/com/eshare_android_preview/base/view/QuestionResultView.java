@@ -1,8 +1,6 @@
 package com.eshare_android_preview.base.view;
 
-import android.app.Activity;
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -11,7 +9,6 @@ import android.widget.RelativeLayout;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
-import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.BaseUtils.ScreenSize;
 import com.eshare_android_preview.base.view.ui.UiSound;

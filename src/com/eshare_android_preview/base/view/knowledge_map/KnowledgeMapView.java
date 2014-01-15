@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.LockableScrollView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;

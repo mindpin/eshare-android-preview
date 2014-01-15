@@ -10,8 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.activity.base.LoginActivity;
+import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.AccountUser;
 
 public class EshareBaseActivity extends Activity {

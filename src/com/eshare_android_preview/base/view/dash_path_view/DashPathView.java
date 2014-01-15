@@ -14,7 +14,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.ArrayList;
 

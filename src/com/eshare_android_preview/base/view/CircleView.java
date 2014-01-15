@@ -2,14 +2,11 @@ package com.eshare_android_preview.base.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.eshare_android_preview.base.utils.BaseUtils;
-import com.nineoldandroids.animation.ValueAnimator;
 
 /**
  * Created by fushang318 on 13-11-19.

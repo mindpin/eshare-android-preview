@@ -1,16 +1,15 @@
 package com.eshare_android_preview.base.utils;
 
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.eshare_android_preview.application.EshareApplication;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.eshare_android_preview.R;
-import com.eshare_android_preview.application.EshareApplication;
-
-import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * 正在表达式验证工具类（验证身份证、车牌号等）

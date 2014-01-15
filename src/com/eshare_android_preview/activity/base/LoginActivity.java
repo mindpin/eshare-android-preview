@@ -3,12 +3,13 @@ package com.eshare_android_preview.activity.base;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.http.api.UserAuthHttpApi;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.utils.ValidateUtil;
+import com.eshare_android_preview.http.api.UserAuthHttpApi;
 
 public class LoginActivity extends EshareBaseActivity{
 	EditText login_et;

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.eshare_android_preview.activity.base.knowledge_net.KnowledgeSetShowActivity;
 import com.eshare_android_preview.application.EshareApplication;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;

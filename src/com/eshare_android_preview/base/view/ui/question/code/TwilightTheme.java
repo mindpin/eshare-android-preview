@@ -1,4 +1,4 @@
-package com.eshare_android_preview.base.view.ui.code;
+package com.eshare_android_preview.base.view.ui.question.code;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -105,12 +105,9 @@ public class TwilightTheme implements RichCodeTextView.ColorTheme {
     }
 
     @Override
-    public QuestionFill.Pack get_string(RichCodeTextView.Token token) {
-        QuestionFill.Pack p = QuestionFill.get_text_include_fills(token.text);
-        SpannableStringBuilder ssb = p.string_builder;
-
-        String key = token.key();
-        TextStyle style = map.get(key);
+    public SpannableStringBuilder get_string(RichCodeTextView.Token token) {
+        SpannableStringBuilder ssb = QuestionFill.parse(token.text);
+        TextStyle style = map.get(token.key());
 
         if (null != style) {
             ssb.setSpan(
@@ -126,7 +123,7 @@ public class TwilightTheme implements RichCodeTextView.ColorTheme {
             }
         }
 
-        return p;
+        return ssb;
     }
 
     private void put(String key, String color_s) {

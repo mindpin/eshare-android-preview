@@ -6,11 +6,13 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.eshare_android_preview.activity.base.questions.QuestionShowActivity;
 import com.eshare_android_preview.http.model.KnowledgeNode;
 import com.eshare_android_preview.http.model.KnowledgeSet;
 import com.eshare_android_preview.model.TestPaper;
 import com.eshare_android_preview.model.TestResult;
+
 import java.util.ArrayList;
 import java.util.List;
 

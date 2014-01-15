@@ -5,17 +5,17 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.eshare_android_preview.base.view.ui.question.builder.IQuItemView;
+import com.eshare_android_preview.base.view.ui.question.builder.ViewBuilder;
 import com.eshare_android_preview.http.model.Question;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 14-1-8.
  */
 public class QuestionContentView extends LinearLayout {
-    public QuestionContentView(Context context) {
-        super(context);
-        init();
-    }
-
     public QuestionContentView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
@@ -25,21 +25,42 @@ public class QuestionContentView extends LinearLayout {
         setOrientation(VERTICAL);
     }
 
-    private QuestionContent question_content;
+    private Question question;
+    private List<IQuItemView> item_views;
+    private List<QuestionFill> fills;
 
-    public void set_content(Question question) {
+    public void set_question(Question question) {
+        this.question = question;
+
         removeAllViews();
 
-        question_content = new QuestionContent(getContext(), question);
-        for (View view : question_content.view_list) {
-            addView(view);
+        parse_views();
+
+        fills = new ArrayList<QuestionFill>();
+        int i = 1;
+        for(IQuItemView qiv : item_views) {
+            for (QuestionFillSpan span : qiv.spans()) {
+                QuestionFill qf = new QuestionFill(qiv, span);
+                fills.add(qf);
+                qf.index = i;
+                i++;
+            }
+
+            addView((View) qiv);
+        }
+    }
+
+    private void parse_views() {
+        item_views = new ArrayList<IQuItemView>();
+        for (Question.ContentToken token : question.content) {
+            item_views.add(ViewBuilder.build(getContext(), token));
         }
     }
 
     // 获取下一个还没填的空
     public QuestionFill get_next_empty_fill() {
-        for (QuestionFill fill : question_content.fill_list) {
-            if (null == fill.filled_text) return fill;
+        for (QuestionFill fill : fills) {
+            if (fill.is_empty()) return fill;
         }
         return null;
     }

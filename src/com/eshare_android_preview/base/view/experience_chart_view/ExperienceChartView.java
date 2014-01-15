@@ -8,11 +8,13 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.eshare_android_preview.base.view.ui.UiColor;
 import com.eshare_android_preview.http.model.DayExp;
+import com.nineoldandroids.animation.ValueAnimator;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.nineoldandroids.animation.ValueAnimator;
 
 
 public class ExperienceChartView extends View {

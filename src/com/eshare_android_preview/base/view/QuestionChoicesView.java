@@ -297,20 +297,6 @@ public class QuestionChoicesView extends FlatGridView {
         }
     }
 
-//    class CodefillViewListener implements OnClickListener {
-//        @Override
-//        public void onClick(View view) {
-//            QuestionFill code_fill = (QuestionFill) view;
-//            if (!code_fill.filled) {
-//                return;
-//            }
-//
-//            unselect_fill_choice(code_fill, (View) code_fill.getTag());
-//
-//            activity.refresh_question_button();
-//        }
-//    }
-
     private void unselect_fill_choice(QuestionFill fill, View item_view) {
         // 设置答案
         answer.set_choice(fill.index, null);

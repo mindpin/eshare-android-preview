@@ -1,12 +1,11 @@
 package com.eshare_android_preview.http.api;
 
-import org.json.JSONObject;
-
+import com.eshare_android_preview.base.http.EsharePostRequest;
+import com.eshare_android_preview.base.http.PostParamText;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.AccountUser;
-import com.eshare_android_preview.base.http.PostParamText;
-import com.eshare_android_preview.base.http.EshareGetRequest;
-import com.eshare_android_preview.base.http.EsharePostRequest;
+
+import org.json.JSONObject;
 
 
 public class UserAuthHttpApi {

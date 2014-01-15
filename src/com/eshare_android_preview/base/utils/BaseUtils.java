@@ -1,5 +1,16 @@
 package com.eshare_android_preview.base.utils;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.widget.Toast;
+
+import com.eshare_android_preview.application.EshareApplication;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,19 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.res.Resources;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.telephony.TelephonyManager;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.widget.Toast;
-
-import com.eshare_android_preview.application.EshareApplication;
 
 public class BaseUtils {
 

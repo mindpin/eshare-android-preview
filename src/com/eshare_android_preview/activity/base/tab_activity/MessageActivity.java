@@ -7,13 +7,10 @@ import android.widget.Button;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.activity.base.dash_path_demo.DashPathDemoActivity;
-
 import com.eshare_android_preview.activity.base.expericence_of.ExperienceViewDemoActivity;
-
 import com.eshare_android_preview.activity.base.experience.ExperienceChartActivity;
-import com.eshare_android_preview.activity.base.webview_demo.WebViewDemoActivity;
-
 import com.eshare_android_preview.activity.base.switch_test.FirstActivity;
+import com.eshare_android_preview.activity.base.webview_demo.WebViewDemoActivity;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 
 public class MessageActivity extends EshareBaseActivity{

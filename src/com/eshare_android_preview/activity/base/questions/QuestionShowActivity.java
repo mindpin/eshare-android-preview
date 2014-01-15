@@ -156,7 +156,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
             @Override
             public void on_success(Void aVoid) {
                 question_kind_desc_text_view.setText(question.get_kind_desc_str());
-                question_content_view.set_content(question);
+                question_content_view.set_question(question);
                 question_choices_view.load_question(question);
                 question_button.reset();
                 question_button.disable_submit();

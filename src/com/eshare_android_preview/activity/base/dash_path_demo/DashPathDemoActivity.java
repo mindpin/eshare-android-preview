@@ -14,6 +14,7 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
+
 import java.util.ArrayList;
 
 /**

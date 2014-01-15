@@ -9,9 +9,7 @@ import android.widget.ListView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
-import com.eshare_android_preview.http.api.ExpApi;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
-import com.eshare_android_preview.http.model.CurrentState;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.widget.adapter.ChangeNetsAdapter;
 
