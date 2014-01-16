@@ -1,12 +1,10 @@
 package com.eshare_android_preview.http.api;
 
 import com.eshare_android_preview.base.http.EshareGetRequest;
-import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNetGsonBuilder;
 import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNodesGsonBuilder;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeNode;
-import com.eshare_android_preview.http.model.KnowledgeSet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

@@ -1,11 +1,12 @@
 package com.eshare_android_preview.http.logic.knowledge_net;
 
-import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.http.model.BaseKnowledgeSet;
 import com.eshare_android_preview.http.model.CurrentState;
 import com.eshare_android_preview.http.model.KnowledgeCheckpoint;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +32,7 @@ public class KnowledgeNetGsonBuilder {
     }
 
     private KnowledgeNet _build_root_base_set(){
-        List<IUserBaseKnowledgeSet> sets = new ArrayList<IUserBaseKnowledgeSet>();
+        List<IUserKnowledgeSet> sets = new ArrayList<IUserKnowledgeSet>();
         for(BaseKnowledgeSet set : base_set_map.values()){
             sets.add(set);
         }

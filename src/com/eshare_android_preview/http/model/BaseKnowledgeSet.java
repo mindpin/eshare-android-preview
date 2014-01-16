@@ -1,24 +1,26 @@
 package com.eshare_android_preview.http.model;
 
-import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
+import com.eshare_android_preview.http.i.IDataIcon;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by fushang318 on 14-1-8.
  */
-public class BaseKnowledgeSet implements IUserBaseKnowledgeSet {
+public abstract class BaseKnowledgeSet implements IUserKnowledgeSet {
     public String id;
     public int deep;
     public boolean is_unlocked;
     public boolean is_learned;
-    public List<IUserBaseKnowledgeSet> children;
-    public List<IUserBaseKnowledgeSet> parents;
-
+    public List<IUserKnowledgeSet> children;
+    public List<IUserKnowledgeSet> parents;
 
     public BaseKnowledgeSet(){
-        children = new ArrayList<IUserBaseKnowledgeSet>();
-        parents = new ArrayList<IUserBaseKnowledgeSet>();
+        children = new ArrayList<IUserKnowledgeSet>();
+        parents = new ArrayList<IUserKnowledgeSet>();
     }
 
     public void add_child(BaseKnowledgeSet child){
@@ -29,8 +31,9 @@ public class BaseKnowledgeSet implements IUserBaseKnowledgeSet {
         this.parents.add(parent);
     }
 
-    public boolean is_root(){
-        return this.parents.size() == 0;
+    @Override
+    public IDataIcon get_icon() {
+        return null;
     }
 
     @Override
@@ -38,17 +41,9 @@ public class BaseKnowledgeSet implements IUserBaseKnowledgeSet {
         return id;
     }
 
-    public String get_name(){
-        return "";
-    }
-
     @Override
     public int get_deep() {
         return deep;
-    }
-
-    public boolean is_checkpoint(){
-        return false;
     }
 
     @Override
@@ -57,12 +52,22 @@ public class BaseKnowledgeSet implements IUserBaseKnowledgeSet {
     }
 
     @Override
-    public List<IUserBaseKnowledgeSet> children() {
+    public boolean is_learned(){
+        return is_learned;
+    }
+
+    @Override
+    public List<IUserKnowledgeSet> children() {
         return children;
     }
 
     @Override
-    public List<IUserBaseKnowledgeSet> parents() {
+    public List<IUserKnowledgeSet> parents() {
         return parents;
     }
+
+    abstract public String get_name();
+    abstract public boolean is_checkpoint();
+    abstract public List<IUserKnowledgeNode> nodes(boolean remote);
+    abstract public boolean is_root();
 }

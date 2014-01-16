@@ -1,10 +1,10 @@
 package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.i.IDataIcon;
-import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
 import com.eshare_android_preview.http.i.knowledge.IUserExp;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class KnowledgeNet extends IUserKnowledgeNet {
     private String id;
     private String name;
-    private List<IUserBaseKnowledgeSet> children = new ArrayList<IUserBaseKnowledgeSet>();
+    private List<IUserKnowledgeSet> children = new ArrayList<IUserKnowledgeSet>();
     private Map<String,BaseKnowledgeSet> base_set_map = new HashMap<String, BaseKnowledgeSet>();
     private CurrentState exp_status;
 
@@ -25,7 +25,7 @@ public class KnowledgeNet extends IUserKnowledgeNet {
         this.name = name;
         this.exp_status = exp_status;
         this.base_set_map = base_set_map;
-        for(IUserBaseKnowledgeSet set : base_set_map.values()){
+        for(IUserKnowledgeSet set : base_set_map.values()){
             if(set.is_root()){
                 this.children.add(set);
             }
@@ -33,7 +33,7 @@ public class KnowledgeNet extends IUserKnowledgeNet {
     }
 
     @Override
-    public List<IUserBaseKnowledgeSet> children() {
+    public List<IUserKnowledgeSet> children() {
         return children;
     }
 

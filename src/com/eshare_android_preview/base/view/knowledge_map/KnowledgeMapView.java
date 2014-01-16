@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.LockableScrollView;
@@ -13,7 +14,8 @@ import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathView;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.knowledge.INetHasChildren;
-import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +94,7 @@ public class KnowledgeMapView extends LockableScrollView {
     }
 
     public void _r_traversal(INetHasChildren node) {
-        for (IUserBaseKnowledgeSet set : node.children()) {
+        for (IUserKnowledgeSet set : node.children()) {
             kdata.put_set_in_map(set);
             _r_traversal(set);
         }

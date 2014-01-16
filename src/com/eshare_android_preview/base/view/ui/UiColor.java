@@ -2,8 +2,7 @@ package com.eshare_android_preview.base.view.ui;
 
 import android.graphics.Color;
 
-import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
-import com.eshare_android_preview.http.model.BaseKnowledgeSet;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 
 /**
  * Created by Administrator on 13-12-27.
@@ -14,7 +13,7 @@ public class UiColor {
     public final static int SET_COLOR = Color.parseColor("#1cb0f6");
     public final static int CHECKPOINT_COLOR = Color.parseColor("#fccd2d");
 
-    public static int get_set_color(IUserBaseKnowledgeSet set) {
+    public static int get_set_color(IUserKnowledgeSet set) {
         if (set.is_checkpoint()) {
             return CHECKPOINT_COLOR;
         }
@@ -22,7 +21,7 @@ public class UiColor {
         return set.is_unlocked() ? SET_COLOR : LOCKED_SET_COLOR;
     }
 
-    public static int get_set_text_color(IUserBaseKnowledgeSet set) {
+    public static int get_set_text_color(IUserKnowledgeSet set) {
         if (set.is_checkpoint()) {
             return Color.parseColor("#844C1D");
         }

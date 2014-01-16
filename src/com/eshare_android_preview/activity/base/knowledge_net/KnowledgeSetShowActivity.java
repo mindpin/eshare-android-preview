@@ -19,12 +19,8 @@ import com.eshare_android_preview.base.view.knowledge_map.SetPosition;
 import com.eshare_android_preview.base.view.ui.FontAwesomeTextView;
 import com.eshare_android_preview.base.view.ui.KnowledgeSetViewPagerAdapter;
 import com.eshare_android_preview.base.view.ui.UiColor;
-import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
 import com.eshare_android_preview.http.c.UserData;
-import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
-import com.eshare_android_preview.http.model.BaseKnowledgeSet;
-import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ValueAnimator;
@@ -39,7 +35,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
     RelativeLayout pager_layout;
     ViewPager view_pager;
 
-    IUserBaseKnowledgeSet set;
+    IUserKnowledgeSet set;
 
     boolean loaded = false;
     private String set_id;
@@ -59,13 +55,22 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         super.onCreate(savedInstanceState);
     }
 
-    private void send_http_request(){
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (!loaded) {
+            page_open_animate();
+            loaded = true;
+        }
+    }
+
+    private void send_http_request_for_nodes(){
         new BaseAsyncTask<Void, Void, Void>(this, R.string.now_loading) {
             @Override
             public Void do_in_background(Void... params) throws Exception {
                 set = UserData.instance().get_current_knowledge_net(false).find_by_set_id(set_id);
                 if(!set.is_checkpoint()){
-                    ((KnowledgeSet)set).nodes(true);
+                    set.nodes(true); //TODO 只有第一次从网络请求
                 }
                 return null;
             }
@@ -80,15 +85,6 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
                 _init_view_pager();
             }
         }.execute();
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (!loaded) {
-            page_open_animate();
-            loaded = true;
-        }
     }
 
     @Override
@@ -169,7 +165,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                send_http_request();
+                send_http_request_for_nodes();
             }
 
             @Override

@@ -2,10 +2,11 @@ package com.eshare_android_preview.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.eshare_android_preview.http.api.QuestionHttpApi;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.model.Question;
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**

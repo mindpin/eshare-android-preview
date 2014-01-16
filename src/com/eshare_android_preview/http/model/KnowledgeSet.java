@@ -2,10 +2,7 @@ package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
 import com.eshare_android_preview.http.c.UserData;
-import com.eshare_android_preview.http.i.IDataIcon;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
-import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
-import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNodesGsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
 /**
  * Created by fushang318 on 14-1-8.
  */
-public class KnowledgeSet extends BaseKnowledgeSet implements IUserKnowledgeSet {
+public class KnowledgeSet extends BaseKnowledgeSet {
     private String name;
     private String icon;
     private int node_count;
@@ -25,8 +22,8 @@ public class KnowledgeSet extends BaseKnowledgeSet implements IUserKnowledgeSet 
     }
 
     @Override
-    public IDataIcon get_icon() {
-        return null;
+    public boolean is_checkpoint() {
+        return false;
     }
 
     @Override
@@ -49,6 +46,11 @@ public class KnowledgeSet extends BaseKnowledgeSet implements IUserKnowledgeSet 
 
     public int get_node_count(){
         return node_count;
+    }
+
+    @Override
+    public boolean is_root(){
+        return this.parents.size() == 0;
     }
 
 }

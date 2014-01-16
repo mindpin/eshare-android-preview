@@ -18,9 +18,9 @@ import com.eshare_android_preview.base.utils.BaseUtils;
 import com.eshare_android_preview.base.view.CircleView;
 import com.eshare_android_preview.base.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.base.view.ui.UiColor;
-import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.http.model.KnowledgeSet;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -41,7 +41,7 @@ public class SetPosition {
     };
 
     public KnowledgeMapView map_view;
-    public IUserBaseKnowledgeSet set;
+    public IUserKnowledgeSet set;
     public AniProxy ani_proxy;
 
     // grid
@@ -63,7 +63,7 @@ public class SetPosition {
     public TextView title_view;
     public TextView count_view;
 
-    public SetPosition(IUserBaseKnowledgeSet set, KnowledgeMapView map_view) {
+    public SetPosition(IUserKnowledgeSet set, KnowledgeMapView map_view) {
         this.map_view = map_view;
         this.set = set;
 
@@ -226,7 +226,7 @@ public class SetPosition {
     // --------------------------------
 
     public void put_data_into_end_point_list(List<DashPathEndpoint> list) {
-        for (IUserBaseKnowledgeSet parent : set.parents()) {
+        for (IUserKnowledgeSet parent : set.parents()) {
             SetPosition parent_pos = map_view.kdata.get_from(parent.get_id());
 
             float x1 = parent_pos.grid_dp_left + parent_pos.circle_center_offset;

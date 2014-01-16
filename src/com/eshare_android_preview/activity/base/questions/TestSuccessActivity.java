@@ -18,12 +18,9 @@ import com.eshare_android_preview.base.view.ExperienceView;
 import com.eshare_android_preview.base.view.experience_chart_view.ExperienceChartView;
 import com.eshare_android_preview.base.view.ui.UiSound;
 import com.eshare_android_preview.base.view.ui.avatar.CircleAvatarDrawable;
-import com.eshare_android_preview.http.api.ExpApi;
 import com.eshare_android_preview.http.api.TestSuccessHttpApi;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
-import com.eshare_android_preview.http.model.CurrentState;
-import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.TestSuccess;
 import com.eshare_android_preview.model.TestPaper;
 
