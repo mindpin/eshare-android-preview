@@ -7,6 +7,7 @@ import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.http.i.question.IQuestionLoader;
 import com.eshare_android_preview.http.model.TestSuccess;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,7 +42,13 @@ public class TestPaper implements Parcelable {
     public TestPaper(Parcel parcel){
         this.loader = (IQuestionLoader)parcel.readSerializable();
         this.test_result = (TestResult)parcel.readSerializable();
-        parcel.readList(this.questions, null);
+
+        List<IQuestion> temp = new ArrayList<IQuestion>();
+        parcel.readList(temp, null);
+        if(temp.size() != 0){
+            questions = temp;
+        }
+
         this.current_index = parcel.readInt();
     }
 
