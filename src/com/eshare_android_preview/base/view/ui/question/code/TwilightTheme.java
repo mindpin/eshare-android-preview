@@ -1,11 +1,13 @@
-package com.eshare_android_preview.base.view.ui.code;
+package com.eshare_android_preview.base.view.ui.question.code;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+
+import com.eshare_android_preview.base.view.ui.question.QuestionFill;
 
 import java.util.HashMap;
 
@@ -103,35 +105,25 @@ public class TwilightTheme implements RichCodeTextView.ColorTheme {
     }
 
     @Override
-    public SpannableString get_string(String kind, String text, String block) {
-        SpannableString ss = new SpannableString(text);
-
-        String key = get_key(block, kind);
-        TextStyle style = map.get(key);
+    public SpannableStringBuilder get_string(RichCodeTextView.Token token) {
+        SpannableStringBuilder ssb = QuestionFill.parse(token.text);
+        TextStyle style = map.get(token.key());
 
         if (null != style) {
-            ss.setSpan(
+            ssb.setSpan(
                     new ForegroundColorSpan(style.color),
-                    0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    0, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             );
 
             if (style.bold) {
-                ss.setSpan(
+                ssb.setSpan(
                         new StyleSpan(Typeface.BOLD),
-                        0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                        0, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                 );
             }
         }
 
-        return ss;
-    }
-
-    private String get_key(String block, String kind) {
-        if (block == null) {
-            return kind;
-        }
-
-        return block + "." + kind;
+        return ssb;
     }
 
     private void put(String key, String color_s) {

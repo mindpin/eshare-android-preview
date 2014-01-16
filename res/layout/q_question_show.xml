@@ -69,8 +69,7 @@
                 <RelativeLayout
                     android:layout_height="40dp"
                     android:layout_width="fill_parent"
-                    android:background="#ffffda"
-                    >
+                    android:background="#ffffda">
 
                     <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
                         android:layout_height="40dp"
@@ -82,8 +81,7 @@
                         android:shadowColor="#66000000"
                         android:shadowDy="1"
                         android:shadowDx="1"
-                        android:shadowRadius="1"
-                        />
+                        android:shadowRadius="1" />
 
                     <TextView
                         android:id="@+id/question_kind_desc_text_view"
@@ -110,10 +108,10 @@
                     android:layout_marginTop="41dp"
                     android:padding="10dp">
 
-                    <com.eshare_android_preview.base.view.webview.EshareMarkdownView
-                        android:id="@+id/question_title"
+                    <com.eshare_android_preview.base.view.ui.question.QuestionContentView
+                        android:id="@+id/question_content_view"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
+                        android:layout_width="match_parent" />
 
                 </RelativeLayout>
 

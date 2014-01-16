@@ -14,7 +14,7 @@ import java.util.List;
 public class TestPaper implements Parcelable {
     public String node_or_checkpoint_id;
     public TestResult test_result;
-    public List<Question> questions = new ArrayList<Question>();
+    public List<Question> questions;
     private int current_index = 0;
 
     public TestPaper(String node_or_checkpoint_id, TestResult test_result){
@@ -23,7 +23,7 @@ public class TestPaper implements Parcelable {
     }
 
     public Question get_next_question(){
-        if(questions.size() == 0){
+        if(null == questions){
             try {
                 String net_id = UserData.instance().get_current_knowledge_net_id();
                 questions = QuestionHttpApi.get_random_questions(net_id, this.node_or_checkpoint_id);

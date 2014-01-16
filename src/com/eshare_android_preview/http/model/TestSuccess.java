@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.model;
 
 import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

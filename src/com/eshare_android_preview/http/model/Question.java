@@ -132,7 +132,7 @@ public class Question implements Serializable {
     }
 
     public class ContentToken implements Serializable{
-        String type;
-        HashMap data;
+        public String type;
+        public HashMap<String, Object> data;
     }
 }

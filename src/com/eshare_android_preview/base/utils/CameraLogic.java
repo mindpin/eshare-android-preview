@@ -1,11 +1,11 @@
 package com.eshare_android_preview.base.utils;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+
+import java.io.File;
 
 public class CameraLogic {
 	  public final static File IMAGE_CAPTURE_TEMP_FILE = new File(FileDirs.MX_CAPTURE_TEMP_DIR, "IMG_TEMP.jpg");

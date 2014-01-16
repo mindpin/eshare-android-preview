@@ -9,15 +9,16 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.base.activity.EshareBaseActivity;
 import com.eshare_android_preview.base.task.BaseAsyncTask;
-import com.eshare_android_preview.base.view.webview.EshareMarkdownView;
 import com.eshare_android_preview.base.view.QuestionChoicesView;
 import com.eshare_android_preview.base.view.QuestionResultView;
 import com.eshare_android_preview.base.view.ui.CorrectPointView;
 import com.eshare_android_preview.base.view.ui.HealthView;
 import com.eshare_android_preview.base.view.ui.QuestionButton;
+import com.eshare_android_preview.base.view.ui.question.QuestionContentView;
 import com.eshare_android_preview.http.model.Question;
 import com.eshare_android_preview.model.TestPaper;
 
@@ -29,7 +30,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
 
     public TestPaper test_paper;
 
-    public EshareMarkdownView question_content_webview;
+    public QuestionContentView question_content_view;
 
     Question question;
     QuestionResultView question_result_view;
@@ -76,7 +77,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
         question_choices_view = (QuestionChoicesView) findViewById(R.id.question_choices_view);
         question_choices_view.activity = this;
 
-        question_content_webview = (EshareMarkdownView) findViewById(R.id.question_title);
+        question_content_view = (QuestionContentView) findViewById(R.id.question_content_view);
 
         question_result_view = (QuestionResultView) findViewById(R.id.question_result_view);
         question_result_view.activity = this;
@@ -155,7 +156,7 @@ public class QuestionShowActivity extends EshareBaseActivity {
             @Override
             public void on_success(Void aVoid) {
                 question_kind_desc_text_view.setText(question.get_kind_desc_str());
-                question_content_webview.set_markdown_content(question.content.toString());
+                question_content_view.set_question(question);
                 question_choices_view.load_question(question);
                 question_button.reset();
                 question_button.disable_submit();

@@ -1,6 +1,8 @@
 package com.eshare_android_preview.base.http;
 
-import java.util.List;
+import android.util.Log;
+
+import com.eshare_android_preview.base.utils.BaseUtils;
 
 import org.apache.http.client.CookieStore;
 import org.apache.http.cookie.Cookie;
@@ -10,9 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
-import com.eshare_android_preview.base.utils.BaseUtils;
+import java.util.List;
 
 public class CookieHelper {
   

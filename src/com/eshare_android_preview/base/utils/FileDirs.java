@@ -1,5 +1,8 @@
 package com.eshare_android_preview.base.utils;
 
+import android.os.Environment;
+import android.util.Log;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,9 +17,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.os.Environment;
-import android.util.Log;
 
 public class FileDirs {
 //	http://blog.csdn.net/ljl961890233bear/article/details/7846146

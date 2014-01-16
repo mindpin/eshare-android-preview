@@ -1,8 +1,6 @@
 package com.eshare_android_preview.http.model;
 
-import com.eshare_android_preview.base.view.knowledge_map.IHasChildren;
 import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,12 +1,12 @@
 package com.eshare_android_preview.http.logic.user_auth;
 
-import org.apache.http.client.CookieStore;
-import org.apache.http.impl.client.BasicCookieStore;
-
 import com.eshare_android_preview.base.http.CookieHelper;
 import com.eshare_android_preview.base.http.EshareHttpRequest.AuthenticateException;
 import com.eshare_android_preview.http.model.AccountUser;
 import com.eshare_android_preview.model.database.AccountUserDBHelper;
+
+import org.apache.http.client.CookieStore;
+import org.apache.http.impl.client.BasicCookieStore;
 
 public class AccountManager {
 	public static void login(String cookies, String info) throws Exception {

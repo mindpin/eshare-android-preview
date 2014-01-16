@@ -5,7 +5,6 @@ import com.eshare_android_preview.http.i.knowledge.IUserBaseKnowledgeSet;
 import com.eshare_android_preview.http.i.knowledge.IUserExp;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -1,14 +1,16 @@
 package com.eshare_android_preview.http.model;
 
-import java.io.IOException;
-import java.io.InputStream;
-import org.apache.commons.io.IOUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 import com.eshare_android_preview.base.http.EshareHttpRequest;
 import com.eshare_android_preview.http.api.BaseHttpApi;
 import com.eshare_android_preview.model.base.BaseModel;
 import com.eshare_android_preview.model.database.AccountUserDBHelper;
+
+import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class AccountUser extends BaseModel{
