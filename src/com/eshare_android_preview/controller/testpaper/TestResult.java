@@ -27,6 +27,7 @@ public class TestResult implements Serializable{
 		return this.point >= this.max_point;
 	}
 
+
 	public TestResult(int max_hp, int max_point) {
 		super();
 		this.max_hp = max_hp;

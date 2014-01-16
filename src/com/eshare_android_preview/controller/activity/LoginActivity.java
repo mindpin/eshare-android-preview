@@ -7,9 +7,9 @@ import android.widget.EditText;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.controller.task.BaseAsyncTask;
+import com.eshare_android_preview.http.api.UserAuthHttpApi;
 import com.eshare_android_preview.utils.BaseUtils;
 import com.eshare_android_preview.utils.ValidateUtil;
-import com.eshare_android_preview.http.api.UserAuthHttpApi;
 
 public class LoginActivity extends EshareBaseActivity{
 	EditText login_et;

@@ -9,8 +9,8 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.eshare_android_preview.view.ui.UiColor;
 import com.eshare_android_preview.http.model.DayExp;
+import com.eshare_android_preview.view.ui.UiColor;
 import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.ArrayList;

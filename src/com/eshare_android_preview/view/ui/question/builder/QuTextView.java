@@ -11,7 +11,6 @@ import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.utils.BaseUtils;
 import com.eshare_android_preview.view.ui.question.QuestionFill;
 import com.eshare_android_preview.view.ui.question.QuestionFillSpan;
-import com.eshare_android_preview.http.model.Question;
 
 /**
  * Created by Administrator on 14-1-15.

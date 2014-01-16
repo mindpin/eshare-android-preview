@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.controller.task.BaseAsyncTask;
+import com.eshare_android_preview.controller.testpaper.TestPaper;
 import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.view.QuestionChoicesView;
 import com.eshare_android_preview.view.QuestionResultView;
@@ -20,8 +21,6 @@ import com.eshare_android_preview.view.ui.CorrectPointView;
 import com.eshare_android_preview.view.ui.HealthView;
 import com.eshare_android_preview.view.ui.QuestionButton;
 import com.eshare_android_preview.view.ui.question.QuestionContentView;
-//import com.eshare_android_preview.http.model.Question;
-import com.eshare_android_preview.controller.testpaper.TestPaper;
 
 public class QuestionShowActivity extends EshareBaseActivity {
 

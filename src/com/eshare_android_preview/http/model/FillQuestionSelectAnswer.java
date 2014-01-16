@@ -1,17 +1,18 @@
 package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.i.question.IChoice;
+import com.eshare_android_preview.http.i.question.IQuestion;
 
 import java.util.HashMap;
 
 /**
  * Created by fushang318 on 13-11-11.
  */
-public class FillQuestionSelectAnswer extends QuestionSelectAnswer {
-    public Question question;
+public class FillQuestionSelectAnswer implements QuestionSelectAnswer {
+    public IQuestion question;
     public HashMap<Integer,IChoice> select_choices = new HashMap<Integer, IChoice>();
 
-    public FillQuestionSelectAnswer(Question question){
+    public FillQuestionSelectAnswer(IQuestion question){
         this.question = question;
     }
 
@@ -26,7 +27,7 @@ public class FillQuestionSelectAnswer extends QuestionSelectAnswer {
 
     @Override
     public boolean is_correct(){
-        return question.answer.equals(select_answer());
+        return question.answer().equals(select_answer());
     }
 
     @Override
@@ -34,6 +35,15 @@ public class FillQuestionSelectAnswer extends QuestionSelectAnswer {
         return select_choices.size() == 0;
     }
 
+    @Override
+    public void set_choice(IChoice select_choice) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void add_or_remove_choice(IChoice select_choice) {
+        throw new UnsupportedOperationException();
+    }
 
     private String select_answer(){
         String select_answer = "";

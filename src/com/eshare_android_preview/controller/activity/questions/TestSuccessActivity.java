@@ -12,17 +12,15 @@ import android.widget.TextView;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.controller.task.BaseAsyncTask;
+import com.eshare_android_preview.controller.testpaper.TestPaper;
+import com.eshare_android_preview.http.logic.user_auth.AccountManager;
+import com.eshare_android_preview.http.model.TestSuccess;
 import com.eshare_android_preview.utils.BaseUtils;
 import com.eshare_android_preview.utils.ImageTools;
 import com.eshare_android_preview.view.ExperienceView;
 import com.eshare_android_preview.view.experience_chart_view.ExperienceChartView;
 import com.eshare_android_preview.view.ui.UiSound;
 import com.eshare_android_preview.view.ui.avatar.CircleAvatarDrawable;
-import com.eshare_android_preview.http.api.TestSuccessHttpApi;
-import com.eshare_android_preview.http.c.UserData;
-import com.eshare_android_preview.http.logic.user_auth.AccountManager;
-import com.eshare_android_preview.http.model.TestSuccess;
-import com.eshare_android_preview.controller.testpaper.TestPaper;
 
 /**
  * Created by fushang318 on 13-12-18.

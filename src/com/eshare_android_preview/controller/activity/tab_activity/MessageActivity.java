@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.controller.activity.dash_path_demo.DashPathDemoActivity;
 import com.eshare_android_preview.controller.activity.expericence_of.ExperienceViewDemoActivity;
 import com.eshare_android_preview.controller.activity.experience.ExperienceChartActivity;
 import com.eshare_android_preview.controller.activity.switch_test.FirstActivity;
 import com.eshare_android_preview.controller.activity.webview_demo.WebViewDemoActivity;
-import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 
 public class MessageActivity extends EshareBaseActivity{
 	@Override

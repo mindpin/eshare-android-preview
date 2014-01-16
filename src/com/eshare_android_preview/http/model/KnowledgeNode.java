@@ -1,5 +1,7 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.api.QuestionHttpApi;
+import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.i.question.IQuestion;
 
@@ -70,7 +72,13 @@ public class KnowledgeNode implements IUserKnowledgeNode {
 
     @Override
     public List<IQuestion> get_questions_remote() {
-        // TODO
-        return null;
+        String net_id = UserData.instance().get_current_knowledge_net_id();
+        try {
+            List<Question> qs = QuestionHttpApi.get_random_questions(net_id, this.id);
+            return new ArrayList<IQuestion>(qs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

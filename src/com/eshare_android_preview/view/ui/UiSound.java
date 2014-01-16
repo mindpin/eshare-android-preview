@@ -2,8 +2,8 @@ package com.eshare_android_preview.view.ui;
 
 import android.media.MediaPlayer;
 
-import com.eshare_android_preview.R;
 import com.eshare_android_preview.EshareApplication;
+import com.eshare_android_preview.R;
 
 /**
  * Created by Administrator on 13-12-27.

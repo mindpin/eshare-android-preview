@@ -3,11 +3,8 @@ package com.eshare_android_preview.controller.testpaper;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.eshare_android_preview.http.api.QuestionHttpApi;
-import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.http.i.question.IQuestionLoader;
-import com.eshare_android_preview.http.model.Question;
 import com.eshare_android_preview.http.model.TestSuccess;
 
 import java.util.List;
@@ -23,9 +20,9 @@ public class TestPaper implements Parcelable {
     public List<IQuestion> questions;
     private int current_index = 0;
 
-    public TestPaper(IQuestionLoader loader, TestResult test_result){
+    public TestPaper(IQuestionLoader loader){
         this.loader = loader;
-        this.test_result = test_result;
+        this.test_result = new TestResult(3, 10);
     }
 
     public IQuestion get_next_question(){
@@ -42,6 +39,7 @@ public class TestPaper implements Parcelable {
     }
 
     public TestPaper(Parcel parcel){
+        this.loader = (IQuestionLoader)parcel.readSerializable();
         this.test_result = (TestResult)parcel.readSerializable();
         parcel.readList(this.questions, null);
         this.current_index = parcel.readInt();
@@ -54,6 +52,7 @@ public class TestPaper implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeSerializable(this.loader);
         dest.writeSerializable(this.test_result);
         dest.writeList(this.questions);
         dest.writeInt(this.current_index);

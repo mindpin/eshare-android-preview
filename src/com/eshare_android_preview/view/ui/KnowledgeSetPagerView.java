@@ -7,8 +7,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.view.BorderRadiusRelativeLayout;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
+import com.eshare_android_preview.view.BorderRadiusRelativeLayout;
 
 /**
  * Created by Administrator on 14-1-2.

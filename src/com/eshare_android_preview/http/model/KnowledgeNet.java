@@ -46,7 +46,7 @@ public class KnowledgeNet extends IUserKnowledgeNet {
     public IUserKnowledgeSet find_by_set_id(String set_id) {
         BaseKnowledgeSet set = base_set_map.get(set_id);
         if(set.getClass() == KnowledgeSet.class){
-            return (KnowledgeSet)set;
+            return set;
         }
         return null;
     }

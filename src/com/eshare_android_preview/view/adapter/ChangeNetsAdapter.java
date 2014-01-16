@@ -5,8 +5,8 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
-import com.eshare_android_preview.view.adapter.base.EshareBaseAdapter;
 import com.eshare_android_preview.http.model.KnowledgeNet;
+import com.eshare_android_preview.view.adapter.base.EshareBaseAdapter;
 
 /**
  * Created by fushang318 on 14-1-13.

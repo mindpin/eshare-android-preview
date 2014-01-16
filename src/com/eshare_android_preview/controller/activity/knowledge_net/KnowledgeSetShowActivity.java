@@ -12,6 +12,8 @@ import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.HomeActivity;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.controller.task.BaseAsyncTask;
+import com.eshare_android_preview.http.c.UserData;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.utils.BaseUtils;
 import com.eshare_android_preview.view.knowledge_map.AniProxy;
 import com.eshare_android_preview.view.knowledge_map.MarginAni;
@@ -19,8 +21,6 @@ import com.eshare_android_preview.view.knowledge_map.SetPosition;
 import com.eshare_android_preview.view.ui.FontAwesomeTextView;
 import com.eshare_android_preview.view.ui.KnowledgeSetViewPagerAdapter;
 import com.eshare_android_preview.view.ui.UiColor;
-import com.eshare_android_preview.http.c.UserData;
-import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ValueAnimator;
 

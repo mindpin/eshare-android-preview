@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.eshare_android_preview.R;
+import com.eshare_android_preview.http.c.UserData;
+import com.eshare_android_preview.http.i.knowledge.INetHasChildren;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.utils.BaseUtils;
 import com.eshare_android_preview.view.LockableScrollView;
 import com.eshare_android_preview.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.view.dash_path_view.DashPathView;
-import com.eshare_android_preview.http.c.UserData;
-import com.eshare_android_preview.http.i.knowledge.INetHasChildren;
-import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 
 import java.util.ArrayList;
 import java.util.List;

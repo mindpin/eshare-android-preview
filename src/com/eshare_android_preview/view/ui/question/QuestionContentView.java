@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.view.ui.question.builder.IQuItemView;
 import com.eshare_android_preview.view.ui.question.builder.ViewBuilder;
-import com.eshare_android_preview.http.model.Question;
 
 import java.util.ArrayList;
 import java.util.List;

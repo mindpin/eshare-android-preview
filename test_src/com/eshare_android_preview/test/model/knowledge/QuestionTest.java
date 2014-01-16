@@ -33,29 +33,21 @@ public class QuestionTest extends AndroidTestCase {
     }
 
     public void test_init_question_from_json() {
-        Assert.assertNotNull(question.content);
-        Assert.assertTrue(question.content.size() > 0);
-        Assert.assertNotNull(question.knowledge_net_id);
-        Assert.assertNotNull(question.knowledge_node_id);
-        Assert.assertNotNull(question.choices);
-        Assert.assertTrue(question.choices.size() > 0);
-        Assert.assertNotNull(question.answer);
-        Assert.assertNotNull(question.difficulty);
-        Assert.assertNotNull(question.kind);
-        Assert.assertEquals(question.content.get(0).getClass(), IQuestion.ContentToken.class);
+        Assert.assertNotNull(question.content());
+        Assert.assertTrue(question.content().size() > 0);
+        Assert.assertNotNull(question.choices());
+        Assert.assertTrue(question.choices().size() > 0);
+        Assert.assertNotNull(question.answer());
+        Assert.assertEquals(question.content().get(0).getClass(), IQuestion.ContentToken.class);
     }
 
     public void test_init_questions_from_json_array() {
         question = questions.get(0);
-        Assert.assertNotNull(question.content);
-        Assert.assertTrue(question.content.size() > 0);
-        Assert.assertNotNull(question.knowledge_net_id);
-        Assert.assertNotNull(question.knowledge_node_id);
-        Assert.assertNotNull(question.choices);
-        Assert.assertTrue(question.choices.size() > 0);
-        Assert.assertNotNull(question.answer);
-        Assert.assertNotNull(question.difficulty);
-        Assert.assertNotNull(question.kind);
-        Assert.assertEquals(question.content.get(0).getClass(), IQuestion.ContentToken.class);
+        Assert.assertNotNull(question.content());
+        Assert.assertTrue(question.content().size() > 0);
+        Assert.assertNotNull(question.choices());
+        Assert.assertTrue(question.choices().size() > 0);
+        Assert.assertNotNull(question.answer());
+        Assert.assertEquals(question.content().get(0).getClass(), IQuestion.ContentToken.class);
     }
 }

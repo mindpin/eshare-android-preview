@@ -7,12 +7,12 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.eshare_android_preview.utils.BaseUtils;
-import com.eshare_android_preview.view.ui.UiColor;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.knowledge.IUserExp;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.model.CurrentState;
+import com.eshare_android_preview.utils.BaseUtils;
+import com.eshare_android_preview.view.ui.UiColor;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.ValueAnimator;

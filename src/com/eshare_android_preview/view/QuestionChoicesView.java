@@ -23,7 +23,6 @@ import com.eshare_android_preview.view.ui.FlowLayout;
 import com.eshare_android_preview.view.ui.FontAwesomeTextView;
 import com.eshare_android_preview.view.ui.UiColor;
 import com.eshare_android_preview.view.ui.question.QuestionFill;
-import com.eshare_android_preview.http.model.QuestionChoice;
 
 import java.io.IOException;
 

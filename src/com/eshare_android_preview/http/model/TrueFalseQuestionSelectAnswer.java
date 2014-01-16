@@ -1,15 +1,16 @@
 package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.i.question.IChoice;
+import com.eshare_android_preview.http.i.question.IQuestion;
 
 /**
  * Created by fushang318 on 13-11-11.
  */
-public class TrueFalseQuestionSelectAnswer extends QuestionSelectAnswer {
-    public Question question;
+public class TrueFalseQuestionSelectAnswer implements QuestionSelectAnswer {
+    public IQuestion question;
     public IChoice select_choice;
 
-    public TrueFalseQuestionSelectAnswer(Question question){
+    public TrueFalseQuestionSelectAnswer(IQuestion question){
         this.question = question;
     }
 
@@ -20,12 +21,22 @@ public class TrueFalseQuestionSelectAnswer extends QuestionSelectAnswer {
 
     @Override
     public boolean is_correct(){
-        return select_choice.sym().equals(question.answer);
+        return select_choice.sym().equals(question.answer());
     }
 
     @Override
     public boolean is_empty(){
         return select_choice == null;
+    }
+
+    @Override
+    public void add_or_remove_choice(IChoice select_choice) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void set_choice(int num, IChoice select_choice) {
+        throw new UnsupportedOperationException();
     }
 
 }

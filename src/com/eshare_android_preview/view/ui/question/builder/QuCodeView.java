@@ -9,7 +9,6 @@ import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.utils.BaseUtils;
 import com.eshare_android_preview.view.ui.question.QuestionFillSpan;
 import com.eshare_android_preview.view.ui.question.code.RichCodeTextView;
-import com.eshare_android_preview.http.model.Question;
 
 import java.util.List;
 

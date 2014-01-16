@@ -11,15 +11,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.eshare_android_preview.controller.activity.knowledge_net.KnowledgeSetShowActivity;
 import com.eshare_android_preview.EshareApplication;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
+import com.eshare_android_preview.controller.activity.knowledge_net.KnowledgeSetShowActivity;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
+import com.eshare_android_preview.http.model.KnowledgeSet;
 import com.eshare_android_preview.utils.BaseUtils;
 import com.eshare_android_preview.view.CircleView;
 import com.eshare_android_preview.view.dash_path_view.DashPathEndpoint;
 import com.eshare_android_preview.view.ui.UiColor;
-import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
-import com.eshare_android_preview.http.model.KnowledgeSet;
 
 import java.io.IOException;
 import java.io.InputStream;

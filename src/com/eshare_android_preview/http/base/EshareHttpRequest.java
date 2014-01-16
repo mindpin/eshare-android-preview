@@ -1,7 +1,7 @@
 package com.eshare_android_preview.http.base;
 
-import com.eshare_android_preview.R;
 import com.eshare_android_preview.EshareApplication;
+import com.eshare_android_preview.R;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 
 import org.apache.commons.io.IOUtils;

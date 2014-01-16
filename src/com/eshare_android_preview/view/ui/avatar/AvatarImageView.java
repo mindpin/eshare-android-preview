@@ -7,8 +7,8 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.eshare_android_preview.utils.ImageTools;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
+import com.eshare_android_preview.utils.ImageTools;
 
 /**
  * Created by Administrator on 14-1-13.
