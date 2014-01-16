@@ -1,5 +1,6 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.i.question.IQuestion;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -26,7 +27,7 @@ public class Question implements Serializable {
     public String knowledge_net_id;
     public String answer;
     public List<String> choices = new ArrayList<String>();
-    public List<ContentToken> content;
+    public List<IQuestion.ContentToken> content;
     public int difficulty;
     public String kind;
     public List<QuestionChoice> choices_list = new ArrayList<QuestionChoice>();
@@ -129,10 +130,5 @@ public class Question implements Serializable {
             choices_list.add(new QuestionChoice(1, "F", "错误"));
         }
         return this;
-    }
-
-    public class ContentToken implements Serializable{
-        public String type;
-        public HashMap<String, Object> data;
     }
 }

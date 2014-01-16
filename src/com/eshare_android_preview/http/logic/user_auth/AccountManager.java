@@ -1,7 +1,7 @@
 package com.eshare_android_preview.http.logic.user_auth;
 
-import com.eshare_android_preview.base.http.CookieHelper;
-import com.eshare_android_preview.base.http.EshareHttpRequest.AuthenticateException;
+import com.eshare_android_preview.http.base.CookieHelper;
+import com.eshare_android_preview.http.base.EshareHttpRequest.AuthenticateException;
 import com.eshare_android_preview.http.model.AccountUser;
 import com.eshare_android_preview.model.database.AccountUserDBHelper;
 

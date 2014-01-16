@@ -1,7 +1,7 @@
 package com.eshare_android_preview.http.api;
 
-import com.eshare_android_preview.base.http.EsharePostRequest;
-import com.eshare_android_preview.base.http.PostParamText;
+import com.eshare_android_preview.http.base.EsharePostRequest;
+import com.eshare_android_preview.http.base.PostParamText;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.AccountUser;
 

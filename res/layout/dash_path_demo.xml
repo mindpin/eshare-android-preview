@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
+    <com.eshare_android_preview.view.BorderRadiusRelativeLayout
         border_radius_background_color="#0000aa"
         border_radius="10"
         border_top_left_radius="20"
@@ -18,7 +18,7 @@
             android:textColor="#ffff11"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
-        </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
+        </com.eshare_android_preview.view.BorderRadiusRelativeLayout>
 
     <TextView
         android:id="@+id/dash_path_view_info_tv"

@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.model;
 
-import com.eshare_android_preview.base.utils.BaseUtils;
+import com.eshare_android_preview.http.i.question.IChoice;
+import com.eshare_android_preview.utils.BaseUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,14 +11,14 @@ import java.util.Arrays;
  */
 public class MultipleChoiceQuestionSelectAnswer extends QuestionSelectAnswer {
     public Question question;
-    public ArrayList<QuestionChoice> select_choices = new ArrayList<QuestionChoice>();
+    public ArrayList<IChoice> select_choices = new ArrayList<IChoice>();
 
     public MultipleChoiceQuestionSelectAnswer(Question question){
         this.question = question;
     }
 
     @Override
-    public void add_or_remove_choice(QuestionChoice select_choice){
+    public void add_or_remove_choice(IChoice select_choice){
         if (select_choices.indexOf(select_choice) != -1) {
             select_choices.remove(select_choice);
         } else {
@@ -31,8 +32,8 @@ public class MultipleChoiceQuestionSelectAnswer extends QuestionSelectAnswer {
         Arrays.sort(answers);
 
         ArrayList<String> choice_str_list = new ArrayList<String>();
-        for(QuestionChoice choice : select_choices){
-            choice_str_list.add(choice.sym);
+        for(IChoice choice : select_choices){
+            choice_str_list.add(choice.sym());
         }
         String[] select_answers = new String[choice_str_list.size()];
         choice_str_list.toArray(select_answers);

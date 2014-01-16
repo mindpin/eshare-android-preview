@@ -1,11 +1,13 @@
 package com.eshare_android_preview.http.i.knowledge;
 
+import com.eshare_android_preview.http.i.question.IQuestionLoader;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 14-1-13.
  */
-public interface IUserKnowledgeNode {
+public interface IUserKnowledgeNode extends IQuestionLoader {
     // ID
     public String get_id();
 

@@ -6,7 +6,7 @@
     android:layout_width="fill_parent"
     android:layout_centerHorizontal="true">
 
-    <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
+    <com.eshare_android_preview.view.BorderRadiusRelativeLayout
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:padding="20dp"
@@ -16,7 +16,7 @@
         border_radius_background_color="#ffffff"
         >
 
-        <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+        <com.eshare_android_preview.view.ui.FontAwesomeTextView
             android:id="@+id/learned_icon"
             android:layout_height="40dp"
             android:layout_width="40dp"
@@ -27,7 +27,7 @@
             android:layout_marginLeft="-10dp"
             />
 
-        <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+        <com.eshare_android_preview.view.ui.FontAwesomeTextView
             android:id="@+id/lock_icon"
             android:layout_height="40dp"
             android:layout_width="40dp"
@@ -66,7 +66,7 @@
             android:text="怎样声明一个和多个变量"
             android:textSize="15dp" />
 
-        <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
+        <com.eshare_android_preview.view.BorderRadiusRelativeLayout
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             border_radius="5"
@@ -89,8 +89,8 @@
                 android:textSize="18dp"
                 android:layout_marginBottom="15dp" />
 
-        </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
+        </com.eshare_android_preview.view.BorderRadiusRelativeLayout>
 
-    </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
+    </com.eshare_android_preview.view.BorderRadiusRelativeLayout>
 
 </RelativeLayout>

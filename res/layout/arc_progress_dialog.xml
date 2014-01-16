@@ -12,7 +12,7 @@
         android:padding="4dp"
         android:background="@drawable/btn_white_circle_flat"
         >
-        <com.eshare_android_preview.widget.dialog.arc.ArcView
+        <com.eshare_android_preview.view.dialog.arc.ArcView
             android:id="@+id/arc_progress_av"
             arc_color="#50CE00"
             arc_width="16"

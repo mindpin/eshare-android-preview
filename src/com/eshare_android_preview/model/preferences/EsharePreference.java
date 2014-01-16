@@ -3,7 +3,7 @@ package com.eshare_android_preview.model.preferences;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.EshareApplication;
 
 import java.util.List;
 

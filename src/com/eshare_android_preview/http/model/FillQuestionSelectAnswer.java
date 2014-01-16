@@ -1,5 +1,7 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.i.question.IChoice;
+
 import java.util.HashMap;
 
 /**
@@ -7,14 +9,14 @@ import java.util.HashMap;
  */
 public class FillQuestionSelectAnswer extends QuestionSelectAnswer {
     public Question question;
-    public HashMap<Integer,QuestionChoice> select_choices = new HashMap<Integer, QuestionChoice>();
+    public HashMap<Integer,IChoice> select_choices = new HashMap<Integer, IChoice>();
 
     public FillQuestionSelectAnswer(Question question){
         this.question = question;
     }
 
     @Override
-    public void set_choice(int num, QuestionChoice select_choice){
+    public void set_choice(int num, IChoice select_choice){
         if(select_choice == null){
             select_choices.remove(num);
         }else{
@@ -36,8 +38,8 @@ public class FillQuestionSelectAnswer extends QuestionSelectAnswer {
     private String select_answer(){
         String select_answer = "";
         for(int i=1; i<=select_choices.size(); i++){
-            QuestionChoice choice = select_choices.get(i);
-            String current_choice_answer = choice == null ? "" : choice.content;
+            IChoice choice = select_choices.get(i);
+            String current_choice_answer = choice == null ? "" : choice.content();
             select_answer += current_choice_answer;
             if(i != select_choices.size()){
                 select_answer += ",";

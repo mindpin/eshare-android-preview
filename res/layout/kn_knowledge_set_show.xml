@@ -17,7 +17,7 @@
         android:layout_marginTop="-18dp"
         >
 
-        <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+        <com.eshare_android_preview.view.ui.FontAwesomeTextView
             android:id="@+id/go_back_icon"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"

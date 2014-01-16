@@ -5,7 +5,7 @@ import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.application.EshareApplication;
+import com.eshare_android_preview.EshareApplication;
 
 public class UserAuthPreferences {
 	public static final SharedPreferences PREFERENCES = PreferenceManager

@@ -3,6 +3,7 @@ package com.eshare_android_preview.test.http.api;
 import android.test.AndroidTestCase;
 
 import com.eshare_android_preview.http.api.QuestionHttpApi;
+import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.http.model.Question;
 
 import junit.framework.Assert;
@@ -38,7 +39,7 @@ public class QuestionHttpApiTest extends AndroidTestCase {
         Assert.assertNotNull(question.answer);
         Assert.assertNotNull(question.difficulty);
         Assert.assertNotNull(question.kind);
-        Assert.assertEquals(question.content.get(0).getClass(), Question.ContentToken.class);
+        Assert.assertEquals(question.content.get(0).getClass(), IQuestion.ContentToken.class);
     }
 
     public void test_get_random_questions() {
@@ -52,6 +53,6 @@ public class QuestionHttpApiTest extends AndroidTestCase {
         Assert.assertNotNull(question.answer);
         Assert.assertNotNull(question.difficulty);
         Assert.assertNotNull(question.kind);
-        Assert.assertEquals(question.content.get(0).getClass(), Question.ContentToken.class);
+        Assert.assertEquals(question.content.get(0).getClass(), IQuestion.ContentToken.class);
     }
 }

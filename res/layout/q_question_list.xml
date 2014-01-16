@@ -70,7 +70,7 @@
                     />
                 </LinearLayout>
 
-            <com.eshare_android_preview.widget.dialog.arc.ArcView
+            <com.eshare_android_preview.view.dialog.arc.ArcView
                 android:layout_height="120dp"
                 android:layout_width="120dp"
                 arc_color="#1CB0F6"

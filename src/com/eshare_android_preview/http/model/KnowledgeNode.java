@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
+import com.eshare_android_preview.http.i.question.IQuestion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,5 +66,11 @@ public class KnowledgeNode implements IUserKnowledgeNode {
     @Override
     public boolean is_learned() {
         return is_learned;
+    }
+
+    @Override
+    public List<IQuestion> get_questions_remote() {
+        // TODO
+        return null;
     }
 }

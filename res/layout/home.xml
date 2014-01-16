@@ -9,13 +9,13 @@
         android:layout_width="fill_parent"
         android:background="#f1f1f1">
 
-        <com.eshare_android_preview.base.view.ui.avatar.AvatarImageView
+        <com.eshare_android_preview.view.ui.avatar.AvatarImageView
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_height="30dp"
             android:layout_width="30dp" />
 
-        <com.eshare_android_preview.base.view.ExperienceView
+        <com.eshare_android_preview.view.ExperienceView
             android:id="@+id/experience_view"
             android:layout_height="50dp"
             android:layout_width="fill_parent"
@@ -23,7 +23,7 @@
             android:layout_marginRight="90dp"
             android:fadingEdge="none" />
 
-        <com.eshare_android_preview.base.view.ui.navigation.ChangeCourseView
+        <com.eshare_android_preview.view.ui.navigation.ChangeCourseView
             android:layout_height="30dp"
             android:layout_width="80dp"
             border_radius="15"
@@ -40,7 +40,7 @@
         android:background="#e7e7e7"
         android:layout_marginTop="50dp"></RelativeLayout>
 
-    <com.eshare_android_preview.base.view.knowledge_map.KnowledgeMapView
+    <com.eshare_android_preview.view.knowledge_map.KnowledgeMapView
         android:id="@+id/knowledge_map_view"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
@@ -48,7 +48,7 @@
         android:fadingEdge="none"
         android:layout_marginTop="51dp" />
 
-    <com.eshare_android_preview.base.view.ui.navigation.AboutView
+    <com.eshare_android_preview.view.ui.navigation.AboutView
         android:layout_height="40dp"
         android:layout_width="50dp"
         android:layout_marginTop="51dp"

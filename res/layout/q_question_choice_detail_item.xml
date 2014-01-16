@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
+    <com.eshare_android_preview.view.BorderRadiusRelativeLayout
         android:id="@+id/item_border"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
@@ -14,7 +14,7 @@
         android:padding="1dp"
         >
 
-        <com.eshare_android_preview.base.view.BorderRadiusRelativeLayout
+        <com.eshare_android_preview.view.BorderRadiusRelativeLayout
             android:id="@+id/item_content"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
@@ -22,7 +22,7 @@
             border_radius_background_color="#ffffff"
             android:gravity="center"
             >
-        </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
+        </com.eshare_android_preview.view.BorderRadiusRelativeLayout>
 
-    </com.eshare_android_preview.base.view.BorderRadiusRelativeLayout>
+    </com.eshare_android_preview.view.BorderRadiusRelativeLayout>
 </RelativeLayout>

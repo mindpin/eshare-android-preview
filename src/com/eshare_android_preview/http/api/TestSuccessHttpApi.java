@@ -1,7 +1,7 @@
 package com.eshare_android_preview.http.api;
 
 
-import com.eshare_android_preview.base.http.EshareGetRequest;
+import com.eshare_android_preview.http.base.EshareGetRequest;
 import com.eshare_android_preview.http.model.TestSuccess;
 
 public class TestSuccessHttpApi {

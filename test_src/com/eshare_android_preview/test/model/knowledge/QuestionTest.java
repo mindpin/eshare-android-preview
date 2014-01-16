@@ -1,6 +1,8 @@
 package com.eshare_android_preview.test.model.knowledge;
 
 import android.test.AndroidTestCase;
+
+import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.http.model.Question;
 import junit.framework.Assert;
 import org.apache.commons.io.IOUtils;
@@ -40,7 +42,7 @@ public class QuestionTest extends AndroidTestCase {
         Assert.assertNotNull(question.answer);
         Assert.assertNotNull(question.difficulty);
         Assert.assertNotNull(question.kind);
-        Assert.assertEquals(question.content.get(0).getClass(), Question.ContentToken.class);
+        Assert.assertEquals(question.content.get(0).getClass(), IQuestion.ContentToken.class);
     }
 
     public void test_init_questions_from_json_array() {
@@ -54,6 +56,6 @@ public class QuestionTest extends AndroidTestCase {
         Assert.assertNotNull(question.answer);
         Assert.assertNotNull(question.difficulty);
         Assert.assertNotNull(question.kind);
-        Assert.assertEquals(question.content.get(0).getClass(), Question.ContentToken.class);
+        Assert.assertEquals(question.content.get(0).getClass(), IQuestion.ContentToken.class);
     }
 }

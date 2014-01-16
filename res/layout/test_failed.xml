@@ -23,7 +23,7 @@
 
         </RelativeLayout>
 
-        <com.eshare_android_preview.base.view.ExperienceView
+        <com.eshare_android_preview.view.ExperienceView
             android:id="@+id/experience_view"
             android:layout_height="50dp"
             android:layout_width="fill_parent"

@@ -9,7 +9,7 @@
         android:layout_height="80dp"
         android:layout_width="fill_parent">
 
-        <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+        <com.eshare_android_preview.view.ui.FontAwesomeTextView
             android:clickable="true"
             android:onClick="back"
             android:layout_alignParentTop="true"
@@ -20,7 +20,7 @@
             android:textSize="20dp"
             android:text="@string/icon_arrow_left" />
 
-        <com.eshare_android_preview.base.view.ui.HealthView
+        <com.eshare_android_preview.view.ui.HealthView
             android:id="@+id/health_view"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
@@ -29,7 +29,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp" />
 
-        <com.eshare_android_preview.base.view.ui.CorrectPointView
+        <com.eshare_android_preview.view.ui.CorrectPointView
             android:id="@+id/correct_point_view"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
@@ -71,7 +71,7 @@
                     android:layout_width="fill_parent"
                     android:background="#ffffda">
 
-                    <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+                    <com.eshare_android_preview.view.ui.FontAwesomeTextView
                         android:layout_height="40dp"
                         android:layout_width="40dp"
                         android:textColor="#fccd2d"
@@ -108,7 +108,7 @@
                     android:layout_marginTop="41dp"
                     android:padding="10dp">
 
-                    <com.eshare_android_preview.base.view.ui.question.QuestionContentView
+                    <com.eshare_android_preview.view.ui.question.QuestionContentView
                         android:id="@+id/question_content_view"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent" />
@@ -121,7 +121,7 @@
         </RelativeLayout>
 
         <!-- 选项 -->
-        <com.eshare_android_preview.base.view.QuestionChoicesView
+        <com.eshare_android_preview.view.QuestionChoicesView
             android:id="@+id/question_choices_view"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
@@ -131,7 +131,7 @@
     </RelativeLayout>
 
     <!-- 正确错误提示 -->
-    <com.eshare_android_preview.base.view.QuestionResultView
+    <com.eshare_android_preview.view.QuestionResultView
         android:id="@+id/question_result_view"
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
@@ -139,7 +139,7 @@
         android:visibility="gone" />
 
     <!-- 提交按钮 -->
-    <com.eshare_android_preview.base.view.ui.QuestionButton
+    <com.eshare_android_preview.view.ui.QuestionButton
         android:id="@+id/question_button"
         android:layout_height="50dp"
         android:layout_width="fill_parent"

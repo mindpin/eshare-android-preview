@@ -1,8 +1,8 @@
 package com.eshare_android_preview.http.model;
 
-import com.eshare_android_preview.base.http.EshareHttpRequest;
+import com.eshare_android_preview.http.base.EshareHttpRequest;
 import com.eshare_android_preview.http.api.BaseHttpApi;
-import com.eshare_android_preview.model.base.BaseModel;
+import com.eshare_android_preview.model.database.base.BaseModel;
 import com.eshare_android_preview.model.database.AccountUserDBHelper;
 
 import org.apache.commons.io.IOUtils;

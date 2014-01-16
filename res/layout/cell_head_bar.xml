@@ -6,7 +6,7 @@
     android:layout_height="50dp"
     android:background="#f1f1f1">
 
-    <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+    <com.eshare_android_preview.view.ui.FontAwesomeTextView
         android:id="@+id/button_go_back"
         android:clickable="true"
         android:onClick="go_back"
@@ -24,7 +24,7 @@
         style="@style/head_bar_text_center"
         android:text="@string/tab_home" />
 
-    <com.eshare_android_preview.base.view.ui.FontAwesomeTextView
+    <com.eshare_android_preview.view.ui.FontAwesomeTextView
         android:id="@+id/button_setting"
         android:clickable="true"
         android:onClick="go_back"

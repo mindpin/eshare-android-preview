@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.eshare_android_preview.http.model.AccountUser;
-import com.eshare_android_preview.model.base.BaseModelDBHelper;
-import com.eshare_android_preview.model.base.Constants;
+import com.eshare_android_preview.model.database.base.BaseModelDBHelper;
+import com.eshare_android_preview.model.database.base.Constants;
 
 public class AccountUserDBHelper extends BaseModelDBHelper{
 	// 保存
