@@ -36,4 +36,5 @@ public interface IUserKnowledgeSet extends INetHasChildren {
 
     // 节点信息
     public List<IUserKnowledgeNode> nodes(boolean remote);
+    public List<IUserKnowledgeNode> nodes();
 }

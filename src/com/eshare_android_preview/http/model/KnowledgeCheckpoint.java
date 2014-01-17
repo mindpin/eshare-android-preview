@@ -30,6 +30,11 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet {
     }
 
     @Override
+    public List<IUserKnowledgeNode> nodes() {
+        return new ArrayList<IUserKnowledgeNode>();
+    }
+
+    @Override
     public boolean is_root() {
         return false;
     }

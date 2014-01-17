@@ -124,12 +124,11 @@ public class QuestionShowActivity extends EshareBaseActivity {
             test_paper = savedInstanceState.getParcelable(ExtraKeys.TEST_PAPER);
         } else {
             test_paper = getIntent().getParcelableExtra(ExtraKeys.TEST_PAPER);
+            load_question();
         }
 
         health_view.set_hp(test_paper.test_result.hp);
         correct_point_view.set_point(test_paper.test_result.point);
-
-        load_question();
     }
 
     public void back(View v) {

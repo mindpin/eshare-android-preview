@@ -32,7 +32,8 @@ public class HomeActivity extends EshareBaseActivity {
         new BaseAsyncTask<Void, Void, Void>(this, R.string.now_loading) {
             @Override
             public Void do_in_background(Void... params) throws Exception {
-                UserData.instance().get_current_knowledge_net(true);
+//                TODO 需要智能取，需要调整结构优化
+                UserData.instance().get_current_knowledge_net();
                 return null;
             }
 

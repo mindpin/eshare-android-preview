@@ -44,9 +44,26 @@ public class UserData implements IUserData {
     @Override
     public IUserKnowledgeNet get_current_knowledge_net(boolean remote) {
         if(remote){
-            String net_id = get_current_knowledge_net_id();
-            this.set_current_knowledge_net = KnowledgeNetHttpApi.net(net_id);
+            return _get_current_knowledge_net_remote();
         }
+        return _get_current_knowledge_net_local();
+    }
+
+    @Override
+    public IUserKnowledgeNet get_current_knowledge_net() {
+        IUserKnowledgeNet result = _get_current_knowledge_net_local();
+        if(null != result) return result;
+
+        return _get_current_knowledge_net_remote();
+    }
+
+    private IUserKnowledgeNet _get_current_knowledge_net_remote(){
+        String net_id = get_current_knowledge_net_id();
+        this.set_current_knowledge_net = KnowledgeNetHttpApi.net(net_id);
+        return this.set_current_knowledge_net;
+    }
+
+    private IUserKnowledgeNet _get_current_knowledge_net_local(){
         return this.set_current_knowledge_net;
     }
 

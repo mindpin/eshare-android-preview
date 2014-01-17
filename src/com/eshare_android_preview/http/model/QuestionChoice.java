@@ -22,17 +22,9 @@ public class QuestionChoice implements Serializable, IChoice {
         this.content = content;
     }
     
-//    public static String syms(List<QuestionChoice> list){
-//    	String syms = "";
-//    	for (QuestionChoice choice : list) {
-//    		syms += choice.sym;
-//        }
-//    	return syms;
-//    }
-
     @Override
     public String content() {
-        return content;
+        return null == content ? "" : content;
     }
 
     @Override

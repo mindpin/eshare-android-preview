@@ -108,5 +108,6 @@ public class KnowledgeNode implements IUserKnowledgeNode, ICanbeLearned,IQuestio
     @Override
     public void set_learned() {
         this.is_learned = true;
+        this.set.refresh_learned_node_count();
     }
 }

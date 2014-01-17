@@ -18,6 +18,7 @@ public class KnowledgeSet extends BaseKnowledgeSet {
     private int node_count;
     private int learned_node_count;
     private HashMap<String,IUserKnowledgeNode> node_maps = new HashMap<String,IUserKnowledgeNode>();
+    private boolean node_maps_has_cache = false;
 
     @Override
     public IUserKnowledgeNode find_node(String id) {
@@ -36,14 +37,30 @@ public class KnowledgeSet extends BaseKnowledgeSet {
     @Override
     public List<IUserKnowledgeNode> nodes(boolean remote) {
         if(remote){
-            String net_id = UserData.instance().get_current_knowledge_net_id();
-            List<KnowledgeNode> temp_nodes = KnowledgeNetHttpApi.set_nodes(net_id, this);
-            node_maps = new HashMap<String,IUserKnowledgeNode>();
-            for(KnowledgeNode node :temp_nodes){
-                node_maps.put(node.get_id(),node);
-            }
+            return _nodes_remote();
         }
+        return _nodes_local();
+    }
 
+    @Override
+    public List<IUserKnowledgeNode> nodes() {
+        if(node_maps_has_cache) return _nodes_local();
+
+        return _nodes_remote();
+    }
+
+    private List<IUserKnowledgeNode> _nodes_remote(){
+        String net_id = UserData.instance().get_current_knowledge_net_id();
+        List<KnowledgeNode> temp_nodes = KnowledgeNetHttpApi.set_nodes(net_id, this);
+        node_maps = new HashMap<String,IUserKnowledgeNode>();
+        for(KnowledgeNode node :temp_nodes){
+            node_maps.put(node.get_id(),node);
+        }
+        node_maps_has_cache = true;
+        return new ArrayList<IUserKnowledgeNode>(node_maps.values());
+    }
+
+    private List<IUserKnowledgeNode> _nodes_local(){
         return new ArrayList<IUserKnowledgeNode>(node_maps.values());
     }
 
@@ -68,6 +85,13 @@ public class KnowledgeSet extends BaseKnowledgeSet {
             }
         }
         return true;
+    }
+
+    public void refresh_learned_node_count(){
+        learned_node_count = 0;
+        for(IUserKnowledgeNode node : this.node_maps.values()){
+            if(node.is_learned()) learned_node_count += 1;
+        }
     }
 
 }

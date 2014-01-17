@@ -91,7 +91,7 @@ public class TestPaper implements Parcelable {
         try {
             TestSuccess test_success = TestSuccessHttpApi.build_test_success(net.get_id(), loader.get_id());
             for(LearnedItem item : test_success.learned_items){
-                ICanbeLearned target = net.find_learn_target(item.id, item.type);
+                ICanbeLearned target = net.find_learn_target(item.type, item.id);
                 target.set_learned();
             }
             return test_success;

@@ -63,13 +63,15 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         }
     }
 
-    private void send_http_request_for_nodes(){
+    private void load_nodes(){
         new BaseAsyncTask<Void, Void, Void>(this, R.string.now_loading) {
             @Override
             public Void do_in_background(Void... params) throws Exception {
                 set = UserData.instance().get_current_knowledge_net(false).find_by_set_id(set_id);
                 if(!set.is_checkpoint()){
-                    set.nodes(true); //TODO 只有第一次从网络请求
+                    //  TODO 需要智能取，需要调整结构优化
+                    // TODO 目前从练习成功页面返回到该页面时，没有刷新页面到最新状态
+                    set.nodes();
                 }
                 return null;
             }
@@ -162,7 +164,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                send_http_request_for_nodes();
+                load_nodes();
             }
 
             @Override
