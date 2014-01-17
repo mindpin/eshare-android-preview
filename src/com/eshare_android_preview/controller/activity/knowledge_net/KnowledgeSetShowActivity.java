@@ -21,6 +21,7 @@ import com.eshare_android_preview.view.knowledge_map.SetPosition;
 import com.eshare_android_preview.view.ui.FontAwesomeTextView;
 import com.eshare_android_preview.view.ui.KnowledgeSetViewPagerAdapter;
 import com.eshare_android_preview.view.ui.UiColor;
+import com.eshare_android_preview.view.ui.animate.SimpleAnimatorListener;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ValueAnimator;
 
@@ -109,11 +110,26 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         view_pager.setAdapter(new KnowledgeSetViewPagerAdapter(set, this));
         view_pager.setPageMargin(- BaseUtils.dp_to_px(90));
         view_pager.setOffscreenPageLimit(2);
+
+        ValueAnimator ani = ValueAnimator
+                .ofPropertyValuesHolder(
+                        ma_pager.get_y_values_holder()
+                )
+                .setDuration(AniProxy.ANIMATE_DRUATION);
+
+        ani.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                ma_pager.update_y(valueAnimator);
+            }
+        });
+
+        ani.start();
     }
 
     // ------------------------------------
 
-    private MarginAni ma_topbar, ma_icon;
+    private MarginAni ma_topbar, ma_icon, ma_pager;
     private AniProxy.AniBundle bundle;
 
     public void page_open_animate() {
@@ -122,17 +138,18 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
 
         HomeActivity.map_view.dash_path_view.pause();
 
+        // 顶栏，包括返回箭头和单元标题
         ma_topbar = new MarginAni(
                 "topbar", top_layout,
                 0, 0,
                 BaseUtils.dp_to_px(-50), 0
         );
-//
-//        ma_pager = new MarginAni(
-//                "pager",  pager_layout,
-//                0, 0,
-//                BaseUtils.dp_to_px(HomeActivity.map_view.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146)
-//        );
+
+        ma_pager = new MarginAni(
+                "pager",  pager_layout,
+                0, 0,
+                BaseUtils.dp_to_px(HomeActivity.map_view.SCREEN_HEIGHT_DP), BaseUtils.dp_to_px(146)
+        );
 
         bundle = opened_node.open(this);
         ma_icon = bundle.icon_ani;
@@ -140,7 +157,6 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         ValueAnimator ani = ValueAnimator
                 .ofPropertyValuesHolder(
                         ma_topbar.get_y_values_holder(),
-//                        ma_pager.get_y_values_holder(),
                         ma_icon.get_x_values_holder(),
                         ma_icon.get_y_values_holder(),
                         bundle.open_holder
@@ -151,13 +167,12 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 ma_topbar.update_y(valueAnimator);
-//                ma_pager.update_y(valueAnimator);
                 ma_icon.update_xy(valueAnimator);
                 bundle.circle_view.set_radius_px((Float) valueAnimator.getAnimatedValue("radius"));
             }
         });
 
-        ani.addListener(new Animator.AnimatorListener() {
+        ani.addListener(new SimpleAnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
             }
@@ -165,14 +180,6 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 load_nodes();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
             }
         });
 
@@ -183,7 +190,7 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
         ValueAnimator ani = ValueAnimator
                 .ofPropertyValuesHolder(
                         ma_topbar.get_reverse_y_values_holder(),
-//                        ma_pager.get_reverse_y_values_holder(),
+                        ma_pager.get_reverse_y_values_holder(),
                         ma_icon.get_reverse_x_values_holder(),
                         ma_icon.get_reverse_y_values_holder(),
                         bundle.close_holder
@@ -194,28 +201,19 @@ public class KnowledgeSetShowActivity extends EshareBaseActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 ma_topbar.update_y(valueAnimator);
-//                ma_pager.update_y(valueAnimator);
+                ma_pager.update_y(valueAnimator);
                 ma_icon.update_xy(valueAnimator);
                 bundle.circle_view.set_radius_px((Float) valueAnimator.getAnimatedValue("radius"));
             }
         });
 
-        ani.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {}
-
+        ani.addListener(new SimpleAnimatorListener() {
             @Override
             public void onAnimationEnd(Animator animator) {
                 KnowledgeSetShowActivity.this.finish();
                 HomeActivity.map_view.locked = false;
                 HomeActivity.map_view.dash_path_view.resume();
             }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {}
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {}
         });
 
         ani.start();
