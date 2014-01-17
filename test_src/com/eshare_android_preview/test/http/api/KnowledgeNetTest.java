@@ -50,18 +50,24 @@ public class KnowledgeNetTest extends AndroidTestCase{
         Assert.assertEquals(1, net.children().size());
 
         KnowledgeSet set_8 = (KnowledgeSet)net.children().get(0);
-        Assert.assertEquals("set-8", set_8.id  );
+        Assert.assertEquals("set-8", set_8.get_id()  );
 
-        Assert.assertEquals(1, set_8.children.size());
+        Assert.assertEquals(1, set_8.children().size());
 
-        Assert.assertEquals(2, set_8.children.get(0).children().size());
+        Assert.assertEquals(2, set_8.children().get(0).children().size());
     }
 
     public void test_3(){
-        List<KnowledgeNode> nodes = new ArrayList<KnowledgeNode>();
-
+        KnowledgeNet net = null;
         try {
-            nodes = KnowledgeNetHttpApi.set_nodes("javascript", "set-8");
+            net = KnowledgeNetHttpApi.net("javascript");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<KnowledgeNode> nodes = new ArrayList<KnowledgeNode>();
+        KnowledgeSet set_8 = (KnowledgeSet)net.children().get(0);
+        try {
+            nodes = KnowledgeNetHttpApi.set_nodes("javascript", set_8);
         } catch (Exception e) {
             e.printStackTrace();
         }

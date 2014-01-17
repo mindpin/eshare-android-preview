@@ -11,6 +11,7 @@ import com.eshare_android_preview.controller.activity.questions.QuestionShowActi
 import com.eshare_android_preview.controller.testpaper.TestPaper;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
+import com.eshare_android_preview.http.i.question.IQuestionLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class KnowledgeSetViewPagerAdapter extends PagerAdapter {
                     if (!node.is_unlocked()) return;
 
                     Intent intent = new Intent(activity, QuestionShowActivity.class);
-                    TestPaper test_paper = new TestPaper(node);
+                    TestPaper test_paper = new TestPaper((IQuestionLoader)node);
                     intent.putExtra(QuestionShowActivity.ExtraKeys.TEST_PAPER, test_paper);
                     activity.startActivity(intent);
                 }

@@ -3,8 +3,13 @@ package com.eshare_android_preview.controller.testpaper;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.eshare_android_preview.http.api.TestSuccessHttpApi;
+import com.eshare_android_preview.http.c.UserData;
+import com.eshare_android_preview.http.i.knowledge.ICanbeLearned;
+import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.http.i.question.IQuestionLoader;
+import com.eshare_android_preview.http.model.LearnedItem;
 import com.eshare_android_preview.http.model.TestSuccess;
 
 import java.util.ArrayList;
@@ -40,7 +45,9 @@ public class TestPaper implements Parcelable {
     }
 
     public TestPaper(Parcel parcel){
-        this.loader = (IQuestionLoader)parcel.readSerializable();
+        String loader_id   = parcel.readString();
+        String loader_class_name = parcel.readString();
+        this.loader = UserData.instance().get_current_knowledge_net(false).get_iquestion_loader(loader_class_name, loader_id);
         this.test_result = (TestResult)parcel.readSerializable();
 
         List<IQuestion> temp = new ArrayList<IQuestion>();
@@ -59,7 +66,8 @@ public class TestPaper implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeSerializable(this.loader);
+        dest.writeString(this.loader.get_id());
+        dest.writeString(this.loader.get_type());
         dest.writeSerializable(this.test_result);
         dest.writeList(this.questions);
         dest.writeInt(this.current_index);
@@ -79,9 +87,17 @@ public class TestPaper implements Parcelable {
 
     // 练习通过，发起请求
     public TestSuccess do_pass() {
-        // TODO
-        // 1 先实现通过的请求
-        // 2 再实现修改变化了的对象
-        return null;
+        IUserKnowledgeNet net = UserData.instance().get_current_knowledge_net(false);
+        try {
+            TestSuccess test_success = TestSuccessHttpApi.build_test_success(net.get_id(), loader.get_id());
+            for(LearnedItem item : test_success.learned_items){
+                ICanbeLearned target = net.find_learn_target(item.id, item.type);
+                target.set_learned();
+            }
+            return test_success;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

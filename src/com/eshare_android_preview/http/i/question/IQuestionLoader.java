@@ -8,4 +8,6 @@ import java.util.List;
  */
 public interface IQuestionLoader extends Serializable{
     public List<IQuestion> get_questions_remote();
+    public String get_id();
+    public String get_type();
 }

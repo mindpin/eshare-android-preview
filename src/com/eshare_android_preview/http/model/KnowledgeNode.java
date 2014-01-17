@@ -2,8 +2,10 @@ package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.api.QuestionHttpApi;
 import com.eshare_android_preview.http.c.UserData;
+import com.eshare_android_preview.http.i.knowledge.ICanbeLearned;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.i.question.IQuestion;
+import com.eshare_android_preview.http.i.question.IQuestionLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +13,12 @@ import java.util.List;
 /**
  * Created by fushang318 on 14-1-9.
  */
-public class KnowledgeNode implements IUserKnowledgeNode {
+public class KnowledgeNode implements IUserKnowledgeNode, ICanbeLearned,IQuestionLoader {
+    private KnowledgeSet set;
     private String id;
     private String name;
     private String desc;
     private boolean required;
-    private boolean is_unlocked;
     private boolean is_learned;
 
     private List<IUserKnowledgeNode> children = new ArrayList<IUserKnowledgeNode>();
@@ -30,9 +32,22 @@ public class KnowledgeNode implements IUserKnowledgeNode {
         this.parents.add(parent);
     }
 
+    public void set_set(KnowledgeSet set){
+        this.set = set;
+    }
+
+    public boolean is_root(){
+        return this.parents.size() == 0;
+    }
+
     @Override
     public String get_id() {
         return id;
+    }
+
+    @Override
+    public String get_type() {
+        return "KnowledgeNode";
     }
 
     @Override
@@ -62,7 +77,15 @@ public class KnowledgeNode implements IUserKnowledgeNode {
 
     @Override
     public boolean is_unlocked() {
-        return is_unlocked;
+        if(this.is_root()){
+            return set.is_unlocked();
+        }
+        for(IUserKnowledgeNode node : parents){
+            if(!node.is_learned()){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -80,5 +103,10 @@ public class KnowledgeNode implements IUserKnowledgeNode {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public void set_learned() {
+        this.is_learned = true;
     }
 }

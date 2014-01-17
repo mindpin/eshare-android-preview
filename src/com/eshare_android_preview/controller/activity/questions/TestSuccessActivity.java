@@ -84,7 +84,7 @@ public class TestSuccessActivity extends EshareBaseActivity {
             @Override
             public void on_success(Void result) {
                 loaded = true;
-                experience_view.refresh();
+                experience_view.init();
                 experience_chart_view.init(test_success.day_exps);
                 handler.sendEmptyMessageDelayed(0, 500);
             }

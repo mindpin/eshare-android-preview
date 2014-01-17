@@ -5,6 +5,7 @@ import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNetGsonBuild
 import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNodesGsonBuilder;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeNode;
+import com.eshare_android_preview.http.model.KnowledgeSet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -43,14 +44,14 @@ public class KnowledgeNetHttpApi {
         }
     }
 
-    public static List<KnowledgeNode> set_nodes(String net_id, String set_id){
+    public static List<KnowledgeNode> set_nodes(String net_id, final KnowledgeSet set){
         try {
-            return new EshareGetRequest<List<KnowledgeNode>>("/knowledge_nets/" +  net_id + "/knowledge_sets/" + set_id) {
+            return new EshareGetRequest<List<KnowledgeNode>>("/knowledge_nets/" +  net_id + "/knowledge_sets/" + set.get_id()) {
                 @Override
                 public List<KnowledgeNode> on_success(String response_text) throws Exception {
                     Gson gson = new Gson();
                     KnowledgeNodesGsonBuilder builder = gson.fromJson(response_text, KnowledgeNodesGsonBuilder.class);
-                    return builder.build();
+                    return builder.build(set);
                 }
             }.go();
         } catch (Exception e) {

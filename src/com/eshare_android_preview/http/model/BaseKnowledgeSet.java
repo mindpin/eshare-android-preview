@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.i.IDataIcon;
+import com.eshare_android_preview.http.i.knowledge.ICanbeLearned;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 
@@ -10,13 +11,12 @@ import java.util.List;
 /**
  * Created by fushang318 on 14-1-8.
  */
-public abstract class BaseKnowledgeSet implements IUserKnowledgeSet {
-    public String id;
-    public int deep;
-    public boolean is_unlocked;
-    public boolean is_learned;
-    public List<IUserKnowledgeSet> children;
-    public List<IUserKnowledgeSet> parents;
+public abstract class BaseKnowledgeSet implements IUserKnowledgeSet, ICanbeLearned {
+    protected String id;
+    protected int deep;
+    protected boolean is_learned;
+    protected List<IUserKnowledgeSet> children;
+    protected List<IUserKnowledgeSet> parents;
 
     public BaseKnowledgeSet(){
         children = new ArrayList<IUserKnowledgeSet>();
@@ -47,11 +47,6 @@ public abstract class BaseKnowledgeSet implements IUserKnowledgeSet {
     }
 
     @Override
-    public boolean is_unlocked() {
-        return is_unlocked;
-    }
-
-    @Override
     public boolean is_learned(){
         return is_learned;
     }
@@ -65,9 +60,17 @@ public abstract class BaseKnowledgeSet implements IUserKnowledgeSet {
     public List<IUserKnowledgeSet> parents() {
         return parents;
     }
+    
+    @Override
+    public void set_learned(){
+        this.is_learned = true;
+    }
 
+
+    abstract public IUserKnowledgeNode find_node(String id);
     abstract public String get_name();
     abstract public boolean is_checkpoint();
     abstract public List<IUserKnowledgeNode> nodes(boolean remote);
     abstract public boolean is_root();
+    abstract public boolean is_unlocked();
 }

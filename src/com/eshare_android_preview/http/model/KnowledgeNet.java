@@ -1,9 +1,11 @@
 package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.i.IDataIcon;
+import com.eshare_android_preview.http.i.knowledge.ICanbeLearned;
 import com.eshare_android_preview.http.i.knowledge.IUserExp;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
+import com.eshare_android_preview.http.i.question.IQuestionLoader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +49,30 @@ public class KnowledgeNet extends IUserKnowledgeNet {
         BaseKnowledgeSet set = base_set_map.get(set_id);
         if(set.getClass() == KnowledgeSet.class){
             return set;
+        }
+        return null;
+    }
+
+    @Override
+    public IQuestionLoader get_iquestion_loader(String type, String id) {
+        Object result = find_object(type, id);
+        return result == null ? null : (IQuestionLoader)result;
+    }
+
+    @Override
+    public ICanbeLearned find_learn_target(String type, String id) {
+        Object result = find_object(type,id);
+        return result == null ? null : (ICanbeLearned)result;
+    }
+
+    private Object find_object(String type, String id){
+        if(type.equals("KnowledgeSet") || type.equals("KnowledgeCheckpoint")){
+            return base_set_map.get(id);
+        }else if(type.equals("KnowledgeNode")){
+            for(BaseKnowledgeSet set : base_set_map.values()){
+                Object object = set.find_node(id);
+                if(object != null) return object;
+            }
         }
         return null;
     }

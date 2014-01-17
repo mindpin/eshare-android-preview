@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.logic.knowledge_net;
 
 import com.eshare_android_preview.http.model.KnowledgeNode;
+import com.eshare_android_preview.http.model.KnowledgeSet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,10 +24,14 @@ public class KnowledgeNodesGsonBuilder {
     public KnowledgeNodeRelation[] relations;
     public Map<String,KnowledgeNode> node_map = new HashMap<String, KnowledgeNode>();
 
-    public List<KnowledgeNode> build(){
+    public List<KnowledgeNode> build(KnowledgeSet set){
         _build_node_map();
         _process_relations();
-        return new ArrayList<KnowledgeNode>(node_map.values());
+        List<KnowledgeNode> result =  new ArrayList<KnowledgeNode>(node_map.values());
+        for(KnowledgeNode node : result){
+            node.set_set(set);
+        }
+        return result;
     }
 
     private void _process_relations() {
@@ -35,7 +40,6 @@ public class KnowledgeNodesGsonBuilder {
             KnowledgeNode child = find_node_by_id(relation.child);
             parent.add_child(child);
             child.add_parent(parent);
-
         }
     }
 

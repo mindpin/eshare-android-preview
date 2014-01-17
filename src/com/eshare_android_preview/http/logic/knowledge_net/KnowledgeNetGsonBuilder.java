@@ -32,6 +32,7 @@ public class KnowledgeNetGsonBuilder {
     }
 
     private KnowledgeNet _build_root_base_set(){
+
         List<IUserKnowledgeSet> sets = new ArrayList<IUserKnowledgeSet>();
         for(BaseKnowledgeSet set : base_set_map.values()){
             sets.add(set);
@@ -50,10 +51,10 @@ public class KnowledgeNetGsonBuilder {
 
     private void _build_base_set_map(){
         for(KnowledgeSet set : sets){
-            base_set_map.put(set.id, set);
+            base_set_map.put(set.get_id(), set);
         }
         for(KnowledgeCheckpoint checkpoint : checkpoints){
-            base_set_map.put(checkpoint.id, checkpoint);
+            base_set_map.put(checkpoint.get_id(), checkpoint);
         }
     }
 

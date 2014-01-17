@@ -8,6 +8,7 @@ import java.util.List;
 
 
 public class TestSuccess {
+    public LearnedItem[] learned_items;
     public int add_exp_num;
     private int[] history_info;
     public List<DayExp> day_exps = new ArrayList<DayExp>();
