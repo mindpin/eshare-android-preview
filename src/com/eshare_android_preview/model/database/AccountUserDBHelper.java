@@ -24,7 +24,7 @@ public class AccountUserDBHelper extends BaseModelDBHelper{
             values.put(Constants.TABLE_ACCOUNT_USERS__EMAIL, account_user.email);
             values.put(Constants.TABLE_ACCOUNT_USERS__COOKIES, account_user.cookies);
             values.put(Constants.TABLE_ACCOUNT_USERS__INFO, account_user.info);
-            values.put(Constants.TABLE_ACCOUNT_USERS__AVATAR,account_user.avatar);
+            values.put(Constants.TABLE_ACCOUNT_USERS__AVATAR_URL,account_user.avatar_url);
            
             AccountUser o_user = find(account_user.user_id);
            
@@ -70,11 +70,11 @@ public class AccountUserDBHelper extends BaseModelDBHelper{
 		String name = cursor.getString(2);
 		String login = cursor.getString(3);
 		String email = cursor.getString(4);
-		byte[] avatar = cursor.getBlob(5);
+		String avatar_url = cursor.getString(5);
 		String cookies = cursor.getString(6);
 		String info = cursor.getString(7);
 
-		return new AccountUser(cookies, info, user_id, name,login,email, avatar);
+		return new AccountUser(cookies, info, user_id, name,login,email, avatar_url);
 	}
 
 	private static String[] get_columns() {
@@ -83,7 +83,7 @@ public class AccountUserDBHelper extends BaseModelDBHelper{
                 Constants.TABLE_ACCOUNT_USERS__NAME,
                 Constants.TABLE_ACCOUNT_USERS__LOGIN,
                 Constants.TABLE_ACCOUNT_USERS__EMAIL,
-                Constants.TABLE_ACCOUNT_USERS__AVATAR,
+                Constants.TABLE_ACCOUNT_USERS__AVATAR_URL,
                 Constants.TABLE_ACCOUNT_USERS__COOKIES,
                 Constants.TABLE_ACCOUNT_USERS__INFO};
 	}

@@ -14,7 +14,7 @@ public class BaseDBHelper extends SQLiteOpenHelper {
             Constants.TABLE_ACCOUNT_USERS__NAME + " text not null, " +
             Constants.TABLE_ACCOUNT_USERS__LOGIN + " text , " +
             Constants.TABLE_ACCOUNT_USERS__EMAIL + " text , " +
-            Constants.TABLE_ACCOUNT_USERS__AVATAR + " blob, " +
+            Constants.TABLE_ACCOUNT_USERS__AVATAR_URL + " text, " +
             Constants.TABLE_ACCOUNT_USERS__COOKIES + " text not null, " +
             Constants.TABLE_ACCOUNT_USERS__INFO + " text not null);";
 	

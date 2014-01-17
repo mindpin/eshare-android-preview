@@ -2,13 +2,15 @@ package com.eshare_android_preview.view.ui.avatar;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.utils.ImageTools;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 
 /**
  * Created by Administrator on 14-1-13.
@@ -31,15 +33,15 @@ public class AvatarImageView extends ImageView {
         if (isInEditMode()) return;
         loaded = true;
 
-        BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inScaled = false;
+        String url = AccountManager.current_user().avatar_url;
 
-        byte[] avatar = AccountManager.current_user().avatar;
-        Bitmap b = BitmapFactory.decodeByteArray(avatar, 0, avatar.length, o);
-
-        b = ImageTools.createBitmapBySize(b, getWidth(), getHeight());
-        CircleAvatarDrawable d = new CircleAvatarDrawable(b);
-
-        setBackgroundDrawable(d);
+        ImageLoader.getInstance().loadImage(url, new SimpleImageLoadingListener() {
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                Bitmap b = ImageTools.createBitmapBySize(loadedImage, getWidth(), getHeight());
+                CircleAvatarDrawable d = new CircleAvatarDrawable(b);
+                setBackgroundDrawable(d);
+            }
+        });
     }
 }
