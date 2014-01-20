@@ -7,6 +7,7 @@ import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeNode;
 import com.eshare_android_preview.http.model.KnowledgeSet;
+import com.eshare_android_preview.http.model.SimpleKnowledgeNet;
 
 import junit.framework.Assert;
 
@@ -29,13 +30,13 @@ public class KnowledgeNetTest extends AndroidTestCase{
     }
 
     public void test_1(){
-        List<KnowledgeNet> net_list = null;
+        List<SimpleKnowledgeNet> net_list = null;
         try {
             net_list = KnowledgeNetHttpApi.net_list();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        KnowledgeNet net = net_list.get(0);
+        SimpleKnowledgeNet net = net_list.get(0);
         Assert.assertEquals("javascript", net.get_id());
         Assert.assertEquals("javascript", net.get_name());
     }

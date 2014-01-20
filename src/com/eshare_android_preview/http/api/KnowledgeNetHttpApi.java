@@ -6,6 +6,7 @@ import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNodesGsonBui
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeNode;
 import com.eshare_android_preview.http.model.KnowledgeSet;
+import com.eshare_android_preview.http.model.SimpleKnowledgeNet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -17,15 +18,20 @@ import java.util.List;
  * Created by fushang318 on 14-1-8.
  */
 public class KnowledgeNetHttpApi {
-    public static List<KnowledgeNet> net_list() throws Exception{
-        return new EshareGetRequest<List<KnowledgeNet>>("/knowledge_nets/list") {
-            @Override
-            public List<KnowledgeNet> on_success(String response_text) throws Exception {
-                Type collectionType = new TypeToken<List<KnowledgeNet>>(){}.getType();
-                Gson gson = new Gson();
-                return gson.fromJson(response_text, collectionType);
-            }
-        }.go();
+    public static List<SimpleKnowledgeNet> net_list(){
+        try {
+            return new EshareGetRequest<List<SimpleKnowledgeNet>>("/knowledge_nets/list") {
+                @Override
+                public List<SimpleKnowledgeNet> on_success(String response_text) throws Exception {
+                    Type collectionType = new TypeToken<List<SimpleKnowledgeNet>>(){}.getType();
+                    Gson gson = new Gson();
+                    return gson.fromJson(response_text, collectionType);
+                }
+            }.go();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<SimpleKnowledgeNet>();
+        }
     }
 
     public static KnowledgeNet net(String net_id){

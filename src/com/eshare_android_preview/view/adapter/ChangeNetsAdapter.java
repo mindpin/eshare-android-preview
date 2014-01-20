@@ -5,13 +5,13 @@ import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
-import com.eshare_android_preview.http.model.KnowledgeNet;
+import com.eshare_android_preview.http.i.knowledge.IUserSimpleKnowledgeNet;
 import com.eshare_android_preview.view.adapter.base.EshareBaseAdapter;
 
 /**
  * Created by fushang318 on 14-1-13.
  */
-public class ChangeNetsAdapter extends EshareBaseAdapter<KnowledgeNet> {
+public class ChangeNetsAdapter extends EshareBaseAdapter<IUserSimpleKnowledgeNet> {
 
     public ChangeNetsAdapter(EshareBaseActivity activity) {
         super(activity);
@@ -30,7 +30,7 @@ public class ChangeNetsAdapter extends EshareBaseAdapter<KnowledgeNet> {
     }
 
     @Override
-    public void fill_with_data(BaseViewHolder holder, KnowledgeNet item, int position) {
+    public void fill_with_data(BaseViewHolder holder, IUserSimpleKnowledgeNet item, int position) {
         ViewHolder view_holder = (ViewHolder) holder;
         view_holder.net_name_tv.setText(item.get_name());
     }

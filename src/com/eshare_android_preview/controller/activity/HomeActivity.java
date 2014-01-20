@@ -14,6 +14,9 @@ import com.eshare_android_preview.view.knowledge_map.KnowledgeMapView;
 
 
 public class HomeActivity extends EshareBaseActivity {
+    public static class ExtraKeys {
+        public static final String CHANGE_NET = "change_net";
+    }
     public static KnowledgeMapView map_view;
 
     @Override
@@ -33,7 +36,12 @@ public class HomeActivity extends EshareBaseActivity {
             @Override
             public Void do_in_background(Void... params) throws Exception {
 //                TODO 需要智能取，需要调整结构优化
-                UserData.instance().get_current_knowledge_net();
+                boolean change_net = getIntent().getBooleanExtra(ExtraKeys.CHANGE_NET, false);
+                if(change_net){
+                    UserData.instance().get_current_knowledge_net(true);
+                }else{
+                    UserData.instance().get_current_knowledge_net();
+                }
                 return null;
             }
 
