@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.c;
 
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
+import com.eshare_android_preview.http.api.UserAuthHttpApi;
 import com.eshare_android_preview.http.i.IUserData;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.i.knowledge.IUserSimpleKnowledgeNet;
@@ -16,6 +17,7 @@ public class UserData implements IUserData {
     private static IUserData instance = new UserData();
 
     private IUserKnowledgeNet set_current_knowledge_net;
+    private IUserProfile user_profile;
 
     static public IUserData instance() {
         return instance;
@@ -23,7 +25,19 @@ public class UserData implements IUserData {
 
     @Override
     public IUserProfile get_profile(boolean remote) {
-        return null;
+        if(remote){
+            return _get_profile_remote();
+        }
+        return _get_profile_local();
+    }
+
+    private IUserProfile _get_profile_remote(){
+        user_profile = UserAuthHttpApi.user_profile();
+        return user_profile;
+    }
+
+    private IUserProfile _get_profile_local(){
+        return user_profile;
     }
 
     @Override

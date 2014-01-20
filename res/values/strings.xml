@@ -100,7 +100,7 @@
     <string name="app_method_not_define_exception">功能方法未定义</string>
     <string name="app_intent_connection_exception">网络连接错误</string>
     <string name="app_authenticate_exception">用户身份验证错误</string>
-    <string name="app_unknown_exception">服务端数据读取错误</string>
+    <string name="app_unknown_exception">网络连接失败</string>
 
     <string name="add_courses_desc">点击 + 号\n添加课程\n到学习计划</string>
     <string name="javascript_desc">属于网络时代的\n世界上最流行的脚本语言</string>

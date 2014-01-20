@@ -106,6 +106,13 @@ public class BaseUtils {
         sdf.applyPattern("yyyy-MM-dd'T'HH:mm:ssZ");
         return sdf.parse(iso_time_string).getTime();
     }
+
+    public static boolean net_is_active(Context context){
+        ConnectivityManager mgrConn = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = mgrConn.getActiveNetworkInfo();
+        return (info != null && info.isAvailable());
+    }
     
 	public static boolean is_wifi_active(Context context) {
 		ConnectivityManager mgrConn = (ConnectivityManager) context

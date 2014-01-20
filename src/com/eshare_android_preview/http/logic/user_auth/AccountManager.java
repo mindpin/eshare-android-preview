@@ -13,16 +13,19 @@ public class AccountManager {
         AccountUser account_user = new AccountUser(cookies, info);
 
         if (AccountUserDBHelper.save(account_user)) {
-            switch_account(account_user);
+            UserAuthPreferences.set_current_user_id(account_user.user_id);
         } else {
             throw new AuthenticateException();
         }
     }
-	
-	public static void switch_account(AccountUser account_user) {
-        UserAuthPreferences.set_current_user_id(account_user.user_id);
+
+    public static void logout(){
+        if(is_logged_in()){
+            AccountUserDBHelper.destroy(current_user());
+            UserAuthPreferences.set_current_user_id(0);
+        }
     }
-	
+
 	public static boolean is_logged_in(){
 		return !current_user().is_nil();
 	}

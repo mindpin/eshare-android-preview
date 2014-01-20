@@ -85,7 +85,6 @@ public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
         }
 		private void ___authenticate_exception() {
 	        on_authenticate_exception();
-	        BaseUtils.toast(R.string.app_authenticate_exception);
 	        // 2011.10.27 不再对用户身份验证错误的情况进行自动处理
 	    }
 		private void ___unknown_exception() {
