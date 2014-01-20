@@ -20,25 +20,15 @@
             android:layout_height="50dp"
             android:layout_width="fill_parent"
             android:layout_marginLeft="40dp"
-            android:layout_marginRight="90dp"
+            android:layout_marginRight="0dp"
             android:fadingEdge="none" />
 
-        <com.eshare_android_preview.view.ui.navigation.ChangeCourseView
-            android:layout_height="30dp"
-            android:layout_width="80dp"
-            border_radius="15"
-            border_radius_background_color="#555555"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp" />
-
+        <RelativeLayout
+            android:layout_height="1dp"
+            android:layout_width="fill_parent"
+            android:background="#e7e7e7"
+            android:layout_marginTop="50dp"></RelativeLayout>
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_height="1dp"
-        android:layout_width="fill_parent"
-        android:background="#e7e7e7"
-        android:layout_marginTop="50dp"></RelativeLayout>
 
     <com.eshare_android_preview.view.knowledge_map.KnowledgeMapView
         android:id="@+id/knowledge_map_view"
@@ -46,7 +36,62 @@
         android:layout_width="fill_parent"
         android:background="#ffffff"
         android:fadingEdge="none"
-        android:layout_marginTop="51dp" />
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp" />
+
+    <RelativeLayout
+        android:layout_height="50dp"
+        android:layout_width="fill_parent"
+        android:background="#f1f1f1"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:layout_height="1dp"
+            android:layout_width="fill_parent"
+            android:background="#e7e7e7"></RelativeLayout>
+
+        <LinearLayout
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="1dp"
+            android:weightSum="3"
+            android:paddingTop="9dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <com.eshare_android_preview.view.ui.navigation.ChangeNetButtonView
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                border_radius="15"
+                border_radius_background_color="#555555"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
+
+            <com.eshare_android_preview.view.ui.navigation.ConceptButtonView
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                border_radius="15"
+                border_radius_background_color="#555555"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
+
+            <com.eshare_android_preview.view.ui.navigation.AccountButtonView
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                border_radius="15"
+                border_radius_background_color="#555555"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <com.eshare_android_preview.view.ui.navigation.AboutView
         android:layout_height="40dp"

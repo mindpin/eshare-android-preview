@@ -20,6 +20,9 @@ public interface IUserData {
     // _local() 方法，从本地持久化获取数据，如果本地无数据，则返回 null，耗时较短
     public IUserProfile get_profile(boolean remote);
 
+    // 登出
+    public void sign_out();
+
     // 获取所有知识网络基础信息（List 中的 IUserKnowledgeNet 对象只包含 ID, NAME 信息）
     public List<IUserSimpleKnowledgeNet> get_knowledge_net_ids(boolean remote);
 
