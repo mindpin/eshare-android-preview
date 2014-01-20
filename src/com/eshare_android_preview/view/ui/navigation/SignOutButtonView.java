@@ -45,7 +45,7 @@ public class SignOutButtonView extends BorderRadiusRelativeLayout {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
-                                UserData.instance().sign_out();
+                                UserData.instance().sign_out(getContext());
                             }
                         }).show();
             }

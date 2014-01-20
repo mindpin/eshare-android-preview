@@ -1,11 +1,15 @@
 package com.eshare_android_preview.http.c;
 
+import android.content.Context;
+
+import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
 import com.eshare_android_preview.http.api.UserAuthHttpApi;
 import com.eshare_android_preview.http.i.IUserData;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.i.knowledge.IUserSimpleKnowledgeNet;
 import com.eshare_android_preview.http.i.profile.IUserProfile;
+import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.SimpleKnowledgeNet;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 
@@ -44,8 +48,9 @@ public class UserData implements IUserData {
     }
 
     @Override
-    public void sign_out() {
-        // TODO
+    public void sign_out(Context context) {
+        AccountManager.logout();
+        ((EshareBaseActivity)context).restart_to_login();
     }
 
     @Override

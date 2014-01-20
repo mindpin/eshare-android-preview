@@ -1,5 +1,7 @@
 package com.eshare_android_preview.http.i;
 
+import android.content.Context;
+
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.i.knowledge.IUserSimpleKnowledgeNet;
 import com.eshare_android_preview.http.i.profile.IUserProfile;
@@ -21,7 +23,7 @@ public interface IUserData {
     public IUserProfile get_profile(boolean remote);
 
     // 登出
-    public void sign_out();
+    public void sign_out(Context context);
 
     // 获取所有知识网络基础信息（List 中的 IUserKnowledgeNet 对象只包含 ID, NAME 信息）
     public List<IUserSimpleKnowledgeNet> get_knowledge_net_ids(boolean remote);
