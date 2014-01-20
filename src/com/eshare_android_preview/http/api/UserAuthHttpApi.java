@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class UserAuthHttpApi {
 
-    public static final String 用户登录 = "/api/account/sign_in";
+    public static final String 用户登录 = "/account/sign_in";
 
 	// 用户登录请求
     public static boolean user_authenticate(String login, String password) throws Exception {
