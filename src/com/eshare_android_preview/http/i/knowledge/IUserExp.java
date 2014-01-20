@@ -15,4 +15,6 @@ public interface IUserExp {
 
     // 到下一等级需要的总经验值
     public int get_next_level_total_exp();
+
+    public void add_exp_num(int add_exp_num);
 }

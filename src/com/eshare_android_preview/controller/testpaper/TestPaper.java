@@ -94,6 +94,7 @@ public class TestPaper implements Parcelable {
                 ICanbeLearned target = net.find_learn_target(item.type, item.id);
                 target.set_learned();
             }
+            net.get_exp().add_exp_num(test_success.add_exp_num);
             return test_success;
         } catch (Exception e) {
             e.printStackTrace();

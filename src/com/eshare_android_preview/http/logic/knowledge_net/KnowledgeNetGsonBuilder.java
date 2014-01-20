@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by fushang318 on 14-1-8.
  */
 public class KnowledgeNetGsonBuilder {
-    private CurrentState exp_status;
+    private int total_exp_num;
     private String id;
     private String name;
     private KnowledgeSet[] sets;
@@ -37,6 +37,7 @@ public class KnowledgeNetGsonBuilder {
         for(BaseKnowledgeSet set : base_set_map.values()){
             sets.add(set);
         }
+        CurrentState exp_status = new CurrentState(total_exp_num);
         return new KnowledgeNet(id, name, exp_status, base_set_map);
     }
 

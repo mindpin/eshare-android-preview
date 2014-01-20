@@ -11,7 +11,6 @@ import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.controller.task.BaseAsyncTask;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.knowledge.IUserSimpleKnowledgeNet;
-import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.view.adapter.ChangeNetsAdapter;
 
 import java.util.List;
