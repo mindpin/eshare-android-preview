@@ -5,7 +5,7 @@ import com.eshare_android_preview.http.model.CurrentState;
 import com.google.gson.Gson;
 
 public class ExpApi {
-	public static final String 经验 = "/knowledge_nets/";
+	public static final String 经验 = "/api/knowledge_nets/";
 	public static final String 获取 = "/exp_info";
 	
 	public static CurrentState exp_info(String net_id){

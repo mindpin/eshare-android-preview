@@ -11,9 +11,8 @@ import org.json.JSONObject;
 
 public class UserAuthHttpApi {
 
-    public static final String 用户登录 = "/account/sign_in";
-	public static final String 用户登出 = "/account/sign_out";
-	
+    public static final String 用户登录 = "/api/account/sign_in";
+
 	// 用户登录请求
     public static boolean user_authenticate(String login, String password) throws Exception {
     	return new EsharePostRequest<Boolean>(
@@ -23,7 +22,6 @@ public class UserAuthHttpApi {
         ) {
             @Override
             public Boolean on_success(String response_text) throws Exception {
-            	System.out.println("json authenticate " + response_text);
                 JSONObject json = new JSONObject(response_text);
                 AccountManager.login(get_cookies(), json.toString());
                 return true;
@@ -42,7 +40,7 @@ public class UserAuthHttpApi {
 
     public static AccountUser user_profile(){
         try {
-            return new EshareGetRequest<AccountUser>("/user/profile") {
+            return new EshareGetRequest<AccountUser>("/api/user/profile") {
                 @Override
                 public AccountUser on_success(String response_text) throws Exception {
                     JSONObject json = new JSONObject(response_text);

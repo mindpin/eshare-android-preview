@@ -20,7 +20,7 @@ import java.util.List;
 public class KnowledgeNetHttpApi {
     public static List<SimpleKnowledgeNet> net_list(){
         try {
-            return new EshareGetRequest<List<SimpleKnowledgeNet>>("/knowledge_nets/list") {
+            return new EshareGetRequest<List<SimpleKnowledgeNet>>("/api/knowledge_nets/list") {
                 @Override
                 public List<SimpleKnowledgeNet> on_success(String response_text) throws Exception {
                     Type collectionType = new TypeToken<List<SimpleKnowledgeNet>>(){}.getType();
@@ -36,7 +36,7 @@ public class KnowledgeNetHttpApi {
 
     public static KnowledgeNet net(String net_id){
         try {
-            return new EshareGetRequest<KnowledgeNet>("/knowledge_nets/" +  net_id) {
+            return new EshareGetRequest<KnowledgeNet>("/api/knowledge_nets/" +  net_id) {
                 @Override
                 public KnowledgeNet on_success(String response_text) throws Exception {
                     Gson gson = new Gson();
@@ -52,7 +52,7 @@ public class KnowledgeNetHttpApi {
 
     public static List<KnowledgeNode> set_nodes(String net_id, final KnowledgeSet set){
         try {
-            return new EshareGetRequest<List<KnowledgeNode>>("/knowledge_nets/" +  net_id + "/knowledge_sets/" + set.get_id()) {
+            return new EshareGetRequest<List<KnowledgeNode>>("/api/knowledge_nets/" +  net_id + "/knowledge_sets/" + set.get_id()) {
                 @Override
                 public List<KnowledgeNode> on_success(String response_text) throws Exception {
                     Gson gson = new Gson();

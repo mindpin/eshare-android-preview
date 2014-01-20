@@ -31,10 +31,10 @@ public class QuestionHttpApi {
     }
 
     private static String random_questions_url(String net_id, String node_id) {
-        return String.format("/knowledge_nets/%s/knowledge_nodes/%s/get_random_questions", net_id, node_id);
+        return String.format("/api/knowledge_nets/%s/knowledge_nodes/%s/get_random_questions", net_id, node_id);
     }
 
     private static String random_question_url(String net_id, String node_id) {
-        return String.format("/knowledge_nets/%s/knowledge_nodes/%s/get_random_question", net_id, node_id);
+        return String.format("/api/knowledge_nets/%s/knowledge_nodes/%s/get_random_question", net_id, node_id);
     }
 }

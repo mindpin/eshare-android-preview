@@ -7,7 +7,7 @@ import com.eshare_android_preview.http.model.TestSuccess;
 public class TestSuccessHttpApi {
 
     public static TestSuccess build_test_success(String net_id, String id) throws Exception {
-        return new EshareGetRequest<TestSuccess>("/knowledge_nets/" + net_id +
+        return new EshareGetRequest<TestSuccess>("/api/knowledge_nets/" + net_id +
                 "/knowledge_nodes/" + id + "/test_success") {
 
             @Override
