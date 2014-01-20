@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff">
+
+    <include layout="@layout/cell_head_bar"/>
+
+    <RelativeLayout
+        android:layout_marginTop="50dp"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        >
+
+        <RelativeLayout
+            android:layout_height="100dp"
+            android:layout_width="fill_parent">
+
+            <com.eshare_android_preview.view.ui.avatar.AvatarImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="80dp"
+                android:layout_width="80dp" />
+
+            <RelativeLayout
+                android:background="#e7e7e7"
+                android:layout_alignParentBottom="true"
+                android:layout_height="1dp"
+                android:layout_width="fill_parent"></RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="100dp"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent">
+
+            <com.eshare_android_preview.view.ui.navigation.SignOutButtonView
+                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                border_radius="20"
+                border_radius_background_color="#cc3333"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

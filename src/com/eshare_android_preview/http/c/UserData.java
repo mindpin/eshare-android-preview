@@ -27,6 +27,11 @@ public class UserData implements IUserData {
     }
 
     @Override
+    public void sign_out() {
+        // TODO
+    }
+
+    @Override
     public List<IUserSimpleKnowledgeNet> get_knowledge_net_ids(boolean remote) {
         return null;
     }
