@@ -44,7 +44,7 @@
     <string name="preferences_key_current_user_id">current_user_id</string>
     
     <!-- 登录页面 -->
-    <string name="login_email">邮箱/密码</string>
+    <string name="login_email">邮箱</string>
     <string name="login_password">密码</string>
     <string name="login_login">登录</string>
     <string name="login_register">注册</string>
