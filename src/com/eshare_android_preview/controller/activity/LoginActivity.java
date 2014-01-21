@@ -8,14 +8,11 @@ import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 
-import com.eshare_android_preview.EshareApplication;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.controller.task.BaseAsyncTask;
@@ -41,47 +38,42 @@ public class LoginActivity extends EshareBaseActivity{
 		login_et = (EditText) findViewById(R.id.login_et);
         password_et = (EditText) findViewById(R.id.password_et);
         
-        init();
-	}
-
-	private void init(){
-		login_file = new FileLoginData();
-		if (login_file.getLogin_data().size() > 0) {
-			login_et.setText(login_file.login_data.get(login_file.login_data.size() - 1));
-		}
-		listener();
+        on_init();
 	}
 	
-	private PopupWindow mPopup;
-	private boolean mInitPopup;
-	private boolean mShowing;
-	private void listener(){
+	private void on_save() {
+		if(BaseUtils.is_str_blank(login)) return;
+		login_file.setLogin_data(login);
+	}
+	private void on_init(){
+		login_file = new FileLoginData();
+		login_et.setText(login_file.get_last_data());
+		
 		login_et.setOnFocusChangeListener(new OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				if(hasFocus) {
-					if(login_file.login_data!=null && login_file.login_data.size()>0 && !mInitPopup){
-						mInitPopup = true;
-						initPopup();
-						}
-						if (mPopup != null) {
-							if (!mShowing) {
-								mPopup.showAsDropDown(login_et,0,0);
-								mShowing = true;
-							} else {
-								mPopup.dismiss();
-							}
-						}
+				if(hasFocus && login_file.login_data!=null && login_file.login_data.size()>0){
+					initPopup();
 				}
 			}
 		});
 	}
+
 	private void initPopup() {
 		LoginPopAdapter adapter = new LoginPopAdapter(this);
 		adapter.add_items(login_file.login_data);
 		View view = LayoutInflater.from(this).inflate(R.layout.l_login_tag, null);
 		ListView list_view = (ListView) view.findViewById(R.id.list_view);
 		list_view.setAdapter(adapter);
+		
+		int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+		int width = login_et.getWidth();
+		final PopupWindow mPopup = new PopupWindow(view, width, height, true);
+		mPopup.setBackgroundDrawable(new BitmapDrawable());
+		mPopup.setOutsideTouchable(true);
+		
+		mPopup.showAsDropDown(login_et,0,0);
+		
 		list_view.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
@@ -89,26 +81,8 @@ public class LoginActivity extends EshareBaseActivity{
 				mPopup.dismiss();
 			}
 		});
-		int height = ViewGroup.LayoutParams.WRAP_CONTENT;
-		int width = login_et.getWidth();
-		mPopup = new PopupWindow(view, width, height, true);
-		mPopup.setBackgroundDrawable(new BitmapDrawable());
-		mPopup.setOutsideTouchable(true);
-		mPopup.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss() {
-				mShowing = false;
-			}
-		});
 	}
-	
-	protected void onDestroy() {
-		super.onDestroy();
-		String login_input = login_et.getText().toString();
-		login_file.setLogin_data(login_input);
-	}
-	
-	
+
 	public void login_button_click(View view){
 		if (!is_params_valid()) return;
 		do_login();
@@ -149,6 +123,7 @@ public class LoginActivity extends EshareBaseActivity{
 			@Override
 			public void on_success(Void result) {
 				open_activity(HomeActivity.class);
+				on_save();
 				finish();
 			}
     	}.execute();

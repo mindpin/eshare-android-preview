@@ -72,4 +72,12 @@ public class FileLoginData {
 			}
 		}
 	}
+	
+	
+	public String get_last_data(){
+		if (login_data == null) {
+			this.login_data = getLogin_data();
+		}
+		return login_data.size() > 0 ? login_data.get(login_data.size() - 1)  : "";
+	}
 }
