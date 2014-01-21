@@ -100,6 +100,8 @@ public class AccountUserDBHelper extends BaseModelDBHelper{
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}finally{
+			db.close();
 		}
 	}
 }
