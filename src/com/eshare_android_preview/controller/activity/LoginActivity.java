@@ -1,13 +1,24 @@
 package com.eshare_android_preview.controller.activity;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.eshare_android_preview.EshareApplication;
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.controller.task.BaseAsyncTask;
 import com.eshare_android_preview.http.api.UserAuthHttpApi;
+import com.eshare_android_preview.model.filedata.FileLoginData;
 import com.eshare_android_preview.utils.BaseUtils;
 import com.eshare_android_preview.utils.ValidateUtil;
 
@@ -18,6 +29,7 @@ public class LoginActivity extends EshareBaseActivity{
 	private String login;
     private String password;
     
+    FileLoginData login_file;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,7 +37,23 @@ public class LoginActivity extends EshareBaseActivity{
 		
 		login_et = (EditText) findViewById(R.id.login_et);
         password_et = (EditText) findViewById(R.id.password_et);
+        
+        init();
 	}
+	
+	
+	private void init(){ 
+		login_file = new FileLoginData();
+		if (login_file.login_data.size() > 0) {
+			login_et.setText(login_file.login_data.get(login_file.login_data.size() - 1));
+		}
+	}
+	protected void onDestroy() {
+		super.onDestroy();
+		String login_input = login_et.getText().toString();
+		login_file.setLogin_data(login_input);
+	}
+	
 	
 	public void login_button_click(View view){
 		if (!is_params_valid()) return;

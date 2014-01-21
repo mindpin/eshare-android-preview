@@ -42,7 +42,9 @@
                 android:imeOptions="actionDone"
                 android:hint="@string/login_email"
                 style="@style/login_layout_inputer"
-                ></EditText>
+                >
+            <requestFocus></requestFocus>
+        </EditText>
         <EditText
                 android:id="@+id/password_et"
                 android:text="1234"
