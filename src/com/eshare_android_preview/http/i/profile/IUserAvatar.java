@@ -6,4 +6,6 @@ import com.eshare_android_preview.http.i.IDataIcon;
  * Created by Administrator on 14-1-13.
  */
 public interface IUserAvatar extends IDataIcon {
+    // LARGE URL
+    public String get_large_url();
 }

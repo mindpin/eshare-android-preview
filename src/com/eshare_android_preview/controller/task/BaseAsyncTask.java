@@ -5,12 +5,17 @@ import android.util.Log;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
+import com.eshare_android_preview.http.base.EshareHttpRequest;
 import com.eshare_android_preview.utils.BaseUtils;
 import com.eshare_android_preview.view.dialog.EshareProgressDialog;
 
+import org.apache.http.conn.HttpHostConnectException;
+
 public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
 	public static final int SUCCESS = 200;
+    public static final int HTTP_HOST_CONNECT_EXCEPTION = 9002;
     public static final int AUTHENTICATE_EXCEPTION = 9003;
+    public static final int RESPONSE_NOT_200_EXCEPTION = 9004;
     public static final int UNKNOWN_EXCEPTION = 9099;
     
 //    三种泛型类型分别代表“启动任务执行的输入参数”、“后台任务执行的进度”、“后台计算结果的类型”。在特定场合下，并不是所有类型都被使用，如果没有被使用，可以用java.lang.Void类型代替。
@@ -35,15 +40,22 @@ public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
 				Log.d("TeamknAsyncTask", "开始执行");
 				inner_task_result = do_in_background(params);
 				return SUCCESS;
-			} catch (AuthenticateException e) {
+            } catch (HttpHostConnectException e) {
+                Log.e("TeamknAsyncTask", "网络连接不上");
+                e.printStackTrace();
+                return HTTP_HOST_CONNECT_EXCEPTION;
+			} catch (EshareHttpRequest.AuthenticateException e) {
                 // 用户身份验证错误
                 Log.e("TeamknAsyncTask", "用户身份验证错误");
                 e.printStackTrace();
                 return AUTHENTICATE_EXCEPTION;
+            } catch (EshareHttpRequest.ResponseNot200Exception e){
+                Log.e("TeamknAsyncTask", "http 请求返回非200 code");
+                e.printStackTrace();
+                return RESPONSE_NOT_200_EXCEPTION;
             }  catch (Exception e) {
             	// 程序执行错误
-                Log.e("TeamknAsyncTask", "程序执行错误");
-                e.printStackTrace();
+                Log.e("TeamknAsyncTask", "程序执行错误", e);
                 return UNKNOWN_EXCEPTION;
 			}
 			
@@ -56,10 +68,15 @@ public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
 					//正确执行
 				    on_success(inner_task_result);
 					break;
+                case HTTP_HOST_CONNECT_EXCEPTION:
+                    ___http_host_connect_exception();
 				case AUTHENTICATE_EXCEPTION:
 					// 用户身份验证错误
 				    ___authenticate_exception();
 					break;
+                case RESPONSE_NOT_200_EXCEPTION:
+                    ___response_not_200_exception();
+                    break;
 				case UNKNOWN_EXCEPTION:
 					// 程序执行错误
 				    ___unknown_exception();
@@ -87,6 +104,12 @@ public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
 	        on_authenticate_exception();
 	        // 2011.10.27 不再对用户身份验证错误的情况进行自动处理
 	    }
+        private void ___response_not_200_exception() {
+            on_response_not_200_exception();
+        }
+        private void ___http_host_connect_exception() {
+            on_http_host_connect_exception();
+        }
 		private void ___unknown_exception() {
             if (on_unknown_exception()) {
                 BaseUtils.toast(R.string.app_unknown_exception);
@@ -155,17 +178,18 @@ public abstract class BaseAsyncTask<TParams, TProgress, TResult>  {
     // 钩子方法，声明在登录认证错误时的一些特定处理逻辑
     public void on_authenticate_exception() {
     }
+    // 钩子方法，声明在出现登录认证错误以外的非200请求时的一些特定处理逻辑
+    public void on_response_not_200_exception() {
+
+    }
+    // 钩子方法，声明在出现网络连接不上时的一些特定处理逻辑
+    public void on_http_host_connect_exception() {
+
+    }
     // 钩子方法，声明在出现其他任何异常时的一些特定处理逻辑
     public boolean on_unknown_exception() {
         return true;
     }
     
-    public static class ResponseNot200Exception extends Exception {
-		private static final long serialVersionUID = -7542262559198093947L;
-	}
-
-	public static class AuthenticateException extends Exception {
-		private static final long serialVersionUID = 8741487079704426464L;
-	}
 }
 

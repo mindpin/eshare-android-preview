@@ -49,4 +49,9 @@ public class UserAvatar implements IUserAvatar {
     public Drawable get_drawable_local() {
         return null;
     }
+
+    @Override
+    public String get_large_url() {
+        return this.url.replace("normal","large");
+    }
 }

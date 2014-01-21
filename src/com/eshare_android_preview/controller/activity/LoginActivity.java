@@ -126,6 +126,28 @@ public class LoginActivity extends EshareBaseActivity{
 				on_save();
 				finish();
 			}
-    	}.execute();
+
+            @Override
+            public void on_authenticate_exception() {
+//                TODO 用户名或密码错误
+            }
+
+            @Override
+            public void on_http_host_connect_exception() {
+//                TODO 网络不给力
+            }
+
+            @Override
+            public void on_response_not_200_exception() {
+//                TODO 非 200 非 401 的网络请求
+            }
+
+            @Override
+            public boolean on_unknown_exception() {
+//               TODO 返回 false 时，不显示默认的 TOAST 提示
+//                do_in_background 方法内出现异常时，会调用这个方法
+                return false;
+            }
+        }.execute();
     }
 }
