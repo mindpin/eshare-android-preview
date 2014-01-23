@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.i.IDataIcon;
+import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.knowledge.ICanbeLearned;
 import com.eshare_android_preview.http.i.knowledge.IUserExp;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
@@ -92,4 +93,11 @@ public class KnowledgeNet extends IUserKnowledgeNet {
 //        TODO 未实现
         return null;
     }
+
+	@Override
+	public List<IConcept> concepts(boolean remote, boolean unlocked,
+			boolean learned) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

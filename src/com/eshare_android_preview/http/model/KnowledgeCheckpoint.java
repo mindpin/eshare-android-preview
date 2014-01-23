@@ -1,5 +1,6 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 
 import java.util.ArrayList;
@@ -43,4 +44,10 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet {
     public boolean is_unlocked() {
         return true;
     }
+
+	@Override
+	public List<IConcept> concepts(boolean remote) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

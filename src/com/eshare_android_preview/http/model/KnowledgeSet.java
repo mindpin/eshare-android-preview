@@ -2,6 +2,7 @@ package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
 import com.eshare_android_preview.http.c.UserData;
+import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 
@@ -93,5 +94,11 @@ public class KnowledgeSet extends BaseKnowledgeSet {
             if(node.is_learned()) learned_node_count += 1;
         }
     }
+
+	@Override
+	public List<IConcept> concepts(boolean remote) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
