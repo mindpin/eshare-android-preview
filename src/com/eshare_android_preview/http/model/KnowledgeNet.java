@@ -23,7 +23,7 @@ public class KnowledgeNet extends IUserKnowledgeNet {
     private List<IUserKnowledgeSet> children = new ArrayList<IUserKnowledgeSet>();
     private Map<String,BaseKnowledgeSet> base_set_map = new HashMap<String, BaseKnowledgeSet>();
     private CurrentState exp_status;
-    private List<IConcept> concepts;
+    private Map<String, List<IConcept>> map_concepts = new  HashMap<String, List<IConcept>>();
     public KnowledgeNet(String id, String name, CurrentState exp_status, Map<String,BaseKnowledgeSet> base_set_map){
         this.id = id;
         this.name = name;
@@ -104,11 +104,14 @@ public class KnowledgeNet extends IUserKnowledgeNet {
 	}
 
 	private List<IConcept> _concepts_remote(boolean unlocked, boolean learned) {
-		concepts = ConceptHttpApi.net_concepts(this.id,unlocked,learned);
+		String key = unlocked+"" + learned + "";
+		List<IConcept> concepts = ConceptHttpApi.net_concepts(this.id,unlocked,learned);
+		map_concepts.put(key, concepts);
 		return concepts;
 	}
 
 	private List<IConcept> _concepts_local(boolean unlocked, boolean learned) {
-		return concepts;
+		String key = unlocked+"" + learned + "";
+		return map_concepts.get(key);
 	}
 }
