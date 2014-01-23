@@ -1,13 +1,13 @@
 package com.eshare_android_preview.http.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.message.BasicNameValuePair;
-
 import com.eshare_android_preview.http.base.EshareGetRequest;
 import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.model.Concept;
+
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConceptHttpApi {
 	public static List<IConcept> net_concepts(String net_id,boolean unlocked, boolean learned) {

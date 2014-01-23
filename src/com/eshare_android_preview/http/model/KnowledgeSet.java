@@ -1,15 +1,15 @@
 package com.eshare_android_preview.http.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.eshare_android_preview.http.api.ConceptHttpApi;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by fushang318 on 14-1-8.
