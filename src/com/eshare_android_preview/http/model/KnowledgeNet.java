@@ -1,5 +1,11 @@
 package com.eshare_android_preview.http.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.eshare_android_preview.http.api.ConceptHttpApi;
 import com.eshare_android_preview.http.i.IDataIcon;
 import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.knowledge.ICanbeLearned;
@@ -7,11 +13,6 @@ import com.eshare_android_preview.http.i.knowledge.IUserExp;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.http.i.question.IQuestionLoader;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by fushang318 on 14-1-8.
@@ -22,7 +23,7 @@ public class KnowledgeNet extends IUserKnowledgeNet {
     private List<IUserKnowledgeSet> children = new ArrayList<IUserKnowledgeSet>();
     private Map<String,BaseKnowledgeSet> base_set_map = new HashMap<String, BaseKnowledgeSet>();
     private CurrentState exp_status;
-
+    private List<IConcept> concepts;
     public KnowledgeNet(String id, String name, CurrentState exp_status, Map<String,BaseKnowledgeSet> base_set_map){
         this.id = id;
         this.name = name;
@@ -95,9 +96,19 @@ public class KnowledgeNet extends IUserKnowledgeNet {
     }
 
 	@Override
-	public List<IConcept> concepts(boolean remote, boolean unlocked,
-			boolean learned) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<IConcept> concepts(boolean remote, boolean unlocked,boolean learned) {
+		if(remote){
+			return _concepts_remote(unlocked, learned);
+		}
+		return _concepts_local(unlocked, learned);
+	}
+
+	private List<IConcept> _concepts_remote(boolean unlocked, boolean learned) {
+		concepts = ConceptHttpApi.net_concepts(this.id,unlocked,learned);
+		return concepts;
+	}
+
+	private List<IConcept> _concepts_local(boolean unlocked, boolean learned) {
+		return concepts;
 	}
 }
