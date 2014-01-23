@@ -1,5 +1,7 @@
 package com.eshare_android_preview.model.filedata;
 
+import com.eshare_android_preview.EshareApplication;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,8 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
-
-import com.eshare_android_preview.EshareApplication;
 
 public class FileLoginData {
 	final static String FILE_NAME =   "account.obj";

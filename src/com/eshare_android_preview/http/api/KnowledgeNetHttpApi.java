@@ -1,11 +1,8 @@
 package com.eshare_android_preview.http.api;
 
 import com.eshare_android_preview.http.base.EshareGetRequest;
-import com.eshare_android_preview.http.base.HttpParam;
-import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNetGsonBuilder;
 import com.eshare_android_preview.http.logic.knowledge_net.KnowledgeNodesGsonBuilder;
-import com.eshare_android_preview.http.model.Concept;
 import com.eshare_android_preview.http.model.KnowledgeNet;
 import com.eshare_android_preview.http.model.KnowledgeNode;
 import com.eshare_android_preview.http.model.KnowledgeSet;
@@ -16,8 +13,6 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.http.message.BasicNameValuePair;
 
 /**
  * Created by fushang318 on 14-1-8.

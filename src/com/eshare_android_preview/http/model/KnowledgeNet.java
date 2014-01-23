@@ -1,10 +1,5 @@
 package com.eshare_android_preview.http.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.eshare_android_preview.http.api.ConceptHttpApi;
 import com.eshare_android_preview.http.i.IDataIcon;
 import com.eshare_android_preview.http.i.concept.IConcept;
@@ -13,6 +8,11 @@ import com.eshare_android_preview.http.i.knowledge.IUserExp;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeSet;
 import com.eshare_android_preview.http.i.question.IQuestionLoader;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by fushang318 on 14-1-8.

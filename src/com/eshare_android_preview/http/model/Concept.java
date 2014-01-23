@@ -1,13 +1,14 @@
 package com.eshare_android_preview.http.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.eshare_android_preview.http.base.EshareGetRequest;
 import com.eshare_android_preview.http.i.concept.IConcept;
+import com.eshare_android_preview.http.i.question.IQuestion;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Concept implements IConcept {
 	private String id;
@@ -33,14 +34,15 @@ public class Concept implements IConcept {
 	}
 
 	@Override
-	public List<Question> get_learned_node_random_questions(int count) {
+	public List<IQuestion> get_learned_node_random_questions(int count) {
         String url = String.format("/api/concept/%s/learned_node_random_questions?count=%d", this.id, count);
 
         try {
-            return new EshareGetRequest<List<Question>>(url) {
+            return new EshareGetRequest<List<IQuestion>>(url) {
                 @Override
-                public List<Question> on_success(String response_text) throws Exception {
-                    return Question.from_json_array(response_text);
+                public List<IQuestion> on_success(String response_text) throws Exception {
+                    return new ArrayList<IQuestion>(Question.from_json_array(response_text));
+
                 }
             }.go();
         } catch (Exception e) {
