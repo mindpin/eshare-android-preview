@@ -38,6 +38,13 @@ public class UserData implements IUserData {
         return _get_profile_local();
     }
 
+    @Override
+    public void refresh() {
+        if (AccountManager.is_logged_in()) {
+            get_profile(true);
+        }
+    }
+
     private IUserProfile _get_profile_remote(){
         user_profile = UserAuthHttpApi.user_profile();
         return user_profile;

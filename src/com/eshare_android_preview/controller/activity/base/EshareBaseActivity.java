@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.eshare_android_preview.R;
-import com.eshare_android_preview.controller.activity.LoginActivity;
+import com.eshare_android_preview.controller.activity.AuthActivity;
 import com.eshare_android_preview.http.logic.user_auth.AccountManager;
 import com.eshare_android_preview.http.model.AccountUser;
 
@@ -42,7 +42,7 @@ public class EshareBaseActivity extends Activity {
 	// 关闭所有activity，并重新打开login
 	final public void restart_to_login(){
 		ActivitiesStackSingleton.clear_activities_stack();
-		open_activity(LoginActivity.class);
+		open_activity(AuthActivity.class);
 	}
 
 	// 绑定在顶栏 go_back 按钮上的事件处理

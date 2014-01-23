@@ -22,6 +22,9 @@ public interface IUserData {
     // _local() 方法，从本地持久化获取数据，如果本地无数据，则返回 null，耗时较短
     public IUserProfile get_profile(boolean remote);
 
+    // 刷新当前用户登录信息
+    public void refresh();
+
     // 登出
     public void sign_out(Context context);
 

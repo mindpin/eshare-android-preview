@@ -1,5 +1,7 @@
 package com.eshare_android_preview.http.i.knowledge;
 
+import com.eshare_android_preview.http.i.concept.IConcept;
+
 import java.util.List;
 
 /**
@@ -26,4 +28,7 @@ public interface IUserKnowledgeNode {
     public boolean is_unlocked();
 
     public boolean is_learned();
+
+    // 获取此知识点下所有概念
+    public List<IConcept> concepts(boolean remote);
 }

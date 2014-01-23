@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.i.knowledge;
 
 import com.eshare_android_preview.http.i.IDataIcon;
+import com.eshare_android_preview.http.i.concept.IConcept;
 
 import java.util.List;
 
@@ -37,4 +38,7 @@ public interface IUserKnowledgeSet extends INetHasChildren {
     // 节点信息
     public List<IUserKnowledgeNode> nodes(boolean remote);
     public List<IUserKnowledgeNode> nodes();
+
+    // 获取此单元下所有概念
+    public List<IConcept> concepts(boolean remote);
 }

@@ -38,14 +38,13 @@
 
         <uses-library android:name="android.test.runner" />
 
-        <activity android:name=".controller.activity.LoginActivity"></activity>
-        <activity android:name=".controller.activity.HomeActivity"></activity>
-        <activity android:name=".controller.activity.LoadingActivity">
+        <activity android:name=".controller.activity.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".controller.activity.HomeActivity"></activity>
         <activity android:name=".controller.activity.tab_activity.MessageActivity"></activity>
         <activity android:name=".controller.activity.tab_activity.AboutActivity"></activity>
 
