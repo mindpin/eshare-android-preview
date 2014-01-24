@@ -1,5 +1,6 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.api.ConceptHttpApi;
 import com.eshare_android_preview.http.api.QuestionHttpApi;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.concept.IConcept;
@@ -24,7 +25,9 @@ public class KnowledgeNode implements IUserKnowledgeNode, ICanbeLearned,IQuestio
 
     private List<IUserKnowledgeNode> children = new ArrayList<IUserKnowledgeNode>();
     private List<IUserKnowledgeNode> parents = new ArrayList<IUserKnowledgeNode>();
-
+    
+    private List<IConcept> concepts;
+    
     public void add_child(KnowledgeNode child){
         this.children.add(child);
     }
@@ -116,4 +119,22 @@ public class KnowledgeNode implements IUserKnowledgeNode, ICanbeLearned,IQuestio
         this.is_learned = true;
         this.set.refresh_learned_node_count();
     }
+
+	@Override
+	public List<IConcept> concepts(boolean remote) {
+		if(remote){
+			return _concepts_remote();
+		}
+		return _concepts_local();
+	}
+
+	private List<IConcept> _concepts_remote() {
+		String net_id = UserData.instance().get_current_knowledge_net_id();
+		concepts = ConceptHttpApi.node_concepts(net_id,this.id);
+		return concepts;
+	}
+
+	private List<IConcept> _concepts_local() {
+		return concepts;
+	}
 }

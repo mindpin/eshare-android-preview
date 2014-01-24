@@ -1,5 +1,6 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.api.ConceptHttpApi;
 import com.eshare_android_preview.http.api.KnowledgeNetHttpApi;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.concept.IConcept;
@@ -20,7 +21,8 @@ public class KnowledgeSet extends BaseKnowledgeSet {
     private int learned_node_count;
     private HashMap<String,IUserKnowledgeNode> node_maps = new HashMap<String,IUserKnowledgeNode>();
     private boolean node_maps_has_cache = false;
-
+    
+    private List<IConcept> concepts;
     @Override
     public IUserKnowledgeNode find_node(String id) {
         return node_maps.get(id);
@@ -99,5 +101,23 @@ public class KnowledgeSet extends BaseKnowledgeSet {
             if(node.is_learned()) learned_node_count += 1;
         }
     }
+
+	@Override
+	public List<IConcept> concepts(boolean remote) {
+		if(remote){
+			return _concepts_remote();
+		}
+		return _concepts_local();
+	}
+
+	private List<IConcept> _concepts_remote() {
+		String net_id = UserData.instance().get_current_knowledge_net_id();
+		concepts = ConceptHttpApi.set_concepts(net_id,this.id);
+		return concepts;
+	}
+
+	private List<IConcept> _concepts_local() {
+		return concepts;
+	}
 
 }

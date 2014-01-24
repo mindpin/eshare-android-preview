@@ -49,4 +49,10 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet {
     public boolean is_unlocked() {
         return true;
     }
+
+	@Override
+	public List<IConcept> concepts(boolean remote) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

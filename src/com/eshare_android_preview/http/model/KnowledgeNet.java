@@ -1,5 +1,6 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.api.ConceptHttpApi;
 import com.eshare_android_preview.http.i.IDataIcon;
 import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.knowledge.ICanbeLearned;
@@ -22,7 +23,7 @@ public class KnowledgeNet extends IUserKnowledgeNet {
     private List<IUserKnowledgeSet> children = new ArrayList<IUserKnowledgeSet>();
     private Map<String,BaseKnowledgeSet> base_set_map = new HashMap<String, BaseKnowledgeSet>();
     private CurrentState exp_status;
-
+    private Map<String, List<IConcept>> map_concepts = new  HashMap<String, List<IConcept>>();
     public KnowledgeNet(String id, String name, CurrentState exp_status, Map<String,BaseKnowledgeSet> base_set_map){
         this.id = id;
         this.name = name;
@@ -98,4 +99,24 @@ public class KnowledgeNet extends IUserKnowledgeNet {
 //        TODO 未实现
         return null;
     }
+
+	@Override
+	public List<IConcept> concepts(boolean remote, boolean unlocked,boolean learned) {
+		if(remote){
+			return _concepts_remote(unlocked, learned);
+		}
+		return _concepts_local(unlocked, learned);
+	}
+
+	private List<IConcept> _concepts_remote(boolean unlocked, boolean learned) {
+		String key = unlocked+"" + learned + "";
+		List<IConcept> concepts = ConceptHttpApi.net_concepts(this.id,unlocked,learned);
+		map_concepts.put(key, concepts);
+		return concepts;
+	}
+
+	private List<IConcept> _concepts_local(boolean unlocked, boolean learned) {
+		String key = unlocked+"" + learned + "";
+		return map_concepts.get(key);
+	}
 }
