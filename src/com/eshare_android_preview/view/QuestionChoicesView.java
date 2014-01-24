@@ -1,6 +1,7 @@
 package com.eshare_android_preview.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -23,6 +24,8 @@ import com.eshare_android_preview.view.ui.FlowLayout;
 import com.eshare_android_preview.view.ui.FontAwesomeTextView;
 import com.eshare_android_preview.view.ui.UiColor;
 import com.eshare_android_preview.view.ui.question.QuestionFill;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 
 import java.io.IOException;
 
@@ -134,27 +137,27 @@ public class QuestionChoicesView extends FlatGridView {
 
                 RelativeLayout rl = (RelativeLayout) choice_item_view.findViewById(R.id.item_content);
 
-                try {
-                    // TODO 由于改成网络请求了，所以这里的url格式有变化，程序要改
-                    ImageView iv = new ImageView(getContext());
-                    String path = choice.content().replace("![file:///android_asset/", "").replace("]", "");
-                    Drawable d = Drawable.createFromStream(getContext().getAssets().open(path), null);
-                    iv.setImageDrawable(d);
-                    rl.addView(iv);
+                final ImageView iv = new ImageView(getContext());
+                String url = choice.content().replace("![", "").replace("]", "");
 
-                    iv.setAdjustViewBounds(true);
-                    iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                ImageLoader.getInstance().loadImage(url, new SimpleImageLoadingListener() {
+                    @Override
+                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        iv.setImageBitmap(loadedImage);
+                    }
+                });
 
-                    RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) iv.getLayoutParams();
-                    lp.setMargins(6, 6, 6, 6);
-                    lp.width = RelativeLayout.LayoutParams.FILL_PARENT;
-                    lp.height = RelativeLayout.LayoutParams.FILL_PARENT;
+                rl.addView(iv);
 
-                    iv.setLayoutParams(lp);
+                iv.setAdjustViewBounds(true);
+                iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-                } catch (IOException e) {
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) iv.getLayoutParams();
+                lp.setMargins(6, 6, 6, 6);
+                lp.width = RelativeLayout.LayoutParams.FILL_PARENT;
+                lp.height = RelativeLayout.LayoutParams.FILL_PARENT;
 
-                }
+                iv.setLayoutParams(lp);
 
                 choice_item_view.setOnClickListener(new QuestionChoiceItemListener(choice_item_view, choice));
             }
@@ -163,12 +166,18 @@ public class QuestionChoicesView extends FlatGridView {
         }
 
 
-        boolean is_long_choice = question.choice_max_length() > 3;
+        boolean is_long_choice = question.choice_max_length() > 11;
+        boolean is_middle_choice = question.choice_max_length() > 3;
+
+        int size = question.choices().size();
 
         if (is_long_choice) {
-            set_grid(1, question.choices().size());
+            set_grid(1, size);
+        } else if (is_middle_choice) {
+            set_grid(2, size / 2 + size % 2);
+            set_lp_height_1_7();
         } else {
-            set_grid(question.choices().size(), 1);
+            set_grid(size, 1);
         }
 
         for (IChoice choice : question.choices()) {
@@ -180,13 +189,19 @@ public class QuestionChoicesView extends FlatGridView {
 
             TextView tv = new TextView(getContext());
             tv.setText(choice.content());
+
             if (is_long_choice) {
+                tv.setTextSize(BaseUtils.dp_to_px(12));
+                rl.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                rl.setPadding(BaseUtils.dp_to_px(10), 0, 0, 0);
+            } else if (is_middle_choice) {
                 tv.setTextSize(BaseUtils.dp_to_px(12));
                 rl.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
                 rl.setPadding(BaseUtils.dp_to_px(10), 0, 0, 0);
             } else {
                 tv.setTextSize(BaseUtils.dp_to_px(16));
             }
+
             tv.setTextColor(Color.parseColor("#555555"));
             tv.setTypeface(Typeface.MONOSPACE);
 
@@ -242,7 +257,7 @@ public class QuestionChoicesView extends FlatGridView {
         public void click_multiple() {
             answer.add_or_remove_choice(choice);
 
-            if(selected) {
+            if (selected) {
                 (item_view.findViewById(R.id.item_border)).setBackgroundColor(UiColor.CHOICE_BORDER);
                 (item_view.findViewById(R.id.item_content)).setBackgroundColor(UiColor.CHOICE_BG);
             } else {

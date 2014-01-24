@@ -52,11 +52,6 @@ public class KnowledgeSet extends BaseKnowledgeSet {
         return _nodes_remote();
     }
 
-    @Override
-    public List<IConcept> concepts(boolean remote) {
-        return null;
-    }
-
     private List<IUserKnowledgeNode> _nodes_remote(){
         String net_id = UserData.instance().get_current_knowledge_net_id();
         List<KnowledgeNode> temp_nodes = KnowledgeNetHttpApi.set_nodes(net_id, this);

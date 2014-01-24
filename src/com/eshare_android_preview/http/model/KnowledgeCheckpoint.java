@@ -36,11 +36,6 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet {
     }
 
     @Override
-    public List<IConcept> concepts(boolean remote) {
-        return null;
-    }
-
-    @Override
     public boolean is_root() {
         return false;
     }

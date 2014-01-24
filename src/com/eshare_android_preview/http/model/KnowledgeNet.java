@@ -67,11 +67,6 @@ public class KnowledgeNet extends IUserKnowledgeNet {
         return result == null ? null : (ICanbeLearned)result;
     }
 
-    @Override
-    public List<IConcept> concepts(boolean remote, boolean unlocked, boolean learned) {
-        return null;
-    }
-
     private Object find_object(String type, String id){
         if(type.equals("KnowledgeSet") || type.equals("KnowledgeCheckpoint")){
             return base_set_map.get(id);

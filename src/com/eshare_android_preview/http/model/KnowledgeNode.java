@@ -98,11 +98,6 @@ public class KnowledgeNode implements IUserKnowledgeNode, ICanbeLearned,IQuestio
     }
 
     @Override
-    public List<IConcept> concepts(boolean remote) {
-        return null;
-    }
-
-    @Override
     public List<IQuestion> get_questions_remote() {
         String net_id = UserData.instance().get_current_knowledge_net_id();
         try {

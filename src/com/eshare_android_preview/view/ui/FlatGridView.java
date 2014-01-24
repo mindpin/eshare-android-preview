@@ -91,4 +91,12 @@ public class FlatGridView extends LinearLayout {
             ll.setLayoutParams(lp);
         }
     }
+
+    public void set_lp_height_1_7() {
+        for (LinearLayout ll : lines) {
+            LayoutParams lp = (LayoutParams) ll.getLayoutParams();
+            lp.height = SCREEN_SIZE.width_px / 7;
+            ll.setLayoutParams(lp);
+        }
+    }
 }

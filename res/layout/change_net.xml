@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff">
+
+    <include layout="@layout/cell_head_bar"/>
+
+    <RelativeLayout
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:padding="5dp"
+        >
+
+        <RelativeLayout
+            android:layout_height="150dp"
+            android:layout_width="120dp"
+            android:padding="5dp"
+            android:onClick="open_javascript"
+            >
+
+            <ImageView
+                android:layout_height="110dp"
+                android:layout_width="110dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/net_javascript"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:layout_height="30dp"
+                android:layout_width="fill_parent"
+                android:text="JavaScript"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginLeft="120dp"
+            android:layout_height="150dp"
+            android:layout_width="120dp"
+            android:padding="5dp"
+            android:onClick="open_english"
+            >
+
+            <ImageView
+                android:layout_height="110dp"
+                android:layout_width="110dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/net_english"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:layout_height="30dp"
+                android:layout_width="fill_parent"
+                android:text="初级英语"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
