@@ -8,7 +8,7 @@
     <com.eshare_android_preview.view.ui.FontAwesomeTextView
         android:id="@+id/concept_icon"
         android:gravity="center"
-        android:textSize="40dp"
+        android:textSize="30dp"
         android:layout_height="50dp"
         android:layout_width="50dp" />
 
@@ -16,7 +16,7 @@
         android:id="@+id/concept_name"
         android:text="概念名"
         android:textSize="18dp"
-        android:layout_marginLeft="55dp"
+        android:layout_marginLeft="60dp"
         android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content" />
@@ -25,7 +25,7 @@
         android:id="@+id/practices_count"
         android:text="练习次数：5"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="55dp"
+        android:layout_marginLeft="60dp"
         android:textColor="#666"
         android:textSize="16dp"
         android:layout_height="wrap_content"

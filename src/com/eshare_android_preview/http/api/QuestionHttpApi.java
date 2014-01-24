@@ -35,7 +35,7 @@ public class QuestionHttpApi {
     public static void do_post_result(String question_id, boolean result){
         try {
             new EsharePostRequest<Void>(
-                    "/questions/" + question_id + "/do_answer",
+                    "/api/questions/" + question_id + "/do_answer",
                     new PostParamText("answer", result+"")
             ) {
                 @Override

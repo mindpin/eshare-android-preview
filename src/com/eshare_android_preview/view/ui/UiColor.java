@@ -74,4 +74,8 @@ public class UiColor {
     // buttons
     public final static int LOGIN_BUTTON = Color.parseColor("#1cb0f6");
     public final static int LOGIN_BUTTON_PRESSED = Color.parseColor("#49bff6");
+
+    public final static int LEARNED_CONCEPT = Color.parseColor("#98cc27");
+    public final static int COMMON_CONCEPT = Color.parseColor("#1cb0f6");
+    public final static int LOCKED_CONCEPT = Color.parseColor("#999999");
 }

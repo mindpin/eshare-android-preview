@@ -91,10 +91,14 @@ public class QuestionShowActivity extends EshareBaseActivity {
                     question_result_view.show_correct();
                     test_paper.test_result.increase_point();
                     correct_point_view.add_point();
+
+                    post_a_question_result(true);
                 } else {
                     question_result_view.show_error();
                     test_paper.test_result.decrease_hp();
                     health_view.break_heart();
+
+                    post_a_question_result(false);
                 }
 
                 question_button.show_next_button();
@@ -117,6 +121,21 @@ public class QuestionShowActivity extends EshareBaseActivity {
                 }
             }
         });
+    }
+
+    private void post_a_question_result(final boolean result) {
+        new BaseAsyncTask<Void, Void, Void>(this, null) {
+            @Override
+            public Void do_in_background(Void... params) throws Exception {
+                question.do_post_result(result);
+                return null;
+            }
+
+            @Override
+            public void on_success(Void aVoid) {
+
+            }
+        }.execute();
     }
 
     private void load_data(Bundle savedInstanceState) {

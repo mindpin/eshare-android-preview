@@ -47,12 +47,21 @@ public class ConceptsAdapter extends EshareBaseAdapter<IConcept> {
         view_holder.view.setBackgroundColor(Color.WHITE);
 
         if (item.is_unlocked()) {
-            view_holder.concept_icon.setTextColor(UiColor.SET_COLOR);
+            if (item.is_learned()) {
+                view_holder.concept_icon.setTextColor(UiColor.LEARNED_CONCEPT);
+                view_holder.concept_icon.setText(R.string.icon_check_circle);
+            } else {
+                view_holder.concept_icon.setTextColor(UiColor.COMMON_CONCEPT);
+                view_holder.concept_icon.setText(R.string.icon_bookmark);
+            }
+
             view_holder.concept_name.setTextColor(Color.parseColor("#000000"));
             view_holder.practices_count.setVisibility(View.VISIBLE);
             view_holder.practices_count.setText("练习次数：" + item.get_practices_count());
         } else {
-            view_holder.concept_icon.setTextColor(Color.parseColor("#999999"));
+            view_holder.concept_icon.setTextColor(UiColor.LOCKED_CONCEPT);
+            view_holder.concept_icon.setText(R.string.icon_lock);
+
             view_holder.concept_name.setTextColor(Color.parseColor("#999999"));
             view_holder.practices_count.setVisibility(View.GONE);
         }

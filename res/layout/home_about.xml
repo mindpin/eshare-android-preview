@@ -40,7 +40,7 @@
         <TextView
             android:layout_height="60dp"
             android:layout_width="wrap_content"
-            android:text="BUILD-20131230"
+            android:text="BUILD-20140124"
             android:textColor="#fff"
             android:textSize="16dp"
             android:layout_marginTop="90dp"
