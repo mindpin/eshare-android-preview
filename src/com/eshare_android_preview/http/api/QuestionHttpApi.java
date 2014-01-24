@@ -1,6 +1,8 @@
 package com.eshare_android_preview.http.api;
 
 import com.eshare_android_preview.http.base.EshareGetRequest;
+import com.eshare_android_preview.http.base.EsharePostRequest;
+import com.eshare_android_preview.http.base.PostParamText;
 import com.eshare_android_preview.http.model.Question;
 
 import java.util.List;
@@ -28,6 +30,24 @@ public class QuestionHttpApi {
                 return Question.from_json(response);
             }
         }.go();
+    }
+
+    public static void do_post_result(String question_id, boolean result){
+        try {
+            new EsharePostRequest<Void>(
+                    "/questions/" + question_id + "/do_answer",
+                    new PostParamText("answer", result+"")
+            ) {
+                @Override
+                public Void on_success(String response_text) throws Exception {
+                    return null;
+                };
+                public void on_authenticate_exception() {
+                };
+            }.go();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static String random_questions_url(String net_id, String node_id) {

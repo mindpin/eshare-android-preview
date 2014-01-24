@@ -1,5 +1,6 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.api.QuestionHttpApi;
 import com.eshare_android_preview.http.i.question.IChoice;
 import com.eshare_android_preview.http.i.question.IQuestion;
 import com.google.gson.Gson;
@@ -149,6 +150,6 @@ public class Question implements Serializable, IQuestion {
 
     @Override
     public void do_post_result(boolean result) {
-        // TODO
+        QuestionHttpApi.do_post_result(this.id, result);
     }
 }

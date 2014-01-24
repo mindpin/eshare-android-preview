@@ -1,7 +1,6 @@
 package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.api.ConceptHttpApi;
-import com.eshare_android_preview.http.base.EshareGetRequest;
 import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.question.IQuestion;
 import com.google.gson.Gson;

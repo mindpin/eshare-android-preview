@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,8 +25,6 @@ import com.eshare_android_preview.view.ui.UiColor;
 import com.eshare_android_preview.view.ui.question.QuestionFill;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
-
-import java.io.IOException;
 
 /**
  * Created by Administrator on 13-12-19.

@@ -1,20 +1,13 @@
 package com.eshare_android_preview.controller.activity.concept;
 
 import android.os.Bundle;
-import android.text.method.CharacterPickerDialog;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.eshare_android_preview.R;
 import com.eshare_android_preview.controller.activity.base.EshareBaseActivity;
 import com.eshare_android_preview.controller.task.BaseAsyncTask;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.http.i.concept.IConcept;
-import com.eshare_android_preview.http.model.Concept;
 import com.eshare_android_preview.view.adapter.ConceptsAdapter;
 
 import java.util.Collections;
