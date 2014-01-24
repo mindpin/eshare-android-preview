@@ -1,5 +1,6 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.api.ConceptHttpApi;
 import com.eshare_android_preview.http.base.EshareGetRequest;
 import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.question.IQuestion;
@@ -35,20 +36,7 @@ public class Concept implements IConcept {
 
 	@Override
 	public List<IQuestion> get_learned_node_random_questions(int count) {
-        String url = String.format("/api/concept/%s/learned_node_random_questions?count=%d", this.id, count);
-
-        try {
-            return new EshareGetRequest<List<IQuestion>>(url) {
-                @Override
-                public List<IQuestion> on_success(String response_text) throws Exception {
-                    return new ArrayList<IQuestion>(Question.from_json_array(response_text));
-
-                }
-            }.go();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return  ConceptHttpApi.get_learned_node_random_questions(this.id,count);
     }
 
 	public static List<IConcept> from_json_array(String response_text) {
