@@ -33,7 +33,17 @@ public class Concept implements IConcept {
 		return this.practicing_count;
 	}
 
-	@Override
+    @Override
+    public boolean is_learned() {
+        return is_learned;
+    }
+
+    @Override
+    public boolean is_unlocked() {
+        return is_unlocked;
+    }
+
+    @Override
 	public List<IQuestion> get_learned_node_random_questions(int count) {
         String url = String.format("/api/concept/%s/learned_node_random_questions?count=%d", this.id, count);
 

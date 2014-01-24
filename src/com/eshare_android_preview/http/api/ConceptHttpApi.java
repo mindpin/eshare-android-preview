@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConceptHttpApi {
-	public static List<IConcept> net_concepts(String net_id,boolean unlocked, boolean learned) {
+	public static List<IConcept> net_concepts(String net_id,Boolean unlocked, Boolean learned) {
 		try {
 			return new EshareGetRequest<List<IConcept>>(
 					"/api/knowledge_nets/" + net_id + "/concepts",

@@ -18,5 +18,5 @@ public abstract class IUserKnowledgeNet implements IUserSimpleKnowledgeNet, INet
     abstract public ICanbeLearned find_learn_target(String type, String id);
 
     // 获取此知识网络下的所有概念
-    abstract public List<IConcept> concepts(boolean remote, boolean unlocked, boolean learned);
+    abstract public List<IConcept> concepts(boolean remote, Boolean unlocked, Boolean learned);
 }

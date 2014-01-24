@@ -146,4 +146,9 @@ public class Question implements Serializable, IQuestion {
         }
         return questions;
     }
+
+    @Override
+    public void do_post_result(boolean result) {
+        // TODO
+    }
 }

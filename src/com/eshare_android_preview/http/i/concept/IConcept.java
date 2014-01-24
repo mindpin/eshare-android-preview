@@ -19,4 +19,7 @@ public interface IConcept {
 
     // 随机获取若干个已学节点下的相关问题
     public List<IQuestion> get_learned_node_random_questions(int count);
+
+    public boolean is_learned();
+    public boolean is_unlocked();
 }

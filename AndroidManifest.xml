@@ -69,6 +69,7 @@
         <activity android:name=".controller.activity.questions.TestSuccessActivity" />
         <activity android:name=".controller.activity.ChangeNetActivity" />
         <activity android:name=".controller.activity.AccountInfoActivity" />
+        <activity android:name=".controller.activity.concept.ConceptsActivity" />
 
     </application>
 

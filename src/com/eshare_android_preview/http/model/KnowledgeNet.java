@@ -96,21 +96,21 @@ public class KnowledgeNet extends IUserKnowledgeNet {
     }
 
 	@Override
-	public List<IConcept> concepts(boolean remote, boolean unlocked,boolean learned) {
+	public List<IConcept> concepts(boolean remote, Boolean unlocked, Boolean learned) {
 		if(remote){
 			return _concepts_remote(unlocked, learned);
 		}
 		return _concepts_local(unlocked, learned);
 	}
 
-	private List<IConcept> _concepts_remote(boolean unlocked, boolean learned) {
+	private List<IConcept> _concepts_remote(Boolean unlocked, Boolean learned) {
 		String key = unlocked+"" + learned + "";
 		List<IConcept> concepts = ConceptHttpApi.net_concepts(this.id,unlocked,learned);
 		map_concepts.put(key, concepts);
 		return concepts;
 	}
 
-	private List<IConcept> _concepts_local(boolean unlocked, boolean learned) {
+	private List<IConcept> _concepts_local(Boolean unlocked, Boolean learned) {
 		String key = unlocked+"" + learned + "";
 		return map_concepts.get(key);
 	}

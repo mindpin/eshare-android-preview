@@ -1,12 +1,15 @@
 package com.eshare_android_preview.view.ui.navigation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.eshare_android_preview.controller.activity.concept.ConceptsActivity;
 import com.eshare_android_preview.view.BorderRadiusRelativeLayout;
 
 /**
@@ -30,5 +33,13 @@ public class ConceptButtonView extends BorderRadiusRelativeLayout {
         );
         tv.setLayoutParams(lp);
         addView(tv);
+
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ConceptsActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
     }
 }

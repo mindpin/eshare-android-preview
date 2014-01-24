@@ -12,7 +12,6 @@ import com.eshare_android_preview.view.adapter.base.EshareBaseAdapter;
  * Created by fushang318 on 14-1-13.
  */
 public class ChangeNetsAdapter extends EshareBaseAdapter<IUserSimpleKnowledgeNet> {
-
     public ChangeNetsAdapter(EshareBaseActivity activity) {
         super(activity);
     }

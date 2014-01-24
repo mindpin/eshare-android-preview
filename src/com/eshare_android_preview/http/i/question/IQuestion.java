@@ -30,4 +30,7 @@ public interface IQuestion extends Serializable{
     public QuestionSelectAnswer build_select_answer();
     public boolean is_choice_contain_image();
     public int choice_max_length();
+
+    // 提交问题回答判定结果
+    public void do_post_result(boolean result);
 }
