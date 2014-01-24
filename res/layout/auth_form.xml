@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:text="用户登录"
+        android:textSize="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="left"
+        android:textColor="#fff" />
+
+    <com.eshare_android_preview.view.ui.auth.EmailInputerView
+        android:id="@+id/email_inputer"
+        android:layout_marginBottom="10dp"
+        android:layout_height="40dp"
+        android:layout_width="fill_parent" />
+
+    <com.eshare_android_preview.view.ui.auth.PasswordInputerView
+        android:id="@+id/password_inputer"
+        android:layout_marginBottom="10dp"
+        android:layout_height="40dp"
+        android:layout_width="fill_parent" />
+
+    <com.eshare_android_preview.view.ui.auth.LoginButton
+        android:id="@+id/login_button"
+        android:layout_height="40dp"
+        android:layout_width="fill_parent" />
+
+    <TextView
+        android:id="@+id/auth_message"
+        android:layout_marginTop="10dp"
+        android:textSize="14dp"
+        android:textColor="@color/white"
+        android:layout_height="40dp"
+        android:layout_width="fill_parent" />
+</LinearLayout>

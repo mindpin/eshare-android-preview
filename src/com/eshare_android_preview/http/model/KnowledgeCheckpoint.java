@@ -1,5 +1,6 @@
 package com.eshare_android_preview.http.model;
 
+import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 
 import java.util.ArrayList;
@@ -32,6 +33,11 @@ public class KnowledgeCheckpoint extends BaseKnowledgeSet {
     @Override
     public List<IUserKnowledgeNode> nodes() {
         return new ArrayList<IUserKnowledgeNode>();
+    }
+
+    @Override
+    public List<IConcept> concepts(boolean remote) {
+        return null;
     }
 
     @Override

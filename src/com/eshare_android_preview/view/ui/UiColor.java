@@ -70,4 +70,8 @@ public class UiColor {
     // kset viewpager
     public final static int VIEW_PAGER_BUTTON_LOCKED = Color.parseColor("#dbdbdb");
     public final static int VIEW_PAGER_BUTTON_UNLOCKED = Color.parseColor("#1CB0F6");
+
+    // buttons
+    public final static int LOGIN_BUTTON = Color.parseColor("#1cb0f6");
+    public final static int LOGIN_BUTTON_PRESSED = Color.parseColor("#49bff6");
 }

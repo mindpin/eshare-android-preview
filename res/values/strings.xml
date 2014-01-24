@@ -37,9 +37,12 @@
     <string name="icon_smile_o">&#xf118;</string>
 
     <string name="icon_arrow_left">&#xf060;</string>
+    <string name="icon_arrow_right">&#xf061;</string>
     <string name="icon_heart">&#xf004;</string>
     <string name="icon_exclamation_circle">&#xf06a;</string>
     <string name="icon_lock">&#xf023;</string>
+    <string name="icon_key">&#xf084;</string>
+    <string name="icon_user">&#xf007;</string>
 	
     <string name="preferences_key_current_user_id">current_user_id</string>
     

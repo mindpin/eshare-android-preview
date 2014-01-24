@@ -4,8 +4,13 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/intro_loading">
+    android:layout_height="fill_parent">
+
+    <ImageView
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:src="@drawable/intro_loading"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/loading_message_view"
@@ -18,49 +23,11 @@
         android:gravity="center"
         android:background="#33000000" />
 
-    <LinearLayout
-        android:id="@+id/auth_view"
+    <com.eshare_android_preview.view.ui.auth.AuthFormView
         android:visibility="gone"
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent"
-        android:padding="10dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:text="用户登录"
-            android:textSize="16dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:textColor="#fff" />
-
-        <EditText
-            android:id="@+id/login_inputer"
-            android:inputType="textEmailAddress"
-            android:imeOptions="actionDone"
-            android:hint="@string/login_email"
-            style="@style/login_layout_inputer">
-
-            <requestFocus />
-        </EditText>
-
-        <EditText
-            android:id="@+id/password_inputer"
-            android:inputType="textPassword"
-            android:imeOptions="actionDone"
-            android:hint="@string/login_password"
-            style="@style/login_layout_inputer"></EditText>
-
-        <Button
-            android:id="@+id/login_button"
-            android:text="@string/login_login"
-            style="@style/login_layout_button"
-            android:onClick="login_button_click"></Button>
-
-    </LinearLayout>
-
-
+        android:id="@+id/auth_form"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />
 </RelativeLayout>
 
 

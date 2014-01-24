@@ -2,6 +2,7 @@ package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.api.QuestionHttpApi;
 import com.eshare_android_preview.http.c.UserData;
+import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.knowledge.ICanbeLearned;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNode;
 import com.eshare_android_preview.http.i.question.IQuestion;
@@ -91,6 +92,11 @@ public class KnowledgeNode implements IUserKnowledgeNode, ICanbeLearned,IQuestio
     @Override
     public boolean is_learned() {
         return is_learned;
+    }
+
+    @Override
+    public List<IConcept> concepts(boolean remote) {
+        return null;
     }
 
     @Override

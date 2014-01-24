@@ -1,6 +1,7 @@
 package com.eshare_android_preview.http.model;
 
 import com.eshare_android_preview.http.i.IDataIcon;
+import com.eshare_android_preview.http.i.concept.IConcept;
 import com.eshare_android_preview.http.i.knowledge.ICanbeLearned;
 import com.eshare_android_preview.http.i.knowledge.IUserExp;
 import com.eshare_android_preview.http.i.knowledge.IUserKnowledgeNet;
@@ -63,6 +64,11 @@ public class KnowledgeNet extends IUserKnowledgeNet {
     public ICanbeLearned find_learn_target(String type, String id) {
         Object result = find_object(type,id);
         return result == null ? null : (ICanbeLearned)result;
+    }
+
+    @Override
+    public List<IConcept> concepts(boolean remote, boolean unlocked, boolean learned) {
+        return null;
     }
 
     private Object find_object(String type, String id){
