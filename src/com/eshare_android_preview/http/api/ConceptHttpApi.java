@@ -2,7 +2,9 @@ package com.eshare_android_preview.http.api;
 
 import com.eshare_android_preview.http.base.EshareGetRequest;
 import com.eshare_android_preview.http.i.concept.IConcept;
+import com.eshare_android_preview.http.i.question.IQuestion;
 import com.eshare_android_preview.http.model.Concept;
+import com.eshare_android_preview.http.model.Question;
 
 import org.apache.http.message.BasicNameValuePair;
 
@@ -55,6 +57,21 @@ public class ConceptHttpApi {
 			return new ArrayList<IConcept>();
 		}
 	}
+
+    public static List<IQuestion> get_learned_node_random_questions(String concept_id, int count){
+        String url = String.format("/api/concept/%s/learned_node_random_questions?count=%d", concept_id, count);
+        try {
+            return new EshareGetRequest<List<IQuestion>>(url) {
+                @Override
+                public List<IQuestion> on_success(String response_text) throws Exception {
+                    return new ArrayList<IQuestion>(Question.from_json_array(response_text));
+                }
+            }.go();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 	
 	private static String set_concepts_url(String net_id, String set_id) {
         return String.format("/api/knowledge_nets/%s/knowledge_sets/%s/concepts", net_id, set_id);
