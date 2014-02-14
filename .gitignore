@@ -38,3 +38,4 @@ out/
 *.log
 
 res/values/http_site.xml
+release.keystore
