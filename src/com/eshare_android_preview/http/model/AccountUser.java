@@ -5,7 +5,6 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.eshare_android_preview.http.i.profile.IUserAvatar;
 import com.eshare_android_preview.http.i.profile.IUserProfile;
-import com.eshare_android_preview.model.database.base.BaseModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
