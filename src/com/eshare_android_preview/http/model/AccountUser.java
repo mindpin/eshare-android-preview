@@ -1,5 +1,8 @@
 package com.eshare_android_preview.http.model;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.eshare_android_preview.http.i.profile.IUserAvatar;
 import com.eshare_android_preview.http.i.profile.IUserProfile;
 import com.eshare_android_preview.model.database.base.BaseModel;
@@ -9,16 +12,29 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-
-public class AccountUser extends BaseModel implements IUserProfile {
+@Table(name = "AccountUsers")
+public class AccountUser extends Model implements IUserProfile {
+    @Column(name = "cookies")
 	public String cookies;
+
+    @Column(name = "info")
     public String info;
 
+    @Column(name = "user_id")
     public int user_id;
+
+    @Column(name = "name")
     public String name;
+
+    @Column(name = "login")
     public String login;
+
+    @Column(name = "email")
     public String email;
+
+    @Column(name = "avatar_url")
     public String avatar_url;
+
     private IUserAvatar user_avatar;
 
     // 用一个特殊的user实例来表示一个空user
@@ -26,11 +42,12 @@ public class AccountUser extends BaseModel implements IUserProfile {
     // 不可用 null == user 来判断
     final public static AccountUser NIL_ACCOUNT_USER = new AccountUser();
 
-    private AccountUser() {
-        set_nil();
+    public AccountUser(){
+        super();
     }
-    
+
 	public AccountUser(String cookies, String info) throws JSONException, IOException {
+        super();
         this.cookies = cookies;
         this.info = info;
         JSONObject json = new JSONObject(info);

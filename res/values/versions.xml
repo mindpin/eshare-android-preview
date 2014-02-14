@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="versionCode">1</integer>
+    <string name="versionName">1.0</string>
+    <integer name="AA_DB_VERSION">111111</integer>
+</resources>

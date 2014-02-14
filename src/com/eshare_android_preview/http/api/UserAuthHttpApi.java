@@ -22,6 +22,7 @@ public class UserAuthHttpApi {
         ) {
             @Override
             public Boolean on_success(String response_text) throws Exception {
+                System.out.println(" => " + response_text);
                 JSONObject json = new JSONObject(response_text);
                 AccountManager.login(get_cookies(), json.toString());
                 return true;

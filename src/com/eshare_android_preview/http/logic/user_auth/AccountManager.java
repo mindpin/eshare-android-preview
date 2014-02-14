@@ -27,7 +27,7 @@ public class AccountManager {
     }
 
 	public static boolean is_logged_in(){
-		return !current_user().is_nil();
+		return current_user() != null ;
 	}
 	
 	public static AccountUser current_user() {
@@ -36,6 +36,9 @@ public class AccountManager {
 	}
 	
 	public static CookieStore get_cookie_store() {
+        if(current_user() == null){
+            return null;
+        }
 		String cookies_string = current_user().cookies;
 		BasicCookieStore cookie_store = (BasicCookieStore) CookieHelper.parse_string_to_cookie_store(cookies_string);
 		return cookie_store;

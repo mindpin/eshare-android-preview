@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 
+import com.activeandroid.ActiveAndroid;
 import com.eshare_android_preview.model.preferences.EsharePreference;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -15,10 +16,19 @@ public class EshareApplication extends Application{
 
     @Override
     public void onCreate() {
+        super.onCreate();
+        ActiveAndroid.initialize(this);
+
     	context = getApplicationContext();
         mInflater = LayoutInflater.from(context);
 
         init_image_loader();
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ActiveAndroid.dispose();
     }
 
     private void init_image_loader() {
