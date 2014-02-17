@@ -17,7 +17,7 @@ import java.util.Calendar;
  * Created by fushang318 on 14-2-17.
  */
 public class FeedbackHttpApi {
-    public static void submit_exception(Exception ex){
+    public static void submit_exception(Throwable ex){
         try {
             new EsharePostRequest<Void>(
                     "/update/api/submit_exception",
@@ -105,11 +105,11 @@ public class FeedbackHttpApi {
         return json.toString();
     }
 
-    private static String _get_exception_type(Exception e){
+    private static String _get_exception_type(Throwable e){
         return e.getClass().getName();
     }
 
-    private static String _get_exception_stack(Exception e){
+    private static String _get_exception_stack(Throwable e){
         String str = "";
         StackTraceElement[] elements = e.getStackTrace();
         for(StackTraceElement el : elements){
