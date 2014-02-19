@@ -12,9 +12,6 @@
 bin/
 gen/
 
-# Local configuration file (sdk path, etc)
-local.properties
-
 # Eclipse project files
 .classpath
 .project
@@ -37,5 +34,9 @@ out/
 .DS_Store
 *.log
 
+
 res/values/http_site.xml
 release.keystore
+evaluation.keystore
+local_evaluation.properties
+local_release.properties

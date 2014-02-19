@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="eshare-android-preview" default="help">
 
-    <!-- The local.properties file is created and updated by the 'android' tool.
+    <!-- The local_evaluation.properties file is created and updated by the 'android' tool.
          It contains the path to the SDK. It should *NOT* be checked into
          Version Control Systems. -->
-    <property file="local.properties" />
+    <property file="local_evaluation.properties" />
 
     <!-- The ant.properties file can be created by you. It is only edited by the
          'android' tool to add properties to it.
@@ -17,7 +17,7 @@
              The name of the output directory. Default is 'bin'.
 
          For other overridable properties, look at the beginning of the rules
-         files in the SDK, at tools/ant/build.xml
+         files in the SDK, at tools/ant/build_evaluation.xml
 
          Properties related to the SDK location or the project target should
          be updated using the 'android' tool with the 'update' action.
@@ -75,7 +75,7 @@
              - copy/paste the target into this file, *before* the
                <import> task.
              - customize it to your needs.
-         - Customize the whole content of build.xml
+         - Customize the whole content of build_evaluation.xml
              - copy/paste the content of the rules files (minus the top node)
                into this file, replacing the <import> task.
              - customize to your needs.
