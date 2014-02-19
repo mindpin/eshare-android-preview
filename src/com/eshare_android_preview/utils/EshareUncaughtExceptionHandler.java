@@ -23,11 +23,16 @@ public class EshareUncaughtExceptionHandler implements Thread.UncaughtExceptionH
     private boolean handleException(final Throwable ex){
         if (null == ex) return false;
 
-        new Thread() {
-            public void run() {
-                FeedbackHttpApi.submit_exception(ex);
-            }
-        }.start();
+//        TODO 发送报告错误页面
+//        提交错误信息到服务器
+//        FeedbackHttpApi.submit_exception(ex);
+
+//        用这种方式可以关闭当前应用，并打开一个自定义报告错误页面
+//        Intent intent = new Intent(EshareApplication.context, XXXActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        EshareApplication.context.startActivity(intent);
+//        android.os.Process.killProcess(android.os.Process.myPid());
+//        System.exit(10);
 
         return true;
     }
