@@ -9,6 +9,7 @@
 *.class
 
 # generated files
+app/build
 bin/
 gen/
 
@@ -20,6 +21,7 @@ gen/
 proguard/
 
 # Intellij project files
+app/*.iml
 *.iml
 *.ipr
 *.iws
@@ -34,8 +36,17 @@ out/
 .DS_Store
 *.log
 
+# gradle
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+local.properties
+import-summary.txt
 
-res/values/http_site.xml
+
+
+app/src/main/res/values/http_site.xml
 release.keystore
 evaluation.keystore
 local_evaluation.properties
