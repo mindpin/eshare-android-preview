@@ -135,10 +135,12 @@ def main():
 
   if "1" == upload_site_num:
     upload_site = "4ye.mindpin.com"
+    is_evaluation = False
     set_http_site("http://4ye.mindpin.com")
 
   if "2" == upload_site_num:
     upload_site = "4ye-evaluation.mindpin.com"
+    is_evaluation = True
     set_http_site("http://4ye-evaluation.mindpin.com")
 
   new_version = raw_input('input new version:')
@@ -167,7 +169,10 @@ def main():
 
   update_manifest_xml_file(new_version)
 
-  result = subprocess.call('ant clean release', shell=True)
+  if is_evaluation:
+    result = subprocess.call('ant clean release -f build_evaluation.xml', shell=True)
+  else:
+    result = subprocess.call('ant clean release -f build_release.xml', shell=True)
 
   if 0 != result:
     subprocess.call('git checkout .', shell=True)
@@ -183,11 +188,17 @@ def main():
     print("%s, upload fail" % rp_hash["status"])
     sys.exit(1)
 
-  subprocess.call('git add -A', shell=True)
-  subprocess.call('git commit -m "release %s version"' % new_version, shell=True)
-  subprocess.call('git tag %s' % new_version, shell=True)
+  if is_evaluation:
+    subprocess.call('git add -A', shell=True)
+    subprocess.call('git commit -m "release %s-eva version"' % new_version, shell=True)
+    subprocess.call('git tag "%s-eva"' % new_version, shell=True)
+    print("publish %s-eva" % new_version)
+  else:
+    subprocess.call('git add -A', shell=True)
+    subprocess.call('git commit -m "release %s version"' % new_version, shell=True)
+    subprocess.call('git tag %s' % new_version, shell=True)
+    print("publish %s" % new_version)
 
-  print("publish %s" % new_version)
   sys.exit(0)
 
 

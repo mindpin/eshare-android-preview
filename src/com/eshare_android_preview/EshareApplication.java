@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 
 import com.activeandroid.ActiveAndroid;
 import com.eshare_android_preview.model.preferences.EsharePreference;
+import com.eshare_android_preview.utils.EshareUncaughtExceptionHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -18,6 +19,10 @@ public class EshareApplication extends Application{
     public void onCreate() {
         super.onCreate();
         ActiveAndroid.initialize(this);
+
+        Thread.setDefaultUncaughtExceptionHandler(
+            EshareUncaughtExceptionHandler.get_instance()
+        );
 
     	context = getApplicationContext();
         mInflater = LayoutInflater.from(context);
