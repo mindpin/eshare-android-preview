@@ -59,12 +59,16 @@ public abstract class EshareHttpRequest<TResult> {
                 on_authenticate_exception();
                 throw new AuthenticateException(); //抛出未登录异常，会被 TeamknRunnable 接到并处理
             default:
+                on_error(responst_text, status_code);
                 throw new ResponseNot200Exception();    //不是 200 也不是 401 只能认为是出错了。会被 TeamknRunnable 接到并处理
         }
     }
 
 	// 此方法为 status_code = 200 时 的处理方法，由用户自己定义
     public abstract TResult on_success(String response_text) throws Exception;
+
+    // status_code != 200
+    public void on_error(String response_text, int status_code) {/*nothing..*/};
 
     public void on_authenticate_exception() {/*nothing..*/};
 

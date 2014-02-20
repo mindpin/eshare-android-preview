@@ -24,7 +24,8 @@ public class AccountInfoActivity extends EshareBaseActivity {
     }
 
     private void init() {
-        IUserProfile p = UserData.instance().get_profile(false);
+        // TODO 因为可能从远程获取，改到异步任务里去做
+        IUserProfile p = UserData.instance().get_profile(true);
 
         ((TextView) findViewById(R.id.user_name)).setText(p.get_name());
         ((TextView) findViewById(R.id.user_email)).setText(p.get_email());
