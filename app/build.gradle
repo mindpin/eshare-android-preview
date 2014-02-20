@@ -7,12 +7,42 @@ android {
         minSdkVersion 8
         targetSdkVersion 8
     }
-    buildTypes {
-        release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+    if(project.hasProperty('has_properities')){
+        signingConfigs {
+            release {
+                storeFile file(release_store_file)
+                storePassword release_store_password
+                keyAlias release_key_alias
+                keyPassword release_key_password
+            }
+            evaluation {
+                storeFile file(evaluation_store_file)
+                storePassword evaluation_store_password
+                keyAlias evaluation_key_alias
+                keyPassword evaluation_key_password
+            }
+        }
+        buildTypes {
+            release {
+                runProguard false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+                signingConfig  signingConfigs.release
+            }
+            evaluation {
+                runProguard false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+                signingConfig  signingConfigs.evaluation
+            }
+        }
+    }else{
+        buildTypes {
+            release {
+                runProguard false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            }
         }
     }
+
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'

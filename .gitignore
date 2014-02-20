@@ -51,3 +51,4 @@ release.keystore
 evaluation.keystore
 local_evaluation.properties
 local_release.properties
+gradle.properties
