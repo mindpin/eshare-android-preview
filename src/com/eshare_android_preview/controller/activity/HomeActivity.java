@@ -11,6 +11,7 @@ import com.eshare_android_preview.controller.task.BaseAsyncTask;
 import com.eshare_android_preview.http.c.UserData;
 import com.eshare_android_preview.view.ExperienceView;
 import com.eshare_android_preview.view.knowledge_map.KnowledgeMapView;
+import com.eshare_android_preview.view.updater.ClientUpdater;
 
 
 public class HomeActivity extends EshareBaseActivity {
@@ -29,6 +30,8 @@ public class HomeActivity extends EshareBaseActivity {
     protected void onResume() {
         super.onResume();
         send_http_request();
+
+        new ClientUpdater(this).check();
     }
 
     private void send_http_request(){

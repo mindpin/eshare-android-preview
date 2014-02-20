@@ -29,10 +29,6 @@ public class EshareBaseActivity extends Activity {
 		return AccountManager.is_logged_in();
 	}
 
-	final public AccountUser current_user() {
-		return AccountManager.current_user();
-	}
-	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -44,6 +40,11 @@ public class EshareBaseActivity extends Activity {
 		ActivitiesStackSingleton.clear_activities_stack();
 		open_activity(AuthActivity.class);
 	}
+
+    // 关闭所有activity
+    final public void clear_and_close() {
+        ActivitiesStackSingleton.clear_activities_stack();
+    }
 
 	// 绑定在顶栏 go_back 按钮上的事件处理
 	final public void go_back(View view) {
