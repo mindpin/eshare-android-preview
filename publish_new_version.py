@@ -7,7 +7,7 @@ import re
 import os, stat, mimetypes, httplib
 import json
 
-version_xml_file_path = "res/values/versions.xml"
+version_xml_file_path = "app/src/main/res/values/versions.xml"
 tree = ET.parse(version_xml_file_path)
 xml_root = tree.getroot()
 
@@ -110,7 +110,7 @@ def update_manifest_xml_file(new_version):
   tree.write(version_xml_file_path)
 
 def set_http_site(value):
-  file_path = "res/values/http_site.xml"
+  file_path = "app/src/main/res/values/http_site.xml"
   et = ET.parse(file_path)
   for el in et.getroot().findall("string"):
     if el.get("name") == "http_site":
