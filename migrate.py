@@ -30,13 +30,8 @@ def check_or_make_migration_dir():
 def basename(file_name):
     return os.path.splitext(os.path.basename(file_name))[0]
 
-def get_migrations():
-    check_or_make_migration_dir()
-    migrations = [basename(s) for s in os.listdir(migrations_dir)]
-    migrations.sort(key=int)
-    return migrations
-
 def generate_migration():
+    check_or_make_migration_dir()
     file_name = migrations_dir + current_time + ".sql"
     set_metadata_dbversion()
     open(file_name, 'a').close()
