@@ -9,7 +9,7 @@ def main():
 
 # manipulate manifest.xml
 current_time = time.strftime("%Y%m%d%H%M%S", time.localtime())[2:-2]
-versions = "res/values/versions.xml"
+versions = "app/src/main/res/values/versions.xml"
 tree = ET.parse(versions)
 root = tree.getroot()
 
@@ -21,7 +21,7 @@ def set_metadata_dbversion():
     tree.write(versions)
 
 # generate empty migration sql file
-migrations_dir = "assets/migrations/"
+migrations_dir = "app/src/main/assets/migrations/"
 
 def check_or_make_migration_dir():
     if not os.path.isdir(migrations_dir):
