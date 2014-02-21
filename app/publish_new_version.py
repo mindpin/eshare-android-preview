@@ -7,9 +7,6 @@ import re
 import os, stat, mimetypes, httplib
 import json
 
-# 根据实际情况修改一个变量值
-apk_file_path = "bin/eshare-android-preview-release.apk"
-
 version_xml_file_path = "res/values/versions.xml"
 tree = ET.parse(version_xml_file_path)
 xml_root = tree.getroot()
@@ -170,9 +167,11 @@ def main():
   update_manifest_xml_file(new_version)
 
   if is_evaluation:
-    result = subprocess.call('ant clean release -f build_evaluation.xml', shell=True)
+    result = subprocess.call('gradle assembleEvaluation', shell=True)
+    apk_file_path = "app/build/apk/app-evaluation.apk"
   else:
-    result = subprocess.call('ant clean release -f build_release.xml', shell=True)
+    result = subprocess.call('gradle assembleRelease', shell=True)
+    apk_file_path = "app/build/apk/app-release.apk"
 
   if 0 != result:
     subprocess.call('git checkout .', shell=True)
